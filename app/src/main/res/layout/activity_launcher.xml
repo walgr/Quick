@@ -6,17 +6,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     android:background="@color/white">
 
     <cn.goodjobs.client.widgets.GlideImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:scaleType="fitXY"
-        app:loadUrl="https://www.2008php.com/09_Website_appreciate/10-07-11/1278861720_g.jpg">
+        app:layout_constraintDimensionRatio="H,16:9"
+        android:scaleType="centerInside"
+        app:loadUrl="https://www.2008php.com/09_Website_appreciate/10-07-11/1278861720_g.jpg"
+        app:placeholder="@mipmap/ic_launcher"
+        app:error="@mipmap/ic_launcher"
+        app:roundedCorners="8dp"
+        >
 
     </cn.goodjobs.client.widgets.GlideImageView>
 
