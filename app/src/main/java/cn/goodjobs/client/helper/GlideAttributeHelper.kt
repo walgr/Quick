@@ -3,8 +3,8 @@ package cn.goodjobs.client.helper
 import android.content.Context
 import android.util.AttributeSet
 import androidx.annotation.DrawableRes
-import androidx.annotation.IntegerRes
 import cn.goodjobs.client.R
+import cn.goodjobs.client.constant.*
 
 /**
  * Created by 王朋飞 on 2022/4/29.
@@ -19,16 +19,6 @@ open class GlideAttributeHelper constructor(
         const val asDrawable = 0
         const val asBitmap = 1
         const val asGif = 2
-
-        const val MATRIX = 10
-        const val FIT_XY = 11
-        const val FIT_START = 12
-        const val FIT_CENTER = 13
-        const val FIT_END = 14
-        const val CENTER = 15
-        const val CENTER_CROP = 16
-        const val CENTER_INSIDE = 17
-        const val CIRCLE_CROP = 18
     }
 
     var transcodeType:Int? = null

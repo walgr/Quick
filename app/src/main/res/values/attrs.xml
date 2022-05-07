@@ -26,4 +26,62 @@
         <attr name="bottomLeftRadius" format="dimension" />
         <attr name="bottomRightRadius" format="dimension" />
     </declare-styleable>
+
+    <declare-styleable name="MultiFunctionView">
+        <attr name="showCheckBox" format="boolean"/>
+        <attr name="isChecked" format="boolean"/>
+        <attr name="checkBoxWidth" format="dimension"/>
+        <attr name="checkboxBackground" format="reference"/>
+        <attr name="checkboxLeftMargin" format="dimension"/>
+        <attr name="checkboxRightMargin" format="dimension"/>
+        <attr name="showLeftImage" format="boolean"/>
+        <attr name="leftImageSrc" format="reference"/>
+        <attr name="leftImageWidth" format="dimension"/>
+        <attr name="leftImageScaleType" format="enum">
+            <enum name="matrix" value="0" />
+            <enum name="fitXY" value="1" />
+            <enum name="fitStart" value="2" />
+            <enum name="fitCenter" value="3" />
+            <enum name="fitEnd" value="4" />
+            <enum name="center" value="5" />
+            <enum name="centerCrop" value="6" />
+            <enum name="centerInside" value="7" />
+            <enum name="circleCrop" value="8" />
+        </attr>
+        <attr name="leftImageLeftMargin" format="dimension"/>
+        <attr name="leftImageRightMargin" format="dimension"/>
+        <attr name="title" format="string"/>
+        <attr name="titleSize" format="dimension"/>
+        <attr name="titleColor" format="color"/>
+        <attr name="titleStyle" format="enum">
+            <enum name="normal" value="0"/>
+            <enum name="bold" value="1"/>
+            <enum name="italic" value="2"/>
+        </attr>
+        <attr name="subTitle" format="string"/>
+        <attr name="subTitleSize" format="dimension"/>
+        <attr name="subTitleColor" format="color"/>
+        <attr name="subTitleStyle" format="enum">
+            <enum name="normal" value="0"/>
+            <enum name="bold" value="1"/>
+            <enum name="italic" value="2"/>
+        </attr>
+        <attr name="subTitleMarginTop" format="dimension"/>
+        <attr name="showRightImage" format="boolean"/>
+        <attr name="rightImageSrc" format="reference"/>
+        <attr name="rightImageWidth" format="dimension"/>
+        <attr name="rightImageScaleType" format="enum">
+            <enum name="matrix" value="0" />
+            <enum name="fitXY" value="1" />
+            <enum name="fitStart" value="2" />
+            <enum name="fitCenter" value="3" />
+            <enum name="fitEnd" value="4" />
+            <enum name="center" value="5" />
+            <enum name="centerCrop" value="6" />
+            <enum name="centerInside" value="7" />
+            <enum name="circleCrop" value="8" />
+        </attr>
+        <attr name="rightImageLeftMargin" format="dimension"/>
+        <attr name="rightImageRightMargin" format="dimension"/>
+    </declare-styleable>
 </resources>

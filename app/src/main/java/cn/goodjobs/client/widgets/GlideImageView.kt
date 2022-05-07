@@ -2,9 +2,9 @@ package cn.goodjobs.client.widgets
 
 import android.app.Activity
 import android.content.Context
-import android.graphics.drawable.shapes.RoundRectShape
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatImageView
+import cn.goodjobs.client.constant.*
 import cn.goodjobs.client.helper.GlideAttributeHelper
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestBuilder
@@ -30,10 +30,10 @@ open class GlideImageView @JvmOverloads constructor(
             glideAttributeHelper = GlideAttributeHelper(context, attributes)
         }
         glide = Glide.with(context)
-        loadData()
+        loadViewAttribute()
     }
 
-    private fun loadData() {
+    private fun loadViewAttribute() {
         if (checkContext()) return
         loadTranscodeType()
         loadScaleType()
@@ -83,10 +83,10 @@ open class GlideImageView @JvmOverloads constructor(
 
     private fun loadScaleType() {
         when(glideAttributeHelper.scaleType) {
-            GlideAttributeHelper.FIT_CENTER -> fitCenter()
-            GlideAttributeHelper.CENTER_CROP -> centerCrop()
-            GlideAttributeHelper.CENTER_INSIDE -> centerInside()
-            GlideAttributeHelper.CIRCLE_CROP -> circleCrop()
+            FIT_CENTER -> fitCenter()
+            CENTER_CROP -> centerCrop()
+            CENTER_INSIDE -> centerInside()
+            CIRCLE_CROP -> circleCrop()
         }
     }
 
