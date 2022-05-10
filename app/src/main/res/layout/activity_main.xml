@@ -31,6 +31,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:showCheckBox="true"
+        app:title="标题"
+        app:titleColor="@color/black"
+        app:titleSize="22sp"
+        app:subTitle="副标题"
+        app:subTitleSize="16sp"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>
 

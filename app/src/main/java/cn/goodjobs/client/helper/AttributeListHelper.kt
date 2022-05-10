@@ -2,6 +2,7 @@ package cn.goodjobs.client.helper
 
 import android.content.Context
 import android.content.res.XmlResourceParser
+import android.graphics.Color
 import android.util.AttributeSet
 import androidx.annotation.StyleableRes
 import java.lang.reflect.Field
@@ -33,7 +34,8 @@ abstract class AttributeListHelper constructor(
             if (styleableId.contains(attributeId) && fieldMap.contains(attributeName)) {
                 val field = fieldMap[attributeName]
                 when(field?.type) {
-                    Int::class.java -> {
+                    java.lang.Integer::class.java, Int::class.java -> {
+                        //只能获取dp、sp、资源id
                         val attributeValue = attributeSet.getAttributeValue(i)
                         if (attributeValue.contains("dip") || attributeValue.contains("sp")) {
                             //获取dp或sp
@@ -42,20 +44,24 @@ abstract class AttributeListHelper constructor(
                            //获取资源id
                             field.set(this, attributeSet.getAttributeResourceValue(i, 0))
                         } else {
-                            field.set(this, attributeSet.getAttributeIntValue(i, 0))
+//                            field.set(this, attributeSet.getAttributeIntValue(i, 0))
                         }
                     }
-                    java.lang.Integer::class.java -> {
-                        field.set(this, attributeSet.getAttributeIntValue(i, 0))
-                    }
-                    Float::class.java -> {
+                    java.lang.Float::class.java, Float::class.java -> {
                         field.set(this, attributeSet.getAttributeFloatValue(i, 0f))
                     }
-                    String::class.java -> {
+                    java.lang.String::class.java, String::class.java -> {
                         field.set(this, attributeSet.getAttributeValue(i))
                     }
-                    Boolean::class.java -> {
+                    java.lang.Boolean::class.java, Boolean::class.java -> {
                         field.set(this, attributeSet.getAttributeBooleanValue(i, false))
+                    }
+                    Color::class.java -> {
+                        val attributeValue = attributeSet.getAttributeValue(i)
+                        if (attributeValue.startsWith("#")) {
+                            //获取资源id
+                            field.set(this, Color.parseColor(attributeValue))
+                        }
                     }
                 }
 

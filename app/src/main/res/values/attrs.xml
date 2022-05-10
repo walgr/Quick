@@ -35,6 +35,7 @@
         <attr name="checkboxLeftMargin" format="dimension"/>
         <attr name="checkboxRightMargin" format="dimension"/>
         <attr name="showLeftImage" format="boolean"/>
+        <attr name="leftImageBackground" format="reference"/>
         <attr name="leftImageSrc" format="reference"/>
         <attr name="leftImageWidth" format="dimension"/>
         <attr name="leftImageScaleType" format="enum">
@@ -46,21 +47,24 @@
             <enum name="center" value="5" />
             <enum name="centerCrop" value="6" />
             <enum name="centerInside" value="7" />
-            <enum name="circleCrop" value="8" />
         </attr>
         <attr name="leftImageLeftMargin" format="dimension"/>
         <attr name="leftImageRightMargin" format="dimension"/>
         <attr name="title" format="string"/>
+        <attr name="titleBackground" format="reference"/>
         <attr name="titleSize" format="dimension"/>
         <attr name="titleColor" format="color"/>
+        <attr name="titleMaxLine" format="integer"/>
         <attr name="titleStyle" format="enum">
             <enum name="normal" value="0"/>
             <enum name="bold" value="1"/>
             <enum name="italic" value="2"/>
         </attr>
         <attr name="subTitle" format="string"/>
+        <attr name="subTitleBackground" format="reference"/>
         <attr name="subTitleSize" format="dimension"/>
         <attr name="subTitleColor" format="color"/>
+        <attr name="subTitleMaxLine" format="integer"/>
         <attr name="subTitleStyle" format="enum">
             <enum name="normal" value="0"/>
             <enum name="bold" value="1"/>
@@ -68,6 +72,7 @@
         </attr>
         <attr name="subTitleMarginTop" format="dimension"/>
         <attr name="showRightImage" format="boolean"/>
+        <attr name="rightImageBackground" format="reference"/>
         <attr name="rightImageSrc" format="reference"/>
         <attr name="rightImageWidth" format="dimension"/>
         <attr name="rightImageScaleType" format="enum">
@@ -79,7 +84,6 @@
             <enum name="center" value="5" />
             <enum name="centerCrop" value="6" />
             <enum name="centerInside" value="7" />
-            <enum name="circleCrop" value="8" />
         </attr>
         <attr name="rightImageLeftMargin" format="dimension"/>
         <attr name="rightImageRightMargin" format="dimension"/>
