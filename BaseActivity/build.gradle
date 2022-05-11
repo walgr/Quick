@@ -1,0 +1,63 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+}
+
+android {
+    compileSdk rootProject.compileSdkVersion
+    buildFeatures {
+        dataBinding true
+    }
+    defaultConfig {
+        minSdk rootProject.minSdkVersion
+        targetSdk rootProject.targetSdkVersion
+
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    //ktx核心
+    api 'androidx.core:core-ktx:1.7.0'
+    //activity-ktx
+    api 'androidx.activity:activity-ktx:1.4.0'
+    //fragment-ktx
+    api 'androidx.fragment:fragment-ktx:1.4.1'
+    //material
+//    implementation 'com.google.android.material:material:1.5.0'
+    //lifecycle-ktx
+    api 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.0-beta01'
+    //lifecycle-ktx
+    api 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.0-beta01'
+
+    //viewmodel-ktx
+    api 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0-beta01'
+
+    //约束布局
+    api 'androidx.constraintlayout:constraintlayout:2.1.3'
+
+    //列表
+    api 'androidx.recyclerview:recyclerview:1.2.1'
+    //分页
+    api 'androidx.paging:paging-runtime:3.1.1'
+    api 'androidx.paging:paging-rxjava3:3.1.1'
+
+    //viewpager2
+    api 'androidx.viewpager2:viewpager2:1.0.0'
+
+    //Navigation
+    api 'androidx.navigation:navigation-fragment-ktx:2.4.2'
+    api 'androidx.navigation:navigation-ui-ktx:2.4.2'
+
+    //Glide
+    api 'com.github.bumptech.glide:glide:4.13.1'
+
+}

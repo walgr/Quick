@@ -1,11 +1,12 @@
 package cn.goodjobs.client
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
+import com.wpf.app.base.activity.ViewModelBindingActivity
+import cn.goodjobs.client.viewmodel.MainViewModel
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+class MainActivity : ViewModelBindingActivity<MainViewModel>(R.layout.activity_main) {
+
+    override fun initView() {
+
     }
+
 }
