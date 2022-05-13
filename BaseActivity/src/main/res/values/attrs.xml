@@ -29,7 +29,7 @@
 
     <declare-styleable name="MultiFunctionView">
         <attr name="showCheckBox" format="boolean"/>
-        <attr name="isChecked" format="boolean"/>
+        <attr name="isCheck" format="boolean"/>
         <attr name="checkBoxWidth" format="dimension"/>
         <attr name="checkboxBackground" format="reference"/>
         <attr name="checkboxLeftMargin" format="dimension"/>

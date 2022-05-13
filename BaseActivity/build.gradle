@@ -60,4 +60,11 @@ dependencies {
     //Glide
     api 'com.github.bumptech.glide:glide:4.13.1'
 
+    //retrofit2-okhttp-gson
+    api 'com.squareup.retrofit2:retrofit:2.9.0'
+    api 'com.squareup.okhttp3:okhttp:4.9.3'
+    api 'com.google.code.gson:gson:2.9.0'
+
+    //kotlin注解
+    implementation 'org.jetbrains.kotlin:kotlin-reflect:1.6.21'
 }

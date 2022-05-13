@@ -17,35 +17,13 @@
         android:background="@color/white"
         android:padding="16dp">
 
-        <com.wpf.app.base.widgets.GlideImageView
-            android:id="@+id/glideView"
+        <com.wpf.app.base.widgets.recyclerview.CommonRecyclerView
+            android:id="@+id/list"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:scaleType="centerInside"
-            android:visibility="@{viewModel.showGlide ? View.VISIBLE : View.GONE}"
-            app:error="@mipmap/ic_launcher"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="H,16:9"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:loadUrl="https://www.2008php.com/09_Website_appreciate/10-07-11/1278861720_g.jpg"
-            app:placeholder="@mipmap/ic_launcher"
-            app:roundedCorners="8dp" />
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            />
 
-        <com.wpf.app.base.widgets.MultiFunctionView
-            android:id="@+id/msgLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:showCheckBox="true"
-            app:subTitle="副标题"
-            app:subTitleSize="16sp"
-            app:title="标题"
-            app:titleColor="@color/black"
-            app:titleSize="22sp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

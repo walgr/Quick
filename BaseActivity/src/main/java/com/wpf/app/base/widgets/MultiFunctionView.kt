@@ -7,16 +7,20 @@ import android.text.TextUtils
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
-import android.widget.CheckBox
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.annotation.DrawableRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.graphics.drawable.toDrawable
+import androidx.databinding.BindingAdapter
+import androidx.databinding.Observable
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import com.wpf.app.base.R
 import com.wpf.app.base.helper.MultiFunctionAttributeHelper
 import com.wpf.app.base.helper.ScaleTypeHelper
 import com.wpf.app.base.helper.TypefaceHelper
+import com.wpf.app.base.widgets.recyclerview.CommonAdapter
 
 /**
  * Created by 王朋飞 on 2022/5/7.
@@ -28,11 +32,23 @@ import com.wpf.app.base.helper.TypefaceHelper
 open class MultiFunctionView
 @JvmOverloads constructor(
     context: Context,
-    attributes: AttributeSet? = null,
+    val attributes: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : ConstraintLayout(context, attributes, defStyleAttr) {
+) : ConstraintLayout(context, attributes, defStyleAttr), Checkable {
 
     private lateinit var attributeHelper: MultiFunctionAttributeHelper
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        attributes?.let {
+            attributeHelper = MultiFunctionAttributeHelper(context, attributes)
+        }
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        attributeHelper.recycle()
+    }
 
     init {
         attributes?.let {
@@ -78,7 +94,7 @@ open class MultiFunctionView
         attributeHelper.checkBoxWidth?.let {
             setCheckBoxWidth(it)
         }
-        attributeHelper.isChecked?.let {
+        attributeHelper.isCheck?.let {
             setCheckBoxChecked(it)
         }
         attributeHelper.checkboxLeftMarge?.let {
@@ -363,4 +379,36 @@ open class MultiFunctionView
     fun setRightImageMarginRight(margin: Int) {
         (rightImage.layoutParams as? MarginLayoutParams)?.rightMargin = margin
     }
+
+    override fun setChecked(checked: Boolean) {
+        checkBox.isChecked = checked
+    }
+
+    override fun isChecked(): Boolean {
+        return checkBox.isChecked
+    }
+
+    override fun toggle() {
+        checkBox.toggle()
+    }
+}
+
+@BindingAdapter("isSelect")
+fun isSelect(multiFunctionView: MultiFunctionView, select: Boolean) {
+    multiFunctionView.isChecked = select
+}
+
+@BindingAdapter("bindSelect")
+fun bindSelect(multiFunctionView: MultiFunctionView, select: MutableLiveData<Boolean>) {
+    multiFunctionView.isChecked = select.value ?: false
+}
+
+@BindingAdapter("onViewClick")
+fun onViewClick(view: View, onClick: View.OnClickListener) {
+    view.setOnClickListener(onClick)
+}
+
+@BindingAdapter("onViewCheck")
+fun onViewCheck(view: MultiFunctionView, onChange: CompoundButton.OnCheckedChangeListener) {
+    view.getCheckBox().setOnCheckedChangeListener(onChange)
 }

@@ -3,6 +3,7 @@ package com.wpf.app.base.helper
 import android.content.Context
 import android.graphics.Color
 import android.util.AttributeSet
+import android.view.ViewGroup
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import com.wpf.app.base.R
@@ -17,7 +18,7 @@ class MultiFunctionAttributeHelper
 ): AttributeListHelper(context, attributeSet, R.styleable.MultiFunctionView) {
 
     var showCheckBox: Boolean? = null
-    var isChecked: Boolean? = null
+    var isCheck: Boolean? = null
     //CheckBox大小
     var checkBoxWidth: Int? = null
     //CheckBox背景
@@ -46,6 +47,7 @@ class MultiFunctionAttributeHelper
     @DrawableRes var leftImageBackground: Int? = null
     @DrawableRes var leftImageSrc: Int? = null
     var leftImageWidth: Int? = null
+        get() = field ?: ViewGroup.LayoutParams.WRAP_CONTENT
     var leftImageScaleType: Int = 3
     var leftImageLeftMarge: Int? = 0
     var leftImageRightMarge: Int? = 0
@@ -54,6 +56,7 @@ class MultiFunctionAttributeHelper
     @DrawableRes var rightImageBackground: Int? = null
     @DrawableRes var rightImageSrc: Int? = null
     var rightImageWidth: Int? = null
+        get() = field ?: ViewGroup.LayoutParams.WRAP_CONTENT
     var rightImageScaleType: Int = 3
     var rightImageLeftMarge: Int? = 0
     var rightImageRightMarge: Int? = 0

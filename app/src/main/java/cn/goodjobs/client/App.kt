@@ -12,5 +12,8 @@ class App: Application() {
     override fun onCreate() {
         super.onCreate()
         BRConstant.viewModel = BR.viewModel
+        BRConstant.data = BR.data
+        BRConstant.adapter = BR.adapter
+        BRConstant.position = BR.position
     }
 }

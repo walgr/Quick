@@ -1,4 +1,4 @@
-package com.wpf.app.base.widgets
+package com.wpf.app.base.widgets.image
 
 import android.app.Activity
 import android.content.Context
@@ -128,6 +128,6 @@ open class GlideImageView @JvmOverloads constructor(
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
-//        glideAttributeHelper.recycle()
+        glideAttributeHelper.recycle()
     }
 }

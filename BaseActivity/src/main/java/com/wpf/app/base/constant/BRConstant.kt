@@ -6,4 +6,7 @@ package com.wpf.app.base.constant
  */
 object BRConstant {
     var viewModel = 0
+    var data = 0
+    var adapter = 0
+    var position = 0
 }

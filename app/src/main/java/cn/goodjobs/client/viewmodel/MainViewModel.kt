@@ -1,6 +1,5 @@
 package cn.goodjobs.client.viewmodel
 
-import androidx.lifecycle.MutableLiveData
 import cn.goodjobs.client.databinding.ActivityMainBinding
 import com.wpf.app.base.activity.BindingViewModel
 
@@ -9,13 +8,5 @@ import com.wpf.app.base.activity.BindingViewModel
  *
  */
 class MainViewModel : BindingViewModel<ActivityMainBinding>() {
-    var showGlide = MutableLiveData(false)
 
-    override fun onModelCreate() {
-        super.onModelCreate()
-        viewBinding?.glideView?.postDelayed({
-            showGlide.postValue(true)
-//            viewBinding?.glideView?.visibility = View.VISIBLE
-        }, 1000)
-    }
 }
