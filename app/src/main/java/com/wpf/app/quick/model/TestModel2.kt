@@ -36,11 +36,6 @@ class TestModel2(
             notifyPropertyChanged(BR.title)
         }
 
-    init {
-        val int = Random.nextInt(100).toString()
-        title = int
-    }
-
     override fun toString(): String {
         return Gson().toJson(this)
     }

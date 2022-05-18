@@ -18,18 +18,16 @@ open class CommonViewBindingHolder<T : CommonItemDataBinding<H>, H: ViewDataBind
     private val variableBinding: Map<Int, Any>? = null) :
     CommonViewHolder<T>(mParent, layoutId = layoutId) {
 
-    var viewBinding: H? = null
+    private var viewBinding: H? = null
 
     override fun bindViewBinding(view: View) {
         viewBinding = DataBindingUtil.bind(view)
-//        viewBinding = viewData?.viewBinding
-//        val viewDataBinding: ViewDataBinding = getVm0Clazz(viewData!!)
-//        viewBinding?.setVariable(BRConstant.data, viewData)
-//        viewBinding?.executePendingBindings()
         viewData?.onViewBindingSet(this)
+        onCreateHolderEnd()
     }
 
     override fun onBindViewHolder(adapter: CommonAdapter, data: T, position: Int) {
+        adapterListener = adapter.commonAdapterListener as? CommonAdapterListener<T>
         viewBinding?.setVariable(BRConstant.data, data)
         viewBinding?.setVariable(BRConstant.adapter, adapter)
         viewBinding?.setVariable(BRConstant.position, position)

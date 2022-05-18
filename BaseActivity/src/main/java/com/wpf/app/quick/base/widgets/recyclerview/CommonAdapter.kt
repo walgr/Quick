@@ -29,7 +29,6 @@ class CommonAdapter(
         parent: ViewGroup,
         viewType: Int
     ): CommonViewHolder<CommonItemData> {
-        Log.e("创建Holder", "" + viewType)
         dataList!!.find {
             it.viewType == viewType
         }?.let { data ->

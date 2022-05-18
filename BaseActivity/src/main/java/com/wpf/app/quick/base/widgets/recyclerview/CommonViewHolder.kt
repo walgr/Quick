@@ -15,11 +15,23 @@ abstract class CommonViewHolder<T: CommonItemData>(
     @LayoutRes open val layoutId: Int
 ) : RecyclerView.ViewHolder(LayoutInflater.from(mParent.context).inflate(layoutId, mParent, false)) {
 
-    abstract fun bindViewBinding(view: View)
+    var adapterListener: CommonAdapterListener<T>? = null
+
+    open fun bindViewBinding(view: View) {
+        onCreateHolderEnd()
+    }
 
     abstract fun onBindViewHolder(
         adapter: CommonAdapter,
         data: T,
         position: Int
     )
+
+    open fun onCreateHolderEnd() {
+
+    }
+
+    fun getAdapterClickListener(): CommonAdapterListener<T>? {
+        return adapterListener
+    }
 }

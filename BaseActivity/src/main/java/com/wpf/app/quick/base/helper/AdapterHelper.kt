@@ -37,7 +37,6 @@ fun bindSelect(checkView: View, select: MutableLiveData<Boolean>) {
             checkView
         ) { _, isChecked ->
             run {
-                Log.e("onViewCheck", "$select   $checkView")
                 select.postValue(isChecked)
             }
         }
