@@ -9,18 +9,15 @@ import android.util.TypedValue
 import android.view.View
 import android.widget.*
 import androidx.annotation.DrawableRes
-import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.graphics.drawable.toDrawable
-import androidx.databinding.BindingAdapter
-import androidx.databinding.Observable
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LifecycleRegistry
 import com.wpf.app.base.R
 import com.wpf.app.base.helper.MultiFunctionAttributeHelper
 import com.wpf.app.base.helper.ScaleTypeHelper
 import com.wpf.app.base.helper.TypefaceHelper
-import com.wpf.app.base.widgets.recyclerview.CommonAdapter
 
 /**
  * Created by 王朋飞 on 2022/5/7.
@@ -29,25 +26,35 @@ import com.wpf.app.base.widgets.recyclerview.CommonAdapter
  * CheckBox   LeftImageview            RightImage
  *                          SubTitle
  */
-open class MultiFunctionView
+class MultiFunctionView
 @JvmOverloads constructor(
     context: Context,
-    val attributes: AttributeSet? = null,
+    private val attributes: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : ConstraintLayout(context, attributes, defStyleAttr), Checkable {
+) : ConstraintLayout(context, attributes, defStyleAttr), CheckView, LifecycleOwner {
+
+    private val mLifecycleRegistry = LifecycleRegistry(this)
 
     private lateinit var attributeHelper: MultiFunctionAttributeHelper
+
+    override fun onFinishInflate() {
+        super.onFinishInflate()
+        mLifecycleRegistry.currentState = Lifecycle.State.STARTED
+    }
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         attributes?.let {
             attributeHelper = MultiFunctionAttributeHelper(context, attributes)
         }
+        mLifecycleRegistry.currentState = Lifecycle.State.RESUMED
     }
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
         attributeHelper.recycle()
+        setOnCheckedChangeListener(null)
+        mLifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     }
 
     init {
@@ -71,6 +78,15 @@ open class MultiFunctionView
         title = findViewById(R.id.title)
         subTitle = findViewById(R.id.subTitle)
         rightImage = findViewById(R.id.rightImage)
+        setClick()
+    }
+
+    private fun setClick() {
+        if (attributeHelper.clickOnlyCheckBox == true) {
+            setOnClickListener {
+                getCheckBox().performClick()
+            }
+        }
     }
 
     private fun loadViewAttribute() {
@@ -380,6 +396,10 @@ open class MultiFunctionView
         (rightImage.layoutParams as? MarginLayoutParams)?.rightMargin = margin
     }
 
+    override fun setOnCheckedChangeListener(listener: CompoundButton.OnCheckedChangeListener?) {
+        checkBox.setOnCheckedChangeListener(listener)
+    }
+
     override fun setChecked(checked: Boolean) {
         checkBox.isChecked = checked
     }
@@ -391,24 +411,13 @@ open class MultiFunctionView
     override fun toggle() {
         checkBox.toggle()
     }
+
+    override fun getLifecycle(): Lifecycle {
+        return mLifecycleRegistry
+    }
 }
 
-@BindingAdapter("isSelect")
-fun isSelect(multiFunctionView: MultiFunctionView, select: Boolean) {
-    multiFunctionView.isChecked = select
-}
+interface CheckView: Checkable {
 
-@BindingAdapter("bindSelect")
-fun bindSelect(multiFunctionView: MultiFunctionView, select: MutableLiveData<Boolean>) {
-    multiFunctionView.isChecked = select.value ?: false
-}
-
-@BindingAdapter("onViewClick")
-fun onViewClick(view: View, onClick: View.OnClickListener) {
-    view.setOnClickListener(onClick)
-}
-
-@BindingAdapter("onViewCheck")
-fun onViewCheck(view: MultiFunctionView, onChange: CompoundButton.OnCheckedChangeListener) {
-    view.getCheckBox().setOnCheckedChangeListener(onChange)
+    fun setOnCheckedChangeListener(listener: CompoundButton.OnCheckedChangeListener?)
 }

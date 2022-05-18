@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import com.wpf.app.base.R
+import com.wpf.app.base.constant.*
 
 /**
  * Created by 王朋飞 on 2022/5/7.
@@ -60,4 +61,19 @@ class MultiFunctionAttributeHelper
     var rightImageScaleType: Int = 3
     var rightImageLeftMarge: Int? = 0
     var rightImageRightMarge: Int? = 0
+
+    var clickView: Int? = null
+    get() {
+        return when(field) {
+            0 -> ItemView
+            1 -> CheckBox
+            2 -> LeftImage
+            3 -> Title
+            4 -> SubTitle
+            5 -> RightImage
+            else -> ItemView
+        }
+    }
+
+    var clickOnlyCheckBox: Boolean? = null
 }

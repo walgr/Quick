@@ -9,13 +9,24 @@
         <variable
             name="viewModel"
             type="cn.goodjobs.client.viewmodel.MainViewModel" />
+
+        <variable
+            name="data"
+            type="cn.goodjobs.client.model.TestModel2" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
+        android:orientation="vertical"
         android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{data.select1.toString()}"
+            />
 
         <com.wpf.app.base.widgets.recyclerview.CommonRecyclerView
             android:id="@+id/list"
@@ -24,6 +35,6 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 </layout>

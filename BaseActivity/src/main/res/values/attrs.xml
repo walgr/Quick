@@ -87,5 +87,14 @@
         </attr>
         <attr name="rightImageLeftMargin" format="dimension"/>
         <attr name="rightImageRightMargin" format="dimension"/>
+        <attr name="clickView" format="enum">
+            <enum name="itemView" value="0"/>
+            <enum name="checkBox" value="1"/>
+            <enum name="leftImage" value="2"/>
+            <enum name="title" value="3"/>
+            <enum name="subTitle" value="4"/>
+            <enum name="rightImage" value="5"/>
+        </attr>
+        <attr name="clickOnlyCheckBox" format="boolean"/>
     </declare-styleable>
 </resources>

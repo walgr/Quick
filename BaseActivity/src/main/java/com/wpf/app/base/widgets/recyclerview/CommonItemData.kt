@@ -1,5 +1,6 @@
 package com.wpf.app.base.widgets.recyclerview
 
+import androidx.databinding.BaseObservable
 import androidx.lifecycle.ViewModel
 import kotlin.math.abs
 
@@ -12,7 +13,7 @@ open class CommonItemData(
     open var id: Int = 0,
     open var isSelect: Boolean = false,
     var viewType: Int = 0
-): ViewModel() {
+): BaseObservable() {
 
     init {
         if (viewType == 0) {

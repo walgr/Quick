@@ -19,18 +19,26 @@ import kotlin.random.Random
 @HolderBindingLayout(R.layout.holder_test2)
 class TestModel2(
     var select1: MutableLiveData<Boolean> = MutableLiveData(false),
-    var title: MutableLiveData<String>
 ) : CommonItemDataBinding<HolderTest2Binding>() {
 
-//    @Bindable
+    //只能data -> View单向刷新，view -> data需要设置点击监听
+    @Bindable
     var select2: Boolean  = false
         set(value) {
             field = value
-//            notifyPropertyChanged(BR.select2)
+            notifyPropertyChanged(BR.select2)
         }
+
+    @Bindable
+    var title: String = ""
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.title)
+        }
+
     init {
         val int = Random.nextInt(100).toString()
-        title.postValue(int)
+        title = int
     }
 
     override fun toString(): String {

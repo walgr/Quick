@@ -25,14 +25,15 @@
             android:id="@+id/selectItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:bindSelect="@{data.select1}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:bindSelect="@{data.select1}"
+            app:title="@{data.title}"
+            app:clickOnlyCheckBox="true"
             app:rightImageSrc="@mipmap/ic_launcher"
             app:rightImageWidth="20dp"
             app:showCheckBox="true"
             app:showRightImage="true"
-            app:title="@{data.title}"
             app:titleSize="22sp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
