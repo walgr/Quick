@@ -25,13 +25,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{data.select1.toString()}"
+            android:text="@{data.isSelect().toString()}"
             />
 
         <com.wpf.app.quick.base.widgets.recyclerview.CommonRecyclerView
             android:id="@+id/list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:setData="@{viewModel.data}"
+            app:selectIdList="@{viewModel.select}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             />
 

@@ -22,7 +22,7 @@ open class CommonViewBindingHolder<T : CommonItemDataBinding<H>, H: ViewDataBind
 
     override fun bindViewBinding(view: View) {
         viewBinding = DataBindingUtil.bind(view)
-        viewData?.onViewBindingSet(this)
+        viewData?.onCreateHolderEnd(this)
         onCreateHolderEnd()
     }
 

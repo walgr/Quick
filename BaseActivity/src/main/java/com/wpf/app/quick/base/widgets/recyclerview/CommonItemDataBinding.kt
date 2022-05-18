@@ -14,7 +14,7 @@ open class CommonItemDataBinding<VB : ViewDataBinding>(
     @LayoutRes val layoutId: Int = 0
 ) : CommonItemData(), LifecycleObserver {
 
-    open fun onViewBindingSet(viewHolder: CommonViewBindingHolder<out CommonItemDataBinding<VB>, VB>) {
+    open fun onCreateHolderEnd(viewHolder: CommonViewBindingHolder<out CommonItemDataBinding<VB>, VB>) {
 
     }
 }

@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:bindSelect="@{data.select1}"
+            app:bindSelect="@{data.isSelect()}"
             app:title="@{data.title}"
             app:clickOnlyCheckBox="true"
             app:rightImageSrc="@mipmap/ic_launcher"

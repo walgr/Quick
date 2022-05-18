@@ -20,6 +20,10 @@ abstract class BaseActivity(
         initView()
     }
 
+    override fun initView() {
+
+    }
+
     open fun dealContentView() {
         layoutId?.let { setContentView(layoutId) }
             ?: let { layoutView?.let { setContentView(layoutView) } }

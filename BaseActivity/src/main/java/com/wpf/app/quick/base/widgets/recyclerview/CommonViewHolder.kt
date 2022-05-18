@@ -31,7 +31,7 @@ abstract class CommonViewHolder<T: CommonItemData>(
 
     }
 
-    fun getAdapterClickListener(): CommonAdapterListener<T>? {
-        return adapterListener
+    fun getAdapterClickListener(): CommonAdapterListener<CommonItemData>? {
+        return adapterListener as? CommonAdapterListener<CommonItemData>
     }
 }

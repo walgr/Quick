@@ -1,16 +1,16 @@
 package com.wpf.app.quick.base.widgets.recyclerview
 
 import androidx.databinding.BaseObservable
+import androidx.lifecycle.MutableLiveData
 import kotlin.math.abs
-
 
 /**
  * Created by 王朋飞 on 2022/5/11.
  * ViewHolder基础数据
  */
 open class CommonItemData(
-    open var id: Int = 0,
-    open var isSelect: Boolean = false,
+    open var id: String = "",
+    open var isSelect: MutableLiveData<Boolean> = MutableLiveData(false),
     var viewType: Int = 0
 ): BaseObservable() {
 

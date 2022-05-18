@@ -7,6 +7,7 @@ import android.text.TextUtils
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
+import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.DrawableRes
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -85,6 +86,7 @@ class MultiFunctionView
         if (attributeHelper.clickOnlyCheckBox == true) {
             setOnClickListener {
                 getCheckBox().performClick()
+                (parent as ViewGroup).performClick()
             }
         }
     }

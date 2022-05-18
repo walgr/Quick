@@ -1,6 +1,5 @@
 package com.wpf.app.quick.base.helper
 
-import android.util.Log
 import android.view.View
 import android.widget.Checkable
 import android.widget.CompoundButton
