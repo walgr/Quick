@@ -8,11 +8,11 @@
 
         <variable
             name="viewModel"
-            type="cn.goodjobs.client.viewmodel.MainViewModel" />
+            type="com.wpf.app.quick.viewmodel.MainViewModel" />
 
         <variable
             name="data"
-            type="cn.goodjobs.client.model.TestModel2" />
+            type="com.wpf.app.quick.model.TestModel2" />
     </data>
 
     <LinearLayout
@@ -28,7 +28,7 @@
             android:text="@{data.select1.toString()}"
             />
 
-        <com.wpf.app.base.widgets.recyclerview.CommonRecyclerView
+        <com.wpf.app.quick.base.widgets.recyclerview.CommonRecyclerView
             android:id="@+id/list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

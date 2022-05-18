@@ -8,7 +8,7 @@
         android:background="@color/white"
         android:padding="16dp">
 
-        <com.wpf.app.base.widgets.image.GlideImageView
+        <com.wpf.app.quick.base.widgets.image.GlideImageView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:scaleType="centerInside"
@@ -21,7 +21,7 @@
             app:placeholder="@mipmap/ic_launcher"
             app:roundedCorners="8dp">
 
-        </com.wpf.app.base.widgets.image.GlideImageView>
+        </com.wpf.app.quick.base.widgets.image.GlideImageView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -6,11 +6,11 @@
 
         <variable
             name="data"
-            type="cn.goodjobs.client.model.TestModel2" />
+            type="com.wpf.app.quick.model.TestModel2" />
 
         <variable
             name="adapter"
-            type="com.wpf.app.base.widgets.recyclerview.CommonAdapter" />
+            type="com.wpf.app.quick.base.widgets.recyclerview.CommonAdapter" />
 
         <variable
             name="position"
@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.wpf.app.base.widgets.MultiFunctionView
+        <com.wpf.app.quick.base.widgets.MultiFunctionView
             android:id="@+id/selectItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

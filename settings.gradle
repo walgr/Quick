@@ -12,6 +12,6 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "GoodJobs2022"
+rootProject.name = "Quick"
 include ':app'
 include ':BaseActivity'
