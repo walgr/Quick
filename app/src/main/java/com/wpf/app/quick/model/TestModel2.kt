@@ -2,13 +2,12 @@ package com.wpf.app.quick.model
 
 import android.annotation.SuppressLint
 import androidx.databinding.Bindable
-import androidx.lifecycle.MutableLiveData
 import com.wpf.app.quick.BR
 import com.wpf.app.quick.R
 import com.google.gson.Gson
-import com.wpf.app.quick.base.widgets.recyclerview.CommonItemData
-import com.wpf.app.quick.base.widgets.recyclerview.CommonItemDataBinding
-import com.wpf.app.quick.base.widgets.recyclerview.CommonViewBindingHolder
+import com.wpf.app.quick.base.widgets.recyclerview.QuickItemData
+import com.wpf.app.quick.base.widgets.recyclerview.QuickItemDataBinding
+import com.wpf.app.quick.base.widgets.recyclerview.QuickViewBindingHolder
 import com.wpf.app.quick.base.widgets.recyclerview.HolderBindingLayout
 import com.wpf.app.quick.databinding.HolderTest2Binding
 
@@ -19,7 +18,7 @@ import com.wpf.app.quick.databinding.HolderTest2Binding
 @SuppressLint("NonConstantResourceId")
 @HolderBindingLayout(R.layout.holder_test2)
 class TestModel2(
-) : CommonItemDataBinding<HolderTest2Binding>() {
+) : QuickItemDataBinding<HolderTest2Binding>() {
 
     //只能data -> View单向刷新，view -> data需要设置点击监听
     @Bindable
@@ -40,12 +39,12 @@ class TestModel2(
         return Gson().toJson(this)
     }
 
-    override fun onCreateHolderEnd(viewHolder: CommonViewBindingHolder<out CommonItemDataBinding<HolderTest2Binding>, HolderTest2Binding>) {
+    override fun onCreateHolderEnd(viewHolder: QuickViewBindingHolder<out QuickItemDataBinding<HolderTest2Binding>, HolderTest2Binding>) {
         super.onCreateHolderEnd(viewHolder)
         viewHolder.itemView.setOnClickListener {
             viewHolder.getAdapterClickListener()?.onItemClick(
                 it,
-                viewHolder.viewData as CommonItemData,
+                viewHolder.viewData as QuickItemData,
                 viewHolder.bindingAdapterPosition
             )
         }

@@ -1,8 +1,9 @@
 package com.wpf.app.quick.adapterholder
 
+import android.view.View
 import android.view.ViewGroup
 import com.wpf.app.quick.R
-import com.wpf.app.quick.base.widgets.recyclerview.CommonViewBindingHolder
+import com.wpf.app.quick.base.widgets.recyclerview.QuickViewBindingHolder
 import com.wpf.app.quick.databinding.HolderTest3Binding
 import com.wpf.app.quick.model.TestModel3
 
@@ -12,10 +13,10 @@ import com.wpf.app.quick.model.TestModel3
  */
 
 class TestHolder3(mParent: ViewGroup)
-    : CommonViewBindingHolder<TestModel3, HolderTest3Binding>(mParent, layoutId = R.layout.holder_test3) {
+    : QuickViewBindingHolder<TestModel3, HolderTest3Binding>(mParent, layoutId = R.layout.holder_test3) {
 
-    override fun onCreateHolderEnd() {
-        super.onCreateHolderEnd()
+    override fun onCreateHolderEnd(itemView: View) {
+        super.onCreateHolderEnd(itemView)
         itemView.setOnClickListener {
             getAdapterClickListener()?.onItemClick(itemView, viewData, bindingAdapterPosition)
         }

@@ -1,7 +1,7 @@
 package com.wpf.app.quick.model
 
 import com.wpf.app.quick.adapterholder.TestHolder
-import com.wpf.app.quick.base.widgets.recyclerview.CommonItemData
+import com.wpf.app.quick.base.widgets.recyclerview.QuickItemData
 import com.wpf.app.quick.base.widgets.recyclerview.HolderClass
 
 /**
@@ -9,6 +9,6 @@ import com.wpf.app.quick.base.widgets.recyclerview.HolderClass
  *
  */
 @HolderClass(TestHolder::class)
-class TestModel(val text: String = "1") : CommonItemData() {
+class TestModel(val text: String = "1") : QuickItemData() {
 
 }

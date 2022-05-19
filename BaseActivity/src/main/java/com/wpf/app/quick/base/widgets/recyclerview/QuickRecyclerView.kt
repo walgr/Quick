@@ -17,27 +17,31 @@ open class CommonRecyclerView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : RecyclerView(context, attributes, defStyleAttr) {
 
-    lateinit var mAdapter: CommonAdapter
+    lateinit var mAdapter: QuickAdapter
 
     init {
         setAdapter()
     }
 
     fun setAdapter() {
-        mAdapter = CommonAdapter()
+        mAdapter = QuickAdapter()
         adapter = mAdapter
+    }
+
+    fun size(): Int {
+        return mAdapter.getData()?.size ?: 0
     }
 }
 
 @BindingAdapter("setData")
-fun setData(list: CommonRecyclerView, newData: List<CommonItemData>?) {
+fun setData(list: CommonRecyclerView, newData: MutableList<QuickItemData>?) {
     newData?.let {
         list.mAdapter.setNewData(newData)
     }
 }
 
 @BindingAdapter("selectList")
-fun selectList(list: CommonRecyclerView, selectList: List<CommonItemData>) {
+fun selectList(list: CommonRecyclerView, selectList: MutableList<QuickItemData>) {
     list.mAdapter.getData()?.forEach { listData ->
         selectList.find { it.id == listData.id }?.isSelect?.postValue(true)
     }

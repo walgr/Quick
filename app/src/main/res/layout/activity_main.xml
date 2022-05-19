@@ -9,34 +9,56 @@
         <variable
             name="viewModel"
             type="com.wpf.app.quick.viewmodel.MainViewModel" />
-
-        <variable
-            name="data"
-            type="com.wpf.app.quick.model.TestModel2" />
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
         android:orientation="vertical"
         android:padding="16dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{data.isSelect().toString()}"
-            />
-
         <com.wpf.app.quick.base.widgets.recyclerview.CommonRecyclerView
             android:id="@+id/list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:setData="@{viewModel.data}"
-            app:selectIdList="@{viewModel.select}"
+            android:layout_height="240dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             />
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:onClick="@{viewModel::clean}"
+                android:text="清空所有"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:onClick="@{viewModel::addMessage}"
+                android:text="新增1条消息"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="某人来了"
+                android:onClick="@{viewModel::addOtherCome}"
+                />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
 
 </layout>

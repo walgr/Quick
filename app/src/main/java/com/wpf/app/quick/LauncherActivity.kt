@@ -1,6 +1,5 @@
 package com.wpf.app.quick
 
-import com.wpf.app.quick.R
 import com.wpf.app.quick.base.activity.BaseActivity
 import com.gyf.immersionbar.ktx.immersionBar
 

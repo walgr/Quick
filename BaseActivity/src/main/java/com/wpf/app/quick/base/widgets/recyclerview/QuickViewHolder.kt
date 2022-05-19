@@ -10,28 +10,24 @@ import androidx.recyclerview.widget.RecyclerView
  * Created by 王朋飞 on 2022/5/11.
  *
  */
-abstract class CommonViewHolder<T: CommonItemData>(
+abstract class QuickViewHolder<T: QuickItemData>(
     mParent: ViewGroup,
     @LayoutRes open val layoutId: Int
 ) : RecyclerView.ViewHolder(LayoutInflater.from(mParent.context).inflate(layoutId, mParent, false)) {
 
-    var adapterListener: CommonAdapterListener<T>? = null
+    var adapterListener: QuickAdapterListener<T>? = null
 
-    open fun bindViewBinding(view: View) {
-        onCreateHolderEnd()
+    open fun onCreateViewHolder(itemView: View) {
+        
     }
 
     abstract fun onBindViewHolder(
-        adapter: CommonAdapter,
+        adapter: QuickAdapter,
         data: T,
         position: Int
     )
 
-    open fun onCreateHolderEnd() {
-
-    }
-
-    fun getAdapterClickListener(): CommonAdapterListener<CommonItemData>? {
-        return adapterListener as? CommonAdapterListener<CommonItemData>
+    fun getAdapterClickListener(): QuickAdapterListener<QuickItemData>? {
+        return adapterListener as? QuickAdapterListener<QuickItemData>
     }
 }

@@ -5,8 +5,10 @@
       <map>
         <entry key="../../../../../layout/custom_preview.xml" value="0.39537037037037037" />
         <entry key="BaseActivity/src/main/res/layout/multi_function_layout.xml" value="0.203125" />
+        <entry key="app/src/main/res/drawable/bg_message_my.xml" value="0.2155" />
         <entry key="app/src/main/res/layout/activity_launcher.xml" value="0.2484375" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3398148148148148" />
+        <entry key="app/src/main/res/layout/holder_message_my.xml" value="0.3734375" />
         <entry key="app/src/main/res/layout/holder_test.xml" value="0.3734375" />
         <entry key="app/src/main/res/layout/holder_test2.xml" value="0.19427083333333334" />
         <entry key="app/src/main/res/layout/holder_test3.xml" value="0.19427083333333334" />
@@ -14,5 +16,5 @@
     </option>
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_17_PREVIEW" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
 </project>

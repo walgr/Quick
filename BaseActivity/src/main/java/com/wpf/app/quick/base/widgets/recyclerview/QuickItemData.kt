@@ -8,7 +8,7 @@ import kotlin.math.abs
  * Created by 王朋飞 on 2022/5/11.
  * ViewHolder基础数据
  */
-open class CommonItemData(
+open class QuickItemData(
     open var id: String = "",
     open var isSelect: MutableLiveData<Boolean> = MutableLiveData(false),
     var viewType: Int = 0

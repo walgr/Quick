@@ -11,23 +11,27 @@ import com.wpf.app.quick.base.constant.BRConstant
  * Created by 王朋飞 on 2022/5/12.
  *
  */
-open class CommonViewBindingHolder<T : CommonItemDataBinding<H>, H: ViewDataBinding>(
+open class QuickViewBindingHolder<T : QuickItemDataBinding<H>, H: ViewDataBinding>(
     mParent: ViewGroup,
-    @LayoutRes override val layoutId: Int = 0,
+    @LayoutRes override val layoutId: Int,
     var viewData: T? = null,
     private val variableBinding: Map<Int, Any>? = null) :
-    CommonViewHolder<T>(mParent, layoutId = layoutId) {
+    QuickViewHolder<T>(mParent, layoutId = layoutId) {
 
-    private var viewBinding: H? = null
+    var viewBinding: H? = null
 
-    override fun bindViewBinding(view: View) {
-        viewBinding = DataBindingUtil.bind(view)
+    override fun onCreateViewHolder(itemView: View) {
+        viewBinding = DataBindingUtil.bind(itemView)
         viewData?.onCreateHolderEnd(this)
-        onCreateHolderEnd()
+        onCreateHolderEnd(itemView)
     }
 
-    override fun onBindViewHolder(adapter: CommonAdapter, data: T, position: Int) {
-        adapterListener = adapter.commonAdapterListener as? CommonAdapterListener<T>
+    open fun onCreateHolderEnd(itemView: View) {
+
+    }
+
+    override fun onBindViewHolder(adapter: QuickAdapter, data: T, position: Int) {
+        adapterListener = adapter.mQuickAdapterListener as? QuickAdapterListener<T>
         viewBinding?.setVariable(BRConstant.data, data)
         viewBinding?.setVariable(BRConstant.adapter, adapter)
         viewBinding?.setVariable(BRConstant.position, position)

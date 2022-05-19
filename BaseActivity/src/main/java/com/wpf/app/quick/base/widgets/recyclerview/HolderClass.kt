@@ -8,4 +8,4 @@ import kotlin.reflect.KClass
  */
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class HolderClass(val holderClass: KClass<out CommonViewHolder<out CommonItemData>>)
+annotation class HolderClass(val holderClass: KClass<out QuickViewHolder<out QuickItemData>>)

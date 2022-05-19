@@ -24,8 +24,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility JavaVersion.VERSION_16
+        targetCompatibility JavaVersion.VERSION_16
     }
     kotlinOptions {
         jvmTarget = '17'
@@ -45,6 +45,8 @@ dependencies {
     implementation 'androidx.preference:preference-ktx:1.2.0'
     implementation 'androidx.datastore:datastore:1.0.0'
     implementation 'androidx.datastore:datastore-rxjava3:1.0.0'
+
+    implementation 'jp.wasabeef:recyclerview-animators:4.0.2'
 
     implementation project(path: ':BaseActivity')
 }
