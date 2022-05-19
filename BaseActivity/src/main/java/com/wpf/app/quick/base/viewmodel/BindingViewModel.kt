@@ -9,9 +9,10 @@ import androidx.lifecycle.ViewModel
  * Activity基础控制器带Binding
  */
 open class BindingViewModel<T : ViewDataBinding>(
-    var viewBinding: T? = null) : ViewModel(), LifecycleObserver {
+    var viewBinding: T? = null
+) : ViewModel(), LifecycleObserver {
 
-        open fun onModelCreate() {
+    open fun onModelCreate() {
 
-        }
+    }
 }
