@@ -14,8 +14,8 @@ import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
  */
 class MainViewModel : BindingViewModel<ActivityMainBinding>() {
 
-    override fun onModelCreate() {
-        super.onModelCreate()
+    override fun onBindingCreate(viewBinding: ActivityMainBinding?) {
+        super.onBindingCreate(viewBinding)
         viewBinding?.list?.itemAnimator = SlideInUpAnimator(OvershootInterpolator()).also {
             it.addDuration = 50
         }

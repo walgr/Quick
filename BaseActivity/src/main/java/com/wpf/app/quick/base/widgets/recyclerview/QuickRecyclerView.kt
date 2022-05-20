@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
  *  通用列表
  *  支持多类型
  */
-open class CommonRecyclerView @JvmOverloads constructor(
+open class QuickRecyclerView @JvmOverloads constructor(
     context: Context,
     attributes: AttributeSet? = null,
     defStyleAttr: Int = 0
@@ -34,14 +34,14 @@ open class CommonRecyclerView @JvmOverloads constructor(
 }
 
 @BindingAdapter("setData")
-fun setData(list: CommonRecyclerView, newData: MutableList<QuickItemData>?) {
+fun setData(list: QuickRecyclerView, newData: MutableList<QuickItemData>?) {
     newData?.let {
         list.mAdapter.setNewData(newData)
     }
 }
 
 @BindingAdapter("selectList")
-fun selectList(list: CommonRecyclerView, selectList: MutableList<QuickItemData>) {
+fun selectList(list: QuickRecyclerView, selectList: MutableList<QuickItemData>) {
     list.mAdapter.getData()?.forEach { listData ->
         selectList.find { it.id == listData.id }?.isSelect?.postValue(true)
     }
@@ -51,7 +51,7 @@ fun selectList(list: CommonRecyclerView, selectList: MutableList<QuickItemData>)
  * 根据id设置选中
  */
 @BindingAdapter("selectIdList")
-fun selectIdList(list: CommonRecyclerView, selectList: MutableLiveData<List<String>>) {
+fun selectIdList(list: QuickRecyclerView, selectList: MutableLiveData<List<String>>) {
     list.mAdapter.getData()?.find { listData ->
         selectList.value?.contains(listData.id) ?: false
     }?.isSelect?.postValue(true)

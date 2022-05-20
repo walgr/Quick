@@ -32,6 +32,7 @@ class QuickAdapter(
     }
 
     fun cleanAll() {
+        this.dataList?.clear()
         this.dataList = null
         notifyDataSetChanged()
     }

@@ -18,11 +18,11 @@ fun <VM> getVm0Clazz(obj: Any): VM {
 }
 
 /**
- * 获取当前类绑定的泛型ViewModel-clazz
+ * 获取当前类绑定的泛型ViewBinding-clazz
  */
 @Suppress("UNCHECKED_CAST")
-fun <VM> getVm1Clazz(obj: Any): VM {
-    return (obj.javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[1] as VM
+fun <VB> getVm1Clazz(obj: Any): VB {
+    return (obj.javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[1] as VB
 }
 
 

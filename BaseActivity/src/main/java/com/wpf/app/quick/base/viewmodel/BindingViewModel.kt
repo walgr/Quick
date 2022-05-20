@@ -12,7 +12,7 @@ open class BindingViewModel<T : ViewDataBinding>(
     var viewBinding: T? = null
 ) : ViewModel(), LifecycleObserver {
 
-    open fun onModelCreate() {
+    open fun onBindingCreate(viewBinding: T?) {
 
     }
 }

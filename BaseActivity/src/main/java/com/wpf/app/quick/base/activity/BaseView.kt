@@ -7,7 +7,7 @@ package com.wpf.app.quick.base.activity
 interface BaseView {
 
     /**
-     * 初始胡Activity页面
+     * 初始话ActivityView
      */
     fun initView()
 
