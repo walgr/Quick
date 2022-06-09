@@ -3,6 +3,7 @@ package com.wpf.app.quick.base.viewmodel
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.whenStarted
 
 /**
  * Created by 王朋飞 on 2022/4/2.

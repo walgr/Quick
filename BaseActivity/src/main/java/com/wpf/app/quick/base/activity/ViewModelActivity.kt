@@ -11,11 +11,12 @@ import com.wpf.app.quick.base.viewmodel.BaseViewModel
  */
 abstract class ViewModelActivity<T: BaseViewModel<H>, H: BaseView>
     @JvmOverloads constructor(
-    private var viewModel: T? = null
-) : BaseActivity() {
+    private var viewModel: T? = null,
+    activityTitle: String = "",
+) : BaseActivity(activityTitle = activityTitle) {
 
     override fun dealContentView() {
-        viewModel = ViewModelProvider(this)[getVm0Clazz(this)]
+        viewModel = ViewModelProvider(this)[getVm0Clazz(this)?:return]
         viewModel?.onModelCreate(this as H)
     }
 }

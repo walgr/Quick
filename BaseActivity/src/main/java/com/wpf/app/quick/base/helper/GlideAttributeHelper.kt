@@ -50,13 +50,13 @@ open class GlideAttributeHelper constructor(
     //所有角
     var roundedCorners = 0
     //左上圆角
-    var topLeftRadius = 0
+    var topLeftRadius = 0F
     //右上圆角
-    var topRightRadius = 0
+    var topRightRadius = 0F
     //左下圆角
-    var bottomLeftRadius = 0
+    var bottomLeftRadius = 0F
     //右下圆角
-    var bottomRightRadius = 0
+    var bottomRightRadius = 0F
 
     @DrawableRes
     var placeholder: Int = 0

@@ -17,8 +17,7 @@ import com.wpf.app.quick.databinding.HolderTest2Binding
  */
 @SuppressLint("NonConstantResourceId")
 @HolderBindingLayout(R.layout.holder_test2)
-class TestModel2(
-) : QuickItemDataBinding<HolderTest2Binding>() {
+class TestModel2: QuickItemDataBinding<HolderTest2Binding>() {
 
     //只能data -> View单向刷新，view -> data需要设置点击监听
     @Bindable

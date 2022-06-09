@@ -3,12 +3,13 @@ package com.wpf.app.quick.base.widgets.image
 import android.app.Activity
 import android.content.Context
 import android.util.AttributeSet
-import androidx.appcompat.widget.AppCompatImageView
+import android.widget.ImageView
 import com.wpf.app.quick.base.constant.*
 import com.wpf.app.quick.base.helper.GlideAttributeHelper
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.RequestManager
+import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 
 /**
@@ -19,15 +20,15 @@ open class GlideImageView @JvmOverloads constructor(
     context: Context,
     attributes: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : AppCompatImageView(context, attributes, defStyleAttr) {
+) : ImageView(context, attributes, defStyleAttr) {
 
-    private lateinit var glideAttributeHelper: GlideAttributeHelper
+    private lateinit var attributeHelper: GlideAttributeHelper
     private var glideRequestManager: RequestBuilder<*>? = null
     private var glide: RequestManager
 
     init {
         attributes?.let {
-            glideAttributeHelper = GlideAttributeHelper(context, attributes)
+            attributeHelper = GlideAttributeHelper(context, attributes)
         }
         glide = Glide.with(context)
         loadViewAttribute()
@@ -40,12 +41,18 @@ open class GlideImageView @JvmOverloads constructor(
         loadUrl()
         placeholder()
         error()
-        roundedCorners()
+        roundedCorners(attributeHelper.roundedCorners)
+        granularRoundedCorners(
+            attributeHelper.topLeftRadius,
+            attributeHelper.topRightRadius,
+            attributeHelper.bottomRightRadius,
+            attributeHelper.bottomLeftRadius
+        )
         glideRequestManager?.into(this)
     }
 
     private fun loadTranscodeType() {
-        when(glideAttributeHelper.transcodeType) {
+        when (attributeHelper.transcodeType) {
             GlideAttributeHelper.asDrawable -> asDrawable()
             GlideAttributeHelper.asBitmap -> asBitmap()
             GlideAttributeHelper.asGif -> asGif()
@@ -65,16 +72,16 @@ open class GlideImageView @JvmOverloads constructor(
     }
 
     fun loadUrl() {
-        if (glideAttributeHelper.loadUrl?.isEmpty() == true) return
-        glideRequestManager = glideRequestManager?.load(glideAttributeHelper.loadUrl)
+        if (attributeHelper.loadUrl?.isEmpty() == true) return
+        glideRequestManager = glideRequestManager?.load(attributeHelper.loadUrl)
     }
 
     fun placeholder() {
-        glideRequestManager = glideRequestManager?.placeholder(glideAttributeHelper.placeholder)
+        glideRequestManager = glideRequestManager?.placeholder(attributeHelper.placeholder)
     }
 
     fun error() {
-        glideRequestManager = glideRequestManager?.error(glideAttributeHelper.error)
+        glideRequestManager = glideRequestManager?.error(attributeHelper.error)
     }
 
     fun centerCrop() {
@@ -82,7 +89,7 @@ open class GlideImageView @JvmOverloads constructor(
     }
 
     private fun loadScaleType() {
-        when(glideAttributeHelper.scaleType) {
+        when (attributeHelper.scaleType) {
             FIT_CENTER -> fitCenter()
             CENTER_CROP -> centerCrop()
             CENTER_INSIDE -> centerInside()
@@ -102,13 +109,30 @@ open class GlideImageView @JvmOverloads constructor(
         glideRequestManager = glideRequestManager?.circleCrop()
     }
 
-    fun roundedCorners() {
-        if (glideAttributeHelper.roundedCorners <= 0) return
-        glideRequestManager = glideRequestManager?.transform(RoundedCorners(glideAttributeHelper.roundedCorners))
+    fun roundedCorners(roundedCorners: Int) {
+        if (roundedCorners <= 0) return
+        glideRequestManager = glideRequestManager?.transform(RoundedCorners(roundedCorners))
     }
 
-    fun setAllRound() {
-        glideRequestManager = glideRequestManager?.transform()
+    fun granularRoundedCorners(
+        topLeftRadius: Float,
+        topRightRadius: Float,
+        bottomRightRadius: Float,
+        bottomLeftRadius: Float
+    ) {
+        if (topLeftRadius == 0F && topRightRadius == 0F && bottomRightRadius == 0F && bottomLeftRadius == 0F) return
+        if (topLeftRadius < 0) return
+        if (topRightRadius < 0) return
+        if (bottomRightRadius < 0) return
+        if (bottomLeftRadius < 0) return
+        glideRequestManager = glideRequestManager?.transform(
+            GranularRoundedCorners(
+                topLeftRadius,
+                topRightRadius,
+                bottomRightRadius,
+                bottomLeftRadius
+            )
+        )
     }
 
     fun checkContext(): Boolean {
@@ -128,6 +152,6 @@ open class GlideImageView @JvmOverloads constructor(
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
-        glideAttributeHelper.recycle()
+        attributeHelper.recycle()
     }
 }

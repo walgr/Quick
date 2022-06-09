@@ -5,6 +5,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import com.wpf.app.quick.base.constant.BRConstant
+import com.wpf.app.quick.base.helper.AutoGetHelper
 import com.wpf.app.quick.base.helper.getVm0Clazz
 import com.wpf.app.quick.base.viewmodel.BindingViewModel
 
@@ -15,7 +16,8 @@ import com.wpf.app.quick.base.viewmodel.BindingViewModel
  */
 abstract class ViewModelBindingActivity<VM : BindingViewModel<VB>, VB : ViewDataBinding> constructor(
     @LayoutRes private val layoutId: Int,
-) : BaseActivity() {
+    override val activityTitle: String = "",
+) : BaseActivity(activityTitle = activityTitle) {
 
     var viewModel: VM? = null
         set(value) {
@@ -23,16 +25,36 @@ abstract class ViewModelBindingActivity<VM : BindingViewModel<VB>, VB : ViewData
             setViewBinding()
         }
 
+    private var viewBinding: VB? = null
+    fun getViewBinding(): VB? {
+        return viewBinding
+    }
+
     private fun setViewBinding() {
-        viewModel?.viewBinding = DataBindingUtil.setContentView(this, layoutId)
-        viewModel?.viewBinding?.lifecycleOwner = this
-        viewModel?.viewBinding?.setVariable(BRConstant.viewModel, viewModel)
-        viewModel?.viewBinding?.executePendingBindings()
+        viewBinding = DataBindingUtil.setContentView(this, layoutId)
+        viewBinding?.lifecycleOwner = this
+        viewBinding?.setVariable(BRConstant.viewModel, viewModel)
+        viewBinding?.executePendingBindings()
+        viewModel?.viewBinding = viewBinding
     }
 
     override fun dealContentView() {
-        viewModel = ViewModelProvider(this)[getVm0Clazz(this)]
-        viewModel?.onBindingCreate(viewModel?.viewBinding)
+        val viewModelCls = getVm0Clazz<Class<VM>>(this)
+        if (viewModelCls != null) {
+            viewModel = ViewModelProvider(this)[viewModelCls]
+            AutoGetHelper.bind(this, viewModel)
+            viewModel?.onBindingCreate(viewModel?.viewBinding)
+        } else {
+            setViewBinding()
+        }
     }
 
+    override fun initView() {
+        super.initView()
+        initView(viewBinding)
+    }
+
+    open fun initView(viewDataBinding: VB?) {
+
+    }
 }

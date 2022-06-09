@@ -31,11 +31,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LauncherActivity"
-            android:exported="true"
-            android:theme="@style/FullScreenTheme">
 
-        </activity>
+        <activity android:name=".RecyclerViewTestActivity" />
+        <activity android:name=".IntentDataTestActivity" />
 
     </application>
 
