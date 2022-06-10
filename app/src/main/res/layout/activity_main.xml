@@ -31,6 +31,13 @@
             android:text="数据测试"
             android:onClick="gotoData"
             />
+
+        <TextView
+            android:id="@+id/spTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="测试绑定"
+            />
     </LinearLayout>
 
 </layout>

@@ -13,7 +13,7 @@ import com.wpf.app.quick.base.constant.*
 open class GlideAttributeHelper constructor(
     context: Context,
     attributeSet: AttributeSet
-) : AttributeListHelper(context, attributeSet, R.styleable.GlideImageView) {
+) : AutoGetAttributeHelper(context, attributeSet, R.styleable.GlideImageView) {
 
     companion object {
         const val asDrawable = 0

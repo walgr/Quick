@@ -13,7 +13,7 @@ import java.lang.reflect.Field
  * 按照xml里配置顺序读取数据
  */
 
-abstract class AttributeListHelper constructor(
+abstract class AutoGetAttributeHelper constructor(
     context: Context,
     attributeSet: AttributeSet,
     @StyleableRes styleableId: IntArray

@@ -1,18 +1,24 @@
 package com.wpf.app.quick
 
+import android.annotation.SuppressLint
 import android.view.View
+import android.widget.TextView
 import com.wpf.app.quick.base.activity.ViewModelBindingActivity
+import com.wpf.app.quick.base.helper.FindView
 import com.wpf.app.quick.base.viewmodel.BindingViewModel
 import com.wpf.app.quick.databinding.ActivityMainBinding
 import com.wpf.app.quick.model.MyMessage
 import com.wpf.app.quick.model.TestModel
-import com.wpf.app.quick.viewmodel.MainViewModel
 
 class MainActivity :
     ViewModelBindingActivity<BindingViewModel<ActivityMainBinding>, ActivityMainBinding>(
         R.layout.activity_main,
         activityTitle = "快捷"
     ) {
+
+    @SuppressLint("NonConstantResourceId")
+    @FindView(R.id.spTextView, spKey = "abc")
+    val bindSp: TextView? = null
 
     fun gotoList(view: View) {
         startActivity(RecyclerViewTestActivity::class.java)
@@ -36,5 +42,13 @@ class MainActivity :
             "arrayS" to arrayOf(MyMessage(userName = "101"), MyMessage(userName = "102")),
             "arrayP" to arrayOf(TestModel(text = "111"), TestModel(text = "112")), //暂不支持
         ))
+    }
+
+    @SuppressLint("SetTextI18n")
+    override fun initView(viewDataBinding: ActivityMainBinding?) {
+        super.initView(viewDataBinding)
+        bindSp?.postDelayed({
+            bindSp.text = System.currentTimeMillis().toString()
+        }, 1000)
     }
 }

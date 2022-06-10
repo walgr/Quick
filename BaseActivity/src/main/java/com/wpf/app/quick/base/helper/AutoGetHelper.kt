@@ -1,9 +1,13 @@
 package com.wpf.app.quick.base.helper
 
 import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.os.Parcelable
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
+import android.widget.TextView
 import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
@@ -16,7 +20,11 @@ annotation class AutoGet(val key: String = "")
 
 @Target(AnnotationTarget.FIELD)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class FindView(@IdRes val id: Int)
+annotation class FindView(@IdRes val id: Int, val spKey: String = "", val defalut: String = "")
+
+@Target(AnnotationTarget.FIELD)
+@Retention(AnnotationRetention.RUNTIME)
+annotation class BindSp(val key: String, val defalut: String = "", val setFun: String = "")
 
 /**
  * Created by 王朋飞 on 2022/6/8.
@@ -29,14 +37,77 @@ object AutoGetHelper {
     fun bind(activity: Activity, viewModel: ViewModel? = null) {
         setDataByIntent(activity.intent.extras, viewModel ?: activity)
         findView(activity, viewModel)
+//        bindSp(activity, viewModel)
     }
 
     fun bind(fragment: Fragment, viewModel: ViewModel? = null) {
         setDataByIntent(fragment.arguments, viewModel ?: fragment)
         findView(fragment, viewModel)
+//        fragment.context?.let {
+//            bindSp(it, viewModel)
+//        }
     }
 
-    fun setDataByIntent(bundle: Bundle?, obj: Any) {
+    private fun bindSp(context: Context, viewModel: ViewModel?) {
+        try {
+            val fields = context::class.java.declaredFields
+            //本类传输数据
+            fields.forEach { field ->
+                field.isAccessible = true
+                if (field.get(context) == null) {
+                    bindSp(context, null, field)
+                }
+            }
+            viewModel?.let {
+                val viewModelFields = viewModel::class.java.declaredFields
+                //本类传输数据
+                viewModelFields.forEach { field ->
+                    bindSp(context, viewModel, field)
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun bindSp(obj: Context, viewModel: ViewModel?, field: Field) {
+        field.getAnnotation(BindSp::class.java)?.let {
+            field.isAccessible = true
+
+        }
+    }
+
+    private fun setTextViewValue(
+        textView: TextView,
+        className: String,
+        key: String,
+        defaultValue: String
+    ) {
+        val spValue = textView.context.getSharedPreferences(className, Context.MODE_PRIVATE)
+            .getString(key, defaultValue)
+        textView.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                s?.let {
+                    if (spValue != s.toString()) {
+                        textView.context.getSharedPreferences(className, Context.MODE_PRIVATE)
+                            .edit()
+                            .putString(key, it.toString()).apply()
+                    }
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+
+        })
+        textView.text = spValue
+    }
+
+    private fun setDataByIntent(bundle: Bundle?, obj: Any) {
         if (bundle == null) return
         try {
             val fields = obj::class.java.declaredFields
@@ -49,12 +120,15 @@ object AutoGetHelper {
         }
     }
 
-    fun findView(obj: Any, viewModel: ViewModel?) {
+    private fun findView(obj: Any, viewModel: ViewModel?) {
         try {
             val fields = obj::class.java.declaredFields
             //本类传输数据
             fields.forEach { field ->
-                setFieldView(obj, null, field)
+                field.isAccessible = true
+                if (field.get(obj) == null) {
+                    setFieldView(obj, null, field)
+                }
             }
             viewModel?.let {
                 val viewModelFields = viewModel::class.java.declaredFields
@@ -100,17 +174,6 @@ object AutoGetHelper {
             } catch (e: Exception) {
                 e.printStackTrace()
             }
-//            try {
-//                if (getFieldType(field) == 1) {
-//                    //Array
-//                    bundle.getParcelableArray(key)?.let { value ->
-//                        field.set(obj, value)
-//                        return
-//                    }
-//                }
-//            } catch (e: Exception) {
-//                e.printStackTrace()
-//            }
             try {
                 if (getFieldType(field) == 2) {
                     //ArrayList
@@ -148,6 +211,11 @@ object AutoGetHelper {
             }
             if (obj is Fragment) {
                 findView = obj.view?.findViewById(it.id)
+            }
+            if (findView is TextView) {
+                if (it.spKey.isNotEmpty()) {
+                    setTextViewValue(findView, field.type.name, it.spKey, it.defalut)
+                }
             }
             viewModel?.let {
                 field.set(viewModel, findView)

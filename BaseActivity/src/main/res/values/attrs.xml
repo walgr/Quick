@@ -97,4 +97,7 @@
         </attr>
         <attr name="clickOnlyCheckBox" format="boolean"/>
     </declare-styleable>
+    <declare-styleable name="SpView">
+        <attr name="bindKey" format="string"/>
+    </declare-styleable>
 </resources>

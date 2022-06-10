@@ -16,7 +16,7 @@ import com.wpf.app.quick.base.constant.*
 class MultiFunctionAttributeHelper
     (context: Context,
      attributeSet: AttributeSet
-): AttributeListHelper(context, attributeSet, R.styleable.MultiFunctionView) {
+): AutoGetAttributeHelper(context, attributeSet, R.styleable.MultiFunctionView) {
 
     var showCheckBox: Boolean? = null
     var isCheck: Boolean? = null

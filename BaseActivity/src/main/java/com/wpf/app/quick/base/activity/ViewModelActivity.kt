@@ -1,6 +1,7 @@
 package com.wpf.app.quick.base.activity
 
 import androidx.lifecycle.ViewModelProvider
+import com.wpf.app.quick.base.helper.AutoGetHelper
 import com.wpf.app.quick.base.helper.getVm0Clazz
 import com.wpf.app.quick.base.viewmodel.BaseViewModel
 
@@ -17,6 +18,7 @@ abstract class ViewModelActivity<T: BaseViewModel<H>, H: BaseView>
 
     override fun dealContentView() {
         viewModel = ViewModelProvider(this)[getVm0Clazz(this)?:return]
+        AutoGetHelper.bind(this, viewModel)
         viewModel?.onModelCreate(this as H)
     }
 }

@@ -25,8 +25,8 @@ abstract class BaseActivity(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        AutoGetHelper.bind(this)
         dealContentView()
+        AutoGetHelper.bind(this)
         initView()
         setTitle()
     }
