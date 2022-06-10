@@ -57,17 +57,22 @@ abstract class BaseActivity(
     ) {
         startActivity(Intent(this, activityCls).also { intent ->
             data?.forEach {
-                if (it.value is Serializable) {
-                    intent.putExtra(it.key, it.value as Serializable)
-                } else if (it.value is Parcelable) {
-                    intent.putExtra(it.key, it.value as Parcelable)
-                } else if (it.value is Array<*>) {
-                    intent.putExtra(it.key, it.value as Array<out Parcelable>)
-                } else if (it.value is ArrayList<*>) {
-                    intent.putParcelableArrayListExtra(
-                        it.key,
-                        it.value as ArrayList<out Parcelable>
-                    )
+                when (it.value) {
+                    is Serializable -> {
+                        intent.putExtra(it.key, it.value as Serializable)
+                    }
+                    is Parcelable -> {
+                        intent.putExtra(it.key, it.value as Parcelable)
+                    }
+                    is Array<*> -> {
+                        intent.putExtra(it.key, it.value as Array<*>)
+                    }
+                    is ArrayList<*> -> {
+                        intent.putParcelableArrayListExtra(
+                            it.key,
+                            it.value as ArrayList<out Parcelable>
+                        )
+                    }
                 }
             }
         })

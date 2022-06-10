@@ -2,13 +2,14 @@ package com.wpf.app.quick
 
 import android.view.View
 import com.wpf.app.quick.base.activity.ViewModelBindingActivity
+import com.wpf.app.quick.base.viewmodel.BindingViewModel
 import com.wpf.app.quick.databinding.ActivityMainBinding
 import com.wpf.app.quick.model.MyMessage
 import com.wpf.app.quick.model.TestModel
 import com.wpf.app.quick.viewmodel.MainViewModel
 
 class MainActivity :
-    ViewModelBindingActivity<MainViewModel, ActivityMainBinding>(
+    ViewModelBindingActivity<BindingViewModel<ActivityMainBinding>, ActivityMainBinding>(
         R.layout.activity_main,
         activityTitle = "快捷"
     ) {
@@ -29,7 +30,11 @@ class MainActivity :
             "data1" to TestModel(text = "41"),
             "map" to mapOf("map1" to "51"),
             "list" to listOf("61"),
-            "array" to arrayOf("71")
+            "array" to arrayOf("71", "72"),
+            "listS" to listOf(MyMessage(userName = "81"), MyMessage(userName = "82")),
+            "listP" to listOf(TestModel(text = "91"), TestModel(text = "92")),
+            "arrayS" to arrayOf(MyMessage(userName = "101"), MyMessage(userName = "102")),
+            "arrayP" to arrayOf(TestModel(text = "111"), TestModel(text = "112")), //暂不支持
         ))
     }
 }

@@ -5,10 +5,10 @@ import android.os.Bundle
 import android.os.Parcelable
 import android.view.View
 import androidx.annotation.IdRes
-import androidx.annotation.IntegerRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import java.lang.reflect.Field
+import java.lang.reflect.ParameterizedType
 
 @Target(AnnotationTarget.FIELD)
 @Retention(AnnotationRetention.RUNTIME)
@@ -21,7 +21,8 @@ annotation class FindView(@IdRes val id: Int)
 /**
  * Created by 王朋飞 on 2022/6/8.
  * 自动获取Activity、Fragment里Intent里的值到属性上
- * 支持 char、byte、int、float、long、short、double、String、list、map、Serializable、Parcelable
+ * 支持 char、byte、int、float、long、short、double、String、array、list、map、Serializable、Parcelable
+ * 暂不支持 Parcelable[]
  */
 object AutoGetHelper {
 
@@ -67,7 +68,6 @@ object AutoGetHelper {
         }
     }
 
-
     private fun setFieldData(bundle: Bundle, obj: Any, field: Field) {
         field.getAnnotation(AutoGet::class.java)?.let {
             field.isAccessible = true
@@ -86,31 +86,57 @@ object AutoGetHelper {
             try {
                 //Serializable
                 bundle.getSerializable(key)?.let { value ->
-                    field.set(obj, value)
+                    if (value is Array<*>) {
+                        if (value.isNotEmpty() && value[0] is Parcelable) {
+                            //TODO 暂不支持Parcelable[]
+                        } else {
+                            field.set(obj, value)
+                        }
+                    } else {
+                        field.set(obj, value)
+                    }
                     return
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
             }
+//            try {
+//                if (getFieldType(field) == 1) {
+//                    //Array
+//                    bundle.getParcelableArray(key)?.let { value ->
+//                        field.set(obj, value)
+//                        return
+//                    }
+//                }
+//            } catch (e: Exception) {
+//                e.printStackTrace()
+//            }
             try {
-                //Array
-                bundle.getParcelableArray(key)?.let { value ->
-                    field.set(obj, value)
-                    return
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-            try {
-                //ArrayList
-                bundle.getParcelableArrayList<Parcelable>(key)?.let { value ->
-                    field.set(obj, value)
-                    return
+                if (getFieldType(field) == 2) {
+                    //ArrayList
+                    bundle.getParcelableArrayList<Parcelable>(key)?.let { value ->
+                        field.set(obj, value)
+                        return
+                    }
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
+    }
+
+    /**
+     * 获取属性类型
+     * @return 0 未知 1 array 2 list
+     */
+    private fun getFieldType(field: Field): Int {
+        val type = field.genericType
+        if (type is Class<*> && type.isArray) {
+            return 1
+        } else if (type is ParameterizedType) {
+            return 2
+        }
+        return 0;
     }
 
     private fun setFieldView(obj: Any, viewModel: ViewModel?, field: Field) {
@@ -125,7 +151,7 @@ object AutoGetHelper {
             }
             viewModel?.let {
                 field.set(viewModel, findView)
-            }?:let {
+            } ?: let {
                 field.set(obj, findView)
             }
         }
