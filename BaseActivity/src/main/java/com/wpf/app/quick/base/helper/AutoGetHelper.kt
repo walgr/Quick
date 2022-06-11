@@ -20,11 +20,13 @@ annotation class AutoGet(val key: String = "")
 
 @Target(AnnotationTarget.FIELD)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class FindView(@IdRes val id: Int, val spKey: String = "", val defalut: String = "")
-
-@Target(AnnotationTarget.FIELD)
-@Retention(AnnotationRetention.RUNTIME)
-annotation class BindSp(val key: String, val defalut: String = "", val setFun: String = "")
+annotation class FindView(
+    @IdRes val id: Int,
+    val bindSp: String = "",
+    val setSp: String = "",
+    val getSp: String = "",
+    val default: String = ""
+)
 
 /**
  * Created by 王朋飞 on 2022/6/8.
@@ -37,74 +39,60 @@ object AutoGetHelper {
     fun bind(activity: Activity, viewModel: ViewModel? = null) {
         setDataByIntent(activity.intent.extras, viewModel ?: activity)
         findView(activity, viewModel)
-//        bindSp(activity, viewModel)
     }
 
     fun bind(fragment: Fragment, viewModel: ViewModel? = null) {
         setDataByIntent(fragment.arguments, viewModel ?: fragment)
         findView(fragment, viewModel)
-//        fragment.context?.let {
-//            bindSp(it, viewModel)
-//        }
-    }
-
-    private fun bindSp(context: Context, viewModel: ViewModel?) {
-        try {
-            val fields = context::class.java.declaredFields
-            //本类传输数据
-            fields.forEach { field ->
-                field.isAccessible = true
-                if (field.get(context) == null) {
-                    bindSp(context, null, field)
-                }
-            }
-            viewModel?.let {
-                val viewModelFields = viewModel::class.java.declaredFields
-                //本类传输数据
-                viewModelFields.forEach { field ->
-                    bindSp(context, viewModel, field)
-                }
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
-
-    private fun bindSp(obj: Context, viewModel: ViewModel?, field: Field) {
-        field.getAnnotation(BindSp::class.java)?.let {
-            field.isAccessible = true
-
-        }
     }
 
     private fun setTextViewValue(
         textView: TextView,
         className: String,
-        key: String,
+        bindKey: String,
+        setKey: String,
+        getKey: String,
         defaultValue: String
     ) {
+        val key: String = if (bindKey.isNotEmpty()) {
+            bindKey
+        } else if (setKey.isNotEmpty()) {
+            setKey
+        } else {
+            getKey
+        }
+        if (key.isEmpty()) return
         val spValue = textView.context.getSharedPreferences(className, Context.MODE_PRIVATE)
             .getString(key, defaultValue)
-        textView.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
+        if (bindKey.isNotEmpty() || setKey.isNotEmpty()) {
+            textView.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                s?.let {
-                    if (spValue != s.toString()) {
-                        textView.context.getSharedPreferences(className, Context.MODE_PRIVATE)
-                            .edit()
-                            .putString(key, it.toString()).apply()
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    s?.let {
+                        if (spValue != s.toString()) {
+                            textView.context.getSharedPreferences(className, Context.MODE_PRIVATE)
+                                .edit()
+                                .putString(key, it.toString()).apply()
+                        }
                     }
                 }
-            }
 
-            override fun afterTextChanged(s: Editable?) {
+                override fun afterTextChanged(s: Editable?) {
 
-            }
+                }
 
-        })
-        textView.text = spValue
+            })
+        }
+        if (bindKey.isNotEmpty() || getKey.isNotEmpty()) {
+            textView.text = spValue
+        }
     }
 
     private fun setDataByIntent(bundle: Bundle?, obj: Any) {
@@ -213,9 +201,14 @@ object AutoGetHelper {
                 findView = obj.view?.findViewById(it.id)
             }
             if (findView is TextView) {
-                if (it.spKey.isNotEmpty()) {
-                    setTextViewValue(findView, field.type.name, it.spKey, it.defalut)
-                }
+                setTextViewValue(
+                    findView,
+                    field.type.name,
+                    it.bindSp,
+                    it.setSp,
+                    it.getSp,
+                    it.default
+                )
             }
             viewModel?.let {
                 field.set(viewModel, findView)

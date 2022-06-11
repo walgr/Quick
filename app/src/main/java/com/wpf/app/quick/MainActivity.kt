@@ -17,7 +17,7 @@ class MainActivity :
     ) {
 
     @SuppressLint("NonConstantResourceId")
-    @FindView(R.id.spTextView, spKey = "abc")
+    @FindView(R.id.spTextView, bindSp = "abc")
     val bindSp: TextView? = null
 
     fun gotoList(view: View) {
