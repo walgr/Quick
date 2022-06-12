@@ -26,6 +26,10 @@ class MainActivity :
     @FindView(R.id.spTextView3, bindSp = "绑定的SpKey3", default = "默认值3")
     val bindSp3: TextView? = null
 
+    fun gotoGlide(view: View) {
+        startActivity(GlideImageTestActivity::class.java)
+    }
+
     fun gotoList(view: View) {
         startActivity(RecyclerViewTestActivity::class.java)
     }

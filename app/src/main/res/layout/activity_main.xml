@@ -21,6 +21,13 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="图像测试"
+            android:onClick="gotoGlide"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="列表测试"
             android:onClick="gotoList"
             />
