@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:padding="8dp"
                 android:onClick="@{viewModel::addMessage}"
-                android:text="新增1条消息"
+                android:text="新增1条"
                 />
 
             <TextView

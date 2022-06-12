@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
+import com.wpf.app.quick.base.widgets.recyclerview.QuickViewHolder
 import java.lang.reflect.Field
 import java.lang.reflect.ParameterizedType
 
@@ -22,9 +23,9 @@ annotation class AutoGet(val key: String = "")
 @Retention(AnnotationRetention.RUNTIME)
 annotation class FindView(
     @IdRes val id: Int,
-    val bindSp: String = "",
-    val setSp: String = "",
-    val getSp: String = "",
+    val bindSp: String = "",        //View的text和Sp双向绑定
+    val setSp: String = "",         //View的text和Sp单向改变 view改变->Sp改变
+    val getSp: String = "",         //View的text和Sp单向获取 view显示时获取Sp
     val default: String = ""
 )
 
@@ -34,21 +35,30 @@ annotation class FindView(
  * 支持 char、byte、int、float、long、short、double、String、array、list、map、Serializable、Parcelable
  * 暂不支持 Parcelable[]
  */
-object AutoGetHelper {
+object QuickBindHelper {
 
+    var bindSpFileName = "QuickViewSpBindFile"
+
+    //支持Activity和ViewModel
     fun bind(activity: Activity, viewModel: ViewModel? = null) {
         setDataByIntent(activity.intent.extras, viewModel ?: activity)
         findView(activity, viewModel)
     }
 
+    //支持Fragment和ViewModel
     fun bind(fragment: Fragment, viewModel: ViewModel? = null) {
         setDataByIntent(fragment.arguments, viewModel ?: fragment)
         findView(fragment, viewModel)
     }
 
+    //支持View
+    fun bind(viewHolder: QuickViewHolder<*>) {
+        findView(viewHolder, null)
+    }
+
     private fun setTextViewValue(
         textView: TextView,
-        className: String,
+        fileName: String,
         bindKey: String,
         setKey: String,
         getKey: String,
@@ -62,7 +72,7 @@ object AutoGetHelper {
             getKey
         }
         if (key.isEmpty()) return
-        val spValue = textView.context.getSharedPreferences(className, Context.MODE_PRIVATE)
+        val spValue = textView.context.getSharedPreferences(fileName, Context.MODE_PRIVATE)
             .getString(key, defaultValue)
         if (bindKey.isNotEmpty() || setKey.isNotEmpty()) {
             textView.addTextChangedListener(object : TextWatcher {
@@ -77,7 +87,7 @@ object AutoGetHelper {
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                     s?.let {
                         if (spValue != s.toString()) {
-                            textView.context.getSharedPreferences(className, Context.MODE_PRIVATE)
+                            textView.context.getSharedPreferences(fileName, Context.MODE_PRIVATE)
                                 .edit()
                                 .putString(key, it.toString()).apply()
                         }
@@ -200,10 +210,13 @@ object AutoGetHelper {
             if (obj is Fragment) {
                 findView = obj.view?.findViewById(it.id)
             }
+            if (obj is QuickViewHolder<*>) {
+                findView = obj.itemView.findViewById(it.id)
+            }
             if (findView is TextView) {
                 setTextViewValue(
                     findView,
-                    field.type.name,
+                    bindSpFileName,
                     it.bindSp,
                     it.setSp,
                     it.getSp,

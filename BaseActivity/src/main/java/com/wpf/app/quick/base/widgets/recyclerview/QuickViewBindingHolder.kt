@@ -15,18 +15,19 @@ open class QuickViewBindingHolder<T : QuickItemDataBinding<H>, H: ViewDataBindin
     mParent: ViewGroup,
     @LayoutRes override val layoutId: Int,
     var viewData: T? = null,
-    private val variableBinding: Map<Int, Any>? = null) :
-    QuickViewHolder<T>(mParent, layoutId = layoutId) {
+    private val variableBinding: Map<Int, Any>? = null,
+    override val dealBindView: Boolean = false) :
+    QuickViewHolder<T>(mParent, layoutId = layoutId, dealBindView = dealBindView) {
 
     var viewBinding: H? = null
 
     override fun onCreateViewHolder(itemView: View) {
         viewBinding = DataBindingUtil.bind(itemView)
         viewData?.onCreateHolderEnd(this)
-        onCreateHolderEnd(itemView)
+        onCreateHolderEnd(itemView, viewBinding)
     }
 
-    open fun onCreateHolderEnd(itemView: View) {
+    open fun onCreateHolderEnd(itemView: View, viewDataBinding: ViewDataBinding?) {
 
     }
 

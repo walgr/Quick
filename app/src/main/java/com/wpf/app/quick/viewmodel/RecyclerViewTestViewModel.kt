@@ -7,6 +7,7 @@ import com.wpf.app.quick.base.viewmodel.BindingViewModel
 import com.wpf.app.quick.databinding.ActivityMainBinding
 import com.wpf.app.quick.databinding.ActivityRecyclerviewTestBinding
 import com.wpf.app.quick.model.MyMessage
+import com.wpf.app.quick.model.TestModel
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 
 /**
@@ -27,7 +28,7 @@ class RecyclerViewTestViewModel : BindingViewModel<ActivityRecyclerviewTestBindi
     }
 
     fun addMessage(view: View) {
-        viewBinding?.list?.mAdapter?.addData(MyMessage(userName = "我", msg = "大家好"))
+        viewBinding?.list?.mAdapter?.addData(TestModel())
         viewBinding?.list?.mAdapter?.notifyItemInserted(viewBinding?.list?.size() ?: 0)
         if (viewBinding?.list?.isScrollBottom() == true) {
             viewBinding?.list?.smoothScrollToPosition(viewBinding?.list?.size() ?: 0)

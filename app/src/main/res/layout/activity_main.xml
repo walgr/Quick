@@ -32,12 +32,41 @@
             android:onClick="gotoData"
             />
 
-        <TextView
-            android:id="@+id/spTextView"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/testBindSpLL"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="测试绑定"
-            />
+            android:layout_weight="1"
+            android:gravity="bottom"
+            android:layout_gravity="bottom"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/spTextView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:text="测试绑定1"
+                />
+
+            <TextView
+                android:id="@+id/spTextView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:text="测试绑定2"
+                />
+
+            <Button
+                android:id="@+id/spTextView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:text="测试绑定3"
+                />
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </layout>

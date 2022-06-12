@@ -2,6 +2,7 @@ package com.wpf.app.quick.adapterholder
 
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.ViewDataBinding
 import com.wpf.app.quick.R
 import com.wpf.app.quick.base.widgets.recyclerview.QuickViewBindingHolder
 import com.wpf.app.quick.databinding.HolderMessageMyBinding
@@ -17,8 +18,8 @@ class MyMessageHolder(mParent: ViewGroup) :
         layoutId = R.layout.holder_message_my
     ) {
 
-    override fun onCreateHolderEnd(itemView: View) {
-        super.onCreateHolderEnd(itemView)
+    override fun onCreateHolderEnd(itemView: View, viewDataBinding: ViewDataBinding?) {
+        super.onCreateHolderEnd(itemView, viewDataBinding)
         viewBinding?.msg?.text = "${viewData?.userName}:${viewData?.msg}"
     }
 }

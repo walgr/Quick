@@ -17,8 +17,14 @@ class MainActivity :
     ) {
 
     @SuppressLint("NonConstantResourceId")
-    @FindView(R.id.spTextView, bindSp = "abc")
-    val bindSp: TextView? = null
+    @FindView(R.id.spTextView1, bindSp = "绑定的SpKey1", default = "默认值1")
+    val bindSp1: TextView? = null
+    @SuppressLint("NonConstantResourceId")
+    @FindView(R.id.spTextView2, bindSp = "绑定的SpKey2", default = "默认值2")
+    val bindSp2: TextView? = null
+    @SuppressLint("NonConstantResourceId")
+    @FindView(R.id.spTextView3, bindSp = "绑定的SpKey3", default = "默认值3")
+    val bindSp3: TextView? = null
 
     fun gotoList(view: View) {
         startActivity(RecyclerViewTestActivity::class.java)
@@ -47,8 +53,14 @@ class MainActivity :
     @SuppressLint("SetTextI18n")
     override fun initView(viewDataBinding: ActivityMainBinding?) {
         super.initView(viewDataBinding)
-        bindSp?.postDelayed({
-            bindSp.text = System.currentTimeMillis().toString()
+        bindSp1?.postDelayed({
+            bindSp1.text = System.currentTimeMillis().toString()
+        }, 1000)
+        bindSp2?.postDelayed({
+            bindSp2.text = System.currentTimeMillis().toString()
+        }, 1000)
+        bindSp3?.postDelayed({
+            bindSp3.text = System.currentTimeMillis().toString()
         }, 1000)
     }
 }

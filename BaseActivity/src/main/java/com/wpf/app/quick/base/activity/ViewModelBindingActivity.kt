@@ -5,7 +5,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import com.wpf.app.quick.base.constant.BRConstant
-import com.wpf.app.quick.base.helper.AutoGetHelper
+import com.wpf.app.quick.base.helper.QuickBindHelper
 import com.wpf.app.quick.base.helper.getVm0Clazz
 import com.wpf.app.quick.base.viewmodel.BindingViewModel
 
@@ -42,7 +42,7 @@ abstract class ViewModelBindingActivity<VM : BindingViewModel<VB>, VB : ViewData
         val viewModelCls = getVm0Clazz<Class<VM>>(this)
         if (viewModelCls != null) {
             viewModel = ViewModelProvider(this)[viewModelCls]
-            AutoGetHelper.bind(this, viewModel)
+            QuickBindHelper.bind(this, viewModel)
             viewModel?.onBindingCreate(viewModel?.viewBinding)
         } else {
             setViewBinding()

@@ -5,13 +5,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.View
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
-import com.wpf.app.quick.base.helper.AutoGet
-import com.wpf.app.quick.base.helper.AutoGetHelper
+import com.wpf.app.quick.base.helper.QuickBindHelper
 import java.io.Serializable
-import kotlin.reflect.KClass
 
 /**
  * Created by 王朋飞 on 2022/4/2.
@@ -26,7 +23,7 @@ abstract class BaseActivity(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         dealContentView()
-        AutoGetHelper.bind(this)
+        QuickBindHelper.bind(this)
         initView()
         setTitle()
     }
