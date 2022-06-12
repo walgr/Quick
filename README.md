@@ -25,5 +25,5 @@ allprojects {
 
 2.添加依赖
 dependencies {
-        implementation 'com.github.walgr:Quick:0.0.1'
+        implementation 'com.github.walgr:Quick:0.0.2'
 }
