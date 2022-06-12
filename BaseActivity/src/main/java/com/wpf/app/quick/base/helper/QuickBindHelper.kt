@@ -29,6 +29,13 @@ annotation class FindView(
     val default: String = ""
 )
 
+@Target(AnnotationTarget.FIELD)
+@Retention(AnnotationRetention.RUNTIME)
+annotation class GroupView(
+    @IdRes val value: IntArray
+)
+
+
 /**
  * Created by 王朋飞 on 2022/6/8.
  * 自动获取Activity、Fragment里Intent里的值到属性上
@@ -54,55 +61,6 @@ object QuickBindHelper {
     //支持View
     fun bind(viewHolder: QuickViewHolder<*>) {
         findView(viewHolder, null)
-    }
-
-    private fun setTextViewValue(
-        textView: TextView,
-        fileName: String,
-        bindKey: String,
-        setKey: String,
-        getKey: String,
-        defaultValue: String
-    ) {
-        val key: String = if (bindKey.isNotEmpty()) {
-            bindKey
-        } else if (setKey.isNotEmpty()) {
-            setKey
-        } else {
-            getKey
-        }
-        if (key.isEmpty()) return
-        val spValue = textView.context.getSharedPreferences(fileName, Context.MODE_PRIVATE)
-            .getString(key, defaultValue)
-        if (bindKey.isNotEmpty() || setKey.isNotEmpty()) {
-            textView.addTextChangedListener(object : TextWatcher {
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int
-                ) {
-                }
-
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    s?.let {
-                        if (spValue != s.toString()) {
-                            textView.context.getSharedPreferences(fileName, Context.MODE_PRIVATE)
-                                .edit()
-                                .putString(key, it.toString()).apply()
-                        }
-                    }
-                }
-
-                override fun afterTextChanged(s: Editable?) {
-
-                }
-
-            })
-        }
-        if (bindKey.isNotEmpty() || getKey.isNotEmpty()) {
-            textView.text = spValue
-        }
     }
 
     private fun setDataByIntent(bundle: Bundle?, obj: Any) {
@@ -228,6 +186,55 @@ object QuickBindHelper {
             } ?: let {
                 field.set(obj, findView)
             }
+        }
+    }
+
+    private fun setTextViewValue(
+        textView: TextView,
+        fileName: String,
+        bindKey: String,
+        setKey: String,
+        getKey: String,
+        defaultValue: String
+    ) {
+        val key: String = if (bindKey.isNotEmpty()) {
+            bindKey
+        } else if (setKey.isNotEmpty()) {
+            setKey
+        } else {
+            getKey
+        }
+        if (key.isEmpty()) return
+        val spValue = textView.context.getSharedPreferences(fileName, Context.MODE_PRIVATE)
+            .getString(key, defaultValue)
+        if (bindKey.isNotEmpty() || setKey.isNotEmpty()) {
+            textView.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    s?.let {
+                        if (spValue != s.toString()) {
+                            textView.context.getSharedPreferences(fileName, Context.MODE_PRIVATE)
+                                .edit()
+                                .putString(key, it.toString()).apply()
+                        }
+                    }
+                }
+
+                override fun afterTextChanged(s: Editable?) {
+
+                }
+
+            })
+        }
+        if (bindKey.isNotEmpty() || getKey.isNotEmpty()) {
+            textView.text = spValue
         }
     }
 }

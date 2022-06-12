@@ -5,6 +5,8 @@ import android.widget.TextView
 import com.wpf.app.quick.base.activity.ViewModelBindingActivity
 import com.wpf.app.quick.base.helper.AutoGet
 import com.wpf.app.quick.base.helper.FindView
+import com.wpf.app.quick.base.helper.GroupView
+import com.wpf.app.quick.base.helper.GroupViews
 import com.wpf.app.quick.databinding.ActivityDataTestBinding
 import com.wpf.app.quick.viewmodel.IntentDataTestViewModel
 
@@ -23,6 +25,9 @@ class IntentDataTestActivity(
     @SuppressLint("NonConstantResourceId")
     @FindView(R.id.title1)
     val title: TextView? = null
+
+    @GroupView([R.id.title, R.id.title1])
+    val textGroup: GroupViews? = null
 
     @SuppressLint("SetTextI18n")
     override fun initView(viewDataBinding: ActivityDataTestBinding?) {

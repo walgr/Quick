@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../../layout/custom_preview.xml" value="0.39537037037037037" />
+        <entry key="..\:/Android/Quick/app/src/main/res/layout/activity_data_test.xml" value="0.44479166666666664" />
         <entry key="..\:/Android/Quick/app/src/main/res/layout/activity_glide_test.xml" value="0.434375" />
         <entry key="..\:/Android/Quick/app/src/main/res/layout/activity_main.xml" value="0.2667572463768116" />
         <entry key="..\:/Android/Quick/app/src/main/res/layout/activity_recyclerview_test.xml" value="0.4354166666666667" />
@@ -23,5 +24,5 @@
     </option>
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_17_PREVIEW" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_16" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
 </project>
