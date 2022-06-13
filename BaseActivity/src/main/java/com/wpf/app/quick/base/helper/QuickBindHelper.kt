@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
+import androidx.recyclerview.widget.RecyclerView
 import com.wpf.app.quick.base.widgets.recyclerview.QuickViewHolder
 import java.lang.reflect.Field
 import java.lang.reflect.ParameterizedType
@@ -32,7 +33,7 @@ annotation class FindView(
 @Target(AnnotationTarget.FIELD)
 @Retention(AnnotationRetention.RUNTIME)
 annotation class GroupView(
-    @IdRes val value: IntArray
+    @IdRes val idList: IntArray
 )
 
 
@@ -161,16 +162,7 @@ object QuickBindHelper {
     private fun setFieldView(obj: Any, viewModel: ViewModel?, field: Field) {
         field.getAnnotation(FindView::class.java)?.let {
             field.isAccessible = true
-            var findView: View? = null
-            if (obj is Activity) {
-                findView = obj.findViewById(it.id)
-            }
-            if (obj is Fragment) {
-                findView = obj.view?.findViewById(it.id)
-            }
-            if (obj is QuickViewHolder<*>) {
-                findView = obj.itemView.findViewById(it.id)
-            }
+            val findView: View? = findView(obj, it.id)
             if (findView is TextView) {
                 setTextViewValue(
                     findView,
@@ -187,6 +179,34 @@ object QuickBindHelper {
                 field.set(obj, findView)
             }
         }
+        field.getAnnotation(GroupView::class.java)?.let {
+            field.isAccessible = true
+            val groupViews = GroupViews()
+            it.idList.forEach { id ->
+                findView(obj, id)?.let { findView ->
+                    groupViews.viewList.add(findView)
+                }
+            }
+            viewModel?.let {
+                field.set(viewModel, groupViews)
+            } ?: let {
+                field.set(obj, groupViews)
+            }
+        }
+    }
+
+    private fun findView(obj: Any, id: Int): View? {
+        var findView: View? = null
+        if (obj is Activity) {
+            findView = obj.findViewById(id)
+        }
+        if (obj is Fragment) {
+            findView = obj.view?.findViewById(id)
+        }
+        if (obj is RecyclerView.ViewHolder) {
+            findView = obj.itemView.findViewById(id)
+        }
+        return findView
     }
 
     private fun setTextViewValue(

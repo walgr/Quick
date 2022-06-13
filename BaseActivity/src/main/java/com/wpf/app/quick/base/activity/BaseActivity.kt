@@ -47,31 +47,31 @@ abstract class BaseActivity(
         layoutId?.let { setContentView(layoutId) }
             ?: let { layoutView?.let { setContentView(layoutView) } }
     }
+}
 
-    fun <T : Activity> startActivity(
-        activityCls: Class<T>,
-        data: Map<String, Any?>? = null
-    ) {
-        startActivity(Intent(this, activityCls).also { intent ->
-            data?.forEach {
-                when (it.value) {
-                    is Serializable -> {
-                        intent.putExtra(it.key, it.value as Serializable)
-                    }
-                    is Parcelable -> {
-                        intent.putExtra(it.key, it.value as Parcelable)
-                    }
-                    is Array<*> -> {
-                        intent.putExtra(it.key, it.value as Array<*>)
-                    }
-                    is ArrayList<*> -> {
-                        intent.putParcelableArrayListExtra(
-                            it.key,
-                            it.value as ArrayList<out Parcelable>
-                        )
-                    }
+fun <T : Activity> Activity.startActivity(
+    activityCls: Class<T>,
+    data: Map<String, Any?>? = null
+) {
+    startActivity(Intent(this, activityCls).also { intent ->
+        data?.forEach {
+            when (it.value) {
+                is Serializable -> {
+                    intent.putExtra(it.key, it.value as Serializable)
+                }
+                is Parcelable -> {
+                    intent.putExtra(it.key, it.value as Parcelable)
+                }
+                is Array<*> -> {
+                    intent.putExtra(it.key, it.value as Array<*>)
+                }
+                is ArrayList<*> -> {
+                    intent.putParcelableArrayListExtra(
+                        it.key,
+                        it.value as ArrayList<out Parcelable>
+                    )
                 }
             }
-        })
-    }
+        }
+    })
 }

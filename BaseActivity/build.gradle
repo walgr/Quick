@@ -52,5 +52,5 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.13.1'
 
     //kotlin注解
-    implementation 'org.jetbrains.kotlin:kotlin-reflect:1.6.21'
+    implementation 'org.jetbrains.kotlin:kotlin-reflect:1.7.0'
 }

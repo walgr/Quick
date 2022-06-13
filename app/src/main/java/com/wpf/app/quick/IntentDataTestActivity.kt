@@ -33,5 +33,9 @@ class IntentDataTestActivity(
     override fun initView(viewDataBinding: ActivityDataTestBinding?) {
         super.initView(viewDataBinding)
         title?.text = "传输测试页Activity"
+
+        title?.postDelayed({
+            textGroup?.goneAll()
+        }, 1000)
     }
 }

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.View
 import android.widget.TextView
 import com.wpf.app.quick.base.activity.ViewModelBindingActivity
+import com.wpf.app.quick.base.activity.startActivity
 import com.wpf.app.quick.base.helper.FindView
 import com.wpf.app.quick.base.viewmodel.BindingViewModel
 import com.wpf.app.quick.databinding.ActivityMainBinding
