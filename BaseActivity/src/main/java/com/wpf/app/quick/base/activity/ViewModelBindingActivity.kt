@@ -15,7 +15,7 @@ import com.wpf.app.quick.base.viewmodel.BindingViewModel
  *  BRConstant.viewModel的值需要关注官方DataBinding里BR的值 viewModel可能是0 可能是1
  */
 abstract class ViewModelBindingActivity<VM : BindingViewModel<VB>, VB : ViewDataBinding> constructor(
-    @LayoutRes private val layoutId: Int,
+    @LayoutRes override val layoutId: Int,
     override val activityTitle: String = "",
 ) : BaseActivity(activityTitle = activityTitle) {
 

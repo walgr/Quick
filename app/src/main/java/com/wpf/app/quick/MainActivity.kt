@@ -46,7 +46,7 @@ class MainActivity :
             "data" to MyMessage(userName = "31"),
             "data1" to TestModel(text = "41"),
             "map" to mapOf("map1" to "51"),
-            "list" to listOf("61"),
+            "list" to listOf("61", "62"),
             "array" to arrayOf("71", "72"),
             "listS" to listOf(MyMessage(userName = "81"), MyMessage(userName = "82")),
             "listP" to listOf(TestModel(text = "91"), TestModel(text = "92")),

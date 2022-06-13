@@ -12,6 +12,7 @@ import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
+import com.wpf.app.quick.base.helper.annotations.GroupViews
 import com.wpf.app.quick.base.widgets.recyclerview.QuickViewHolder
 import java.lang.reflect.Field
 import java.lang.reflect.ParameterizedType
@@ -60,7 +61,7 @@ object QuickBindHelper {
     }
 
     //支持View
-    fun bind(viewHolder: QuickViewHolder<*>) {
+    fun bind(viewHolder: RecyclerView.ViewHolder) {
         findView(viewHolder, null)
     }
 
@@ -80,7 +81,6 @@ object QuickBindHelper {
     private fun findView(obj: Any, viewModel: ViewModel?) {
         try {
             val fields = obj::class.java.declaredFields
-            //本类传输数据
             fields.forEach { field ->
                 field.isAccessible = true
                 if (field.get(obj) == null) {
@@ -89,7 +89,6 @@ object QuickBindHelper {
             }
             viewModel?.let {
                 val viewModelFields = viewModel::class.java.declaredFields
-                //本类传输数据
                 viewModelFields.forEach { field ->
                     setFieldView(obj, viewModel, field)
                 }
@@ -156,7 +155,7 @@ object QuickBindHelper {
         } else if (type is ParameterizedType) {
             return 2
         }
-        return 0;
+        return 0
     }
 
     private fun setFieldView(obj: Any, viewModel: ViewModel?, field: Field) {

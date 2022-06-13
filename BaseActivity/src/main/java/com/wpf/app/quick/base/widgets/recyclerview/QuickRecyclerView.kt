@@ -3,7 +3,6 @@ package com.wpf.app.quick.base.widgets.recyclerview
 import android.content.Context
 import android.util.AttributeSet
 import androidx.databinding.BindingAdapter
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 
 /**
@@ -42,8 +41,8 @@ fun setData(list: QuickRecyclerView, newData: MutableList<QuickItemData>?) {
 
 @BindingAdapter("selectList")
 fun selectList(list: QuickRecyclerView, selectList: MutableList<QuickItemData>) {
-    list.mAdapter.getData()?.forEach { listData ->
-        selectList.find { it.id == listData.id }?.isSelect?.postValue(true)
+    selectList.forEach { selectItem ->
+        list.mAdapter.getData()?.find { it.id == selectItem.id }?.isSelect?.postValue(true)
     }
 }
 
@@ -51,8 +50,8 @@ fun selectList(list: QuickRecyclerView, selectList: MutableList<QuickItemData>) 
  * 根据id设置选中
  */
 @BindingAdapter("selectIdList")
-fun selectIdList(list: QuickRecyclerView, selectList: MutableLiveData<List<String>>) {
+fun selectIdList(list: QuickRecyclerView, selectList: List<String>) {
     list.mAdapter.getData()?.find { listData ->
-        selectList.value?.contains(listData.id) ?: false
+        selectList.contains(listData.id)
     }?.isSelect?.postValue(true)
 }

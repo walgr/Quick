@@ -1,4 +1,4 @@
-package com.wpf.app.quick.base.helper
+package com.wpf.app.quick.base.helper.attribute
 
 import android.content.Context
 import android.graphics.Color
@@ -8,6 +8,7 @@ import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import com.wpf.app.quick.base.R
 import com.wpf.app.quick.base.constant.*
+import com.wpf.app.quick.base.helper.attribute.base.AutoGetAttributeHelper
 
 /**
  * Created by 王朋飞 on 2022/5/7.

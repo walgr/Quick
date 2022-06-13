@@ -48,7 +48,7 @@ class QuickAdapter(
         dataList!!.find {
             it.viewType == viewType
         }?.let { data ->
-            if (data is QuickItemDataBinding<out ViewDataBinding>) {
+            if (data is QuickBindingData<out ViewDataBinding>) {
                 val holderAnnotationClass = data::class.findAnnotation<HolderBindingClass>()
                 val holderAnnotationLayout = data::class.findAnnotation<HolderBindingLayout>()
                 holderAnnotationLayout?.let {
@@ -61,7 +61,7 @@ class QuickAdapter(
                 holderAnnotationClass?.let {
                     val bindingHolderCls = it.holderClass.java.getConstructor(ViewGroup::class.java)
                     val bindingHolder =
-                        bindingHolderCls.newInstance(parent) as QuickViewBindingHolder<QuickItemDataBinding<out ViewDataBinding>,
+                        bindingHolderCls.newInstance(parent) as QuickViewBindingHolder<QuickBindingData<out ViewDataBinding>,
                                 out ViewDataBinding>
                     bindingHolder.viewData = data
                     bindingHolder.onCreateViewHolder(bindingHolder.itemView)

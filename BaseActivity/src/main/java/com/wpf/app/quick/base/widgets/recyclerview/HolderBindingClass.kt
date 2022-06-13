@@ -10,5 +10,5 @@ import kotlin.reflect.KClass
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)
 annotation class HolderBindingClass(
-    val holderClass: KClass<out QuickViewBindingHolder<out QuickItemDataBinding<out ViewDataBinding>, out ViewDataBinding>>
+    val holderClass: KClass<out QuickViewBindingHolder<out QuickBindingData<out ViewDataBinding>, out ViewDataBinding>>
 )

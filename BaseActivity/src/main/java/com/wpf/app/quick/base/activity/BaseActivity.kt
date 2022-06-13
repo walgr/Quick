@@ -15,7 +15,7 @@ import java.io.Serializable
  *  layoutId、layoutView 必须有1个，同时存在时layoutView有效
  */
 abstract class BaseActivity(
-    @LayoutRes private val layoutId: Int? = null,
+    @LayoutRes open val layoutId: Int? = null,
     private val layoutView: View? = null,
     open val activityTitle: String = "",
 ) : AppCompatActivity(), BaseView {
@@ -25,11 +25,6 @@ abstract class BaseActivity(
         dealContentView()
         QuickBindHelper.bind(this)
         initView()
-        setTitle()
-    }
-
-    override fun onResume() {
-        super.onResume()
         setTitle()
     }
 
@@ -44,7 +39,7 @@ abstract class BaseActivity(
     }
 
     open fun dealContentView() {
-        layoutId?.let { setContentView(layoutId) }
+        layoutId?.let { setContentView(it) }
             ?: let { layoutView?.let { setContentView(layoutView) } }
     }
 }

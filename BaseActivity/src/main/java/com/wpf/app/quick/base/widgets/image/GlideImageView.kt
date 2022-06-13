@@ -5,7 +5,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.widget.ImageView
 import com.wpf.app.quick.base.constant.*
-import com.wpf.app.quick.base.helper.GlideAttributeHelper
+import com.wpf.app.quick.base.helper.attribute.GlideAttributeHelper
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.RequestManager

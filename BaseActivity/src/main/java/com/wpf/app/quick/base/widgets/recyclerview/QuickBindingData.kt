@@ -10,11 +10,11 @@ import androidx.lifecycle.LifecycleObserver
  * ViewHolder基础数据
  */
 
-open class QuickItemDataBinding<VB : ViewDataBinding>(
+open class QuickBindingData<VB : ViewDataBinding>(
     @LayoutRes val layoutId: Int = 0
 ) : QuickItemData(), LifecycleObserver {
 
-    open fun onCreateHolderEnd(viewHolder: QuickViewBindingHolder<out QuickItemDataBinding<VB>, VB>) {
+    open fun onCreateHolderEnd(viewHolder: QuickViewBindingHolder<out QuickBindingData<VB>, VB>) {
 
     }
 }

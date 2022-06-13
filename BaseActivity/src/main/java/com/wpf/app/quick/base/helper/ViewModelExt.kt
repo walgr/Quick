@@ -9,7 +9,6 @@ import java.lang.reflect.ParameterizedType
 /**
  * 获取当前类绑定的泛型ViewModel-clazz
  */
-@Suppress("UNCHECKED_CAST")
 inline fun <reified VM> getVm0Clazz(obj: Any): VM? {
     val superCls = obj.javaClass.genericSuperclass
     if (superCls is ParameterizedType) {

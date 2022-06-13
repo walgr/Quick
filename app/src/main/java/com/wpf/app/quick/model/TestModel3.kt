@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import androidx.lifecycle.MutableLiveData
 import com.wpf.app.quick.adapterholder.TestHolder3
 import com.wpf.app.quick.databinding.HolderTest3Binding
-import com.wpf.app.quick.base.widgets.recyclerview.QuickItemDataBinding
+import com.wpf.app.quick.base.widgets.recyclerview.QuickBindingData
 import com.wpf.app.quick.base.widgets.recyclerview.HolderBindingClass
 
 /**
@@ -13,6 +13,6 @@ import com.wpf.app.quick.base.widgets.recyclerview.HolderBindingClass
  */
 @SuppressLint("NonConstantResourceId")
 @HolderBindingClass(TestHolder3::class)
-class TestModel3(var text: MutableLiveData<String>): QuickItemDataBinding<HolderTest3Binding>() {
+class TestModel3(var text: MutableLiveData<String>): QuickBindingData<HolderTest3Binding>() {
 
 }

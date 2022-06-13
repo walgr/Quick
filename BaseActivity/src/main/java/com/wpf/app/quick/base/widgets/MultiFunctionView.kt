@@ -16,7 +16,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
 import com.wpf.app.quick.base.R
-import com.wpf.app.quick.base.helper.MultiFunctionAttributeHelper
+import com.wpf.app.quick.base.helper.attribute.MultiFunctionAttributeHelper
 import com.wpf.app.quick.base.helper.ScaleTypeHelper
 import com.wpf.app.quick.base.helper.TypefaceHelper
 

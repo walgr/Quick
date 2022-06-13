@@ -1,5 +1,6 @@
 package com.wpf.app.quick.base.activity
 
+import androidx.annotation.LayoutRes
 import androidx.lifecycle.ViewModelProvider
 import com.wpf.app.quick.base.helper.QuickBindHelper
 import com.wpf.app.quick.base.helper.getVm0Clazz
@@ -12,9 +13,10 @@ import com.wpf.app.quick.base.viewmodel.BaseViewModel
  */
 abstract class ViewModelActivity<T: BaseViewModel<H>, H: BaseView>
     @JvmOverloads constructor(
-    private var viewModel: T? = null,
-    activityTitle: String = "",
-) : BaseActivity(activityTitle = activityTitle) {
+        @LayoutRes override val layoutId: Int,
+        private var viewModel: T? = null,
+        activityTitle: String = "",
+) : BaseActivity(layoutId = layoutId, activityTitle = activityTitle) {
 
     override fun dealContentView() {
         viewModel = ViewModelProvider(this)[getVm0Clazz(this)?:return]

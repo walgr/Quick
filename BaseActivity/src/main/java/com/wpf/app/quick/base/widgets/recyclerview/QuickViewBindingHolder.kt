@@ -11,7 +11,7 @@ import com.wpf.app.quick.base.constant.BRConstant
  * Created by 王朋飞 on 2022/5/12.
  *
  */
-open class QuickViewBindingHolder<T : QuickItemDataBinding<H>, H: ViewDataBinding>(
+open class QuickViewBindingHolder<T : QuickBindingData<H>, H: ViewDataBinding>(
     mParent: ViewGroup,
     @LayoutRes override val layoutId: Int,
     var viewData: T? = null,

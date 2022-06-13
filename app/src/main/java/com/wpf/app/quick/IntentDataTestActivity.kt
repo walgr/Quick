@@ -6,7 +6,7 @@ import com.wpf.app.quick.base.activity.ViewModelBindingActivity
 import com.wpf.app.quick.base.helper.AutoGet
 import com.wpf.app.quick.base.helper.FindView
 import com.wpf.app.quick.base.helper.GroupView
-import com.wpf.app.quick.base.helper.GroupViews
+import com.wpf.app.quick.base.helper.annotations.GroupViews
 import com.wpf.app.quick.databinding.ActivityDataTestBinding
 import com.wpf.app.quick.viewmodel.IntentDataTestViewModel
 

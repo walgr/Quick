@@ -1,4 +1,4 @@
-package com.wpf.app.quick.base.helper
+package com.wpf.app.quick.base.helper.annotations
 
 import android.view.View
 

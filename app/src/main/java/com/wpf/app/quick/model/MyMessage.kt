@@ -1,7 +1,7 @@
 package com.wpf.app.quick.model
 
 import com.wpf.app.quick.adapterholder.MyMessageHolder
-import com.wpf.app.quick.base.widgets.recyclerview.QuickItemDataBinding
+import com.wpf.app.quick.base.widgets.recyclerview.QuickBindingData
 import com.wpf.app.quick.base.widgets.recyclerview.HolderBindingClass
 import com.wpf.app.quick.databinding.HolderMessageMyBinding
 import java.io.Serializable
@@ -14,4 +14,4 @@ import java.io.Serializable
 class MyMessage(
     var userName: String = "",
     var msg: String = ""
-) : QuickItemDataBinding<HolderMessageMyBinding>(), Serializable
+) : QuickBindingData<HolderMessageMyBinding>(), Serializable

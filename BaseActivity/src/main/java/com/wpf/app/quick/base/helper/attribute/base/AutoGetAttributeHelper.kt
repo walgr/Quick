@@ -1,4 +1,4 @@
-package com.wpf.app.quick.base.helper
+package com.wpf.app.quick.base.helper.attribute.base
 
 import android.content.Context
 import android.content.res.XmlResourceParser
