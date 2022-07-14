@@ -3,7 +3,7 @@ plugins {
 //    id 'kotlin-kapt'
 }
 
-apply plugin: 'kotlin-kapt'
+//apply plugin: 'kotlin-kapt'
 
 java {
     sourceCompatibility JavaVersion.VERSION_1_8

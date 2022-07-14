@@ -45,11 +45,11 @@ afterEvaluate {
         // 添加仓库地址
         repositories {
             // 本地仓库
-            mavenLocal()
+//            mavenLocal()
             // 当上传到远端仓库
-//            maven {
-//                url("https://jitpack.io")
-//            }
+            maven {
+                url = uri('../repo')
+            }
         }
     }
 }
