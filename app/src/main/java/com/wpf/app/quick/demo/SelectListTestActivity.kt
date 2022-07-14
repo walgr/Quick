@@ -1,12 +1,13 @@
-package com.wpf.app.quick
+package com.wpf.app.demo.quick
 
 import android.annotation.SuppressLint
 import android.view.View
 import com.wpf.app.quick.activity.QuickActivity
 import com.wpf.app.quick.annotations.BindData2View
 import com.wpf.app.quick.annotations.BindView
+import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.helper.binddatahelper.ItemClick
-import com.wpf.app.quick.model.SelectItem
+import com.wpf.app.quick.demo.model.SelectItem
 import com.wpf.app.quick.widgets.recyclerview.QuickRecyclerView
 import com.wpf.app.quickbind.interfaces.runItemClick
 

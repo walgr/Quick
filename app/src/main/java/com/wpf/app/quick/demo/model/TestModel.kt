@@ -1,8 +1,8 @@
-package com.wpf.app.quick.model
+package com.wpf.app.quick.demo.model
 
 import android.os.Parcel
 import android.os.Parcelable
-import com.wpf.app.quick.adapterholder.TestHolder
+import com.wpf.app.quick.demo.adapterholder.TestHolder
 import com.wpf.app.quick.widgets.recyclerview.BindHolder
 import com.wpf.app.quick.widgets.recyclerview.QuickItemData
 

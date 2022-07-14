@@ -1,8 +1,8 @@
-package com.wpf.app.quick.model
+package com.wpf.app.quick.demo.model
 
 import androidx.databinding.Bindable
-import com.wpf.app.quick.BR
-import com.wpf.app.quick.databinding.HolderTest2Binding
+import com.wpf.app.quick.demo.BR
+import com.wpf.app.quick.demo.databinding.HolderTest2Binding
 import com.wpf.app.quick.widgets.recyclerview.QuickViewBindingHolder
 import com.wpf.app.quick.widgets.recyclerview.QuickViewDataBinding
 

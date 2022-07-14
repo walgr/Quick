@@ -6,7 +6,7 @@
 
         <variable
             name="data"
-            type="com.wpf.app.quick.model.TestModel2" />
+            type="com.wpf.app.quick.demo.model.TestModel2" />
 
         <variable
             name="adapter"

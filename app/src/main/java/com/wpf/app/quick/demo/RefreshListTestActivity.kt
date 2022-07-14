@@ -1,11 +1,12 @@
-package com.wpf.app.quick
+package com.wpf.app.demo.quick
 
 import android.annotation.SuppressLint
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.wpf.app.quick.activity.QuickActivity
 import com.wpf.app.quick.annotations.BindView
-import com.wpf.app.quick.model.ListRequest
-import com.wpf.app.quick.model.RefreshItem
+import com.wpf.app.quick.demo.R
+import com.wpf.app.quick.demo.model.ListRequest
+import com.wpf.app.quick.demo.model.RefreshItem
 import com.wpf.app.quick.utils.Callback
 import com.wpf.app.quick.widgets.recyclerview.DataChangeListener
 import com.wpf.app.quick.widgets.recyclerview.QuickRefreshRecyclerView

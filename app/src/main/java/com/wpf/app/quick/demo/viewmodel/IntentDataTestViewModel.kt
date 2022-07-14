@@ -1,13 +1,14 @@
-package com.wpf.app.quick.viewmodel
+package com.wpf.app.quick.demo.viewmodel
 
 import android.annotation.SuppressLint
 import android.util.Log
 import android.widget.TextView
-import com.wpf.app.quick.R
+import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.annotations.BindView
-import com.wpf.app.quick.databinding.ActivityDataTestBinding
-import com.wpf.app.quick.model.MyMessage
-import com.wpf.app.quick.model.TestModel
+import com.wpf.app.quick.demo.databinding.ActivityDataTestBinding
+import com.wpf.app.quick.demo.model.MyMessage
+import com.wpf.app.quick.demo.model.TestModel
+import com.wpf.app.quick.viewmodel.BindingViewModel
 import com.wpf.app.quickbind.annotations.AutoGet
 
 /**
@@ -61,6 +62,7 @@ class IntentDataTestViewModel : BindingViewModel<ActivityDataTestBinding>() {
     @SuppressLint("NonConstantResourceId", "StaticFieldLeak")
     @BindView(R.id.title1)
     var title: TextView? = null
+
     override fun onBindingCreated(mViewBinding: ActivityDataTestBinding?) {
         printData()
     }

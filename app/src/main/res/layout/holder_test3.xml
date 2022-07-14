@@ -6,7 +6,7 @@
     <data>
         <variable
             name="data"
-            type="com.wpf.app.quick.model.TestModel3" />
+            type="com.wpf.app.quick.demo.model.TestModel3" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

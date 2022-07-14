@@ -1,9 +1,9 @@
-package com.wpf.app.quick.model
+package com.wpf.app.quick.demo.model
 
 import android.annotation.SuppressLint
 import android.view.View
 import android.widget.Toast
-import com.wpf.app.quick.R
+import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.annotations.BindData2View
 import com.wpf.app.quick.helper.binddatahelper.ItemClick
 import com.wpf.app.quick.helper.binddatahelper.Text2TextView

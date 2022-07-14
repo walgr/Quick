@@ -1,4 +1,4 @@
-package com.wpf.app.quick.model
+package com.wpf.app.quick.demo.model
 
 import com.wpf.app.quick.widgets.recyclerview.RequestData
 

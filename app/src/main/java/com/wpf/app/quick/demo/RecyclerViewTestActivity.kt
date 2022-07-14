@@ -1,8 +1,9 @@
-package com.wpf.app.quick
+package com.wpf.app.demo.quick
 
 import com.wpf.app.quick.activity.ViewModelBindingActivity
-import com.wpf.app.quick.databinding.ActivityRecyclerviewTestBinding
-import com.wpf.app.quick.viewmodel.RecyclerViewTestViewModel
+import com.wpf.app.quick.demo.R
+import com.wpf.app.quick.demo.databinding.ActivityRecyclerviewTestBinding
+import com.wpf.app.quick.demo.viewmodel.RecyclerViewTestViewModel
 
 /**
  * Created by 王朋飞 on 2022/6/13.

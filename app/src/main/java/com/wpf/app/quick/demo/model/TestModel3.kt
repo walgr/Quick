@@ -1,8 +1,8 @@
-package com.wpf.app.quick.model
+package com.wpf.app.quick.demo.model
 
 import androidx.lifecycle.MutableLiveData
-import com.wpf.app.quick.adapterholder.TestHolder3
-import com.wpf.app.quick.databinding.HolderTest3Binding
+import com.wpf.app.quick.demo.adapterholder.TestHolder3
+import com.wpf.app.quick.demo.databinding.HolderTest3Binding
 import com.wpf.app.quick.widgets.recyclerview.BindBindingHolder
 import com.wpf.app.quick.widgets.recyclerview.QuickViewDataBinding
 

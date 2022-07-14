@@ -1,12 +1,13 @@
-package com.wpf.app.quick
+package com.wpf.app.demo.quick
 
 import android.annotation.SuppressLint
 import android.widget.TextView
 import com.wpf.app.quick.activity.ViewModelBindingActivity
 import com.wpf.app.quick.annotations.BindView
 import com.wpf.app.quick.annotations.GroupView
-import com.wpf.app.quick.databinding.ActivityDataTestBinding
-import com.wpf.app.quick.viewmodel.IntentDataTestViewModel
+import com.wpf.app.quick.demo.R
+import com.wpf.app.quick.demo.databinding.ActivityDataTestBinding
+import com.wpf.app.quick.demo.viewmodel.IntentDataTestViewModel
 import com.wpf.app.quickbind.utils.GroupViews
 
 

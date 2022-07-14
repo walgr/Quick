@@ -1,9 +1,9 @@
-package com.wpf.app.quick.adapterholder
+package com.wpf.app.quick.demo.adapterholder
 
 import android.view.ViewGroup
-import com.wpf.app.quick.R
-import com.wpf.app.quick.databinding.HolderMessageMyBinding
-import com.wpf.app.quick.model.MyMessage
+import com.wpf.app.quick.demo.R
+import com.wpf.app.quick.demo.databinding.HolderMessageMyBinding
+import com.wpf.app.quick.demo.model.MyMessage
 import com.wpf.app.quick.widgets.recyclerview.QuickAdapter
 import com.wpf.app.quick.widgets.recyclerview.QuickViewBindingHolder
 

@@ -1,11 +1,11 @@
-package com.wpf.app.quick.adapterholder
+package com.wpf.app.quick.demo.adapterholder
 
 import android.annotation.SuppressLint
 import android.view.ViewGroup
 import android.widget.TextView
-import com.wpf.app.quick.R
+import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.annotations.BindView
-import com.wpf.app.quick.model.TestModel
+import com.wpf.app.quick.demo.model.TestModel
 import com.wpf.app.quick.widgets.recyclerview.QuickAdapter
 import com.wpf.app.quick.widgets.recyclerview.QuickViewHolder
 

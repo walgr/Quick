@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.wpf.app.quick.viewmodel.RecyclerViewTestViewModel" />
+            type="com.wpf.app.quick.demo.viewmodel.RecyclerViewTestViewModel" />
     </data>
 
     <RelativeLayout

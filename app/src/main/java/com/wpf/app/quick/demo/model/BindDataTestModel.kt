@@ -1,7 +1,7 @@
-package com.wpf.app.quick.model
+package com.wpf.app.quick.demo.model
 
 import android.annotation.SuppressLint
-import com.wpf.app.quick.R
+import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.annotations.BindData2View
 import com.wpf.app.quick.helper.binddatahelper.Url2ImageView
 import com.wpf.app.quick.widgets.recyclerview.QuickBindData

@@ -1,4 +1,4 @@
-package com.wpf.app.quick
+package com.wpf.app.quick.demo
 
 import android.app.Application
 import com.wpf.app.quick.constant.BRConstant

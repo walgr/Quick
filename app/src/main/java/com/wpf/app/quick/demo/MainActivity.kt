@@ -1,14 +1,15 @@
-package com.wpf.app.quick
+package com.wpf.app.demo.quick
 
 import android.annotation.SuppressLint
 import android.view.View
 import android.widget.TextView
 import com.wpf.app.quick.activity.ViewModelBindingActivity
 import com.wpf.app.quick.annotations.BindView
-import com.wpf.app.quick.databinding.ActivityMainBinding
-import com.wpf.app.quick.model.MyMessage
-import com.wpf.app.quick.model.TestModel
-import com.wpf.app.quick.viewmodel.MainViewModel
+import com.wpf.app.quick.demo.R
+import com.wpf.app.quick.demo.databinding.ActivityMainBinding
+import com.wpf.app.quick.demo.viewmodel.MainViewModel
+import com.wpf.app.quick.demo.model.MyMessage
+import com.wpf.app.quick.demo.model.TestModel
 import com.wpf.app.quickbind.annotations.BindSp2View
 import java.util.ArrayList
 import java.util.HashMap
