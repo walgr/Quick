@@ -43,15 +43,15 @@ afterEvaluate {
             }
         }
         // 添加仓库地址
-        repositories {
-//          本地仓库
+//        repositories {
+////          本地仓库
 //            mavenLocal()
-//          当上传到远端仓库
-            maven {
-                // 生成的插件位置
-                url = uri('../repo')
-            }
-        }
+////          当上传到远端仓库
+////            maven {
+////                // 生成的插件位置
+////                url = uri('../repo')
+////            }
+//        }
     }
 }
 
