@@ -24,7 +24,8 @@ buildscript {
                         'base'       : "com.wpf.app.quick:quickbind:${release}",
                         'annotations': "com.wpf.app.quick:quick-annotations:${release}",
                         'runtime'    : "com.wpf.app.quick:quick-runtime:${release}",
-                        'compiler'   : "com.wpf.app.quick:quick-compiler:${release}"
+                        'compiler'   : "com.wpf.app.quick:quick-compiler:${release}",
+                        'plugin'   : "com.wpf.app.quick:quick-gradle-plugin:${release}"
                 ],
                 'quick'   : [
                         'base'       : "com.wpf.app.quick:quick:${release}",

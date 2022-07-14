@@ -25,37 +25,33 @@ apply plugin: 'signing'
 
 // 这个是把源码打入jar包中的任务
 task sourceJar(type: Jar) {
-  archiveClassifier.set('sources')
-  from sourceSets.main.allSource
+    archiveClassifier.set('sources')
+    from sourceSets.main.allSource
 }
 
 afterEvaluate {
-  publishing {
-    publications {
-      release(MavenPublication) {
-        groupId GROUP
-        artifactId POM_ARTIFACT_ID
-        version VERSION_NAME
+    publishing {
+        publications {
+            release(MavenPublication) {
+                groupId GROUP
+                artifactId POM_ARTIFACT_ID
+                version VERSION_NAME
 
-        from components.java
-        // 运行任务，把源码打进去
-        artifact sourceJar
-      }
+                from components.java
+                // 运行任务，把源码打进去
+                artifact sourceJar
+            }
+        }
+        // 添加仓库地址
+        repositories {
+            // 本地仓库
+            mavenLocal()
+            // 当上传到远端仓库
+//            maven {
+//                url("https://jitpack.io")
+//            }
+        }
     }
-    // 添加仓库地址
-//    repositories {
-//      // 本地仓库
-//      mavenLocal()
-//      // 当上传到远端仓库
-////            maven {
-////                url("")
-////                credentials {
-////                    username = ""
-////                    password = ""
-////                }
-////          }
-//    }
-  }
 }
 
 //build.finalizedBy publishToMavenLocal
