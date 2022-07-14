@@ -23,4 +23,7 @@ rootProject.name = "Quick"
 include ':app'
 include ':Quick'
 include ':QuickBind'
-//include ':Quick-gradle-plugin'
+include ':Quick-annotations'
+include ':Quick-runtime'
+include ':Quick-compiler'
+include ':Quick-gradle-plugin'

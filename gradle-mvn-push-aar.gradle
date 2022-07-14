@@ -32,7 +32,7 @@ task sourceJar(type: Jar) {
 afterEvaluate {
   publishing {
     publications {
-      aar(MavenPublication) {
+      release(MavenPublication) {
         groupId GROUP
         artifactId POM_ARTIFACT_ID
         version VERSION_NAME
@@ -43,9 +43,9 @@ afterEvaluate {
       }
     }
     // 添加仓库地址
-    repositories {
+//    repositories {
       // 本地仓库
-      mavenLocal()
+//      mavenLocal()
       // 当上传到远端仓库
 //            maven {
 //                url("")
@@ -54,7 +54,7 @@ afterEvaluate {
 //                    password = ""
 //                }
 //          }
-    }
+//    }
   }
 }
 

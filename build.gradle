@@ -9,37 +9,55 @@ buildscript {
         androidTools = '32.0.0'
         kotlin = '1.7.10'
 
-        release = '0.1.0'
+        release = VERSION_NAME
+
+        incap = '0.3'
 
         ext.deps = [
-                android       : [
-                        'runtime'     : 'com.google.android:android:4.1.1.4',
-                        'gradlePlugin': "com.android.tools.build:gradle:4.2.2",
-                        'annotations' : "com.android.support:support-annotations:28.0.0",
-                        'fragment'    : "com.android.support:support-fragment:28.0.0",
-                        'activity'    : "com.android.support:appcompat-v7:28.0.0",
-                ],
                 androidx    : [
-                        'fragment': "com.android.support:support-fragment:28.0.0",
-                        'activity': "com.android.support:appcompat-v7:28.0.0",
+                        'annotations' : 'androidx.annotation:annotation:1.2.0',
+                        'runtime'     : 'com.google.android:android:4.1.1.4',
+                        'fragment': "androidx.fragment:fragment-ktx:1.4.1",
+                        'activity': "androidx.activity:activity-ktx:1.4.0",
                 ],
-                'release'   : [
+                'quickbind'   : [
                         'base'       : "com.wpf.app.quick:quickbind:${release}",
                         'annotations': "com.wpf.app.quick:quick-annotations:${release}",
                         'runtime'    : "com.wpf.app.quick:quick-runtime:${release}",
                         'compiler'   : "com.wpf.app.quick:quick-compiler:${release}"
                 ],
-                javapoet    : 'com.squareup:javapoet:1.13.0',
+                'quick'   : [
+                        'base'       : "com.wpf.app.quick:quick:${release}",
+                ],
                 gradlePlugin: "com.android.tools.build:gradle:7.2.1",
                 'kotlin'    : [
                         'stdLibJdk8': "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlin}",
                 ],
+                'lint'        : [
+                        'core'  : "com.android.tools.lint:lint:25.3.0",
+                        'api'   : "com.android.tools.lint:lint-api:25.3.0",
+                        'checks': "com.android.tools.lint:lint-checks:25.3.0",
+                        'tests' : "com.android.tools.lint:lint-tests:25.3.0",
+                ],
+                javapoet      : 'com.squareup:javapoet:1.13.0',
+                truth         : 'com.google.truth:truth:0.42',
+                compiletesting: 'com.google.testing.compile:compile-testing:0.15',
+                'auto'        : [
+                        'service': 'com.google.auto.service:auto-service:1.0.1',
+                        'common' : 'com.google.auto:auto-common:1.2.1',
+                ],
+                'guava'       : 'com.google.guava:guava:31.1-jre',
+                'incap'       : [
+                        'runtime'  : "net.ltgt.gradle.incap:incap:${incap}",
+                        'processor': "net.ltgt.gradle.incap:incap-processor:${incap}",
+                ]
         ]
     }
 
-//    dependencies {
-//        classpath "com.wpf.app.quick:quick-gradle-plugin:0.5.0"
-//    }
+    dependencies {
+//        classpath "com.wpf.app.quick:quick-gradle-plugin:0.5.0
+//        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlin}"
+    }
 }
 
 plugins {

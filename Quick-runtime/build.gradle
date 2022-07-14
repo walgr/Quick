@@ -1,0 +1,41 @@
+plugins {
+    id 'com.android.library'
+}
+
+android {
+
+    defaultConfig {
+        minSdkVersion 19
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    lintOptions {
+        textReport true
+        textOutput 'stdout'
+        // We run a full lint analysis as build part in CI, so skip vital checks for assemble tasks.
+        checkReleaseBuilds false
+    }
+
+    // TODO replace with https://issuetracker.google.com/issues/72050365 once released.
+    libraryVariants.all {
+        it.generateBuildConfigProvider.configure {
+            it.setEnabled(true)
+        }
+    }
+}
+
+dependencies {
+    api deps.quickbind.annotations
+    api deps.androidx.activity
+}
+
+apply from: rootProject.file('gradle-mvn-push-aar.gradle')

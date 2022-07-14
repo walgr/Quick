@@ -1,0 +1,29 @@
+plugins {
+    id 'java-library'
+//    id 'kotlin-kapt'
+}
+
+apply plugin: 'kotlin-kapt'
+
+java {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+}
+
+dependencies {
+    implementation deps.quickbind.annotations
+    implementation deps.auto.common
+    implementation deps.guava
+    api deps.javapoet
+    compileOnly deps.auto.service
+    //解决和Gradle版本兼容问题（无法生成META-INF里services文件）
+    annotationProcessor deps.auto.service
+    compileOnly files(org.gradle.internal.jvm.Jvm.current().getToolsJar())
+
+    api deps.incap.runtime
+//    compileOnly deps.incap.processor
+    //解决和Gradle版本兼容问题（无法生成META-INF里gradle文件）
+    annotationProcessor deps.incap.processor
+}
+
+apply from: rootProject.file('gradle-mvn-push-jar.gradle')

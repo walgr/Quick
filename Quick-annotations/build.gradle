@@ -1,0 +1,15 @@
+plugins {
+    id 'java-library'
+}
+
+java {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+}
+
+dependencies {
+    compileOnly deps.androidx.runtime
+    api deps.androidx.annotations
+}
+
+apply from: rootProject.file('gradle-mvn-push-jar.gradle')
