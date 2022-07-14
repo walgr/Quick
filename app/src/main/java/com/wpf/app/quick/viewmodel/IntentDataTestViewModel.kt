@@ -1,61 +1,85 @@
 package com.wpf.app.quick.viewmodel
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.widget.TextView
 import com.wpf.app.quick.R
-import com.wpf.app.quick.base.helper.AutoGet
-import com.wpf.app.quick.base.helper.FindView
-import com.wpf.app.quick.base.viewmodel.BindingViewModel
+import com.wpf.app.quick.annotations.BindView
 import com.wpf.app.quick.databinding.ActivityDataTestBinding
 import com.wpf.app.quick.model.MyMessage
 import com.wpf.app.quick.model.TestModel
+import com.wpf.app.quickbind.annotations.AutoGet
 
 /**
- * Created by 王朋飞 on 2022/6/9.
- *
+ * Created by 王朋飞 on 2022/6/13.
  */
-class IntentDataTestViewModel(
-    @AutoGet val intD: Int = 0,
-    @AutoGet val byteD: Byte = 0,
-    @AutoGet val floatD: Float = 0f,
-    @AutoGet val doubleD: Double = 0.0,
-    @AutoGet val charD: Char = 'a',
-    @AutoGet val data: MyMessage? = null,
-    @AutoGet val data1: TestModel? = null,
-    @AutoGet val map: Map<String, Any>? = null,
-    @AutoGet val list: List<Any>? = null,
-    @AutoGet val array: Array<Any>? = null,
-    @AutoGet val listS: List<MyMessage>? = null,
-    @AutoGet val arrayS: Array<MyMessage>? = null,
-    @AutoGet val listP: List<TestModel>? = null,
-    @AutoGet val arrayP: Array<TestModel>? = null
-): BindingViewModel<ActivityDataTestBinding>() {
+class IntentDataTestViewModel : BindingViewModel<ActivityDataTestBinding>() {
+    private val TAG = "IntentDataTestViewModel"
 
-    @SuppressLint("StaticFieldLeak", "NonConstantResourceId")
-    @FindView(R.id.title)
-    val title: TextView? = null
+    @AutoGet
+    var intD = 0
 
-    override fun onBindingCreate(viewBinding: ActivityDataTestBinding?) {
-        super.onBindingCreate(viewBinding)
+    @AutoGet
+    var byteD: Byte = 0
+
+    @AutoGet
+    var floatD = 0f
+
+    @AutoGet
+    var doubleD = 0.0
+
+    @AutoGet
+    var charD = 'a'
+
+    @AutoGet
+    var data: MyMessage? = null
+
+    @AutoGet
+    var data1: TestModel? = null
+
+    @AutoGet
+    var map: Map<String, Any>? = null
+
+    @AutoGet
+    var list: List<Any>? = null
+
+    @AutoGet
+    var array: Array<Any>? = null
+
+    @AutoGet
+    var listS: List<MyMessage>? = null
+
+    @AutoGet
+    var arrayS: Array<MyMessage>? = null
+
+    @AutoGet
+    var listP: List<TestModel>? = null
+
+    @AutoGet
+    var arrayP: Array<TestModel>? = null
+
+    @SuppressLint("NonConstantResourceId", "StaticFieldLeak")
+    @BindView(R.id.title1)
+    var title: TextView? = null
+    override fun onBindingCreated(mViewBinding: ActivityDataTestBinding?) {
         printData()
     }
 
-    @SuppressLint("SetTextI18n")
     private fun printData() {
-        println(intD)
-        println(floatD)
-        println(doubleD)
-        println(charD)
-        println(byteD)
-        println(data)
-        println(data1)
-        println(map)
-        println(list)
-        println(array?.get(0))
-        println(listS?.get(0)?.userName)
-        println(listP?.get(0)?.text)
-        println(arrayS?.get(0)?.userName)
-        println(arrayP?.get(0)?.text)
+        Log.i(TAG, intD.toString() + "")
+        Log.i(TAG, floatD.toString() + "")
+        Log.i(TAG, doubleD.toString() + "")
+        Log.i(TAG, charD.toString() + "")
+        Log.i(TAG, byteD.toString() + "")
+        Log.i(TAG, data.toString() + "")
+        Log.i(TAG, data1.toString() + "")
+        Log.i(TAG, map.toString() + "")
+        Log.i(TAG, list.toString() + "")
+        Log.i(TAG, array!![0].toString() + "")
+        Log.i(TAG, listS!![0].userName + "")
+        Log.i(TAG, listP!![0].text + "")
+        Log.i(TAG, arrayS!![0].userName + "")
+        Log.i(TAG, arrayP.toString() + "")
         title?.text = "数据测试页ViewModel"
     }
 }

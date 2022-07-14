@@ -3,24 +3,31 @@ package com.wpf.app.quick.model
 import android.os.Parcel
 import android.os.Parcelable
 import com.wpf.app.quick.adapterholder.TestHolder
-import com.wpf.app.quick.base.widgets.recyclerview.QuickItemData
-import com.wpf.app.quick.base.widgets.recyclerview.HolderClass
+import com.wpf.app.quick.widgets.recyclerview.BindHolder
+import com.wpf.app.quick.widgets.recyclerview.QuickItemData
 
 /**
- * Created by 王朋飞 on 2022/5/11.
- *
+ * Created by 王朋飞 on 2022/6/13.
  */
-@HolderClass(TestHolder::class)
-class TestModel(val text: String = "1") : QuickItemData(), Parcelable {
+@BindHolder(TestHolder::class)
+class TestModel : QuickItemData, Parcelable {
+    var text: String = "1"
 
-    constructor(parcel: Parcel) : this(parcel.readString() ?: "")
+    constructor() {}
+    constructor(text: String) {
+        this.text = text
+    }
 
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(text)
+    protected constructor(`in`: Parcel) {
+        text = `in`.readString() ?: ""
     }
 
     override fun describeContents(): Int {
         return 0
+    }
+
+    override fun writeToParcel(dest: Parcel, flags: Int) {
+        dest.writeString(text)
     }
 
     companion object CREATOR : Parcelable.Creator<TestModel> {
@@ -32,6 +39,4 @@ class TestModel(val text: String = "1") : QuickItemData(), Parcelable {
             return arrayOfNulls(size)
         }
     }
-
-
 }

@@ -34,7 +34,8 @@
 
         <activity android:name=".RecyclerViewTestActivity" />
         <activity android:name=".IntentDataTestActivity" />
-        <activity android:name=".GlideImageTestActivity" />
+        <activity android:name=".RefreshListTestActivity" />
+        <activity android:name=".SelectListTestActivity" />
 
     </application>
 

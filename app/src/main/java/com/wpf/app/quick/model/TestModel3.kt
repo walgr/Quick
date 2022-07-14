@@ -1,18 +1,13 @@
 package com.wpf.app.quick.model
 
-import android.annotation.SuppressLint
 import androidx.lifecycle.MutableLiveData
 import com.wpf.app.quick.adapterholder.TestHolder3
 import com.wpf.app.quick.databinding.HolderTest3Binding
-import com.wpf.app.quick.base.widgets.recyclerview.QuickBindingData
-import com.wpf.app.quick.base.widgets.recyclerview.HolderBindingClass
+import com.wpf.app.quick.widgets.recyclerview.BindBindingHolder
+import com.wpf.app.quick.widgets.recyclerview.QuickViewDataBinding
 
 /**
- * Created by 王朋飞 on 2022/5/11.
- *
+ * Created by 王朋飞 on 2022/6/13.
  */
-@SuppressLint("NonConstantResourceId")
-@HolderBindingClass(TestHolder3::class)
-class TestModel3(var text: MutableLiveData<String>): QuickBindingData<HolderTest3Binding>() {
-
-}
+@BindBindingHolder(TestHolder3::class)
+class TestModel3(val text: MutableLiveData<String>) : QuickViewDataBinding<HolderTest3Binding>()

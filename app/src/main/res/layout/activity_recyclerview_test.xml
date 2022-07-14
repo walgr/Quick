@@ -18,12 +18,11 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <com.wpf.app.quick.base.widgets.recyclerview.QuickRecyclerView
+        <com.wpf.app.quick.widgets.recyclerview.QuickRecyclerView
             android:id="@+id/list"
             android:layout_width="match_parent"
-            android:layout_height="240dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            />
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,7 +31,8 @@
             android:layout_marginBottom="16dp"
             android:orientation="vertical">
 
-            <TextView
+            <Button
+                android:id="@+id/btnClean"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
@@ -40,20 +40,13 @@
                 android:text="清空所有"
                 />
 
-            <TextView
+            <Button
+                android:id="@+id/btnAdd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
                 android:onClick="@{viewModel::addMessage}"
                 android:text="新增1条"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="某人来了"
-                android:onClick="@{viewModel::addOtherCome}"
                 />
 
         </LinearLayout>

@@ -3,69 +3,108 @@ package com.wpf.app.quick
 import android.annotation.SuppressLint
 import android.view.View
 import android.widget.TextView
-import com.wpf.app.quick.base.activity.ViewModelBindingActivity
-import com.wpf.app.quick.base.activity.startActivity
-import com.wpf.app.quick.base.helper.FindView
-import com.wpf.app.quick.base.viewmodel.BindingViewModel
+import com.wpf.app.quick.activity.ViewModelBindingActivity
+import com.wpf.app.quick.annotations.BindView
 import com.wpf.app.quick.databinding.ActivityMainBinding
 import com.wpf.app.quick.model.MyMessage
 import com.wpf.app.quick.model.TestModel
+import com.wpf.app.quick.viewmodel.MainViewModel
+import com.wpf.app.quickbind.annotations.BindSp2View
+import java.util.ArrayList
+import java.util.HashMap
+import com.wpf.app.quick.utils.startActivity
 
-class MainActivity :
-    ViewModelBindingActivity<BindingViewModel<ActivityMainBinding>, ActivityMainBinding>(
-        R.layout.activity_main,
-        activityTitle = "快捷"
-    ) {
+/**
+ * Created by 王朋飞 on 2022/6/13.
+ */
+class MainActivity : ViewModelBindingActivity<MainViewModel, ActivityMainBinding>(R.layout.activity_main, titleName = "快捷") {
+    @SuppressLint("NonConstantResourceId")
+    @BindSp2View(bindSp = "绑定的SpKey1", defaultValue = "默认值1")
+    @BindView(R.id.spTextView1)
+    var text1: TextView? = null
 
     @SuppressLint("NonConstantResourceId")
-    @FindView(R.id.spTextView1, bindSp = "绑定的SpKey1", default = "默认值1")
-    val bindSp1: TextView? = null
+    @BindSp2View(bindSp = "绑定的SpKey2", defaultValue = "默认值2")
+    @BindView(R.id.spTextView2)
+    var text2: TextView? = null
+
     @SuppressLint("NonConstantResourceId")
-    @FindView(R.id.spTextView2, bindSp = "绑定的SpKey2", default = "默认值2")
-    val bindSp2: TextView? = null
-    @SuppressLint("NonConstantResourceId")
-    @FindView(R.id.spTextView3, bindSp = "绑定的SpKey3", default = "默认值3")
-    val bindSp3: TextView? = null
-
-    fun gotoGlide(view: View) {
-        startActivity(GlideImageTestActivity::class.java)
-    }
-
-    fun gotoList(view: View) {
-        startActivity(RecyclerViewTestActivity::class.java)
-    }
-
-    fun gotoData(view: View) {
-        startActivity(IntentDataTestActivity::class.java, data = mapOf(
-            "activityTitle" to "数据测试页",
-            "intD" to 2,
-            "floatD" to 3f,
-            "doubleD" to 4.0,
-            "charD" to 'b',
-            "byteD" to 6.toByte(),
-            "data" to MyMessage(userName = "31"),
-            "data1" to TestModel(text = "41"),
-            "map" to mapOf("map1" to "51"),
-            "list" to listOf("61", "62"),
-            "array" to arrayOf("71", "72"),
-            "listS" to listOf(MyMessage(userName = "81"), MyMessage(userName = "82")),
-            "listP" to listOf(TestModel(text = "91"), TestModel(text = "92")),
-            "arrayS" to arrayOf(MyMessage(userName = "101"), MyMessage(userName = "102")),
-            "arrayP" to arrayOf(TestModel(text = "111"), TestModel(text = "112")), //暂不支持
-        ))
-    }
-
+    @BindSp2View(bindSp = "绑定的SpKey3", defaultValue = "默认值3")
+    @BindView(R.id.spTextView3)
+    var text3: TextView? = null
     @SuppressLint("SetTextI18n")
-    override fun initView(viewDataBinding: ActivityMainBinding?) {
-        super.initView(viewDataBinding)
-        bindSp1?.postDelayed({
-            bindSp1.text = System.currentTimeMillis().toString()
-        }, 1000)
-        bindSp2?.postDelayed({
-            bindSp2.text = System.currentTimeMillis().toString()
-        }, 1000)
-        bindSp3?.postDelayed({
-            bindSp3.text = System.currentTimeMillis().toString()
-        }, 1000)
+    override fun initView() {
+        text1?.postDelayed(
+            { text1?.text = System.currentTimeMillis().toString() + "" },
+            1000
+        )
+        text2?.postDelayed(
+            { text2?.text = System.currentTimeMillis().toString() + "" },
+            1000
+        )
+        text3?.postDelayed(
+            { text3?.text = System.currentTimeMillis().toString() + "" },
+            1000
+        )
+    }
+
+    fun gotoR2Test(view: View?) {
+//        startActivity(activityCls = R2TestActivity::class.java)
+    }
+
+    fun gotoGlide(view: View?) {
+
+    }
+    fun gotoRefreshList(view: View?) {
+        startActivity(activityCls = RefreshListTestActivity::class.java)
+    }
+
+    fun gotoSelectList(view: View?) {
+        startActivity(activityCls = SelectListTestActivity::class.java)
+    }
+
+    fun gotoList(view: View?) {
+        startActivity(activityCls = RecyclerViewTestActivity::class.java)
+    }
+
+    fun gotoData(view: View?) {
+        startActivity(activityCls = IntentDataTestActivity::class.java, object : HashMap<String, Any?>() {
+            init {
+                put("activityTitle", "数据测试页")
+                put("intD", 2)
+                put("floatD", 3f)
+                put("doubleD", 4.0)
+                put("charD", 'b')
+                put("byteD", 6.toByte())
+                put("data", MyMessage("31"))
+                put("data1", TestModel("41"))
+                put("map", object : HashMap<String?, String?>() {
+                    init {
+                        put("map1", "51")
+                    }
+                })
+                put("list", object : ArrayList<String?>() {
+                    init {
+                        add("61")
+                        add("62")
+                    }
+                })
+                put("array", arrayOf("71", "72"))
+                put("listS", object : ArrayList<MyMessage?>() {
+                    init {
+                        add(MyMessage("81"))
+                        add(MyMessage("82"))
+                    }
+                })
+                put("listP", object : ArrayList<TestModel?>() {
+                    init {
+                        add(TestModel("91"))
+                        add(TestModel("92"))
+                    }
+                })
+                put("arrayS", arrayOf<MyMessage>(MyMessage("101"), MyMessage("102")))
+                put("arrayP", arrayOf<TestModel>(TestModel("101"), TestModel("102"))) //暂不支持
+            }
+        })
     }
 }

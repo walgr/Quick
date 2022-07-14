@@ -10,7 +10,7 @@
 
         <variable
             name="adapter"
-            type="com.wpf.app.quick.base.widgets.recyclerview.QuickAdapter" />
+            type="com.wpf.app.quick.widgets.recyclerview.QuickAdapter" />
 
         <variable
             name="position"
@@ -21,20 +21,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.wpf.app.quick.base.widgets.MultiFunctionView
-            android:id="@+id/selectItem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:bindSelect="@{data.isSelect()}"
-            app:title="@{data.title}"
-            app:clickOnlyCheckBox="true"
-            app:rightImageSrc="@mipmap/ic_launcher"
-            app:rightImageWidth="20dp"
-            app:showCheckBox="true"
-            app:showRightImage="true"
-            app:titleSize="22sp" />
+<!--        <com.wpf.app.quick.base.widgets.MultiFunctionView-->
+<!--            android:id="@+id/selectItem"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:bindSelect="@{data.isSelect()}"-->
+<!--            app:title="@{data.title}"-->
+<!--            app:clickOnlyCheckBox="true"-->
+<!--            app:rightImageSrc="@mipmap/ic_launcher"-->
+<!--            app:rightImageWidth="20dp"-->
+<!--            app:showCheckBox="true"-->
+<!--            app:showRightImage="true"-->
+<!--            app:titleSize="22sp" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

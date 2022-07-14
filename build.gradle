@@ -6,43 +6,48 @@ buildscript {
         compileSdkVersion = 32
         minSdkVersion = 21
         targetSdkVersion = 32
+        androidTools = '32.0.0'
+        kotlin = '1.7.10'
 
-        // App dependencies
-        appCompatVersion = '1.1.0'
-        constraintLayoutVersion = '2.0.0-beta3'
-        coreTestingVersion = '2.0.0'
-        coroutinesVersion = "1.4.2"
-        espressoVersion = '3.1.1'
-        fragmentVersion = '1.3.0'
-        glideVersion = '4.10.0'
-        gradleVersion = '4.1.2'
-        gsonVersion = '2.8.2'
-        hiltVersion = '2.38.1'
-        junitVersion = '4.12'
-        kotlinVersion = '1.4.30'
-        ktlintVersion = '0.38.1'
-        ktxVersion = '1.0.2'
-        lifecycleVersion = '2.2.0'
-        materialVersion = '1.2.0'
-        navigationVersion = '2.3.3'
-        okhttpLoggingVersion = '4.7.2'
-        pagingVersion = '3.0.1'
-        retrofitVersion = '2.9.0'
-        roomVersion = '2.2.5'
-        runnerVersion = '1.0.1'
-        truthVersion = '0.42'
-        testExtJunit = '1.1.0'
-        uiAutomatorVersion = '2.2.0'
-        viewPagerVersion = '1.0.0'
-        workVersion = '2.4.0'
+        release = '0.1.0'
+
+        ext.deps = [
+                android       : [
+                        'runtime'     : 'com.google.android:android:4.1.1.4',
+                        'gradlePlugin': "com.android.tools.build:gradle:4.2.2",
+                        'annotations' : "com.android.support:support-annotations:28.0.0",
+                        'fragment'    : "com.android.support:support-fragment:28.0.0",
+                        'activity'    : "com.android.support:appcompat-v7:28.0.0",
+                ],
+                androidx    : [
+                        'fragment': "com.android.support:support-fragment:28.0.0",
+                        'activity': "com.android.support:appcompat-v7:28.0.0",
+                ],
+                'release'   : [
+                        'base'       : "com.wpf.app.quick:quickbind:${release}",
+                        'annotations': "com.wpf.app.quick:quick-annotations:${release}",
+                        'runtime'    : "com.wpf.app.quick:quick-runtime:${release}",
+                        'compiler'   : "com.wpf.app.quick:quick-compiler:${release}"
+                ],
+                javapoet    : 'com.squareup:javapoet:1.13.0',
+                gradlePlugin: "com.android.tools.build:gradle:7.2.1",
+                'kotlin'    : [
+                        'stdLibJdk8': "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlin}",
+                ],
+        ]
+    }
+
+    dependencies {
+        classpath "com.wpf.app.quick:quick-gradle-plugin:0.5.0"
     }
 }
 
 plugins {
     id 'com.android.application' version '7.2.1' apply false
     id 'com.android.library' version '7.2.1' apply false
-    id 'org.jetbrains.kotlin.android' version '1.7.0' apply false
+    id 'org.jetbrains.kotlin.android' version '1.7.10' apply false
 }
+
 
 task clean(type: Delete) {
     delete rootProject.buildDir

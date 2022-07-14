@@ -80,5 +80,10 @@ dependencies {
     //约束布局
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
-    implementation project(path: ':BaseActivity')
+    //SmartRefreshLayout
+    implementation  'io.github.scwang90:refresh-layout-kernel:2.0.5'      //核心必须依赖
+    implementation  'io.github.scwang90:refresh-header-classics:2.0.5'    //经典刷新头
+    implementation  'io.github.scwang90:refresh-footer-classics:2.0.5'    //经典加载
+
+    implementation project(path: ':Quick')
 }

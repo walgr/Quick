@@ -11,7 +11,8 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/BaseActivity" />
+            <option value="$PROJECT_DIR$/Quick" />
+            <option value="$PROJECT_DIR$/QuickBind" />
             <option value="$PROJECT_DIR$/app" />
           </set>
         </option>

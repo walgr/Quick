@@ -1,25 +1,20 @@
 package com.wpf.app.quick.adapterholder
 
-import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.ViewDataBinding
 import com.wpf.app.quick.R
-import com.wpf.app.quick.base.widgets.recyclerview.QuickViewBindingHolder
 import com.wpf.app.quick.databinding.HolderMessageMyBinding
 import com.wpf.app.quick.model.MyMessage
+import com.wpf.app.quick.widgets.recyclerview.QuickAdapter
+import com.wpf.app.quick.widgets.recyclerview.QuickViewBindingHolder
 
 /**
- * Created by 王朋飞 on 2022/5/19.
- *
+ * Created by 王朋飞 on 2022/6/13.
  */
 class MyMessageHolder(mParent: ViewGroup) :
     QuickViewBindingHolder<MyMessage, HolderMessageMyBinding>(
-        mParent = mParent,
-        layoutId = R.layout.holder_message_my
+        mParent,
+        R.layout.holder_message_my
     ) {
 
-    override fun onCreateHolderEnd(itemView: View, viewDataBinding: ViewDataBinding?) {
-        super.onCreateHolderEnd(itemView, viewDataBinding)
-        viewBinding?.msg?.text = "${viewData?.userName}:${viewData?.msg}"
-    }
+    override fun onBindViewHolder(adapter: QuickAdapter, data: MyMessage?, position: Int) {}
 }

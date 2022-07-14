@@ -11,15 +11,22 @@
         <entry key="..\:/Android/Quick/app/src/main/res/layout/holder_message_my.xml" value="0.4354166666666667" />
         <entry key="..\:/Android/Quick/app/src/main/res/layout/holder_test.xml" value="0.4354166666666667" />
         <entry key="BaseActivity/src/main/res/layout/multi_function_layout.xml" value="0.203125" />
+        <entry key="Quick/src/main/res/layout/fragment_recyclerview.xml" value="0.37447916666666664" />
+        <entry key="Quick/src/main/res/layout/multi_function_layout.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/drawable/bg_message_my.xml" value="0.2155" />
         <entry key="app/src/main/res/layout/activity_data_test.xml" value="0.1890625" />
+        <entry key="app/src/main/res/layout/activity_glide_test.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/activity_launcher.xml" value="0.2484375" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_recyclerview_test.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_refresh_list.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/holder_message_my.xml" value="0.3734375" />
+        <entry key="app/src/main/res/layout/holder_refresh_item.xml" value="0.37447916666666664" />
+        <entry key="app/src/main/res/layout/holder_select_item.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/holder_test.xml" value="0.3734375" />
         <entry key="app/src/main/res/layout/holder_test2.xml" value="0.375" />
         <entry key="app/src/main/res/layout/holder_test3.xml" value="0.19427083333333334" />
+        <entry key="app/src/main/res/layout/holder_test_bind_data.xml" value="0.37447916666666664" />
       </map>
     </option>
   </component>
