@@ -33,7 +33,7 @@ afterEvaluate {
 
                 from components.release
                 // 运行任务，把源码打进去
-                artifact sourceJar
+//                artifact sourceJar
             }
         }
         // 添加仓库地址
