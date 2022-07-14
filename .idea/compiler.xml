@@ -21,6 +21,10 @@
         <module name="Quick.Quick-compiler.main" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="1.8" />
+    <bytecodeTargetLevel target="1.8">
+      <module name="Quick.app" target="17" />
+      <module name="Quick.Quick" target="17" />
+      <module name="Quick.QuickBind" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>

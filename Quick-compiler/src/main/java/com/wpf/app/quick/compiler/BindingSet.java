@@ -49,17 +49,17 @@ final class BindingSet implements BindingInformationProvider {
     private static final ClassName CONTEXT = ClassName.get("android.content", "Context");
     private static final ClassName RESOURCES = ClassName.get("android.content.res", "Resources");
     private static final ClassName UI_THREAD =
-            ClassName.get("android.support.annotation", "UiThread");
+            ClassName.get("androidx.annotation", "UiThread");
     private static final ClassName CALL_SUPER =
-            ClassName.get("android.support.annotation", "CallSuper");
+            ClassName.get("androidx.annotation", "CallSuper");
     private static final ClassName SUPPRESS_LINT =
-            ClassName.get("android.annotation", "SuppressLint");
+            ClassName.get("androidx.annotation", "SuppressLint");
     private static final ClassName UNBINDER = ClassName.get("com.wpf.app.quick.runtime", "Databinder");
     static final ClassName BITMAP_FACTORY = ClassName.get("android.graphics", "BitmapFactory");
     static final ClassName CONTEXT_COMPAT =
-            ClassName.get("android.core.content", "ContextCompat");
+            ClassName.get("androidx.core.content", "ContextCompat");
     static final ClassName ANIMATION_UTILS =
-            ClassName.get("android.view.animation", "AnimationUtils");
+            ClassName.get("com.google.android.material.animation", "AnimationUtils");
 
     private final TypeName targetTypeName;
     private final ClassName bindingClassName;

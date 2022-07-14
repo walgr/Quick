@@ -1,6 +1,6 @@
 package com.wpf.app.quick.compiler;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.google.common.collect.ImmutableList;
 import com.google.errorprone.annotations.Immutable;
@@ -56,7 +56,8 @@ final class FieldResourceBinding implements ResourceBinding {
   @Immutable
   static final class ResourceMethod implements Comparable<ResourceMethod> {
     @SuppressWarnings("Immutable")
-    final @Nullable ClassName typeName;
+    final @Nullable
+    ClassName typeName;
     final String name;
     final boolean requiresResources;
     final int sdk;

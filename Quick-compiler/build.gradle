@@ -18,7 +18,7 @@ dependencies {
     compileOnly deps.auto.service
     //解决和Gradle版本兼容问题（无法生成META-INF里services文件）
     annotationProcessor deps.auto.service
-    compileOnly files(org.gradle.internal.jvm.Jvm.current().getToolsJar())
+//    compileOnly files(org.gradle.internal.jvm.Jvm.current().getToolsJar())
 
     api deps.incap.runtime
 //    compileOnly deps.incap.processor

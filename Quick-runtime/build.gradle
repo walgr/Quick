@@ -3,6 +3,7 @@ plugins {
 }
 
 android {
+    compileSdk rootProject.compileSdkVersion
 
     defaultConfig {
         minSdkVersion 19

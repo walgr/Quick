@@ -1,6 +1,6 @@
 package com.wpf.app.quick.compiler;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.CodeBlock;
