@@ -3,7 +3,6 @@ package com.wpf.app.quick.widgets.recyclerview
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-import kotlin.reflect.full.findAnnotation
 
 /**
  * Created by 王朋飞 on 2022/7/13.
@@ -69,7 +68,7 @@ class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>() {
             it.viewType == viewType
         }?.let { findData ->
             if (findData is QuickViewDataBinding<*>) {
-                val holderAnnotationClass = findData::class.findAnnotation<BindBindingHolder>()
+                val holderAnnotationClass = findData::class.java.getAnnotation(BindBindingHolder::class.java)
                 holderAnnotationClass?.let {
                     val bindingHolderCls = it.value.java.getConstructor(ViewGroup::class.java)
                     val bindingHolder =
@@ -79,7 +78,7 @@ class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>() {
                     return bindingHolder as QuickViewHolder<QuickItemData>
                 }
             }
-            val holderAnnotation = findData::class.findAnnotation<BindHolder>()
+            val holderAnnotation = findData::class.java.getAnnotation(BindHolder::class.java)
             var holder: QuickViewHolder<out QuickItemData>? = null
 
             if (holderAnnotation == null) {
