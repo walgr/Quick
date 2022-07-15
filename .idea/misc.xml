@@ -13,6 +13,8 @@
         <entry key="BaseActivity/src/main/res/layout/multi_function_layout.xml" value="0.203125" />
         <entry key="Quick/src/main/res/layout/fragment_recyclerview.xml" value="0.37447916666666664" />
         <entry key="Quick/src/main/res/layout/multi_function_layout.xml" value="0.37447916666666664" />
+        <entry key="Quick/src/main/res/layout/toolbar_layout.xml" value="0.37447916666666664" />
+        <entry key="R2Test/src/main/res/layout/test_layout.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/drawable/bg_message_my.xml" value="0.2155" />
         <entry key="app/src/main/res/layout/activity_data_test.xml" value="0.1890625" />
         <entry key="app/src/main/res/layout/activity_glide_test.xml" value="0.37447916666666664" />

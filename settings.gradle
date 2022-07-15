@@ -1,4 +1,3 @@
-import org.gradle.api.initialization.resolve.RepositoriesMode
 
 pluginManagement {
     repositories {
@@ -25,5 +24,6 @@ include ':Quick'
 include ':QuickBind'
 include ':Quick-annotations'
 include ':Quick-runtime'
-//include ':Quick-compiler'
-//include ':Quick-gradle-plugin'
+include ':Quick-compiler'
+include ':Quick-gradle-plugin'
+include ':R2Test'

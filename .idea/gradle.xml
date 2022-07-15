@@ -13,8 +13,11 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/Quick" />
             <option value="$PROJECT_DIR$/Quick-annotations" />
+            <option value="$PROJECT_DIR$/Quick-compiler" />
+            <option value="$PROJECT_DIR$/Quick-gradle-plugin" />
             <option value="$PROJECT_DIR$/Quick-runtime" />
             <option value="$PROJECT_DIR$/QuickBind" />
+            <option value="$PROJECT_DIR$/R2Test" />
             <option value="$PROJECT_DIR$/app" />
           </set>
         </option>

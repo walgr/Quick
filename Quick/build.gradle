@@ -1,12 +1,9 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
-    id 'kotlin-kapt'
 }
+apply plugin: 'com.wpf.app.quick'
 
-//apply plugin : 'com.wpf.app.quick'
-group rootProject.GROUP
-version rootProject.VERSION_NAME
 android {
     compileSdk rootProject.compileSdkVersion
 
@@ -47,10 +44,11 @@ dependencies {
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.13.1'
 
-    if (IS_REMOTE.toBoolean())
+    if (IS_REMOTE.toBoolean()) {
         api deps.quickbind.base
-    else
+    } else {
         api project(":QuickBind")
+    }
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

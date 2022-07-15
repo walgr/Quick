@@ -3,8 +3,6 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
-group rootProject.GROUP
-version rootProject.VERSION_NAME
 android {
     compileSdk rootProject.compileSdkVersion
 

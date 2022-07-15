@@ -14,24 +14,24 @@ buildscript {
         incap = '0.3'
 
         ext.deps = [
-                androidx    : [
-                        'annotations' : 'androidx.annotation:annotation:1.2.0',
-                        'runtime'     : 'com.google.android:android:4.1.1.4',
-                        'fragment': "androidx.fragment:fragment-ktx:1.4.1",
-                        'activity': "androidx.activity:activity-ktx:1.4.0",
+                androidx      : [
+                        'annotations': 'androidx.annotation:annotation:1.2.0',
+                        'runtime'    : 'com.google.android:android:4.1.1.4',
+                        'fragment'   : "androidx.fragment:fragment-ktx:1.4.1",
+                        'activity'   : "androidx.activity:activity-ktx:1.4.0",
                 ],
                 'quickbind'   : [
                         'base'       : "com.wpf.app.quick:QuickBind:${release}",
                         'annotations': "com.wpf.app.quick:Quick-annotations:${release}",
                         'runtime'    : "com.wpf.app.quick:Quick-runtime:${release}",
                         'compiler'   : "com.wpf.app.quick:Quick-compiler:${release}",
-                        'plugin'   : "com.wpf.app.quick:Quick-gradle-plugin:${release}"
+                        'plugin'     : "com.wpf.app.quick:Quick-gradle-plugin:${release}"
                 ],
-                'quick'   : [
-                        'base'       : "com.wpf.app.quick:Quick:${release}",
+                'quick'       : [
+                        'base': "com.wpf.app.quick:Quick:${release}",
                 ],
-                gradlePlugin: "com.android.tools.build:gradle:7.2.1",
-                'kotlin'    : [
+                gradlePlugin  : "com.android.tools.build:gradle:7.2.1",
+                'kotlin'      : [
                         'stdLibJdk8': "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlin}",
                 ],
                 'lint'        : [
@@ -56,7 +56,7 @@ buildscript {
     }
 
     dependencies {
-//        classpath "com.wpf.app.quick:quick-gradle-plugin:0.5.0
+        classpath deps.quickbind.plugin
 //        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlin}"
     }
 }

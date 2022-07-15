@@ -5,7 +5,6 @@ import android.view.View
 import android.widget.TextView
 import com.wpf.app.quick.activity.ViewModelBindingActivity
 import com.wpf.app.quick.annotations.BindView
-import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.demo.databinding.ActivityMainBinding
 import com.wpf.app.quick.demo.viewmodel.MainViewModel
 import com.wpf.app.quick.demo.model.MyMessage
@@ -14,6 +13,7 @@ import com.wpf.app.quickbind.annotations.BindSp2View
 import java.util.ArrayList
 import java.util.HashMap
 import com.wpf.app.quick.utils.startActivity
+import com.wpf.app.r2test.R2TestActivity
 
 /**
  * Created by 王朋飞 on 2022/6/13.
@@ -52,7 +52,7 @@ class MainActivity : ViewModelBindingActivity<MainViewModel, ActivityMainBinding
     }
 
     fun gotoR2Test(view: View?) {
-//        startActivity(activityCls = R2TestActivity::class.java)
+        startActivity(activityCls = R2TestActivity::class.java)
     }
 
     fun gotoGlide(view: View?) {
