@@ -1,6 +1,8 @@
 plugins {
     id 'java-library'
 }
+
+group rootProject.GROUP
 version rootProject.VERSION_NAME
 java {
     sourceCompatibility JavaVersion.VERSION_11
