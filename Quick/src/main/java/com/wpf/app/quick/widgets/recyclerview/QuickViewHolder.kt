@@ -31,8 +31,8 @@ open class QuickViewHolder<T : QuickItemData> @JvmOverloads constructor(
             QuickBind.bind(this)
         }
         if (autoClick) {
-            itemView.setOnClickListener { v: View? ->
-                (mQuickAdapter?.getQuickAdapterListener() as? QuickAdapterListener<T>)?.onItemClick(
+            itemView.setOnClickListener { v: View ->
+                (mQuickAdapter.getQuickAdapterListener() as QuickAdapterListener<T>).onItemClick(
                     v, getViewData(), bindingAdapterPosition
                 )
             }
@@ -50,7 +50,7 @@ open class QuickViewHolder<T : QuickItemData> @JvmOverloads constructor(
     }
 
     open fun getAdapterClickListener(): QuickAdapterListener<QuickItemData>? {
-        return this.mQuickAdapter?.getQuickAdapterListener() as? QuickAdapterListener<QuickItemData>?
+        return this.mQuickAdapter.getQuickAdapterListener() as QuickAdapterListener<QuickItemData>?
     }
 
     open fun itemViewClick(clickView: View?) {
@@ -66,6 +66,6 @@ open class QuickViewHolder<T : QuickItemData> @JvmOverloads constructor(
     }
 
     open fun getViewData(): T? {
-        return mQuickAdapter?.getData()?.get(bindingAdapterPosition) as? T
+        return mQuickAdapter.getData()?.get(bindingAdapterPosition) as T
     }
 }
