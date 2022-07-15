@@ -15,7 +15,7 @@ import com.wpf.app.quickbind.annotations.AutoGet
 abstract class LazyViewFragment(
     @LayoutRes override val layoutId: Int = 0,
     override val layoutView: View? = null,
-    @AutoGet(titleKey) override val titleName: String = this.javaClass.name
+    @AutoGet(titleKey) override val titleName: String = ""
 ) : QuickFragment() {
 
     protected var rootView: View? = null
