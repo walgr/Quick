@@ -1,4 +1,4 @@
-package com.wpf.app.demo.quick
+package com.wpf.app.quick.demo
 
 import android.annotation.SuppressLint
 import android.view.View
@@ -19,6 +19,7 @@ import com.wpf.app.quick.utils.startActivity
  * Created by 王朋飞 on 2022/6/13.
  */
 class MainActivity : ViewModelBindingActivity<MainViewModel, ActivityMainBinding>(R.layout.activity_main, titleName = "快捷") {
+
     @SuppressLint("NonConstantResourceId")
     @BindSp2View(bindSp = "绑定的SpKey1", defaultValue = "默认值1")
     @BindView(R.id.spTextView1)
@@ -33,6 +34,7 @@ class MainActivity : ViewModelBindingActivity<MainViewModel, ActivityMainBinding
     @BindSp2View(bindSp = "绑定的SpKey3", defaultValue = "默认值3")
     @BindView(R.id.spTextView3)
     var text3: TextView? = null
+
     @SuppressLint("SetTextI18n")
     override fun initView() {
         text1?.postDelayed(

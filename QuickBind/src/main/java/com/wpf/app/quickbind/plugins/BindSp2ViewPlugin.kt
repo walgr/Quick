@@ -21,31 +21,27 @@ class BindSp2ViewPlugin : BasePlugin {
         viewModel: ViewModel?,
         field: Field
     ): Boolean {
-        try {
-            val findViewA: BindSp2View =
-                field.getAnnotation(BindSp2View::class.java) ?: return false
-            field.isAccessible = true
-            val findView = field[obj] as View
-            if (findView is TextView) {
-                setTextViewValue(
-                    findView,
-                    QuickBind.getBindSpFileName(),
-                    findViewA.bindSp,
-                    findViewA.setSp,
-                    findViewA.getSp,
-                    findViewA.defaultValue
-                )
-            }
-            if (viewModel != null) {
-                field[viewModel] = findView
-            } else {
-                field[obj] = findView
-            }
-            return true
-        } catch (e: Exception) {
-            e.printStackTrace()
+        val findViewA: BindSp2View =
+            field.getAnnotation(BindSp2View::class.java) ?: return false
+        field.isAccessible = true
+        val findView = field[obj] as View
+        if (findView is TextView) {
+            setTextViewValue(
+                findView,
+                QuickBind.getBindSpFileName(),
+                findViewA.bindSp,
+                findViewA.setSp,
+                findViewA.getSp,
+                findViewA.defaultValue
+            )
         }
-        return false
+        if (viewModel != null) {
+            field[viewModel] = findView
+        } else {
+            field[obj] = findView
+        }
+        return true
+
     }
 
     private fun setTextViewValue(

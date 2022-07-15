@@ -7,12 +7,18 @@ import androidx.annotation.UiThread
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
+import com.wpf.app.quick.annotations.BindData2View
+import com.wpf.app.quick.annotations.BindView
+import com.wpf.app.quick.annotations.GroupView
 import com.wpf.app.quick.runtime.Databinder
+import com.wpf.app.quickbind.annotations.*
 import com.wpf.app.quickbind.plugins.*
+import com.wpf.app.quickbind.utils.GroupViews
 import com.wpf.app.quickbind.utils.ReflectHelper
 import java.lang.reflect.Constructor
 import java.lang.reflect.Field
 import java.lang.reflect.InvocationTargetException
+import kotlin.reflect.KClass
 
 /**
  * Created by 王朋飞 on 2022/7/13.
@@ -21,23 +27,24 @@ import java.lang.reflect.InvocationTargetException
 object QuickBind {
     private var bindSpFileName = "QuickViewSpBindFile"
 
-    private val plugins: MutableList<BasePlugin> = mutableListOf()
-    val bindPlugin: MutableList<BasePlugin> = mutableListOf(BindData2ViewPlugin())
+    private val plugins: MutableMap<KClass<out Annotation>, BasePlugin> = LinkedHashMap()
+    val bindPlugin: MutableMap<KClass<out Annotation>, BasePlugin> =
+        linkedMapOf(Pair(BindData2View::class, BindData2ViewPlugin()))
 
-    fun <T : BasePlugin> registerPlugin(plugin: T) {
-        plugins.add(plugin)
+    fun <T : BasePlugin> registerPlugin(ann: KClass<out Annotation>, plugin: T) {
+        plugins[ann] = plugin
     }
 
     init {
         //顺序不能乱
-        registerPlugin(BindViewPlugin())
-        registerPlugin(GroupViewPlugin())
-        registerPlugin(AutoGetPlugin())
-        registerPlugin(BindSp2ViewPlugin())
-        registerPlugin(LoadSpPlugin())
-        registerPlugin(BindFragmentsPlugin())
-        registerPlugin(BindFragmentPlugin())
-        registerPlugin(BindData2ViewPlugin())
+        registerPlugin(BindView::class, BindViewPlugin())
+        registerPlugin(GroupView::class, GroupViewPlugin())
+        registerPlugin(AutoGet::class, AutoGetPlugin())
+        registerPlugin(BindSp2View::class, BindSp2ViewPlugin())
+        registerPlugin(LoadSp::class, LoadSpPlugin())
+        registerPlugin(BindFragments::class, BindFragmentsPlugin())
+        registerPlugin(BindFragment::class, BindFragmentPlugin())
+        registerPlugin(BindData2View::class, BindData2ViewPlugin())
     }
 
     fun bind(activity: Activity) {
@@ -126,26 +133,24 @@ object QuickBind {
         dealInPlugins(obj, viewModel, plugins)
     }
 
-    fun dealInPlugins(obj: Any?, viewModel: ViewModel?, plugins: MutableList<BasePlugin>) {
+    fun dealInPlugins(
+        obj: Any?,
+        viewModel: ViewModel?,
+        plugins: MutableMap<KClass<out Annotation>, BasePlugin>
+    ) {
         if (obj == null) return
         try {
             val fields: List<Field> = ReflectHelper.getFieldWithParent(obj)
             for (field in fields) {
-                for (plugin in plugins) {
-                    val result = plugin.dealField(obj, null, field)
-                    if (result) {
-                        break
-                    }
+                field.annotations.forEach {
+                    plugins[it.annotationClass]?.dealField(obj, null, field)
                 }
             }
             if (viewModel != null) {
                 val viewModelFields: List<Field> = ReflectHelper.getFieldWithParent(viewModel)
                 for (field in viewModelFields) {
-                    for (plugin in plugins) {
-                        val result = plugin.dealField(obj, viewModel, field)
-                        if (result) {
-                            break
-                        }
+                    field.annotations.forEach {
+                        plugins[it.annotationClass]?.dealField(obj, viewModel, field)
                     }
                 }
             }

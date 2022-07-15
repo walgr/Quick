@@ -41,7 +41,10 @@ dependencies {
     //列表
     compileOnly 'androidx.recyclerview:recyclerview:1.2.1'
 
-    api deps.quickbind.runtime
+    if (IS_REMOTE.toBoolean())
+        api deps.quickbind.runtime
+    else
+        api project(":Quick-runtime")
 
     //GSON
     compileOnly 'com.google.code.gson:gson:2.9.0'

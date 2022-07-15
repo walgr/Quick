@@ -1,4 +1,4 @@
-package com.wpf.app.demo.quick
+package com.wpf.app.quick.demo
 
 import com.wpf.app.quick.activity.ViewModelBindingActivity
 import com.wpf.app.quick.demo.R

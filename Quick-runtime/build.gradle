@@ -35,7 +35,10 @@ android {
 }
 
 dependencies {
-    api deps.quickbind.annotations
+    if (IS_REMOTE.toBoolean())
+        api deps.quickbind.annotations
+    else
+        api project(":Quick-annotations")
     api deps.androidx.activity
 }
 

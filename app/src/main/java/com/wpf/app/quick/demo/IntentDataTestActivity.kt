@@ -1,4 +1,4 @@
-package com.wpf.app.demo.quick
+package com.wpf.app.quick.demo
 
 import android.annotation.SuppressLint
 import android.widget.TextView

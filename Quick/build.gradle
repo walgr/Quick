@@ -46,7 +46,10 @@ dependencies {
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.13.1'
 
-    api deps.quickbind.base
+    if (IS_REMOTE.toBoolean())
+        api deps.quickbind.base
+    else
+        api project(":QuickBind")
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
