@@ -56,8 +56,9 @@ class MainActivity : ViewModelBindingActivity<MainViewModel, ActivityMainBinding
     }
 
     fun gotoGlide(view: View?) {
-
+        startActivity(activityCls = GlideImageTestActivity::class.java)
     }
+
     fun gotoRefreshList(view: View?) {
         startActivity(activityCls = RefreshListTestActivity::class.java)
     }

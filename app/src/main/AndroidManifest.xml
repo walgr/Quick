@@ -36,6 +36,7 @@
         <activity android:name=".IntentDataTestActivity" />
         <activity android:name=".RefreshListTestActivity" />
         <activity android:name=".SelectListTestActivity" />
+        <activity android:name=".GlideImageTestActivity" />
         <activity android:name="com.wpf.app.r2test.R2TestActivity"/>
 
     </application>
