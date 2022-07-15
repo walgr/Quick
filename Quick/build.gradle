@@ -5,7 +5,7 @@ plugins {
 }
 
 //apply plugin : 'com.wpf.app.quick'
-
+version rootProject.VERSION_NAME
 android {
     compileSdk rootProject.compileSdkVersion
 
