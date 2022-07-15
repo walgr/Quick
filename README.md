@@ -10,6 +10,7 @@
         输入Choose Boot Runtime for the IDE
         弹窗里选择带有JCEF的jdk版本
     2.安装MarkDown Editor插件
+
 ### 项目目的
 
     简化代码，争取做到最小代码实现功能。
@@ -26,5 +27,5 @@
 
     2.添加依赖
     dependencies {
-            implementation 'com.github.walgr:Quick:0.2.0'
+            implementation 'com.github.walgr.Quick:Quick:0.2.0'
     }
