@@ -21,14 +21,14 @@ buildscript {
                         'activity': "androidx.activity:activity-ktx:1.4.0",
                 ],
                 'quickbind'   : [
-                        'base'       : "com.wpf.app.quick:quickbind:${release}",
-                        'annotations': "com.wpf.app.quick:quick-annotations:${release}",
-                        'runtime'    : "com.wpf.app.quick:quick-runtime:${release}",
-                        'compiler'   : "com.wpf.app.quick:quick-compiler:${release}",
-                        'plugin'   : "com.wpf.app.quick:quick-gradle-plugin:${release}"
+                        'base'       : "com.wpf.app.quick:Quickbind:${release}",
+                        'annotations': "com.wpf.app.quick:Quick-annotations:${release}",
+                        'runtime'    : "com.wpf.app.quick:Quick-runtime:${release}",
+                        'compiler'   : "com.wpf.app.quick:Quick-compiler:${release}",
+                        'plugin'   : "com.wpf.app.quick:Quick-gradle-plugin:${release}"
                 ],
                 'quick'   : [
-                        'base'       : "com.wpf.app.quick:quick:${release}",
+                        'base'       : "com.wpf.app.quick:Quick:${release}",
                 ],
                 gradlePlugin: "com.android.tools.build:gradle:7.2.1",
                 'kotlin'    : [
