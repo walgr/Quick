@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
 }
+//apply plugin: 'com.wpf.app.quick'
 
 android {
     compileSdk 32
