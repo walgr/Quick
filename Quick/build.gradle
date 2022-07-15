@@ -2,7 +2,8 @@ plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
 }
-apply plugin: 'com.wpf.app.quick'
+if (!IS_REMOTE.toBoolean())
+    apply plugin: 'com.wpf.app.quick'
 
 android {
     compileSdk rootProject.compileSdkVersion

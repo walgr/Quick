@@ -56,7 +56,8 @@ buildscript {
     }
 
     dependencies {
-        classpath deps.quickbind.plugin
+        if (!IS_REMOTE.toBoolean())
+            classpath deps.quickbind.plugin
 //        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlin}"
     }
 }
