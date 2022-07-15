@@ -421,11 +421,6 @@ public final class QuickProcessor extends AbstractProcessor {
         }
 
 //        if (hasError) {
-//            Set<Modifier> modifiers = element.getModifiers();
-//            if (modifiers.contains(PRIVATE) || modifiers.contains(STATIC)) {
-//                //如果是private尝试访问set方法
-//
-//            }
 //            return;
 //        }
 
