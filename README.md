@@ -15,6 +15,8 @@
 
     简化代码，争取做到最小代码实现功能。
 
+    PS：R2部分逻辑参照butterknife项目
+
 ### 项目集成
 
     1.添加远程地址
@@ -27,5 +29,5 @@
 
     2.添加依赖
     dependencies {
-            implementation 'com.github.walgr.Quick:Quick:0.2.0'
+            implementation 'com.github.walgr.Quick:Quick:latest'
     }
