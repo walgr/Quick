@@ -1,4 +1,7 @@
 jdk:
   - openjdk11
 install:
-  - ./gradlew build :quick:publishToMavenLocal
+  - ./gradlew :Quick-annotations:publishToMavenLocal
+  - ./gradlew :Quick-runtime:publishToMavenLocal
+  - ./gradlew :QuickBind:publishToMavenLocal
+  - ./gradlew :Quick:publishToMavenLocal
