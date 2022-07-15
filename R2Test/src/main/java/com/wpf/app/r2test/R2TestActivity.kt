@@ -2,7 +2,6 @@ package com.wpf.app.r2test
 
 import android.annotation.SuppressLint
 import android.widget.TextView
-import com.wpf.app.quick.R2
 import com.wpf.app.quick.activity.QuickActivity
 import com.wpf.app.quick.annotations.BindData2View
 import com.wpf.app.quick.annotations.BindView

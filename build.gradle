@@ -56,8 +56,7 @@ buildscript {
     }
 
     dependencies {
-//        classpath deps.quickbind.plugin
-//        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlin}"
+        classpath deps.quickbind.plugin
     }
 }
 
