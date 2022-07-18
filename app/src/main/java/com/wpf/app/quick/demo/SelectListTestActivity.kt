@@ -13,7 +13,8 @@ import com.wpf.app.quickbind.interfaces.runItemClick
 /**
  * Created by 王朋飞 on 2022/7/8.
  */
-class SelectListTestActivity : QuickActivity(R.layout.activity_recyclerview_test, titleName = "选择列表页") {
+class SelectListTestActivity :
+    QuickActivity(R.layout.activity_recyclerview_test, titleName = "选择列表页") {
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.list)
     var list: QuickRecyclerView? = null
@@ -23,7 +24,7 @@ class SelectListTestActivity : QuickActivity(R.layout.activity_recyclerview_test
     var btnClean: runItemClick =
         object : runItemClick {
             override fun run(): View.OnClickListener {
-                return View.OnClickListener { view: View? -> clean(view) }
+                return View.OnClickListener { view: View -> clean(view) }
             }
         }
 
@@ -32,7 +33,7 @@ class SelectListTestActivity : QuickActivity(R.layout.activity_recyclerview_test
     var btnAdd: runItemClick =
         object : runItemClick {
             override fun run(): View.OnClickListener {
-                return View.OnClickListener { view: View? -> addMessage(view) }
+                return View.OnClickListener { view: View -> addMessage(view) }
             }
         }
 

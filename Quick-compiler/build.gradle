@@ -8,7 +8,10 @@ java {
 }
 
 dependencies {
-    implementation deps.quickbind.annotations
+    if (IS_REMOTE.toBoolean())
+        implementation deps.quickbind.annotations
+    else
+        implementation project(":Quick-annotations")
     implementation deps.auto.common
     implementation deps.guava
     api deps.javapoet
