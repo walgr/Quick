@@ -8,57 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>() {
+class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>(), DataChangeAdapter {
 
-    private var mDataList: MutableList<QuickItemData>? = null
+    var mDataList: MutableList<QuickItemData>? = null
 
-    var mQuickAdapterListener: QuickAdapterListener<out QuickItemData>? = null
-
-    fun setNewData(mDataList: List<QuickItemData>?) {
-        cleanAll()
-        appendList(mDataList)
-        notifyDataSetChanged()
-    }
-
-    fun cleanAll() {
-        if (mDataList != null) {
-            mDataList!!.clear()
-        }
-        notifyDataSetChanged()
-    }
-
-    fun appendList(mDataList: List<QuickItemData>?) {
-        if (mDataList == null) return
-        if (this.mDataList == null) {
-            this.mDataList = mutableListOf()
-        }
-        this.mDataList!!.addAll(mDataList)
-    }
-
-    fun addData(data: QuickItemData) {
-        if (mDataList == null) {
-            mDataList = ArrayList()
-        }
-        mDataList!!.add(data)
-    }
-
-    fun addData(
-        pos: Int,
-        data: QuickItemData
-    ) {
-        if (mDataList == null) {
-            mDataList = mutableListOf()
-        }
-        mDataList?.add(pos, data)
-    }
-
-    fun getData(): MutableList<QuickItemData>? {
-        return mDataList
-    }
-
-    fun <T : QuickItemData> getRealTypeData(): MutableList<T>? {
-        return mDataList as? MutableList<T>
-    }
+    private var mQuickAdapterListener: QuickAdapterListener<out QuickItemData>? = null
 
     override fun onCreateViewHolder(
         viewGroup: ViewGroup,
@@ -68,11 +22,12 @@ class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>() {
             it.viewType == viewType
         }?.let { findData ->
             if (findData is QuickViewDataBinding<*>) {
-                val holderAnnotationClass = findData::class.java.getAnnotation(BindBindingHolder::class.java)
+                val holderAnnotationClass =
+                    findData::class.java.getAnnotation(BindBindingHolder::class.java)
                 holderAnnotationClass?.let {
                     val bindingHolderCls = it.value.java.getConstructor(ViewGroup::class.java)
-                    val bindingHolder =
-                        bindingHolderCls.newInstance(viewGroup) as QuickViewBindingHolder<QuickViewDataBinding<out ViewDataBinding>, out ViewDataBinding>
+                    val bindingHolder = bindingHolderCls.newInstance(viewGroup)
+                            as QuickViewBindingHolder<QuickViewDataBinding<out ViewDataBinding>, out ViewDataBinding>
                     bindingHolder.mViewData = findData
                     bindingHolder.onCreateViewHolder(bindingHolder.itemView)
                     return bindingHolder as QuickViewHolder<QuickItemData>
@@ -116,5 +71,13 @@ class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>() {
 
     fun getQuickAdapterListener(): QuickAdapterListener<out QuickItemData>? {
         return mQuickAdapterListener
+    }
+
+    fun setQuickAdapterListener(listener: QuickAdapterListener<out QuickItemData>?) {
+        this.mQuickAdapterListener = listener
+    }
+
+    override fun getAdapter(): QuickAdapter {
+        return this
     }
 }

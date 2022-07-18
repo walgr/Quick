@@ -33,8 +33,7 @@ open class ViewModelFragment<VM : BaseViewModel<H>, H : QuickView>(
             mViewModel = ViewModelProvider(
                 this,
                 ViewModelProvider.AndroidViewModelFactory(context!!.applicationContext as Application)
-            )
-                .get(vmClass)
+            ).get(vmClass)
             bind(this, mViewModel)
             mViewModel?.baseView = this as H
             mViewModel?.onViewCreated(this as H)

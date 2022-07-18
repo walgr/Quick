@@ -8,7 +8,7 @@ import com.wpf.app.quick.utils.Callback
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-class QuickRefreshRecyclerView @JvmOverloads constructor(
+open class QuickRefreshRecyclerView @JvmOverloads constructor(
     override val mContext: Context,
     override val attrs: AttributeSet? = null,
     override val defStyleAttr: Int = 0
@@ -28,8 +28,8 @@ class QuickRefreshRecyclerView @JvmOverloads constructor(
         (mDataChangeListener as? DataChangeListener<RequestData, QuickItemData>)?.onRefresh(
             mRequestData, object : Callback<QuickItemData> {
                 override fun callback(data: List<QuickItemData>?) {
-                    getQuickAdapter().setNewData(data)
-                    getQuickAdapter().notifyDataSetChanged()
+                    setNewData(data)
+                    adapter.notifyDataSetChanged()
                 }
 
             })
@@ -43,9 +43,9 @@ class QuickRefreshRecyclerView @JvmOverloads constructor(
             mRequestData,
             object : Callback<QuickItemData> {
                 override fun callback(data: List<QuickItemData>?) {
-                    getQuickAdapter().appendList(data)
-                    getQuickAdapter().notifyItemRangeInserted(
-                        getQuickAdapter().itemCount - (data?.size ?: 0), (data?.size ?: 0)
+                    appendList(data)
+                    adapter.notifyItemRangeInserted(
+                        size() - (data?.size ?: 0), (data?.size ?: 0)
                     )
                 }
             })

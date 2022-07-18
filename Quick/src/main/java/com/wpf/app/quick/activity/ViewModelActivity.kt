@@ -46,8 +46,7 @@ abstract class ViewModelActivity<VM : BaseViewModel<H>, H : QuickView>(
             mViewModel = ViewModelProvider(
                 this,
                 ViewModelProvider.AndroidViewModelFactory(application)
-            )
-                .get(vmClass)
+            ).get(vmClass)
             bind(this, mViewModel)
             mViewModel?.baseView = this as H
             mViewModel?.onViewCreated(this as H)

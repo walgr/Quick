@@ -15,11 +15,11 @@ class RecyclerViewTestViewModel : BindingViewModel<ActivityRecyclerviewTestBindi
     }
 
     fun clean(view: View?) {
-        getViewBinding()?.list?.getQuickAdapter()?.cleanAll()
+        getViewBinding()?.list?.cleanAll()
     }
 
     fun addMessage(view: View?) {
-        getViewBinding()?.list?.getQuickAdapter()?.addData(BindDataTestModel())
-        getViewBinding()?.list?.getQuickAdapter()?.notifyDataSetChanged()
+        getViewBinding()?.list?.addData(BindDataTestModel())
+        getViewBinding()?.list?.adapter?.notifyItemInserted(getViewBinding()?.list?.size() ?: 0)
     }
 }

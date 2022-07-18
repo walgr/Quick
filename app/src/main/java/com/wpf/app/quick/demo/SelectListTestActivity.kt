@@ -41,11 +41,11 @@ class SelectListTestActivity : QuickActivity(R.layout.activity_recyclerview_test
     }
 
     fun clean(view: View?) {
-        list?.getQuickAdapter()?.cleanAll()
+        list?.cleanAll()
     }
 
     fun addMessage(view: View?) {
-        list?.getQuickAdapter()?.addData(SelectItem())
-        list?.getQuickAdapter()?.notifyItemInserted(list?.getQuickAdapter()?.itemCount ?: 0)
+        list?.addData(SelectItem())
+        list?.adapter?.notifyItemInserted(list?.size() ?: 0)
     }
 }
