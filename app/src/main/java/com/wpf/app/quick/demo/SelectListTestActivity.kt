@@ -8,7 +8,7 @@ import com.wpf.app.quick.annotations.BindView
 import com.wpf.app.quick.helper.binddatahelper.ItemClick
 import com.wpf.app.quick.demo.model.SelectItem
 import com.wpf.app.quick.widgets.recyclerview.QuickRecyclerView
-import com.wpf.app.quickbind.interfaces.runItemClick
+import com.wpf.app.quickbind.interfaces.itemClick
 
 /**
  * Created by 王朋飞 on 2022/7/8.
@@ -21,21 +21,15 @@ class SelectListTestActivity :
 
     @SuppressLint("NonConstantResourceId")
     @BindData2View(id = R.id.btnClean, helper = ItemClick::class)
-    var btnClean: runItemClick =
-        object : runItemClick {
-            override fun run(): View.OnClickListener {
-                return View.OnClickListener { view: View -> clean(view) }
-            }
-        }
+    var btnClean = itemClick {
+        clean(it)
+    }
 
     @SuppressLint("NonConstantResourceId")
     @BindData2View(id = R.id.btnAdd, helper = ItemClick::class)
-    var btnAdd: runItemClick =
-        object : runItemClick {
-            override fun run(): View.OnClickListener {
-                return View.OnClickListener { view: View -> addMessage(view) }
-            }
-        }
+    var btnAdd = itemClick {
+        addMessage(it)
+    }
 
     override fun initView() {
 

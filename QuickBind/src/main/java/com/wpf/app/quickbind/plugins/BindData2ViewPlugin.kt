@@ -6,10 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.wpf.app.quick.annotations.BindD2VHelper
 import com.wpf.app.quick.annotations.BindData2View
 import com.wpf.app.quick.annotations.internal.Constants
-import com.wpf.app.quickbind.interfaces.runOnHolder
+import com.wpf.app.quickbind.interfaces.RunOnHolder
 import com.wpf.app.quickbind.utils.ReflectHelper
 import java.lang.reflect.Field
-import kotlin.reflect.KClass
 
 /**
  * Created by 王朋飞 on 2022/7/13.
@@ -43,8 +42,8 @@ class BindData2ViewPlugin : BasePlugin {
             val value = field[getRealObj(obj, viewModel)]
             if (findView == null || value == null) return true
             val bindBaseHelper = helper.newInstance()
-            if (value is runOnHolder<*, *>) {
-                bindBaseHelper.initView(findView, (value as runOnHolder<View, Any>).run(findView))
+            if (value is RunOnHolder<*>) {
+                bindBaseHelper.initView(findView, (value as RunOnHolder<Any>).run(findView))
             } else {
                 bindBaseHelper.initView(findView, value)
             }

@@ -14,14 +14,14 @@ open class QuickBindData(
     override var viewType: Int = 0
 ) : QuickItemData(viewType = viewType) {
 
-    private lateinit var mViewHolder: QuickViewHolder<out QuickBindData>
-    private var mAdapter: QuickAdapter? = null
+    private lateinit var mViewHolder: QuickViewHolder<QuickBindData>
+    private lateinit var mAdapter: QuickAdapter
     private var dealBind = true
 
     @CallSuper
-    fun onBindViewHolder(
-        adapter: QuickAdapter?,
-        viewHolder: QuickViewHolder<out QuickBindData>,
+    open fun onBindViewHolder(
+        adapter: QuickAdapter,
+        viewHolder: QuickViewHolder<QuickBindData>,
         position: Int
     ) {
         mAdapter = adapter
@@ -35,11 +35,11 @@ open class QuickBindData(
         this.dealBind = false
     }
 
-    fun getAdapter(): QuickAdapter? {
+    fun getAdapter(): QuickAdapter {
         return mAdapter
     }
 
-    fun getViewHolder(): QuickViewHolder<out QuickBindData> {
+    fun getViewHolder(): QuickViewHolder<QuickBindData> {
         return mViewHolder
     }
 }

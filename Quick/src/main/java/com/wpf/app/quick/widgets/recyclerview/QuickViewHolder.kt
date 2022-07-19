@@ -44,7 +44,7 @@ open class QuickViewHolder<T : QuickItemData> @JvmOverloads constructor(
         this.mQuickAdapter = adapter
         if (data is QuickBindData) {
             data.onBindViewHolder(
-                adapter, (this as QuickViewHolder<out QuickBindData>), position
+                adapter, (this as QuickViewHolder<QuickBindData>), position
             )
         }
     }
