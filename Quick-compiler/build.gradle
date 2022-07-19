@@ -14,7 +14,7 @@ dependencies {
         implementation project(":Quick-annotations")
     implementation deps.auto.common
     implementation deps.guava
-    api deps.javapoet
+    implementation deps.javapoet
     compileOnly deps.auto.service
     //解决和Gradle版本兼容问题（无法生成META-INF里services文件）
     annotationProcessor deps.auto.service
@@ -22,7 +22,7 @@ dependencies {
     implementation fileTree(dir:'libs',include:['*.jar'])
 //    compileOnly files(org.gradle.internal.jvm.Jvm.current().getToolsJar())
 
-    api deps.incap.runtime
+    implementation deps.incap.runtime
 //    compileOnly deps.incap.processor
     //解决和Gradle版本兼容问题（无法生成META-INF里gradle文件）
     annotationProcessor deps.incap.processor

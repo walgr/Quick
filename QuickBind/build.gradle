@@ -39,7 +39,7 @@ dependencies {
     //fragment-ktx
     implementation 'androidx.fragment:fragment-ktx:1.4.1'
     //列表
-    compileOnly 'androidx.recyclerview:recyclerview:1.2.1'
+    compileOnly deps.androidx.recyclerview
 
     if (IS_REMOTE.toBoolean())
         api deps.quickbind.runtime

@@ -14,13 +14,10 @@ import com.wpf.app.quickbind.interfaces.runOnHolder
  * Created by 王朋飞 on 2022/7/8.
  */
 class RefreshItem : QuickBindData(R.layout.holder_refresh_item) {
-    @SuppressLint("NonConstantResourceId")
-    @BindData2View(id = R.id.title, helper = Text2TextView::class)
-    var title: CharSequence = "Title"
 
     @SuppressLint("NonConstantResourceId")
     @BindData2View(id = R.id.title, helper = Text2TextView::class)
-    var title1 = runOnHolder {
+    var title = runOnHolder {
         "Title " + getViewHolder().bindingAdapterPosition
     }
 
