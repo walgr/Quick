@@ -5,11 +5,11 @@
 ### Android Studio 环境配置
 
     1.预览MarkDown
-    1.允许JCEF
+    2.允许JCEF
         点击Help-Find Action...
         输入Choose Boot Runtime for the IDE
         弹窗里选择带有JCEF的jdk版本
-    2.安装MarkDown Editor插件
+    3.安装MarkDown Editor插件
 
 ### 项目目的
 
@@ -21,13 +21,24 @@
 
     1.添加远程地址
     allprojects {
-        repositories {
-            ...
-            maven { url 'https://jitpack.io' }
-        }
+    repositories {
+    ...
+    maven { url 'https://jitpack.io' }
     }
-
+    }
+    
     2.添加依赖
     dependencies {
-            implementation 'com.github.walgr.Quick:Quick:latest'
+    implementation 'com.github.walgr.Quick:Quick:latest'
     }
+
+### 项目功能
+
+1.基础Activity、ViewModelActivity、ViewBindingActivity、Fragment
+    
+2.类似ButterKnife的功能注解
+    
+3.可定制宽高，动画的Dialog、DialogFragment
+    
+4.快速搭建列表 
+![RecyclerView.png](./assets/README/README-1658197283964.png)
