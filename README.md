@@ -21,15 +21,15 @@
 
     1.添加远程地址
     allprojects {
-    repositories {
-    ...
-    maven { url 'https://jitpack.io' }
-    }
+        repositories {
+            ...
+            maven { url 'https://jitpack.io' }
+        }
     }
     
     2.添加依赖
     dependencies {
-    implementation 'com.github.walgr.Quick:Quick:latest'
+        implementation 'com.github.walgr.Quick:Quick:latest'
     }
 
 ### 项目功能
