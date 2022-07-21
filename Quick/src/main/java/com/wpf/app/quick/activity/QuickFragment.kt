@@ -19,7 +19,7 @@ import com.wpf.app.quickbind.interfaces.BindBaseFragment
  * Created by 王朋飞 on 2022/6/15.
  */
 @SuppressLint("ValidFragment")
-abstract class QuickFragment(
+abstract class QuickFragment @JvmOverloads constructor(
     @LayoutRes open val layoutId: Int = 0,
     open val layoutView: View? = null,
     @AutoGet(titleKey) open val titleName: String = ""

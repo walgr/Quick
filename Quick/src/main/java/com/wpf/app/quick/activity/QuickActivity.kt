@@ -11,7 +11,7 @@ import com.wpf.app.quickbind.annotations.AutoGet
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-abstract class QuickActivity(
+abstract class QuickActivity @JvmOverloads constructor(
     @LayoutRes open val layoutId: Int = 0,
     open val layoutView: View? = null,
     @AutoGet(QuickFragment.titleKey) open val titleName: String = ""

@@ -3,11 +3,12 @@ package com.wpf.app.quickbind.plugins
 import android.view.View
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
-import com.wpf.app.quick.annotations.BindD2VHelper
 import com.wpf.app.quick.annotations.BindData2View
 import com.wpf.app.quick.annotations.internal.Constants
 import com.wpf.app.quickbind.annotations.BindD2VHHelper
+import com.wpf.app.quickbind.interfaces.RunOnContext
 import com.wpf.app.quickbind.interfaces.RunOnHolder
+import com.wpf.app.quickbind.interfaces.RunOnHolderWithSelf
 import com.wpf.app.quickbind.utils.ReflectHelper
 import java.lang.reflect.Field
 
@@ -28,7 +29,7 @@ class BindData2ViewPlugin : BasePlugin {
             val bindId: Int = bindData2View.id
             val helper = bindData2View.helper.java as Class<BindD2VHHelper<View, Any>>
             var viewParent = obj
-            var findView: View? = null
+            var findView: View? = getRootView(obj)
             if (parentClassIs(obj.javaClass, "QuickBindData")) {
                 viewParent = obj.javaClass.getMethod("getViewHolder").invoke(obj) as Any
                 if (viewParent is RecyclerView.ViewHolder) {
@@ -43,8 +44,9 @@ class BindData2ViewPlugin : BasePlugin {
             val value = field[getRealObj(obj, viewModel)]
             if (findView == null || value == null) return true
             val bindBaseHelper = helper.newInstance()
-            if (value is RunOnHolder<*>) {
-                bindBaseHelper.initView(viewParent as? RecyclerView.ViewHolder, findView, (value as RunOnHolder<Any>).run(findView))
+            if (value is RunOnHolderWithSelf<*, *>) {
+                bindBaseHelper.initView(viewParent as? RecyclerView.ViewHolder,
+                    findView, (value as RunOnHolderWithSelf<Any, Any>).run(findView, obj))
             } else {
                 bindBaseHelper.initView(viewParent as? RecyclerView.ViewHolder, findView, value)
             }

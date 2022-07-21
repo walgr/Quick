@@ -3,7 +3,7 @@ package com.wpf.app.quick.demo
 import android.annotation.SuppressLint
 import android.view.View
 import android.widget.TextView
-import com.wpf.app.quick.activity.ViewModelBindingActivity
+import com.wpf.app.quick.activity.QuickViewModelBindingActivity
 import com.wpf.app.quick.annotations.BindView
 import com.wpf.app.quick.demo.databinding.ActivityMainBinding
 import com.wpf.app.quick.demo.viewmodel.MainViewModel
@@ -18,7 +18,7 @@ import com.wpf.app.r2test.R2TestActivity
 /**
  * Created by 王朋飞 on 2022/6/13.
  */
-class MainActivity : ViewModelBindingActivity<MainViewModel, ActivityMainBinding>(R.layout.activity_main, titleName = "快捷") {
+class MainActivity : QuickViewModelBindingActivity<MainViewModel, ActivityMainBinding>(R.layout.activity_main, titleName = "快捷") {
 
     @SuppressLint("NonConstantResourceId")
     @BindSp2View(bindSp = "绑定的SpKey1", defaultValue = "默认值1")
@@ -26,7 +26,6 @@ class MainActivity : ViewModelBindingActivity<MainViewModel, ActivityMainBinding
     var text1: TextView? = null
 
     @SuppressLint("NonConstantResourceId")
-    @BindSp2View(bindSp = "绑定的SpKey2", defaultValue = "默认值2")
     @BindView(R.id.spTextView2)
     var text2: TextView? = null
 

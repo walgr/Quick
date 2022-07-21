@@ -303,30 +303,31 @@ final class BindingSet implements BindingInformationProvider {
             result.addAnnotation(CALL_SUPER);
         }
 
-        if (hasTargetField()) {
-            if (hasFieldBindings()) {
-                result.addStatement("$T target = this.target", targetTypeName);
-            }
-            result.addStatement("if (target == null) throw new $T($S)", IllegalStateException.class,
-                    "Bindings already cleared.");
-            result.addStatement("$N = null", hasFieldBindings() ? "this.target" : "target");
-            result.addCode("\n");
-            for (ViewBinding binding : viewBindings) {
-                if (binding.getFieldBinding() != null) {
-                    result.addStatement("target.$L = null", binding.getFieldBinding().getName());
-                }
-            }
-            for (FieldCollectionViewBinding binding : collectionBindings) {
-                result.addStatement("target.$L = null", binding.name);
-            }
-        }
+        //TODO 解绑
+//        if (hasTargetField()) {
+//            if (hasFieldBindings()) {
+//                result.addStatement("$T target = this.target", targetTypeName);
+//            }
+//            result.addStatement("if (target == null) throw new $T($S)", IllegalStateException.class,
+//                    "Bindings already cleared.");
+//            for (ViewBinding binding : viewBindings) {
+//                if (binding.getFieldBinding() != null) {
+//                    result.addStatement("target.$L = null", binding.getFieldBinding().getName());
+//                }
+//            }
+//            result.addStatement("$N = null", hasFieldBindings() ? "this.target" : "target");
+//            result.addCode("\n");
+//            for (FieldCollectionViewBinding binding : collectionBindings) {
+//                result.addStatement("target.$L = null", binding.name);
+//            }
+//        }
 
-        if (hasMethodBindings()) {
-            result.addCode("\n");
-            for (ViewBinding binding : viewBindings) {
-                addFieldAndUnbindStatement(bindingClass, result, binding);
-            }
-        }
+//        if (hasMethodBindings()) {
+//            result.addCode("\n");
+//            for (ViewBinding binding : viewBindings) {
+//                addFieldAndUnbindStatement(bindingClass, result, binding);
+//            }
+//        }
 
         if (parentBinding != null) {
             result.addCode("\n");

@@ -1,7 +1,5 @@
 package com.wpf.app.quick.annotations;
 
-import android.view.View;
-
 import androidx.annotation.IdRes;
 import com.wpf.app.quick.annotations.internal.Constants;
 
@@ -19,5 +17,5 @@ import java.lang.annotation.Target;
 public @interface BindData2View {
     @IdRes int id() default Constants.NO_RES_ID;
 
-    Class<? extends BindD2VHelper<?, ? extends View, ?>> helper();
+    Class<? extends BindD2VHelper> helper() default BindD2VHelper.class;
 }

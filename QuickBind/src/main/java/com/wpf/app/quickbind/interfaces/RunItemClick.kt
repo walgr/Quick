@@ -20,3 +20,5 @@ fun itemClick(listener: View.OnClickListener) = object : RunItemClick {
         return listener
     }
 }
+
+fun itemClickRun(listener: View.OnClickListener) = itemClick(listener).run()

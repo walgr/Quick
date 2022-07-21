@@ -347,7 +347,7 @@ public final class QuickProcessor extends AbstractProcessor {
         TypeName type = TypeName.get(elementType);
         boolean required = isFieldRequired(element);
 
-        builder.addField(resourceId, BindData2View.class.getSimpleName(), new FieldViewBinding(name, type, required, false, true, false));
+        builder.addField(resourceId, name + BindData2View.class.getSimpleName(), new FieldViewBinding(name, type, required, false, true, false));
 
         // Add the type-erased version to the valid binding targets set.
         erasedTargetNames.add(enclosingElement);
@@ -599,7 +599,6 @@ public final class QuickProcessor extends AbstractProcessor {
 
     @Override
     public SourceVersion getSupportedSourceVersion() {
-        System.out.println("开始");
         return SourceVersion.RELEASE_8;
     }
 

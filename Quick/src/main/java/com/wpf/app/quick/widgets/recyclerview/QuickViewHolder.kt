@@ -20,6 +20,7 @@ open class QuickViewHolder<T : QuickItemData> @JvmOverloads constructor(
 ) : RecyclerView.ViewHolder(LayoutInflater.from(mParent.context).inflate(layoutId, mParent, false)) {
 
     private lateinit var mQuickAdapter: QuickAdapter
+    var itemPosition: Int = -1
 
     fun getQuickAdapter(): QuickAdapter {
         return mQuickAdapter

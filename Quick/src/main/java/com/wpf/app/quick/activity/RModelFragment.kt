@@ -5,19 +5,18 @@ import androidx.annotation.CallSuper
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import com.wpf.app.quick.R
-import com.wpf.app.quick.viewmodel.BaseViewModel
+import com.wpf.app.quick.viewmodel.QuickViewModel
 import com.wpf.app.quick.widgets.recyclerview.QuickRecyclerView
-import com.wpf.app.quickbind.annotations.AutoGet
 
 /**
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-open class RModelFragment<VM : BaseViewModel<H>, H : QuickView>(
+open class RModelFragment<VM : QuickViewModel<H>, H : QuickView> @JvmOverloads constructor(
     @LayoutRes override val layoutId: Int = 0,
     @IdRes open val listId: Int = 0,
     override val titleName: String = ""
-) : ViewModelFragment<VM, H>(layoutId = layoutId) {
+) : QuickViewModelFragment<VM, H>(layoutId = layoutId) {
     private var mRecyclerView: QuickRecyclerView? = null
 
     @CallSuper

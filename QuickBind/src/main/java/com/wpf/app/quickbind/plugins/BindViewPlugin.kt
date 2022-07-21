@@ -18,15 +18,8 @@ class BindViewPlugin : BasePlugin {
         try {
             val findViewA = field.getAnnotation(BindView::class.java) ?: return false
             field.isAccessible = true
-            if (field[getRealObj(obj, viewModel)] != null) {
-                return true
-            }
-            val findView = findView(obj, findViewA.value)
-            if (viewModel != null) {
-                field[viewModel] = findView
-            } else {
-                field[obj] = findView
-            }
+            if (field[getRealObj(obj, viewModel)] != null) return true
+            field[getRealObj(obj, viewModel)] = findView(obj, findViewA.value)
             return true
         } catch (e: Exception) {
             e.printStackTrace()

@@ -8,13 +8,13 @@ import com.wpf.app.quick.annotations.BindView
 import com.wpf.app.quick.demo.databinding.ActivityDataTestBinding
 import com.wpf.app.quick.demo.model.MyMessage
 import com.wpf.app.quick.demo.model.TestModel
-import com.wpf.app.quick.viewmodel.BindingViewModel
+import com.wpf.app.quick.viewmodel.QuickBindingViewModel
 import com.wpf.app.quickbind.annotations.AutoGet
 
 /**
  * Created by 王朋飞 on 2022/6/13.
  */
-class IntentDataTestViewModel : BindingViewModel<ActivityDataTestBinding>() {
+class IntentDataTestViewModel : QuickBindingViewModel<ActivityDataTestBinding>() {
     private val TAG = "IntentDataTestViewModel"
 
     @AutoGet

@@ -1,22 +1,36 @@
 package com.wpf.app.quick.widgets.recyclerview
 
+import android.content.Context
+import android.view.View
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import com.wpf.app.quickbind.QuickBind
 import com.wpf.app.quickbind.QuickBind.dealInPlugins
+import com.wpf.app.quickbind.interfaces.Bind
 
 /**
  * Created by 王朋飞 on 2022/7/13.
  *
  */
 open class QuickBindData(
-    @LayoutRes open var layoutId: Int = 0,
-    override var viewType: Int = 0
-) : QuickItemData(viewType = viewType) {
+    @LayoutRes open var layoutId: Int,
+) : QuickItemData(), Bind {
 
     private lateinit var mViewHolder: QuickViewHolder<QuickBindData>
     private lateinit var mAdapter: QuickAdapter
     private var dealBind = true
+    private lateinit var mView: View
+
+    open fun onCreateViewHolder(itemView: View) {
+        this.mView = itemView
+        if (dealBind) {
+            QuickBind.bind(this)
+        }
+    }
+
+    open fun getContext(): Context {
+        return mView.context
+    }
 
     @CallSuper
     open fun onBindViewHolder(
@@ -41,5 +55,9 @@ open class QuickBindData(
 
     fun getViewHolder(): QuickViewHolder<QuickBindData> {
         return mViewHolder
+    }
+
+    override fun getView(): View {
+        return mView
     }
 }

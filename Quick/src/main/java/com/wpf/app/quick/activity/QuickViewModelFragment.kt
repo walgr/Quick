@@ -6,15 +6,14 @@ import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import androidx.lifecycle.ViewModelProvider
 import com.wpf.app.quick.utils.ViewMolderEx
-import com.wpf.app.quick.viewmodel.BaseViewModel
+import com.wpf.app.quick.viewmodel.QuickViewModel
 import com.wpf.app.quickbind.QuickBind.bind
-import com.wpf.app.quickbind.annotations.AutoGet
 
 /**
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-open class ViewModelFragment<VM : BaseViewModel<H>, H : QuickView>(
+open class QuickViewModelFragment<VM : QuickViewModel<H>, H : QuickView> @JvmOverloads constructor(
     @LayoutRes override val layoutId: Int = 0,
     override val layoutView: View? = null,
     override val titleName: String = ""

@@ -15,7 +15,7 @@ open class QuickItemData(
         initViewType()
     }
 
-    private fun initViewType() {
+    open fun initViewType() {
         if (viewType == 0) {
             viewType = abs(javaClass.name.hashCode())
         }

@@ -10,5 +10,4 @@ open class QuickSelectData(
     open val id: String? = null,
     open val isSelect: Boolean = false,
     @LayoutRes override var layoutId: Int = 0,
-    override var viewType: Int = 0
-) : QuickBindData(layoutId, viewType)
+) : QuickBindData(layoutId)

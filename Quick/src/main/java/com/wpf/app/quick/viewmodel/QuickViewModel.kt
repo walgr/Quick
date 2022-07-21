@@ -1,5 +1,6 @@
 package com.wpf.app.quick.viewmodel
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import com.wpf.app.quick.activity.QuickView
 
@@ -7,7 +8,7 @@ import com.wpf.app.quick.activity.QuickView
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-open class BaseViewModel<T : QuickView> : ViewModel() {
+abstract class QuickViewModel<T : QuickView> : ViewModel() {
     var baseView: T? = null
 
     fun onResume() {}
@@ -18,5 +19,5 @@ open class BaseViewModel<T : QuickView> : ViewModel() {
 
     fun onDestroy() {}
 
-    fun onViewCreated(baseView: T) {}
+    abstract fun onViewCreated(baseView: T)
 }

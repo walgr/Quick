@@ -54,7 +54,7 @@ class BindFragmentPlugin : BasePlugin {
                         override fun getItem(i: Int): Fragment {
                             try {
                                 val baseFragment: BindBaseFragment =
-                                    bindFragmentAnn.fragment.objectInstance as BindBaseFragment
+                                    bindFragmentAnn.fragment.java.newInstance() as BindBaseFragment
                                 if (viewModel != null) {
                                     baseFragment.arguments =
                                         baseFragment.getInitBundle(obj as BindViewModel<*>, i)
@@ -98,7 +98,7 @@ class BindFragmentPlugin : BasePlugin {
                         override fun getItem(i: Int): Fragment {
                             try {
                                 val baseFragment: BindBaseFragment =
-                                    bindFragmentAnn.fragment.objectInstance as BindBaseFragment
+                                    bindFragmentAnn.fragment.java.newInstance() as BindBaseFragment
                                 if (viewModel != null) {
                                     baseFragment.arguments =
                                         baseFragment.getInitBundle(obj as BindViewModel<*>, i)

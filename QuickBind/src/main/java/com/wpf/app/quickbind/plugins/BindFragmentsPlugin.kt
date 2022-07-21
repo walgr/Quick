@@ -32,7 +32,7 @@ class BindFragmentsPlugin : BasePlugin {
             if (viewPagerObj is ViewPager) {
                 val viewPager: ViewPager = viewPagerObj
                 if (bindFragmentsAnn.limit > 0) {
-                    viewPager.setOffscreenPageLimit(bindFragmentsAnn.limit)
+                    viewPager.offscreenPageLimit = bindFragmentsAnn.limit
                 }
                 var fragmentManager: FragmentManager? = null
                 if (obj is AppCompatActivity) {
@@ -67,7 +67,7 @@ class BindFragmentsPlugin : BasePlugin {
         val fragments: MutableList<BindBaseFragment> = ArrayList()
         for ((position, fragmentCls) in fragmentClsArray.withIndex()) {
             try {
-                val baseFragment: Fragment? = fragmentCls.objectInstance
+                val baseFragment: Fragment? = fragmentCls.java.newInstance()
                 if (baseFragment is BindBaseFragment) {
                     if (obj is Activity) {
                         baseFragment.setArguments(

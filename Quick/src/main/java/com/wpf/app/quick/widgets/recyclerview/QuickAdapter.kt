@@ -12,7 +12,7 @@ class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>(), Dat
 
     var mDataList: MutableList<QuickItemData>? = null
 
-    private var mQuickAdapterListener: QuickAdapterListener<out QuickItemData>? = null
+    private var mQuickAdapterListener: QuickAdapterListener<QuickItemData>? = null
 
     override fun onCreateViewHolder(
         viewGroup: ViewGroup,
@@ -52,10 +52,12 @@ class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>(), Dat
                     e.printStackTrace()
                 }
             }
-            holder?.onCreateViewHolder(holder.itemView)
-            //            if (findData instanceof QuickBindData) {
-//                ((QuickBindData) findData).onCreateViewHolder((QuickViewHolder<? extends QuickBindData>)holder);
-//            }
+            holder?.let {
+                holder.onCreateViewHolder(holder.itemView)
+                if (findData is QuickBindData) {
+                    findData.onCreateViewHolder(holder.itemView)
+                }
+            }
             return holder as QuickViewHolder<QuickItemData>
         }
         return null!!
@@ -63,18 +65,23 @@ class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>(), Dat
 
     override fun onBindViewHolder(viewHolder: QuickViewHolder<QuickItemData>, position: Int) {
         viewHolder.onBindViewHolder(this, mDataList!![position], position)
+        viewHolder.itemPosition = position
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return mDataList?.get(position)?.viewType ?: super.getItemViewType(position)
     }
 
     override fun getItemCount(): Int {
         return mDataList?.size ?: 0
     }
 
-    fun getQuickAdapterListener(): QuickAdapterListener<out QuickItemData>? {
+    fun getQuickAdapterListener(): QuickAdapterListener<QuickItemData>? {
         return mQuickAdapterListener
     }
 
     fun setQuickAdapterListener(listener: QuickAdapterListener<out QuickItemData>?) {
-        this.mQuickAdapterListener = listener
+        this.mQuickAdapterListener = listener as QuickAdapterListener<QuickItemData>
     }
 
     override fun getAdapter(): QuickAdapter {

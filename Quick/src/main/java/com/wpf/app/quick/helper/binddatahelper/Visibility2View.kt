@@ -1,22 +1,21 @@
 package com.wpf.app.quick.helper.binddatahelper
 
-import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.wpf.app.quickbind.annotations.BindD2VHHelper
-import com.wpf.app.quickbind.interfaces.itemClickRun
 
 /**
- * Created by 王朋飞 on 2022/7/13.
+ * Created by 王朋飞 on 2022/7/20.
  *
  */
-class ItemClick : BindD2VHHelper<View, View.OnClickListener> {
+class Visibility2View :
+    BindD2VHHelper<View, Int> {
 
     override fun initView(
         viewHolder: RecyclerView.ViewHolder?,
         view: View,
-        data: View.OnClickListener
+        data: Int
     ) {
-        view.setOnClickListener(data)
+        view.visibility = data
     }
 }

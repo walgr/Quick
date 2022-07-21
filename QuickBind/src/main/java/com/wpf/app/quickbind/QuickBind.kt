@@ -12,6 +12,7 @@ import com.wpf.app.quick.annotations.BindView
 import com.wpf.app.quick.annotations.GroupView
 import com.wpf.app.quick.runtime.Databinder
 import com.wpf.app.quickbind.annotations.*
+import com.wpf.app.quickbind.interfaces.Bind
 import com.wpf.app.quickbind.plugins.*
 import com.wpf.app.quickbind.utils.GroupViews
 import com.wpf.app.quickbind.utils.ReflectHelper
@@ -73,6 +74,11 @@ object QuickBind {
     fun bind(dialog: Dialog) {
         bindBinder(dialog, dialog.window!!.decorView)
         dealInPlugins(dialog, null)
+    }
+
+    fun <T : Bind> bind(bindData: T) {
+        bindBinder(bindData, bindData.getView())
+        dealInPlugins(bindData, null)
     }
 
     val BINDEDMAP: MutableMap<Class<*>, Databinder> = LinkedHashMap()
