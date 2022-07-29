@@ -22,16 +22,16 @@ class SelectItem : QuickSelectData(layoutId = R.layout.holder_select_item) {
 
     @SuppressLint("NonConstantResourceId")
     @BindData2View(id = R.id.title, helper = Text2TextView::class)
-    var title = runOnHolder { "Title " + getViewHolder().bindingAdapterPosition }
+    var title = runOnHolder { "Title " + getViewHolder()?.bindingAdapterPosition }
 
     @BindData2View(helper = ItemClick::class)
     var itemClick = itemClick {
         isSelect = !isSelect
         Toast.makeText(
             it.context,
-            "点击" + getViewHolder().bindingAdapterPosition,
+            "点击" + getViewHolder()?.bindingAdapterPosition,
             Toast.LENGTH_SHORT
         ).show()
-        getAdapter().notifyItemChanged(getViewHolder().bindingAdapterPosition)
+        getAdapter().notifyItemChanged((getViewHolder()?.bindingAdapterPosition) ?: 0)
     }
 }

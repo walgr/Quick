@@ -3,6 +3,7 @@ package com.wpf.app.quickbind.plugins
 import android.view.View
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
+import com.wpf.app.quick.annotations.BindD2VHelper
 import com.wpf.app.quick.annotations.BindData2View
 import com.wpf.app.quick.annotations.internal.Constants
 import com.wpf.app.quickbind.annotations.BindD2VHHelper
@@ -27,7 +28,7 @@ class BindData2ViewPlugin : BasePlugin {
             val bindData2View = field.getAnnotation(BindData2View::class.java)
                 ?: return false
             val bindId: Int = bindData2View.id
-            val helper = bindData2View.helper.java as Class<BindD2VHHelper<View, Any>>
+            val helper = bindData2View.helper.java as Class<BindD2VHelper<RecyclerView.ViewHolder, View, Any>>
             var viewParent: Any? = obj
             var findView: View? = getRootView(obj)
             if (parentClassIs(obj.javaClass, "QuickBindData")) {

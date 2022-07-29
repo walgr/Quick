@@ -18,14 +18,14 @@ class RefreshItem : QuickBindData(R.layout.holder_refresh_item) {
     @SuppressLint("NonConstantResourceId")
     @BindData2View(id = R.id.title, helper = Text2TextView::class)
     var title = runOnHolder {
-        "Title " + getViewHolder().bindingAdapterPosition
+        "Title " + getViewHolder()?.bindingAdapterPosition
     }
 
     @BindData2View(helper = ItemClick::class)
     var itemClick = itemClick {
         Toast.makeText(
             it.context,
-            "点击" + getViewHolder().bindingAdapterPosition,
+            "点击" + getViewHolder()?.bindingAdapterPosition,
             Toast.LENGTH_SHORT
         ).show()
     }

@@ -4,7 +4,6 @@ import android.app.Activity
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.wpf.app.quick.annotations.BindD2VHelper
 import com.wpf.app.quickbind.annotations.BindD2VHHelper
 
 /**
