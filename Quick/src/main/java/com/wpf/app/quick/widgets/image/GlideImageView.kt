@@ -76,6 +76,12 @@ open class GlideImageView @JvmOverloads constructor(
         glideRequestManager = glideRequestManager?.load(attributeHelper.loadUrl)
     }
 
+    fun loadUrl(url: String) {
+        glideRequestManager = glideRequestManager?.clone()
+        glideRequestManager?.load(url)
+        glideRequestManager?.into(this)
+    }
+
     fun placeholder() {
         glideRequestManager = glideRequestManager?.placeholder(attributeHelper.placeholder)
     }

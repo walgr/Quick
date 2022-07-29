@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 import com.wpf.app.quick.runtime.Databinder
 import com.wpf.app.quickbind.QuickBind
+import com.wpf.app.quickbind.interfaces.Bind
 import java.lang.reflect.Field
 
 /**
@@ -18,6 +19,8 @@ import java.lang.reflect.Field
  *
  */
 interface BasePlugin {
+
+//    fun sortOrder(): Int
 
     @NonNull
     fun getRealObj(@NonNull obj: Any, @Nullable viewModel: ViewModel?): Any {
@@ -55,12 +58,22 @@ interface BasePlugin {
     fun getContext(obj: Any?): Context? {
         if (obj == null) return null
         var context: Context? = null
-        if (obj is Activity) {
-            context = obj
-        } else if (obj is Fragment) {
-            context = obj.context
-        } else if (obj is Dialog) {
-            context = obj.context
+        when (obj) {
+            is Activity -> {
+                context = obj
+            }
+            is Fragment -> {
+                context = obj.context
+            }
+            is Dialog -> {
+                context = obj.context
+            }
+            is Bind -> {
+                context = obj.getView().context
+            }
+            is View -> {
+                context = obj.context
+            }
         }
         return context
     }

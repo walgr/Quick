@@ -11,10 +11,10 @@ import com.wpf.app.quickbind.annotations.BindD2VHHelper
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-class Url2ImageView : BindD2VHHelper<ImageView, String> {
+open class Url2ImageView : BindD2VHHelper<ImageView, String> {
 
     override fun initView(viewHolder: RecyclerView.ViewHolder?, view: ImageView, data: String) {
-        if (view.context == null) return
+        if (view.context == null || data.isEmpty()) return
         val activity = view.context as Activity
         if (activity.isDestroyed || activity.isFinishing) return
         Glide.with(activity)

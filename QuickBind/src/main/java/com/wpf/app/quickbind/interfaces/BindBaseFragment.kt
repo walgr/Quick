@@ -15,7 +15,7 @@ abstract class BindBaseFragment : Fragment() {
      * 从ViewModelActivity获取数据
      */
     @NonNull
-    open fun getInitBundle(viewModelActivity: BindViewModel<*>?, position: Int): Bundle? {
+    open fun getInitBundle(viewModel: BindViewModel<*>?, position: Int): Bundle? {
         return null
     }
 
@@ -36,5 +36,7 @@ abstract class BindBaseFragment : Fragment() {
     }
 
     @NonNull
-    abstract fun getTitle(): String?
+    open fun getTitle(): String? {
+        return null
+    }
 }

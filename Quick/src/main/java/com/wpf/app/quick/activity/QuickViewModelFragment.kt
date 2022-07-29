@@ -7,7 +7,8 @@ import androidx.annotation.LayoutRes
 import androidx.lifecycle.ViewModelProvider
 import com.wpf.app.quick.utils.ViewMolderEx
 import com.wpf.app.quick.viewmodel.QuickViewModel
-import com.wpf.app.quickbind.QuickBind.bind
+import com.wpf.app.quickbind.QuickBind
+import com.wpf.app.quickbind.interfaces.BindViewModel
 
 /**
  * Created by 王朋飞 on 2022/7/13.
@@ -17,7 +18,7 @@ open class QuickViewModelFragment<VM : QuickViewModel<H>, H : QuickView> @JvmOve
     @LayoutRes override val layoutId: Int = 0,
     override val layoutView: View? = null,
     override val titleName: String = ""
-) : QuickFragment() {
+) : QuickFragment(), BindViewModel<VM> {
 
     private var mViewModel: VM? = null
 
@@ -33,13 +34,13 @@ open class QuickViewModelFragment<VM : QuickViewModel<H>, H : QuickView> @JvmOve
                 this,
                 ViewModelProvider.AndroidViewModelFactory(context!!.applicationContext as Application)
             ).get(vmClass)
-            bind(this, mViewModel)
+            QuickBind.bind(this, mViewModel)
             mViewModel?.baseView = this as H
             mViewModel?.onViewCreated(this as H)
         }
     }
 
-    open fun getViewModel(): VM? {
+    override fun getViewModel(): VM? {
         return mViewModel
     }
 

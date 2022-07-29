@@ -15,7 +15,7 @@ buildscript {
 
         ext.deps = [
                 androidx      : [
-                        'annotations' : 'androidx.annotation:annotation:1.2.0',
+                        'annotations' : 'androidx.annotation:annotation:1.4.0',
                         'runtime'     : 'com.google.android:android:4.1.1.4',
                         'fragment'    : "androidx.fragment:fragment-ktx:1.4.1",
                         'activity'    : "androidx.activity:activity-ktx:1.4.0",

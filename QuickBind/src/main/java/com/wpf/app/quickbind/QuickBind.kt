@@ -2,6 +2,7 @@ package com.wpf.app.quickbind
 
 import android.app.Activity
 import android.app.Dialog
+import android.util.Log
 import android.view.View
 import androidx.annotation.UiThread
 import androidx.fragment.app.Fragment
@@ -14,7 +15,6 @@ import com.wpf.app.quick.runtime.Databinder
 import com.wpf.app.quickbind.annotations.*
 import com.wpf.app.quickbind.interfaces.Bind
 import com.wpf.app.quickbind.plugins.*
-import com.wpf.app.quickbind.utils.GroupViews
 import com.wpf.app.quickbind.utils.ReflectHelper
 import java.lang.reflect.Constructor
 import java.lang.reflect.Field
@@ -53,7 +53,7 @@ object QuickBind {
     }
 
     fun bind(activity: Activity, viewModel: ViewModel?) {
-        bindBinder(activity, activity.window.decorView)
+        bindBinder(viewModel ?: activity, activity.window.decorView)
         dealInPlugins(activity, viewModel)
     }
 
@@ -62,7 +62,9 @@ object QuickBind {
     }
 
     fun bind(fragment: Fragment, viewModel: ViewModel?) {
-        fragment.view?.let { bindBinder(fragment, it) }
+        fragment.view?.let {
+            bindBinder(viewModel ?: fragment, it)
+        }
         dealInPlugins(fragment, viewModel)
     }
 
@@ -76,9 +78,9 @@ object QuickBind {
         dealInPlugins(dialog, null)
     }
 
-    fun <T : Bind> bind(bindData: T) {
-        bindBinder(bindData, bindData.getView())
-        dealInPlugins(bindData, null)
+    fun <T : Bind> bind(bind: T) {
+        bindBinder(bind, bind.getView())
+        dealInPlugins(bind, null)
     }
 
     val BINDEDMAP: MutableMap<Class<*>, Databinder> = LinkedHashMap()
@@ -148,16 +150,22 @@ object QuickBind {
         try {
             val fields: List<Field> = ReflectHelper.getFieldWithParent(obj)
             for (field in fields) {
-                field.annotations.forEach {
+                val annotations = field.annotations.toMutableList()
+                annotations.sortBy { plugins.keys.indexOf(it.annotationClass) }
+                annotations.forEach {
                     plugins[it.annotationClass]?.dealField(obj, null, field)
                 }
+                annotations.clear()
             }
             if (viewModel != null) {
                 val viewModelFields: List<Field> = ReflectHelper.getFieldWithParent(viewModel)
                 for (field in viewModelFields) {
-                    field.annotations.forEach {
+                    val annotations = field.annotations.toMutableList()
+                    annotations.sortBy { plugins.keys.indexOf(it.annotationClass) }
+                    annotations.forEach {
                         plugins[it.annotationClass]?.dealField(obj, viewModel, field)
                     }
+                    annotations.clear()
                 }
             }
         } catch (e: Exception) {

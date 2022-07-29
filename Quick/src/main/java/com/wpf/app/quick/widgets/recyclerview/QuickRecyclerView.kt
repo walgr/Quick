@@ -2,6 +2,7 @@ package com.wpf.app.quick.widgets.recyclerview
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import androidx.annotation.CallSuper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView

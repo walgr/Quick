@@ -28,14 +28,15 @@ class BindData2ViewPlugin : BasePlugin {
                 ?: return false
             val bindId: Int = bindData2View.id
             val helper = bindData2View.helper.java as Class<BindD2VHHelper<View, Any>>
-            var viewParent = obj
+            var viewParent: Any? = obj
             var findView: View? = getRootView(obj)
             if (parentClassIs(obj.javaClass, "QuickBindData")) {
-                viewParent = obj.javaClass.getMethod("getViewHolder").invoke(obj) as Any
+                viewParent = obj.javaClass.getMethod("getViewHolder").invoke(obj)
                 if (viewParent is RecyclerView.ViewHolder) {
                     findView = viewParent.itemView
                 }
             }
+            if (viewParent == null) return true
             if (bindId != Constants.NO_RES_ID) {
                 val id = getSaveId(obj, viewModel, field, bindId)
                 findView = findView(viewParent, id)

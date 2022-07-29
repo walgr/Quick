@@ -13,10 +13,10 @@ import com.wpf.app.quickbind.interfaces.Bind
  *
  */
 open class QuickBindData(
-    @LayoutRes open var layoutId: Int,
+    @LayoutRes open val layoutId: Int,
 ) : QuickItemData(), Bind {
 
-    private lateinit var mViewHolder: QuickViewHolder<QuickBindData>
+    private var mViewHolder: QuickViewHolder<QuickBindData>? = null
     private lateinit var mAdapter: QuickAdapter
     private var dealBind = true
     private lateinit var mView: View
@@ -53,7 +53,7 @@ open class QuickBindData(
         return mAdapter
     }
 
-    fun getViewHolder(): QuickViewHolder<QuickBindData> {
+    fun getViewHolder(): QuickViewHolder<QuickBindData>? {
         return mViewHolder
     }
 

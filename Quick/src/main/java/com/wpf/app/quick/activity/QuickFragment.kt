@@ -2,6 +2,7 @@ package com.wpf.app.quick.activity
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +26,8 @@ abstract class QuickFragment @JvmOverloads constructor(
     @AutoGet(titleKey) open val titleName: String = ""
 ) : BindBaseFragment(), QuickView {
 
+    private var mView: View? = null
+
     init {
         val bundle = Bundle()
         bundle.putString(titleKey, titleName)
@@ -38,9 +41,12 @@ abstract class QuickFragment @JvmOverloads constructor(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return if (layoutId != 0) {
-            inflater.inflate(layoutId, null)
-        } else layoutView
+        if (mView == null) {
+            mView = return if (layoutId != 0) {
+                inflater.inflate(layoutId, null)
+            } else layoutView
+        }
+        return mView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
