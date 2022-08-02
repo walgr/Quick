@@ -31,7 +31,7 @@ buildscript {
                 'quick'       : [
                         'base': "com.wpf.app.quick:Quick:${release}",
                 ],
-                gradlePlugin  : "com.android.tools.build:gradle:7.2.1",
+                gradlePlugin  : "com.android.tools.build:gradle:4.2.2",
                 'kotlin'      : [
                         'stdLibJdk8': "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlin}",
                 ],
