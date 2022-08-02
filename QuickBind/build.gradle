@@ -33,10 +33,10 @@ dependencies {
     //ktx核心
     implementation 'androidx.core:core-ktx:1.8.0'
     //activity-ktx
-    implementation 'androidx.activity:activity-ktx:1.4.0'
+    implementation 'androidx.activity:activity-ktx:1.5.1'
     implementation 'androidx.appcompat:appcompat:1.4.2'
     //fragment-ktx
-    implementation 'androidx.fragment:fragment-ktx:1.4.1'
+    implementation 'androidx.fragment:fragment-ktx:1.5.1'
     //列表
     compileOnly deps.androidx.recyclerview
 

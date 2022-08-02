@@ -18,7 +18,7 @@ buildscript {
                         'annotations' : 'androidx.annotation:annotation:1.4.0',
                         'runtime'     : 'com.google.android:android:4.1.1.4',
                         'fragment'    : "androidx.fragment:fragment-ktx:1.4.1",
-                        'activity'    : "androidx.activity:activity-ktx:1.4.0",
+                        'activity'    : "androidx.activity:activity-ktx:1.5.1",
                         'recyclerview': "androidx.recyclerview:recyclerview:1.2.1",
                 ],
                 'quickbind'   : [
