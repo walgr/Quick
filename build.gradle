@@ -4,7 +4,7 @@ buildscript {
     ext {
         // Sdk and tools
         compileSdkVersion = 32
-        minSdkVersion = 21
+        minSdkVersion = 19
         targetSdkVersion = 32
         androidTools = '32.0.0'
         kotlin = '1.5.21'
@@ -15,10 +15,10 @@ buildscript {
 
         ext.deps = [
                 androidx      : [
-                        'annotations' : 'androidx.annotation:annotation:1.4.0',
+                        'annotations' : 'androidx.annotation:annotation:1.1.0',
                         'runtime'     : 'com.google.android:android:4.1.1.4',
-                        'fragment'    : "androidx.fragment:fragment-ktx:1.4.1",
-                        'activity'    : "androidx.activity:activity-ktx:1.5.1",
+                        'fragment'    : "androidx.fragment:fragment-ktx:1.2.0",
+                        'activity'    : "androidx.activity:activity-ktx:1.1.0",
                         'recyclerview': "androidx.recyclerview:recyclerview:1.2.1",
                 ],
                 'quickbind'   : [

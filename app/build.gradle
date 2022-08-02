@@ -36,8 +36,8 @@ dependencies {
     //ktx核心
     implementation 'androidx.core:core-ktx:1.8.0'
     //activity-ktx
-    implementation 'androidx.activity:activity-ktx:1.4.0'
-    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'androidx.activity:activity-ktx:1.1.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
 
     //lifecycle-ktx
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.0-beta01'
@@ -54,7 +54,7 @@ dependencies {
 
     //列表
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
-    implementation 'jp.wasabeef:recyclerview-animators:4.0.2'
+//    implementation 'jp.wasabeef:recyclerview-animators:4.0.2'
 
     //分页
     implementation 'androidx.paging:paging-runtime:3.1.1'
@@ -90,5 +90,5 @@ dependencies {
     else
         implementation project(":Quick")
 
-//    implementation project(":R2Test")
+    implementation project(":R2Test")
 }

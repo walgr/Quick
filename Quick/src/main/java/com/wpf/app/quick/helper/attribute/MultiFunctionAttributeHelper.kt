@@ -34,14 +34,14 @@ class MultiFunctionAttributeHelper
     @DrawableRes var titleBackground: Int? = null
     var titleSize: Int? = null
     @ColorRes var titleColor: Int? = null
-    var titleStyle: Int? = null
+    var titleWpfStyle: Int? = null
     var titleMaxLine: Int? = null
 
     var subTitle: String? = null
     @DrawableRes var subTitleBackground: Int? = null
     var subTitleSize: Int? = null
     @ColorRes var subTitleColor: Int? = null
-    var subTitleStyle: Int? = null
+    var subTitleWpfStyle: Int? = null
     var subTitleMarginTop: Int? = null
     var subTitleMaxLine: Int? = null
 
