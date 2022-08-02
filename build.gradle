@@ -26,7 +26,7 @@ buildscript {
                         'annotations': "com.wpf.app.quick:Quick-annotations:${release}",
                         'runtime'    : "com.wpf.app.quick:Quick-runtime:${release}",
                         'compiler'   : "com.wpf.app.quick:Quick-compiler:${release}",
-                        'plugin'     : "com.github.walgr.Quick:Quick-gradle-plugin:0.2.0"
+                        'plugin'     : "com.github.walgr.Quick:Quick-gradle-plugin:0.2.6"
                 ],
                 'quick'       : [
                         'base': "com.wpf.app.quick:Quick:${release}",
@@ -57,19 +57,14 @@ buildscript {
     }
 
     dependencies {
-        if (IS_REMOTE.toBoolean()) {
-//            classpath deps.quickbind.plugin
-        } else {
-//            classpath project(":Quick-gradle-plugin")
-        }
-//        if (!IS_ONLY_PLUGIN.toBoolean()) classpath deps.quickbind.plugin
+        classpath deps.quickbind.plugin
     }
 }
 
 plugins {
     id 'com.android.application' version '7.2.1' apply false
     id 'com.android.library' version '7.2.1' apply false
-    id 'org.jetbrains.kotlin.android' version '1.7.10' apply false
+    id 'org.jetbrains.kotlin.android' version '1.5.21' apply false
 }
 
 

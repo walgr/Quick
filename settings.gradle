@@ -20,7 +20,7 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Quick"
 include ':app'
-//include ':R2Test'
+include ':R2Test'
 if (!IS_ONLY_PLUGIN.toBoolean()) {
     include ':Quick'
     include ':QuickBind'
