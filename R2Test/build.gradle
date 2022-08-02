@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
 }
+if (!IS_ONLY_PLUGIN.toBoolean())
 apply plugin: 'com.wpf.app.quick'
 
 android {

@@ -57,7 +57,7 @@ buildscript {
     }
 
     dependencies {
-        classpath deps.quickbind.plugin
+        if (!IS_ONLY_PLUGIN.toBoolean()) classpath deps.quickbind.plugin
     }
 }
 

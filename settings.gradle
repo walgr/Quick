@@ -20,10 +20,12 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Quick"
 include ':app'
-include ':Quick'
-include ':QuickBind'
-include ':Quick-annotations'
-include ':Quick-runtime'
-include ':Quick-compiler'
-include ':Quick-gradle-plugin'
 include ':R2Test'
+if (!IS_ONLY_PLUGIN.toBoolean()) {
+    include ':Quick'
+    include ':QuickBind'
+    include ':Quick-annotations'
+    include ':Quick-runtime'
+    include ':Quick-compiler'
+}
+include ':Quick-gradle-plugin'
