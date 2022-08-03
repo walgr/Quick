@@ -52,7 +52,10 @@ class BindFragmentPlugin : BasePlugin {
                 }
                 if (fragmentManager == null) return true
                 if (bindFragmentAnn.withState) {
-                    viewPager.adapter = object : FragmentStatePagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+                    viewPager.adapter = object : FragmentStatePagerAdapter(
+                        fragmentManager,
+                        BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
+                    ) {
                         private val mBaseFragmentList: HashMap<Int, BindBaseFragment> = HashMap()
 
                         override fun notifyDataSetChanged() {
@@ -65,9 +68,11 @@ class BindFragmentPlugin : BasePlugin {
                                 val baseFragment: BindBaseFragment =
                                     bindFragmentAnn.fragment.java.newInstance() as BindBaseFragment
                                 if (obj is View) {
-                                    val viewContext = obj.getViewContext()
+                                    val viewContext = (viewPager as ViewPagerSize).currentContext()
+                                        ?: obj.getViewContext()
                                     if (viewContext is BindViewModel<*>) {
-                                        baseFragment.arguments = baseFragment.getInitBundle(viewContext, i)
+                                        baseFragment.arguments =
+                                            baseFragment.getInitBundle(viewContext, i)
                                     } else {
                                         if (viewContext is Activity) {
                                             baseFragment.arguments =
@@ -136,9 +141,11 @@ class BindFragmentPlugin : BasePlugin {
                                 val baseFragment: BindBaseFragment =
                                     bindFragmentAnn.fragment.java.newInstance() as BindBaseFragment
                                 if (obj is View) {
-                                    val viewContext = obj.getViewContext()
+                                    val viewContext = (viewPager as ViewPagerSize).currentContext()
+                                        ?: obj.getViewContext()
                                     if (viewContext is BindViewModel<*>) {
-                                        baseFragment.arguments = baseFragment.getInitBundle(viewContext, i)
+                                        baseFragment.arguments =
+                                            baseFragment.getInitBundle(viewContext, i)
                                     } else {
                                         if (viewContext is Activity) {
                                             baseFragment.arguments =
