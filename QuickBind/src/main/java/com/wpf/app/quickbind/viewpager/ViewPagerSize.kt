@@ -1,5 +1,6 @@
 package com.wpf.app.quickbind.viewpager
 
+import android.os.Bundle
 import androidx.viewpager.widget.PagerAdapter
 
 /**

@@ -67,20 +67,26 @@ class BindFragmentPlugin : BasePlugin {
                             try {
                                 val baseFragment: BindBaseFragment =
                                     bindFragmentAnn.fragment.java.newInstance() as BindBaseFragment
-                                if (obj is View) {
-                                    val viewContext = (viewPager as ViewPagerSize).currentContext()
-                                        ?: obj.getViewContext()
-                                    if (viewContext is BindViewModel<*>) {
-                                        baseFragment.arguments =
-                                            baseFragment.getInitBundle(viewContext, i)
+                                if (obj is Bind) {
+                                    val bundle = obj.bindData(i)
+                                    if (bundle != null) {
+                                        baseFragment.arguments = bundle
                                     } else {
-                                        if (viewContext is Activity) {
+                                        val viewContext =
+                                            (viewPager as? ViewPagerSize)?.currentContext()
+                                                ?: obj.getView().getViewContext()
+                                        if (viewContext is BindViewModel<*>) {
                                             baseFragment.arguments =
                                                 baseFragment.getInitBundle(viewContext, i)
-                                        }
-                                        if (viewContext is Fragment) {
-                                            baseFragment.arguments =
-                                                baseFragment.getInitBundle(viewContext, i)
+                                        } else {
+                                            if (viewContext is Activity) {
+                                                baseFragment.arguments =
+                                                    baseFragment.getInitBundle(viewContext, i)
+                                            }
+                                            if (viewContext is Fragment) {
+                                                baseFragment.arguments =
+                                                    baseFragment.getInitBundle(viewContext, i)
+                                            }
                                         }
                                     }
                                 } else {
@@ -140,20 +146,26 @@ class BindFragmentPlugin : BasePlugin {
                             try {
                                 val baseFragment: BindBaseFragment =
                                     bindFragmentAnn.fragment.java.newInstance() as BindBaseFragment
-                                if (obj is View) {
-                                    val viewContext = (viewPager as ViewPagerSize).currentContext()
-                                        ?: obj.getViewContext()
-                                    if (viewContext is BindViewModel<*>) {
-                                        baseFragment.arguments =
-                                            baseFragment.getInitBundle(viewContext, i)
+                                if (obj is Bind) {
+                                    val bundle = obj.bindData(i)
+                                    if (bundle != null) {
+                                        baseFragment.arguments = bundle
                                     } else {
-                                        if (viewContext is Activity) {
+                                        val viewContext =
+                                            (viewPager as? ViewPagerSize)?.currentContext()
+                                                ?: obj.getView().getViewContext()
+                                        if (viewContext is BindViewModel<*>) {
                                             baseFragment.arguments =
                                                 baseFragment.getInitBundle(viewContext, i)
-                                        }
-                                        if (viewContext is Fragment) {
-                                            baseFragment.arguments =
-                                                baseFragment.getInitBundle(viewContext, i)
+                                        } else {
+                                            if (viewContext is Activity) {
+                                                baseFragment.arguments =
+                                                    baseFragment.getInitBundle(viewContext, i)
+                                            }
+                                            if (viewContext is Fragment) {
+                                                baseFragment.arguments =
+                                                    baseFragment.getInitBundle(viewContext, i)
+                                            }
                                         }
                                     }
                                 } else {

@@ -1,6 +1,7 @@
 package com.wpf.app.quickbind.utils
 
 import android.view.View
+import android.view.ViewParent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 
@@ -10,17 +11,19 @@ import androidx.viewpager.widget.ViewPager
  * 返回view所在的Fragment或Activity
  */
 fun View.getViewContext(): Any? {
-    var viewParent = parent ?: return null
+    var viewParent: ViewParent? = parent ?: return null
     while (viewParent != null) {
         if (viewParent is ViewPager) {
             val fragments = (viewParent.context as AppCompatActivity).supportFragmentManager.fragments
-            fragments?.forEach {
+            fragments.forEach {
                 if (it.view?.findViewById<View>(id) != null) {
                     return it
                 }
             }
         }
+        if (viewParent == null) break
         viewParent = viewParent.parent
+        if (viewParent == null) break
     }
     return null
 }
