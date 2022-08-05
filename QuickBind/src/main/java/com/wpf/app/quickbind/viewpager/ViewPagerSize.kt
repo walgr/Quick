@@ -9,7 +9,7 @@ import androidx.viewpager.widget.PagerAdapter
  */
 interface ViewPagerSize {
 
-    fun getPageSize(): Int
+    fun getPageSize(): Int?
 
     fun setPageSize(size: Int)
 

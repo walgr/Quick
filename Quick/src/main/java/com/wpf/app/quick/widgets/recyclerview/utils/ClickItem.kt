@@ -20,7 +20,7 @@ open class ClickItem @JvmOverloads constructor(
     override fun onCreateViewHolder(itemView: View) {
         super.onCreateViewHolder(itemView)
         if (clickSelf != null || click != null) {
-            BindData2ViewHelper.bind(itemView, clickSelf?.run(this) ?: click?.run()!!, ItemClick())
+            BindData2ViewHelper.bind(itemView, clickSelf?.run(this) ?: click?.run()!!, ItemClick)
         }
     }
 }

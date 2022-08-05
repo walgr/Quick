@@ -14,4 +14,5 @@ annotation class BindFragment(
     val fragment: KClass<out BindBaseFragment>,
     val withState: Boolean = true,
     val limit: Int = 0,
+    val defaultSize: Int = 0
 )

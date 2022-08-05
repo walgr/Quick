@@ -53,7 +53,7 @@ class MainActivity : QuickViewModelBindingActivity<MainViewModel, ActivityMainBi
     }
 
     fun gotoGlide(view: View?) {
-//        startActivity(activityCls = GlideImageTestActivity::class.java)
+        startActivity(activityCls = ViewPagerBindFragmentTestActivity::class.java)
     }
 
     fun gotoRefreshList(view: View?) {

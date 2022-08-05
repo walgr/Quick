@@ -15,7 +15,7 @@ import com.wpf.app.quickbind.annotations.BindD2VHHelper
  * Created by 王朋飞 on 2022/7/20.
  *
  */
-class Color2View: BindD2VHHelper<View, Int> {
+object Color2View: BindD2VHHelper<View, Int> {
 
     override fun initView(viewHolder: RecyclerView.ViewHolder?, view: View, @DrawableRes data: Int) {
         view.setBackgroundColor(data)

@@ -12,7 +12,7 @@ import com.wpf.app.quickbind.annotations.BindD2VHHelper
  * Created by 王朋飞 on 2022/7/20.
  *
  */
-class List2LinearLayout : BindD2VHHelper<LinearLayout, List<QuickItemData>> {
+object List2LinearLayout : BindD2VHHelper<LinearLayout, List<QuickItemData>> {
 
     override fun initView(
         viewHolder: RecyclerView.ViewHolder?,

@@ -122,7 +122,7 @@ class BindFragmentPlugin : BasePlugin {
                         }
 
                         override fun getCount(): Int {
-                            return (viewPager as? ViewPagerSize)?.getPageSize() ?: 0
+                            return (viewPager as? ViewPagerSize)?.getPageSize() ?: bindFragmentAnn.defaultSize
                         }
 
                         override fun getItemPosition(`object`: Any): Int {
@@ -201,7 +201,7 @@ class BindFragmentPlugin : BasePlugin {
                         }
 
                         override fun getCount(): Int {
-                            return (viewPager as? ViewPagerSize)?.getPageSize() ?: 0
+                            return (viewPager as? ViewPagerSize)?.getPageSize() ?: bindFragmentAnn.defaultSize
                         }
 
                         override fun getItemPosition(`object`: Any): Int {

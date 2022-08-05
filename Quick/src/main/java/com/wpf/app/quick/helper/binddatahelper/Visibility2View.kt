@@ -8,7 +8,7 @@ import com.wpf.app.quickbind.annotations.BindD2VHHelper
  * Created by 王朋飞 on 2022/7/20.
  *
  */
-class Visibility2View :
+object Visibility2View :
     BindD2VHHelper<View, Int> {
 
     override fun initView(
