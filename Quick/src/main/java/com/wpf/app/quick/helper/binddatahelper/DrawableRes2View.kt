@@ -15,7 +15,7 @@ import com.wpf.app.quickbind.annotations.BindD2VHHelper
  * Created by 王朋飞 on 2022/7/20.
  *
  */
-class DrawableRes2View: BindD2VHHelper<View, Int> {
+object DrawableRes2View: BindD2VHHelper<View, Int> {
 
     override fun initView(viewHolder: RecyclerView.ViewHolder?, view: View, @DrawableRes data: Int) {
         view.background = ContextCompat.getDrawable(view.context, data)

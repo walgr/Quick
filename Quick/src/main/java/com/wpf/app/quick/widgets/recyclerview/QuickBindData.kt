@@ -13,12 +13,16 @@ import com.wpf.app.quickbind.interfaces.Bind
  *
  */
 open class QuickBindData(
+    @Transient
     @LayoutRes open val layoutId: Int,
 ) : QuickItemData(), Bind {
 
+    @Transient
     private var mViewHolder: QuickViewHolder<QuickBindData>? = null
+    @Transient
     private lateinit var mAdapter: QuickAdapter
     private var dealBind = true
+    @Transient
     private lateinit var mView: View
 
     open fun onCreateViewHolder(itemView: View) {

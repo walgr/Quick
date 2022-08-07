@@ -10,16 +10,16 @@ import androidx.viewpager.widget.ViewPager
  */
 open class QuickViewPager(
     mContext: Context,
-    attrs : AttributeSet
-): ViewPager(mContext, attrs), ViewPagerSize {
+    attrs: AttributeSet
+) : ViewPager(mContext, attrs), ViewPagerSize {
 
-    var pageSizeI = 0
+    private var pageSizeI: Int? = null
 
-    override fun setPageSize(pageSize: Int) {
-        pageSizeI = pageSize
+    override fun setPageSize(size: Int) {
+        pageSizeI = size
     }
 
-    override fun getPageSize(): Int {
+    override fun getPageSize(): Int? {
         return pageSizeI
     }
 

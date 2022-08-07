@@ -52,7 +52,10 @@ class BindFragmentPlugin : BasePlugin {
                 }
                 if (fragmentManager == null) return true
                 if (bindFragmentAnn.withState) {
-                    viewPager.adapter = object : FragmentStatePagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+                    viewPager.adapter = object : FragmentStatePagerAdapter(
+                        fragmentManager,
+                        BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
+                    ) {
                         private val mBaseFragmentList: HashMap<Int, BindBaseFragment> = HashMap()
 
                         override fun notifyDataSetChanged() {
@@ -64,18 +67,26 @@ class BindFragmentPlugin : BasePlugin {
                             try {
                                 val baseFragment: BindBaseFragment =
                                     bindFragmentAnn.fragment.java.newInstance() as BindBaseFragment
-                                if (obj is View) {
-                                    val viewContext = obj.getViewContext()
-                                    if (viewContext is BindViewModel<*>) {
-                                        baseFragment.arguments = baseFragment.getInitBundle(viewContext, i)
+                                if (obj is Bind) {
+                                    val bundle = obj.bindData(i)
+                                    if (bundle != null) {
+                                        baseFragment.arguments = bundle
                                     } else {
-                                        if (viewContext is Activity) {
+                                        val viewContext =
+                                            (viewPager as? ViewPagerSize)?.currentContext()
+                                                ?: obj.getView().getViewContext()
+                                        if (viewContext is BindViewModel<*>) {
                                             baseFragment.arguments =
                                                 baseFragment.getInitBundle(viewContext, i)
-                                        }
-                                        if (viewContext is Fragment) {
-                                            baseFragment.arguments =
-                                                baseFragment.getInitBundle(viewContext, i)
+                                        } else {
+                                            if (viewContext is Activity) {
+                                                baseFragment.arguments =
+                                                    baseFragment.getInitBundle(viewContext, i)
+                                            }
+                                            if (viewContext is Fragment) {
+                                                baseFragment.arguments =
+                                                    baseFragment.getInitBundle(viewContext, i)
+                                            }
                                         }
                                     }
                                 } else {
@@ -111,11 +122,11 @@ class BindFragmentPlugin : BasePlugin {
                         }
 
                         override fun getCount(): Int {
-                            return (viewPager as? ViewPagerSize)?.getPageSize() ?: 0
+                            return (viewPager as? ViewPagerSize)?.getPageSize() ?: bindFragmentAnn.defaultSize
                         }
 
                         override fun getItemPosition(`object`: Any): Int {
-                            return POSITION_NONE
+                            return (viewPager as? ViewPagerSize)?.getItemPosition(`object`) ?: POSITION_NONE
                         }
 
                         override fun getPageTitle(position: Int): CharSequence? {
@@ -135,18 +146,26 @@ class BindFragmentPlugin : BasePlugin {
                             try {
                                 val baseFragment: BindBaseFragment =
                                     bindFragmentAnn.fragment.java.newInstance() as BindBaseFragment
-                                if (obj is View) {
-                                    val viewContext = obj.getViewContext()
-                                    if (viewContext is BindViewModel<*>) {
-                                        baseFragment.arguments = baseFragment.getInitBundle(viewContext, i)
+                                if (obj is Bind) {
+                                    val bundle = obj.bindData(i)
+                                    if (bundle != null) {
+                                        baseFragment.arguments = bundle
                                     } else {
-                                        if (viewContext is Activity) {
+                                        val viewContext =
+                                            (viewPager as? ViewPagerSize)?.currentContext()
+                                                ?: obj.getView().getViewContext()
+                                        if (viewContext is BindViewModel<*>) {
                                             baseFragment.arguments =
                                                 baseFragment.getInitBundle(viewContext, i)
-                                        }
-                                        if (viewContext is Fragment) {
-                                            baseFragment.arguments =
-                                                baseFragment.getInitBundle(viewContext, i)
+                                        } else {
+                                            if (viewContext is Activity) {
+                                                baseFragment.arguments =
+                                                    baseFragment.getInitBundle(viewContext, i)
+                                            }
+                                            if (viewContext is Fragment) {
+                                                baseFragment.arguments =
+                                                    baseFragment.getInitBundle(viewContext, i)
+                                            }
                                         }
                                     }
                                 } else {
@@ -182,11 +201,11 @@ class BindFragmentPlugin : BasePlugin {
                         }
 
                         override fun getCount(): Int {
-                            return (viewPager as? ViewPagerSize)?.getPageSize() ?: 0
+                            return (viewPager as? ViewPagerSize)?.getPageSize() ?: bindFragmentAnn.defaultSize
                         }
 
                         override fun getItemPosition(`object`: Any): Int {
-                            return POSITION_NONE
+                            return (viewPager as? ViewPagerSize)?.getItemPosition(`object`) ?: POSITION_NONE
                         }
 
                         override fun getPageTitle(position: Int): CharSequence? {

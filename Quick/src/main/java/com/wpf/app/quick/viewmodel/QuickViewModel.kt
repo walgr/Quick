@@ -1,5 +1,7 @@
 package com.wpf.app.quick.viewmodel
 
+import android.content.Intent
+import android.os.Bundle
 import androidx.lifecycle.ViewModel
 import com.wpf.app.quick.activity.QuickView
 
@@ -10,13 +12,17 @@ import com.wpf.app.quick.activity.QuickView
 abstract class QuickViewModel<T : QuickView> : ViewModel() {
     var baseView: T? = null
 
-    fun onResume() {}
+    open fun onResume() {}
 
-    fun onPause() {}
+    open fun onPause() {}
 
-    fun onStop() {}
+    open fun onStop() {}
 
-    fun onDestroy() {}
+    open fun onDestroy() {}
+
+    open fun onSaveInstanceState(outState: Bundle) {}
+
+    open fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {}
 
     abstract fun onViewCreated(baseView: T)
 }

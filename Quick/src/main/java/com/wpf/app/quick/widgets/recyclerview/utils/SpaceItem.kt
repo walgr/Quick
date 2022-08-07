@@ -19,6 +19,6 @@ open class SpaceItem(
     override fun onCreateViewHolder(itemView: View) {
         super.onCreateViewHolder(itemView)
         BindData2ViewHelper.bind(itemView.findViewById(R.id.rootView),
-        space, if (isVertical) Height2View() else Width2View())
+        space, if (isVertical) Height2View else Width2View)
     }
 }

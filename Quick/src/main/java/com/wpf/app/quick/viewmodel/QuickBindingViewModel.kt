@@ -1,5 +1,7 @@
 package com.wpf.app.quick.viewmodel
 
+import android.content.Intent
+import android.os.Bundle
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModel
@@ -10,6 +12,18 @@ import androidx.lifecycle.ViewModel
  */
 abstract class QuickBindingViewModel<T : ViewDataBinding> : ViewModel(), LifecycleObserver {
     var mViewBinding: T? = null
+
+    open fun onResume() {}
+
+    open fun onPause() {}
+
+    open fun onStop() {}
+
+    open fun onDestroy() {}
+
+    open fun onSaveInstanceState(outState: Bundle) {}
+
+    open fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {}
 
     abstract fun onBindingCreated(mViewBinding: T?)
 

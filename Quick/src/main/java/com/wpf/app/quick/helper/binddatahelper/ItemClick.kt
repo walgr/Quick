@@ -10,7 +10,7 @@ import com.wpf.app.quickbind.interfaces.itemClickRun
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-class ItemClick : BindD2VHHelper<View, View.OnClickListener> {
+object ItemClick : BindD2VHHelper<View, View.OnClickListener> {
 
     override fun initView(
         viewHolder: RecyclerView.ViewHolder?,

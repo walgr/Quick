@@ -1,5 +1,7 @@
 package com.wpf.app.quick.activity
 
+import android.content.Intent
+import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.lifecycle.ViewModelProvider
@@ -20,6 +22,11 @@ abstract class QuickViewModelActivity<VM : QuickViewModel<H>, H : QuickView> @Jv
     BindViewModel<VM> {
     private var mViewModel: VM? = null
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        mViewModel?.onSaveInstanceState(outState)
+    }
+
     override fun onResume() {
         super.onResume()
         mViewModel?.onResume()
@@ -33,6 +40,11 @@ abstract class QuickViewModelActivity<VM : QuickViewModel<H>, H : QuickView> @Jv
     override fun onStop() {
         super.onStop()
         mViewModel?.onStop()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        mViewModel?.onActivityResult(requestCode, resultCode, data)
     }
 
     override fun onDestroy() {

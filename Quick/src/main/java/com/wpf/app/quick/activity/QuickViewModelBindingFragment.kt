@@ -1,6 +1,7 @@
 package com.wpf.app.quick.activity
 
 import android.app.Application
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.CallSuper
@@ -76,6 +77,37 @@ abstract class QuickViewModelBindingFragment<VM : QuickBindingViewModel<VB>, VB 
         } else {
             setViewBinding()
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        mViewModel?.onSaveInstanceState(outState)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mViewModel?.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mViewModel?.onPause()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        mViewModel?.onStop()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        mViewModel?.onActivityResult(requestCode, resultCode, data)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mViewModel?.onDestroy()
+        mViewModel = null
     }
 
     abstract fun initView(viewDataBinding: VB?)

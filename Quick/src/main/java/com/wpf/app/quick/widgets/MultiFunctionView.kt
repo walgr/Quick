@@ -160,7 +160,7 @@ class MultiFunctionView @JvmOverloads constructor(
         attributeHelper.titleMaxLine?.let {
             setTitleMaxLine(it)
         }
-        attributeHelper.titleStyle?.let {
+        attributeHelper.titleWpfStyle?.let {
             setTitleStyle(TypefaceHelper.getAndroidTypeface(it))
         }
     }
@@ -181,7 +181,7 @@ class MultiFunctionView @JvmOverloads constructor(
         attributeHelper.subTitleMaxLine?.let {
             setSubTitleMaxLine(it)
         }
-        attributeHelper.subTitleStyle?.let {
+        attributeHelper.subTitleWpfStyle?.let {
             setSubTitleStyle(TypefaceHelper.getAndroidTypeface(it))
         }
         attributeHelper.subTitleMarginTop?.let {

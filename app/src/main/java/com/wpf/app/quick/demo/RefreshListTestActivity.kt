@@ -24,7 +24,7 @@ class RefreshListTestActivity : QuickActivity(R.layout.activity_refresh_list, ti
     var mRecyclerView: QuickRefreshRecyclerView? = null
     override fun initView() {
         mRecyclerView?.mRequestData = ListRequest(0)
-        mRecyclerView?.setDataChangeListener( object : DataChangeListener<ListRequest, RefreshItem> {
+        mRecyclerView?.setDataChangeListener(object : DataChangeListener<ListRequest, RefreshItem> {
             override fun onLoadMore(requestData: ListRequest, callback: Callback<RefreshItem>) {
                 Thread {
                     try {

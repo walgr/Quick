@@ -45,12 +45,24 @@ class BindData2ViewPlugin : BasePlugin {
             field.isAccessible = true
             val value = field[getRealObj(obj, viewModel)]
             if (findView == null || value == null) return true
-            val bindBaseHelper = helper.newInstance()
+            var bindBaseHelper: BindD2VHelper<RecyclerView.ViewHolder, View, Any>?
+            try {
+                helper.fields.find {
+                    it.name == "INSTANCE"
+                }.let {
+                    bindBaseHelper = it?.get(getRealObj(obj, viewModel)) as? BindD2VHelper<RecyclerView.ViewHolder, View, Any>
+                }
+            } catch (ignore: Exception) {
+                bindBaseHelper = helper.newInstance()
+            }
+            if (bindBaseHelper == null) {
+                bindBaseHelper = helper.newInstance()
+            }
             if (value is RunOnHolderWithSelf<*, *>) {
-                bindBaseHelper.initView(viewParent as? RecyclerView.ViewHolder,
+                bindBaseHelper?.initView(viewParent as? RecyclerView.ViewHolder,
                     findView, (value as RunOnHolderWithSelf<Any, Any>).run(findView, obj))
             } else {
-                bindBaseHelper.initView(viewParent as? RecyclerView.ViewHolder, findView, value)
+                bindBaseHelper?.initView(viewParent as? RecyclerView.ViewHolder, findView, value)
             }
             return true
         } catch (e: Exception) {
