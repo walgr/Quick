@@ -148,15 +148,7 @@ object QuickBind {
     ) {
         if (obj == null) return
         try {
-            val fields: List<Field> = ReflectHelper.getFieldWithParent(obj)
-            for (field in fields) {
-                val annotations = field.annotations.toMutableList()
-                annotations.sortBy { plugins.keys.indexOf(it.annotationClass) }
-                annotations.forEach {
-                    plugins[it.annotationClass]?.dealField(obj, null, field)
-                }
-                annotations.clear()
-            }
+
             if (viewModel != null) {
                 val viewModelFields: List<Field> = ReflectHelper.getFieldWithParent(viewModel)
                 for (field in viewModelFields) {
@@ -164,6 +156,16 @@ object QuickBind {
                     annotations.sortBy { plugins.keys.indexOf(it.annotationClass) }
                     annotations.forEach {
                         plugins[it.annotationClass]?.dealField(obj, viewModel, field)
+                    }
+                    annotations.clear()
+                }
+            } else {
+                val fields: List<Field> = ReflectHelper.getFieldWithParent(obj)
+                for (field in fields) {
+                    val annotations = field.annotations.toMutableList()
+                    annotations.sortBy { plugins.keys.indexOf(it.annotationClass) }
+                    annotations.forEach {
+                        plugins[it.annotationClass]?.dealField(obj, null, field)
                     }
                     annotations.clear()
                 }
