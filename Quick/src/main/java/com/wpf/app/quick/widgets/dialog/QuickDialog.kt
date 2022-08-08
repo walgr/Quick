@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
 import com.wpf.app.quick.helper.DialogSizeHelper
+import com.wpf.app.quickbind.QuickBind
 
 /**
  * Created by 王朋飞 on 2022/6/16.
@@ -46,18 +47,18 @@ abstract class QuickDialog : Dialog, DialogSize, DialogLifecycle {
     }
 
     private var mView: View? = null
-    override fun onCreate(savedInstanceState: Bundle) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         dealSize()
         mView = layoutView ?: View.inflate(context, layoutId, null)
         setContentView(mView!!)
-        val window = getWindow()
         if (window != null) {
             if (initDialogAnim() != DialogSize.NO_SET) {
-                window.setWindowAnimations(initDialogAnim())
+                window!!.setWindowAnimations(initDialogAnim())
             }
-            window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         }
+        QuickBind.bind(this)
         initView(mView)
     }
     protected var mScreenWidth = 0
@@ -67,6 +68,10 @@ abstract class QuickDialog : Dialog, DialogSize, DialogLifecycle {
         val size = getScreenSize()
         mScreenWidth = size.x
         mScreenHeight = size.y
+    }
+
+    override fun getView(): View? {
+        return mView
     }
 
     abstract fun initView(view: View?)

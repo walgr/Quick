@@ -60,9 +60,9 @@ abstract class QuickDialogFragment @JvmOverloads constructor(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         dealSize()
+        QuickBind.bind(this)
         initView(view)
         onDialogOpen()
-        QuickBind.bind(this)
     }
 
     abstract fun initView(view: View?)
