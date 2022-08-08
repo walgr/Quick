@@ -148,7 +148,6 @@ object QuickBind {
     ) {
         if (obj == null) return
         try {
-
             if (viewModel != null) {
                 val viewModelFields: List<Field> = ReflectHelper.getFieldWithParent(viewModel)
                 for (field in viewModelFields) {
