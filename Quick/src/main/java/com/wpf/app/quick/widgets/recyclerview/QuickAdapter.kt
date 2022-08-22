@@ -64,8 +64,8 @@ class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>(), Dat
     }
 
     override fun onBindViewHolder(viewHolder: QuickViewHolder<QuickItemData>, position: Int) {
-        viewHolder.onBindViewHolder(this, mDataList!![position], position)
         viewHolder.itemPosition = position
+        viewHolder.onBindViewHolder(this, mDataList!![position], position)
     }
 
     override fun getItemViewType(position: Int): Int {

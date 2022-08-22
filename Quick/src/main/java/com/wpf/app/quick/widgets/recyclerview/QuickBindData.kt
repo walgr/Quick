@@ -13,7 +13,6 @@ import com.wpf.app.quickbind.interfaces.Bind
  *
  */
 open class QuickBindData(
-    @Transient
     @LayoutRes open val layoutId: Int,
 ) : QuickItemData(), Bind {
 
