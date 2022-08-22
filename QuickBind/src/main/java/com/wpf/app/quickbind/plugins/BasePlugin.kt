@@ -92,6 +92,9 @@ interface BasePlugin {
         if (obj is RecyclerView.ViewHolder) {
             rootView = obj.itemView
         }
+        if (obj is Bind) {
+            rootView = obj.getView()
+        }
         return rootView
     }
 
