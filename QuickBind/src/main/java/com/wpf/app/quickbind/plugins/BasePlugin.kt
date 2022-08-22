@@ -69,7 +69,7 @@ interface BasePlugin {
                 context = obj.context
             }
             is Bind -> {
-                context = obj.getView().context
+                context = obj.getView()?.context
             }
             is View -> {
                 context = obj.context

@@ -79,7 +79,9 @@ object QuickBind {
     }
 
     fun <T : Bind> bind(bind: T) {
-        bindBinder(bind, bind.getView())
+        bind.getView()?.let {
+            bindBinder(bind, bind.getView()!!)
+        }
         dealInPlugins(bind, null)
     }
 

@@ -1,8 +1,6 @@
 package com.wpf.app.quickbind.plugins
 
 import android.app.Activity
-import android.util.Log
-import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -43,12 +41,14 @@ class BindFragmentPlugin : BasePlugin {
                 var fragmentManager: FragmentManager? = null
                 var context = obj
                 if (obj is Bind) {
-                    context = obj.getView().context
+                    obj.getView()?.let {
+                        context = it.context
+                    }
                 }
                 if (context is AppCompatActivity) {
-                    fragmentManager = context.supportFragmentManager
+                    fragmentManager = (context as AppCompatActivity).supportFragmentManager
                 } else if (context is Fragment) {
-                    fragmentManager = context.childFragmentManager
+                    fragmentManager = (context as Fragment).childFragmentManager
                 }
                 if (fragmentManager == null) return true
                 if (bindFragmentAnn.withState) {
@@ -74,7 +74,7 @@ class BindFragmentPlugin : BasePlugin {
                                     } else {
                                         val viewContext =
                                             (viewPager as? ViewPagerSize)?.currentContext()
-                                                ?: obj.getView().getViewContext()
+                                                ?: obj.getView()?.getViewContext()
                                         if (viewContext is BindViewModel<*>) {
                                             baseFragment.arguments =
                                                 baseFragment.getInitBundle(viewContext, i)
@@ -153,7 +153,7 @@ class BindFragmentPlugin : BasePlugin {
                                     } else {
                                         val viewContext =
                                             (viewPager as? ViewPagerSize)?.currentContext()
-                                                ?: obj.getView().getViewContext()
+                                                ?: obj.getView()?.getViewContext()
                                         if (viewContext is BindViewModel<*>) {
                                             baseFragment.arguments =
                                                 baseFragment.getInitBundle(viewContext, i)
