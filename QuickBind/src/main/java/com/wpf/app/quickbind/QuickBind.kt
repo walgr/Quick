@@ -2,7 +2,6 @@ package com.wpf.app.quickbind
 
 import android.app.Activity
 import android.app.Dialog
-import android.util.Log
 import android.view.View
 import androidx.annotation.UiThread
 import androidx.fragment.app.Fragment
@@ -79,7 +78,9 @@ object QuickBind {
     }
 
     fun <T : Bind> bind(bind: T) {
-        bindBinder(bind, bind.getView())
+        bind.getView()?.let {
+            bindBinder(bind, bind.getView()!!)
+        }
         dealInPlugins(bind, null)
     }
 
@@ -148,15 +149,6 @@ object QuickBind {
     ) {
         if (obj == null) return
         try {
-            val fields: List<Field> = ReflectHelper.getFieldWithParent(obj)
-            for (field in fields) {
-                val annotations = field.annotations.toMutableList()
-                annotations.sortBy { plugins.keys.indexOf(it.annotationClass) }
-                annotations.forEach {
-                    plugins[it.annotationClass]?.dealField(obj, null, field)
-                }
-                annotations.clear()
-            }
             if (viewModel != null) {
                 val viewModelFields: List<Field> = ReflectHelper.getFieldWithParent(viewModel)
                 for (field in viewModelFields) {
@@ -164,6 +156,16 @@ object QuickBind {
                     annotations.sortBy { plugins.keys.indexOf(it.annotationClass) }
                     annotations.forEach {
                         plugins[it.annotationClass]?.dealField(obj, viewModel, field)
+                    }
+                    annotations.clear()
+                }
+            } else {
+                val fields: List<Field> = ReflectHelper.getFieldWithParent(obj)
+                for (field in fields) {
+                    val annotations = field.annotations.toMutableList()
+                    annotations.sortBy { plugins.keys.indexOf(it.annotationClass) }
+                    annotations.forEach {
+                        plugins[it.annotationClass]?.dealField(obj, null, field)
                     }
                     annotations.clear()
                 }

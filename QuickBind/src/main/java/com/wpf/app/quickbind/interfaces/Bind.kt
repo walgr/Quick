@@ -8,7 +8,7 @@ import android.view.View
  * 可进行QuickBind.bind
  */
 interface Bind {
-    fun getView(): View
+    fun getView(): View?
 
     fun bindData(position: Int): Bundle? {
         return null

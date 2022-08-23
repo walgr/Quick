@@ -69,7 +69,7 @@ interface BasePlugin {
                 context = obj.context
             }
             is Bind -> {
-                context = obj.getView().context
+                context = obj.getView()?.context
             }
             is View -> {
                 context = obj.context
@@ -91,6 +91,9 @@ interface BasePlugin {
         }
         if (obj is RecyclerView.ViewHolder) {
             rootView = obj.itemView
+        }
+        if (obj is Bind) {
+            rootView = obj.getView()
         }
         return rootView
     }

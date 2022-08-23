@@ -3,6 +3,7 @@ package com.wpf.app.quick.demo
 import android.annotation.SuppressLint
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import com.wpf.app.quick.activity.QuickFragment
 import com.wpf.app.quick.activity.QuickViewModelFragment
 import com.wpf.app.quick.annotations.BindView
@@ -15,11 +16,12 @@ import com.wpf.app.quick.widgets.recyclerview.QuickRecyclerView
  */
 class TestFragment: QuickFragment(R.layout.activity_recyclerview_test) {
     @SuppressLint("StaticFieldLeak")
-    @BindView(R.id.list)
-    var list: QuickRecyclerView? = null
+    @BindView(R.id.btnClean)
+    var btnClean: TextView? = null
 
     override fun initView(view: View?) {
-        Log.e("TestFragment", "id:${list}---baseview:${view}")
+        Log.e("TestFragment", "id:${btnClean}---baseview:${view}")
+        btnClean?.text = "123123"
     }
 
 }
