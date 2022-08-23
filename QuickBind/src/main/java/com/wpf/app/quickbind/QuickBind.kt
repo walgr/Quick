@@ -2,7 +2,6 @@ package com.wpf.app.quickbind
 
 import android.app.Activity
 import android.app.Dialog
-import android.util.Log
 import android.view.View
 import androidx.annotation.UiThread
 import androidx.fragment.app.Fragment
