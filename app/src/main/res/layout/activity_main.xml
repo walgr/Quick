@@ -51,6 +51,10 @@
             android:onClick="gotoSelectList"
             />
 
+        <com.wpf.app.quick.demo.model.SelectItemView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
         <LinearLayout
             android:id="@+id/testBindSpLL"
             android:layout_width="match_parent"
