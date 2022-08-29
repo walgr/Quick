@@ -15,6 +15,7 @@ android {
         targetSdk rootProject.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        multiDexEnabled = true
     }
 
     buildTypes {
@@ -33,6 +34,7 @@ android {
 }
 
 dependencies {
+    implementation 'com.android.support:multidex:1.0.3'
     //ktx核心
     implementation 'androidx.core:core-ktx:1.8.0'
     //activity-ktx

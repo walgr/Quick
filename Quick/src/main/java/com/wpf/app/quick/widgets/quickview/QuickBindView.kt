@@ -1,6 +1,7 @@
 package com.wpf.app.quick.widgets.quickview
 
 import android.content.Context
+import android.graphics.Canvas
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
@@ -18,27 +19,28 @@ open class QuickBindView @JvmOverloads constructor(
     mContext: Context,
     attributeSet: AttributeSet? = null,
     defStyleAttr: Int = 0,
-    @LayoutRes open val layoutId: Int,
+    @LayoutRes
+    private val layoutId: Int,
     private var dealBind: Boolean = true
 ) : QuickItemView(mContext, attributeSet, defStyleAttr), Bind {
+
+    private var mView: View? = null
+    var index: Int = -1
 
     init {
         initView()
     }
 
-    private var mView: View? = null
-    var index: Int = -1
-
-    open fun initView() {
+    fun initView() {
+        mView = inflate(context, this.layoutId, null)
         post {
             val parent = parent as? ViewGroup ?: return@post
-            if (this.layoutId == 0) return@post
-            mView = inflate(context, layoutId, null)
             val thisIndex = parent.indexOfChild(this)
             parent.addView(mView, thisIndex)
             visibility = GONE
             onCreateViewHolder()
             onBindViewHolder(thisIndex)
+            postInvalidate()
         }
     }
 
@@ -65,16 +67,21 @@ open class QuickBindView @JvmOverloads constructor(
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        //隐藏当前view
-        val specMode = MeasureSpec.getMode(heightMeasureSpec)
-//        val specSize = MeasureSpec.getSize(heightMeasureSpec)
-        if (specMode == MeasureSpec.EXACTLY || specMode == MeasureSpec.UNSPECIFIED)
-            super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        else super.onMeasure(widthMeasureSpec, 0)
+        getView()?.measure(widthMeasureSpec, heightMeasureSpec)
+        val viewMeasureWidth = getView()?.measuredWidth ?: 0
+        val viewMeasureHeight = getView()?.measuredHeight ?: 0
+        val specModeWidth = MeasureSpec.getMode(widthMeasureSpec)
+        val specModeHeight = MeasureSpec.getMode(heightMeasureSpec)
+        super.onMeasure(MeasureSpec.makeMeasureSpec(viewMeasureWidth, specModeWidth),
+            MeasureSpec.makeMeasureSpec(viewMeasureHeight, specModeHeight))
     }
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
-        //隐藏当前view
-        super.onLayout(changed, left, 0, right, 0)
+        getView()?.layout(left, top, right, bottom)
+        super.onLayout(changed, left, top, right, bottom)
+    }
+
+    override fun onDraw(canvas: Canvas?) {
+        return getView()?.draw(canvas) ?: super.onDraw(canvas)
     }
 }

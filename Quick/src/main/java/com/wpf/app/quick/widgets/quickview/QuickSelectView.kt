@@ -14,5 +14,5 @@ open class QuickSelectView @JvmOverloads constructor(
     defStyleAttr: Int = 0,
     open val id: String? = null,
     open val isSelect: Boolean = false,
-    @LayoutRes override val layoutId: Int,
+    @LayoutRes val layoutId: Int,
 ) : QuickBindView(mContext, attributeSet, defStyleAttr, layoutId)
