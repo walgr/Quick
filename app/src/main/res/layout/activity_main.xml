@@ -55,6 +55,43 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
+        <com.wpf.app.quick.demo.view.QuickLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="子view1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="子view2" />
+
+        </com.wpf.app.quick.demo.view.QuickLinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="子view3"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="子view4"
+                />
+
+        </LinearLayout>
+
         <LinearLayout
             android:id="@+id/testBindSpLL"
             android:layout_width="match_parent"

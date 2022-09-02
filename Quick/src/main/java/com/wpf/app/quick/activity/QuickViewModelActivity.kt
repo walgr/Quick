@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.lifecycle.ViewModelProvider
-import com.wpf.app.quick.utils.ViewMolderEx
+import com.wpf.app.quick.utils.ViewModelEx
 import com.wpf.app.quick.viewmodel.QuickViewModel
 import com.wpf.app.quickbind.QuickBind.bind
 import com.wpf.app.quickbind.interfaces.BindViewModel
@@ -55,7 +55,7 @@ abstract class QuickViewModelActivity<VM : QuickViewModel<H>, H : QuickView> @Jv
 
     override fun dealContentView() {
         super.dealContentView()
-        val vmClass: Class<VM>? = ViewMolderEx.getVm0Clazz(this)
+        val vmClass: Class<VM>? = ViewModelEx.get0Clazz(this)
         if (vmClass != null) {
             mViewModel = ViewModelProvider(
                 this,

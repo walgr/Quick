@@ -10,21 +10,24 @@ import com.wpf.app.quickbind.interfaces.Bind
 import kotlin.math.abs
 
 /**
- * Created by 王朋飞 on 2022/8/23.
+ * Created by 王朋飞 on 2022/8/31.
  *
  */
-abstract class QuickItemView @JvmOverloads constructor(
+abstract class QuickItemGroup<T : ViewGroup> @JvmOverloads constructor(
     mContext: Context,
     attributeSet: AttributeSet? = null,
     defStyleAttr: Int = 0,
     @LayoutRes
     private val layoutId: Int,
     open var viewType: Int = 0,
-) : View(mContext, attributeSet, defStyleAttr), Bind {
+) : ViewGroup(mContext, attributeSet, defStyleAttr), Bind {
+
+    private var mView: View? = null
+    var position: Int = -1
 
     init {
-        initViewType()
         initView()
+        initViewType()
     }
 
     open fun initViewType() {
@@ -33,15 +36,11 @@ abstract class QuickItemView @JvmOverloads constructor(
         }
     }
 
-    private var mView: View? = null
-    var position: Int = -1
-
     open fun initView() {
-        mView = inflate(context, this.layoutId, null)
+        mView = inflate(context, this.layoutId, this)
         post {
             val parentGroup = parent as? ViewGroup ?: return@post
             position = parentGroup.indexOfChild(this)
-            parentGroup.removeView(this)
             parentGroup.addView(mView, position)
             visibility = GONE
             onCreateViewHolder()
@@ -59,22 +58,21 @@ abstract class QuickItemView @JvmOverloads constructor(
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         getView()?.measure(widthMeasureSpec, heightMeasureSpec)
-        val specModeWidth = MeasureSpec.getMode(widthMeasureSpec)
-        val specModeHeight = MeasureSpec.getMode(heightMeasureSpec)
         val viewMeasureWidth = getView()?.measuredWidth ?: 0
         val viewMeasureHeight = getView()?.measuredHeight ?: 0
+        val specModeWidth = MeasureSpec.getMode(widthMeasureSpec)
+        val specModeHeight = MeasureSpec.getMode(heightMeasureSpec)
         super.onMeasure(
             MeasureSpec.makeMeasureSpec(viewMeasureWidth, specModeWidth),
             MeasureSpec.makeMeasureSpec(viewMeasureHeight, specModeHeight)
         )
     }
 
-    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
+    override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
         getView()?.layout(left, top, right, bottom)
-        super.onLayout(changed, left, top, right, bottom)
+
     }
 
-    //预览可见
     override fun onDraw(canvas: Canvas?) {
         return getView()?.draw(canvas) ?: super.onDraw(canvas)
     }

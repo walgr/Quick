@@ -3,6 +3,8 @@ package com.wpf.app.quick.demo.model
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
+import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.Toast
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.annotations.BindData2View
@@ -10,18 +12,18 @@ import com.wpf.app.quick.helper.binddatahelper.BindData2ViewHelper
 import com.wpf.app.quick.helper.binddatahelper.ItemClick
 import com.wpf.app.quick.helper.binddatahelper.Select2CheckBox
 import com.wpf.app.quick.helper.binddatahelper.Text2TextView
-import com.wpf.app.quick.widgets.quickview.QuickSelectView
+import com.wpf.app.quick.widgets.quickview.QuickSelectGroup
 import com.wpf.app.quickbind.interfaces.itemClick
 import com.wpf.app.quickbind.interfaces.runOnHolder
 
 /**
  * Created by 王朋飞 on 2022/7/8.
  */
-class SelectItemView @JvmOverloads constructor(
+class SelectItemGroup @JvmOverloads constructor(
     mContext: Context,
     attributeSet: AttributeSet? = null,
     defStyleAttr: Int = 0,
-) : QuickSelectView(mContext, attributeSet, defStyleAttr, layoutId = R.layout.holder_select_item) {
+) : QuickSelectGroup<LinearLayout>(mContext, attributeSet, defStyleAttr, layoutId = R.layout.holder_select_item) {
 
     @SuppressLint("NonConstantResourceId")
     @BindData2View(id = R.id.select, helper = Select2CheckBox::class)

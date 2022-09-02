@@ -10,7 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import com.wpf.app.quick.constant.BRConstant
-import com.wpf.app.quick.utils.ViewMolderEx
+import com.wpf.app.quick.utils.ViewModelEx
 import com.wpf.app.quick.viewmodel.QuickBindingViewModel
 import com.wpf.app.quickbind.QuickBind.bind
 
@@ -62,7 +62,7 @@ abstract class QuickViewModelBindingFragment<VM : QuickBindingViewModel<VB>, VB 
     }
 
     open fun initViewModel() {
-        val viewModelCls: Class<VM>? = ViewMolderEx.getVm0Clazz(this)
+        val viewModelCls: Class<VM>? = ViewModelEx.get0Clazz(this)
         if (viewModelCls != null && context != null) {
             setViewModel(
                 ViewModelProvider(
