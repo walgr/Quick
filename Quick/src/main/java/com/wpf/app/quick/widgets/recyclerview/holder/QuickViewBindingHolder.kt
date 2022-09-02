@@ -1,4 +1,4 @@
-package com.wpf.app.quick.widgets.recyclerview
+package com.wpf.app.quick.widgets.recyclerview.holder
 
 import android.view.View
 import android.view.ViewGroup
@@ -6,6 +6,8 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.wpf.app.quick.constant.BRConstant
+import com.wpf.app.quick.widgets.recyclerview.QuickAdapter
+import com.wpf.app.quick.widgets.recyclerview.data.QuickViewDataBinding
 
 /**
  * Created by 王朋飞 on 2022/7/13.

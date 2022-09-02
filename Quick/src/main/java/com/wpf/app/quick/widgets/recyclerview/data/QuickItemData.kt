@@ -1,4 +1,4 @@
-package com.wpf.app.quick.widgets.recyclerview
+package com.wpf.app.quick.widgets.recyclerview.data
 
 import androidx.databinding.BaseObservable
 import kotlin.math.abs

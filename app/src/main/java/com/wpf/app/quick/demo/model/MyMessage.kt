@@ -2,8 +2,8 @@ package com.wpf.app.quick.demo.model
 
 import com.wpf.app.quick.demo.adapterholder.MyMessageHolder
 import com.wpf.app.quick.demo.databinding.HolderMessageMyBinding
-import com.wpf.app.quick.widgets.recyclerview.BindBindingHolder
-import com.wpf.app.quick.widgets.recyclerview.QuickViewDataBinding
+import com.wpf.app.quick.widgets.recyclerview.holder.BindBindingHolder
+import com.wpf.app.quick.widgets.recyclerview.data.QuickViewDataBinding
 import java.io.Serializable
 
 /**

@@ -3,16 +3,29 @@ package com.wpf.app.quick.widgets.recyclerview
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
+import com.wpf.app.quick.widgets.recyclerview.annotations.BindHolder
+import com.wpf.app.quick.widgets.recyclerview.data.QuickBindData
+import com.wpf.app.quick.widgets.recyclerview.data.QuickItemData
+import com.wpf.app.quick.widgets.recyclerview.data.QuickViewDataBinding
+import com.wpf.app.quick.widgets.recyclerview.holder.BindBindingHolder
+import com.wpf.app.quick.widgets.recyclerview.holder.QuickViewBindingHolder
+import com.wpf.app.quick.widgets.recyclerview.holder.QuickViewHolder
+import com.wpf.app.quick.widgets.recyclerview.listeners.DataChangeAdapter
+import com.wpf.app.quick.widgets.recyclerview.listeners.DataSelectOnAdapter
+import com.wpf.app.quick.widgets.recyclerview.listeners.OnSelectOnChange
+import com.wpf.app.quick.widgets.recyclerview.listeners.QuickAdapterListener
 
 /**
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>(), DataChangeAdapter {
+open class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>(), DataChangeAdapter,
+    DataSelectOnAdapter {
 
     var mDataList: MutableList<QuickItemData>? = null
 
     private var mQuickAdapterListener: QuickAdapterListener<QuickItemData>? = null
+    private var mOnSelectChange: OnSelectOnChange? = null
 
     override fun onCreateViewHolder(
         viewGroup: ViewGroup,
@@ -83,6 +96,15 @@ class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>(), Dat
     fun setQuickAdapterListener(listener: QuickAdapterListener<out QuickItemData>?) {
         this.mQuickAdapterListener = listener as QuickAdapterListener<QuickItemData>
     }
+
+    override fun setOnSelectChange(onSelectChange: OnSelectOnChange) {
+        this.mOnSelectChange = onSelectChange
+    }
+
+    override fun getOnSelectChange(): OnSelectOnChange? {
+        return this.mOnSelectChange
+    }
+
 
     override fun getAdapter(): QuickAdapter {
         return this

@@ -1,9 +1,11 @@
-package com.wpf.app.quick.widgets.recyclerview
+package com.wpf.app.quick.widgets.recyclerview.data
 
 import android.content.Context
 import android.view.View
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
+import com.wpf.app.quick.widgets.recyclerview.QuickAdapter
+import com.wpf.app.quick.widgets.recyclerview.holder.QuickViewHolder
 import com.wpf.app.quickbind.QuickBind
 import com.wpf.app.quickbind.QuickBind.dealInPlugins
 import com.wpf.app.quickbind.interfaces.Bind

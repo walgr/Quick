@@ -1,8 +1,9 @@
-package com.wpf.app.quick.widgets.recyclerview
+package com.wpf.app.quick.widgets.recyclerview.data
 
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleObserver
+import com.wpf.app.quick.widgets.recyclerview.holder.QuickViewBindingHolder
 
 /**
  * Created by 王朋飞 on 2022/7/13.

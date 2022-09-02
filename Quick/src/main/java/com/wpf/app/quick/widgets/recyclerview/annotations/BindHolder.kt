@@ -1,5 +1,7 @@
-package com.wpf.app.quick.widgets.recyclerview
+package com.wpf.app.quick.widgets.recyclerview.annotations
 
+import com.wpf.app.quick.widgets.recyclerview.data.QuickItemData
+import com.wpf.app.quick.widgets.recyclerview.holder.QuickViewHolder
 import kotlin.reflect.KClass
 
 /**

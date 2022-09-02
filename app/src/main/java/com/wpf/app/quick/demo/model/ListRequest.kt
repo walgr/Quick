@@ -1,6 +1,6 @@
 package com.wpf.app.quick.demo.model
 
-import com.wpf.app.quick.widgets.recyclerview.RequestData
+import com.wpf.app.quick.widgets.recyclerview.data.RequestData
 
 /**
  * Created by 王朋飞 on 2022/7/8.

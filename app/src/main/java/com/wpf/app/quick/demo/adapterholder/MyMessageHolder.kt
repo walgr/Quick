@@ -5,7 +5,7 @@ import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.demo.databinding.HolderMessageMyBinding
 import com.wpf.app.quick.demo.model.MyMessage
 import com.wpf.app.quick.widgets.recyclerview.QuickAdapter
-import com.wpf.app.quick.widgets.recyclerview.QuickViewBindingHolder
+import com.wpf.app.quick.widgets.recyclerview.holder.QuickViewBindingHolder
 
 /**
  * Created by 王朋飞 on 2022/6/13.

@@ -7,7 +7,7 @@ import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.annotations.BindView
 import com.wpf.app.quick.demo.model.TestModel
 import com.wpf.app.quick.widgets.recyclerview.QuickAdapter
-import com.wpf.app.quick.widgets.recyclerview.QuickViewHolder
+import com.wpf.app.quick.widgets.recyclerview.holder.QuickViewHolder
 
 /**
  * Created by 王朋飞 on 2022/6/13.

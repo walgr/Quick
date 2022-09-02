@@ -6,7 +6,7 @@ import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.annotations.BindData2View
 import com.wpf.app.quick.helper.binddatahelper.ItemClick
 import com.wpf.app.quick.helper.binddatahelper.Text2TextView
-import com.wpf.app.quick.widgets.recyclerview.QuickBindData
+import com.wpf.app.quick.widgets.recyclerview.data.QuickBindData
 import com.wpf.app.quickbind.interfaces.itemClick
 import com.wpf.app.quickbind.interfaces.runOnHolder
 

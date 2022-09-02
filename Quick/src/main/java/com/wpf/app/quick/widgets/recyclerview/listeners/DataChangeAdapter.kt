@@ -1,4 +1,7 @@
-package com.wpf.app.quick.widgets.recyclerview
+package com.wpf.app.quick.widgets.recyclerview.listeners
+
+import com.wpf.app.quick.widgets.recyclerview.QuickAdapter
+import com.wpf.app.quick.widgets.recyclerview.data.QuickItemData
 
 /**
  * Created by 王朋飞 on 2022/7/18.
@@ -51,11 +54,11 @@ interface DataChangeAdapter {
     fun <T : QuickItemData> getRealTypeData(): MutableList<T>? {
         return getData() as? MutableList<T>
     }
-    
+
     fun getData(): MutableList<QuickItemData>? {
         return getAdapter().mDataList
     }
-    
+
     fun setData(newData: MutableList<QuickItemData>) {
         getAdapter().mDataList = newData
     }

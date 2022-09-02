@@ -1,4 +1,4 @@
-package com.wpf.app.quick.widgets.recyclerview
+package com.wpf.app.quick.widgets.recyclerview.listeners
 
 import android.view.View
 

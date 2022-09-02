@@ -3,8 +3,8 @@ package com.wpf.app.quick.demo.model
 import android.os.Parcel
 import android.os.Parcelable
 import com.wpf.app.quick.demo.adapterholder.TestHolder
-import com.wpf.app.quick.widgets.recyclerview.BindHolder
-import com.wpf.app.quick.widgets.recyclerview.QuickItemData
+import com.wpf.app.quick.widgets.recyclerview.annotations.BindHolder
+import com.wpf.app.quick.widgets.recyclerview.data.QuickItemData
 
 /**
  * Created by 王朋飞 on 2022/6/13.

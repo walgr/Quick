@@ -1,13 +1,9 @@
 package com.wpf.app.quick.helper.binddatahelper
 
 import android.view.View
-import android.widget.LinearLayout
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.wpf.app.quick.widgets.recyclerview.QuickAdapter
-import com.wpf.app.quick.widgets.recyclerview.QuickItemData
-import com.wpf.app.quick.widgets.recyclerview.QuickRecyclerView
 import com.wpf.app.quickbind.annotations.BindD2VHHelper
 
 

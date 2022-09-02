@@ -5,7 +5,7 @@ import com.wpf.app.quick.R
 import com.wpf.app.quick.helper.binddatahelper.BindData2ViewHelper
 import com.wpf.app.quick.helper.binddatahelper.Height2View
 import com.wpf.app.quick.helper.binddatahelper.Width2View
-import com.wpf.app.quick.widgets.recyclerview.QuickBindData
+import com.wpf.app.quick.widgets.recyclerview.data.QuickBindData
 
 /**
  * Created by 王朋飞 on 2022/7/20.

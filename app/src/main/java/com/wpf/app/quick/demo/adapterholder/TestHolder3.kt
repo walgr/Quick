@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.demo.databinding.HolderTest3Binding
 import com.wpf.app.quick.demo.model.TestModel3
-import com.wpf.app.quick.widgets.recyclerview.QuickViewBindingHolder
+import com.wpf.app.quick.widgets.recyclerview.holder.QuickViewBindingHolder
 
 /**
  * Created by 王朋飞 on 2022/6/13.

@@ -1,6 +1,7 @@
-package com.wpf.app.quick.widgets.recyclerview
+package com.wpf.app.quick.widgets.recyclerview.holder
 
 import androidx.databinding.ViewDataBinding
+import com.wpf.app.quick.widgets.recyclerview.data.QuickViewDataBinding
 import kotlin.reflect.KClass
 
 /**

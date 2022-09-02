@@ -3,8 +3,7 @@ package com.wpf.app.quick.helper.binddatahelper
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.wpf.app.quick.widgets.recyclerview.QuickAdapter
-import com.wpf.app.quick.widgets.recyclerview.QuickItemData
-import com.wpf.app.quick.widgets.recyclerview.QuickRecyclerView
+import com.wpf.app.quick.widgets.recyclerview.data.QuickItemData
 import com.wpf.app.quickbind.annotations.BindD2VHHelper
 
 

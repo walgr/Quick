@@ -4,11 +4,10 @@ import android.annotation.SuppressLint
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.wpf.app.quick.activity.QuickActivity
 import com.wpf.app.quick.annotations.BindView
-import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.demo.model.ListRequest
 import com.wpf.app.quick.demo.model.RefreshItem
 import com.wpf.app.quick.utils.Callback
-import com.wpf.app.quick.widgets.recyclerview.DataChangeListener
+import com.wpf.app.quick.widgets.recyclerview.listeners.DataChangeOnListener
 import com.wpf.app.quick.widgets.recyclerview.QuickRefreshRecyclerView
 
 /**
@@ -24,7 +23,7 @@ class RefreshListTestActivity : QuickActivity(R.layout.activity_refresh_list, ti
     var mRecyclerView: QuickRefreshRecyclerView? = null
     override fun initView() {
         mRecyclerView?.mRequestData = ListRequest(0)
-        mRecyclerView?.setDataChangeListener(object : DataChangeListener<ListRequest, RefreshItem> {
+        mRecyclerView?.setDataChangeListener(object : DataChangeOnListener<ListRequest, RefreshItem> {
             override fun onLoadMore(requestData: ListRequest, callback: Callback<RefreshItem>) {
                 Thread {
                     try {

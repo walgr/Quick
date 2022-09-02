@@ -1,4 +1,4 @@
-package com.wpf.app.quick.widgets.recyclerview
+package com.wpf.app.quick.widgets.recyclerview.holder
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,10 @@ import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
+import com.wpf.app.quick.widgets.recyclerview.QuickAdapter
+import com.wpf.app.quick.widgets.recyclerview.data.QuickBindData
+import com.wpf.app.quick.widgets.recyclerview.data.QuickItemData
+import com.wpf.app.quick.widgets.recyclerview.listeners.QuickAdapterListener
 import com.wpf.app.quickbind.QuickBind
 
 /**

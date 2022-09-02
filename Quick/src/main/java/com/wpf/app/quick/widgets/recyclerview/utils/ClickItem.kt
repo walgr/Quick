@@ -3,7 +3,7 @@ package com.wpf.app.quick.widgets.recyclerview.utils
 import android.view.View
 import com.wpf.app.quick.helper.binddatahelper.BindData2ViewHelper
 import com.wpf.app.quick.helper.binddatahelper.ItemClick
-import com.wpf.app.quick.widgets.recyclerview.QuickBindData
+import com.wpf.app.quick.widgets.recyclerview.data.QuickBindData
 import com.wpf.app.quickbind.interfaces.RunItemClick
 import com.wpf.app.quickbind.interfaces.RunItemClickWithSelf
 

@@ -1,4 +1,4 @@
-package com.wpf.app.quick.widgets.recyclerview
+package com.wpf.app.quick.widgets.recyclerview.data
 
 /**
  * Created by 王朋飞 on 2022/7/13.
