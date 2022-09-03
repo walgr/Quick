@@ -47,4 +47,12 @@ open class QuickParentSelectData(
             }
         }
     }
+
+    fun getChildSelectList(): List<QuickChildSelectData>? {
+        return childList?.filter { it.isSelect }
+    }
+
+    fun onChildChange(selectList: List<QuickChildSelectData>?) {
+
+    }
 }

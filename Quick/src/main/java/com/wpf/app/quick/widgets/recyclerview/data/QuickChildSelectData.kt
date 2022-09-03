@@ -43,4 +43,8 @@ open class QuickChildSelectData(
             getAdapter().onChildClick(self)
         }
     }
+
+    open fun onChange() {
+        getAdapter().getOnSelectChange()?.onSelect(getAdapter().getSelectList())
+    }
 }

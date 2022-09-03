@@ -18,10 +18,18 @@ interface DataSelectOnAdapter : DataChangeAdapter {
      */
     fun onParentChild(parentSelectData: QuickParentSelectData) {
         if (parentSelectData.onItemClick != null) return
-        parentSelectData.childList?.forEach {
-            it.isSelect = true
+        val curItemSelect = parentSelectData.isSelect
+        if (curItemSelect) {
+            if (parentSelectData.canCancel) {
+                parentSelectData.isSelect = false
+            }
+        } else {
+            parentSelectData.isSelect = true
         }
-        parentSelectData.onSelectResultChange()
+        parentSelectData.childList?.forEach {
+            it.isSelect = parentSelectData.isSelect
+        }
+        parentSelectData.onChildChange(parentSelectData.getChildSelectList())
         getAdapter().notifyDataSetChanged()
     }
 
@@ -52,7 +60,9 @@ interface DataSelectOnAdapter : DataChangeAdapter {
                 childSelectData.maxLimitListener?.beyondLimit(childSelectData.maxLimit)
             }
         }
-        childSelectData.onSelectResultChange()
+        if (curItemSelect != childSelectData.isSelect) {
+            childSelectData.onChange()
+        }
         notifyItemChange()
     }
 

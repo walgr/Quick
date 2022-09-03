@@ -15,7 +15,5 @@ open class QuickSelectData(
     @LayoutRes override val layoutId: Int,
 ) : QuickBindData(layoutId) {
 
-    open fun onSelectResultChange() {
-        getAdapter().getOnSelectChange()?.onSelect(getAdapter().getSelectList())
-    }
+
 }
