@@ -12,7 +12,7 @@ import com.wpf.app.quickbind.interfaces.itemClickWithSelf
  */
 open class QuickChildSelectData(
     open var parentId: String? = null,
-    open var childList: MutableList<QuickChildSelectData>? = null,
+    open var childList: MutableList<out QuickChildSelectData>? = null,
     open val onItemClick: ItemClick? = null,
     override var id: String? = null,
     override var name: String? = null,

@@ -16,7 +16,7 @@ import com.wpf.app.quickbind.interfaces.runOnHolder
 /**
  * Created by 王朋飞 on 2022/7/8.
  */
-class SelectItem : QuickChildSelectData(layoutId = R.layout.holder_select_item) {
+class SelectItem : QuickParentSelectData(layoutId = R.layout.holder_select_item) {
 
     @SuppressLint("NonConstantResourceId")
     @BindData2View(id = R.id.select, helper = Select2CheckBox::class)
@@ -24,7 +24,7 @@ class SelectItem : QuickChildSelectData(layoutId = R.layout.holder_select_item) 
 
     @SuppressLint("NonConstantResourceId")
     @BindData2View(id = R.id.title, helper = Text2TextView::class)
-    var title = runOnHolder { "Title " + getViewHolder()?.bindingAdapterPosition }
+    var title = runOnHolder { name + getViewHolder()?.bindingAdapterPosition }
 
 //    @BindData2View(helper = ItemClick::class)
 //    var itemClick = itemClick {
