@@ -14,7 +14,7 @@ import com.wpf.app.quickbind.interfaces.itemClick
  * Created by 王朋飞 on 2022/7/8.
  */
 class SelectListTestActivity :
-    QuickActivity(R.layout.activity_recyclerview_test, titleName = "选择列表页") {
+    QuickActivity(R.layout.activity_recyclerview_test, titleName = "选择筛选页") {
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.list)
     var list: QuickRecyclerView? = null
@@ -32,7 +32,9 @@ class SelectListTestActivity :
     }
 
     override fun initView() {
-
+        for (i in 0..20) {
+            addMessage(null)
+        }
     }
 
     fun clean(view: View?) {

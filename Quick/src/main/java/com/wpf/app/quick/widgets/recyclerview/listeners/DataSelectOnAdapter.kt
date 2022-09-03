@@ -31,6 +31,7 @@ interface DataSelectOnAdapter : DataChangeAdapter {
     fun onChildClick(childSelectData: QuickChildSelectData) {
         if (childSelectData.onItemClick != null) return
         val changePos = arrayListOf<Int>()
+        val curItemSelect = childSelectData.isSelect
         if (childSelectData.singleSelect) {
             if (childSelectData.isGlobal) {
                 clearAll(false)
@@ -38,7 +39,7 @@ interface DataSelectOnAdapter : DataChangeAdapter {
                 clearInParent(childSelectData, false)
             }
         }
-        if (childSelectData.isSelect) {
+        if (curItemSelect) {
             if (childSelectData.canCancel) {
                 childSelectData.isSelect = false
                 changePos.add(getData()?.indexOf(childSelectData) ?: -1)
@@ -52,7 +53,7 @@ interface DataSelectOnAdapter : DataChangeAdapter {
             }
         }
         childSelectData.onSelectResultChange()
-        notifyItemChange(changePos)
+        notifyItemChange()
     }
 
     /**
@@ -80,7 +81,10 @@ interface DataSelectOnAdapter : DataChangeAdapter {
     /**
      * 同父清空
      */
-    fun clearInParent(childSelectData: QuickChildSelectData, dealChange: Boolean = true) {
+    fun clearInParent(
+        childSelectData: QuickChildSelectData,
+        dealChange: Boolean = true,
+    ) {
         asChildSelectData()?.find {
             it.parentId == childSelectData.parentId
         }?.let {
@@ -127,6 +131,10 @@ interface DataSelectOnAdapter : DataChangeAdapter {
         if (dealChange) {
             notifyItemChange(changePos)
         }
+    }
+
+    fun notifyItemChange() {
+        getAdapter().notifyDataSetChanged()
     }
 
     fun notifyItemChange(changePos: List<Int>) {
