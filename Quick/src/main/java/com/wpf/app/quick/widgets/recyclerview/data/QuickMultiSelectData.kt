@@ -24,11 +24,7 @@ open class QuickMultiSelectData(
     override var defaultSelect: Boolean = false,        //是否默认选中，true清空后会再次选中
     @LayoutRes override val layoutId: Int,
 ) : QuickSelectData(
-    layoutId = layoutId,
-    id = id,
-    name = name,
-    isSelect = isSelect,
-    defaultSelect = defaultSelect
+    layoutId = layoutId
 )
 
 interface MaxLimitListener {

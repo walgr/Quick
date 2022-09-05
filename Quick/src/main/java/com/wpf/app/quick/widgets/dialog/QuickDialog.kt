@@ -57,10 +57,12 @@ abstract class QuickDialog : Dialog, DialogSize, DialogLifecycle {
                 window!!.setWindowAnimations(initDialogAnim())
             }
             window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            window!!.decorView.setPadding(0, 0, 0, 0)
         }
         QuickBind.bind(this)
         initView(mView)
     }
+
     protected var mScreenWidth = 0
     protected var mScreenHeight = 0
 

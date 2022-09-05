@@ -9,7 +9,7 @@ import com.wpf.app.quickbind.annotations.BindD2VHHelper
  */
 object BindData2ViewHelper {
 
-    fun <Data, V : View, Helper : BindD2VHHelper<V, Data>> bind(
+    fun <Data: Any, V : View, Helper : BindD2VHHelper<V, Data>> bind(
         view: V,
         data: Data,
         helper: Helper

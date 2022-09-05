@@ -18,26 +18,26 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <LinearLayout
-            android:orientation="horizontal"
+        <com.wpf.app.quick.widgets.selectview.QuickMultistageSelectView
+            android:id="@+id/selectList"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.wpf.app.quick.widgets.recyclerview.QuickRecyclerView
+            <com.wpf.app.quick.widgets.recyclerview.QuickSelectRecyclerView
                 android:id="@+id/list1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-            <com.wpf.app.quick.widgets.recyclerview.QuickRecyclerView
+            <com.wpf.app.quick.widgets.recyclerview.QuickSelectRecyclerView
                 android:id="@+id/list2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="5"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-        </LinearLayout>
+        </com.wpf.app.quick.widgets.selectview.QuickMultistageSelectView>
 
 
         <LinearLayout

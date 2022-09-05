@@ -17,27 +17,18 @@ open class QuickRecyclerView @JvmOverloads constructor(
     mContext: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : RecyclerView(mContext, attrs, defStyleAttr), DataChangeAdapter, DataSelectOnAdapter {
+) : RecyclerView(mContext, attrs, defStyleAttr), DataChangeAdapter {
 
-    private lateinit var mQuickAdapter: QuickAdapter
+    open lateinit var mQuickAdapter: QuickAdapter
 
     init {
         init()
     }
 
-    @CallSuper
-    protected fun init() {
+    open fun init() {
         layoutManager = LinearLayoutManager(context)
         mQuickAdapter = QuickAdapter()
         adapter = mQuickAdapter
-    }
-
-    override fun setOnSelectChange(onSelectChange: OnSelectOnChange) {
-        adapter.setOnSelectChange(onSelectChange)
-    }
-
-    override fun getOnSelectChange(): OnSelectOnChange? {
-        return adapter.getOnSelectChange()
     }
 
     override fun getAdapter() : QuickAdapter {

@@ -54,11 +54,11 @@ open class QuickBindData(
         this.dealBind = false
     }
 
-    fun getAdapter(): QuickAdapter {
+    open fun getAdapter(): QuickAdapter {
         return mAdapter
     }
 
-    fun getViewHolder(): QuickViewHolder<QuickBindData>? {
+    open fun getViewHolder(): QuickViewHolder<QuickBindData>? {
         return mViewHolder
     }
 

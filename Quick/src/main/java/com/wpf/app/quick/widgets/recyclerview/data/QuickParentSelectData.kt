@@ -1,10 +1,7 @@
 package com.wpf.app.quick.widgets.recyclerview.data
 
 import androidx.annotation.LayoutRes
-import com.wpf.app.quick.annotations.BindData2View
-import com.wpf.app.quick.helper.binddatahelper.ItemClick
-import com.wpf.app.quickbind.interfaces.itemClickRun
-import com.wpf.app.quickbind.interfaces.itemClickWithSelf
+import com.wpf.app.quickbind.interfaces.RunItemClickWithSelf
 
 /**
  * Created by 王朋飞 on 2022/7/13.
@@ -12,9 +9,9 @@ import com.wpf.app.quickbind.interfaces.itemClickWithSelf
  */
 open class QuickParentSelectData(
     open var canClick: Boolean = false,
-    override var parentId: String? = null,
+    override var parent: QuickParentSelectData? = null,
     override var childList: MutableList<out QuickChildSelectData>? = null,
-    override val onItemClick: ItemClick? = null,
+    onParentClick: RunItemClickWithSelf<QuickParentSelectData>? = null,
     override var id: String? = null,
     override var name: String? = null,
     override var isSelect: Boolean = false,
@@ -26,30 +23,19 @@ open class QuickParentSelectData(
     override val maxLimitListener: MaxLimitListener? = null, //超出反馈
     @LayoutRes override val layoutId: Int,
 ) : QuickChildSelectData(
-    parentId = parentId,
-    canCancel = canCancel,
-    singleSelect = singleSelect,
-    isGlobal = isGlobal,
-    maxLimit = maxLimit,
-    maxLimitListener = maxLimitListener,
-    id = id,
-    name = name,
-    isSelect = isSelect,
-    defaultSelect = defaultSelect,
+    onChildClick = onParentClick as? RunItemClickWithSelf<QuickChildSelectData>,
     layoutId = layoutId
 ) {
 
-    @BindData2View(helper = ItemClick::class)
-    override val itemClick = itemClickWithSelf<QuickChildSelectData> { self ->
-        itemClickRun {
-            if (canClick) {
-                getAdapter().onParentChild(self as QuickParentSelectData)
-            }
-        }
-    }
-
     fun getChildSelectList(): List<QuickChildSelectData>? {
         return childList?.filter { it.isSelect }
+    }
+
+    override fun onClick() {
+        getAdapter().curClickData = this
+        getAdapter().notifyDataSetChanged()
+        getAdapter().childSelectAdapter?.setNewData(childList)
+        getAdapter().childSelectAdapter?.notifyDataSetChanged()
     }
 
     fun onChildChange(selectList: List<QuickChildSelectData>?) {

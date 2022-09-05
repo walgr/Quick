@@ -1,22 +1,51 @@
 package com.wpf.app.quick.demo.model
 
 import android.annotation.SuppressLint
-import android.widget.Toast
+import android.view.View
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.annotations.BindData2View
-import com.wpf.app.quick.helper.binddatahelper.ItemClick
 import com.wpf.app.quick.helper.binddatahelper.Select2CheckBox
 import com.wpf.app.quick.helper.binddatahelper.Text2TextView
+import com.wpf.app.quick.utils.LogUtil
+import com.wpf.app.quick.utils.toDrawable
+import com.wpf.app.quick.widgets.recyclerview.QuickSelectAdapter
+import com.wpf.app.quick.widgets.recyclerview.data.QuickBindData
 import com.wpf.app.quick.widgets.recyclerview.data.QuickChildSelectData
 import com.wpf.app.quick.widgets.recyclerview.data.QuickParentSelectData
-import com.wpf.app.quick.widgets.recyclerview.data.QuickSelectData
-import com.wpf.app.quickbind.interfaces.itemClick
+import com.wpf.app.quick.widgets.recyclerview.holder.QuickViewHolder
 import com.wpf.app.quickbind.interfaces.runOnHolder
 
 /**
  * Created by 王朋飞 on 2022/7/8.
  */
-class SelectItem : QuickParentSelectData(layoutId = R.layout.holder_select_item) {
+class ParentSelectItem : QuickParentSelectData(layoutId = R.layout.holder_select_parent_item, canCancel = false) {
+
+    @SuppressLint("NonConstantResourceId")
+    @BindData2View(id = R.id.title, helper = Text2TextView::class)
+    var title = runOnHolder { "" + name + getViewHolder()?.bindingAdapterPosition + getParentName() }
+
+    private fun getParentName(): String {
+        parent?.id?.let { return "属于:父$it" }
+        return ""
+    }
+
+    override fun onCreateViewHolder(itemView: View) {
+        super.onCreateViewHolder(itemView)
+        itemView.background = R.drawable.bg_change_isselect_eeeeee_fffff.toDrawable(itemView.context)
+    }
+
+    override fun onBindViewHolder(
+        adapter: QuickSelectAdapter,
+        viewHolder: QuickViewHolder<QuickBindData>,
+        position: Int
+    ) {
+        super.onBindViewHolder(adapter, viewHolder, position)
+        LogUtil.e("-----${adapter.curClickData == this}")
+        getViewHolder()?.itemView?.isSelected = adapter.curClickData == this
+    }
+}
+
+open class SelectItem : QuickChildSelectData(layoutId = R.layout.holder_select_item) {
 
     @SuppressLint("NonConstantResourceId")
     @BindData2View(id = R.id.select, helper = Select2CheckBox::class)
@@ -24,16 +53,6 @@ class SelectItem : QuickParentSelectData(layoutId = R.layout.holder_select_item)
 
     @SuppressLint("NonConstantResourceId")
     @BindData2View(id = R.id.title, helper = Text2TextView::class)
-    var title = runOnHolder { name + getViewHolder()?.bindingAdapterPosition }
+    var title = runOnHolder { name + getViewHolder()?.bindingAdapterPosition + "属于:父" + parent?.id }
 
-//    @BindData2View(helper = ItemClick::class)
-//    var itemClick = itemClick {
-//        isSelect = !isSelect
-//        Toast.makeText(
-//            it.context,
-//            "点击" + getViewHolder()?.bindingAdapterPosition,
-//            Toast.LENGTH_SHORT
-//        ).show()
-//        getAdapter().notifyItemChanged((getViewHolder()?.bindingAdapterPosition) ?: 0)
-//    }
 }

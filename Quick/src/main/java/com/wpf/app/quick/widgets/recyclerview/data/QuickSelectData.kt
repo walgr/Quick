@@ -1,7 +1,12 @@
 package com.wpf.app.quick.widgets.recyclerview.data
 
+import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
+import com.wpf.app.quick.widgets.recyclerview.QuickAdapter
+import com.wpf.app.quick.widgets.recyclerview.QuickSelectAdapter
 import com.wpf.app.quick.widgets.recyclerview.data.QuickBindData
+import com.wpf.app.quick.widgets.recyclerview.holder.QuickViewHolder
+import com.wpf.app.quickbind.QuickBind
 
 /**
  * Created by 王朋飞 on 2022/7/13.
@@ -15,5 +20,39 @@ open class QuickSelectData(
     @LayoutRes override val layoutId: Int,
 ) : QuickBindData(layoutId) {
 
+    @CallSuper
+    override fun onBindViewHolder(
+        adapter: QuickAdapter,
+        viewHolder: QuickViewHolder<QuickBindData>,
+        position: Int
+    ) {
+        super.onBindViewHolder(adapter as QuickSelectAdapter, viewHolder, position)
+    }
 
+    @CallSuper
+    open fun onBindViewHolder(
+        adapter: QuickSelectAdapter,
+        viewHolder: QuickViewHolder<QuickBindData>,
+        position: Int
+    ) {
+
+    }
+
+    override fun getAdapter(): QuickSelectAdapter {
+        return super.getAdapter() as QuickSelectAdapter
+    }
+
+    /**
+     * 选择状态变化
+     */
+    open fun onSelectChange(isSelect: Boolean) {
+
+    }
+
+    /**
+     * 当前是否点击
+     */
+    open fun onClick() {
+
+    }
 }

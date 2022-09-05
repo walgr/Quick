@@ -19,13 +19,11 @@ import com.wpf.app.quick.widgets.recyclerview.listeners.QuickAdapterListener
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-open class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>(), DataChangeAdapter,
-    DataSelectOnAdapter {
+open class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>(), DataChangeAdapter {
 
     var mDataList: MutableList<QuickItemData>? = null
 
     private var mQuickAdapterListener: QuickAdapterListener<QuickItemData>? = null
-    private var mOnSelectChange: OnSelectOnChange? = null
 
     override fun onCreateViewHolder(
         viewGroup: ViewGroup,
@@ -96,15 +94,6 @@ open class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>()
     fun setQuickAdapterListener(listener: QuickAdapterListener<out QuickItemData>?) {
         this.mQuickAdapterListener = listener as QuickAdapterListener<QuickItemData>
     }
-
-    override fun setOnSelectChange(onSelectChange: OnSelectOnChange) {
-        this.mOnSelectChange = onSelectChange
-    }
-
-    override fun getOnSelectChange(): OnSelectOnChange? {
-        return this.mOnSelectChange
-    }
-
 
     override fun getAdapter(): QuickAdapter {
         return this

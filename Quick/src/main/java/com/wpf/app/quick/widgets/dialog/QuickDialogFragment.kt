@@ -41,6 +41,7 @@ abstract class QuickDialogFragment @JvmOverloads constructor(
                 window.setWindowAnimations(initDialogAnim())
             }
             window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            window.decorView.setPadding(0, 0, 0, 0)
         }
         return dialog
     }

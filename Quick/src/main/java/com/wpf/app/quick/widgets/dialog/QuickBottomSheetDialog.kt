@@ -71,6 +71,7 @@ abstract class QuickBottomSheetDialog : BottomSheetDialog,
                 window.setWindowAnimations(initDialogAnim())
             }
             window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            window.decorView.setPadding(0, 0, 0, 0)
         }
         initView(mView)
     }

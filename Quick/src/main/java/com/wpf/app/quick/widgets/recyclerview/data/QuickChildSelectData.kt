@@ -3,6 +3,8 @@ package com.wpf.app.quick.widgets.recyclerview.data
 import androidx.annotation.LayoutRes
 import com.wpf.app.quick.annotations.BindData2View
 import com.wpf.app.quick.helper.binddatahelper.ItemClick
+import com.wpf.app.quick.utils.LogUtil
+import com.wpf.app.quickbind.interfaces.RunItemClickWithSelf
 import com.wpf.app.quickbind.interfaces.itemClickRun
 import com.wpf.app.quickbind.interfaces.itemClickWithSelf
 
@@ -11,9 +13,9 @@ import com.wpf.app.quickbind.interfaces.itemClickWithSelf
  * 筛选子类
  */
 open class QuickChildSelectData(
-    open var parentId: String? = null,
+    open var parent: QuickParentSelectData? = null,
     open var childList: MutableList<out QuickChildSelectData>? = null,
-    open val onItemClick: ItemClick? = null,
+    onChildClick: RunItemClickWithSelf<QuickChildSelectData>? = null,
     override var id: String? = null,
     override var name: String? = null,
     override var isSelect: Boolean = false,
@@ -25,23 +27,33 @@ open class QuickChildSelectData(
     override val maxLimitListener: MaxLimitListener? = null, //超出反馈
     @LayoutRes override val layoutId: Int,
 ) : QuickMultiSelectData(
-    canCancel = canCancel,
-    singleSelect = singleSelect,
-    isGlobal = isGlobal,
-    maxLimit = maxLimit,
-    maxLimitListener = maxLimitListener,
-    id = id,
-    name = name,
-    isSelect = isSelect,
-    defaultSelect = defaultSelect,
     layoutId = layoutId
 ) {
 
-    @BindData2View(helper = ItemClick::class)
-    open val itemClick = itemClickWithSelf<QuickChildSelectData> { self ->
+    private val childClick = itemClickWithSelf<QuickChildSelectData> { self ->
         itemClickRun {
-            getAdapter().onChildClick(self)
+            onClick()
+            if (self is QuickParentSelectData) {
+                if (!self.canClick) {
+                    return@itemClickRun
+                }
+                getAdapter().onChildClick(self)
+                getAdapter().onParentChild(self)
+            } else {
+                getAdapter().onChildClick(self)
+            }
         }
+    }
+
+    @BindData2View(helper = ItemClick::class)
+    open val itemClick = onChildClick ?: childClick
+
+    override fun onSelectChange(isSelect: Boolean) {
+        LogUtil.e("当前选中:$isSelect")
+    }
+
+    fun runClick() {
+        childClick.run(this)
     }
 
     open fun onChange() {

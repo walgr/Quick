@@ -31,6 +31,7 @@ open class QuickBottomSheetDialogFragment @JvmOverloads constructor(
     override fun getRealContext(): Context? {
         return mContext
     }
+
     private var mBehavior: BottomSheetBehavior<View>? = null
     override fun onStart() {
         super.onStart()
@@ -47,6 +48,7 @@ open class QuickBottomSheetDialogFragment @JvmOverloads constructor(
             getWindow()?.setWindowAnimations(initDialogAnim())
         }
         getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        getWindow()?.decorView?.setPadding(0, 0, 0, 0)
         return dialog
     }
 
@@ -96,7 +98,7 @@ open class QuickBottomSheetDialogFragment @JvmOverloads constructor(
     protected var mNewHeight = DialogSize.NO_SET
 
     override fun getContext(): Context {
-        TODO("Not yet implemented")
+        return mContext!!
     }
 
     /**

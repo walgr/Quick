@@ -17,27 +17,16 @@ interface DataSelectOnAdapter : DataChangeAdapter {
      * 父Item点击
      */
     fun onParentChild(parentSelectData: QuickParentSelectData) {
-        if (parentSelectData.onItemClick != null) return
-        val curItemSelect = parentSelectData.isSelect
-        if (curItemSelect) {
-            if (parentSelectData.canCancel) {
-                parentSelectData.isSelect = false
-            }
-        } else {
-            parentSelectData.isSelect = true
-        }
         parentSelectData.childList?.forEach {
             it.isSelect = parentSelectData.isSelect
         }
         parentSelectData.onChildChange(parentSelectData.getChildSelectList())
-        getAdapter().notifyDataSetChanged()
     }
 
     /**
      * 子Item点击
      */
     fun onChildClick(childSelectData: QuickChildSelectData) {
-        if (childSelectData.onItemClick != null) return
         val changePos = arrayListOf<Int>()
         val curItemSelect = childSelectData.isSelect
         if (childSelectData.singleSelect) {
@@ -48,8 +37,8 @@ interface DataSelectOnAdapter : DataChangeAdapter {
             }
         }
         if (curItemSelect) {
-            if (childSelectData.canCancel) {
-                childSelectData.isSelect = false
+            childSelectData.isSelect = !childSelectData.canCancel
+            if (!childSelectData.isSelect) {
                 changePos.add(getData()?.indexOf(childSelectData) ?: -1)
             }
         } else {
@@ -61,7 +50,7 @@ interface DataSelectOnAdapter : DataChangeAdapter {
             }
         }
         if (curItemSelect != childSelectData.isSelect) {
-            childSelectData.onChange()
+            childSelectData.onSelectChange(childSelectData.isSelect)
         }
         notifyItemChange()
     }
@@ -95,8 +84,8 @@ interface DataSelectOnAdapter : DataChangeAdapter {
         childSelectData: QuickChildSelectData,
         dealChange: Boolean = true,
     ) {
-        asChildSelectData()?.find {
-            it.parentId == childSelectData.parentId
+        asParentSelectData()?.find {
+            it == childSelectData.parent
         }?.let {
             val changePos = arrayListOf<Int>()
             if (it.isSelect != it.defaultSelect) {
@@ -132,8 +121,8 @@ interface DataSelectOnAdapter : DataChangeAdapter {
      */
     fun selectInParent(childSelectData: QuickChildSelectData, dealChange: Boolean = true) {
         val changePos = arrayListOf<Int>()
-        asChildSelectData()?.filter {
-            it.parentId == childSelectData.parentId
+        asParentSelectData()?.filter {
+            it == childSelectData.parent
         }?.forEach {
             changePos.add(getData()?.indexOf(it) ?: -1)
             it.isSelect = true
@@ -169,5 +158,9 @@ interface DataSelectOnAdapter : DataChangeAdapter {
 
     fun asChildSelectData(): MutableList<QuickChildSelectData>? {
         return getData() as? MutableList<QuickChildSelectData>
+    }
+
+    fun asParentSelectData(): MutableList<QuickParentSelectData>? {
+        return getData() as? MutableList<QuickParentSelectData>
     }
 }
