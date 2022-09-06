@@ -12,15 +12,16 @@ open class QuickSelectAdapter: QuickAdapter(), DataSelectOnAdapter {
     var parentSelectAdapter: QuickSelectAdapter? = null
     var childSelectAdapter: QuickSelectAdapter? = null
 
+    //在父类表示当前切换的项
     var curClickData: QuickSelectData? = null
 
     private var mOnSelectChange: OnSelectOnChange? = null
 
-    override fun setOnSelectChange(onSelectChange: OnSelectOnChange) {
+    override fun setOnSelectChangeListener(onSelectChange: OnSelectOnChange) {
         this.mOnSelectChange = onSelectChange
     }
 
-    override fun getOnSelectChange(): OnSelectOnChange? {
+    override fun getOnSelectChangeListener(): OnSelectOnChange? {
         return this.mOnSelectChange
     }
 

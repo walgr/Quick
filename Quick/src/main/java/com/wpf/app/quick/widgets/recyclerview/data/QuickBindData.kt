@@ -26,6 +26,9 @@ open class QuickBindData(
     @Transient
     private var mView: View? = null
 
+    /**
+     * TODO 列表中刷新会不执行onCreateViewHolder
+     */
     open fun onCreateViewHolder(itemView: View) {
         this.mView = itemView
         if (dealBind) {
@@ -45,6 +48,7 @@ open class QuickBindData(
     ) {
         mAdapter = adapter
         mViewHolder = viewHolder
+        mView = viewHolder.itemView
         if (dealBind) {
             dealInPlugins(this, null, QuickBind.bindPlugin)
         }

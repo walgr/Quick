@@ -27,6 +27,7 @@ open class QuickSelectData(
         position: Int
     ) {
         super.onBindViewHolder(adapter as QuickSelectAdapter, viewHolder, position)
+        onBindViewHolder(adapter, viewHolder, position)
     }
 
     @CallSuper

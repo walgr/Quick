@@ -1,5 +1,6 @@
 package com.wpf.app.quick.widgets.recyclerview.listeners
 
+import com.wpf.app.quick.widgets.recyclerview.QuickSelectAdapter
 import com.wpf.app.quick.widgets.recyclerview.data.QuickChildSelectData
 import com.wpf.app.quick.widgets.recyclerview.data.QuickParentSelectData
 import com.wpf.app.quick.widgets.recyclerview.data.QuickSelectData
@@ -10,11 +11,12 @@ import com.wpf.app.quick.widgets.recyclerview.data.QuickSelectData
  */
 interface DataSelectOnAdapter : DataChangeAdapter {
 
-    fun setOnSelectChange(onSelectChange: OnSelectOnChange)
-    fun getOnSelectChange(): OnSelectOnChange?
+    fun setOnSelectChangeListener(onSelectChange: OnSelectOnChange)
+    fun getOnSelectChangeListener(): OnSelectOnChange?
 
     /**
-     * 父Item点击
+     * Item点击
+     * 作为父项选中
      */
     fun onParentChild(parentSelectData: QuickParentSelectData) {
         parentSelectData.childList?.forEach {
@@ -24,7 +26,8 @@ interface DataSelectOnAdapter : DataChangeAdapter {
     }
 
     /**
-     * 子Item点击
+     * Item点击
+     * 作为子项选中
      */
     fun onChildClick(childSelectData: QuickChildSelectData) {
         val changePos = arrayListOf<Int>()
@@ -42,7 +45,7 @@ interface DataSelectOnAdapter : DataChangeAdapter {
                 changePos.add(getData()?.indexOf(childSelectData) ?: -1)
             }
         } else {
-            if (getSelectSize() < childSelectData.maxLimit) {
+            if (getItemSelectSize() < childSelectData.maxLimit) {
                 childSelectData.isSelect = true
                 changePos.add(getData()?.indexOf(childSelectData) ?: -1)
             } else {
@@ -51,7 +54,9 @@ interface DataSelectOnAdapter : DataChangeAdapter {
         }
         if (curItemSelect != childSelectData.isSelect) {
             childSelectData.onSelectChange(childSelectData.isSelect)
+            getSelectAdapter().getOnSelectChangeListener()?.onSelectChange()
         }
+        childSelectData.parent?.onChildChange(getItemSelectList())
         notifyItemChange()
     }
 
@@ -142,14 +147,18 @@ interface DataSelectOnAdapter : DataChangeAdapter {
         }
     }
 
-    fun getSelectList(): MutableList<QuickChildSelectData>? {
+    fun getItemSelectList(): MutableList<QuickChildSelectData>? {
         return asChildSelectData()?.filter {
             it.isSelect
         }?.toMutableList()
     }
 
-    fun getSelectSize(): Int {
-        return getSelectList()?.size ?: 0
+    fun getItemSelectSize(): Int {
+        return getItemSelectList()?.size ?: 0
+    }
+
+    fun getSelectAdapter(): QuickSelectAdapter {
+        return getAdapter() as QuickSelectAdapter
     }
 
     fun asSelectData(): MutableList<QuickSelectData>? {

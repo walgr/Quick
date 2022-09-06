@@ -1,6 +1,7 @@
 package com.wpf.app.quick.widgets.recyclerview.data
 
 import androidx.annotation.LayoutRes
+import com.wpf.app.quick.utils.LogUtil
 import com.wpf.app.quickbind.interfaces.RunItemClickWithSelf
 
 /**
@@ -27,10 +28,6 @@ open class QuickParentSelectData(
     layoutId = layoutId
 ) {
 
-    fun getChildSelectList(): List<QuickChildSelectData>? {
-        return childList?.filter { it.isSelect }
-    }
-
     override fun onClick() {
         getAdapter().curClickData = this
         getAdapter().notifyDataSetChanged()
@@ -38,7 +35,7 @@ open class QuickParentSelectData(
         getAdapter().childSelectAdapter?.notifyDataSetChanged()
     }
 
-    fun onChildChange(selectList: List<QuickChildSelectData>?) {
+    open fun onChildChange(selectList: List<QuickChildSelectData>?) {
 
     }
 }

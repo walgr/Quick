@@ -22,16 +22,19 @@ class ParentSelectItem : QuickParentSelectData(layoutId = R.layout.holder_select
 
     @SuppressLint("NonConstantResourceId")
     @BindData2View(id = R.id.title, helper = Text2TextView::class)
-    var title = runOnHolder { "" + name + getViewHolder()?.bindingAdapterPosition + getParentName() }
+    var title = runOnHolder { "" + name + getViewHolder()?.bindingAdapterPosition + getParentName() + "(${getChildSelectSize()})"}
+
+    override fun onChildChange(selectList: List<QuickChildSelectData>?) {
+        super.onChildChange(selectList)
+        title.run(getView()!!.findViewById(R.id.title))
+        getViewHolder()?.itemPosition?.let {
+            getAdapter().notifyItemChanged(getViewHolder()?.itemPosition!!)
+        }
+    }
 
     private fun getParentName(): String {
         parent?.id?.let { return "属于:父$it" }
         return ""
-    }
-
-    override fun onCreateViewHolder(itemView: View) {
-        super.onCreateViewHolder(itemView)
-        itemView.background = R.drawable.bg_change_isselect_eeeeee_fffff.toDrawable(itemView.context)
     }
 
     override fun onBindViewHolder(
@@ -40,7 +43,6 @@ class ParentSelectItem : QuickParentSelectData(layoutId = R.layout.holder_select
         position: Int
     ) {
         super.onBindViewHolder(adapter, viewHolder, position)
-        LogUtil.e("-----${adapter.curClickData == this}")
         getViewHolder()?.itemView?.isSelected = adapter.curClickData == this
     }
 }

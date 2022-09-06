@@ -64,7 +64,7 @@ open class QuickViewGroup<T : ViewGroup> @JvmOverloads constructor(
 
     private fun addTToThis() {
         if (shadowView?.parent == null) {
-            LogUtil.e("shadowView:${shadowView} 数量:${shadowView?.childCount}")
+//            LogUtil.e("shadowView:${shadowView} 数量:${shadowView?.childCount}")
             this.shadowView?.layoutParams = layoutParams
             this.addView(shadowView)
         }
@@ -88,8 +88,8 @@ open class QuickViewGroup<T : ViewGroup> @JvmOverloads constructor(
             val viewMeasureHeight = it.measuredHeight
             val specModeWidth = MeasureSpec.getMode(widthMeasureSpec)
             val specModeHeight = MeasureSpec.getMode(heightMeasureSpec)
-            LogUtil.e("viewMeasureWidth:${viewMeasureWidth}")
-            LogUtil.e("viewMeasureHeight:${viewMeasureHeight}")
+//            LogUtil.e("viewMeasureWidth:${viewMeasureWidth}")
+//            LogUtil.e("viewMeasureHeight:${viewMeasureHeight}")
             super.onMeasure(
                 MeasureSpec.makeMeasureSpec(viewMeasureWidth, specModeWidth),
                 MeasureSpec.makeMeasureSpec(viewMeasureHeight, specModeHeight)

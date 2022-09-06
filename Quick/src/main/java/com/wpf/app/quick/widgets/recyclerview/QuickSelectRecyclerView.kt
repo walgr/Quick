@@ -26,15 +26,15 @@ class QuickSelectRecyclerView @JvmOverloads constructor(
         return mQuickAdapter
     }
 
-    open fun getSelectAdapter(): QuickSelectAdapter {
+    override fun getSelectAdapter(): QuickSelectAdapter {
         return adapter as QuickSelectAdapter
     }
 
-    override fun setOnSelectChange(onSelectChange: OnSelectOnChange) {
-        getSelectAdapter().setOnSelectChange(onSelectChange)
+    override fun setOnSelectChangeListener(onSelectChange: OnSelectOnChange) {
+        getSelectAdapter().setOnSelectChangeListener(onSelectChange)
     }
 
-    override fun getOnSelectChange(): OnSelectOnChange? {
-        return getSelectAdapter().getOnSelectChange()
+    override fun getOnSelectChangeListener(): OnSelectOnChange? {
+        return getSelectAdapter().getOnSelectChangeListener()
     }
 }

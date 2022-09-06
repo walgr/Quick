@@ -28,6 +28,10 @@ class SelectListTestActivity :
     }
 
     override fun initView() {
+        loadData()
+    }
+
+    private fun loadData() {
         val allData = mutableListOf<ParentSelectItem>()
         for (i in 0..10) {
             val parentItem = ParentSelectItem().apply {

@@ -5,8 +5,12 @@ import android.util.AttributeSet
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.core.view.children
+import com.wpf.app.quick.utils.LogUtil
 import com.wpf.app.quick.widgets.recyclerview.QuickSelectRecyclerView
+import com.wpf.app.quick.widgets.recyclerview.data.QuickChildSelectData
 import com.wpf.app.quick.widgets.recyclerview.data.QuickParentSelectData
+import com.wpf.app.quick.widgets.recyclerview.data.QuickSelectData
+import com.wpf.app.quick.widgets.recyclerview.listeners.OnSelectOnChange
 
 /**
  * Created by 王朋飞 on 2022/9/5.
@@ -19,7 +23,7 @@ open class QuickMultistageSelectView @JvmOverloads constructor(
     private val weightList: List<Float>? = null,            //层级深度由数组长度确定 null由xml里自己确定子view
 ) : LinearLayout(mContext, attributeSet, defStyleAttr) {
 
-    val selectViewList = mutableListOf<QuickSelectRecyclerView>()
+    private val selectViewList = mutableListOf<QuickSelectRecyclerView>()
 
     init {
         initView()
@@ -30,6 +34,7 @@ open class QuickMultistageSelectView @JvmOverloads constructor(
         children.forEachIndexed { index, it ->
             if (it is QuickSelectRecyclerView) {
                 addSelectRecyclerView(it, index)
+                addListener()
             }
         }
     }
@@ -42,9 +47,25 @@ open class QuickMultistageSelectView @JvmOverloads constructor(
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.MATCH_PARENT
                 ).also { it.weight = weightList[weightPos] })
-
             }
+            addListener()
         }
+    }
+
+    private fun addListener() {
+        selectViewList[selectViewList.size - 1].setOnSelectChangeListener(object :
+            OnSelectOnChange {
+            override fun onSelectChange() {
+                LogUtil.e("总共选择了" + getSelectList().toString())
+            }
+        })
+    }
+
+    fun getSelectList(): List<QuickSelectData>? {
+        if (selectViewList.isEmpty()) return null
+        return selectViewList[0].getRealTypeData<QuickChildSelectData>()?.flatMap {
+            it.childList ?: arrayListOf()
+        }?.filter { it.isSelect }
     }
 
     private fun addSelectRecyclerView(

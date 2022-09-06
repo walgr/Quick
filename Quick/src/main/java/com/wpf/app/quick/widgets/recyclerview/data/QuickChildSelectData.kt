@@ -21,7 +21,7 @@ open class QuickChildSelectData(
     override var isSelect: Boolean = false,
     override var defaultSelect: Boolean = false,
     override var canCancel: Boolean = true,                  //是否可以取消选择
-    override var singleSelect: Boolean = true,               //true 单选  false 多选
+    override var singleSelect: Boolean = false,               //true 单选  false 多选
     override val isGlobal: Boolean = true,                   //true 全局范围  false 同父范围
     override var maxLimit: Int = 5,                          //多选最多数量
     override val maxLimitListener: MaxLimitListener? = null, //超出反馈
@@ -29,6 +29,14 @@ open class QuickChildSelectData(
 ) : QuickMultiSelectData(
     layoutId = layoutId
 ) {
+
+    fun getChildSelectSize(): Int {
+        return getChildSelectList()?.size ?: 0
+    }
+
+    fun getChildSelectList(): List<QuickChildSelectData>? {
+        return childList?.filter { it.isSelect }
+    }
 
     private val childClick = itemClickWithSelf<QuickChildSelectData> { self ->
         itemClickRun {
@@ -49,14 +57,10 @@ open class QuickChildSelectData(
     open val itemClick = onChildClick ?: childClick
 
     override fun onSelectChange(isSelect: Boolean) {
-        LogUtil.e("当前选中:$isSelect")
+
     }
 
     fun runClick() {
         childClick.run(this)
-    }
-
-    open fun onChange() {
-        getAdapter().getOnSelectChange()?.onSelect(getAdapter().getSelectList())
     }
 }
