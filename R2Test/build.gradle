@@ -4,7 +4,7 @@ plugins {
     id 'kotlin-kapt'
 }
 
-apply plugin: 'com.wpf.app.quick'
+//apply plugin: 'com.wpf.app.quick'
 
 android {
     compileSdk rootProject.compileSdkVersion
