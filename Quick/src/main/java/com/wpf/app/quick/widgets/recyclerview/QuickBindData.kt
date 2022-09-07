@@ -43,6 +43,7 @@ open class QuickBindData(
     ) {
         mAdapter = adapter
         mViewHolder = viewHolder
+        mView = viewHolder.itemView
         if (dealBind) {
             dealInPlugins(this, null, QuickBind.bindPlugin)
         }

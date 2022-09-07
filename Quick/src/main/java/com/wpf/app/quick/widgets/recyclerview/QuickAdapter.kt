@@ -54,9 +54,9 @@ class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>(), Dat
             }
             holder?.let {
                 holder.onCreateViewHolder(holder.itemView)
-                if (findData is QuickBindData) {
-                    findData.onCreateViewHolder(holder.itemView)
-                }
+//                if (findData is QuickBindData) {
+//                    findData.onCreateViewHolder(holder.itemView)
+//                }
             }
             return holder as QuickViewHolder<QuickItemData>
         }
