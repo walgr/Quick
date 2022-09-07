@@ -3,6 +3,7 @@ package com.wpf.app.quick.widgets.recyclerview
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
+import com.wpf.app.quick.utils.LogUtil
 import com.wpf.app.quick.widgets.recyclerview.annotations.BindHolder
 import com.wpf.app.quick.widgets.recyclerview.data.QuickBindData
 import com.wpf.app.quick.widgets.recyclerview.data.QuickItemData
@@ -64,12 +65,14 @@ open class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>()
                 }
             }
             holder?.let {
-                if (findData is QuickBindData) {
-                    findData.onCreateViewHolder(holder.itemView)
-                } else {
-                    holder.onCreateViewHolder(holder.itemView)
-                }
+//                if (findData is QuickBindData) {
+//                    findData.onCreateViewHolder(holder.itemView)
+//                } else {
+//                    holder.onCreateViewHolder(holder.itemView)
+//                }
+                holder.onCreateViewHolder(holder.itemView)
             }
+            LogUtil.e("onCreateViewHolder")
             return holder as QuickViewHolder<QuickItemData>
         }
         return null!!

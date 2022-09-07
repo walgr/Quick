@@ -25,6 +25,9 @@ class RefreshListTestActivity : QuickActivity(R.layout.activity_refresh_list, ti
         mRecyclerView?.mRequestData = ListRequest(0)
         mRecyclerView?.setDataChangeListener(object : DataChangeOnListener<ListRequest, RefreshItem> {
             override fun onLoadMore(requestData: ListRequest, callback: Callback<RefreshItem>) {
+                if (requestData.page > 2) {
+                    mSmartRefreshLayout?.setEnableLoadMore(false)
+                }
                 Thread {
                     try {
                         Thread.sleep(500)

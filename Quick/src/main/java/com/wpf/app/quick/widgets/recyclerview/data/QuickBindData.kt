@@ -32,6 +32,7 @@ open class QuickBindData(
     /**
      * TODO 列表中刷新会不执行onCreateViewHolder
      */
+//    @Deprecated("有复用Bug")
     open fun onCreateViewHolder(itemView: View) {
         this.mView = itemView
         if (dealBind) {
@@ -73,9 +74,9 @@ open class QuickBindData(
         return mView
     }
 
-    override fun initViewType() {
-        if (viewType == 0) {
-            viewType = abs(this.hashCode()) + Random.nextInt(1000)
-        }
-    }
+//    override fun initViewType() {
+//        if (viewType == 0) {
+//            viewType = abs(this.hashCode()) + Random.nextInt(1000)
+//        }
+//    }
 }
