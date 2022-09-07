@@ -32,6 +32,9 @@ open class QuickRefreshRecyclerView @JvmOverloads constructor(
             mRequestData, object : Callback<QuickItemData> {
                 override fun callback(data: List<QuickItemData>?) {
                     setNewData(data)
+                    adapter.getData()?.forEachIndexed { index, item->
+//                        item.viewType = index
+                    }
                     adapter.notifyDataSetChanged()
                 }
 
@@ -47,6 +50,9 @@ open class QuickRefreshRecyclerView @JvmOverloads constructor(
             object : Callback<QuickItemData> {
                 override fun callback(data: List<QuickItemData>?) {
                     appendList(data)
+                    adapter.getData()?.forEachIndexed { index, item->
+//                        item.viewType = index
+                    }
                     adapter.notifyItemRangeInserted(
                         size() - (data?.size ?: 0), (data?.size ?: 0)
                     )

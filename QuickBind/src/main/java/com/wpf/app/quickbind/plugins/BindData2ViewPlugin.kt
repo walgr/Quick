@@ -1,5 +1,6 @@
 package com.wpf.app.quickbind.plugins
 
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
@@ -45,6 +46,7 @@ class BindData2ViewPlugin : BasePlugin {
             field.isAccessible = true
             val value = field[getRealObj(obj, viewModel)]
             if (findView == null || value == null) return true
+            Log.e("onBindViewHolder","-----" + obj)
             var bindBaseHelper: BindD2VHelper<RecyclerView.ViewHolder, View, Any>?
             try {
                 helper.fields.find {

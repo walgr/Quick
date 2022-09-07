@@ -33,7 +33,7 @@ class RefreshListTestActivity : QuickActivity(R.layout.activity_refresh_list, ti
                     }
                     mSmartRefreshLayout?.post {
                         mSmartRefreshLayout?.finishLoadMore()
-                        callback.callback(arrayListOf(RefreshItem(), RefreshItem(), RefreshItem()))
+                        callback.callback(arrayListOf(RefreshItem(), RefreshItem(), RefreshItem(),RefreshItem(), RefreshItem(), RefreshItem(),RefreshItem(), RefreshItem(), RefreshItem()))
                     }
                 }.start()
             }
@@ -47,7 +47,7 @@ class RefreshListTestActivity : QuickActivity(R.layout.activity_refresh_list, ti
                     }
                     mSmartRefreshLayout?.post {
                         mSmartRefreshLayout?.finishRefresh()
-                        callback.callback(arrayListOf(RefreshItem(), RefreshItem()))
+                        callback.callback(arrayListOf(RefreshItem(), RefreshItem(),RefreshItem(), RefreshItem(), RefreshItem(),RefreshItem(), RefreshItem(), RefreshItem(),RefreshItem(), RefreshItem(), RefreshItem(), RefreshItem(), RefreshItem(), RefreshItem(),RefreshItem(), RefreshItem(), RefreshItem(),RefreshItem(), RefreshItem(), RefreshItem()))
                     }
                 }.start()
             }

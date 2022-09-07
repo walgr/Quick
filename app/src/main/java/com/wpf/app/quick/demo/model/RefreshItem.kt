@@ -6,9 +6,13 @@ import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.annotations.BindData2View
 import com.wpf.app.quick.helper.binddatahelper.ItemClick
 import com.wpf.app.quick.helper.binddatahelper.Text2TextView
+import com.wpf.app.quick.utils.LogUtil
+import com.wpf.app.quick.widgets.recyclerview.QuickAdapter
 import com.wpf.app.quick.widgets.recyclerview.data.QuickBindData
+import com.wpf.app.quick.widgets.recyclerview.holder.QuickViewHolder
 import com.wpf.app.quickbind.interfaces.itemClick
 import com.wpf.app.quickbind.interfaces.runOnHolder
+import kotlin.random.Random
 
 /**
  * Created by 王朋飞 on 2022/7/8.
@@ -17,16 +21,23 @@ class RefreshItem : QuickBindData(R.layout.holder_refresh_item) {
 
     @SuppressLint("NonConstantResourceId")
     @BindData2View(id = R.id.title, helper = Text2TextView::class)
-    var title = runOnHolder {
-        "Title " + getViewHolder()?.bindingAdapterPosition
-    }
+    var title = "Title:${Random.nextInt(100)}"
 
-    @BindData2View(helper = ItemClick::class)
-    var itemClick = itemClick {
-        Toast.makeText(
-            it.context,
-            "点击" + getViewHolder()?.bindingAdapterPosition,
-            Toast.LENGTH_SHORT
-        ).show()
+//    @BindData2View(helper = ItemClick::class)
+//    var itemClick = itemClick {
+//        Toast.makeText(
+//            it.context,
+//            "点击" + getViewHolder()?.bindingAdapterPosition,
+//            Toast.LENGTH_SHORT
+//        ).show()
+//    }
+
+    override fun onBindViewHolder(
+        adapter: QuickAdapter,
+        viewHolder: QuickViewHolder<QuickBindData>,
+        position: Int
+    ) {
+        super.onBindViewHolder(adapter, viewHolder, position)
+        LogUtil.e("onBindViewHolder-----" + this)
     }
 }
