@@ -17,7 +17,6 @@ object Text2TextView :
         view: TextView,
         data: CharSequence
     ) {
-        LogUtil.e("onBindViewHolder-----" + view)
         view.text = data
     }
 }

@@ -5,10 +5,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.wpf.app.quick.demo.databinding.ActivitySelectTestBinding
 import com.wpf.app.quick.demo.model.ParentSelectItem
 import com.wpf.app.quick.demo.model.SelectItem
+import com.wpf.app.quick.demo.model.SelectResultItem
 import com.wpf.app.quick.utils.LogUtil
 import com.wpf.app.quick.viewmodel.QuickBindingViewModel
 import com.wpf.app.quick.widgets.recyclerview.data.QuickChildSelectData
 import com.wpf.app.quick.widgets.recyclerview.listeners.OnSelectCallback
+import com.wpf.app.quick.widgets.recyclerview.listeners.OnSelectOnChange
 
 /**
  * Created by 王朋飞 on 2022/9/16.
@@ -23,10 +25,17 @@ class SelectListViewModel: QuickBindingViewModel<ActivitySelectTestBinding>() {
             override fun onSelectResult(selectResult: List<QuickChildSelectData>?) {
                 LogUtil.e("选择了${selectResult}")
                 selectList.value = selectResult
-                mViewBinding?.selectResult?.setNewData(selectResult)
+                mViewBinding?.selectResult?.setNewData(selectResult?.map {
+                    SelectResultItem(it.isSelect, it.id, it.name)
+                })
             }
         }
         mViewBinding?.selectResult?.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+        mViewBinding?.selectResult?.setOnSelectChangeListener(object : OnSelectOnChange {
+            override fun onSelectChange() {
+
+            }
+        })
         loadData()
     }
 

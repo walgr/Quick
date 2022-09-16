@@ -61,6 +61,13 @@ interface DataSelectOnAdapter : DataChangeAdapter {
     }
 
     /**
+     * 重新设置选择列表
+     */
+    fun setNewSelect(selectIdList: List<String>) {
+        clearAll(false)
+    }
+
+    /**
      * 全局清空
      */
     fun clearAll(dealChange: Boolean = true) {
@@ -78,7 +85,6 @@ interface DataSelectOnAdapter : DataChangeAdapter {
             }
         }
         if (dealChange) {
-
             notifyItemChange(changePos)
         }
     }
