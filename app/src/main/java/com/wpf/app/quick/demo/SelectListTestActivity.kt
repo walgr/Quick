@@ -38,14 +38,14 @@ class SelectListTestActivity :
 
     private fun loadData() {
         val allData = mutableListOf<ParentSelectItem>()
-        for (i in 0..10) {
+        for (i in 0 until 10) {
             val parentItem = ParentSelectItem().apply {
                 id = i.toString()
                 name = "父"
             }
             allData.add(parentItem)
             val childList = mutableListOf<SelectItem>()
-            for (j in 0..20) {
+            for (j in 0 until 20) {
                 childList.add(SelectItem().apply {
                     parent = parentItem
                     id = j.toString()
