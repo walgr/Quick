@@ -5,11 +5,10 @@ import android.util.AttributeSet
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.core.view.children
-import com.wpf.app.quick.utils.LogUtil
 import com.wpf.app.quick.widgets.recyclerview.QuickSelectRecyclerView
 import com.wpf.app.quick.widgets.recyclerview.data.QuickChildSelectData
 import com.wpf.app.quick.widgets.recyclerview.data.QuickParentSelectData
-import com.wpf.app.quick.widgets.recyclerview.data.QuickSelectData
+import com.wpf.app.quick.widgets.recyclerview.listeners.OnSelectCallback
 import com.wpf.app.quick.widgets.recyclerview.listeners.OnSelectOnChange
 
 /**
@@ -22,6 +21,8 @@ open class QuickMultistageSelectView @JvmOverloads constructor(
     defStyleAttr: Int = 0,
     private val weightList: List<Float>? = null,            //层级深度由数组长度确定 null由xml里自己确定子view
 ) : LinearLayout(mContext, attributeSet, defStyleAttr) {
+
+    var mOnSelectCallback: OnSelectCallback? = null
 
     private val selectViewList = mutableListOf<QuickSelectRecyclerView>()
 
@@ -56,12 +57,12 @@ open class QuickMultistageSelectView @JvmOverloads constructor(
         selectViewList[selectViewList.size - 1].setOnSelectChangeListener(object :
             OnSelectOnChange {
             override fun onSelectChange() {
-                LogUtil.e("总共选择了" + getSelectList().toString())
+                mOnSelectCallback?.onSelectResult(getSelectList())
             }
         })
     }
 
-    fun getSelectList(): List<QuickSelectData>? {
+    fun getSelectList(): List<QuickChildSelectData>? {
         if (selectViewList.isEmpty()) return null
         return selectViewList[0].getRealTypeData<QuickChildSelectData>()?.flatMap {
             it.childList ?: arrayListOf()
@@ -88,4 +89,5 @@ open class QuickMultistageSelectView @JvmOverloads constructor(
         selectViewList[0].getSelectAdapter().notifyItemChanged(0)
         selectViewList[1].setNewData(dataList[0].childList)
     }
+
 }

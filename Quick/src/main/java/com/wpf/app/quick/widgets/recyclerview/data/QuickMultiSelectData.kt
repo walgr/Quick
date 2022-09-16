@@ -17,6 +17,7 @@ open class QuickMultiSelectData(
     open var singleSelect: Boolean = true,               //true 单选  false 多选
     open val isGlobal: Boolean = true,                   //true 全局范围  false 同父范围
     open var maxLimit: Int = 5,                          //多选最多数量
+    @Transient
     open val maxLimitListener: MaxLimitListener? = null, //超出反馈
     override var id: String? = null,
     override var name: String? = null,

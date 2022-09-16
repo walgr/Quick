@@ -24,6 +24,4 @@ open class QuickSelectAdapter: QuickAdapter(), DataSelectOnAdapter {
     override fun getOnSelectChangeListener(): OnSelectOnChange? {
         return this.mOnSelectChange
     }
-
-
 }

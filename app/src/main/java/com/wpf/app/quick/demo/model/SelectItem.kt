@@ -20,6 +20,7 @@ import com.wpf.app.quickbind.interfaces.runOnHolder
  */
 class ParentSelectItem : QuickParentSelectData(layoutId = R.layout.holder_select_parent_item, canCancel = false) {
 
+    @Transient
     @SuppressLint("NonConstantResourceId")
     @BindData2View(id = R.id.title, helper = Text2TextView::class)
     var title = runOnHolder { "" + name + getViewHolder()?.bindingAdapterPosition + getParentName() + "(${getChildSelectSize()})"}
@@ -53,6 +54,7 @@ open class SelectItem : QuickChildSelectData(layoutId = R.layout.holder_select_i
     @BindData2View(id = R.id.select, helper = Select2CheckBox::class)
     override var isSelect = false
 
+    @Transient
     @SuppressLint("NonConstantResourceId")
     @BindData2View(id = R.id.title, helper = Text2TextView::class)
     var title = runOnHolder { name + getViewHolder()?.bindingAdapterPosition + "属于:父" + parent?.id }

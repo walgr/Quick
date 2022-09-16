@@ -2,12 +2,17 @@ package com.wpf.app.quick.demo
 
 import android.annotation.SuppressLint
 import android.view.View
+import com.google.gson.Gson
 import com.wpf.app.quick.activity.QuickActivity
 import com.wpf.app.quick.annotations.BindData2View
 import com.wpf.app.quick.annotations.BindView
 import com.wpf.app.quick.demo.model.ParentSelectItem
 import com.wpf.app.quick.helper.binddatahelper.ItemClick
 import com.wpf.app.quick.demo.model.SelectItem
+import com.wpf.app.quick.utils.GsonHelper
+import com.wpf.app.quick.utils.LogUtil
+import com.wpf.app.quick.widgets.recyclerview.data.QuickChildSelectData
+import com.wpf.app.quick.widgets.recyclerview.listeners.OnSelectCallback
 import com.wpf.app.quick.widgets.selectview.QuickMultistageSelectView
 import com.wpf.app.quickbind.interfaces.itemClick
 
@@ -50,6 +55,12 @@ class SelectListTestActivity :
             parentItem.childList = childList
         }
         selectList?.setData(allData)
+        selectList?.mOnSelectCallback = object : OnSelectCallback {
+            override fun onSelectResult(selectResult: List<QuickChildSelectData>?) {
+                LogUtil.e("选择了${selectResult}")
+            }
+
+        }
     }
 
     fun clean(view: View?) {

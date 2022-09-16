@@ -1,9 +1,9 @@
 package com.wpf.app.quick.widgets.recyclerview.data
 
 import androidx.annotation.LayoutRes
+import com.google.gson.annotations.Expose
 import com.wpf.app.quick.annotations.BindData2View
 import com.wpf.app.quick.helper.binddatahelper.ItemClick
-import com.wpf.app.quick.utils.LogUtil
 import com.wpf.app.quickbind.interfaces.RunItemClickWithSelf
 import com.wpf.app.quickbind.interfaces.itemClickRun
 import com.wpf.app.quickbind.interfaces.itemClickWithSelf
@@ -24,6 +24,7 @@ open class QuickChildSelectData(
     override var singleSelect: Boolean = false,               //true 单选  false 多选
     override val isGlobal: Boolean = true,                   //true 全局范围  false 同父范围
     override var maxLimit: Int = 5,                          //多选最多数量
+    @Transient
     override val maxLimitListener: MaxLimitListener? = null, //超出反馈
     @LayoutRes override val layoutId: Int,
 ) : QuickMultiSelectData(

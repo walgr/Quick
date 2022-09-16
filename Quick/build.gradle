@@ -43,6 +43,8 @@ dependencies {
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.7.1'
 
+    compileOnly 'com.google.code.gson:gson:2.9.0'
+
     if (IS_REMOTE.toBoolean()) {
         api deps.quickbind.base
     } else {

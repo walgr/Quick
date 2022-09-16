@@ -21,6 +21,7 @@ open class QuickParentSelectData(
     override var singleSelect: Boolean = true,               //true 单选  false 多选
     override val isGlobal: Boolean = true,                   //true 全局范围  false 同父范围
     override var maxLimit: Int = 5,                          //多选最多数量
+    @Transient
     override val maxLimitListener: MaxLimitListener? = null, //超出反馈
     @LayoutRes override val layoutId: Int,
 ) : QuickChildSelectData(
