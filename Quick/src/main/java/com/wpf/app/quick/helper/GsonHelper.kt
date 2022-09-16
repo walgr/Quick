@@ -1,10 +1,10 @@
-package com.wpf.app.quick.utils
+package com.wpf.app.quick.helper
 
 import com.google.gson.ExclusionStrategy
 import com.google.gson.FieldAttributes
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import java.lang.reflect.Field
+import com.wpf.app.quick.utils.LogUtil
 
 /**
  * Created by 王朋飞 on 2022/9/16.

@@ -48,6 +48,7 @@ abstract class QuickViewModelBindingActivity<VM : QuickBindingViewModel<VB>, VB 
                     viewModelCls
                 )
             QuickBind.bind(this, mViewModel)
+            mViewModel?.activity = this
             mViewModel?.onBindingCreated(viewBinding)
         } else {
             setViewBinding()

@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.wpf.app.quick.demo.viewmodel.RecyclerViewTestViewModel" />
+            type="com.wpf.app.quick.demo.viewmodel.SelectListViewModel" />
     </data>
 
     <RelativeLayout
@@ -17,26 +17,59 @@
         android:background="@color/white"
         android:orientation="vertical">
 
-        <com.wpf.app.quick.widgets.selectview.QuickMultistageSelectView
-            android:id="@+id/selectList"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.wpf.app.quick.widgets.recyclerview.QuickSelectRecyclerView
-                android:id="@+id/list1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            <com.wpf.app.quick.widgets.selectview.QuickMultistageSelectView
+                android:id="@+id/selectList"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <com.wpf.app.quick.widgets.recyclerview.QuickSelectRecyclerView
-                android:id="@+id/list2"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="5"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                <com.wpf.app.quick.widgets.recyclerview.QuickSelectRecyclerView
+                    android:id="@+id/list1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-        </com.wpf.app.quick.widgets.selectview.QuickMultistageSelectView>
+                <com.wpf.app.quick.widgets.recyclerview.QuickSelectRecyclerView
+                    android:id="@+id/list2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            </com.wpf.app.quick.widgets.selectview.QuickMultistageSelectView>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="56dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{`已选(` + viewModel.selectList.size() + `)`}"
+                    />
+
+                <com.wpf.app.quick.widgets.recyclerview.QuickSelectRecyclerView
+                    android:id="@+id/selectResult"
+                    android:layout_weight="1"
+                    android:layout_marginStart="16dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     </RelativeLayout>
 

@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModel
+import com.wpf.app.quick.activity.QuickViewModelBindingActivity
 
 /**
  * Created by 王朋飞 on 2022/7/13.
@@ -12,6 +13,7 @@ import androidx.lifecycle.ViewModel
  */
 abstract class QuickBindingViewModel<T : ViewDataBinding> : ViewModel(), LifecycleObserver {
     var mViewBinding: T? = null
+    var activity: QuickViewModelBindingActivity<out QuickBindingViewModel<T>, T>? = null
 
     open fun onResume() {}
 
