@@ -5,11 +5,13 @@ import android.util.AttributeSet
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.core.view.children
+import com.wpf.app.quick.utils.LogUtil
 import com.wpf.app.quick.widgets.recyclerview.QuickSelectRecyclerView
 import com.wpf.app.quick.widgets.recyclerview.data.QuickChildSelectData
 import com.wpf.app.quick.widgets.recyclerview.data.QuickParentSelectData
 import com.wpf.app.quick.widgets.recyclerview.listeners.OnSelectCallback
 import com.wpf.app.quick.widgets.recyclerview.listeners.OnSelectOnChange
+import com.wpf.app.quick.widgets.recyclerview.listeners.SetSelectChange
 
 /**
  * Created by 王朋飞 on 2022/9/5.
@@ -24,6 +26,7 @@ open class QuickMultistageSelectView @JvmOverloads constructor(
 
     var mOnSelectCallback: OnSelectCallback? = null
 
+    private var allData: List<QuickParentSelectData>? = null
     private val selectViewList = mutableListOf<QuickSelectRecyclerView>()
 
     init {
@@ -84,10 +87,35 @@ open class QuickMultistageSelectView @JvmOverloads constructor(
     }
 
     fun setData(dataList: List<out QuickParentSelectData>) {
+        allData = dataList
         selectViewList[0].setNewData(dataList)
         selectViewList[0].getSelectAdapter().curClickData = dataList[0]
         selectViewList[0].getSelectAdapter().notifyItemChanged(0)
         selectViewList[1].setNewData(dataList[0].childList)
     }
 
+    fun bindResult(setChange: SetSelectChange?) {
+        setChange?.setOnSelectChangeListener(object : OnSelectOnChange {
+            override fun onSelectChange() {
+                setNewSelectList(setChange.getSelectList())
+            }
+        })
+    }
+
+    fun setNewSelectList(newSelect: List<QuickChildSelectData>?) {
+        selectViewList[0].clearAll(false)
+        (selectViewList[0].getRealTypeData<QuickChildSelectData>())?.flatMap {
+            it.childList ?: arrayListOf()
+        }?.forEach { it ->
+            val find = newSelect?.find { find ->
+                find.id == it.id && find.parent == it.parent
+            }
+            if (find != null) {
+                it.isSelect = true
+            }
+        }
+        selectViewList.forEach {
+            it.notifyItemChange()
+        }
+    }
 }

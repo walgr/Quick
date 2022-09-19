@@ -9,10 +9,7 @@ import com.wpf.app.quick.widgets.recyclerview.data.QuickSelectData
  * Created by 王朋飞 on 2022/9/2.
  * 处理父子同级
  */
-interface DataSelectOnAdapter : DataChangeAdapter {
-
-    fun setOnSelectChangeListener(onSelectChange: OnSelectOnChange)
-    fun getOnSelectChangeListener(): OnSelectOnChange?
+interface DataSelectOnAdapter : DataChangeAdapter, SetSelectChange {
 
     /**
      * Item点击
@@ -55,16 +52,9 @@ interface DataSelectOnAdapter : DataChangeAdapter {
         if (curItemSelect != childSelectData.isSelect) {
             childSelectData.onSelectChange(childSelectData.isSelect)
             getSelectAdapter().getOnSelectChangeListener()?.onSelectChange()
-            childSelectData.parent?.onChildChange(getItemSelectList())
+            childSelectData.parent?.onChildChange(getSelectList())
         }
         notifyItemChange()
-    }
-
-    /**
-     * 重新设置选择列表
-     */
-    fun setNewSelect(selectIdList: List<String>) {
-        clearAll(false)
     }
 
     /**
@@ -154,14 +144,14 @@ interface DataSelectOnAdapter : DataChangeAdapter {
         }
     }
 
-    fun getItemSelectList(): MutableList<QuickChildSelectData>? {
+    override fun getSelectList(): MutableList<QuickChildSelectData>? {
         return asChildSelectData()?.filter {
             it.isSelect
         }?.toMutableList()
     }
 
     fun getItemSelectSize(): Int {
-        return getItemSelectList()?.size ?: 0
+        return getSelectList()?.size ?: 0
     }
 
     fun getSelectAdapter(): QuickSelectAdapter {

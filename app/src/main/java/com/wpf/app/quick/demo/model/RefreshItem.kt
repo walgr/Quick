@@ -38,6 +38,6 @@ class RefreshItem : QuickBindData(R.layout.holder_refresh_item) {
         position: Int
     ) {
         super.onBindViewHolder(adapter, viewHolder, position)
-        LogUtil.e("onBindViewHolder-----" + this)
+//        LogUtil.e("onBindViewHolder-----" + this)
     }
 }

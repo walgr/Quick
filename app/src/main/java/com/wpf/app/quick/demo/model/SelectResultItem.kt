@@ -4,6 +4,7 @@ import com.wpf.app.quick.annotations.BindData2View
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.helper.binddatahelper.Text2TextView
 import com.wpf.app.quick.widgets.recyclerview.data.QuickChildSelectData
+import com.wpf.app.quick.widgets.recyclerview.data.QuickParentSelectData
 import com.wpf.app.quickbind.interfaces.itemClickRun
 import com.wpf.app.quickbind.interfaces.itemClickWithSelf
 
@@ -13,6 +14,7 @@ import com.wpf.app.quickbind.interfaces.itemClickWithSelf
  */
 class SelectResultItem(
     override var isSelect: Boolean,
+    override var parent: QuickParentSelectData? = null,
     override var id: String?,
     @BindData2View(id = R.id.title, helper = Text2TextView::class)
     override var name: String?
@@ -21,8 +23,9 @@ class SelectResultItem(
     onChildClick = itemClickWithSelf { self ->
         itemClickRun {
             self.isSelect = false
+            val index = self.getAdapter().getData()?.indexOf(self) ?: 0
             self.getAdapter().getData()?.remove(self)
-            self.getAdapter().notifyItemRemoved(self.getViewHolder()?.itemPosition ?: 0)
+            self.getAdapter().notifyItemRemoved(index)
             self.getAdapter().getOnSelectChangeListener()?.onSelectChange()
         }
     })

@@ -46,7 +46,7 @@ class BindData2ViewPlugin : BasePlugin {
             field.isAccessible = true
             val value = field[getRealObj(obj, viewModel)]
             if (findView == null || value == null) return true
-            Log.e("onBindViewHolder","-----" + obj)
+//            Log.e("onBindViewHolder","-----" + obj)
             var bindBaseHelper: BindD2VHelper<RecyclerView.ViewHolder, View, Any>?
             try {
                 helper.fields.find {

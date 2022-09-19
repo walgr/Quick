@@ -26,16 +26,12 @@ class SelectListViewModel: QuickBindingViewModel<ActivitySelectTestBinding>() {
                 LogUtil.e("选择了${selectResult}")
                 selectList.value = selectResult
                 mViewBinding?.selectResult?.setNewData(selectResult?.map {
-                    SelectResultItem(it.isSelect, it.id, it.name)
+                    SelectResultItem(it.isSelect, it.parent, it.id, it.name)
                 })
             }
         }
         mViewBinding?.selectResult?.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-        mViewBinding?.selectResult?.setOnSelectChangeListener(object : OnSelectOnChange {
-            override fun onSelectChange() {
-
-            }
-        })
+        mViewBinding?.selectList?.bindResult(mViewBinding.selectResult)
         loadData()
     }
 

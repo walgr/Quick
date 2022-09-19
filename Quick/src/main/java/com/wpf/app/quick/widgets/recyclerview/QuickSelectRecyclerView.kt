@@ -5,16 +5,17 @@ import android.util.AttributeSet
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.wpf.app.quick.widgets.recyclerview.listeners.DataSelectOnAdapter
 import com.wpf.app.quick.widgets.recyclerview.listeners.OnSelectOnChange
+import com.wpf.app.quick.widgets.recyclerview.listeners.SetSelectChange
 
 /**
  * Created by 王朋飞 on 2022/9/5.
  *
  */
-class QuickSelectRecyclerView @JvmOverloads constructor(
+open class QuickSelectRecyclerView @JvmOverloads constructor(
     mContext: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : QuickRecyclerView(mContext, attrs, defStyleAttr), DataSelectOnAdapter {
+) : QuickRecyclerView(mContext, attrs, defStyleAttr), DataSelectOnAdapter, SetSelectChange {
 
     override fun init() {
         layoutManager = LinearLayoutManager(context)
