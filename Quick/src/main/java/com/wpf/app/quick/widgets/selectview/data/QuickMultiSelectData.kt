@@ -1,6 +1,7 @@
 package com.wpf.app.quick.widgets.recyclerview.data
 
 import androidx.annotation.LayoutRes
+import com.wpf.app.quick.widgets.selectview.data.QuickSelectData
 
 /**
  * Created by 王朋飞 on 2022/9/2.

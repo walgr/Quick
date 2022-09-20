@@ -8,9 +8,8 @@ import com.wpf.app.quick.demo.model.SelectItem
 import com.wpf.app.quick.demo.model.SelectResultItem
 import com.wpf.app.quick.utils.LogUtil
 import com.wpf.app.quick.viewmodel.QuickBindingViewModel
-import com.wpf.app.quick.widgets.recyclerview.data.QuickChildSelectData
+import com.wpf.app.quick.widgets.selectview.data.QuickChildSelectData
 import com.wpf.app.quick.widgets.recyclerview.listeners.OnSelectCallback
-import com.wpf.app.quick.widgets.recyclerview.listeners.OnSelectOnChange
 
 /**
  * Created by 王朋飞 on 2022/9/16.

@@ -1,4 +1,4 @@
-package com.wpf.app.quick.widgets.recyclerview.data
+package com.wpf.app.quick.widgets.selectview.data
 
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
@@ -39,8 +39,15 @@ open class QuickSelectData(
 
     }
 
-    override fun getAdapter(): QuickSelectAdapter {
-        return super.getAdapter() as QuickSelectAdapter
+    override fun getAdapter(): QuickSelectAdapter? {
+        return super.getAdapter() as? QuickSelectAdapter
+    }
+
+    /**
+     * 当前点击
+     */
+    open fun onClick() {
+
     }
 
     /**
@@ -51,9 +58,9 @@ open class QuickSelectData(
     }
 
     /**
-     * 当前是否点击
+     * 点击态变化
      */
-    open fun onClick() {
+    open fun onClickChange(clicked: Boolean) {
 
     }
 }

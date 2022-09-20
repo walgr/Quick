@@ -1,7 +1,13 @@
-package com.wpf.app.quick.widgets.recyclerview.data
+package com.wpf.app.quick.widgets.selectview.data
 
+import android.annotation.SuppressLint
 import androidx.annotation.LayoutRes
 import com.wpf.app.quick.utils.LogUtil
+import com.wpf.app.quick.widgets.recyclerview.QuickAdapter
+import com.wpf.app.quick.widgets.recyclerview.QuickSelectAdapter
+import com.wpf.app.quick.widgets.recyclerview.data.MaxLimitListener
+import com.wpf.app.quick.widgets.recyclerview.data.QuickBindData
+import com.wpf.app.quick.widgets.recyclerview.holder.QuickViewHolder
 import com.wpf.app.quickbind.interfaces.RunItemClickWithSelf
 
 /**
@@ -29,14 +35,35 @@ open class QuickParentSelectData(
     layoutId = layoutId
 ) {
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onClick() {
-        getAdapter().curClickData = this
-        getAdapter().notifyDataSetChanged()
-        getAdapter().childSelectAdapter?.setNewData(childList)
-        getAdapter().childSelectAdapter?.notifyDataSetChanged()
+        if (getView() != null) {
+            if (getAdapter()?.curClickData != this) {
+                val oldClickPos = getAdapter()?.getDataPos(getAdapter()?.curClickData) ?: -1
+                getAdapter()?.curClickData = this
+                getAdapter()?.notifyItemChange(
+                    arrayListOf(
+                        oldClickPos,
+                        getAdapter()?.getDataPos(this) ?: -1
+                    )
+                )
+            }
+        }
+        childList?.let {
+            getAdapter()?.childSelectAdapter?.setNewData(childList)
+        }
     }
 
     open fun onChildChange(selectList: List<QuickChildSelectData>?) {
 
+    }
+
+    override fun onBindViewHolder(
+        adapter: QuickSelectAdapter,
+        viewHolder: QuickViewHolder<QuickBindData>,
+        position: Int
+    ) {
+        super.onBindViewHolder(adapter, viewHolder, position)
+        onClickChange(adapter.curClickData == this)
     }
 }

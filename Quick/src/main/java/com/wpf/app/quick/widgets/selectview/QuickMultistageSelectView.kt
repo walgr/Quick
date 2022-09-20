@@ -5,10 +5,9 @@ import android.util.AttributeSet
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.core.view.children
-import com.wpf.app.quick.utils.LogUtil
 import com.wpf.app.quick.widgets.recyclerview.QuickSelectRecyclerView
-import com.wpf.app.quick.widgets.recyclerview.data.QuickChildSelectData
-import com.wpf.app.quick.widgets.recyclerview.data.QuickParentSelectData
+import com.wpf.app.quick.widgets.selectview.data.QuickChildSelectData
+import com.wpf.app.quick.widgets.selectview.data.QuickParentSelectData
 import com.wpf.app.quick.widgets.recyclerview.listeners.OnSelectCallback
 import com.wpf.app.quick.widgets.recyclerview.listeners.OnSelectOnChange
 import com.wpf.app.quick.widgets.recyclerview.listeners.SetSelectChange

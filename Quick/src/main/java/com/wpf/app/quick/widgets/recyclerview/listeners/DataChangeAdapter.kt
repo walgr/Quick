@@ -51,6 +51,20 @@ interface DataChangeAdapter {
         getData()?.add(pos, data)
     }
 
+    fun getDataPos(curData: QuickItemData?): Int {
+        return getData()?.indexOf(curData) ?: -1
+    }
+
+    /**
+     * 未找到不会刷新
+     */
+    fun notifyItemChanged(curData: QuickItemData?) {
+        val pos = getDataPos(curData)
+        if (pos != -1) {
+            getAdapter().notifyItemChanged(pos)
+        }
+    }
+
     fun <T : QuickItemData> getRealTypeData(): MutableList<T>? {
         return getData() as? MutableList<T>
     }

@@ -1,9 +1,10 @@
-package com.wpf.app.quick.widgets.recyclerview.data
+package com.wpf.app.quick.widgets.selectview.data
 
 import androidx.annotation.LayoutRes
-import com.google.gson.annotations.Expose
 import com.wpf.app.quick.annotations.BindData2View
 import com.wpf.app.quick.helper.binddatahelper.ItemClick
+import com.wpf.app.quick.widgets.recyclerview.data.MaxLimitListener
+import com.wpf.app.quick.widgets.recyclerview.data.QuickMultiSelectData
 import com.wpf.app.quickbind.interfaces.RunItemClickWithSelf
 import com.wpf.app.quickbind.interfaces.itemClickRun
 import com.wpf.app.quickbind.interfaces.itemClickWithSelf
@@ -46,10 +47,10 @@ open class QuickChildSelectData(
                 if (!self.canClick) {
                     return@itemClickRun
                 }
-                getAdapter().onChildClick(self)
-                getAdapter().onParentChild(self)
+                getAdapter()?.onChildClick(self)
+                getAdapter()?.onParentChild(self)
             } else {
-                getAdapter().onChildClick(self)
+                getAdapter()?.onChildClick(self)
             }
         }
     }
@@ -61,7 +62,7 @@ open class QuickChildSelectData(
 
     }
 
-    fun runClick() {
+    fun performClick() {
         childClick.run(this)
     }
 }

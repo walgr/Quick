@@ -1,9 +1,9 @@
 package com.wpf.app.quick.widgets.recyclerview.listeners
 
 import com.wpf.app.quick.widgets.recyclerview.QuickSelectAdapter
-import com.wpf.app.quick.widgets.recyclerview.data.QuickChildSelectData
-import com.wpf.app.quick.widgets.recyclerview.data.QuickParentSelectData
-import com.wpf.app.quick.widgets.recyclerview.data.QuickSelectData
+import com.wpf.app.quick.widgets.selectview.data.QuickChildSelectData
+import com.wpf.app.quick.widgets.selectview.data.QuickParentSelectData
+import com.wpf.app.quick.widgets.selectview.data.QuickSelectData
 
 /**
  * Created by 王朋飞 on 2022/9/2.

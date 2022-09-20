@@ -24,7 +24,7 @@ open class QuickBindData(
     @Transient
     private var mViewHolder: QuickViewHolder<QuickBindData>? = null
     @Transient
-    private lateinit var mAdapter: QuickAdapter
+    private var mAdapter: QuickAdapter? = null
     private var dealBind = true
     @Transient
     private var mView: View? = null
@@ -62,7 +62,7 @@ open class QuickBindData(
         this.dealBind = false
     }
 
-    open fun getAdapter(): QuickAdapter {
+    open fun getAdapter(): QuickAdapter? {
         return mAdapter
     }
 
