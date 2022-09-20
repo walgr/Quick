@@ -1,4 +1,4 @@
-package com.wpf.app.quick.widgets.recyclerview.data
+package com.wpf.app.quick.widgets.selectview.data
 
 import androidx.annotation.LayoutRes
 import com.wpf.app.quick.widgets.selectview.data.QuickSelectData

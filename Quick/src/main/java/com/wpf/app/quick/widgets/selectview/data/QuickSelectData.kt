@@ -6,7 +6,6 @@ import com.wpf.app.quick.widgets.recyclerview.QuickAdapter
 import com.wpf.app.quick.widgets.recyclerview.QuickSelectAdapter
 import com.wpf.app.quick.widgets.recyclerview.data.QuickBindData
 import com.wpf.app.quick.widgets.recyclerview.holder.QuickViewHolder
-import com.wpf.app.quickbind.QuickBind
 
 /**
  * Created by 王朋飞 on 2022/7/13.

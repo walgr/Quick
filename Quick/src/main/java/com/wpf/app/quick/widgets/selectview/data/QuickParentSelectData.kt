@@ -2,10 +2,7 @@ package com.wpf.app.quick.widgets.selectview.data
 
 import android.annotation.SuppressLint
 import androidx.annotation.LayoutRes
-import com.wpf.app.quick.utils.LogUtil
-import com.wpf.app.quick.widgets.recyclerview.QuickAdapter
 import com.wpf.app.quick.widgets.recyclerview.QuickSelectAdapter
-import com.wpf.app.quick.widgets.recyclerview.data.MaxLimitListener
 import com.wpf.app.quick.widgets.recyclerview.data.QuickBindData
 import com.wpf.app.quick.widgets.recyclerview.holder.QuickViewHolder
 import com.wpf.app.quickbind.interfaces.RunItemClickWithSelf
