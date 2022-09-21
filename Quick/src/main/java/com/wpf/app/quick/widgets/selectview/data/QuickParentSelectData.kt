@@ -2,6 +2,7 @@ package com.wpf.app.quick.widgets.selectview.data
 
 import android.annotation.SuppressLint
 import androidx.annotation.LayoutRes
+import com.wpf.app.quick.utils.RecyclerViewUtils
 import com.wpf.app.quick.widgets.recyclerview.QuickSelectAdapter
 import com.wpf.app.quick.widgets.recyclerview.data.QuickBindData
 import com.wpf.app.quick.widgets.recyclerview.holder.QuickViewHolder
@@ -46,8 +47,24 @@ open class QuickParentSelectData(
                 )
             }
         }
-        childList?.let {
-            getAdapter()?.childSelectAdapter?.setNewData(childList)
+        if (!isInOne) {
+            childList?.let {
+                getAdapter()?.childSelectAdapter?.setNewData(childList)
+            }
+        } else {
+            //在右边查询和点击的id相同的item
+            val childAdapter = getAdapter()?.childSelectAdapter ?: return
+            var findPos = -1
+            for (i in 0 until childAdapter.size()) {
+                findPos++
+                val child = childAdapter.getRealTypeData<QuickChildSelectData>()?.get(i)
+                if (child?.parent?.id == this.id) {
+                    break
+                }
+            }
+            if (findPos >= 0) {
+                RecyclerViewUtils.scrollToPosition(childAdapter.mRecyclerView, findPos)
+            }
         }
     }
 

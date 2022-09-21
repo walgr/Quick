@@ -25,6 +25,7 @@ open class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>()
     var mDataList: MutableList<QuickItemData>? = null
 
     private var mQuickAdapterListener: QuickAdapterListener<QuickItemData>? = null
+    var mRecyclerView: RecyclerView? = null
 
     override fun onCreateViewHolder(
         viewGroup: ViewGroup,
@@ -102,4 +103,6 @@ open class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>()
     override fun getAdapter(): QuickAdapter {
         return this
     }
+
+
 }

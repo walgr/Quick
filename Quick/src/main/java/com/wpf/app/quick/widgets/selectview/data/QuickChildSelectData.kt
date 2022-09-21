@@ -12,6 +12,7 @@ import com.wpf.app.quickbind.interfaces.itemClickWithSelf
  * 筛选子类
  */
 open class QuickChildSelectData(
+    open var isInOne: Boolean = false,
     open var parent: QuickParentSelectData? = null,
     open var childList: MutableList<out QuickChildSelectData>? = null,
     onChildClick: RunItemClickWithSelf<QuickChildSelectData>? = null,

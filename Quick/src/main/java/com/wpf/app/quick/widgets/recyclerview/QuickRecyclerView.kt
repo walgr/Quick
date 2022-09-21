@@ -28,6 +28,7 @@ open class QuickRecyclerView @JvmOverloads constructor(
     open fun init() {
         layoutManager = LinearLayoutManager(context)
         mQuickAdapter = QuickAdapter()
+        mQuickAdapter.mRecyclerView = this
         adapter = mQuickAdapter
     }
 

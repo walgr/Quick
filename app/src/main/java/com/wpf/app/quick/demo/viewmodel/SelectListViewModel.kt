@@ -43,15 +43,14 @@ class SelectListViewModel: QuickBindingViewModel<ActivitySelectTestBinding>() {
             }
             allData.add(parentItem)
             val childList = mutableListOf<SelectItem>()
-            for (j in 0 until 20) {
+            for (j in 0 until 10) {
                 childList.add(SelectItem().apply {
-                    parent = parentItem
                     id = j.toString()
                     name = "子"
                 })
             }
             parentItem.childList = childList
         }
-        getViewBinding()?.selectList?.setData(allData)
+        getViewBinding()?.selectList?.setData(allData, true)
     }
 }

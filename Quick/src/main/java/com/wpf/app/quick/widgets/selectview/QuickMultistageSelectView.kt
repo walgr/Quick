@@ -5,12 +5,16 @@ import android.util.AttributeSet
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.core.view.children
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.OnScrollListener
+import com.wpf.app.quick.widgets.recyclerview.QuickSelectAdapter
 import com.wpf.app.quick.widgets.recyclerview.QuickSelectRecyclerView
-import com.wpf.app.quick.widgets.selectview.data.QuickChildSelectData
-import com.wpf.app.quick.widgets.selectview.data.QuickParentSelectData
 import com.wpf.app.quick.widgets.recyclerview.listeners.OnSelectCallback
 import com.wpf.app.quick.widgets.recyclerview.listeners.OnSelectOnChange
 import com.wpf.app.quick.widgets.recyclerview.listeners.SetSelectChange
+import com.wpf.app.quick.widgets.selectview.data.QuickChildSelectData
+import com.wpf.app.quick.widgets.selectview.data.QuickParentSelectData
+import com.wpf.app.quick.widgets.selectview.helper.ParentChildDataHelper
 
 /**
  * Created by 王朋飞 on 2022/9/5.
@@ -25,7 +29,6 @@ open class QuickMultistageSelectView @JvmOverloads constructor(
 
     var mOnSelectCallback: OnSelectCallback? = null
 
-    private var allData: List<QuickParentSelectData>? = null
     private val selectViewList = mutableListOf<QuickSelectRecyclerView>()
 
     init {
@@ -45,7 +48,7 @@ open class QuickMultistageSelectView @JvmOverloads constructor(
     private fun initView() {
         orientation = HORIZONTAL
         weightList?.let {
-            (0..weightList.size).forEachIndexed { index, weightPos ->
+            (weightList.indices).forEachIndexed { index, weightPos ->
                 addView(addSelectRecyclerView(null, index), LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.MATCH_PARENT
@@ -60,6 +63,25 @@ open class QuickMultistageSelectView @JvmOverloads constructor(
             OnSelectOnChange {
             override fun onSelectChange() {
                 mOnSelectCallback?.onSelectResult(getSelectList())
+            }
+        })
+        selectViewList[selectViewList.size - 1].addOnScrollListener(object : OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                val selectAdapter: QuickSelectAdapter =
+                    recyclerView.adapter as? QuickSelectAdapter ?: return
+                val curTopPos = recyclerView.getChildLayoutPosition(recyclerView.getChildAt(0))
+                if (curTopPos >= 0 && curTopPos < selectAdapter.size()) {
+                    val curTopData =
+                        selectAdapter.getRealTypeData<QuickChildSelectData>()?.get(curTopPos)
+                    if (curTopData?.isInOne != true) return
+                    val parentDataSize: Int = selectAdapter.parentSelectAdapter?.size() ?: 0
+                    val parentPos: Int = selectAdapter.parentSelectAdapter?.getDataPos(curTopData.parent) ?: -1
+                    if (parentPos in 0 until parentDataSize) {
+                        selectAdapter.parentSelectAdapter?.curClickData = curTopData.parent
+                        selectAdapter.parentSelectAdapter?.notifyItemChange()
+                    }
+                }
             }
         })
     }
@@ -85,8 +107,11 @@ open class QuickMultistageSelectView @JvmOverloads constructor(
         return recyclerView
     }
 
-    fun setData(dataList: List<out QuickParentSelectData>) {
-        allData = dataList
+    /**
+     * @param childInOne 是否展示所有子项 只支持父子2级数据
+     */
+    fun setData(dataList: List<QuickParentSelectData>, childInOne: Boolean = false) {
+        ParentChildDataHelper.initData(dataList, childInOne)
         selectViewList[0].setNewData(dataList)
         selectViewList[0].getSelectAdapter().curClickData = dataList[0]
         selectViewList[0].getSelectAdapter().notifyItemChanged(0)
