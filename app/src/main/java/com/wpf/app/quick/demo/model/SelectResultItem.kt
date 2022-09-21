@@ -16,8 +16,7 @@ class SelectResultItem(
     override var isSelect: Boolean,
     override var parent: QuickParentSelectData? = null,
     override var id: String?,
-    @BindData2View(id = R.id.title, helper = Text2TextView::class)
-    override var name: String?
+    override var name: String?,
 ) : QuickChildSelectData(
     layoutId = R.layout.holder_select_result_item,
     onChildClick = itemClickWithSelf { self ->
@@ -28,4 +27,7 @@ class SelectResultItem(
             self.getAdapter()?.notifyItemRemoved(index)
             self.getAdapter()?.getOnSelectChangeListener()?.onSelectChange()
         }
-    })
+    }) {
+    @BindData2View(id = R.id.title, helper = Text2TextView::class)
+    val title = name + id + "属于：" + parent?.name + parent?.id
+}

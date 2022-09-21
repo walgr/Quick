@@ -42,9 +42,6 @@ object ParentChildDataHelper {
                     parentList[0].childList = parentList.flatMap {
                         it.childList ?: arrayListOf()
                     }.toMutableList()
-                    parentList.takeLast(parentList.size - 1).forEach {
-                        it.childList = null
-                    }
                 }
             }
         }
