@@ -5,6 +5,7 @@ import androidx.annotation.LayoutRes
 import com.wpf.app.quick.utils.RecyclerViewUtils
 import com.wpf.app.quick.widgets.recyclerview.QuickSelectAdapter
 import com.wpf.app.quick.widgets.recyclerview.data.QuickBindData
+import com.wpf.app.quick.widgets.recyclerview.data.QuickItemData
 import com.wpf.app.quick.widgets.recyclerview.holder.QuickViewHolder
 import com.wpf.app.quickbind.interfaces.RunItemClickWithSelf
 
@@ -72,12 +73,17 @@ open class QuickParentSelectData(
 
     }
 
+    open fun asTitleViewInChild(): QuickParentSelectData? {
+        return null
+    }
+
     override fun onBindViewHolder(
         adapter: QuickSelectAdapter,
         viewHolder: QuickViewHolder<QuickBindData>,
         position: Int
     ) {
         super.onBindViewHolder(adapter, viewHolder, position)
+        asTitleViewInChild()?.onBindViewHolder(adapter, viewHolder, position)
         onClickChange(adapter.curClickData == this)
     }
 }

@@ -6,6 +6,7 @@ import com.wpf.app.quick.annotations.BindData2View
 import com.wpf.app.quick.helper.binddatahelper.Select2CheckBox
 import com.wpf.app.quick.helper.binddatahelper.Text2TextView
 import com.wpf.app.quick.utils.LogUtil
+import com.wpf.app.quick.widgets.recyclerview.data.QuickBindData
 import com.wpf.app.quick.widgets.selectview.data.QuickChildSelectData
 import com.wpf.app.quick.widgets.selectview.data.QuickParentSelectData
 import com.wpf.app.quickbind.interfaces.runOnHolder
@@ -37,7 +38,18 @@ class ParentSelectItem : QuickParentSelectData(layoutId = R.layout.holder_select
         super.onClickChange(clicked)
         getView()?.isSelected = clicked
     }
+
+    override fun asTitleViewInChild(): QuickParentSelectData {
+        return ParentTitleSelectItem(name + id).also {
+            it.id = id
+        }
+    }
 }
+
+class ParentTitleSelectItem(
+    @BindData2View(id = R.id.title, helper = Text2TextView::class)
+    val title: String? = null
+): QuickParentSelectData(layoutId = R.layout.holder_select_parent_title_item)
 
 open class SelectItem : QuickChildSelectData(layoutId = R.layout.holder_select_item) {
 
