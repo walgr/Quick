@@ -5,6 +5,7 @@ import android.graphics.Canvas
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.core.view.children
 import com.wpf.app.quick.utils.GenericEx
 import com.wpf.app.quick.utils.LogUtil
@@ -93,13 +94,17 @@ open class QuickViewGroup<T : ViewGroup> @JvmOverloads constructor(
     override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
         this.shadowView?.let {
             it.layout(0, 0, it.measuredWidth, it.measuredHeight)
-//            (it as? QuickMeasure)?.Layout(changed, 0, 0, it.measuredWidth, it.measuredHeight)
-            (it as? QuickMeasure)?.Layout(changed, l, t, r, b)
+            (it as? QuickMeasure)?.Layout(changed, 0, 0, it.measuredWidth, it.measuredHeight)
+//            (it as? QuickMeasure)?.Layout(changed, l, t, r, b)
         }
     }
 
     override fun onDraw(canvas: Canvas?) {
         LogUtil.e("onDraw " + this.shadowView?.toString())
         (this.shadowView as? QuickMeasure)?.Draw(canvas)
+    }
+
+    override fun generateLayoutParams(attrs: AttributeSet?): LayoutParams {
+        return LinearLayout.LayoutParams(context, attrs)
     }
 }
