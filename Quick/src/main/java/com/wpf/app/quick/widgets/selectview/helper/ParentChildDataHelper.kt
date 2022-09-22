@@ -39,9 +39,9 @@ object ParentChildDataHelper {
                             }
                         }
                     }
-                    parentList[0].childList = parentList.flatMap {
-                        it.childList ?: arrayListOf()
-                    }.toMutableList()
+//                    parentList[0].childList = parentList.flatMap {
+//                        it.childList ?: arrayListOf()
+//                    }.toMutableList()
                 }
             }
         }
