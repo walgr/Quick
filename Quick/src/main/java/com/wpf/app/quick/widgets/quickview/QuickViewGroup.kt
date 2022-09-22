@@ -3,11 +3,8 @@ package com.wpf.app.quick.widgets.quickview
 import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
-import android.util.LayoutDirection
 import android.view.View
-import android.view.View.LAYOUT_DIRECTION_LOCALE
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.core.view.children
 import com.wpf.app.quick.utils.GenericEx
 import com.wpf.app.quick.utils.LogUtil
@@ -35,50 +32,45 @@ open class QuickViewGroup<T : ViewGroup> @JvmOverloads constructor(
             val t =
                 tCls.getConstructor(Context::class.java, AttributeSet::class.java, Int::class.java)
             this.shadowView = t.newInstance(mContext, attributeSet, defStyleAttr)
-            if (!isInEditMode) {
-                post {
-                    addChildToT()
-                    addTToThis()
-                }
+            post {
+                LogUtil.e("当前:" + this.shadowView!!.childCount)
             }
         }
     }
 
     private fun addChildToT() {
+        if (shadowView?.childCount != 0) return
         val childList = mutableListOf<View>()
         childList.addAll(children.toMutableList())
         removeAllViews()
-//        shadowView?.removeAllViews()
+        shadowView?.removeAllViews()
         childList.forEach {
             this.shadowView?.addView(it)
         }
     }
 
     private fun addTToParent() {
+        if (shadowView?.parent != null) return
         val parentGroup = parent as? ViewGroup ?: return
         val position = parentGroup.indexOfChild(this)
-//        parentGroup.removeView(this)
+        parentGroup.removeView(this)
         parentGroup.addView(shadowView, position)
-        visibility = View.INVISIBLE
     }
 
     private fun addTToThis() {
-        if (shadowView?.parent == null) {
-//            LogUtil.e("shadowView:${shadowView} 数量:${shadowView?.childCount}")
-            this.shadowView?.layoutParams = layoutParams
-            this.addView(shadowView)
+        if (shadowView?.parent != null) return
+        shadowView?.let {
+            it.layoutParams = layoutParams
+            (this.shadowView?.parent as? ViewGroup)?.removeView(this.shadowView)
+            this.addView(shadowView, 0)
         }
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         shadowView?.let {
-            if (isInEditMode) {
-                addChildToT()
-                addTToParent()
-            } else {
-//                super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-//                return
-            }
+            addChildToT()
+            addTToThis()
+//            addTToParent()
             if (it is QuickMeasure) {
                 it.Measure(widthMeasureSpec, heightMeasureSpec)
             } else {
@@ -88,26 +80,22 @@ open class QuickViewGroup<T : ViewGroup> @JvmOverloads constructor(
             val viewMeasureHeight = it.measuredHeight
             val specModeWidth = MeasureSpec.getMode(widthMeasureSpec)
             val specModeHeight = MeasureSpec.getMode(heightMeasureSpec)
-//            LogUtil.e("viewMeasureWidth:${viewMeasureWidth}")
-//            LogUtil.e("viewMeasureHeight:${viewMeasureHeight}")
-            super.onMeasure(
+//            it.measure(widthMeasureSpec, heightMeasureSpec)
+            setMeasuredDimension(
                 MeasureSpec.makeMeasureSpec(viewMeasureWidth, specModeWidth),
                 MeasureSpec.makeMeasureSpec(viewMeasureHeight, specModeHeight)
             )
-            return@let
         } ?: let {
             super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         }
     }
 
     override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
-        if (!isInEditMode) {
-            this.shadowView?.layout(l, t, r, b)
+        this.shadowView?.let {
+            it.layout(0, 0, it.measuredWidth, it.measuredHeight)
+//            (it as? QuickMeasure)?.Layout(changed, 0, 0, it.measuredWidth, it.measuredHeight)
+            (it as? QuickMeasure)?.Layout(changed, l, t, r, b)
         }
-//        this.shadowView?.let {
-//            LogUtil.e("onLayout " + this.shadowView?.toString())
-//            (it as? QuickMeasure)?.Layout(changed, l, t, r, b)
-//        }
     }
 
     override fun onDraw(canvas: Canvas?) {
