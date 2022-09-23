@@ -15,6 +15,8 @@ class QuickViewGroupAttrSetHelper(
 ) : AutoGetAttributeHelper(mContext, attributeSet, R.styleable.QuickViewGroup) {
 
     val groupType: Int? = null
+
+    val layout: Int? = null
 }
 
 enum class GroupType(type: Int) {

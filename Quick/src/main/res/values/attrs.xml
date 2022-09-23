@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
     <!--    <declare-styleable name="GlideImageView">-->
     <!--        <attr name="transcodeType">-->
     <!--            <enum name="asDrawable" value="0" />-->
@@ -108,6 +108,7 @@
             <enum name="ConstraintLayout" value="3" />
             <enum name="RadioGroup" value="4" />
         </attr>
+        <attr name="layout" format="reference"/>
     </declare-styleable>
 
 </resources>

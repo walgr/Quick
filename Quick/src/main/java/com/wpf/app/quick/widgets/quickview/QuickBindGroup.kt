@@ -2,6 +2,7 @@ package com.wpf.app.quick.widgets.quickview
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
@@ -18,10 +19,11 @@ open class QuickBindGroup<T : ViewGroup> @JvmOverloads constructor(
     attributeSet: AttributeSet? = null,
     defStyleAttr: Int = 0,
     @LayoutRes
-    private val layoutId: Int,
+    private val layoutId: Int = 0,
     private var dealBind: Boolean = true
 ) : QuickItemGroup<T>(mContext, attributeSet, defStyleAttr, layoutId), Bind {
 
+    @Deprecated("有的手机有复用bug")
     override fun onCreateViewHolder() {
         if (dealBind) {
             QuickBind.bind(this)

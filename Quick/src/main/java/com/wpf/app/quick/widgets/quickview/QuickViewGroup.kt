@@ -19,21 +19,28 @@ import com.wpf.app.quick.widgets.quickview.util.QuickMeasure
  *
  */
 open class QuickViewGroup<T : ViewGroup> @JvmOverloads constructor(
-    val mContext: Context,
+    mContext: Context,
     val attributeSet: AttributeSet? = null,
     val defStyleAttr: Int = 0,
 ) : ViewGroup(mContext, attributeSet, defStyleAttr) {
 
-    private var attrSet: QuickViewGroupAttrSetHelper? = null
+    protected var attrSet: QuickViewGroupAttrSetHelper? = null
+
     init {
-        attributeSet?.let {
-            attrSet = QuickViewGroupAttrSetHelper(mContext, attributeSet)
+        init()
+    }
+
+    private var shadowView: T? = null
+
+    open fun init() {
+        if (attrSet == null) {
+            attributeSet?.let {
+                attrSet = QuickViewGroupAttrSetHelper(context, it)
+            }
         }
         initViewGroupByXml()
         initViewGroupByT()
     }
-
-    private var shadowView: T? = null
 
     private fun initViewGroupByT() {
         if (this.shadowView != null) return
@@ -41,7 +48,7 @@ open class QuickViewGroup<T : ViewGroup> @JvmOverloads constructor(
         tCls?.let {
             val t =
                 tCls.getConstructor(Context::class.java, AttributeSet::class.java, Int::class.java)
-            this.shadowView = t.newInstance(mContext, attributeSet, defStyleAttr)
+            this.shadowView = t.newInstance(context, attributeSet, defStyleAttr)
         }
     }
 
@@ -50,19 +57,19 @@ open class QuickViewGroup<T : ViewGroup> @JvmOverloads constructor(
         attrSet?.let {
             when (it.groupType) {
                 0 -> {
-                    this.shadowView = LinearLayout(mContext, attributeSet, defStyleAttr) as T
+                    this.shadowView = LinearLayout(context, attributeSet, defStyleAttr) as T
                 }
                 1 -> {
-                    this.shadowView = RelativeLayout(mContext, attributeSet, defStyleAttr) as T
+                    this.shadowView = RelativeLayout(context, attributeSet, defStyleAttr) as T
                 }
                 2 -> {
-                    this.shadowView = FrameLayout(mContext, attributeSet, defStyleAttr) as T
+                    this.shadowView = FrameLayout(context, attributeSet, defStyleAttr) as T
                 }
                 3 -> {
-                    this.shadowView = ConstraintLayout(mContext, attributeSet, defStyleAttr) as T
+                    this.shadowView = ConstraintLayout(context, attributeSet, defStyleAttr) as T
                 }
                 4 -> {
-                    this.shadowView = RadioGroup(mContext, attributeSet) as T
+                    this.shadowView = RadioGroup(context, attributeSet) as T
                 }
             }
         }
@@ -70,6 +77,7 @@ open class QuickViewGroup<T : ViewGroup> @JvmOverloads constructor(
 
     private fun addChildToT() {
         if (shadowView?.childCount != 0) return
+        if (childCount == 0) return
         val childList = mutableListOf<View>()
         childList.addAll(children.toMutableList())
         removeAllViews()
@@ -88,6 +96,7 @@ open class QuickViewGroup<T : ViewGroup> @JvmOverloads constructor(
     }
 
     private fun addTToThis() {
+        if (shadowView?.childCount == 0) return
         if (shadowView?.parent != null) return
         shadowView?.let {
             it.layoutParams = layoutParams

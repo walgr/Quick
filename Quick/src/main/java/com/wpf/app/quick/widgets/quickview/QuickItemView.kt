@@ -18,7 +18,7 @@ abstract class QuickItemView @JvmOverloads constructor(
     attributeSet: AttributeSet? = null,
     defStyleAttr: Int = 0,
     @LayoutRes
-    private val layoutId: Int,
+    private val layoutId: Int = 0,
     open var viewType: Int = 0,
 ) : View(mContext, attributeSet, defStyleAttr), Bind {
 
@@ -37,6 +37,7 @@ abstract class QuickItemView @JvmOverloads constructor(
     var position: Int = -1
 
     open fun initView() {
+        if (layoutId == 0) return
         mView = inflate(context, this.layoutId, null)
         post {
             val parentGroup = parent as? ViewGroup ?: return@post
