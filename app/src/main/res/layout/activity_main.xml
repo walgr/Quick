@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:test="http://schemas.android.com/apk/res/android"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,54 +15,49 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="图像测试"
             android:onClick="gotoGlide"
-            />
+            android:text="图像测试" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="列表测试"
             android:onClick="gotoList"
-            />
+            android:text="列表测试" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="数据测试"
             android:onClick="gotoData"
-            />
+            android:text="数据测试" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="R2测试"
             android:onClick="gotoR2Test"
-            />
+            android:text="R2测试" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="列表刷新测试"
             android:onClick="gotoRefreshList"
-            />
+            android:text="列表刷新测试" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="选择列表测试"
             android:onClick="gotoSelectList"
-            />
+            android:text="选择列表测试" />
 
         <com.wpf.app.quick.demo.model.SelectItemView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <com.wpf.app.quick.demo.view.QuickLinearLayout
+        <android.widget.QuickViewGroup
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            app:groupType="LinearLayout">
 
             <TextView
                 android:id="@+id/t1"
@@ -71,24 +69,23 @@
                 android:id="@+id/t2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_below="@+id/t1"
+                android:layout_marginTop="10dp"
                 android:text="子view2" />
 
-        </com.wpf.app.quick.demo.view.QuickLinearLayout>
+        </android.widget.QuickViewGroup>
 
         <RelativeLayout
-            android:orientation="vertical"
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/t3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="子view3"
-                />
+                android:text="子view3" />
 
             <TextView
                 android:id="@+id/t4"
@@ -96,8 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/t3"
                 android:layout_marginTop="10dp"
-                android:text="子view4"
-                />
+                android:text="子view4" />
 
         </RelativeLayout>
 
@@ -105,9 +101,9 @@
             android:id="@+id/testBindSpLL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
             android:layout_weight="1"
             android:gravity="bottom"
-            android:layout_gravity="bottom"
             android:orientation="horizontal">
 
             <TextView
@@ -115,24 +111,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
-                android:text="测试绑定1"
-                />
+                android:text="测试绑定1" />
 
             <TextView
                 android:id="@+id/spTextView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
-                android:text="测试绑定2"
-                />
+                android:text="测试绑定2" />
 
             <Button
                 android:id="@+id/spTextView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
-                android:text="测试绑定3"
-                />
+                android:text="测试绑定3" />
 
         </LinearLayout>
 

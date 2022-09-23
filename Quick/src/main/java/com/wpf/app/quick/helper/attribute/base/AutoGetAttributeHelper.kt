@@ -27,8 +27,8 @@ abstract class AutoGetAttributeHelper constructor(
 
     private fun getAttributeType(attributeSet: AttributeSet, @StyleableRes styleableId: IntArray) {
         for (i in 0 until attributeSet.attributeCount) {
-            val attributeResNameSpace = (attributeSet as? XmlResourceParser)?.getAttributeNamespace(i)
-            if ("http://schemas.android.com/apk/res-auto" != attributeResNameSpace) continue
+//            val attributeResNameSpace = (attributeSet as? XmlResourceParser)?.getAttributeNamespace(i)
+//            if ("http://schemas.android.com/apk/res-auto" != attributeResNameSpace) continue
             val attributeName = attributeSet.getAttributeName(i)
             val attributeId = attributeSet.getAttributeNameResource(i)
             if (styleableId.contains(attributeId) && fieldMap.contains(attributeName)) {
@@ -44,7 +44,7 @@ abstract class AutoGetAttributeHelper constructor(
                            //获取资源id
                             field.set(this, attributeSet.getAttributeResourceValue(i, 0))
                         } else {
-//                            field.set(this, attributeSet.getAttributeIntValue(i, 0))
+                            field.set(this, attributeSet.getAttributeIntValue(i, 0))
                         }
                     }
                     java.lang.Float::class.java, Float::class.java -> {
