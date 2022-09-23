@@ -5,7 +5,10 @@ import android.graphics.Canvas
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.children
 import com.wpf.app.quick.utils.GenericEx
 import com.wpf.app.quick.utils.LogUtil
@@ -81,7 +84,6 @@ open class QuickViewGroup<T : ViewGroup> @JvmOverloads constructor(
             val viewMeasureHeight = it.measuredHeight
             val specModeWidth = MeasureSpec.getMode(widthMeasureSpec)
             val specModeHeight = MeasureSpec.getMode(heightMeasureSpec)
-//            it.measure(widthMeasureSpec, heightMeasureSpec)
             setMeasuredDimension(
                 MeasureSpec.makeMeasureSpec(viewMeasureWidth, specModeWidth),
                 MeasureSpec.makeMeasureSpec(viewMeasureHeight, specModeHeight)
@@ -95,16 +97,30 @@ open class QuickViewGroup<T : ViewGroup> @JvmOverloads constructor(
         this.shadowView?.let {
             it.layout(0, 0, it.measuredWidth, it.measuredHeight)
             (it as? QuickMeasure)?.Layout(changed, 0, 0, it.measuredWidth, it.measuredHeight)
-//            (it as? QuickMeasure)?.Layout(changed, l, t, r, b)
         }
     }
 
     override fun onDraw(canvas: Canvas?) {
-        LogUtil.e("onDraw " + this.shadowView?.toString())
         (this.shadowView as? QuickMeasure)?.Draw(canvas)
     }
 
     override fun generateLayoutParams(attrs: AttributeSet?): LayoutParams {
-        return LinearLayout.LayoutParams(context, attrs)
+        return when (shadowView) {
+            is LinearLayout -> {
+                LinearLayout.LayoutParams(context, attrs)
+            }
+            is RelativeLayout -> {
+                RelativeLayout.LayoutParams(context, attrs)
+            }
+            is FrameLayout -> {
+                FrameLayout.LayoutParams(context, attrs)
+            }
+            is ConstraintLayout -> {
+                ConstraintLayout.LayoutParams(context, attrs)
+            }
+            else -> {
+                MarginLayoutParams(context, attrs)
+            }
+        }
     }
 }
