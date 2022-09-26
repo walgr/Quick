@@ -80,7 +80,7 @@ open class QuickBottomSheetDialogFragment @JvmOverloads constructor(
         mScreenHeight = size.y
     }
 
-    fun initView(view: View?) {}
+    open fun initView(view: View?) {}
 
     override fun getWindow(): Window? {
         return dialog?.window
