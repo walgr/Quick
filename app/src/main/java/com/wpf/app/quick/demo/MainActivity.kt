@@ -11,7 +11,6 @@ import com.wpf.app.quick.demo.model.TestModel
 import com.wpf.app.quick.demo.viewmodel.MainViewModel
 import com.wpf.app.quick.utils.startActivity
 import com.wpf.app.quickbind.annotations.BindSp2View
-import com.wpf.app.r2test.R2TestActivity
 
 /**
  * Created by 王朋飞 on 2022/6/13.
@@ -49,7 +48,7 @@ class MainActivity : QuickViewModelBindingActivity<MainViewModel, ActivityMainBi
     }
 
     fun gotoR2Test(view: View?) {
-        startActivity(activityCls = R2TestActivity::class.java)
+//        startActivity(activityCls = R2TestActivity::class.java)
     }
 
     fun gotoGlide(view: View?) {
