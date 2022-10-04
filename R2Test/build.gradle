@@ -23,30 +23,25 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '11'
     }
 }
 
 dependencies {
-
-    implementation 'androidx.core:core-ktx:1.8.0'
-    implementation 'androidx.appcompat:appcompat:1.4.2'
-    implementation 'com.google.android.material:material:1.6.1'
+    implementation deps.androidx.corektx
+    implementation deps.androidx.appcompat
+    implementation deps.androidx.material
     implementation deps.androidx.recyclerview
 
     if (IS_REMOTE.toBoolean()) {
-        api deps.quick.base
+        api deps.quickbind.base
         kapt deps.quickbind.compiler
     } else {
         api project(":Quick")
         kapt project(":Quick-compiler")
     }
-
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 }

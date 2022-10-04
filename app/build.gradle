@@ -25,29 +25,29 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '11'
     }
 }
 
 dependencies {
-    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.android.support:multidex:2.0.1'
     //ktx核心
-    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation deps.androidx.corektx
     //activity-ktx
-    implementation 'androidx.activity:activity-ktx:1.1.0'
-    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation deps.androidx.activity
+    implementation deps.androidx.appcompat
 
     //lifecycle-ktx
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.0-beta01'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
     //lifecycle-ktx
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.0-beta01'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
 
-    //viewmodel-ktx
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0-beta01'
+    //ViewModel-ktx
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
 
     //statusBar
     implementation 'com.geyifeng.immersionbar:immersionbar:3.2.2'
@@ -55,7 +55,7 @@ dependencies {
     implementation 'com.geyifeng.immersionbar:immersionbar-ktx:3.2.2'
 
     //列表
-    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation deps.androidx.recyclerview
 //    implementation 'jp.wasabeef:recyclerview-animators:4.0.2'
 
     //分页
@@ -66,12 +66,12 @@ dependencies {
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
 
     //Navigation
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.2'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.4.2'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.2'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.2'
 
     //retrofit2-okhttp-gson
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.okhttp3:okhttp:4.9.3'
+    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
     implementation 'com.google.code.gson:gson:2.9.0'
 
     //Sp存储
@@ -80,7 +80,7 @@ dependencies {
     implementation 'androidx.datastore:datastore-rxjava3:1.0.0'
 
     //约束布局
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation deps.androidx.constraintlayout
 
     //SmartRefreshLayout
     implementation 'io.github.scwang90:refresh-layout-kernel:2.0.5'      //核心必须依赖
@@ -88,7 +88,7 @@ dependencies {
     implementation 'io.github.scwang90:refresh-footer-classics:2.0.5'    //经典加载
 
     if (IS_REMOTE.toBoolean())
-        implementation deps.quick.base
+        implementation deps.quickbind.base
     else
         implementation project(":Quick")
 
