@@ -2,7 +2,7 @@ package com.wpf.app.quick.widgets.recyclerview
 
 import android.content.Context
 import android.util.AttributeSet
-import com.wpf.app.quick.utils.Callback
+import com.wpf.app.quickutil.Callback
 import com.wpf.app.quick.widgets.recyclerview.data.QuickItemData
 import com.wpf.app.quick.widgets.recyclerview.data.RequestData
 import com.wpf.app.quick.widgets.recyclerview.listeners.DataChangeOnListener
@@ -29,7 +29,7 @@ open class QuickRefreshRecyclerView @JvmOverloads constructor(
     fun onRefresh() {
         mRequestData.refresh()
         (mDataChangeListener as? DataChangeOnListener<RequestData, QuickItemData>)?.onRefresh(
-            mRequestData, object : Callback<QuickItemData> {
+            mRequestData, object : com.wpf.app.quickutil.Callback<QuickItemData> {
                 override fun callback(data: List<QuickItemData>?) {
                     setNewData(data)
                     adapter.notifyDataSetChanged()
@@ -44,7 +44,7 @@ open class QuickRefreshRecyclerView @JvmOverloads constructor(
         mRequestData.loadMore()
         (mDataChangeListener as? DataChangeOnListener<RequestData, QuickItemData>)?.onLoadMore(
             mRequestData,
-            object : Callback<QuickItemData> {
+            object : com.wpf.app.quickutil.Callback<QuickItemData> {
                 override fun callback(data: List<QuickItemData>?) {
                     appendList(data)
                     adapter.notifyItemRangeInserted(

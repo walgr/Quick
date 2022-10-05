@@ -1,4 +1,4 @@
-package com.wpf.app.quick.utils
+package com.wpf.app.quickutil
 
 import com.wpf.app.quick.widgets.recyclerview.data.QuickItemData
 

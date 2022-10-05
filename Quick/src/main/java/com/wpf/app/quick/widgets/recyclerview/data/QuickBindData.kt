@@ -4,14 +4,11 @@ import android.content.Context
 import android.view.View
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
-import com.wpf.app.quick.utils.LogUtil
 import com.wpf.app.quick.widgets.recyclerview.QuickAdapter
 import com.wpf.app.quick.widgets.recyclerview.holder.QuickViewHolder
 import com.wpf.app.quickbind.QuickBind
 import com.wpf.app.quickbind.QuickBind.dealInPlugins
 import com.wpf.app.quickbind.interfaces.Bind
-import kotlin.math.abs
-import kotlin.random.Random
 
 /**
  * Created by 王朋飞 on 2022/7/13.

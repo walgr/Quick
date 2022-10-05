@@ -11,7 +11,7 @@ import android.widget.RadioGroup
 import android.widget.RelativeLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.children
-import com.wpf.app.quick.utils.GenericEx
+import com.wpf.app.quickutil.GenericEx
 import com.wpf.app.quick.widgets.quickview.util.QuickMeasure
 
 /**
@@ -44,7 +44,7 @@ open class QuickViewGroup<T : ViewGroup> @JvmOverloads constructor(
 
     private fun initViewGroupByT() {
         if (this.shadowView != null) return
-        val tCls: Class<T>? = GenericEx.get0Clazz(this)
+        val tCls: Class<T>? = com.wpf.app.quickutil.GenericEx.get0Clazz(this)
         tCls?.let {
             val t =
                 tCls.getConstructor(Context::class.java, AttributeSet::class.java, Int::class.java)

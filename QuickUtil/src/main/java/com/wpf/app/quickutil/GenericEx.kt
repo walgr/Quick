@@ -1,4 +1,4 @@
-package com.wpf.app.quick.utils
+package com.wpf.app.quickutil
 
 import java.lang.reflect.ParameterizedType
 

@@ -2,10 +2,9 @@ package com.wpf.app.quick.widgets.selectview.data
 
 import android.annotation.SuppressLint
 import androidx.annotation.LayoutRes
-import com.wpf.app.quick.utils.RecyclerViewUtils
+import com.wpf.app.quickutil.RecyclerViewUtils
 import com.wpf.app.quick.widgets.recyclerview.QuickSelectAdapter
 import com.wpf.app.quick.widgets.recyclerview.data.QuickBindData
-import com.wpf.app.quick.widgets.recyclerview.data.QuickItemData
 import com.wpf.app.quick.widgets.recyclerview.holder.QuickViewHolder
 import com.wpf.app.quickbind.interfaces.RunItemClickWithSelf
 
@@ -64,7 +63,7 @@ open class QuickParentSelectData(
                 }
             }
             if (findPos >= 0) {
-                RecyclerViewUtils.scrollToPosition(childAdapter.mRecyclerView, findPos)
+                com.wpf.app.quickutil.RecyclerViewUtils.scrollToPosition(childAdapter.mRecyclerView, findPos)
             }
         }
     }

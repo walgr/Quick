@@ -6,7 +6,7 @@ import com.wpf.app.quick.demo.databinding.ActivitySelectTestBinding
 import com.wpf.app.quick.demo.model.ParentSelectItem
 import com.wpf.app.quick.demo.model.SelectItem
 import com.wpf.app.quick.demo.model.SelectResultItem
-import com.wpf.app.quick.utils.LogUtil
+import com.wpf.app.quickutil.LogUtil
 import com.wpf.app.quick.viewmodel.QuickBindingViewModel
 import com.wpf.app.quick.widgets.selectview.data.QuickChildSelectData
 import com.wpf.app.quick.widgets.recyclerview.listeners.OnSelectCallback
@@ -22,7 +22,7 @@ class SelectListViewModel: QuickBindingViewModel<ActivitySelectTestBinding>() {
     override fun onBindingCreated(mViewBinding: ActivitySelectTestBinding?) {
         mViewBinding?.selectList?.mOnSelectCallback = object : OnSelectCallback {
             override fun onSelectResult(selectResult: List<QuickChildSelectData>?) {
-                LogUtil.e("选择了${selectResult}")
+                com.wpf.app.quickutil.LogUtil.e("选择了${selectResult}")
                 selectList.value = selectResult
                 mViewBinding?.selectResult?.setNewData(selectResult?.map {
                     SelectResultItem(it.isSelect, it.parent, it.id, it.name)

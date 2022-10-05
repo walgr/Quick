@@ -9,7 +9,6 @@ import com.wpf.app.quick.demo.databinding.ActivityMainBinding
 import com.wpf.app.quick.demo.model.MyMessage
 import com.wpf.app.quick.demo.model.TestModel
 import com.wpf.app.quick.demo.viewmodel.MainViewModel
-import com.wpf.app.quick.utils.startActivity
 import com.wpf.app.quickbind.annotations.BindSp2View
 import com.wpf.app.r2test.R2TestActivity
 

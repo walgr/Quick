@@ -5,8 +5,6 @@ import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.annotations.BindData2View
 import com.wpf.app.quick.helper.binddatahelper.Select2CheckBox
 import com.wpf.app.quick.helper.binddatahelper.Text2TextView
-import com.wpf.app.quick.utils.LogUtil
-import com.wpf.app.quick.widgets.recyclerview.data.QuickBindData
 import com.wpf.app.quick.widgets.selectview.data.QuickChildSelectData
 import com.wpf.app.quick.widgets.selectview.data.QuickParentSelectData
 import com.wpf.app.quickbind.interfaces.runOnHolder

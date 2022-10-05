@@ -1,17 +1,12 @@
 package com.wpf.app.quick.demo.model
 
 import android.annotation.SuppressLint
-import android.widget.Toast
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.annotations.BindData2View
-import com.wpf.app.quick.helper.binddatahelper.ItemClick
 import com.wpf.app.quick.helper.binddatahelper.Text2TextView
-import com.wpf.app.quick.utils.LogUtil
 import com.wpf.app.quick.widgets.recyclerview.QuickAdapter
 import com.wpf.app.quick.widgets.recyclerview.data.QuickBindData
 import com.wpf.app.quick.widgets.recyclerview.holder.QuickViewHolder
-import com.wpf.app.quickbind.interfaces.itemClick
-import com.wpf.app.quickbind.interfaces.runOnHolder
 import kotlin.random.Random
 
 /**

@@ -1,6 +1,6 @@
 package com.wpf.app.quick.widgets.recyclerview.listeners
 
-import com.wpf.app.quick.utils.Callback
+import com.wpf.app.quickutil.Callback
 import com.wpf.app.quick.widgets.recyclerview.data.QuickItemData
 import com.wpf.app.quick.widgets.recyclerview.data.RequestData
 
@@ -12,12 +12,12 @@ interface DataChangeOnListener<Request : RequestData, Data : QuickItemData> {
     /**
      * 下拉刷新
      */
-    fun onRefresh(requestData: Request, callback: Callback<Data>)
+    fun onRefresh(requestData: Request, callback: com.wpf.app.quickutil.Callback<Data>)
 
     /**
      * 上拉加载
      */
-    fun onLoadMore(requestData: Request, callback: Callback<Data>)
+    fun onLoadMore(requestData: Request, callback: com.wpf.app.quickutil.Callback<Data>)
 
     /**
      * 刷新结束

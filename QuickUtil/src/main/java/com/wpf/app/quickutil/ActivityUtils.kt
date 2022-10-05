@@ -1,7 +1,6 @@
-package com.wpf.app.quick.utils
+package com.wpf.app.quickutil
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Parcelable
 import java.io.Serializable

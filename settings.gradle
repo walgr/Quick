@@ -29,3 +29,4 @@ if (!IS_ONLY_PLUGIN.toBoolean()) {
 }
 include ':Quick-gradle-plugin'
 include ':QuickNetwork'
+include ':QuickUtil'

@@ -3,7 +3,7 @@ package com.wpf.app.quick.widgets.recyclerview
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-import com.wpf.app.quick.utils.LogUtil
+import com.wpf.app.quickutil.LogUtil
 import com.wpf.app.quick.widgets.recyclerview.annotations.BindHolder
 import com.wpf.app.quick.widgets.recyclerview.data.QuickBindData
 import com.wpf.app.quick.widgets.recyclerview.data.QuickItemData
@@ -12,8 +12,6 @@ import com.wpf.app.quick.widgets.recyclerview.holder.BindBindingHolder
 import com.wpf.app.quick.widgets.recyclerview.holder.QuickViewBindingHolder
 import com.wpf.app.quick.widgets.recyclerview.holder.QuickViewHolder
 import com.wpf.app.quick.widgets.recyclerview.listeners.DataChangeAdapter
-import com.wpf.app.quick.widgets.recyclerview.listeners.DataSelectOnAdapter
-import com.wpf.app.quick.widgets.recyclerview.listeners.OnSelectOnChange
 import com.wpf.app.quick.widgets.recyclerview.listeners.QuickAdapterListener
 
 /**
@@ -73,7 +71,7 @@ open class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>()
 //                }
                 holder.onCreateViewHolder(holder.itemView)
             }
-            LogUtil.e("onCreateViewHolder")
+            com.wpf.app.quickutil.LogUtil.e("onCreateViewHolder")
             return holder as QuickViewHolder<QuickItemData>
         }
         return null!!

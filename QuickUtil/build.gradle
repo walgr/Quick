@@ -28,24 +28,5 @@ android {
 }
 
 dependencies {
-    //ktx核心
-    implementation deps.androidx.corektx
-    //activity-ktx
-    implementation deps.androidx.activity
-    implementation deps.androidx.appcompat
-    //fragment-ktx
-    implementation deps.androidx.fragmentktx
-    //列表
-    compileOnly deps.androidx.recyclerview
-    //GSON
-    implementation 'com.google.code.gson:gson:2.9.0'
-
-    if (IS_REMOTE.toBoolean()) {
-        api deps.quickbind.runtime
-    } else {
-        api project(":Quick-runtime")
-    }
 
 }
-
-apply from: rootProject.file('gradle-mvn-push-aar.gradle')
