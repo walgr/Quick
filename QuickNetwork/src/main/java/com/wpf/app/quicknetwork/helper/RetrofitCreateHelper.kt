@@ -1,8 +1,8 @@
 package com.wpf.app.quicknetwork.helper
 
-import cn.goodjobs.community.user.network.base.WpfCallAdapterFactory
-import cn.goodjobs.community.user.network.base.WpfCommonCallAdapterFactory
-import cn.goodjobs.community.user.network.base.WpfNoResponseCallAdapterFactory
+import com.wpf.app.quicknetwork.base.WpfCallAdapterFactory
+import com.wpf.app.quicknetwork.base.WpfCommonCallAdapterFactory
+import com.wpf.app.quicknetwork.base.WpfNoResponseCallAdapterFactory
 import okhttp3.OkHttpClient
 import retrofit2.CallAdapter
 import retrofit2.Converter

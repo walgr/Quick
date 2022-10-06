@@ -28,5 +28,7 @@ android {
 }
 
 dependencies {
-
+    implementation deps.androidx.appcompat
+    //列表
+    implementation deps.androidx.recyclerview
 }

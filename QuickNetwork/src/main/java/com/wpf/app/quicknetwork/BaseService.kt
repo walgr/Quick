@@ -1,10 +1,10 @@
 package com.wpf.app.quicknetwork
 
-import cn.goodjobs.community.user.network.base.BaseRequest
-import cn.goodjobs.community.user.network.base.BaseResponse
-import cn.goodjobs.community.user.network.base.WpfRealCall
-import cn.goodjobs.community.user.network.base.WpfRequest
-import cn.goodjobs.community.user.network.helper.RetrofitCreateHelper
+import com.wpf.app.quicknetwork.base.BaseRequest
+import com.wpf.app.quicknetwork.base.BaseResponse
+import com.wpf.app.quicknetwork.base.WpfRealCall
+import com.wpf.app.quicknetwork.base.WpfRequest
+import com.wpf.app.quicknetwork.helper.RetrofitCreateHelper
 
 
 /**

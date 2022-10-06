@@ -31,6 +31,7 @@ buildscript {
                         'annotations': "com.github.walgr.Quick:Quick-annotations:${release}",
                         'runtime'    : "com.github.walgr.Quick:Quick-runtime:${release}",
                         'compiler'   : "com.github.walgr.Quick:Quick-compiler:${release}",
+                        'util'       : "com.github.walgr.Quick:QuickUtil:${release}",
                         'plugin'     : "com.github.walgr.Quick:Quick-gradle-plugin:0.3.0"
                 ],
                 gradlePlugin  : "com.android.tools.build:gradle:4.2.2",

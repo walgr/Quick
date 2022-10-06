@@ -4,6 +4,7 @@ import okhttp3.*
 import java.util.concurrent.TimeUnit
 import javax.net.ssl.HostnameVerifier
 import javax.net.ssl.SSLSocketFactory
+import javax.net.ssl.X509TrustManager
 
 /**
  * Created by 王朋飞 on 2022/7/21.
@@ -18,6 +19,7 @@ object OkHttpCreateHelper {
         interceptorList: List<Interceptor>? = null,
         cookieJar: CookieJar? = null,
         sslFactory: SSLSocketFactory? = null,
+        trustManager: X509TrustManager? = null,
         hostnameVerifier: HostnameVerifier? = null
     ): OkHttpClient {
         val builder = OkHttpClient.Builder()
@@ -25,7 +27,9 @@ object OkHttpCreateHelper {
             .readTimeout(timeOut, TimeUnit.SECONDS)
             .writeTimeout(timeOut, TimeUnit.SECONDS)
         sslFactory?.let {
-            builder.sslSocketFactory(it)
+            trustManager?.let {
+                builder.sslSocketFactory(sslFactory, trustManager)
+            }
         }
         hostnameVerifier?.let {
             builder.hostnameVerifier(it)
