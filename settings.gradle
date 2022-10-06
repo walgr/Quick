@@ -28,5 +28,5 @@ if (!IS_ONLY_PLUGIN.toBoolean()) {
     include ':Quick-compiler'
 }
 include ':Quick-gradle-plugin'
-include ':QuickNetwork'
 include ':QuickUtil'
+include ':QuickNetwork'

@@ -40,5 +40,6 @@ dependencies {
     } else {
         api project(":QuickUtil")
     }
-
 }
+
+apply from: rootProject.file('gradle-mvn-push-aar.gradle')
