@@ -92,5 +92,5 @@ dependencies {
     else
         implementation project(":Quick")
 
-    implementation project(":R2Test")
+//    implementation project(":R2Test")
 }

@@ -19,7 +19,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "Quick"
 include ':app'
-include ':R2Test'
+//include ':R2Test'
 include ':Quick'
 include ':QuickBind'
 include ':Quick-annotations'

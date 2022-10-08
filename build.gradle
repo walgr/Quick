@@ -60,7 +60,7 @@ buildscript {
     }
 
     dependencies {
-        classpath deps.quickbind.plugin
+//        classpath deps.quickbind.plugin
     }
 }
 
