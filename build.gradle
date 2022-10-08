@@ -26,12 +26,12 @@ buildscript {
                         'constraintlayout': 'androidx.constraintlayout:constraintlayout:2.1.4',
                 ],
                 'quickbind'   : [
-                        'base'       : "com.github.walgr.Quick:Quick:${release}",
-                        'bind'       : "com.github.walgr.Quick:QuickBind:${release}",
-                        'annotations': "com.github.walgr.Quick:Quick-annotations:${release}",
-                        'runtime'    : "com.github.walgr.Quick:Quick-runtime:${release}",
-                        'compiler'   : "com.github.walgr.Quick:Quick-compiler:${release}",
-                        'util'       : "com.github.walgr.Quick:QuickUtil:${release}",
+                        'base'       : "com.wpf.app.quick:Quick:${release}",
+                        'bind'       : "com.wpf.app.quick:QuickBind:${release}",
+                        'annotations': "com.wpf.app.quick:Quick-annotations:${release}",
+                        'runtime'    : "com.wpf.app.quick:Quick-runtime:${release}",
+                        'compiler'   : "com.wpf.app.quick:Quick-compiler:${release}",
+                        'util'       : "com.wpf.app.quick:QuickUtil:${release}",
                         'plugin'     : "com.github.walgr.Quick:Quick-gradle-plugin:0.3.0"
                 ],
                 gradlePlugin  : "com.android.tools.build:gradle:4.2.2",

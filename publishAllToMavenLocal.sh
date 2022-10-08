@@ -1,3 +1,5 @@
+./gradlew :QuickUtil:publishToMavenLocal
+./gradlew :QuickNetwork:publishToMavenLocal
 ./gradlew :Quick-annotations:publishToMavenLocal
 ./gradlew :Quick-runtime:publishToMavenLocal
 ./gradlew :Quick-gradle-plugin:publishToMavenLocal
