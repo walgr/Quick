@@ -30,6 +30,7 @@
     2.添加依赖
     dependencies {
         implementation 'com.github.walgr.Quick:Quick:latest'
+        implementation 'com.github.walgr.Quick:QuickNetwork:latest'
     }
 
 ### 项目功能
@@ -42,3 +43,5 @@
     
 4.快速搭建列表 
 ![RecyclerView.png](./assets/README/README-1658197283964.png)
+
+5.快速集成retrofit-okhttp网络请求，便捷网络请求
