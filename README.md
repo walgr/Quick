@@ -30,6 +30,7 @@
     2.添加依赖
     dependencies {
         implementation 'com.github.walgr.Quick:Quick:latest'
+        implementation 'com.github.walgr.Quick:QuickNetwork:latest'
     }
 
 ### 项目功能
