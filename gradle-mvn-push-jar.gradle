@@ -30,9 +30,7 @@ afterEvaluate {
                 groupId GROUP
                 artifactId POM_ARTIFACT_ID
                 version VERSION_NAME
-                afterEvaluate {
-                    from components.java
-                }
+                from components.java
                 // 运行任务，把源码打进去
 //                artifact sourceJar
             }

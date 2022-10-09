@@ -31,9 +31,7 @@ afterEvaluate {
                 artifactId POM_ARTIFACT_ID
                 version VERSION_NAME
 
-                afterEvaluate {
-                    from components.release
-                }
+                from components.release
                 // 运行任务，把源码打进去
 //                artifact sourceJar
             }

@@ -1,6 +1,7 @@
 package com.wpf.app.quick.demo
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.view.View
 import android.widget.TextView
 import com.wpf.app.quick.activity.QuickViewModelBindingActivity
@@ -11,7 +12,6 @@ import com.wpf.app.quick.demo.model.TestModel
 import com.wpf.app.quick.demo.viewmodel.MainViewModel
 import com.wpf.app.quickbind.annotations.BindSp2View
 import com.wpf.app.quickutil.startActivity
-//import com.wpf.app.r2test.R2TestActivity
 
 /**
  * Created by 王朋飞 on 2022/6/13.
@@ -49,7 +49,9 @@ class MainActivity : QuickViewModelBindingActivity<MainViewModel, ActivityMainBi
     }
 
     fun gotoR2Test(view: View?) {
-//        startActivity(activityCls = R2TestActivity::class.java)
+        try {
+            startActivity(activityCls = Class.forName("com.wpf.app.r2test.R2TestActivity") as Class<Activity>)
+        } catch (ignore: Exception) { }
     }
 
     fun gotoGlide(view: View?) {

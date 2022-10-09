@@ -19,7 +19,9 @@ dependencyResolutionManagement {
 
 rootProject.name = "Quick"
 include ':app'
-//include ':R2Test'
+if (!IS_REMOTE.toBoolean()) {
+    include ':R2Test'
+}
 include ':Quick'
 include ':QuickBind'
 include ':Quick-annotations'

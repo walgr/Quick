@@ -41,16 +41,18 @@ dependencies {
     //列表
     implementation deps.androidx.recyclerview
     //Glide
-    implementation 'com.github.bumptech.glide:glide:4.13.2'
+    implementation 'com.github.bumptech.glide:glide:4.14.1'
 
     implementation 'com.google.code.gson:gson:2.9.0'
 
     if (IS_REMOTE.toBoolean()) {
         api deps.quickbind.bind
         api deps.quickbind.util
+        api deps.quickbind.network
     } else {
         api project(":QuickBind")
         api project(":QuickUtil")
+        api project(":QuickNetwork")
     }
 }
 

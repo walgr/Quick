@@ -37,11 +37,11 @@ import java.util.ArrayList
 //    }
 //}
 
-fun <T : Activity?> Activity.startActivity(activityCls: Class<T>) {
+fun <T : Activity> Activity.startActivity(activityCls: Class<T>) {
     startActivity(activityCls, data = null)
 }
 
-fun <T : Activity?> Activity.startActivity(
+fun <T : Activity> Activity.startActivity(
     activityCls: Class<T>,
     data: Map<String, Any?>?
 ) {
@@ -51,7 +51,7 @@ fun <T : Activity?> Activity.startActivity(
         for (key in keys) {
             val value = data[key]
             if (value is ArrayList<*> && value.isNotEmpty() && value[0] is Parcelable) {
-                intent.putParcelableArrayListExtra(key, value as ArrayList<out Parcelable?>?)
+                intent.putParcelableArrayListExtra(key, value as ArrayList<out Parcelable>)
             } else if (value is Parcelable) {
                 intent.putExtra(key, value)
             } else if (value is Serializable) {
