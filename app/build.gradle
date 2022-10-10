@@ -47,7 +47,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
 
     //ViewModel-ktx
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
+    implementation deps.androidx.lifecycleviewmodelktx
 
     //statusBar
     implementation 'com.geyifeng.immersionbar:immersionbar:3.2.2'

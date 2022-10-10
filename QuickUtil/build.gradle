@@ -28,7 +28,9 @@ android {
 }
 
 dependencies {
-    implementation deps.androidx.appcompat
+    //viewModel
+    implementation deps.androidx.lifecycleviewmodelktx
+    implementation deps.androidx.annotations
     //列表
     implementation deps.androidx.recyclerview
 }
