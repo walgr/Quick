@@ -7,7 +7,7 @@ package com.wpf.app.quicknetwork.base
 class WpfRequest<SResponse, FResponse> : BaseRequest<SResponse, FResponse>() {
 
     override fun isSuccess(response: SResponse?): Boolean {
-        if (response is BaseResponse<*>) {
+        if (response is BaseResponseI<*,*>) {
             return response.isSuccess()
         }
         return response != null

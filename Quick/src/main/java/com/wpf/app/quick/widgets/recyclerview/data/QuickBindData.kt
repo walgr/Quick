@@ -25,11 +25,10 @@ open class QuickBindData(
     private var dealBind = true
     @Transient
     private var mView: View? = null
+    @Transient
+    private var isFirstLoad = true
 
-    /**
-     * TODO 列表中刷新会不执行onCreateViewHolder
-     */
-//    @Deprecated("有复用Bug")
+//    @ExperimentalStdlibApi
     open fun onCreateViewHolder(itemView: View) {
         this.mView = itemView
         if (dealBind) {
@@ -50,9 +49,13 @@ open class QuickBindData(
         mAdapter = adapter
         mViewHolder = viewHolder
         mView = viewHolder.itemView
+        if (isFirstLoad) {
+            onCreateViewHolder(itemView = viewHolder.itemView)
+        }
         if (dealBind) {
             dealInPlugins(this, null, QuickBind.bindPlugin)
         }
+        isFirstLoad = false
     }
 
     fun noBind() {

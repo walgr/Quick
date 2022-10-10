@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import com.wpf.app.quickbind.interfaces.Bind
+import com.wpf.app.quickbind.interfaces.RunOnContext
 import kotlin.math.abs
 
 /**
@@ -19,6 +20,7 @@ abstract class QuickItemView @JvmOverloads constructor(
     defStyleAttr: Int = 0,
     @LayoutRes
     private val layoutId: Int = 0,
+    private val layoutView: RunOnContext<View>? = null,
     open var viewType: Int = 0,
 ) : View(mContext, attributeSet, defStyleAttr), Bind {
 
@@ -37,13 +39,17 @@ abstract class QuickItemView @JvmOverloads constructor(
     var position: Int = -1
 
     open fun initView() {
-        if (layoutId == 0) return
-        mView = inflate(context, this.layoutId, null)
+        if (layoutId == 0 && layoutView == null) return
+        mView = if (layoutId != 0) {
+            inflate(context, this.layoutId, null)
+        } else {
+            layoutView?.run(context)
+        }
         post {
             val parentGroup = parent as? ViewGroup ?: return@post
             position = parentGroup.indexOfChild(this)
             parentGroup.removeView(this)
-            parentGroup.addView(mView, position)
+            parentGroup.addView(mView, position, ViewGroup.LayoutParams(layoutParams.width, layoutParams.height))
             visibility = GONE
             onCreateViewHolder()
             onBindViewHolder(position)

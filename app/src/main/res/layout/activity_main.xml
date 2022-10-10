@@ -48,6 +48,10 @@
             android:onClick="gotoSelectList"
             android:text="选择列表测试" />
 
+        <view class="com.wpf.app.quick.demo.RequestTestActivity$GotoThis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
         <com.wpf.app.quick.demo.model.SelectItemView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

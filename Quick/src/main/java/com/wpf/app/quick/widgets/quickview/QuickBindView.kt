@@ -10,6 +10,7 @@ import androidx.annotation.LayoutRes
 import com.wpf.app.quickbind.QuickBind
 import com.wpf.app.quickbind.QuickBind.dealInPlugins
 import com.wpf.app.quickbind.interfaces.Bind
+import com.wpf.app.quickbind.interfaces.RunOnContext
 
 /**
  * Created by 王朋飞 on 2022/7/13.
@@ -20,9 +21,10 @@ open class QuickBindView @JvmOverloads constructor(
     attributeSet: AttributeSet? = null,
     defStyleAttr: Int = 0,
     @LayoutRes
-    private val layoutId: Int,
+    private val layoutId: Int = 0,
+    layoutView: RunOnContext<View>? = null,
     private var dealBind: Boolean = true
-) : QuickItemView(mContext, attributeSet, defStyleAttr, layoutId) {
+) : QuickItemView(mContext, attributeSet, defStyleAttr, layoutId, layoutView) {
 
     override fun onCreateViewHolder() {
         if (dealBind) {

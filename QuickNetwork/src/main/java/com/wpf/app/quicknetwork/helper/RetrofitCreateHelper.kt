@@ -22,7 +22,7 @@ object RetrofitCreateHelper {
     /**
      * 存储已经初始化过的Retrofit
      */
-    fun putInitRetrofit(baseUrl: String, serviceCls: KClass<*>, retrofit: Retrofit) {
+    fun putInitedRetrofit(baseUrl: String, serviceCls: KClass<*>, retrofit: Retrofit) {
         retrofitMap[baseUrl] = retrofit
         retrofitServiceMap[serviceCls] = retrofit
     }
@@ -32,7 +32,8 @@ object RetrofitCreateHelper {
     }
 
     fun createService(serviceCls: KClass<*>): Any {
-        return retrofitServiceMap[serviceCls]?.create(serviceCls.java) ?: throw RuntimeException("请先调用newInstance初始化Retrofit")
+        return retrofitServiceMap[serviceCls]?.create(serviceCls.java)
+            ?: throw RuntimeException("请先调用newInstance初始化Retrofit")
     }
 
     fun newInstance(
@@ -64,14 +65,16 @@ object RetrofitCreateHelper {
         return retrofit!!
     }
 
+    fun getRetrofit(baseUrl: String): Retrofit? {
+        return retrofitMap[baseUrl]
+    }
+
     inline fun <reified T> getService(): T {
         val cls = T::class
         var service: Any? = serviceMap[cls]
         if (service == null) {
             service = createService(cls)
-            service?.let {
-                serviceMap[T::class] = service
-            }
+            serviceMap[T::class] = service
         }
         return service as T
     }

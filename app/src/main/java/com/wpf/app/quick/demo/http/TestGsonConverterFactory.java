@@ -1,4 +1,4 @@
-package com.wpf.app.quicknetwork.base;
+package com.wpf.app.quick.demo.http;
 
 import androidx.annotation.NonNull;
 import com.google.gson.Gson;
@@ -6,56 +6,49 @@ import com.google.gson.TypeAdapter;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-
+import com.wpf.app.quicknetwork.base.BaseResponseI;
+import com.wpf.app.quicknetwork.helper.GsonHelper;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+import okio.Buffer;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import retrofit2.Converter;
+import retrofit2.Retrofit;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.Reader;
-import java.io.StringReader;
-import java.io.Writer;
+import java.io.*;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
-import okio.Buffer;
-import retrofit2.Converter;
-import retrofit2.Retrofit;
-
 /**
  * Created by wg on 2017/5/9.
  */
 
-public class WpfGsonConverterFactory extends Converter.Factory {
+public class TestGsonConverterFactory extends Converter.Factory {
 
     private final Gson gson;
 
-    private WpfGsonConverterFactory(Gson gson) {
+    private TestGsonConverterFactory(Gson gson) {
         if (gson == null) throw new NullPointerException("gson == null");
         this.gson = gson;
     }
 
-    public static WpfGsonConverterFactory create() {
+    public static TestGsonConverterFactory create() {
         return create(new Gson());
     }
 
-    public static WpfGsonConverterFactory create(Gson gson) {
-        return new WpfGsonConverterFactory(gson);
+    public static TestGsonConverterFactory create(Gson gson) {
+        return new TestGsonConverterFactory(gson);
     }
 
     @Override
     public Converter<ResponseBody, ?> responseBodyConverter(@NonNull Type type, @NonNull Annotation[] annotations, @NonNull Retrofit retrofit) {
         if (!(type instanceof BaseResponseI) && !(type instanceof JSONObject) && !(type instanceof JSONArray)) {
-            BaseResponseA baseResponse = new BaseResponseA(type);
+            TestResponse baseResponse = new TestResponse();
             TypeAdapter<?> adapter = gson.getAdapter(TypeToken.getParameterized(baseResponse.getClass(), type));
             return new CustomGsonResponseBodyConverter<>(gson, adapter);
         }
@@ -105,7 +98,7 @@ public class WpfGsonConverterFactory extends Converter.Factory {
         @Override
         public T convert(ResponseBody value) throws IOException {
             String response = value.string();
-            BaseResponseA httpStatus = gson.fromJson(response, BaseResponseA.class);
+            TestResponse httpStatus = gson.fromJson(response, TestResponse.class);
             if (!httpStatus.isSuccess()) {
                 //处理失败
                 return (T) httpStatus;
@@ -125,21 +118,21 @@ public class WpfGsonConverterFactory extends Converter.Factory {
                     return (T) new JSONObject(response);
                 } else if (t instanceof JSONArray) {
                     return (T) new JSONArray(response);
-                } else if (t instanceof BaseResponseA) {
-                    if (((BaseResponseA<?>) t).getData() instanceof JSONObject) {
-                        ((BaseResponseA<JSONObject>) t).setData(new JSONObject(new Gson().toJson(((BaseResponseA<?>) httpStatus).getData())));
-                    } else if (((BaseResponseA<?>) t).getData() instanceof JSONArray) {
-                        ((BaseResponseA<JSONArray>) t).setData(new JSONArray(new Gson().toJson(((BaseResponseA<?>) httpStatus).getData())));
-                    } else if (((BaseResponseA<?>) t).getData() instanceof Map) {
-                        ((BaseResponseA<Map>) t).setData((Map) httpStatus.getData());
+                } else if (t instanceof TestResponse) {
+                    if (((TestResponse<?>) t).getData() instanceof JSONObject) {
+                        ((TestResponse<JSONObject>) t).setData(new JSONObject(new Gson().toJson(((TestResponse<?>) httpStatus).getData())));
+                    } else if (((TestResponse<?>) t).getData() instanceof JSONArray) {
+                        ((TestResponse<JSONArray>) t).setData(new JSONArray(new Gson().toJson(((TestResponse<?>) httpStatus).getData())));
+                    } else if (((TestResponse<?>) t).getData() instanceof Map) {
+                        ((TestResponse<Map>) t).setData((Map) httpStatus.getData());
                     }
                     return (T) t;
                 }
                 return t;
             } catch (Exception e) {
-                BaseResponseA exceReponse = new BaseResponseA();
-                exceReponse.setCode("-1");
-                exceReponse.setErrorMessage(e.getMessage());
+                TestResponse exceReponse = new TestResponse();
+                exceReponse.setErrorCode("-1");
+                exceReponse.setErrorMsg(e.getMessage());
                 return (T) exceReponse;
             } finally {
                 value.close();

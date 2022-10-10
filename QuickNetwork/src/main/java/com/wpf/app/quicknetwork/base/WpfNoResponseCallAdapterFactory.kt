@@ -26,7 +26,7 @@ class WpfNoResponseCallAdapterFactory private constructor(): CallAdapter.Factory
             val fResponseType = getParameterUpperBound(1, returnType)
             val sResponseClz = getRawType(sResponseType)
             val fResponseClz = getRawType(fResponseType)
-            val baseResponseF = BaseResponse(fResponseClz)
+            val baseResponseF = BaseResponseA(fResponseClz) as BaseResponseIA<*>
             return WpfNoResponseCallAdapter(sResponseType, sResponseClz, baseResponseF)
         }
         return null
