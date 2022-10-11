@@ -6,7 +6,6 @@ import com.google.gson.Gson
 import com.wpf.app.quick.annotations.BindView
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.demo.RequestTestActivity
-import com.wpf.app.quick.demo.http.model.首页文章
 import com.wpf.app.quick.demo.http.request
 import com.wpf.app.quick.viewmodel.QuickViewModel
 import com.wpf.app.quicknetwork.helper.GsonHelper
@@ -26,11 +25,13 @@ class RequestTestViewModel: QuickViewModel<RequestTestActivity>() {
         request {
             首页文章列表(0)
         }.success {
-            val result = Gson().toJson(it?.getDataI()) ?: ""
+            val result = Gson().toJson(it?.data) ?: ""
             LogUtil.e("接口返回成功$result")
             info?.text = GsonHelper.decodeHTMLCharacter(result)
         }.fail {
-            LogUtil.e(("接口返回失败" + it?.getErrorI()?.toString()))
+            val result = Gson().toJson(it?.data) ?: ""
+            LogUtil.e("接口返回失败:${it?.errorMsg}$result")
+            info?.text = GsonHelper.decodeHTMLCharacter(result)
         }
     }
 }

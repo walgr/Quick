@@ -19,7 +19,7 @@ class MainViewModel : QuickBindingViewModel<ActivityMainBinding>() {
     @BindData2View(id = R.id.spTextView1, helper = Text2TextView::class)
     var title = "测试BindData2View"
 
-    @SuppressLint("NonConstantResourceId")
+    @SuppressLint("NonConstantResourceId", "StaticFieldLeak")
     @BindSp2View(bindSp = "绑定的SpKey2", defaultValue = "默认值2")
     @BindView(R.id.spTextView2)
     var text2: TextView? = null

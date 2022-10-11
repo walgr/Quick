@@ -1,5 +1,6 @@
-package com.wpf.app.quicknetwork.base
+package com.wpf.app.quick.demo.http.call
 
+import com.wpf.app.quick.demo.http.TestResponse
 import retrofit2.CallAdapter
 import retrofit2.Retrofit
 import java.lang.reflect.ParameterizedType
@@ -9,10 +10,10 @@ import java.lang.reflect.Type
  * Created by 王朋飞 on 2022/8/1.
  *
  */
-class WpfNoResponseCallAdapterFactory private constructor(): CallAdapter.Factory() {
+class TestNoResponseCallAdapterFactory private constructor(): CallAdapter.Factory() {
 
     companion object {
-        fun create() = WpfNoResponseCallAdapterFactory()
+        fun create() = TestNoResponseCallAdapterFactory()
     }
 
     override fun get(
@@ -21,13 +22,13 @@ class WpfNoResponseCallAdapterFactory private constructor(): CallAdapter.Factory
         retrofit: Retrofit
     ): CallAdapter<*, *>? {
         val rawType = getRawType(returnType)
-        if (rawType == WpfNoResponseCall::class.java) {
+        if (rawType == TestNoResponseCall::class.java) {
             val sResponseType = getParameterUpperBound(0, returnType as ParameterizedType)
             val fResponseType = getParameterUpperBound(1, returnType)
             val sResponseClz = getRawType(sResponseType)
             val fResponseClz = getRawType(fResponseType)
-            val baseResponseF = BaseResponseA(fResponseClz) as BaseResponseIA<*>
-            return WpfNoResponseCallAdapter(sResponseType, sResponseClz, baseResponseF)
+            val baseResponseF = TestResponse(fResponseClz.newInstance())
+            return TestNoResponseCallAdapter(sResponseType, sResponseClz, baseResponseF)
         }
         return null
     }

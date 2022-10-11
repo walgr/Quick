@@ -9,6 +9,25 @@ open class BaseResponse<Data>: BaseResponseI<Data, BaseResponse.ErrorData> {
     var errorMessage: ErrorData? = null
     var data: Data? = null
 
+    override var codeI: String? = null
+        get() = code
+        set(value) {
+            field = value
+            code = value
+        }
+    override var errorI: ErrorData? = null
+        get() = errorMessage
+        set(value) {
+            field = value
+            errorMessage = value
+        }
+    override var dataI: Data? = null
+        get() = data
+        set(value) {
+            field = value
+            data = value
+        }
+
     //给CallAdapter确定类型使用
     internal constructor()
     internal constructor(data: Class<Data>)
@@ -20,49 +39,36 @@ open class BaseResponse<Data>: BaseResponseI<Data, BaseResponse.ErrorData> {
         val type: Int? = null,
         val message: String? = null,
     )
-
-    override fun getCodeI(): String? {
-        return code
-    }
-
-    override fun getErrorI(): ErrorData? {
-        return errorMessage
-    }
-
-    override fun setDataI(data: Data?) {
-        this.data = data
-    }
-
-    override fun getDataI(): Data? {
-        return data
-    }
 }
 
-open class BaseResponseA<Data>: BaseResponseIA<Data> {
+open class BaseResponseS<Data>: BaseResponseIS<Data> {
     var code: String? = null
-    var errorMessage: Any? = null
+    var errorMessage: String? = null
     var data: Data? = null
+
+    override var codeI: String? = null
+        get() = code
+        set(value) {
+            field = value
+            code = value
+        }
+    override var errorI: String? = null
+        get() = errorMessage
+        set(value) {
+            field = value
+            errorMessage = value
+        }
+    override var dataI: Data? = null
+        get() = data
+        set(value) {
+            field = value
+            data = value
+        }
 
     //给CallAdapter确定类型使用
     internal constructor()
     internal constructor(data: Class<Data>)
     internal constructor(data: Data?) {
         this.data = data
-    }
-
-    override fun getCodeI(): String? {
-        return code
-    }
-
-    override fun getErrorI(): Any? {
-        return errorMessage
-    }
-
-    override fun setDataI(data: Data?) {
-        this.data = data
-    }
-
-    override fun getDataI(): Data? {
-        return data
     }
 }

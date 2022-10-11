@@ -1,4 +1,4 @@
-package com.wpf.app.quicknetwork.base
+package com.wpf.app.quicknetwork.call
 
 import retrofit2.CallAdapter
 import retrofit2.Retrofit
@@ -9,10 +9,10 @@ import java.lang.reflect.Type
  * Created by 王朋飞 on 2022/8/1.
  *
  */
-class WpfCommonCallAdapterFactory private constructor(): CallAdapter.Factory() {
+class CommonCallAdapterFactory private constructor(): CallAdapter.Factory() {
 
     companion object {
-        fun create() = WpfCommonCallAdapterFactory()
+        fun create() = CommonCallAdapterFactory()
     }
 
     override fun get(
@@ -21,10 +21,10 @@ class WpfCommonCallAdapterFactory private constructor(): CallAdapter.Factory() {
         retrofit: Retrofit
     ): CallAdapter<*, *>? {
         val rawType = getRawType(returnType)
-        if (rawType == WpfCommonCall::class.java) {
+        if (rawType == CommonCall::class.java) {
             val sResponseType = getParameterUpperBound(0, returnType as ParameterizedType)
             val sResponseClz = getRawType(sResponseType)
-            return WpfCommonCallAdapter(sResponseType, sResponseClz)
+            return CommonCallAdapter(sResponseType, sResponseClz)
         }
         return null
     }

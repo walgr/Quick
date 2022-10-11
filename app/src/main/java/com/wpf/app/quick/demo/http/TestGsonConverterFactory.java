@@ -6,8 +6,6 @@ import com.google.gson.TypeAdapter;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.wpf.app.quicknetwork.base.BaseResponseI;
-import com.wpf.app.quicknetwork.helper.GsonHelper;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -19,6 +17,7 @@ import retrofit2.Retrofit;
 
 import java.io.*;
 import java.lang.annotation.Annotation;
+import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -47,13 +46,30 @@ public class TestGsonConverterFactory extends Converter.Factory {
 
     @Override
     public Converter<ResponseBody, ?> responseBodyConverter(@NonNull Type type, @NonNull Annotation[] annotations, @NonNull Retrofit retrofit) {
-        if (!(type instanceof BaseResponseI) && !(type instanceof JSONObject) && !(type instanceof JSONArray)) {
-            TestResponse baseResponse = new TestResponse();
+        if (!(type instanceof ParameterizedType && ((ParameterizedType) type).getRawType() instanceof Class && parentIs((Class<?>) ((ParameterizedType) type).getRawType(), TestResponse.class)) && !(type instanceof JSONObject) && !(type instanceof JSONArray)) {
+            TestResponse<?> baseResponse = new TestResponse<>();
             TypeAdapter<?> adapter = gson.getAdapter(TypeToken.getParameterized(baseResponse.getClass(), type));
             return new CustomGsonResponseBodyConverter<>(gson, adapter);
         }
         TypeAdapter<?> adapter = gson.getAdapter(TypeToken.get(type));
         return new CustomGsonResponseBodyConverter<>(gson, adapter);
+    }
+
+    private boolean parentIs(Class<?> curClass, Class<?> parentClass) {
+        Class<?> child = curClass;
+        while (child != null) {
+            if (parentClass.isInterface()) {
+                if (child.getInterfaces().length > 0 && parentIs(child.getInterfaces()[0], parentClass)) {
+                    return true;
+                } else {
+                    if (child == parentClass) return true;
+                }
+            } else {
+                if (child == parentClass) return true;
+            }
+            child = child.getSuperclass();
+        }
+        return false;
     }
 
     @Override
@@ -98,7 +114,7 @@ public class TestGsonConverterFactory extends Converter.Factory {
         @Override
         public T convert(ResponseBody value) throws IOException {
             String response = value.string();
-            TestResponse httpStatus = gson.fromJson(response, TestResponse.class);
+            TestResponse<?> httpStatus = gson.fromJson(response, TestResponse.class);
             if (!httpStatus.isSuccess()) {
                 //处理失败
                 return (T) httpStatus;

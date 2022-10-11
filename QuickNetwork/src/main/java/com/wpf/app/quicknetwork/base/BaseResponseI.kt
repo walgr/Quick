@@ -4,12 +4,11 @@ interface BaseResponseIS<Data> : BaseResponseI<Data, String>
 interface BaseResponseIA<Data> : BaseResponseI<Data, Any>
 
 interface BaseResponseI<Data, Error> {
-    fun getCodeI(): String?
-    fun getErrorI(): Error?
-    fun getDataI(): Data?
-    fun setDataI(data: Data?)
+    var codeI: String?
+    var errorI: Error?
+    var dataI: Data?
 
     fun isSuccess(): Boolean {
-        return getCodeI() == "0"
+        return codeI == "0"
     }
 }

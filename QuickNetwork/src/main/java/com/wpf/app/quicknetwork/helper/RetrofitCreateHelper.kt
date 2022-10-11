@@ -1,8 +1,8 @@
 package com.wpf.app.quicknetwork.helper
 
-import com.wpf.app.quicknetwork.base.WpfCallAdapterFactory
-import com.wpf.app.quicknetwork.base.WpfCommonCallAdapterFactory
-import com.wpf.app.quicknetwork.base.WpfNoResponseCallAdapterFactory
+import com.wpf.app.quicknetwork.call.RealCallAdapterFactory
+import com.wpf.app.quicknetwork.call.CommonCallAdapterFactory
+import com.wpf.app.quicknetwork.call.NoResponseCallAdapterFactory
 import okhttp3.OkHttpClient
 import retrofit2.CallAdapter
 import retrofit2.Converter
@@ -48,9 +48,9 @@ object RetrofitCreateHelper {
             val retrofitBuilder =
                 Retrofit.Builder()
                     .baseUrl(baseUrl)
-                    .addCallAdapterFactory(WpfCallAdapterFactory.create())
-                    .addCallAdapterFactory(WpfNoResponseCallAdapterFactory.create())
-                    .addCallAdapterFactory(WpfCommonCallAdapterFactory.create())
+                    .addCallAdapterFactory(RealCallAdapterFactory.create())
+                    .addCallAdapterFactory(NoResponseCallAdapterFactory.create())
+                    .addCallAdapterFactory(CommonCallAdapterFactory.create())
                     .client(okHttp)
             callFactoryList?.forEach {
                 retrofitBuilder.addCallAdapterFactory(it)

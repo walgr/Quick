@@ -1,26 +1,38 @@
 package com.wpf.app.quick.demo.http
 
-import com.wpf.app.quicknetwork.base.BaseResponseIA
 import com.wpf.app.quicknetwork.base.BaseResponseIS
 
-class TestResponse<Data>: BaseResponseIA<Data> {
+open class TestResponse<Data>: BaseResponseIS<Data> {
     var data: Data? = null
     var errorCode: String? = null
     var errorMsg: String? = null
+    override var codeI: String? = null
+        get() = errorCode
+        set(value) {
+            field = value
+            errorCode = value
+        }
+    override var errorI: String? = null
+        get() = errorMsg
+        set(value) {
+            field = value
+            errorMsg = value
+        }
+    override var dataI: Data? = null
+        get() = data
+        set(value) {
+            field = value
+            data = value
+        }
 
-    override fun getCodeI(): String? {
-        return errorCode
+    override fun isSuccess(): Boolean {
+        return errorCode == ""
     }
 
-    override fun getErrorI(): String? {
-        return errorMsg
-    }
-
-    override fun getDataI(): Data? {
-        return data
-    }
-
-    override fun setDataI(data: Data?) {
+    //给CallAdapter确定类型使用
+    internal constructor()
+    internal constructor(data: Class<Data>)
+    internal constructor(data: Data?) {
         this.data = data
     }
 }
