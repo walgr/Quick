@@ -2,6 +2,7 @@ package com.wpf.app.quick.demo.viewmodel
 
 import android.annotation.SuppressLint
 import android.widget.TextView
+import com.google.android.material.button.MaterialButton
 import com.google.gson.Gson
 import com.wpf.app.quick.annotations.BindView
 import com.wpf.app.quick.demo.R

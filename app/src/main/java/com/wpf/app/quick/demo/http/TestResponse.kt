@@ -25,10 +25,6 @@ open class TestResponse<Data>: BaseResponseIS<Data> {
             data = value
         }
 
-    override fun isSuccess(): Boolean {
-        return errorCode == ""
-    }
-
     //给CallAdapter确定类型使用
     internal constructor()
     internal constructor(data: Class<Data>)
