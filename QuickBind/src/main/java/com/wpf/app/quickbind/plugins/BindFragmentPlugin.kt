@@ -70,42 +70,42 @@ class BindFragmentPlugin : BasePlugin {
                                 if (obj is Bind) {
                                     val bundle = obj.bindData(i)
                                     if (bundle != null) {
-                                        baseFragment.arguments = bundle
+                                        (baseFragment as Fragment).arguments = bundle
                                     } else {
                                         val viewContext =
                                             (viewPager as? ViewPagerSize)?.currentContext()
                                                 ?: obj.getView()?.getViewContext()
                                         if (viewContext is BindViewModel<*>) {
-                                            baseFragment.arguments =
+                                            (baseFragment as Fragment).arguments =
                                                 baseFragment.getInitBundle(viewContext, i)
                                         } else {
                                             if (viewContext is Activity) {
-                                                baseFragment.arguments =
+                                                (baseFragment as Fragment).arguments =
                                                     baseFragment.getInitBundle(viewContext, i)
                                             }
                                             if (viewContext is Fragment) {
-                                                baseFragment.arguments =
+                                                (baseFragment as Fragment).arguments =
                                                     baseFragment.getInitBundle(viewContext, i)
                                             }
                                         }
                                     }
                                 } else {
                                     if (viewModel != null) {
-                                        baseFragment.arguments =
+                                        (baseFragment as Fragment).arguments =
                                             baseFragment.getInitBundle(obj as BindViewModel<*>, i)
                                     } else {
                                         if (obj is Activity) {
-                                            baseFragment.arguments =
+                                            (baseFragment as Fragment).arguments =
                                                 baseFragment.getInitBundle(obj, i)
                                         }
                                         if (obj is Fragment) {
-                                            baseFragment.arguments =
+                                            (baseFragment as Fragment).arguments =
                                                 baseFragment.getInitBundle(obj, i)
                                         }
                                     }
                                 }
                                 mBaseFragmentList[i] = baseFragment
-                                return baseFragment
+                                return baseFragment as Fragment
                             } catch (e: Exception) {
                                 e.printStackTrace()
                             }
@@ -149,42 +149,42 @@ class BindFragmentPlugin : BasePlugin {
                                 if (obj is Bind) {
                                     val bundle = obj.bindData(i)
                                     if (bundle != null) {
-                                        baseFragment.arguments = bundle
+                                        (baseFragment as Fragment).arguments = bundle
                                     } else {
                                         val viewContext =
                                             (viewPager as? ViewPagerSize)?.currentContext()
                                                 ?: obj.getView()?.getViewContext()
                                         if (viewContext is BindViewModel<*>) {
-                                            baseFragment.arguments =
+                                            (baseFragment as Fragment).arguments =
                                                 baseFragment.getInitBundle(viewContext, i)
                                         } else {
                                             if (viewContext is Activity) {
-                                                baseFragment.arguments =
+                                                (baseFragment as Fragment).arguments =
                                                     baseFragment.getInitBundle(viewContext, i)
                                             }
                                             if (viewContext is Fragment) {
-                                                baseFragment.arguments =
+                                                (baseFragment as Fragment).arguments =
                                                     baseFragment.getInitBundle(viewContext, i)
                                             }
                                         }
                                     }
                                 } else {
                                     if (viewModel != null) {
-                                        baseFragment.arguments =
+                                        (baseFragment as Fragment).arguments =
                                             baseFragment.getInitBundle(obj as BindViewModel<*>, i)
                                     } else {
                                         if (obj is Activity) {
-                                            baseFragment.arguments =
+                                            (baseFragment as Fragment).arguments =
                                                 baseFragment.getInitBundle(obj, i)
                                         }
                                         if (obj is Fragment) {
-                                            baseFragment.arguments =
+                                            (baseFragment as Fragment).arguments =
                                                 baseFragment.getInitBundle(obj, i)
                                         }
                                     }
                                 }
                                 mBaseFragmentList[i] = baseFragment
-                                return baseFragment
+                                return (baseFragment as Fragment)
                             } catch (e: Exception) {
                                 e.printStackTrace()
                             }

@@ -28,11 +28,11 @@ class RequestTestViewModel: QuickViewModel<RequestTestActivity>() {
         }.success {
             val result = Gson().toJson(it?.data) ?: ""
             LogUtil.e("接口返回成功$result")
-            info?.text = GsonHelper.decodeHTMLCharacter(result)
+            info?.text = result
         }.fail {
             val result = Gson().toJson(it?.data) ?: ""
             LogUtil.e("接口返回失败:${it?.errorMsg}$result")
-            info?.text = GsonHelper.decodeHTMLCharacter(result)
+            info?.text = result
         }
     }
 }

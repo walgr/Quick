@@ -15,6 +15,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import com.wpf.app.quick.helper.DialogSizeHelper
 import com.wpf.app.quickbind.QuickBind
+import com.wpf.app.quickbind.interfaces.BindBaseFragment
 
 /**
  * Created by 王朋飞 on 2022/6/16.
@@ -23,7 +24,7 @@ abstract class QuickDialogFragment @JvmOverloads constructor(
     @LayoutRes
     var layoutId: Int = 0,
     var layoutView: View? = null
-) : DialogFragment(), DialogSize, DialogLifecycle {
+) : DialogFragment(), BindBaseFragment, DialogSize, DialogLifecycle {
 
     override fun onStart() {
         super.onStart()

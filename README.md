@@ -36,3 +36,7 @@
         implementation 'com.github.walgr.Quick:Quick:latest'
         implementation 'com.github.walgr.Quick:QuickNetwork:latest'
     }
+
+### 未来功能
+
+    1.父选择基类支持悬浮和展开收起功能

@@ -9,34 +9,30 @@ import androidx.fragment.app.Fragment
  * Created by 王朋飞 on 2022/7/12.
  *
  */
-abstract class BindBaseFragment : Fragment() {
+interface BindBaseFragment {
 
     /**
      * 从ViewModelActivity获取数据
      */
-    @NonNull
-    open fun getInitBundle(viewModel: BindViewModel<*>?, position: Int): Bundle? {
+    fun getInitBundle(viewModel: BindViewModel<*>?, position: Int): Bundle? {
         return null
     }
 
     /**
      * 从Activity获取数据
      */
-    @NonNull
-    open fun getInitBundle(activity: Activity?, position: Int): Bundle? {
+    fun getInitBundle(activity: Activity?, position: Int): Bundle? {
         return null
     }
 
     /**
      * 从Fragment获取数据
      */
-    @NonNull
-    open fun getInitBundle(fragment: Fragment?, position: Int): Bundle? {
+    fun getInitBundle(fragment: Fragment?, position: Int): Bundle? {
         return null
     }
 
-    @NonNull
-    open fun getTitle(): String? {
+    fun getTitle(): String? {
         return null
     }
 }

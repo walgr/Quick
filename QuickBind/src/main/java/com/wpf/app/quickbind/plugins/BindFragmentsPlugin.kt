@@ -67,14 +67,12 @@ class BindFragmentsPlugin : BasePlugin {
         val fragments: MutableList<BindBaseFragment> = ArrayList()
         for ((position, fragmentCls) in fragmentClsArray.withIndex()) {
             try {
-                val baseFragment: Fragment? = fragmentCls.java.newInstance()
+                val baseFragment: Fragment = fragmentCls.java.newInstance() as Fragment
                 if (baseFragment is BindBaseFragment) {
                     if (obj is Activity) {
-                        baseFragment.setArguments(
-                            baseFragment.getInitBundle(obj, position)
-                        )
+                        baseFragment.arguments = baseFragment.getInitBundle(obj, position)
                     } else if (obj is Fragment) {
-                        baseFragment.setArguments(baseFragment.getInitBundle(obj, position))
+                        baseFragment.arguments = baseFragment.getInitBundle(obj, position)
                     }
                     fragments.add(baseFragment)
                 }

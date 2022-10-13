@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
+import androidx.fragment.app.Fragment
 import com.wpf.app.quickbind.QuickBind
 import com.wpf.app.quickbind.annotations.AutoGet
 import com.wpf.app.quickbind.interfaces.BindBaseFragment
@@ -24,13 +25,13 @@ abstract class QuickFragment @JvmOverloads constructor(
     @LayoutRes open val layoutId: Int = 0,
     open val layoutView: View? = null,
     @AutoGet(titleKey) open val titleName: String = ""
-) : BindBaseFragment(), QuickView {
+) : Fragment(), BindBaseFragment, QuickView {
 
     private var mView: View? = null
 
     init {
         val bundle = Bundle()
-        bundle.putString(titleKey, titleName)
+        bundle.putString(titleKey, this.titleName)
         arguments = bundle
     }
 

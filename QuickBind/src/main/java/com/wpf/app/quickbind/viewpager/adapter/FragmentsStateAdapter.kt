@@ -16,7 +16,7 @@ class FragmentsStateAdapter(
 ) : FragmentStatePagerAdapter(fm) {
 
     override fun getItem(i: Int): Fragment {
-        return fragments[i]
+        return fragments[i] as Fragment
     }
 
     override fun getCount(): Int {
