@@ -63,7 +63,7 @@ open class QuickParentSelectData(
                 }
             }
             if (findPos >= 0) {
-                com.wpf.app.quickutil.RecyclerViewUtils.scrollToPosition(childAdapter.mRecyclerView, findPos)
+                RecyclerViewUtils.scrollToPosition(childAdapter.mRecyclerView, findPos)
             }
         }
     }
