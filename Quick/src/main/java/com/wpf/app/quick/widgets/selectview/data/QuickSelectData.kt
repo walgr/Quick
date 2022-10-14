@@ -16,9 +16,9 @@ open class QuickSelectData(
     open var name: String? = null,
     open var isSelect: Boolean = false,
     open var defaultSelect: Boolean = false,        //是否默认选中，true清空后会再次选中
-    override val isSuspension: Boolean = false,         //View是否悬浮置顶
     @LayoutRes override val layoutId: Int,
-) : QuickBindData(layoutId) {
+    override val isSuspension: Boolean = false,         //View是否悬浮置顶
+) : QuickBindData(layoutId, isSuspension) {
 
     @CallSuper
     override fun onBindViewHolder(

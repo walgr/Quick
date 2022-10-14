@@ -26,10 +26,11 @@ open class QuickChildSelectData(
     override var maxLimit: Int = 5,                             //多选最多数量
     @Transient
     override val maxLimitListener: MaxLimitListener? = null,    //超出反馈
-    override val isSuspension: Boolean = false,                 //View是否悬浮置顶
     @LayoutRes override val layoutId: Int,
+    override val isSuspension: Boolean = false,                 //View是否悬浮置顶
 ) : QuickMultiSelectData(
-    layoutId = layoutId
+    layoutId = layoutId,
+    isSuspension = isSuspension
 ) {
 
     fun getChildSelectSize(): Int {

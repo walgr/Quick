@@ -30,8 +30,8 @@ open class QuickParentSelectData(
     @LayoutRes override val layoutId: Int,
 ) : QuickChildSelectData(
     onChildClick = onParentClick as? RunItemClickWithSelf<QuickChildSelectData>,
-    isSuspension = isSuspension,
-    layoutId = layoutId
+    layoutId = layoutId,
+    isSuspension = isSuspension
 ) {
 
     @SuppressLint("NotifyDataSetChanged")
