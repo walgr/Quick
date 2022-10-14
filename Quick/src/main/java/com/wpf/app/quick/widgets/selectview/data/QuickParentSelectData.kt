@@ -6,6 +6,7 @@ import com.wpf.app.quick.widgets.recyclerview.QuickSelectAdapter
 import com.wpf.app.quick.widgets.recyclerview.data.QuickBindData
 import com.wpf.app.quick.widgets.recyclerview.holder.QuickViewHolder
 import com.wpf.app.quickbind.interfaces.RunItemClickWithSelf
+import com.wpf.app.quickutil.recyclerview.scrollToPositionAndOffset
 
 /**
  * Created by 王朋飞 on 2022/7/13.
@@ -64,7 +65,7 @@ open class QuickParentSelectData(
                 }
             }
             if (findPos >= 0) {
-                childAdapter.mRecyclerView?.scrollToPosition(findPos)
+                childAdapter.mRecyclerView?.scrollToPositionAndOffset(findPos)
             }
         }
     }

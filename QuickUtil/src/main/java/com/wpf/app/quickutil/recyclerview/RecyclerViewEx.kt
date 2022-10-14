@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
  * Created by 王朋飞 on 2022/6/22.
  */
 
-
     fun RecyclerView.isScrollBottom(): Boolean {
         return !canScrollVertically(1)
     }
@@ -16,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
         return !canScrollVertically(-1)
     }
 
-    fun RecyclerView.scrollToPosition(position: Int) {
+    fun RecyclerView.scrollToPositionAndOffset(position: Int) {
         if (position != -1) {
             scrollToPosition(position)
             val mLayoutManager = layoutManager

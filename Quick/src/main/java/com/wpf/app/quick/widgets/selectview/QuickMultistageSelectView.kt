@@ -16,6 +16,7 @@ import com.wpf.app.quick.widgets.selectview.data.QuickChildSelectData
 import com.wpf.app.quick.widgets.selectview.data.QuickParentSelectData
 import com.wpf.app.quick.widgets.selectview.helper.ParentChildDataHelper
 import com.wpf.app.quick.widgets.selectview.helper.QuickStickyView
+import com.wpf.app.quickutil.LogUtil
 import com.wpf.app.quickutil.recyclerview.StickyItemDecoration
 
 /**
@@ -61,7 +62,7 @@ open class QuickMultistageSelectView @JvmOverloads constructor(
     }
 
     private fun addListener() {
-        selectViewList[selectViewList.size - 1].addItemDecoration(StickyItemDecoration(QuickStickyView()))
+//        selectViewList[selectViewList.size - 1].addItemDecoration(StickyItemDecoration(QuickStickyView()))
         selectViewList[selectViewList.size - 1].setOnSelectChangeListener(object :
             OnSelectOnChange {
             override fun onSelectChange() {
@@ -69,6 +70,7 @@ open class QuickMultistageSelectView @JvmOverloads constructor(
             }
         })
         selectViewList[selectViewList.size - 1].addOnScrollListener(object : OnScrollListener() {
+
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 val selectAdapter: QuickSelectAdapter =
@@ -120,9 +122,14 @@ open class QuickMultistageSelectView @JvmOverloads constructor(
         selectViewList[0].getSelectAdapter().curClickData = dataList[0]
         selectViewList[0].getSelectAdapter().notifyItemChanged(0)
         if (childInOne) {
-            selectViewList[1].setNewData(dataList.flatMap {
+            val allChildList = dataList.flatMap {
                 it.childList ?: arrayListOf()
-            })
+            }
+            val hasSuspension = allChildList.find { it.isSuspension } != null
+            selectViewList[1].setNewData(allChildList)
+            if (hasSuspension) {
+                selectViewList[1].addItemDecoration(StickyItemDecoration(QuickStickyView()))
+            }
         } else {
             selectViewList[1].setNewData(dataList[0].childList)
         }

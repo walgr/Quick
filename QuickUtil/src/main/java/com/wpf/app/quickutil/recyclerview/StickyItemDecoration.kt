@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.wpf.app.quickutil.LogUtil
 
 
 class StickyItemDecoration(
@@ -181,6 +182,14 @@ class StickyItemDecoration(
         if (!mStickyPositionList.contains(position)) {
             mStickyPositionList.add(position)
         }
+        //不能用上一次缓存的position,需要根据当前位置查询上一个可吸附的View
+        if (mStickyPositionList.size > 1) {
+            val lastPos = mStickyView.getLastStickyView(mAdapter, position)
+            if (lastPos != -1 && lastPos != position && !mStickyPositionList.contains(lastPos)) {
+                mStickyPositionList.add(mStickyPositionList.size - 2, lastPos)
+                mStickyPositionList.sort()
+            }
+        }
     }
 
     /**
@@ -189,7 +198,7 @@ class StickyItemDecoration(
      * @return
      */
     private fun getStickyViewPositionOfRecyclerView(m: Int): Int {
-        return mLayoutManager!!.findFirstVisibleItemPosition() + m
+        return (mLayoutManager?.findFirstVisibleItemPosition() ?: 0) + m
     }
 
     /**
