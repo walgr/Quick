@@ -6,12 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.wpf.app.quickutil.LogUtil
 
 
 class StickyItemDecoration(
     private val mStickyView: StickyView
-) : RecyclerView.ItemDecoration() {
+) : ClickItemDecoration() {
     /**
      * 吸附的itemView
      */
@@ -240,5 +239,9 @@ class StickyItemDecoration(
         canvas.translate(0f, -mStickyItemViewMarginTop)
         mStickyItemView?.draw(canvas)
         canvas.restoreToCount(saveCount)
+    }
+
+    override fun getStickyItemList(): List<View?> {
+        return arrayListOf(mStickyItemView)
     }
 }

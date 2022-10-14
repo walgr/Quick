@@ -3,8 +3,6 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:background="@drawable/bg_change_isselect_eeeeee_fffff"
               android:orientation="horizontal"
-              android:clickable="true"
-              android:focusable="true"
               android:gravity="center_vertical"
               android:layout_width="match_parent"
               android:layout_height="56dp" >

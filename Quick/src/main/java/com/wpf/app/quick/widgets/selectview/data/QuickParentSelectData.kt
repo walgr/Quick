@@ -74,6 +74,9 @@ open class QuickParentSelectData(
 
     }
 
+    /**
+     * 返回父在子列表作为标题View
+     */
     open fun asTitleViewInChild(): QuickParentSelectData? {
         return null
     }
@@ -86,8 +89,5 @@ open class QuickParentSelectData(
         super.onBindViewHolder(adapter, viewHolder, position)
         asTitleViewInChild()?.onBindViewHolder(adapter, viewHolder, position)
         onClickChange(adapter.curClickData == this)
-        if (isSuspension) {
-            viewHolder.itemView.isClickable = true
-        }
     }
 }
