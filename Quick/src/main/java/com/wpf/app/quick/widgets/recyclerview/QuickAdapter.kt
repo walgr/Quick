@@ -71,7 +71,6 @@ open class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>()
 //                }
                 holder.onCreateViewHolder(holder.itemView)
             }
-            com.wpf.app.quickutil.LogUtil.e("onCreateViewHolder")
             return holder as QuickViewHolder<QuickItemData>
         }
         return null!!

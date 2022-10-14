@@ -6,7 +6,7 @@ package com.wpf.app.quickbind.annotations
  * 自动复用Fragment
  */
 @Target(AnnotationTarget.FIELD)
-@kotlin.annotation.Retention(AnnotationRetention.RUNTIME)
+@Retention(AnnotationRetention.RUNTIME)
 annotation class LoadSp(
     val fileName: String = "QuickViewSpBindFile",
     val key: String,

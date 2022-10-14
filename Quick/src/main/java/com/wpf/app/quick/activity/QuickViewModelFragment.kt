@@ -7,7 +7,7 @@ import android.view.View
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import androidx.lifecycle.ViewModelProvider
-import com.wpf.app.quickutil.ViewModelEx
+import com.wpf.app.quickutil.base.ViewModelEx
 import com.wpf.app.quick.viewmodel.QuickViewModel
 import com.wpf.app.quickbind.QuickBind
 import com.wpf.app.quickbind.interfaces.BindViewModel
@@ -61,7 +61,7 @@ open class QuickViewModelFragment<VM : QuickViewModel<H>, H : QuickView> @JvmOve
     }
 
     open fun initViewModel() {
-        val vmClass: Class<VM>? = com.wpf.app.quickutil.ViewModelEx.get0Clazz(this)
+        val vmClass: Class<VM>? = ViewModelEx.get0Clazz(this)
         if (vmClass != null && context != null) {
             mViewModel = ViewModelProvider(
                 this,

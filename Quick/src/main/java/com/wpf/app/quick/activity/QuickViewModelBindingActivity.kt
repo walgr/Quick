@@ -8,7 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import com.wpf.app.quick.constant.BRConstant
-import com.wpf.app.quickutil.ViewModelEx
+import com.wpf.app.quickutil.base.ViewModelEx
 import com.wpf.app.quick.viewmodel.QuickBindingViewModel
 import com.wpf.app.quickbind.QuickBind
 
@@ -41,7 +41,7 @@ abstract class QuickViewModelBindingActivity<VM : QuickBindingViewModel<VB>, VB 
 
     override fun dealContentView() {
         super.dealContentView()
-        val viewModelCls: Class<VM>? = com.wpf.app.quickutil.ViewModelEx.get0Clazz(this)
+        val viewModelCls: Class<VM>? = ViewModelEx.get0Clazz(this)
         if (viewModelCls != null) {
             mViewModel =
                 ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory(application)).get(

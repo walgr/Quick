@@ -2,7 +2,6 @@ package com.wpf.app.quick.widgets.selectview.data
 
 import android.annotation.SuppressLint
 import androidx.annotation.LayoutRes
-import com.wpf.app.quickutil.RecyclerViewUtils
 import com.wpf.app.quick.widgets.recyclerview.QuickSelectAdapter
 import com.wpf.app.quick.widgets.recyclerview.data.QuickBindData
 import com.wpf.app.quick.widgets.recyclerview.holder.QuickViewHolder
@@ -14,6 +13,7 @@ import com.wpf.app.quickbind.interfaces.RunItemClickWithSelf
  */
 open class QuickParentSelectData(
     open var canClick: Boolean = false,
+    override val isSuspension: Boolean = false,                 //父View是否悬浮置顶
     override var parent: QuickParentSelectData? = null,
     override var childList: MutableList<out QuickChildSelectData>? = null,
     onParentClick: RunItemClickWithSelf<QuickParentSelectData>? = null,
@@ -30,6 +30,7 @@ open class QuickParentSelectData(
     @LayoutRes override val layoutId: Int,
 ) : QuickChildSelectData(
     onChildClick = onParentClick as? RunItemClickWithSelf<QuickChildSelectData>,
+    isSuspension = isSuspension,
     layoutId = layoutId
 ) {
 
@@ -63,7 +64,7 @@ open class QuickParentSelectData(
                 }
             }
             if (findPos >= 0) {
-                RecyclerViewUtils.scrollToPosition(childAdapter.mRecyclerView, findPos)
+                childAdapter.mRecyclerView?.scrollToPosition(findPos)
             }
         }
     }
@@ -84,5 +85,8 @@ open class QuickParentSelectData(
         super.onBindViewHolder(adapter, viewHolder, position)
         asTitleViewInChild()?.onBindViewHolder(adapter, viewHolder, position)
         onClickChange(adapter.curClickData == this)
+        if (isSuspension) {
+            viewHolder.itemView.isClickable = true
+        }
     }
 }

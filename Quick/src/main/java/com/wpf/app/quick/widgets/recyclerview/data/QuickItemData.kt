@@ -8,7 +8,8 @@ import kotlin.math.abs
  *
  */
 open class QuickItemData(
-    open var viewType: Int = 0
+    open var viewType: Int = 0,
+    open val isSuspension: Boolean = false                 //View是否悬浮置顶
 ): BaseObservable() {
 
     init {

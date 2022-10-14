@@ -20,12 +20,13 @@ open class QuickChildSelectData(
     override var name: String? = null,
     override var isSelect: Boolean = false,
     override var defaultSelect: Boolean = false,
-    override var canCancel: Boolean = true,                  //是否可以取消选择
-    override var singleSelect: Boolean = false,               //true 单选  false 多选
-    override val isGlobal: Boolean = true,                   //true 全局范围  false 同父范围
-    override var maxLimit: Int = 5,                          //多选最多数量
+    override var canCancel: Boolean = true,                     //是否可以取消选择
+    override var singleSelect: Boolean = false,                 //true 单选  false 多选
+    override val isGlobal: Boolean = true,                      //true 全局范围  false 同父范围
+    override var maxLimit: Int = 5,                             //多选最多数量
     @Transient
-    override val maxLimitListener: MaxLimitListener? = null, //超出反馈
+    override val maxLimitListener: MaxLimitListener? = null,    //超出反馈
+    override val isSuspension: Boolean = false,                 //View是否悬浮置顶
     @LayoutRes override val layoutId: Int,
 ) : QuickMultiSelectData(
     layoutId = layoutId

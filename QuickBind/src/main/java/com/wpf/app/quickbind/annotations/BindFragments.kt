@@ -9,7 +9,7 @@ import kotlin.reflect.KClass
  * 自动复用Fragment
  */
 @Target(AnnotationTarget.FIELD)
-@kotlin.annotation.Retention(AnnotationRetention.RUNTIME)
+@Retention(AnnotationRetention.RUNTIME)
 annotation class BindFragments(
     val fragments: Array<KClass<out BindBaseFragment>>,
     val withState: Boolean = true,

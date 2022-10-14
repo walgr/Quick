@@ -55,7 +55,7 @@ open class QuickViewHolder<T : QuickItemData> @JvmOverloads constructor(
     }
 
     open fun getAdapterClickListener(): QuickAdapterListener<QuickItemData>? {
-        return this.mQuickAdapter.getQuickAdapterListener() as QuickAdapterListener<QuickItemData>?
+        return this.mQuickAdapter.getQuickAdapterListener()
     }
 
     open fun itemViewClick(clickView: View?) {

@@ -17,7 +17,7 @@ class ParentSelectItem : QuickParentSelectData(layoutId = R.layout.holder_select
     @Transient
     @SuppressLint("NonConstantResourceId")
     @BindData2View(id = R.id.title, helper = Text2TextView::class)
-    var title = runOnHolder { "" + name + id + getParentName() + "(${getChildSelectSize()})"}
+    var title = runOnHolder { "" + name + id + getParentName() + "(${getChildSelectSize()})" }
 
     override fun onChildChange(selectList: List<QuickChildSelectData>?) {
         super.onChildChange(selectList)
@@ -45,9 +45,9 @@ class ParentSelectItem : QuickParentSelectData(layoutId = R.layout.holder_select
 }
 
 class ParentTitleSelectItem(
-    @BindData2View(id = R.id.title, helper = Text2TextView::class)
+    @SuppressLint("NonConstantResourceId") @BindData2View(id = R.id.title, helper = Text2TextView::class)
     val title: String? = null
-): QuickParentSelectData(layoutId = R.layout.holder_select_parent_title_item)
+) : QuickParentSelectData(isSuspension = true, layoutId = R.layout.holder_select_parent_title_item)
 
 open class SelectItem : QuickChildSelectData(layoutId = R.layout.holder_select_item) {
 

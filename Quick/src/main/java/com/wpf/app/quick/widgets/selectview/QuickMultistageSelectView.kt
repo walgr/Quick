@@ -15,6 +15,8 @@ import com.wpf.app.quick.widgets.recyclerview.listeners.SetSelectChange
 import com.wpf.app.quick.widgets.selectview.data.QuickChildSelectData
 import com.wpf.app.quick.widgets.selectview.data.QuickParentSelectData
 import com.wpf.app.quick.widgets.selectview.helper.ParentChildDataHelper
+import com.wpf.app.quick.widgets.selectview.helper.QuickStickyView
+import com.wpf.app.quickutil.recyclerview.StickyItemDecoration
 
 /**
  * Created by 王朋飞 on 2022/9/5.
@@ -40,9 +42,9 @@ open class QuickMultistageSelectView @JvmOverloads constructor(
         children.forEachIndexed { index, it ->
             if (it is QuickSelectRecyclerView) {
                 addSelectRecyclerView(it, index)
-                addListener()
             }
         }
+        addListener()
     }
 
     private fun initView() {
@@ -59,6 +61,7 @@ open class QuickMultistageSelectView @JvmOverloads constructor(
     }
 
     private fun addListener() {
+        selectViewList[selectViewList.size - 1].addItemDecoration(StickyItemDecoration(QuickStickyView()))
         selectViewList[selectViewList.size - 1].setOnSelectChangeListener(object :
             OnSelectOnChange {
             override fun onSelectChange() {
@@ -137,7 +140,7 @@ open class QuickMultistageSelectView @JvmOverloads constructor(
         selectViewList[0].clearAll(false)
         (selectViewList[0].getRealTypeData<QuickChildSelectData>())?.flatMap {
             it.childList ?: arrayListOf()
-        }?.forEach { it ->
+        }?.forEach {
             val find = newSelect?.find { find ->
                 find.id == it.id && find.parent == it.parent
             }

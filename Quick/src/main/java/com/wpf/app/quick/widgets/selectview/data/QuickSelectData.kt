@@ -16,7 +16,7 @@ open class QuickSelectData(
     open var name: String? = null,
     open var isSelect: Boolean = false,
     open var defaultSelect: Boolean = false,        //是否默认选中，true清空后会再次选中
-//    open var isEffective: Boolean = true,           //是否在统计中有效，例如统计选中态
+    override val isSuspension: Boolean = false,         //View是否悬浮置顶
     @LayoutRes override val layoutId: Int,
 ) : QuickBindData(layoutId) {
 
