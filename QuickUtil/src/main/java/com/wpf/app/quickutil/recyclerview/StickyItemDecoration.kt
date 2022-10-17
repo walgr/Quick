@@ -89,7 +89,7 @@ class StickyItemDecoration(
             if (mStickyView.isStickyView(parent, view)) {
                 mCurrentUIFindStickView = true
                 getStickyViewHolder(parent, view)
-                cacheStickyViewPosition(m)
+                cacheStickyViewPosition()
                 if (view.top <= 0) {
                     bindDataForStickyView(mLayoutManager!!.findFirstVisibleItemPosition(), parent.measuredWidth)
                 } else {
@@ -171,24 +171,33 @@ class StickyItemDecoration(
         measureLayoutStickyItemView(width)
         mStickyItemViewHeight = (mViewHolder!!.itemView.bottom - mViewHolder!!.itemView.top).toFloat()
     }
+//
+//    /**
+//     * 缓存吸附的view position
+//     * @param m
+//     */
+//    private fun cacheStickyViewPosition(m: Int) {
+//        val position = getStickyViewPositionOfRecyclerView(m)
+//        if (!mStickyPositionList.contains(position)) {
+//            mStickyPositionList.add(position)
+//        }
+//        //不能用上一次缓存的position,需要根据当前位置查询上一个可吸附的View
+//        if (mStickyPositionList.size > 1) {
+//            val lastPos = mStickyView.getLastStickyView(mAdapter, position)
+//            if (lastPos != -1 && lastPos != position && !mStickyPositionList.contains(lastPos)) {
+//                mStickyPositionList.add(mStickyPositionList.size - 2, lastPos)
+//                mStickyPositionList.sort()
+//            }
+//        }
+//    }
 
     /**
-     * 缓存吸附的view position
+     * 缓存所有可吸附的view position
      * @param m
      */
-    private fun cacheStickyViewPosition(m: Int) {
-        val position = getStickyViewPositionOfRecyclerView(m)
-        if (!mStickyPositionList.contains(position)) {
-            mStickyPositionList.add(position)
-        }
-        //不能用上一次缓存的position,需要根据当前位置查询上一个可吸附的View
-        if (mStickyPositionList.size > 1) {
-            val lastPos = mStickyView.getLastStickyView(mAdapter, position)
-            if (lastPos != -1 && lastPos != position && !mStickyPositionList.contains(lastPos)) {
-                mStickyPositionList.add(mStickyPositionList.size - 2, lastPos)
-                mStickyPositionList.sort()
-            }
-        }
+    private fun cacheStickyViewPosition() {
+        mStickyPositionList.clear()
+        mStickyPositionList.addAll(mStickyView.getAllStickyList(mAdapter))
     }
 
     /**
