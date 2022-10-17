@@ -2,12 +2,16 @@ package com.wpf.app.quick.demo.model
 
 import android.annotation.SuppressLint
 import android.os.Build
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.DiffUtil.Callback
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.annotations.BindData2View
 import com.wpf.app.quick.helper.binddatahelper.Select2CheckBox
 import com.wpf.app.quick.helper.binddatahelper.Text2TextView
+import com.wpf.app.quick.widgets.recyclerview.data.QuickBindData
 import com.wpf.app.quick.widgets.selectview.data.QuickChildSelectData
 import com.wpf.app.quick.widgets.selectview.data.QuickParentSelectData
+import com.wpf.app.quick.widgets.selectview.data.QuickSelectData
 import com.wpf.app.quickbind.interfaces.runOnHolder
 import com.wpf.app.quickutil.LogUtil
 
@@ -54,18 +58,25 @@ class ParentTitleSelectItem(
     private var isShowChild = true
     override fun onClick() {
 //        super.onClick()
-        LogUtil.e("点击了${title}")
+        val positionStart = getDataPos() + 1
         if (isShowChild) {
-                getAdapter()?.getData()?.removeIf {
-                    parent?.childList?.takeLast(parent!!.childList!!.size - 1)?.contains(it) ?: false
+            LogUtil.e("收缩${title}")
+            if (parent?.childList?.isEmpty() == true) return
+            parent?.childList?.takeLast(parent!!.childList!!.size - 1)?.let { removeList ->
+                getAdapter()?.let {
+                    it.getData()?.removeAll(removeList)
+                    it.notifyItemRangeRemoved(positionStart, removeList.size)
                 }
-            getAdapter()?.notifyItemChange()
+            }
             isShowChild = false
         } else {
-            parent?.childList?.takeLast(parent!!.childList!!.size - 1)?.let {
-                getAdapter()?.getData()?.addAll((getAdapter()?.getDataPos(this) ?: 0) + 1, it)
+            LogUtil.e("展开${title}")
+            parent?.childList?.takeLast(parent!!.childList!!.size - 1)?.let { removeList ->
+                getAdapter()?.let {
+                    it.getData()?.addAll(positionStart, removeList)
+                    it.notifyItemRangeInserted(positionStart, removeList.size)
+                }
             }
-            getAdapter()?.notifyItemChange()
             isShowChild = true
         }
     }

@@ -5,8 +5,11 @@ import android.graphics.Canvas
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.OnItemTouchListener
+import com.wpf.app.quickutil.LogUtil
 
 abstract class ClickItemDecoration : RecyclerView.ItemDecoration() {
 
@@ -54,17 +57,17 @@ abstract class ClickItemDecoration : RecyclerView.ItemDecoration() {
     }
 
     private fun onTouchEvent(e: MotionEvent): Boolean {
-        val stickyView = getStickyItemList()
-        stickyView.forEach {
-            if (it != null) {
-                if (e.y > it.top && e.y < it.bottom && e.x > it.left && e.x < it.right) {
-                    it.performClick()
-                    return true
-                }
+        val stickyView = getStickyItem()
+        stickyView?.let {
+            if (e.y > (it.top - getStickyItemMarginTop()) && e.y < (it.bottom - getStickyItemMarginTop()) && e.x > it.left && e.x < it.right) {
+                it.performClick()
+                return true
             }
         }
         return false
     }
 
-    abstract fun getStickyItemList(): List<View?>
+    abstract fun getStickyItem(): View?
+
+    abstract fun getStickyItemMarginTop() : Float
 }

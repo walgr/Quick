@@ -193,7 +193,6 @@ class StickyItemDecoration(
 
     /**
      * 缓存所有可吸附的view position
-     * @param m
      */
     private fun cacheStickyViewPosition() {
         mStickyPositionList.clear()
@@ -250,7 +249,11 @@ class StickyItemDecoration(
         canvas.restoreToCount(saveCount)
     }
 
-    override fun getStickyItemList(): List<View?> {
-        return arrayListOf(mStickyItemView)
+    override fun getStickyItem(): View? {
+        return mStickyItemView
+    }
+
+    override fun getStickyItemMarginTop(): Float {
+        return mStickyItemViewMarginTop
     }
 }
