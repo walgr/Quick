@@ -1,5 +1,6 @@
 package com.wpf.app.quick.widgets.selectview.data
 
+import android.view.View
 import androidx.annotation.LayoutRes
 import com.wpf.app.quick.widgets.selectview.data.QuickSelectData
 
@@ -24,10 +25,12 @@ open class QuickMultiSelectData(
     override var name: String? = null,
     override var isSelect: Boolean = false,
     override var defaultSelect: Boolean = false,        //是否默认选中，true清空后会再次选中
-    @LayoutRes override val layoutId: Int,
+    @LayoutRes override val layoutId: Int = 0,
+    override val layoutView: View? = null,
     override val isSuspension: Boolean = false,         //View是否悬浮置顶
 ) : QuickSelectData(
     layoutId = layoutId,
+    layoutView = layoutView,
     isSuspension = isSuspension
 )
 

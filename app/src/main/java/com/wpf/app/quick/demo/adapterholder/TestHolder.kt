@@ -13,13 +13,14 @@ import com.wpf.app.quick.widgets.recyclerview.holder.QuickViewHolder
  * Created by 王朋飞 on 2022/6/13.
  */
 class TestHolder(mParent: ViewGroup) :
-    QuickViewHolder<TestModel>(mParent, R.layout.holder_test, true) {
+    QuickViewHolder<TestModel>(mParent, R.layout.holder_test, dealBindView = true) {
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.txt)
     var txt: TextView? = null
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(adapter: QuickAdapter, data: TestModel?, position: Int) {
+        super.onBindViewHolder(adapter, data, position)
         txt?.postDelayed(
             { txt?.text = System.currentTimeMillis().toString() + "" },
             1000

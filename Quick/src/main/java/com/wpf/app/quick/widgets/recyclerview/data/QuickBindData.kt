@@ -15,7 +15,8 @@ import com.wpf.app.quickbind.interfaces.Bind
  *
  */
 open class QuickBindData(
-    @LayoutRes open val layoutId: Int,
+    @LayoutRes open val layoutId: Int = 0,
+    open val layoutView: View? = null,
     override val isSuspension: Boolean = false,         //View是否悬浮置顶
 ) : QuickItemData(isSuspension = isSuspension), Bind {
 

@@ -1,5 +1,6 @@
 package com.wpf.app.quick.widgets.selectview.data
 
+import android.view.View
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import com.wpf.app.quick.widgets.recyclerview.QuickAdapter
@@ -16,9 +17,10 @@ open class QuickSelectData(
     open var name: String? = null,
     open var isSelect: Boolean = false,
     open var defaultSelect: Boolean = false,        //是否默认选中，true清空后会再次选中
-    @LayoutRes override val layoutId: Int,
+    @LayoutRes override val layoutId: Int = 0,
+    override val layoutView: View? = null,
     override val isSuspension: Boolean = false,         //View是否悬浮置顶
-) : QuickBindData(layoutId, isSuspension) {
+) : QuickBindData(layoutId, layoutView, isSuspension = isSuspension) {
 
     @CallSuper
     override fun onBindViewHolder(

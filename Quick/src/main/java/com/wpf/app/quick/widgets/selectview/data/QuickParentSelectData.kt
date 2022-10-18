@@ -1,6 +1,7 @@
 package com.wpf.app.quick.widgets.selectview.data
 
 import android.annotation.SuppressLint
+import android.view.View
 import androidx.annotation.LayoutRes
 import com.wpf.app.quick.widgets.recyclerview.QuickSelectAdapter
 import com.wpf.app.quick.widgets.recyclerview.data.QuickBindData
@@ -28,10 +29,12 @@ open class QuickParentSelectData(
     override var maxLimit: Int = 5,                          //多选最多数量
     @Transient
     override val maxLimitListener: MaxLimitListener? = null, //超出反馈
-    @LayoutRes override val layoutId: Int,
+    @LayoutRes override val layoutId: Int = 0,
+    override val layoutView: View? = null,
 ) : QuickChildSelectData(
     onChildClick = onParentClick as? RunItemClickWithSelf<QuickChildSelectData>,
     layoutId = layoutId,
+    layoutView = layoutView,
     isSuspension = isSuspension
 ) {
 

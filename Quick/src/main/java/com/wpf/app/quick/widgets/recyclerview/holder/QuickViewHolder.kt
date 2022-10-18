@@ -18,10 +18,11 @@ import com.wpf.app.quickbind.QuickBind
  */
 open class QuickViewHolder<T : QuickItemData> @JvmOverloads constructor(
     open val mParent: ViewGroup,
-    @LayoutRes open val layoutId: Int,
+    @LayoutRes open val layoutId: Int = 0,
+    open val layoutView: View? = null,
     open var dealBindView: Boolean = false,
     open var autoClick: Boolean = false
-) : RecyclerView.ViewHolder(LayoutInflater.from(mParent.context).inflate(layoutId, mParent, false)) {
+) : RecyclerView.ViewHolder(layoutView ?: LayoutInflater.from(mParent.context).inflate(layoutId, mParent, false)) {
 
     private lateinit var mQuickAdapter: QuickAdapter
     var itemPosition: Int = -1

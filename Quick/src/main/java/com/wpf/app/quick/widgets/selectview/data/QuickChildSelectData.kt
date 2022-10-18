@@ -1,5 +1,6 @@
 package com.wpf.app.quick.widgets.selectview.data
 
+import android.view.View
 import androidx.annotation.LayoutRes
 import com.wpf.app.quick.annotations.BindData2View
 import com.wpf.app.quick.helper.binddatahelper.ItemClick
@@ -14,6 +15,7 @@ import com.wpf.app.quickbind.interfaces.itemClickWithSelf
 open class QuickChildSelectData(
     open var isInOne: Boolean = false,
     open var parent: QuickParentSelectData? = null,
+    override val isSuspension: Boolean = false,                 //View是否悬浮置顶
     open var childList: MutableList<out QuickChildSelectData>? = null,
     onChildClick: RunItemClickWithSelf<QuickChildSelectData>? = null,
     override var id: String? = null,
@@ -26,10 +28,11 @@ open class QuickChildSelectData(
     override var maxLimit: Int = 5,                             //多选最多数量
     @Transient
     override val maxLimitListener: MaxLimitListener? = null,    //超出反馈
-    @LayoutRes override val layoutId: Int,
-    override val isSuspension: Boolean = false,                 //View是否悬浮置顶
+    @LayoutRes override val layoutId: Int = 0,
+    override val layoutView: View? = null,
 ) : QuickMultiSelectData(
     layoutId = layoutId,
+    layoutView = layoutView,
     isSuspension = isSuspension
 ) {
 

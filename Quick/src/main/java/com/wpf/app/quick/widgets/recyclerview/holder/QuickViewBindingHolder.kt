@@ -17,8 +17,9 @@ open class QuickViewBindingHolder<T : QuickViewDataBinding<VB>, VB : ViewDataBin
 @JvmOverloads constructor(
     override val mParent: ViewGroup,
     @LayoutRes override var layoutId: Int = 0,
+    override var layoutView: View? = null,
     override var dealBindView: Boolean = false,
-) : QuickViewHolder<T>(mParent, layoutId, dealBindView) {
+) : QuickViewHolder<T>(mParent, layoutId = layoutId, layoutView = layoutView, dealBindView = dealBindView) {
 
     var mViewData: T? = null
     var mViewBinding: VB? = null
