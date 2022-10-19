@@ -23,9 +23,8 @@ class SelectResultItem(
     onChildClick = itemClickWithSelf { self ->
         itemClickRun {
             self.isSelect = false
-            val index = self.getAdapter()?.getData()?.indexOf(self) ?: 0
             self.getAdapter()?.getData()?.remove(self)
-            self.getAdapter()?.notifyItemRemoved(index)
+            self.getAdapter()?.notifyItemRemoved(self.getDataPos())
             self.getAdapter()?.getOnSelectChangeListener()?.onSelectChange()
         }
     }) {

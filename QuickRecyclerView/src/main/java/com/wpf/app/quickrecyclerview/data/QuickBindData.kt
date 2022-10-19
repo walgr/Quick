@@ -76,6 +76,10 @@ open class QuickBindData(
         return getAdapter()?.getData()?.indexOf(this) ?: 0
     }
 
+    open fun getViewPos(): Int {
+        return getViewHolder()?.bindingAdapterPosition ?: 0
+    }
+
     override fun getView(): View? {
         return mView
     }

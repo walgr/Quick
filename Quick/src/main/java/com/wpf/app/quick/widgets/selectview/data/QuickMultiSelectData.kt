@@ -27,11 +27,7 @@ open class QuickMultiSelectData(
     @LayoutRes override val layoutId: Int = 0,
     override val layoutView: View? = null,
     override val isSuspension: Boolean = false,         //View是否悬浮置顶
-) : QuickSelectData(
-    layoutId = layoutId,
-    layoutView = layoutView,
-    isSuspension = isSuspension
-)
+) : QuickSelectData()
 
 interface MaxLimitListener {
     fun beyondLimit(limitSize: Int)

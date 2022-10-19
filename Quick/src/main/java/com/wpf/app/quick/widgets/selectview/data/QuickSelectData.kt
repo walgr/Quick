@@ -6,6 +6,8 @@ import androidx.annotation.LayoutRes
 import com.wpf.app.quick.widgets.selectview.QuickSelectAdapter
 import com.wpf.app.quickrecyclerview.QuickAdapter
 import com.wpf.app.quickrecyclerview.data.QuickBindData
+import com.wpf.app.quickrecyclerview.data.QuickClickData
+import com.wpf.app.quickrecyclerview.data.QuickStateData
 import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
 
 /**
@@ -20,7 +22,10 @@ open class QuickSelectData(
     @LayoutRes override val layoutId: Int = 0,
     override val layoutView: View? = null,
     override val isSuspension: Boolean = false,         //View是否悬浮置顶
-) : QuickBindData(layoutId, layoutView, isSuspension = isSuspension) {
+) : QuickClickData() {
+    override fun onClick() {
+
+    }
 
     @CallSuper
     override fun onBindViewHolder(
@@ -42,13 +47,6 @@ open class QuickSelectData(
 
     override fun getAdapter(): QuickSelectAdapter? {
         return super.getAdapter() as? QuickSelectAdapter
-    }
-
-    /**
-     * 当前点击
-     */
-    open fun onClick() {
-
     }
 
     /**

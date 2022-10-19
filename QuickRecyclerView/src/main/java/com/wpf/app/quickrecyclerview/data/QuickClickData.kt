@@ -1,4 +1,4 @@
-package com.wpf.app.quick.widgets.selectview.data
+package com.wpf.app.quickrecyclerview.data
 
 import android.view.View
 import com.wpf.app.quick.annotations.BindData2View

@@ -33,13 +33,10 @@ open class QuickParentSelectData(
     override val layoutView: View? = null,
 ) : QuickChildSelectData(
     onChildClick = onParentClick as? RunItemClickWithSelf<QuickChildSelectData>,
-    layoutId = layoutId,
-    layoutView = layoutView,
-    isSuspension = isSuspension
 ) {
 
     @SuppressLint("NotifyDataSetChanged")
-    override fun onClick() {
+    override fun onItemClick() {
         if (getView() != null) {
             if (getAdapter()?.curClickData != this) {
                 val oldClickPos = getAdapter()?.getDataPos(getAdapter()?.curClickData) ?: -1
