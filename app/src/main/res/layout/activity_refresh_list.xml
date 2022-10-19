@@ -13,7 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <com.wpf.app.quick.widgets.recyclerview.QuickRefreshRecyclerView
+        <com.wpf.app.quickrecyclerview.QuickRefreshRecyclerView
             android:id="@+id/list"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

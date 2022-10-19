@@ -3,14 +3,14 @@ package com.wpf.app.quick.demo.model
 import android.annotation.SuppressLint
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.annotations.BindData2View
-import com.wpf.app.quick.helper.binddatahelper.Url2ImageView
-import com.wpf.app.quick.widgets.recyclerview.data.QuickBindData
+import com.wpf.app.quickbind.helper.binddatahelper.Url2ImageView
+import com.wpf.app.quickrecyclerview.data.QuickBindData
 import com.wpf.app.quickbind.interfaces.runOnHolder
 
 /**
  * Created by 王朋飞 on 2022/7/5.
  */
-class BindDataTestModel : QuickBindData(R.layout.holder_test_bind_data) {
+class BindDataTestModel : com.wpf.app.quickrecyclerview.data.QuickBindData(R.layout.holder_test_bind_data) {
     @SuppressLint("NonConstantResourceId")
     @BindData2View(id = R.id.img, helper = Url2ImageView::class)
     var img =

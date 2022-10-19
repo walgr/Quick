@@ -2,20 +2,18 @@ package com.wpf.app.quick.widgets.selectview.helper
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.wpf.app.quick.widgets.recyclerview.QuickAdapter
-import com.wpf.app.quick.widgets.recyclerview.data.QuickItemData
-import com.wpf.app.quick.widgets.selectview.data.QuickChildSelectData
-import com.wpf.app.quickutil.LogUtil
+import com.wpf.app.quickrecyclerview.QuickAdapter
+import com.wpf.app.quickrecyclerview.data.QuickItemData
 import com.wpf.app.quickutil.recyclerview.StickyView
 
 class QuickStickyView : StickyView {
 
-    override fun isStickyView(recyclerView: RecyclerView, view: View?): Boolean {
-        val viewData = getViewData(recyclerView, view)
+    override fun isStickyView(recyclerView: RecyclerView, curView: View?): Boolean {
+        val viewData = getViewData(recyclerView, curView)
         if (viewData is QuickItemData) {
             return viewData.isSuspension
         }
-        return view?.tag == "true"
+        return curView?.tag == "true"
     }
 
     override fun getAllStickyList(adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>?): List<Int> {

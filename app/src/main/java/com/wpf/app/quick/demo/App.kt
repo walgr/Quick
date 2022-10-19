@@ -1,9 +1,7 @@
 package com.wpf.app.quick.demo
 
 import android.app.Application
-import com.google.gson.FieldNamingPolicy
-import com.google.gson.GsonBuilder
-import com.wpf.app.quick.constant.BRConstant
+import com.wpf.app.quickrecyclerview.constant.BRConstant
 import com.wpf.app.quick.demo.http.TestApi
 import com.wpf.app.quick.demo.http.TestGsonConverterFactory
 import com.wpf.app.quick.demo.http.call.TestCommonCallAdapterFactory

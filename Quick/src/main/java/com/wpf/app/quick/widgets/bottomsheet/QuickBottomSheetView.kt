@@ -11,9 +11,9 @@ import android.widget.LinearLayout
 import androidx.annotation.CallSuper
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.wpf.app.quick.widgets.dialog.DialogSize
-import com.wpf.app.quick.widgets.dialog.QuickContext
-import com.wpf.app.quick.widgets.dialog.SheetInit
+import com.wpf.app.quickdialog.listeners.DialogSize
+import com.wpf.app.quickdialog.listeners.QuickContext
+import com.wpf.app.quickdialog.listeners.SheetInit
 
 
 /**

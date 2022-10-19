@@ -5,10 +5,9 @@ import android.util.Log
 import android.view.View
 import android.widget.TextView
 import com.wpf.app.quick.activity.QuickFragment
-import com.wpf.app.quick.activity.QuickViewModelFragment
 import com.wpf.app.quick.annotations.BindView
 import com.wpf.app.quick.viewmodel.QuickViewModel
-import com.wpf.app.quick.widgets.recyclerview.QuickRecyclerView
+import com.wpf.app.quickrecyclerview.QuickRecyclerView
 
 /**
  * Created by 王朋飞 on 2022/8/5.
@@ -30,7 +29,7 @@ class TestViewModel: QuickViewModel<TestFragment>() {
 
     @SuppressLint("StaticFieldLeak")
     @BindView(R.id.list)
-    var list: QuickRecyclerView? = null
+    var list: com.wpf.app.quickrecyclerview.QuickRecyclerView? = null
 
     override fun onViewCreated(baseView: TestFragment) {
         Log.e("TestFragment", "id:${list}---baseview:${baseView.view}")

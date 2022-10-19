@@ -20,7 +20,7 @@ object GsonHelper {
         return GsonBuilder().setExclusionStrategies(object : ExclusionStrategy {
             override fun shouldSkipField(f: FieldAttributes?): Boolean {
                 f?.let {
-                    com.wpf.app.quickutil.LogUtil.e("过滤字段${it.name}  ${it.declaringClass}")
+                    LogUtil.e("过滤字段${it.name}  ${it.declaringClass}")
                     return isParentHaveField(it.declaringClass, it.name)
                 }
                 return false

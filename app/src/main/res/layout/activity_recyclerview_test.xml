@@ -18,7 +18,7 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <com.wpf.app.quick.widgets.recyclerview.QuickRecyclerView
+        <com.wpf.app.quickrecyclerview.QuickRecyclerView
             android:id="@+id/list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

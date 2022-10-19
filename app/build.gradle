@@ -38,7 +38,7 @@ dependencies {
     //ktx核心
     implementation deps.androidx.corektx
     //activity-ktx
-    implementation deps.androidx.activity
+    implementation deps.androidx.activityktx
     implementation deps.androidx.appcompat
 
     //lifecycle-ktx

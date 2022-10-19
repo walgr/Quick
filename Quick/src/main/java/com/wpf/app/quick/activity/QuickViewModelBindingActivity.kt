@@ -7,7 +7,7 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
-import com.wpf.app.quick.constant.BRConstant
+import com.wpf.app.quickrecyclerview.constant.BRConstant
 import com.wpf.app.quickutil.base.ViewModelEx
 import com.wpf.app.quick.viewmodel.QuickBindingViewModel
 import com.wpf.app.quickbind.QuickBind

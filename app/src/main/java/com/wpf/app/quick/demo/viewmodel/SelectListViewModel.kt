@@ -6,10 +6,9 @@ import com.wpf.app.quick.demo.databinding.ActivitySelectTestBinding
 import com.wpf.app.quick.demo.model.ParentSelectItem
 import com.wpf.app.quick.demo.model.SelectItem
 import com.wpf.app.quick.demo.model.SelectResultItem
-import com.wpf.app.quickutil.LogUtil
 import com.wpf.app.quick.viewmodel.QuickBindingViewModel
 import com.wpf.app.quick.widgets.selectview.data.QuickChildSelectData
-import com.wpf.app.quick.widgets.recyclerview.listeners.OnSelectCallback
+import com.wpf.app.quick.widgets.selectview.listeners.OnSelectCallback
 
 /**
  * Created by 王朋飞 on 2022/9/16.
@@ -20,10 +19,12 @@ class SelectListViewModel: QuickBindingViewModel<ActivitySelectTestBinding>() {
     val selectList: MutableLiveData<List<QuickChildSelectData>> = MutableLiveData()
 
     override fun onBindingCreated(mViewBinding: ActivitySelectTestBinding?) {
-        mViewBinding?.selectList?.mOnSelectCallback = object : OnSelectCallback {
+        mViewBinding?.selectList?.mOnSelectCallback = object :
+            OnSelectCallback {
             override fun onSelectResult(selectResult: List<QuickChildSelectData>?) {
-                com.wpf.app.quickutil.LogUtil.e("选择了${selectResult}")
-                selectList.value = selectResult
+                selectResult?.let {
+                    selectList.value = it
+                }
                 mViewBinding?.selectResult?.setNewData(selectResult?.map {
                     SelectResultItem(it.isSelect, it.parent, it.id, it.name)
                 })

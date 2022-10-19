@@ -8,10 +8,10 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.annotations.BindData2View
-import com.wpf.app.quick.helper.binddatahelper.BindData2ViewHelper
-import com.wpf.app.quick.helper.binddatahelper.ItemClick
-import com.wpf.app.quick.helper.binddatahelper.Select2CheckBox
-import com.wpf.app.quick.helper.binddatahelper.Text2TextView
+import com.wpf.app.quickbind.helper.binddatahelper.BindData2ViewHelper
+import com.wpf.app.quickbind.helper.binddatahelper.ItemClick
+import com.wpf.app.quickbind.helper.binddatahelper.Select2CheckBox
+import com.wpf.app.quickbind.helper.binddatahelper.Text2TextView
 import com.wpf.app.quick.widgets.quickview.QuickSelectGroup
 import com.wpf.app.quickbind.interfaces.itemClick
 import com.wpf.app.quickbind.interfaces.runOnHolder

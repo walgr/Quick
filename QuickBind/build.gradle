@@ -31,12 +31,15 @@ dependencies {
     //ktx核心
     implementation deps.androidx.corektx
     //activity-ktx
-    implementation deps.androidx.activity
+    implementation deps.androidx.activityktx
     implementation deps.androidx.appcompat
     //fragment-ktx
     implementation deps.androidx.fragmentktx
     //列表
-    compileOnly deps.androidx.recyclerview
+    implementation deps.androidx.recyclerview
+
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.14.1'
     //GSON
     implementation 'com.google.code.gson:gson:2.9.0'
 

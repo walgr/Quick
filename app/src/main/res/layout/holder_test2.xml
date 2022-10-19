@@ -10,7 +10,7 @@
 
         <variable
             name="adapter"
-            type="com.wpf.app.quick.widgets.recyclerview.QuickAdapter" />
+            type="com.wpf.app.quickrecyclerview.QuickAdapter" />
 
         <variable
             name="position"

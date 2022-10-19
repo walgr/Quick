@@ -3,7 +3,7 @@ package com.wpf.app.quick.widgets.selectview.data
 import android.view.View
 import androidx.annotation.LayoutRes
 import com.wpf.app.quick.annotations.BindData2View
-import com.wpf.app.quick.helper.binddatahelper.ItemClick
+import com.wpf.app.quickbind.helper.binddatahelper.ItemClick
 import com.wpf.app.quickbind.interfaces.RunItemClickWithSelf
 import com.wpf.app.quickbind.interfaces.itemClickRun
 import com.wpf.app.quickbind.interfaces.itemClickWithSelf

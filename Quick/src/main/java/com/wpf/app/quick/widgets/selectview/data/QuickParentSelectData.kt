@@ -3,9 +3,9 @@ package com.wpf.app.quick.widgets.selectview.data
 import android.annotation.SuppressLint
 import android.view.View
 import androidx.annotation.LayoutRes
-import com.wpf.app.quick.widgets.recyclerview.QuickSelectAdapter
-import com.wpf.app.quick.widgets.recyclerview.data.QuickBindData
-import com.wpf.app.quick.widgets.recyclerview.holder.QuickViewHolder
+import com.wpf.app.quick.widgets.selectview.QuickSelectAdapter
+import com.wpf.app.quickrecyclerview.data.QuickBindData
+import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
 import com.wpf.app.quickbind.interfaces.RunItemClickWithSelf
 import com.wpf.app.quickutil.recyclerview.scrollToPositionAndOffset
 

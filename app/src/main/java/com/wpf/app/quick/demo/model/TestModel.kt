@@ -3,14 +3,14 @@ package com.wpf.app.quick.demo.model
 import android.os.Parcel
 import android.os.Parcelable
 import com.wpf.app.quick.demo.adapterholder.TestHolder
-import com.wpf.app.quick.widgets.recyclerview.annotations.BindHolder
-import com.wpf.app.quick.widgets.recyclerview.data.QuickItemData
+import com.wpf.app.quickrecyclerview.annotations.BindHolder
+import com.wpf.app.quickrecyclerview.data.QuickItemData
 
 /**
  * Created by 王朋飞 on 2022/6/13.
  */
-@BindHolder(TestHolder::class)
-class TestModel : QuickItemData, Parcelable {
+@com.wpf.app.quickrecyclerview.annotations.BindHolder(TestHolder::class)
+class TestModel : com.wpf.app.quickrecyclerview.data.QuickItemData, Parcelable {
     var text: String = "1"
 
     constructor() {}

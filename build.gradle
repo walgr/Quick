@@ -15,26 +15,28 @@ buildscript {
 
         ext.deps = [
                 androidx      : [
+                        'activityktx'          : 'androidx.activity:activity-ktx:1.5.1',
+                        'fragmentktx'          : 'androidx.fragment:fragment-ktx:1.5.2',
                         'appcompat'            : 'androidx.appcompat:appcompat:1.5.1',
                         'corektx'              : 'androidx.core:core-ktx:1.8.0',
                         'annotations'          : 'androidx.annotation:annotation:1.5.0',
                         'runtime'              : 'com.google.android:android:4.1.1.4',
-                        'fragmentktx'          : 'androidx.fragment:fragment-ktx:1.5.0',
-                        'activity'             : 'androidx.activity:activity-ktx:1.5.1',
                         'lifecycleviewmodelktx': 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1',
                         'recyclerview'         : 'androidx.recyclerview:recyclerview:1.2.1',
                         'material'             : 'com.google.android.material:material:1.5.0',
                         'constraintlayout'     : 'androidx.constraintlayout:constraintlayout:2.1.4',
                 ],
                 'quickbind'   : [
-                        'base'       : "com.wpf.app.quick:Quick:${release}",
-                        'bind'       : "com.wpf.app.quick:QuickBind:${release}",
-                        'annotations': "com.wpf.app.quick:Quick-annotations:${release}",
-                        'runtime'    : "com.wpf.app.quick:Quick-runtime:${release}",
-                        'compiler'   : "com.wpf.app.quick:Quick-compiler:${release}",
-                        'util'       : "com.wpf.app.quick:QuickUtil:${release}",
-                        'network'    : "com.wpf.app.quick:QuickNetwork:${release}",
-                        'plugin'     : "com.github.walgr.Quick:Quick-gradle-plugin:0.3.0"
+                        'base'        : "com.wpf.app.quick:Quick:${release}",
+                        'bind'        : "com.wpf.app.quick:QuickBind:${release}",
+                        'annotations' : "com.wpf.app.quick:Quick-annotations:${release}",
+                        'runtime'     : "com.wpf.app.quick:Quick-runtime:${release}",
+                        'compiler'    : "com.wpf.app.quick:Quick-compiler:${release}",
+                        'util'        : "com.wpf.app.quick:QuickUtil:${release}",
+                        'network'     : "com.wpf.app.quick:QuickNetwork:${release}",
+                        'recyclerview': "com.wpf.app.quick:QuickRecyclerView:${release}",
+                        'dialog'      : "com.wpf.app.quick:QuickDialog:${release}",
+                        'plugin'      : "com.github.walgr.Quick:Quick-gradle-plugin:0.3.0"
                 ],
                 gradlePlugin  : "com.android.tools.build:gradle:4.2.2",
                 'kotlin'      : [

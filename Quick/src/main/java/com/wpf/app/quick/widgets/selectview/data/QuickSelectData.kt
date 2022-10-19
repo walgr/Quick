@@ -3,10 +3,10 @@ package com.wpf.app.quick.widgets.selectview.data
 import android.view.View
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
-import com.wpf.app.quick.widgets.recyclerview.QuickAdapter
-import com.wpf.app.quick.widgets.recyclerview.QuickSelectAdapter
-import com.wpf.app.quick.widgets.recyclerview.data.QuickBindData
-import com.wpf.app.quick.widgets.recyclerview.holder.QuickViewHolder
+import com.wpf.app.quick.widgets.selectview.QuickSelectAdapter
+import com.wpf.app.quickrecyclerview.QuickAdapter
+import com.wpf.app.quickrecyclerview.data.QuickBindData
+import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
 
 /**
  * Created by 王朋飞 on 2022/7/13.

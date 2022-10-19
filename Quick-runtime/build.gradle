@@ -38,7 +38,7 @@ dependencies {
         api deps.quickbind.annotations
     else
         api project(":Quick-annotations")
-    implementation deps.androidx.activity
+    implementation deps.androidx.activityktx
 }
 
 apply from: rootProject.file('gradle-mvn-push-aar.gradle')

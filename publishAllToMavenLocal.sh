@@ -5,4 +5,6 @@
 ./gradlew :Quick-gradle-plugin:publishToMavenLocal
 ./gradlew :Quick-compiler:publishToMavenLocal
 ./gradlew :QuickBind:publishToMavenLocal
+./gradlew :QuickRecyclerView:publishToMavenLocal
+./gradlew :QuickDialog:publishToMavenLocal
 ./gradlew :Quick:publishToMavenLocal

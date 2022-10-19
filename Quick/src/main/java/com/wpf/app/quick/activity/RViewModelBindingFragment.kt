@@ -7,7 +7,7 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
 import com.wpf.app.quick.R
 import com.wpf.app.quick.viewmodel.QuickBindingViewModel
-import com.wpf.app.quick.widgets.recyclerview.QuickRecyclerView
+import com.wpf.app.quickrecyclerview.QuickRecyclerView
 
 /**
  * Created by 王朋飞 on 2022/7/13.
@@ -20,7 +20,7 @@ abstract class RViewModelBindingFragment<VM : QuickBindingViewModel<VB>, VB : Vi
 ) : QuickViewModelBindingFragment<VM, VB>(
     layoutId, null, titleName
 ) {
-    private var mRecyclerView: QuickRecyclerView? = null
+    private var mRecyclerView: com.wpf.app.quickrecyclerview.QuickRecyclerView? = null
 
     @CallSuper
     override fun initView(view: View?) {
@@ -32,7 +32,7 @@ abstract class RViewModelBindingFragment<VM : QuickBindingViewModel<VB>, VB : Vi
         return titleName
     }
 
-    open fun getRecyclerView(): QuickRecyclerView? {
+    open fun getRecyclerView(): com.wpf.app.quickrecyclerview.QuickRecyclerView? {
         return mRecyclerView
     }
 }

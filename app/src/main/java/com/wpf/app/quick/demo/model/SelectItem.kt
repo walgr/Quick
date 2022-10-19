@@ -1,17 +1,12 @@
 package com.wpf.app.quick.demo.model
 
 import android.annotation.SuppressLint
-import android.os.Build
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.DiffUtil.Callback
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.annotations.BindData2View
-import com.wpf.app.quick.helper.binddatahelper.Select2CheckBox
-import com.wpf.app.quick.helper.binddatahelper.Text2TextView
-import com.wpf.app.quick.widgets.recyclerview.data.QuickBindData
+import com.wpf.app.quickbind.helper.binddatahelper.Select2CheckBox
+import com.wpf.app.quickbind.helper.binddatahelper.Text2TextView
 import com.wpf.app.quick.widgets.selectview.data.QuickChildSelectData
 import com.wpf.app.quick.widgets.selectview.data.QuickParentSelectData
-import com.wpf.app.quick.widgets.selectview.data.QuickSelectData
 import com.wpf.app.quickbind.interfaces.runOnHolder
 import com.wpf.app.quickutil.LogUtil
 

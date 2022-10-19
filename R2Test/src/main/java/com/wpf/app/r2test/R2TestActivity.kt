@@ -6,7 +6,7 @@ import com.wpf.app.quick.activity.QuickActivity
 import com.wpf.app.quick.annotations.BindData2View
 import com.wpf.app.quick.annotations.BindView
 import com.wpf.app.quick.annotations.GroupView
-import com.wpf.app.quick.helper.binddatahelper.Text2TextView
+import com.wpf.app.quickbind.helper.binddatahelper.Text2TextView
 import com.wpf.app.quickbind.utils.GroupViews
 
 /**

@@ -7,16 +7,13 @@ import android.widget.LinearLayout
 import androidx.core.view.children
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener
-import com.wpf.app.quick.widgets.recyclerview.QuickSelectAdapter
-import com.wpf.app.quick.widgets.recyclerview.QuickSelectRecyclerView
-import com.wpf.app.quick.widgets.recyclerview.listeners.OnSelectCallback
-import com.wpf.app.quick.widgets.recyclerview.listeners.OnSelectOnChange
-import com.wpf.app.quick.widgets.recyclerview.listeners.SetSelectChange
+import com.wpf.app.quick.widgets.selectview.listeners.SetSelectChange
 import com.wpf.app.quick.widgets.selectview.data.QuickChildSelectData
 import com.wpf.app.quick.widgets.selectview.data.QuickParentSelectData
 import com.wpf.app.quick.widgets.selectview.helper.ParentChildDataHelper
 import com.wpf.app.quick.widgets.selectview.helper.QuickStickyView
-import com.wpf.app.quickutil.LogUtil
+import com.wpf.app.quick.widgets.selectview.listeners.OnSelectCallback
+import com.wpf.app.quick.widgets.selectview.listeners.OnSelectOnChange
 import com.wpf.app.quickutil.recyclerview.StickyItemDecoration
 
 /**
@@ -62,7 +59,6 @@ open class QuickMultistageSelectView @JvmOverloads constructor(
     }
 
     private fun addListener() {
-//        selectViewList[selectViewList.size - 1].addItemDecoration(StickyItemDecoration(QuickStickyView()))
         selectViewList[selectViewList.size - 1].setOnSelectChangeListener(object :
             OnSelectOnChange {
             override fun onSelectChange() {

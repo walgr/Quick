@@ -6,9 +6,7 @@ import com.wpf.app.quick.activity.QuickActivity
 import com.wpf.app.quick.annotations.BindView
 import com.wpf.app.quick.demo.model.ListRequest
 import com.wpf.app.quick.demo.model.RefreshItem
-import com.wpf.app.quick.util.Callback
-import com.wpf.app.quick.widgets.recyclerview.listeners.DataChangeOnListener
-import com.wpf.app.quick.widgets.recyclerview.QuickRefreshRecyclerView
+import com.wpf.app.quickutil.Callback
 
 /**
  * Created by 王朋飞 on 2022/7/8.
@@ -20,10 +18,11 @@ class RefreshListTestActivity : QuickActivity(R.layout.activity_refresh_list, ti
 
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.list)
-    var mRecyclerView: QuickRefreshRecyclerView? = null
+    var mRecyclerView: com.wpf.app.quickrecyclerview.QuickRefreshRecyclerView? = null
     override fun initView() {
         mRecyclerView?.mRequestData = ListRequest(0)
-        mRecyclerView?.setDataChangeListener(object : DataChangeOnListener<ListRequest, RefreshItem> {
+        mRecyclerView?.setDataChangeListener(object :
+            com.wpf.app.quickrecyclerview.listeners.DataChangeOnListener<ListRequest, RefreshItem> {
             override fun onLoadMore(requestData: ListRequest, callback: Callback<RefreshItem>) {
                 if (requestData.page > 2) {
                     mSmartRefreshLayout?.setEnableLoadMore(false)
