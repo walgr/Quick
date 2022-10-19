@@ -79,10 +79,4 @@ open class QuickBindData(
     override fun getView(): View? {
         return mView
     }
-
-//    override fun initViewType() {
-//        if (viewType == 0) {
-//            viewType = abs(this.hashCode()) + Random.nextInt(1000)
-//        }
-//    }
 }

@@ -20,7 +20,7 @@ abstract class RViewModelBindingFragment<VM : QuickBindingViewModel<VB>, VB : Vi
 ) : QuickViewModelBindingFragment<VM, VB>(
     layoutId, null, titleName
 ) {
-    private var mRecyclerView: com.wpf.app.quickrecyclerview.QuickRecyclerView? = null
+    private var mRecyclerView: QuickRecyclerView? = null
 
     @CallSuper
     override fun initView(view: View?) {
@@ -32,7 +32,7 @@ abstract class RViewModelBindingFragment<VM : QuickBindingViewModel<VB>, VB : Vi
         return titleName
     }
 
-    open fun getRecyclerView(): com.wpf.app.quickrecyclerview.QuickRecyclerView? {
+    open fun getRecyclerView(): QuickRecyclerView? {
         return mRecyclerView
     }
 }

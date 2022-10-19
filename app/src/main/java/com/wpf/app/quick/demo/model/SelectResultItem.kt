@@ -1,5 +1,6 @@
 package com.wpf.app.quick.demo.model
 
+import android.annotation.SuppressLint
 import com.wpf.app.quick.annotations.BindData2View
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quickbind.helper.binddatahelper.Text2TextView
@@ -28,6 +29,7 @@ class SelectResultItem(
             self.getAdapter()?.getOnSelectChangeListener()?.onSelectChange()
         }
     }) {
+    @SuppressLint("NonConstantResourceId")
     @BindData2View(id = R.id.title, helper = Text2TextView::class)
     val title = name + id + "属于：" + parent?.name + parent?.id
 }

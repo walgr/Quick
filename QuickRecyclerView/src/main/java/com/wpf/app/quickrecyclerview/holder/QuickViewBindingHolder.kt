@@ -2,6 +2,7 @@ package com.wpf.app.quickrecyclerview.holder
 
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -35,6 +36,7 @@ open class QuickViewBindingHolder<T : QuickViewDataBinding<VB>, VB : ViewDataBin
 
     open fun onCreateHolderEnd(itemView: View) {}
 
+    @CallSuper
     override fun onBindViewHolder(adapter: QuickAdapter, data: T?, position: Int) {
         super.onBindViewHolder(adapter, data, position)
         if (mViewBinding != null) {

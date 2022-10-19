@@ -1,5 +1,6 @@
 package com.wpf.app.quick.widgets.selectview.listeners
 
+import com.wpf.app.quick.widgets.selectview.QuickSelectAdapter
 import com.wpf.app.quick.widgets.selectview.data.QuickChildSelectData
 import com.wpf.app.quick.widgets.selectview.data.QuickParentSelectData
 import com.wpf.app.quick.widgets.selectview.data.QuickSelectData
@@ -155,8 +156,8 @@ interface DataSelectOnAdapter : DataChangeAdapter, SetSelectChange {
         return getSelectList()?.size ?: 0
     }
 
-    fun getSelectAdapter(): com.wpf.app.quick.widgets.selectview.QuickSelectAdapter {
-        return getAdapter() as com.wpf.app.quick.widgets.selectview.QuickSelectAdapter
+    fun getSelectAdapter(): QuickSelectAdapter {
+        return getAdapter() as QuickSelectAdapter
     }
 
     fun asSelectData(): MutableList<QuickSelectData>? {

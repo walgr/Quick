@@ -21,8 +21,8 @@ open class QuickParentSelectData(
     onParentClick: RunItemClickWithSelf<QuickParentSelectData>? = null,
     override var id: String? = null,
     override var name: String? = null,
-    override var isSelect: Boolean = false,
     override var defaultSelect: Boolean = false,
+    override var isSelect: Boolean = defaultSelect,
     override var canCancel: Boolean = true,                  //是否可以取消选择
     override var singleSelect: Boolean = true,               //true 单选  false 多选
     override val isGlobal: Boolean = true,                   //true 全局范围  false 同父范围

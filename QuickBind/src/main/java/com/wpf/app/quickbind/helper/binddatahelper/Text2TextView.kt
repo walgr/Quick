@@ -8,8 +8,7 @@ import com.wpf.app.quickbind.annotations.BindD2VHHelper
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-object Text2TextView :
-    BindD2VHHelper<TextView, CharSequence> {
+object Text2TextView : BindD2VHHelper<TextView, CharSequence> {
 
     override fun initView(
         viewHolder: RecyclerView.ViewHolder?,

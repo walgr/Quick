@@ -12,7 +12,7 @@ import kotlin.random.Random
 /**
  * Created by 王朋飞 on 2022/7/8.
  */
-class RefreshItem : com.wpf.app.quickrecyclerview.data.QuickBindData(R.layout.holder_refresh_item) {
+class RefreshItem : QuickBindData(R.layout.holder_refresh_item) {
 
     @SuppressLint("NonConstantResourceId")
     @BindData2View(id = R.id.title, helper = Text2TextView::class)
@@ -27,12 +27,4 @@ class RefreshItem : com.wpf.app.quickrecyclerview.data.QuickBindData(R.layout.ho
 //        ).show()
 //    }
 
-    override fun onBindViewHolder(
-        adapter: com.wpf.app.quickrecyclerview.QuickAdapter,
-        viewHolder: com.wpf.app.quickrecyclerview.holder.QuickViewHolder<com.wpf.app.quickrecyclerview.data.QuickBindData>,
-        position: Int
-    ) {
-        super.onBindViewHolder(adapter, viewHolder, position)
-//        LogUtil.e("onBindViewHolder-----" + this)
-    }
 }

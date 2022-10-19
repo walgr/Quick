@@ -11,7 +11,7 @@ import com.wpf.app.quickrecyclerview.holder.QuickViewBindingHolder
  * Created by 王朋飞 on 2022/6/13.
  */
 class TestHolder3(mParent: ViewGroup) :
-    com.wpf.app.quickrecyclerview.holder.QuickViewBindingHolder<TestModel3, HolderTest3Binding>(mParent, R.layout.holder_test3) {
+    QuickViewBindingHolder<TestModel3, HolderTest3Binding>(mParent, R.layout.holder_test3) {
 
     override fun onCreateHolderEnd(itemView: View) {
         super.onCreateHolderEnd(itemView)

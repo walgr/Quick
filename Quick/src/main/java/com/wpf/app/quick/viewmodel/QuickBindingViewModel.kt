@@ -1,5 +1,6 @@
 package com.wpf.app.quick.viewmodel
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.databinding.ViewDataBinding
@@ -13,6 +14,7 @@ import com.wpf.app.quick.activity.QuickViewModelBindingActivity
  */
 abstract class QuickBindingViewModel<T : ViewDataBinding> : ViewModel(), LifecycleObserver {
     var mViewBinding: T? = null
+    @SuppressLint("StaticFieldLeak")
     var activity: QuickViewModelBindingActivity<out QuickBindingViewModel<T>, T>? = null
 
     open fun onResume() {}

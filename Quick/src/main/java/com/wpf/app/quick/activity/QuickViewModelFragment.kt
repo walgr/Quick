@@ -65,8 +65,8 @@ open class QuickViewModelFragment<VM : QuickViewModel<H>, H : QuickView> @JvmOve
         if (vmClass != null && context != null) {
             mViewModel = ViewModelProvider(
                 this,
-                ViewModelProvider.AndroidViewModelFactory(context!!.applicationContext as Application)
-            ).get(vmClass)
+                ViewModelProvider.AndroidViewModelFactory(requireContext().applicationContext as Application)
+            )[vmClass]
             QuickBind.bind(this, mViewModel)
             mViewModel?.baseView = this as H
             mViewModel?.onViewCreated(this as H)

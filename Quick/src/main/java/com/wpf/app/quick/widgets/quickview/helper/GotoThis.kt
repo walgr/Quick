@@ -1,4 +1,4 @@
-package com.wpf.app.quick.util
+package com.wpf.app.quick.widgets.quickview.helper
 
 import android.app.Activity
 import android.content.Context

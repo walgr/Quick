@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import com.wpf.app.quick.activity.QuickViewModelActivity
 import com.wpf.app.quick.demo.viewmodel.RequestTestViewModel
-import com.wpf.app.quick.util.GotoThis
+import com.wpf.app.quick.widgets.quickview.helper.GotoThis
 
 class RequestTestActivity : QuickViewModelActivity<RequestTestViewModel, RequestTestActivity>(
     R.layout.activity_request_test,

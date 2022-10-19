@@ -13,7 +13,7 @@ open class RFragment(
     override val titleName: String = ""
 ) : QuickFragment(R.layout.fragment_recyclerview, titleName = titleName) {
 
-    var mRecyclerView: com.wpf.app.quickrecyclerview.QuickRecyclerView? = null
+    private var mRecyclerView: QuickRecyclerView? = null
 
     @CallSuper
     override fun initView(view: View?) {
@@ -22,5 +22,9 @@ open class RFragment(
 
     override fun getTitle(): String? {
         return titleName
+    }
+
+    open fun getRecyclerView(): QuickRecyclerView? {
+        return mRecyclerView
     }
 }

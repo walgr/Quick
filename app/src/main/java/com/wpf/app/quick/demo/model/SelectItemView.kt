@@ -32,7 +32,7 @@ class SelectItemView @JvmOverloads constructor(
     var title = runOnHolder { "Data2View$position" }
 
     @BindData2View(helper = ItemClick::class)
-    var itemClick = itemClick {
+    private val itemClick = itemClick {
         isSelect = !isSelect
         BindData2ViewHelper.bind(getView()?.findViewById(R.id.select)!!, isSelect, Select2CheckBox)
         Toast.makeText(

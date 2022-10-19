@@ -41,7 +41,7 @@ abstract class QuickViewModelBindingFragment<VM : QuickBindingViewModel<VB>, VB 
 
     open fun setViewBinding() {
         if (view != null) {
-            viewBinding = DataBindingUtil.getBinding(view!!)
+            viewBinding = DataBindingUtil.getBinding(requireView())
             if (viewBinding != null) {
                 viewBinding!!.lifecycleOwner = this
                 viewBinding!!.setVariable(
@@ -67,8 +67,8 @@ abstract class QuickViewModelBindingFragment<VM : QuickBindingViewModel<VB>, VB 
             setViewModel(
                 ViewModelProvider(
                     this,
-                    ViewModelProvider.AndroidViewModelFactory(context!!.applicationContext as Application)
-                ).get(viewModelCls)
+                    ViewModelProvider.AndroidViewModelFactory(requireContext().applicationContext as Application)
+                )[viewModelCls]
             )
             bind(this, mViewModel)
             if (mViewModel != null) {

@@ -83,10 +83,10 @@ open class QuickBottomSheetView(
 
     protected var mBehavior: BottomSheetBehavior<View>? = null
     open fun initBottomSheet() {
-        if (canScroll()) {
-            mBehavior = BottomSheetBehavior()
+        mBehavior = if (canScroll()) {
+            BottomSheetBehavior()
         } else {
-            mBehavior = NoScrollBottomSheetBehavior()
+            NoScrollBottomSheetBehavior()
         }
         setBottomSheet()
     }

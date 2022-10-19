@@ -97,7 +97,7 @@ public class TestGsonConverterFactory extends Converter.Factory {
             JsonWriter jsonWriter = gson.newJsonWriter(writer);
             adapter.write(jsonWriter, value);
             jsonWriter.close();
-            return RequestBody.create(MEDIA_TYPE, buffer.readByteString());
+            return RequestBody.Companion.create(buffer.readByteString(), MEDIA_TYPE);
         }
     }
 
@@ -136,9 +136,9 @@ public class TestGsonConverterFactory extends Converter.Factory {
                     return (T) new JSONArray(response);
                 } else if (t instanceof TestResponse) {
                     if (((TestResponse<?>) t).getData() instanceof JSONObject) {
-                        ((TestResponse<JSONObject>) t).setData(new JSONObject(new Gson().toJson(((TestResponse<?>) httpStatus).getData())));
+                        ((TestResponse<JSONObject>) t).setData(new JSONObject(new Gson().toJson(httpStatus.getData())));
                     } else if (((TestResponse<?>) t).getData() instanceof JSONArray) {
-                        ((TestResponse<JSONArray>) t).setData(new JSONArray(new Gson().toJson(((TestResponse<?>) httpStatus).getData())));
+                        ((TestResponse<JSONArray>) t).setData(new JSONArray(new Gson().toJson(httpStatus.getData())));
                     } else if (((TestResponse<?>) t).getData() instanceof Map) {
                         ((TestResponse<Map>) t).setData((Map) httpStatus.getData());
                     }

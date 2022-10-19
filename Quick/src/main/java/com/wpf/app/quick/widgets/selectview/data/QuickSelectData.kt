@@ -15,8 +15,8 @@ import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
 open class QuickSelectData(
     open var id: String? = null,
     open var name: String? = null,
-    open var isSelect: Boolean = false,
-    open var defaultSelect: Boolean = false,        //是否默认选中，true清空后会再次选中
+    open var defaultSelect: Boolean = false,            //是否默认选中，true 清空后会再次选中
+    open var isSelect: Boolean = defaultSelect,
     @LayoutRes override val layoutId: Int = 0,
     override val layoutView: View? = null,
     override val isSuspension: Boolean = false,         //View是否悬浮置顶
@@ -32,7 +32,6 @@ open class QuickSelectData(
         onBindViewHolder(adapter, viewHolder, position)
     }
 
-    @CallSuper
     open fun onBindViewHolder(
         adapter: QuickSelectAdapter,
         viewHolder: QuickViewHolder<QuickBindData>,

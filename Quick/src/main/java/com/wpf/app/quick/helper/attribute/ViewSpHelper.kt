@@ -1,8 +1,7 @@
-package com.wpf.app.quick.helper
+package com.wpf.app.quick.helper.attribute
 
 import android.content.Context
 import android.util.AttributeSet
-import com.wpf.app.quick.helper.attribute.SpViewAttributeHelper
 
 /**
  * Created by 王朋飞 on 2022/6/10.

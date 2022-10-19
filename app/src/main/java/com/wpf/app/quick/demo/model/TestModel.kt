@@ -9,8 +9,8 @@ import com.wpf.app.quickrecyclerview.data.QuickItemData
 /**
  * Created by 王朋飞 on 2022/6/13.
  */
-@com.wpf.app.quickrecyclerview.annotations.BindHolder(TestHolder::class)
-class TestModel : com.wpf.app.quickrecyclerview.data.QuickItemData, Parcelable {
+@BindHolder(TestHolder::class)
+class TestModel : QuickItemData, Parcelable {
     var text: String = "1"
 
     constructor() {}

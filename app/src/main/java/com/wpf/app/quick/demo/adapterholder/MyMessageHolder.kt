@@ -11,10 +11,7 @@ import com.wpf.app.quickrecyclerview.holder.QuickViewBindingHolder
  * Created by 王朋飞 on 2022/6/13.
  */
 class MyMessageHolder(mParent: ViewGroup) :
-    com.wpf.app.quickrecyclerview.holder.QuickViewBindingHolder<MyMessage, HolderMessageMyBinding>(
+    QuickViewBindingHolder<MyMessage, HolderMessageMyBinding>(
         mParent,
         R.layout.holder_message_my
-    ) {
-
-    override fun onBindViewHolder(adapter: com.wpf.app.quickrecyclerview.QuickAdapter, data: MyMessage?, position: Int) {}
-}
+    )

@@ -12,7 +12,7 @@ import com.wpf.app.quickbind.interfaces.BindBaseFragment
  *
  */
 class FragmentsAdapter(
-    fm: FragmentManager, private val fragments: List<out BindBaseFragment>
+    fm: FragmentManager, private val fragments: List<BindBaseFragment>
 ) : FragmentPagerAdapter(fm) {
 
     override fun getItem(i: Int): Fragment {

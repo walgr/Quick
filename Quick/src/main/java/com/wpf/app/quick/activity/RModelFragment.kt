@@ -17,7 +17,7 @@ open class RModelFragment<VM : QuickViewModel<H>, H : QuickView> @JvmOverloads c
     @IdRes open val listId: Int = 0,
     override val titleName: String = ""
 ) : QuickViewModelFragment<VM, H>(layoutId = layoutId) {
-    private var mRecyclerView: com.wpf.app.quickrecyclerview.QuickRecyclerView? = null
+    private var mRecyclerView: QuickRecyclerView? = null
 
     @CallSuper
     override fun initView(view: View?) {
@@ -27,7 +27,7 @@ open class RModelFragment<VM : QuickViewModel<H>, H : QuickView> @JvmOverloads c
         super.initView(view)
     }
 
-    open fun getRecyclerView(): com.wpf.app.quickrecyclerview.QuickRecyclerView? {
+    open fun getRecyclerView(): QuickRecyclerView? {
         return mRecyclerView
     }
 }

@@ -23,7 +23,7 @@ open class QuickBindGroup<T : ViewGroup> @JvmOverloads constructor(
     private var dealBind: Boolean = true
 ) : QuickItemGroup<T>(mContext, attributeSet, defStyleAttr, layoutId), Bind {
 
-    @Deprecated("有的手机有复用bug")
+    private var isLoadFirst = true
     override fun onCreateViewHolder() {
         if (dealBind) {
             QuickBind.bind(this)
@@ -32,6 +32,10 @@ open class QuickBindGroup<T : ViewGroup> @JvmOverloads constructor(
 
     @CallSuper
     override fun onBindViewHolder(position: Int) {
+        if (isLoadFirst) {
+            onCreateViewHolder()
+            isLoadFirst = false
+        }
         if (dealBind) {
             dealInPlugins(this, null, QuickBind.bindPlugin)
         }
