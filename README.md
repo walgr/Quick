@@ -33,7 +33,10 @@
     
     2.添加依赖
     dependencies {
+        依赖全部
         implementation 'com.github.walgr.Quick:Quick:latest'
+
+        看需求依赖
         implementation 'com.github.walgr.Quick:QuickNetwork:latest'
         implementation 'com.github.walgr.Quick:QuickDialog:latest'
         implementation 'com.github.walgr.Quick:QuickRecyclerView:latest'
