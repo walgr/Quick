@@ -35,6 +35,8 @@
     dependencies {
         implementation 'com.github.walgr.Quick:Quick:latest'
         implementation 'com.github.walgr.Quick:QuickNetwork:latest'
+        implementation 'com.github.walgr.Quick:QuickDialog:latest'
+        implementation 'com.github.walgr.Quick:QuickRecyclerView:latest'
     }
 
 ### 未来功能
