@@ -9,7 +9,7 @@ java {
 
 
 dependencies {
-    compileOnly deps.androidx.runtime
+//    compileOnly deps.androidx.runtime
     api deps.androidx.annotations
 }
 

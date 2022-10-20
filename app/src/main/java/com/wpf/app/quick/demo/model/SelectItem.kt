@@ -46,7 +46,8 @@ class ParentSelectItem : QuickParentSelectData(layoutId = R.layout.holder_select
 }
 
 class ParentTitleSelectItem(
-    @SuppressLint("NonConstantResourceId") @BindData2View(id = R.id.title, helper = Text2TextView::class)
+    @SuppressLint("NonConstantResourceId")
+    @BindData2View(id = R.id.selectAll, helper = Text2TextView::class)
     val title: String? = null
 ) : QuickParentSelectData(isSuspension = true, layoutId = R.layout.holder_select_parent_title_item) {
 
