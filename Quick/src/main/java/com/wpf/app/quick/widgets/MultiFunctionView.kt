@@ -321,6 +321,7 @@ class MultiFunctionView @JvmOverloads constructor(
 
     fun setTitleHint(titleHintStr: CharSequence) {
         title.hint = titleHintStr
+        showTitle(titleHintStr.isNotEmpty())
     }
 
     fun setTitleColor(color: Int) {
@@ -359,6 +360,7 @@ class MultiFunctionView @JvmOverloads constructor(
 
     fun setSubTitleHint(subTitleHintStr: CharSequence) {
         subTitle.hint = subTitleHintStr
+        showSubTitle(subTitleHintStr.isNotEmpty())
     }
 
     fun setSubTitleColor(color: Int) {

@@ -104,7 +104,10 @@
         <com.wpf.app.quick.widgets.MultiFunctionView
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                app:title="123"
+                app:titleHint="123"
+                app:title="写实"
+                app:titleColor="@color/purple_500"
+                app:titleHintColor="#000000"
         />
 
         <LinearLayout
