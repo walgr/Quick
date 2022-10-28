@@ -51,9 +51,11 @@
         <attr name="leftImageLeftMargin" format="dimension" />
         <attr name="leftImageRightMargin" format="dimension" />
         <attr name="title" format="string" />
+        <attr name="titleHint" format="string" />
         <attr name="titleBackground" format="reference" />
         <attr name="titleSize" format="dimension" />
         <attr name="titleColor" format="color" />
+        <attr name="titleHintColor" format="color" />
         <attr name="titleMaxLine" format="integer" />
         <attr name="titleWpfStyle" format="enum">
             <enum name="normal" value="0" />
@@ -61,9 +63,11 @@
             <enum name="italic" value="2" />
         </attr>
         <attr name="subTitle" format="string" />
+        <attr name="subTitleHint" format="string" />
         <attr name="subTitleBackground" format="reference" />
         <attr name="subTitleSize" format="dimension" />
         <attr name="subTitleColor" format="color" />
+        <attr name="subTitleHintColor" format="color" />
         <attr name="subTitleMaxLine" format="integer" />
         <attr name="subTitleWpfStyle" format="enum">
             <enum name="normal" value="0" />

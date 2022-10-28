@@ -145,11 +145,17 @@ class MultiFunctionView @JvmOverloads constructor(
 
     private fun loadTitleAttribute() {
         setTitle(attributeHelper.title ?: "")
+        attributeHelper.titleHint?.let {
+            setTitleHint(it)
+        }
         attributeHelper.titleBackground?.let {
             setTitleBackground(it)
         }
         attributeHelper.titleColor?.let {
             setTitleColor(it)
+        }
+        attributeHelper.titleHintColor?.let {
+            setTitleHintColor(it)
         }
         attributeHelper.titleSize?.let {
             setTitleSize(it.toFloat())
@@ -164,11 +170,17 @@ class MultiFunctionView @JvmOverloads constructor(
 
     private fun loadSubTitleAttribute() {
         setSubTitle(attributeHelper.subTitle ?: "")
+        attributeHelper.subTitleHint?.let {
+            setSubTitleHint(it)
+        }
         attributeHelper.subTitleBackground?.let {
             setSubTitleBackground(it)
         }
         attributeHelper.subTitleColor?.let {
             setSubTitleColor(it)
+        }
+        attributeHelper.subTitleHintColor?.let {
+            setSubTitleHintColor(it)
         }
         attributeHelper.subTitleSize?.let {
             setSubTitleSize(it.toFloat())
@@ -302,13 +314,21 @@ class MultiFunctionView @JvmOverloads constructor(
         title.setBackgroundResource(res)
     }
 
-    fun setTitle(titleStr: String) {
+    fun setTitle(titleStr: CharSequence) {
         title.text = titleStr
         showTitle(titleStr.isNotEmpty())
     }
 
+    fun setTitleHint(titleHintStr: CharSequence) {
+        title.hint = titleHintStr
+    }
+
     fun setTitleColor(color: Int) {
         title.setTextColor(color)
+    }
+
+    fun setTitleHintColor(color: Int) {
+        title.setHintTextColor(color)
     }
 
     fun setTitleSize(size: Float) {
@@ -332,13 +352,21 @@ class MultiFunctionView @JvmOverloads constructor(
         subTitle.setBackgroundResource(res)
     }
 
-    fun setSubTitle(subTitleStr: String) {
+    fun setSubTitle(subTitleStr: CharSequence) {
         subTitle.text = subTitleStr
         showSubTitle(subTitleStr.isNotEmpty())
     }
 
+    fun setSubTitleHint(subTitleHintStr: CharSequence) {
+        subTitle.hint = subTitleHintStr
+    }
+
     fun setSubTitleColor(color: Int) {
         subTitle.setTextColor(color)
+    }
+
+    fun setSubTitleHintColor(color: Int) {
+        subTitle.setHintTextColor(color)
     }
 
     fun setSubTitleSize(size: Float) {

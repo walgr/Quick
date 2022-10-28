@@ -35,20 +35,26 @@ class MultiFunctionAttributeHelper(
     var checkboxRightMarge: Int? = 0
 
     var title: String? = null
+    var titleHint: String? = null
     @DrawableRes
     var titleBackground: Int? = null
     var titleSize: Int? = null
     @ColorRes
     var titleColor: Int? = null
+    @ColorRes
+    var titleHintColor: Int? = null
     var titleWpfStyle: Int? = null
     var titleMaxLine: Int? = null
 
     var subTitle: String? = null
+    var subTitleHint: String? = null
     @DrawableRes
     var subTitleBackground: Int? = null
     var subTitleSize: Int? = null
     @ColorRes
     var subTitleColor: Int? = null
+    @ColorRes
+    var subTitleHintColor: Int? = null
     var subTitleWpfStyle: Int? = null
     var subTitleMarginTop: Int? = null
     var subTitleMaxLine: Int? = null
