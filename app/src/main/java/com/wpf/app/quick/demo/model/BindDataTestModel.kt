@@ -15,7 +15,7 @@ class BindDataTestModel : QuickClickData(R.layout.holder_test_bind_data) {
     @SuppressLint("NonConstantResourceId")
     @BindData2View(id = R.id.img, helper = Url2ImageView::class)
     var img =
-        "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.jj20.com%2Fup%2Fallimg%2F4k%2Fs%2F02%2F2109242306111155-0-lp.jpg&refer=http%3A%2F%2Fimg.jj20.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1659674125&t=990c637869e9e67501c9db10e592a0c7"
+        "https://img1.baidu.com/it/u=3009731526,373851691&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500"
 
     val title = runOnHolder {
         "Title:${getViewHolder()?.bindingAdapterPosition}"

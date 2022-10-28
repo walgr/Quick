@@ -44,9 +44,10 @@ class MultiFunctionView @JvmOverloads constructor(
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        attributes?.let {
-            attributeHelper = MultiFunctionAttributeHelper(context, attributes)
-        }
+        //预览时会报错
+//        attributes?.let {
+//            attributeHelper = MultiFunctionAttributeHelper(context, attributes)
+//        }
         mLifecycleRegistry.currentState = Lifecycle.State.RESUMED
     }
 
@@ -99,9 +100,7 @@ class MultiFunctionView @JvmOverloads constructor(
     }
 
     private fun loadCheckBoxAttribute() {
-        attributeHelper.showCheckBox?.let {
-            showCheckBox(it)
-        }
+        showCheckBox(attributeHelper.showCheckBox ?: false)
         attributeHelper.checkboxBackground?.let {
             setCheckBoxBackground(it)
         }
@@ -145,9 +144,7 @@ class MultiFunctionView @JvmOverloads constructor(
     }
 
     private fun loadTitleAttribute() {
-        attributeHelper.title?.let {
-            setTitle(it)
-        }
+        setTitle(attributeHelper.title ?: "")
         attributeHelper.titleBackground?.let {
             setTitleBackground(it)
         }
@@ -166,9 +163,7 @@ class MultiFunctionView @JvmOverloads constructor(
     }
 
     private fun loadSubTitleAttribute() {
-        attributeHelper.subTitle?.let {
-            setSubTitle(it)
-        }
+        setSubTitle(attributeHelper.subTitle ?: "")
         attributeHelper.subTitleBackground?.let {
             setSubTitleBackground(it)
         }
@@ -418,7 +413,7 @@ class MultiFunctionView @JvmOverloads constructor(
     }
 }
 
-interface CheckView: Checkable {
+interface CheckView : Checkable {
 
     fun setOnCheckedChangeListener(listener: CompoundButton.OnCheckedChangeListener?)
 }

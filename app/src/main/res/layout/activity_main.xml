@@ -101,6 +101,12 @@
 
         </RelativeLayout>
 
+        <com.wpf.app.quick.widgets.MultiFunctionView
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                app:title="123"
+        />
+
         <LinearLayout
                 android:id="@+id/testBindSpLL"
                 android:layout_width="match_parent"
