@@ -3,8 +3,13 @@ package com.wpf.app.quick.helper.attribute.base
 import android.content.Context
 import android.content.res.XmlResourceParser
 import android.graphics.Color
+import android.util.ArrayMap
 import android.util.AttributeSet
+import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
 import androidx.annotation.StyleableRes
+import androidx.collection.arrayMapOf
+import androidx.core.content.ContextCompat
 import java.lang.reflect.Field
 
 /**
@@ -13,19 +18,20 @@ import java.lang.reflect.Field
  * 按照xml里配置顺序读取数据
  */
 
-abstract class AutoGetAttributeHelper constructor(
-    context: Context,
+open class AutoGetAttributeHelper constructor(
+    private val context: Context,
     attributeSet: AttributeSet,
     @StyleableRes styleableId: IntArray
-): AttributeHelper(context, attributeSet, styleableId) {
+) : AttributeHelper(context, attributeSet, styleableId) {
 
-    private val fieldMap: MutableMap<String, Field> = mutableMapOf()
+    private val fieldMap = arrayMapOf<String, Field>()
+
     init {
         getAllClassField()
         getAttributeType(attributeSet, styleableId)
     }
 
-    private fun getAttributeType(attributeSet: AttributeSet, @StyleableRes styleableId: IntArray) {
+    fun getAttributeType(attributeSet: AttributeSet, @StyleableRes styleableId: IntArray) {
         for (i in 0 until attributeSet.attributeCount) {
 //            val attributeResNameSpace = (attributeSet as? XmlResourceParser)?.getAttributeNamespace(i)
 //            if ("http://schemas.android.com/apk/res-auto" != attributeResNameSpace) continue
@@ -33,16 +39,29 @@ abstract class AutoGetAttributeHelper constructor(
             val attributeId = attributeSet.getAttributeNameResource(i)
             if (styleableId.contains(attributeId) && fieldMap.contains(attributeName)) {
                 val field = fieldMap[attributeName]
-                when(field?.type) {
+                field?.isAccessible = true
+                when (field?.type) {
                     java.lang.Integer::class.java, Int::class.java -> {
                         //只能获取dp、sp、资源id
                         val attributeValue = attributeSet.getAttributeValue(i)
                         if (attributeValue.contains("dip") || attributeValue.contains("sp")) {
                             //获取dp或sp
-                            field.set(this, typeArray.getDimensionPixelSize(styleableId.indexOf(attributeId), 0))
+                            field.set(
+                                this,
+                                typeArray.getDimensionPixelSize(styleableId.indexOf(attributeId), 0)
+                            )
                         } else if (attributeValue.startsWith("@")) {
-                           //获取资源id
-                            field.set(this, attributeSet.getAttributeResourceValue(i, 0))
+                            //获取资源id
+                            val res = attributeSet.getAttributeResourceValue(i, 0)
+                            try {
+                                field.set(this, ContextCompat.getColor(context, res))
+                            } catch (ignore: Exception) {
+                                try {
+                                    field.set(this, ContextCompat.getDrawable(context, res))
+                                } catch (ignore: Exception) {
+                                    field.set(this, res)
+                                }
+                            }
                         } else {
                             field.set(this, attributeSet.getAttributeIntValue(i, 0))
                         }
@@ -64,15 +83,14 @@ abstract class AutoGetAttributeHelper constructor(
                         }
                     }
                 }
-
             }
         }
+        fieldMap.clear()
     }
 
     private fun getAllClassField() {
         val fieldList = this.javaClass.declaredFields
         fieldList.forEach {
-            it.isAccessible = true
             fieldMap[it.name] = it
         }
     }

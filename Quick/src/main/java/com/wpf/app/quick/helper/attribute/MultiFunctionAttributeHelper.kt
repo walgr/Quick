@@ -4,10 +4,9 @@ import android.content.Context
 import android.graphics.Color
 import android.util.AttributeSet
 import android.view.ViewGroup
-import androidx.annotation.ColorRes
+import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import com.wpf.app.quick.R
-import com.wpf.app.quick.constant.*
 import com.wpf.app.quick.helper.attribute.base.AutoGetAttributeHelper
 
 /**
@@ -39,9 +38,9 @@ class MultiFunctionAttributeHelper(
     @DrawableRes
     var titleBackground: Int? = null
     var titleSize: Int? = null
-    @ColorRes
+    @ColorInt
     var titleColor: Int? = null
-    @ColorRes
+    @ColorInt
     var titleHintColor: Int? = null
     var titleWpfStyle: Int? = null
     var titleMaxLine: Int? = null
@@ -51,9 +50,9 @@ class MultiFunctionAttributeHelper(
     @DrawableRes
     var subTitleBackground: Int? = null
     var subTitleSize: Int? = null
-    @ColorRes
+    @ColorInt
     var subTitleColor: Int? = null
-    @ColorRes
+    @ColorInt
     var subTitleHintColor: Int? = null
     var subTitleWpfStyle: Int? = null
     var subTitleMarginTop: Int? = null
@@ -80,19 +79,6 @@ class MultiFunctionAttributeHelper(
     var rightImageScaleType: Int = 3
     var rightImageLeftMarge: Int? = 0
     var rightImageRightMarge: Int? = 0
-
-    var clickView: Int? = null
-        get() {
-            return when (field) {
-                0 -> ItemView
-                1 -> CheckBox
-                2 -> LeftImage
-                3 -> Title
-                4 -> SubTitle
-                5 -> RightImage
-                else -> ItemView
-            }
-        }
 
     var clickOnlyCheckBox: Boolean? = null
 }

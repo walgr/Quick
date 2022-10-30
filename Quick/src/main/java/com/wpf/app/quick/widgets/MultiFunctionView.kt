@@ -62,7 +62,6 @@ class MultiFunctionView @JvmOverloads constructor(
         attributes?.let {
             attributeHelper = MultiFunctionAttributeHelper(context, attributes)
         }
-        View.inflate(context, R.layout.multi_function_layout, this)
         initView()
         loadViewAttribute()
     }
@@ -74,6 +73,7 @@ class MultiFunctionView @JvmOverloads constructor(
     private lateinit var rightImage: ImageView
 
     private fun initView() {
+        View.inflate(context, R.layout.multi_function_layout, this)
         checkBox = findViewById(R.id.checkbox)
         leftImage = findViewById(R.id.leftImage)
         title = findViewById(R.id.title)
