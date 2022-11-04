@@ -6,7 +6,7 @@ import com.wpf.app.quick.activity.QuickViewModelActivity
 import com.wpf.app.quick.demo.viewmodel.RequestTestViewModel
 import com.wpf.app.quick.widgets.quickview.helper.GotoThis
 
-class RequestTestActivity : QuickViewModelActivity<RequestTestViewModel, RequestTestActivity>(
+class RequestTestActivity : QuickViewModelActivity<RequestTestViewModel>(
     R.layout.activity_request_test,
     titleName = "接口测试页"
 ) {

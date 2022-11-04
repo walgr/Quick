@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import com.wpf.app.quicknetwork.base.BaseRequest
 import com.wpf.app.quicknetwork.base.BaseResponseI
 import com.wpf.app.quicknetwork.base.BaseResponseIA
+import com.wpf.app.quickutil.LogUtil
 import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Response
@@ -30,19 +31,21 @@ open class RealCall<SResponse, FResponse>(private val rawCall: Call<SResponse>, 
             }
             withContext(Dispatchers.Main) {
                 when (result) {
-                    is Throwable ->
+                    is Throwable -> {
                         try {
                             if (fail is BaseResponseIA<*>) {
                                 request.funFail.invoke(fail.apply {
                                     codeI = "-1"
                                     errorI = result.message
                                 })
+                            } else {
+                                request.funFail.invoke(fail)
                             }
                         } catch (e: Exception) {
                             e.printStackTrace()
                             request.funFail.invoke(fail)
                         }
-
+                    }
                     is Response<*> -> {
                         var code = ""
                         try {
@@ -72,6 +75,8 @@ open class RealCall<SResponse, FResponse>(private val rawCall: Call<SResponse>, 
                                         codeI = code
                                         errorI = e.message
                                     })
+                                } else {
+                                    request.funFail.invoke(fail)
                                 }
                             } catch (e: Exception) {
                                 e.printStackTrace()
