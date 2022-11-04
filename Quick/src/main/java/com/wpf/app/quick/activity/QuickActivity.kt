@@ -27,7 +27,7 @@ abstract class QuickActivity @JvmOverloads constructor(
 
     abstract override fun initView()
 
-    private fun setTitleName() {
+    open fun setTitleName() {
         if (titleName.isNotEmpty()) {
             supportActionBar?.title = titleName
         }

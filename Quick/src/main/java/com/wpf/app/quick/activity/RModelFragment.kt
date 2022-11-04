@@ -12,11 +12,11 @@ import com.wpf.app.quickrecyclerview.QuickRecyclerView
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-open class RModelFragment<VM : QuickViewModel<H>, H : QuickView> @JvmOverloads constructor(
+open class RModelFragment<VM : QuickViewModel<out QuickView>> @JvmOverloads constructor(
     @LayoutRes override val layoutId: Int = 0,
     @IdRes open val listId: Int = 0,
     override val titleName: String = ""
-) : QuickViewModelFragment<VM, H>(layoutId = layoutId) {
+) : QuickViewModelFragment<VM>(layoutId = layoutId) {
     private var mRecyclerView: QuickRecyclerView? = null
 
     @CallSuper

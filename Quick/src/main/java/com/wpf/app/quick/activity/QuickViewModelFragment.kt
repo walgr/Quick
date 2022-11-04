@@ -16,7 +16,7 @@ import com.wpf.app.quickbind.interfaces.BindViewModel
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-open class QuickViewModelFragment<VM : QuickViewModel<H>, H : QuickView> @JvmOverloads constructor(
+open class QuickViewModelFragment<VM : QuickViewModel<out QuickView>> @JvmOverloads constructor(
     @LayoutRes override val layoutId: Int = 0,
     override val layoutView: View? = null,
     override val titleName: String = ""
@@ -67,9 +67,11 @@ open class QuickViewModelFragment<VM : QuickViewModel<H>, H : QuickView> @JvmOve
                 this,
                 ViewModelProvider.AndroidViewModelFactory(requireContext().applicationContext as Application)
             )[vmClass]
-            QuickBind.bind(this, mViewModel)
-            mViewModel?.baseView = this as H
-            mViewModel?.onViewCreated(this as H)
+            (mViewModel as? QuickViewModel<QuickView>)?.let {
+                it.baseView = this
+                QuickBind.bind(this, it)
+                it.onViewCreated(this)
+            }
         }
     }
 
