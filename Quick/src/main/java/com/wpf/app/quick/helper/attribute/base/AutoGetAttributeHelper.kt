@@ -31,7 +31,7 @@ open class AutoGetAttributeHelper constructor(
         getAttributeType(attributeSet, styleableId)
     }
 
-    fun getAttributeType(attributeSet: AttributeSet, @StyleableRes styleableId: IntArray) {
+    private fun getAttributeType(attributeSet: AttributeSet, @StyleableRes styleableId: IntArray) {
         for (i in 0 until attributeSet.attributeCount) {
 //            val attributeResNameSpace = (attributeSet as? XmlResourceParser)?.getAttributeNamespace(i)
 //            if ("http://schemas.android.com/apk/res-auto" != attributeResNameSpace) continue
