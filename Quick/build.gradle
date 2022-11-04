@@ -43,7 +43,7 @@ dependencies {
     //列表
     implementation deps.androidx.recyclerview
 
-    implementation 'com.google.code.gson:gson:2.9.0'
+    implementation 'com.google.code.gson:gson:2.10'
 
     if (IS_REMOTE.toBoolean()) {
         api deps.quickbind.bind
