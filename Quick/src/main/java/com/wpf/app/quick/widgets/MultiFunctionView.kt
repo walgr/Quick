@@ -256,8 +256,8 @@ class MultiFunctionView @JvmOverloads constructor(
         checkBox.setBackgroundResource(res)
     }
 
-    fun setCheckBoxBackgroundColor(color: Color) {
-        checkBox.background = color.toDrawable()
+    fun setCheckBoxBackgroundColor(color: Int) {
+        checkBox.setBackgroundColor(color)
     }
 
     fun setCheckBoxChecked(checked: Boolean) {
