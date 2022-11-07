@@ -46,4 +46,4 @@
 
     1.父选择基类支持悬浮和展开收起功能 已实现
 
-    2.BindFragment支持ViewPager2
+    2.BindFragment支持ViewPager2 已实现
