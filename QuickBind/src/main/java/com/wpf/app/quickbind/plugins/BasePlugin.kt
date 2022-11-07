@@ -114,5 +114,5 @@ interface BasePlugin {
         obj: Any,
         viewModel: ViewModel?,
         field: Field
-    ): Boolean
+    )
 }

@@ -14,16 +14,16 @@ class BindViewPlugin : BasePlugin {
         obj: Any,
         viewModel: ViewModel?,
         field: Field
-    ): Boolean {
+    ) {
         try {
-            val findViewA = field.getAnnotation(BindView::class.java) ?: return false
+            val findViewA = field.getAnnotation(BindView::class.java) ?: return
             field.isAccessible = true
 //            if (field[getRealObj(obj, viewModel)] != null) return true
             field[getRealObj(obj, viewModel)] = findView(obj, findViewA.value)
-            return true
+            return
         } catch (e: Exception) {
             e.printStackTrace()
         }
-        return false
+        return
     }
 }

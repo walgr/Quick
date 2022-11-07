@@ -27,10 +27,10 @@ class BindFragmentPlugin : BasePlugin {
         obj: Any,
         viewModel: ViewModel?,
         field: Field
-    ): Boolean {
+    ) {
         try {
             val bindFragmentAnn: BindFragment = field.getAnnotation(BindFragment::class.java)
-                ?: return false
+                ?: return
             field.isAccessible = true
             val viewPagerObj = field[getRealObj(obj, viewModel)]
             if (viewPagerObj is ViewPager) {
@@ -50,7 +50,7 @@ class BindFragmentPlugin : BasePlugin {
                 } else if (context is Fragment) {
                     fragmentManager = (context as Fragment).childFragmentManager
                 }
-                if (fragmentManager == null) return true
+                if (fragmentManager == null) return
                 if (bindFragmentAnn.withState) {
                     viewPager.adapter = object : FragmentStatePagerAdapter(
                         fragmentManager,
@@ -214,10 +214,8 @@ class BindFragmentPlugin : BasePlugin {
                     }
                 }
             }
-            return true
         } catch (e: Exception) {
             e.printStackTrace()
         }
-        return false
     }
 }

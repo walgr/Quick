@@ -24,10 +24,10 @@ class BindData2ViewPlugin : BasePlugin {
         obj: Any,
         viewModel: ViewModel?,
         field: Field
-    ): Boolean {
+    ) {
         try {
             val bindData2View = field.getAnnotation(BindData2View::class.java)
-                ?: return false
+                ?: return
             val bindId: Int = bindData2View.id
             val helper = bindData2View.helper.java as Class<BindD2VHelper<RecyclerView.ViewHolder, View, Any>>
             var viewParent: Any? = obj
@@ -38,14 +38,14 @@ class BindData2ViewPlugin : BasePlugin {
                     findView = viewParent.itemView
                 }
             }
-            if (viewParent == null) return true
+            if (viewParent == null) return
             if (bindId != Constants.NO_RES_ID) {
                 val id = getSaveId(obj, viewModel, field, bindId)
                 findView = findView(viewParent, id)
             }
             field.isAccessible = true
             val value = field[getRealObj(obj, viewModel)]
-            if (findView == null || value == null) return true
+            if (findView == null || value == null) return
 //            Log.e("onBindViewHolder","-----" + obj)
             var bindBaseHelper: BindD2VHelper<RecyclerView.ViewHolder, View, Any>?
             try {
@@ -66,11 +66,11 @@ class BindData2ViewPlugin : BasePlugin {
             } else {
                 bindBaseHelper?.initView(viewParent as? RecyclerView.ViewHolder, findView, value)
             }
-            return true
+            return
         } catch (e: Exception) {
             e.printStackTrace()
         }
-        return false
+        return
     }
 
     fun parentClassIs(cur: Class<*>, parentName: String): Boolean {

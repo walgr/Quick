@@ -62,6 +62,7 @@ buildscript {
                 ],
                 'gson'        : 'com.google.code.gson:gson:2.10',
                 'glide'       : 'com.github.bumptech.glide:glide:4.14.2',
+                'viewpager2'  : 'androidx.viewpager2:viewpager2:1.0.0',
         ]
     }
 

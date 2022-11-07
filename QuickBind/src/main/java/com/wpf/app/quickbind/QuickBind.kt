@@ -44,6 +44,8 @@ object QuickBind {
         registerPlugin(LoadSp::class, LoadSpPlugin())
         registerPlugin(BindFragments::class, BindFragmentsPlugin())
         registerPlugin(BindFragment::class, BindFragmentPlugin())
+        registerPlugin(BindFragments2::class, BindFragments2Plugin())
+        registerPlugin(BindFragment2::class, BindFragment2Plugin())
         registerPlugin(BindData2View::class, BindData2ViewPlugin())
     }
 

@@ -15,10 +15,10 @@ class GroupViewPlugin : BasePlugin {
         obj: Any,
         viewModel: ViewModel?,
         field: Field
-    ): Boolean {
+    ) {
         val groupViewA = field.getAnnotation(
             GroupView::class.java
-        ) ?: return false
+        ) ?: return
         field.isAccessible = true
         val groupViews = GroupViews()
         val R2IdList = getSaveIdList(obj, viewModel, field)
@@ -46,6 +46,6 @@ class GroupViewPlugin : BasePlugin {
         } catch (e: IllegalAccessException) {
             e.printStackTrace()
         }
-        return true
+        return
     }
 }

@@ -20,9 +20,9 @@ class BindSp2ViewPlugin : BasePlugin {
         obj: Any,
         viewModel: ViewModel?,
         field: Field
-    ): Boolean {
+    ) {
         val findViewA: BindSp2View =
-            field.getAnnotation(BindSp2View::class.java) ?: return false
+            field.getAnnotation(BindSp2View::class.java) ?: return
         field.isAccessible = true
         val findView = field[getRealObj(obj, viewModel)] as View
         if (findView is TextView) {
@@ -36,7 +36,7 @@ class BindSp2ViewPlugin : BasePlugin {
             )
         }
         field[getRealObj(obj, viewModel)] = findView
-        return true
+        return
 
     }
 

@@ -1,15 +1,13 @@
 package com.wpf.app.quickbind.plugins
 
 import android.app.Activity
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
-import androidx.viewpager.widget.ViewPager
-import com.wpf.app.quickbind.annotations.BindFragments
+import androidx.viewpager2.widget.ViewPager2
+import com.wpf.app.quickbind.annotations.BindFragments2
 import com.wpf.app.quickbind.interfaces.BindBaseFragment
-import com.wpf.app.quickbind.viewpager.adapter.FragmentsAdapter
-import com.wpf.app.quickbind.viewpager.adapter.FragmentsStateAdapter
+import com.wpf.app.quickbind.viewpager2.adapter.FragmentsStateAdapter
 import java.lang.reflect.Field
 import kotlin.reflect.KClass
 
@@ -17,7 +15,7 @@ import kotlin.reflect.KClass
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-class BindFragmentsPlugin : BasePlugin {
+class BindFragments2Plugin : BasePlugin {
 
     override fun dealField(
         obj: Any,
@@ -25,32 +23,19 @@ class BindFragmentsPlugin : BasePlugin {
         field: Field
     ) {
         try {
-            val bindFragmentsAnn: BindFragments = field.getAnnotation(BindFragments::class.java)
+            val bindFragmentsAnn: BindFragments2 = field.getAnnotation(BindFragments2::class.java)
                 ?: return
             field.isAccessible = true
             val viewPagerObj = field[getRealObj(obj, viewModel)]
-            if (viewPagerObj is ViewPager) {
-                val viewPager: ViewPager = viewPagerObj
+            if (viewPagerObj is ViewPager2) {
+                val viewPager: ViewPager2 = viewPagerObj
                 if (bindFragmentsAnn.limit > 0) {
                     viewPager.offscreenPageLimit = bindFragmentsAnn.limit
                 }
-                var fragmentManager: FragmentManager? = null
-                if (obj is AppCompatActivity) {
-                    fragmentManager = obj.supportFragmentManager
+                if (obj is FragmentActivity) {
+                    viewPager.adapter = FragmentsStateAdapter(obj, getFragment(obj, bindFragmentsAnn.fragments))
                 } else if (obj is Fragment) {
-                    fragmentManager = obj.childFragmentManager
-                }
-                if (fragmentManager == null) return
-                if (bindFragmentsAnn.withState) {
-                    viewPager.adapter = FragmentsStateAdapter(
-                        fragmentManager,
-                        getFragment(obj, bindFragmentsAnn.fragments)
-                    )
-                } else {
-                    viewPager.adapter = FragmentsAdapter(
-                        fragmentManager,
-                        getFragment(obj, bindFragmentsAnn.fragments)
-                    )
+                    viewPager.adapter = FragmentsStateAdapter(obj, getFragment(obj, bindFragmentsAnn.fragments))
                 }
             }
         } catch (e: Exception) {
