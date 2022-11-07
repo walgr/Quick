@@ -6,7 +6,7 @@ import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
 import com.wpf.app.quick.R
-import com.wpf.app.quick.viewmodel.QuickBindingViewModel
+import com.wpf.app.quick.activity.viewmodel.QuickBindingViewModel
 import com.wpf.app.quickrecyclerview.QuickRecyclerView
 
 /**

@@ -6,7 +6,7 @@ import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.lifecycle.ViewModelProvider
 import com.wpf.app.quickutil.base.ViewModelEx
-import com.wpf.app.quick.viewmodel.QuickViewModel
+import com.wpf.app.quick.activity.viewmodel.QuickViewModel
 import com.wpf.app.quickbind.QuickBind
 import com.wpf.app.quickbind.interfaces.BindViewModel
 

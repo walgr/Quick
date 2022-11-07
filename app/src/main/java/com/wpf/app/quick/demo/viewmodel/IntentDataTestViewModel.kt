@@ -8,7 +8,7 @@ import com.wpf.app.quick.annotations.BindView
 import com.wpf.app.quick.demo.databinding.ActivityDataTestBinding
 import com.wpf.app.quick.demo.model.MyMessage
 import com.wpf.app.quick.demo.model.TestModel
-import com.wpf.app.quick.viewmodel.QuickBindingViewModel
+import com.wpf.app.quick.activity.viewmodel.QuickBindingViewModel
 import com.wpf.app.quickbind.annotations.AutoGet
 
 /**

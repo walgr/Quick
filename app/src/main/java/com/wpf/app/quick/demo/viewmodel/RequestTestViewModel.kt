@@ -8,7 +8,7 @@ import com.wpf.app.quick.annotations.BindView
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.demo.RequestTestActivity
 import com.wpf.app.quick.demo.http.request
-import com.wpf.app.quick.viewmodel.QuickViewModel
+import com.wpf.app.quick.activity.viewmodel.QuickViewModel
 import com.wpf.app.quicknetwork.helper.GsonHelper
 import com.wpf.app.quickutil.LogUtil
 

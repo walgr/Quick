@@ -3,7 +3,7 @@ package com.wpf.app.quick.demo.viewmodel
 import android.view.View
 import com.wpf.app.quick.demo.databinding.ActivityRecyclerviewTestBinding
 import com.wpf.app.quick.demo.model.BindDataTestModel
-import com.wpf.app.quick.viewmodel.QuickBindingViewModel
+import com.wpf.app.quick.activity.viewmodel.QuickBindingViewModel
 
 /**
  * Created by 王朋飞 on 2022/6/13.

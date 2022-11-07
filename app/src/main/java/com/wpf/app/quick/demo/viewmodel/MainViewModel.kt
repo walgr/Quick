@@ -7,7 +7,7 @@ import com.wpf.app.quick.annotations.BindData2View
 import com.wpf.app.quick.annotations.BindView
 import com.wpf.app.quick.demo.databinding.ActivityMainBinding
 import com.wpf.app.quickbind.helper.binddatahelper.Text2TextView
-import com.wpf.app.quick.viewmodel.QuickBindingViewModel
+import com.wpf.app.quick.activity.viewmodel.QuickBindingViewModel
 import com.wpf.app.quickbind.annotations.BindSp2View
 
 /**

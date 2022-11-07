@@ -6,7 +6,7 @@ import com.wpf.app.quick.demo.databinding.ActivitySelectTestBinding
 import com.wpf.app.quick.demo.model.ParentSelectItem
 import com.wpf.app.quick.demo.model.SelectItem
 import com.wpf.app.quick.demo.model.SelectResultItem
-import com.wpf.app.quick.viewmodel.QuickBindingViewModel
+import com.wpf.app.quick.activity.viewmodel.QuickBindingViewModel
 import com.wpf.app.quick.widgets.selectview.data.QuickChildSelectData
 import com.wpf.app.quick.widgets.selectview.listeners.OnSelectCallback
 
@@ -14,7 +14,7 @@ import com.wpf.app.quick.widgets.selectview.listeners.OnSelectCallback
  * Created by 王朋飞 on 2022/9/16.
  *
  */
-class SelectListViewModel: QuickBindingViewModel<ActivitySelectTestBinding>() {
+class SelectListViewModel : QuickBindingViewModel<ActivitySelectTestBinding>() {
 
     val selectList: MutableLiveData<List<QuickChildSelectData>> = MutableLiveData()
 
@@ -30,7 +30,8 @@ class SelectListViewModel: QuickBindingViewModel<ActivitySelectTestBinding>() {
                 })
             }
         }
-        mViewBinding?.selectResult?.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+        mViewBinding?.selectResult?.layoutManager =
+            LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false)
         mViewBinding?.selectList?.bindResult(mViewBinding.selectResult)
         loadData()
     }

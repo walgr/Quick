@@ -9,7 +9,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import com.wpf.app.quickrecyclerview.constant.BRConstant
 import com.wpf.app.quickutil.base.ViewModelEx
-import com.wpf.app.quick.viewmodel.QuickBindingViewModel
+import com.wpf.app.quick.activity.viewmodel.QuickBindingViewModel
 import com.wpf.app.quickbind.QuickBind
 
 /**
@@ -48,7 +48,7 @@ abstract class QuickViewModelBindingActivity<VM : QuickBindingViewModel<VB>, VB 
                     viewModelCls
                 )
             QuickBind.bind(this, mViewModel)
-            mViewModel?.activity = this
+//            mViewModel?.activity = this
             mViewModel?.onBindingCreated(viewBinding)
         } else {
             setViewBinding()

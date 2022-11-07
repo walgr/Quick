@@ -5,7 +5,7 @@ import androidx.annotation.CallSuper
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import com.wpf.app.quick.R
-import com.wpf.app.quick.viewmodel.QuickViewModel
+import com.wpf.app.quick.activity.viewmodel.QuickViewModel
 import com.wpf.app.quickrecyclerview.QuickRecyclerView
 
 /**

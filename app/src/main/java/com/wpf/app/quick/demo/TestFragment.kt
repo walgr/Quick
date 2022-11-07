@@ -5,7 +5,7 @@ import android.view.View
 import android.widget.TextView
 import com.wpf.app.quick.activity.QuickFragment
 import com.wpf.app.quick.annotations.BindView
-import com.wpf.app.quick.viewmodel.QuickViewModel
+import com.wpf.app.quick.activity.viewmodel.QuickViewModel
 import com.wpf.app.quickrecyclerview.QuickRecyclerView
 
 /**
