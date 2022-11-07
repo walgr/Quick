@@ -9,10 +9,8 @@ java {
 
 dependencies {
     implementation fileTree(dir:'libs',include:['*.jar'])
-    if (IS_REMOTE.toBoolean())
-        implementation deps.quickbind.annotations
-    else
-        implementation project(":Quick-annotations")
+
+    compileOnly deps.androidx.annotations
     implementation deps.auto.common
     implementation deps.guava
     implementation deps.javapoet
@@ -26,6 +24,11 @@ dependencies {
 //    compileOnly deps.incap.processor
     //解决和Gradle版本兼容问题（无法生成META-INF里gradle文件）
     annotationProcessor deps.incap.processor
+
+    if (IS_REMOTE.toBoolean())
+        implementation deps.quickbind.annotations
+    else
+        implementation project(":Quick-annotations")
 }
 
 apply from: rootProject.file('gradle-mvn-push-jar.gradle')

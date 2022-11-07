@@ -33,17 +33,17 @@ android {
 
 dependencies {
 
-    implementation deps.androidx.appcompat
+    compileOnly deps.androidx.appcompat
     //fragment-ktx
-    implementation deps.androidx.fragmentktx
+    compileOnly deps.androidx.fragmentktx
 
-    implementation deps.androidx.material
+    compileOnly deps.androidx.material
     //约束布局
-    implementation deps.androidx.constraintlayout
+    compileOnly deps.androidx.constraintlayout
     //列表
-    implementation deps.androidx.recyclerview
+    compileOnly deps.androidx.recyclerview
 
-    implementation 'com.google.code.gson:gson:2.10'
+    compileOnly deps.gson
 
     if (IS_REMOTE.toBoolean()) {
         api deps.quickbind.bind

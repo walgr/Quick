@@ -35,53 +35,26 @@ android {
 
 dependencies {
     implementation 'com.android.support:multidex:2.0.1'
-    //ktx核心
-    implementation deps.androidx.corektx
-    //activity-ktx
-    implementation deps.androidx.activityktx
-    implementation deps.androidx.appcompat
-
     //lifecycle-ktx
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
     //lifecycle-ktx
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
-
-    //ViewModel-ktx
-    implementation deps.androidx.lifecycleviewmodelktx
-
     //statusBar
     implementation 'com.geyifeng.immersionbar:immersionbar:3.2.2'
     // kotlin扩展（可选）
     implementation 'com.geyifeng.immersionbar:immersionbar-ktx:3.2.2'
-
-    //列表
-    implementation deps.androidx.recyclerview
-//    implementation 'jp.wasabeef:recyclerview-animators:4.0.2'
-
     //分页
     implementation 'androidx.paging:paging-runtime:3.1.1'
     implementation 'androidx.paging:paging-rxjava3:3.1.1'
-
     //viewpager2
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
-
     //Navigation
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.2'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.2'
-
-    //retrofit2-okhttp-gson
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
-    implementation 'com.google.code.gson:gson:2.10'
-
     //Sp存储
     implementation 'androidx.preference:preference-ktx:1.2.0'
     implementation 'androidx.datastore:datastore:1.0.0'
     implementation 'androidx.datastore:datastore-rxjava3:1.0.0'
-
-    //约束布局
-    implementation deps.androidx.constraintlayout
-
     //SmartRefreshLayout
     implementation 'io.github.scwang90:refresh-layout-kernel:2.0.5'      //核心必须依赖
     implementation 'io.github.scwang90:refresh-header-classics:2.0.5'    //经典刷新头
@@ -93,4 +66,22 @@ dependencies {
         implementation project(":Quick")
         implementation project(":R2Test")
     }
+    //ktx核心
+    implementation deps.androidx.corektx
+    //activity-ktx
+    implementation deps.androidx.activityktx
+    implementation deps.androidx.appcompat
+    //ViewModel-ktx
+    implementation deps.androidx.lifecycleviewmodelktx
+    //列表
+    implementation deps.androidx.recyclerview
+//    implementation 'jp.wasabeef:recyclerview-animators:4.0.2'
+    //retrofit2-okhttp-gson
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
+    implementation deps.gson
+
+    implementation deps.glide
+    //约束布局
+    implementation deps.androidx.constraintlayout
 }

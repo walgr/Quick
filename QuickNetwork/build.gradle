@@ -28,12 +28,12 @@ android {
 }
 
 dependencies {
-    implementation deps.androidx.annotations
+    compileOnly deps.androidx.annotations
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
     //retrofit2-okhttp-gson
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
-    implementation 'com.google.code.gson:gson:2.10'
+    compileOnly 'com.squareup.retrofit2:retrofit:2.9.0'
+    compileOnly 'com.squareup.okhttp3:okhttp:4.10.0'
+    compileOnly 'com.google.code.gson:gson:2.10'
 
     if (IS_REMOTE.toBoolean()) {
         api deps.quickbind.util

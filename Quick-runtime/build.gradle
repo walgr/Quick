@@ -25,7 +25,6 @@ android {
         checkReleaseBuilds false
     }
 
-    // TODO replace with https://issuetracker.google.com/issues/72050365 once released.
     libraryVariants.all {
         it.generateBuildConfigProvider.configure {
             it.setEnabled(true)
@@ -38,7 +37,7 @@ dependencies {
         api deps.quickbind.annotations
     else
         api project(":Quick-annotations")
-    implementation deps.androidx.activityktx
+    compileOnly deps.androidx.activityktx
 }
 
 apply from: rootProject.file('gradle-mvn-push-aar.gradle')

@@ -32,7 +32,7 @@ android {
 
 dependencies {
     //列表
-    implementation deps.androidx.recyclerview
+    compileOnly deps.androidx.recyclerview
 
     if (IS_REMOTE.toBoolean()) {
         api deps.quickbind.util
