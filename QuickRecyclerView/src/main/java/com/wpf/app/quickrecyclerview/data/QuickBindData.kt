@@ -14,7 +14,7 @@ import com.wpf.app.quickbind.interfaces.Bind
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-open class QuickBindData(
+open class QuickBindData @JvmOverloads constructor(
     @LayoutRes open val layoutId: Int = 0,
     @Transient open val layoutView: View? = null,
     override val isSuspension: Boolean = false,         //View是否悬浮置顶
