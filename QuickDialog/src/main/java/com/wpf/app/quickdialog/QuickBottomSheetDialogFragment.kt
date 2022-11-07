@@ -45,7 +45,7 @@ open class QuickBottomSheetDialogFragment @JvmOverloads constructor(
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         this.mContext = getRealActivity()
         val dialog = BottomSheetDialog(
-            context, if (initDialogStyle() == DialogSize.NO_SET) this.theme else initDialogStyle()
+            getViewContext(), if (initDialogStyle() == DialogSize.NO_SET) this.theme else initDialogStyle()
         )
         if (initDialogAnim() != DialogSize.NO_SET) {
             getWindow()?.setWindowAnimations(initDialogAnim())
@@ -100,10 +100,6 @@ open class QuickBottomSheetDialogFragment @JvmOverloads constructor(
     protected var mNewWidth = DialogSize.NO_SET
     protected var mNewHeight = DialogSize.NO_SET
 
-    override fun getContext(): Context {
-        return mContext!!
-    }
-
     /**
      * 重新设置高度
      */
@@ -151,5 +147,9 @@ open class QuickBottomSheetDialogFragment @JvmOverloads constructor(
     override fun dismissAllowingStateLoss() {
         super.dismissAllowingStateLoss()
         onDialogClose()
+    }
+
+    override fun getViewContext(): Context {
+        return context!!
     }
 }

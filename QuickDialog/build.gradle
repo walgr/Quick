@@ -29,6 +29,7 @@ android {
 
 dependencies {
     compileOnly deps.androidx.material
+    compileOnly deps.androidx.activityktx
 
     if (IS_REMOTE.toBoolean()) {
         api deps.quickbind.util

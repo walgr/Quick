@@ -14,20 +14,20 @@ import androidx.appcompat.app.AppCompatActivity
  */
 interface QuickContext {
 
-    fun getContext(): Context
+    fun getViewContext(): Context
     fun getRealContext(): Context? {
-        return this.getRealActivity()?: getContext()
+        return this.getRealActivity()?: getViewContext()
     }
 
     fun getRealActivity(): Activity? {
-        if (getContext() is Activity) {
-            return getContext() as Activity
-        } else if (getContext() is ContextThemeWrapper) {
-            if ((getContext() as ContextThemeWrapper).baseContext is Activity) {
-                return (getContext() as ContextThemeWrapper).baseContext as Activity
-            } else if ((getContext() as ContextThemeWrapper).baseContext is ContextThemeWrapper) {
-                if (((getContext() as ContextThemeWrapper).baseContext as ContextThemeWrapper).baseContext is Activity) {
-                    return ((getContext() as ContextThemeWrapper).baseContext as ContextThemeWrapper).baseContext as Activity
+        if (getViewContext() is Activity) {
+            return getViewContext() as Activity
+        } else if (getViewContext() is ContextThemeWrapper) {
+            if ((getViewContext() as ContextThemeWrapper).baseContext is Activity) {
+                return (getViewContext() as ContextThemeWrapper).baseContext as Activity
+            } else if ((getViewContext() as ContextThemeWrapper).baseContext is ContextThemeWrapper) {
+                if (((getViewContext() as ContextThemeWrapper).baseContext as ContextThemeWrapper).baseContext is Activity) {
+                    return ((getViewContext() as ContextThemeWrapper).baseContext as ContextThemeWrapper).baseContext as Activity
                 }
             }
         }
@@ -35,14 +35,14 @@ interface QuickContext {
     }
 
     fun getAppCompatActivity() : AppCompatActivity? {
-        if (getContext() is AppCompatActivity) {
-            return getContext() as AppCompatActivity
-        } else if (getContext() is ContextThemeWrapper) {
-            if ((getContext() as ContextThemeWrapper).baseContext is AppCompatActivity) {
-                return (getContext() as ContextThemeWrapper).baseContext as AppCompatActivity
-            } else if ((getContext() as ContextThemeWrapper).baseContext is ContextThemeWrapper) {
-                if (((getContext() as ContextThemeWrapper).baseContext as ContextThemeWrapper).baseContext is AppCompatActivity) {
-                    return ((getContext() as ContextThemeWrapper).baseContext as ContextThemeWrapper).baseContext as AppCompatActivity
+        if (getViewContext() is AppCompatActivity) {
+            return getViewContext() as AppCompatActivity
+        } else if (getViewContext() is ContextThemeWrapper) {
+            if ((getViewContext() as ContextThemeWrapper).baseContext is AppCompatActivity) {
+                return (getViewContext() as ContextThemeWrapper).baseContext as AppCompatActivity
+            } else if ((getViewContext() as ContextThemeWrapper).baseContext is ContextThemeWrapper) {
+                if (((getViewContext() as ContextThemeWrapper).baseContext as ContextThemeWrapper).baseContext is AppCompatActivity) {
+                    return ((getViewContext() as ContextThemeWrapper).baseContext as ContextThemeWrapper).baseContext as AppCompatActivity
                 }
             }
         }

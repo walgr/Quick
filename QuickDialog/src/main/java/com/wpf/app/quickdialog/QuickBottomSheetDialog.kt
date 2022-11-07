@@ -65,7 +65,7 @@ abstract class QuickBottomSheetDialog : BottomSheetDialog,
         mView = if (layoutView != null) {
             layoutView
         } else {
-            View.inflate(context, layoutId, null)
+            View.inflate(getViewContext(), layoutId, null)
         }
         setContentView(mView!!)
         val window = window
@@ -138,5 +138,9 @@ abstract class QuickBottomSheetDialog : BottomSheetDialog,
     override fun dismiss() {
         super.dismiss()
         onDialogClose()
+    }
+
+    override fun getViewContext(): Context {
+        return context
     }
 }
