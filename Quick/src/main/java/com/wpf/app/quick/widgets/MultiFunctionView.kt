@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.DrawableRes
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.graphics.drawable.toDrawable
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
@@ -256,8 +255,8 @@ class MultiFunctionView @JvmOverloads constructor(
         checkBox.setBackgroundResource(res)
     }
 
-    fun setCheckBoxBackgroundColor(color: Color) {
-        checkBox.background = color.toDrawable()
+    fun setCheckBoxBackgroundColor(color: Int) {
+        checkBox.setBackgroundColor(color)
     }
 
     fun setCheckBoxChecked(checked: Boolean) {

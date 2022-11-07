@@ -148,7 +148,7 @@ abstract class QuickDialogFragment @JvmOverloads constructor(
         return super.getView()
     }
 
-    override fun getContext(): Context {
-        return super.requireContext()
+    override fun getViewContext(): Context {
+        return context!!
     }
 }

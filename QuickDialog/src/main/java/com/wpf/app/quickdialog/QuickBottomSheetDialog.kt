@@ -139,4 +139,8 @@ abstract class QuickBottomSheetDialog : BottomSheetDialog,
         super.dismiss()
         onDialogClose()
     }
+
+    override fun getViewContext(): Context {
+        return context
+    }
 }

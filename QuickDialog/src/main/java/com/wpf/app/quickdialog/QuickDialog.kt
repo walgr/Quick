@@ -129,4 +129,8 @@ abstract class QuickDialog : Dialog, DialogSize, DialogLifecycle {
         super.dismiss()
         onDialogClose()
     }
+
+    override fun getViewContext(): Context {
+        return context
+    }
 }

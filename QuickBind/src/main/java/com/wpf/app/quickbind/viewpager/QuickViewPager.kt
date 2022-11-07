@@ -25,8 +25,7 @@ open class QuickViewPager(
 
     open fun notifyPagerSize(size: Int) {
         this.pageSizeI = size
-        val fragmentsAdapter = adapter ?: return
-        fragmentsAdapter.notifyDataSetChanged()
+        adapter?.notifyDataSetChanged()
     }
 
     override fun setCurrentItem(item: Int) {

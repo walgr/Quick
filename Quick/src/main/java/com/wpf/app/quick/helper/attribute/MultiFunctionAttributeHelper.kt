@@ -27,7 +27,7 @@ class MultiFunctionAttributeHelper(
     //CheckBox背景
     @DrawableRes
     var checkboxBackground: Int? = null
-    var checkboxBackgroundColor: Color? = null
+    var checkboxBackgroundColor: Int? = null
 
     //CheckBox左右边距
     var checkboxLeftMarge: Int? = 0

@@ -6,11 +6,8 @@ import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.core.view.get
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.OnItemTouchListener
-import com.wpf.app.quickutil.LogUtil
 
 abstract class ClickItemDecoration : RecyclerView.ItemDecoration() {
 
@@ -78,7 +75,7 @@ abstract class ClickItemDecoration : RecyclerView.ItemDecoration() {
     private fun onTouchEvent(view: View, e: MotionEvent): Boolean {
         if (view is ViewGroup) {
             for (i in 0 until view.childCount) {
-                return onTouchEvent(view[i], e)
+                return onTouchEvent(view.getChildAt(i), e)
             }
         } else {
             if (view.isClickable && e.x > view.left && e.x < view.right && e.y > view.top && e.y < view.bottom) {
