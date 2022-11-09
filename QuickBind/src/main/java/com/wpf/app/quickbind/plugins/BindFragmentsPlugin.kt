@@ -17,7 +17,7 @@ import kotlin.reflect.KClass
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-class BindFragmentsPlugin : BasePlugin {
+class BindFragmentsPlugin : BindBasePlugin {
 
     override fun dealField(
         obj: Any,

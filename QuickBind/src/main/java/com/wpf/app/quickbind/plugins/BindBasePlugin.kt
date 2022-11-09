@@ -1,0 +1,44 @@
+package com.wpf.app.quickbind.plugins
+
+import androidx.annotation.NonNull
+import androidx.annotation.Nullable
+import androidx.lifecycle.ViewModel
+import com.wpf.app.quick.runtime.Databinder
+import com.wpf.app.quickbind.QuickBind
+import com.wpf.app.quickutil.bind.plugins.BasePlugin
+import java.lang.reflect.Field
+
+/**
+ * Created by 王朋飞 on 2022/7/12.
+ *
+ */
+interface BindBasePlugin: BasePlugin {
+
+    fun getSaveId(
+        @NonNull obj: Any,
+        @Nullable viewModel: ViewModel?,
+        @NonNull field: Field,
+        id: Int
+    ): Int {
+        val dataBinder: Databinder =
+            QuickBind.BINDEDMAP[getRealObj(obj, viewModel).javaClass] ?: return id
+        val value: Any? = dataBinder.getFieldValue(field.name + "BindViewId")
+        return if (value is Int) {
+            value
+        } else id
+    }
+
+    @Nullable
+    fun getSaveIdList(
+        @NonNull obj: Any,
+        @Nullable viewModel: ViewModel?,
+        @NonNull field: Field
+    ): ArrayList<Int>? {
+        val dataBinder: Databinder =
+            QuickBind.BINDEDMAP[getRealObj(obj, viewModel).javaClass] ?: return null
+        val value: Any? = dataBinder.getFieldValue(field.name)
+        return if (value is ArrayList<*>) {
+            value as ArrayList<Int>
+        } else null
+    }
+}

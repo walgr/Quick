@@ -1,7 +1,7 @@
 package com.wpf.app.quickbind.helper.binddatahelper
 
 import android.view.View
-import com.wpf.app.quickbind.annotations.BindD2VHHelper
+import com.wpf.app.quickbind.annotations.BindD2VHelper
 
 /**
  * Created by 王朋飞 on 2022/7/20.
@@ -9,7 +9,7 @@ import com.wpf.app.quickbind.annotations.BindD2VHHelper
  */
 object BindData2ViewHelper {
 
-    fun <Data: Any, V : View, Helper : BindD2VHHelper<V, Data>> bind(
+    fun <Data: Any, V : View, Helper : BindD2VHelper<V, Data>> bind(
         view: V,
         data: Data,
         helper: Helper

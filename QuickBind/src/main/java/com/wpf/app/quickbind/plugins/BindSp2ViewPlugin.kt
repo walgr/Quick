@@ -14,7 +14,7 @@ import java.lang.reflect.Field
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-class BindSp2ViewPlugin : BasePlugin {
+class BindSp2ViewPlugin : BindBasePlugin {
 
     override fun dealField(
         obj: Any,

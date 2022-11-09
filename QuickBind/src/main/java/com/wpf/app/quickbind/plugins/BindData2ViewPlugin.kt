@@ -1,15 +1,11 @@
 package com.wpf.app.quickbind.plugins
 
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
-import com.wpf.app.quick.annotations.BindD2VHelper
+import com.wpf.app.quick.annotations.BindD2VHHelper
 import com.wpf.app.quick.annotations.BindData2View
 import com.wpf.app.quick.annotations.internal.Constants
-import com.wpf.app.quickbind.annotations.BindD2VHHelper
-import com.wpf.app.quickbind.interfaces.RunOnContext
-import com.wpf.app.quickbind.interfaces.RunOnHolder
 import com.wpf.app.quickbind.interfaces.RunOnHolderWithSelf
 import com.wpf.app.quickbind.utils.ReflectHelper
 import java.lang.reflect.Field
@@ -18,7 +14,7 @@ import java.lang.reflect.Field
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-class BindData2ViewPlugin : BasePlugin {
+class BindData2ViewPlugin : BindBasePlugin {
 
     override fun dealField(
         obj: Any,
@@ -29,7 +25,7 @@ class BindData2ViewPlugin : BasePlugin {
             val bindData2View = field.getAnnotation(BindData2View::class.java)
                 ?: return
             val bindId: Int = bindData2View.id
-            val helper = bindData2View.helper.java as Class<BindD2VHelper<RecyclerView.ViewHolder, View, Any>>
+            val helper = bindData2View.helper.java as Class<BindD2VHHelper<RecyclerView.ViewHolder, View, Any>>
             var viewParent: Any? = obj
             var findView: View? = getRootView(obj)
             if (parentClassIs(obj.javaClass, "QuickBindData")) {
@@ -46,13 +42,10 @@ class BindData2ViewPlugin : BasePlugin {
             field.isAccessible = true
             val value = field[getRealObj(obj, viewModel)]
             if (findView == null || value == null) return
-//            Log.e("onBindViewHolder","-----" + obj)
-            var bindBaseHelper: BindD2VHelper<RecyclerView.ViewHolder, View, Any>?
+            var bindBaseHelper: BindD2VHHelper<RecyclerView.ViewHolder, View, Any>?
             try {
-                helper.fields.find {
-                    it.name == "INSTANCE"
-                }.let {
-                    bindBaseHelper = it?.get(getRealObj(obj, viewModel)) as? BindD2VHelper<RecyclerView.ViewHolder, View, Any>
+                helper.getField("INSTANCE").let {
+                    bindBaseHelper = it.get(getRealObj(obj, viewModel)) as? BindD2VHHelper<RecyclerView.ViewHolder, View, Any>
                 }
             } catch (ignore: Exception) {
                 bindBaseHelper = helper.newInstance()
@@ -73,7 +66,7 @@ class BindData2ViewPlugin : BasePlugin {
         return
     }
 
-    fun parentClassIs(cur: Class<*>, parentName: String): Boolean {
+    private fun parentClassIs(cur: Class<*>, parentName: String): Boolean {
         var cur = cur
         while (parentName != cur.simpleName) {
             cur = cur.superclass

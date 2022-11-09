@@ -8,7 +8,7 @@ import java.lang.reflect.Field
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-class BindViewPlugin : BasePlugin {
+class BindViewPlugin : BindBasePlugin {
 
     override fun dealField(
         obj: Any,

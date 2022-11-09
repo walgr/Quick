@@ -4,7 +4,6 @@ import android.view.ViewGroup
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.demo.databinding.HolderMessageMyBinding
 import com.wpf.app.quick.demo.model.MyMessage
-import com.wpf.app.quickrecyclerview.QuickAdapter
 import com.wpf.app.quickrecyclerview.holder.QuickViewBindingHolder
 
 /**

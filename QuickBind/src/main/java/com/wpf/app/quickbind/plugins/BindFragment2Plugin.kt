@@ -6,15 +6,15 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import androidx.viewpager2.widget.ViewPager2
 import com.wpf.app.quickbind.annotations.BindFragment2
-import com.wpf.app.quickbind.interfaces.Bind
 import com.wpf.app.quickbind.interfaces.BindBaseFragment
 import com.wpf.app.quickbind.interfaces.BindViewModel
 import com.wpf.app.quickbind.utils.getViewContext
 import com.wpf.app.quickbind.viewpager2.ViewPagerSize2
 import com.wpf.app.quickbind.viewpager2.adapter.FragmentStateAdapter
+import com.wpf.app.quickutil.bind.Bind
 import java.lang.reflect.Field
 
-class BindFragment2Plugin : BasePlugin {
+class BindFragment2Plugin : BindBasePlugin {
 
     override fun dealField(obj: Any, viewModel: ViewModel?, field: Field) {
         try {

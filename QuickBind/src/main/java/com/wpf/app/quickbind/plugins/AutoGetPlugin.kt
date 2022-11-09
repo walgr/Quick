@@ -13,7 +13,7 @@ import java.lang.reflect.ParameterizedType
  * Created by 王朋飞 on 2022/7/12.
  *
  */
-class AutoGetPlugin : BasePlugin {
+class AutoGetPlugin : BindBasePlugin {
 
     override fun dealField(obj: Any, viewModel: ViewModel?, field: Field) {
         var objTemp = obj

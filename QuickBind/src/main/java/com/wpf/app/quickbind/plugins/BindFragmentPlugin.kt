@@ -10,18 +10,18 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.lifecycle.ViewModel
 import androidx.viewpager.widget.ViewPager
 import com.wpf.app.quickbind.annotations.BindFragment
-import com.wpf.app.quickbind.interfaces.Bind
 import com.wpf.app.quickbind.interfaces.BindBaseFragment
 import com.wpf.app.quickbind.interfaces.BindViewModel
 import com.wpf.app.quickbind.utils.getViewContext
 import com.wpf.app.quickbind.viewpager.ViewPagerSize
+import com.wpf.app.quickutil.bind.Bind
 import java.lang.reflect.Field
 
 /**
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-class BindFragmentPlugin : BasePlugin {
+class BindFragmentPlugin : BindBasePlugin {
 
     override fun dealField(
         obj: Any,

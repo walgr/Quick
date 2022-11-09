@@ -2,13 +2,12 @@ package com.wpf.app.quick.widgets.quickview
 
 import android.content.Context
 import android.util.AttributeSet
-import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import com.wpf.app.quickbind.QuickBind
 import com.wpf.app.quickbind.QuickBind.dealInPlugins
-import com.wpf.app.quickbind.interfaces.Bind
+import com.wpf.app.quickutil.bind.Bind
 
 /**
  * Created by 王朋飞 on 2022/7/13.

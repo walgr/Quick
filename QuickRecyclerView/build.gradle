@@ -37,9 +37,11 @@ dependencies {
     if (IS_REMOTE.toBoolean()) {
         api deps.quickbind.util
         api deps.quickbind.bind
+        api deps.quickbind.network
     } else {
         api project(":QuickUtil")
         api project(":QuickBind")
+        api project(":QuickNetwork")
     }
 }
 
