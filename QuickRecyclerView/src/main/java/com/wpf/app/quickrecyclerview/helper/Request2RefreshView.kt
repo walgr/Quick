@@ -7,19 +7,19 @@ import com.wpf.app.quickrecyclerview.QuickRefreshRecyclerView
 import com.wpf.app.quickrecyclerview.data.QuickItemData
 import com.wpf.app.quickrecyclerview.data.RequestData
 import com.wpf.app.quickrecyclerview.listeners.RefreshView
-import com.wpf.app.quickrecyclerview.listeners.RequestAndCallbackWithView
+import com.wpf.app.quickrecyclerview.listeners.RequestDataAndCallbackWithView
 import com.wpf.app.quickutil.Callback
 import java.lang.reflect.ParameterizedType
 
 object Request2RefreshView :
-    BindD2VHelper<View, RequestAndCallbackWithView<out RequestData, out QuickItemData, out RefreshView>> {
+    BindD2VHelper<View, RequestDataAndCallbackWithView<out RequestData, out QuickItemData, out RefreshView>> {
 
     override fun initView(
         view: View,
-        data: RequestAndCallbackWithView<out RequestData, out QuickItemData, out RefreshView>
+        data: RequestDataAndCallbackWithView<out RequestData, out QuickItemData, out RefreshView>
     ) {
         if (view is QuickRefreshRecyclerView) {
-            view.setDataChangeListener(data as RequestAndCallbackWithView<RequestData, QuickItemData, QuickRefreshRecyclerView>)
+            view.setDataChangeListener(data as RequestDataAndCallbackWithView<RequestData, QuickItemData, QuickRefreshRecyclerView>)
         } else if (view is RefreshView && view.getAdapter() is QuickAdapter) {
             val quickAdapter = view.getAdapter() as QuickAdapter
             val requestData: RequestData = try {
@@ -27,7 +27,7 @@ object Request2RefreshView :
             } catch (ignore: Exception) {
                 RequestData()
             }
-            val realData = data as RequestAndCallbackWithView<RequestData, QuickItemData, RefreshView>
+            val realData = data as RequestDataAndCallbackWithView<RequestData, QuickItemData, RefreshView>
             view.refreshView = object : RefreshView {
                 override var refreshView: RefreshView? = this
 

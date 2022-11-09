@@ -1,5 +1,6 @@
 package com.wpf.app.quickrecyclerview.listeners
 
+import android.view.View
 import com.wpf.app.quickrecyclerview.data.QuickItemData
 import com.wpf.app.quickrecyclerview.data.RequestData
 import com.wpf.app.quickutil.Callback
@@ -8,7 +9,49 @@ import com.wpf.app.quickutil.Callback
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-interface RequestAndCallback<Request : RequestData, Data : QuickItemData>: RequestAndCallbackWithView<Request, Data, Any> {
+interface RequestAndCallback<Data : QuickItemData>: RequestAndCallbackWithView<Data, View> {
+
+    /**
+     * 接口请求
+     */
+    fun requestAndCallback(callback: Callback<Data>)
+
+    override fun requestAndCallback(view: View, callback: Callback<Data>) {
+        requestAndCallback(callback)
+    }
+}
+
+interface RequestAndCallbackWithView<Data : QuickItemData, View>: RequestDataAndCallbackWithView<RequestData, Data, View> {
+
+    /**
+     * 接口请求
+     */
+    fun requestAndCallback(view: View, callback: Callback<Data>)
+
+    override fun requestAndCallback(view: View, requestData: RequestData, callback: Callback<Data>) {
+        requestAndCallback(view, callback)
+    }
+}
+
+fun <Data : QuickItemData, View> request2View(
+    callbackF: (callback: Callback<Data>) -> Unit
+) = object : RequestAndCallback<Data> {
+
+    override fun requestAndCallback(callback: Callback<Data>) {
+        callbackF.invoke(callback)
+    }
+}
+
+fun <Data : QuickItemData, View> request2ViewWithView(
+    callbackF: (view: View, callback: Callback<Data>) -> Unit
+) = object : RequestAndCallbackWithView<Data, View> {
+
+    override fun requestAndCallback(view: View, callback: Callback<Data>) {
+        callbackF.invoke(view, callback)
+    }
+}
+
+interface RequestDataAndCallback<Request : RequestData, Data : QuickItemData>: RequestDataAndCallbackWithView<Request, Data, Any> {
 
     /**
      * 接口请求
@@ -20,7 +63,7 @@ interface RequestAndCallback<Request : RequestData, Data : QuickItemData>: Reque
     }
 }
 
-interface RequestAndCallbackWithView<Request : RequestData, Data : QuickItemData, View> {
+interface RequestDataAndCallbackWithView<Request : RequestData, Data : QuickItemData, View> {
 
     /**
      * 接口请求
@@ -42,7 +85,7 @@ interface RequestAndCallbackWithView<Request : RequestData, Data : QuickItemData
 
 fun <Request : RequestData, Data : QuickItemData> requestData2List(
     callbackF: (requestData: Request, callback: Callback<Data>) -> Unit
-) = object : RequestAndCallback<Request, Data> {
+) = object : RequestDataAndCallback<Request, Data> {
 
     override fun requestAndCallback(requestData: Request, callback: Callback<Data>) {
         callbackF.invoke(requestData, callback)
@@ -51,7 +94,7 @@ fun <Request : RequestData, Data : QuickItemData> requestData2List(
 
 fun <Request : RequestData, Data : QuickItemData, View> requestData2ListWithView(
     callbackF: (view: View, requestData: Request, callback: Callback<Data>) -> Unit
-) = object : RequestAndCallbackWithView<Request, Data, View> {
+) = object : RequestDataAndCallbackWithView<Request, Data, View> {
 
     override fun requestAndCallback(view: View, requestData: Request, callback: Callback<Data>) {
         callbackF.invoke(view, requestData, callback)
@@ -60,7 +103,7 @@ fun <Request : RequestData, Data : QuickItemData, View> requestData2ListWithView
 
 fun <Data : QuickItemData> request2List(
     callbackF: (requestData: RequestData, callback: Callback<Data>) -> Unit
-) = object : RequestAndCallback<RequestData, Data> {
+) = object : RequestDataAndCallback<RequestData, Data> {
 
     override fun requestAndCallback(requestData: RequestData, callback: Callback<Data>) {
         callbackF.invoke(requestData, callback)
@@ -69,7 +112,7 @@ fun <Data : QuickItemData> request2List(
 
 fun <Data : QuickItemData, View> request2ListWithView(
     callbackF: (view: View, requestData: RequestData, callback: Callback<Data>) -> Unit
-) = object : RequestAndCallbackWithView<RequestData, Data, View> {
+) = object : RequestDataAndCallbackWithView<RequestData, Data, View> {
 
     override fun requestAndCallback(view: View, requestData: RequestData, callback: Callback<Data>) {
         callbackF.invoke(view, requestData, callback)
