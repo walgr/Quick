@@ -8,6 +8,8 @@
 
     PS：R2部分逻辑参照butterknife项目
 
+    项目目前处于初期建设阶段，文档粗略，功能可参照app里的demo。
+
 ### 项目功能
 
 1.基础Activity、ViewModelActivity、ViewBindingActivity、Fragment
