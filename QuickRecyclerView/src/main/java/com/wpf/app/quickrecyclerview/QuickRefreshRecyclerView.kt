@@ -5,8 +5,8 @@ import android.util.AttributeSet
 import com.wpf.app.quickrecyclerview.data.QuickItemData
 import com.wpf.app.quickrecyclerview.data.RequestData
 import com.wpf.app.quickrecyclerview.listeners.RefreshView
-import com.wpf.app.quickrecyclerview.listeners.RequestDataAndCallbackWithView
-import com.wpf.app.quickutil.Callback
+import com.wpf.app.quickrecyclerview.listeners.Request2ListWithView
+import com.wpf.app.quickutil.CallbackList
 
 /**
  * Created by 王朋飞 on 2022/7/13.
@@ -26,17 +26,17 @@ open class QuickRefreshRecyclerView @JvmOverloads constructor(
     @JvmField
     var mRequestData = RequestData(0)
 
-    private var mDataChangeListener: RequestDataAndCallbackWithView<out RequestData, out QuickItemData, QuickRefreshRecyclerView>? =
+    private var mDataChangeListener: Request2ListWithView<out RequestData, out QuickItemData, QuickRefreshRecyclerView>? =
         null
 
-    fun <Request : RequestData, Data : QuickItemData> setDataChangeListener(dataChangeListener: RequestDataAndCallbackWithView<Request, Data, QuickRefreshRecyclerView>) {
+    fun <Request : RequestData, Data : QuickItemData> setDataChangeListener(dataChangeListener: Request2ListWithView<Request, Data, QuickRefreshRecyclerView>) {
         mDataChangeListener = dataChangeListener
     }
 
     override fun onRefresh() {
         mRequestData.refresh()
-        (mDataChangeListener as? RequestDataAndCallbackWithView<RequestData, QuickItemData, QuickRefreshRecyclerView>)
-            ?.requestAndCallback(this, mRequestData, object : Callback<QuickItemData> {
+        (mDataChangeListener as? Request2ListWithView<RequestData, QuickItemData, QuickRefreshRecyclerView>)
+            ?.requestAndCallback(this, mRequestData, object : CallbackList<QuickItemData> {
                 override fun callback(data: List<QuickItemData>?) {
                     setNewData(data)
                     mRequestData.loadDataSize(data?.size ?: 0)
@@ -49,8 +49,8 @@ open class QuickRefreshRecyclerView @JvmOverloads constructor(
 
     override fun onLoadMore() {
         mRequestData.loadMore()
-        (mDataChangeListener as? RequestDataAndCallbackWithView<RequestData, QuickItemData, QuickRefreshRecyclerView>)
-            ?.requestAndCallback(this, mRequestData, object : Callback<QuickItemData> {
+        (mDataChangeListener as? Request2ListWithView<RequestData, QuickItemData, QuickRefreshRecyclerView>)
+            ?.requestAndCallback(this, mRequestData, object : CallbackList<QuickItemData> {
                 override fun callback(data: List<QuickItemData>?) {
                     appendList(data)
                     mRequestData.loadDataSize(data?.size ?: 0)
