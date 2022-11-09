@@ -10,14 +10,14 @@ import com.wpf.app.quickrecyclerview.data.QuickViewDataBinding
 import com.wpf.app.quickrecyclerview.holder.BindBindingHolder
 import com.wpf.app.quickrecyclerview.holder.QuickViewBindingHolder
 import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
-import com.wpf.app.quickrecyclerview.listeners.DataChangeAdapter
+import com.wpf.app.quickrecyclerview.listeners.DataAdapter
 import com.wpf.app.quickrecyclerview.listeners.QuickAdapterListener
 
 /**
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-open class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>(), DataChangeAdapter {
+open class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>(), DataAdapter {
 
     var mDataList: MutableList<QuickItemData>? = null
 
@@ -91,7 +91,7 @@ open class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>()
         this.mQuickAdapterListener = listener as QuickAdapterListener<QuickItemData>
     }
 
-    override fun getAdapter(): QuickAdapter {
+    override fun getQuickAdapter(): QuickAdapter {
         return this
     }
 

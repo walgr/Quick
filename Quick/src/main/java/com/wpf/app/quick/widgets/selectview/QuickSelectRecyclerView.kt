@@ -26,12 +26,12 @@ open class QuickSelectRecyclerView @JvmOverloads constructor(
         adapter = mQuickAdapter
     }
 
-    override fun getAdapter() : QuickAdapter {
+    override fun getQuickAdapter() : QuickAdapter {
         return mQuickAdapter
     }
 
     override fun getSelectAdapter(): QuickSelectAdapter {
-        return adapter as QuickSelectAdapter
+        return mQuickAdapter as QuickSelectAdapter
     }
 
     override fun setOnSelectChangeListener(onSelectChange: OnSelectOnChange) {

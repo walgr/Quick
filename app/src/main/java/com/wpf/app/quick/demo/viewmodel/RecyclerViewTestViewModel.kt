@@ -20,6 +20,6 @@ class RecyclerViewTestViewModel : QuickBindingViewModel<ActivityRecyclerviewTest
 
     fun addMessage(view: View?) {
         getViewBinding()?.list?.addData(BindDataTestModel())
-        getViewBinding()?.list?.adapter?.notifyItemInserted(getViewBinding()?.list?.size() ?: 0)
+        getViewBinding()?.list?.getQuickAdapter()?.notifyItemInserted(getViewBinding()?.list?.size() ?: 0)
     }
 }

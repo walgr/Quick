@@ -2,7 +2,9 @@ package com.wpf.app.quickrecyclerview
 
 import android.content.Context
 import android.util.AttributeSet
+import android.widget.Adapter
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.wpf.app.quickrecyclerview.data.QuickItemData
 import com.wpf.app.quickrecyclerview.data.RequestData
 import com.wpf.app.quickrecyclerview.listeners.RefreshView
@@ -20,6 +22,10 @@ open class QuickRefreshRecyclerView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : QuickRecyclerView(mContext, attrs, defStyleAttr), RefreshView {
     override var refreshView: RefreshView? = null
+
+    override fun getAdapter(): Adapter<*> {
+        return getQuickAdapter()
+    }
 
     @JvmField
     var mRequestData = RequestData(0)

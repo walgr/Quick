@@ -1,7 +1,6 @@
 package com.wpf.app.quickrecyclerview.helper
 
 import android.view.View
-import androidx.recyclerview.widget.RecyclerView
 import com.wpf.app.quickbind.annotations.BindD2VHelper
 import com.wpf.app.quickrecyclerview.QuickAdapter
 import com.wpf.app.quickrecyclerview.QuickRefreshRecyclerView
@@ -21,8 +20,8 @@ object Request2RefreshView :
     ) {
         if (view is QuickRefreshRecyclerView) {
             view.setDataChangeListener(data as RequestAndCallbackWithView<RequestData, QuickItemData, QuickRefreshRecyclerView>)
-        } else if (view is RecyclerView && view is RefreshView && view.adapter is QuickAdapter) {
-            val quickAdapter = view.adapter as QuickAdapter
+        } else if (view is RefreshView && view.getAdapter() is QuickAdapter) {
+            val quickAdapter = view.getAdapter() as QuickAdapter
             val requestData: RequestData = try {
                 ((data.javaClass.genericInterfaces[0] as ParameterizedType).actualTypeArguments[0] as Class<*>).newInstance() as RequestData
             } catch (ignore: Exception) {

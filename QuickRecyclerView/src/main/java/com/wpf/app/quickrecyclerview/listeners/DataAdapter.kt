@@ -7,23 +7,23 @@ import com.wpf.app.quickrecyclerview.data.QuickItemData
  * Created by 王朋飞 on 2022/7/18.
  *
  */
-interface DataChangeAdapter {
+interface DataAdapter {
 
-    fun getAdapter(): QuickAdapter
+    fun getQuickAdapter(): QuickAdapter
 
     fun size(): Int {
-        return getAdapter().itemCount
+        return getQuickAdapter().itemCount
     }
 
     fun setNewData(mDataList: List<QuickItemData>?) {
         cleanAll()
         appendList(mDataList)
-        getAdapter().notifyDataSetChanged()
+        getQuickAdapter().notifyDataSetChanged()
     }
 
     fun cleanAll() {
         getData()?.clear()
-        getAdapter().notifyDataSetChanged()
+        getQuickAdapter().notifyDataSetChanged()
     }
 
     fun appendList(mDataList: List<QuickItemData>?) {
@@ -61,7 +61,7 @@ interface DataChangeAdapter {
     fun notifyItemChanged(curData: QuickItemData?) {
         val pos = getDataPos(curData)
         if (pos != -1) {
-            getAdapter().notifyItemChanged(pos)
+            getQuickAdapter().notifyItemChanged(pos)
         }
     }
 
@@ -70,10 +70,10 @@ interface DataChangeAdapter {
     }
 
     fun getData(): MutableList<QuickItemData>? {
-        return getAdapter().mDataList
+        return getQuickAdapter().mDataList
     }
 
     fun setData(newData: MutableList<QuickItemData>) {
-        getAdapter().mDataList = newData
+        getQuickAdapter().mDataList = newData
     }
 }
