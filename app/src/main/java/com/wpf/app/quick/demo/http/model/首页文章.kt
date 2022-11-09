@@ -8,9 +8,7 @@ import com.wpf.app.quickbind.helper.binddatahelper.Text2TextView
 import com.wpf.app.quickbind.interfaces.runOnContextWithSelf
 import com.wpf.app.quickrecyclerview.data.QuickBindData
 
-class 首页文章 : QuickRequestData(
-    R.layout.activity_request_test
-) {
+class 首页文章 : QuickRequestData() {
     val curPage: Int? = null
     val datas: List<文章>? = null
 

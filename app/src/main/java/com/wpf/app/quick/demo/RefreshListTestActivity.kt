@@ -38,7 +38,6 @@ class RefreshListTestActivity : QuickActivity(R.layout.activity_refresh_list, ti
         }
     }
 
-
     override fun initView() {
         mSmartRefreshLayout?.setOnRefreshListener { mRecyclerView?.onRefresh() }
         mSmartRefreshLayout?.setOnLoadMoreListener { mRecyclerView?.onLoadMore() }

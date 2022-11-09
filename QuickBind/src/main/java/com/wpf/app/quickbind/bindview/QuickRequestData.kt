@@ -5,10 +5,7 @@ import androidx.annotation.LayoutRes
 import com.wpf.app.quickbind.QuickBind
 import com.wpf.app.quickutil.bind.Bind
 
-open class QuickRequestData @JvmOverloads constructor(
-    @LayoutRes open val layoutId: Int = 0,
-    @Transient open val layoutView: View? = null
-) : Bind {
+open class QuickRequestData : Bind {
 
     @Transient
     private var mView: View? = null
