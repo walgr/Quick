@@ -28,37 +28,43 @@ object Request2RefreshView :
                 RequestData()
             }
             val realData = data as Request2ListWithView<RequestData, QuickItemData, RefreshView>
+            realData.view = view
+            realData.requestData = requestData
+            val refreshCallback = object : CallbackList<QuickItemData> {
+                override fun callback(data: List<QuickItemData>?) {
+                    quickAdapter.mDataList?.clear()
+                    quickAdapter.appendList(data)
+                    requestData.loadDataSize(data?.size ?: 0)
+                    if (!realData.refreshFinish()) {
+                        quickAdapter.notifyDataSetChanged()
+                    }
+                }
+            }
+            realData.refreshCallback = refreshCallback
+            val loadMoreCallback = object : CallbackList<QuickItemData> {
+                override fun callback(data: List<QuickItemData>?) {
+                    quickAdapter.appendList(data)
+                    requestData.loadDataSize(data?.size ?: 0)
+                    if (!realData.loadMoreFinish()) {
+                        quickAdapter.notifyDataSetChanged()
+                    }
+                }
+            }
+            realData.loadMoreCallback = loadMoreCallback
             view.refreshView = object : RefreshView {
                 override var refreshView: RefreshView? = this
 
                 override fun onRefresh() {
                     super.onRefresh()
                     requestData.refresh()
-                    realData.requestAndCallback(view, requestData, object : CallbackList<QuickItemData> {
-                        override fun callback(data: List<QuickItemData>?) {
-                            quickAdapter.mDataList?.clear()
-                            quickAdapter.appendList(data)
-                            requestData.loadDataSize(data?.size ?: 0)
-                            if (!realData.refreshFinish()) {
-                                quickAdapter.notifyDataSetChanged()
-                            }
-                        }
-                    })
+                    realData.requestAndCallback(view, requestData, refreshCallback)
                     realData.refreshFinish()
                 }
 
                 override fun onLoadMore() {
                     super.onLoadMore()
                     requestData.loadMore()
-                    realData.requestAndCallback(view, requestData, object : CallbackList<QuickItemData> {
-                        override fun callback(data: List<QuickItemData>?) {
-                            quickAdapter.appendList(data)
-                            requestData.loadDataSize(data?.size ?: 0)
-                            if (!realData.loadMoreFinish()) {
-                                quickAdapter.notifyDataSetChanged()
-                            }
-                        }
-                    })
+                    realData.requestAndCallback(view, requestData, loadMoreCallback)
                     realData.loadMoreFinish()
                 }
             }

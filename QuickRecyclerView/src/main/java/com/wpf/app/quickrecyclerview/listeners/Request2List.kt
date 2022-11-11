@@ -1,5 +1,6 @@
 package com.wpf.app.quickrecyclerview.listeners
 
+import androidx.annotation.CallSuper
 import com.wpf.app.quickrecyclerview.data.QuickItemData
 import com.wpf.app.quickrecyclerview.data.RequestData
 import com.wpf.app.quickutil.CallbackList
@@ -9,43 +10,124 @@ import com.wpf.app.quickutil.CallbackList
  *
  */
 
-interface Request2List<Request : RequestData, Data : QuickItemData>: Request2ListWithView<Request, Data, Any> {
+interface Request2List<Request : RequestData, Data : QuickItemData> : Request2ListWithView<Request, Data, Any> {
 
     /**
      * 接口请求
      */
-    fun requestAndCallback(requestData: Request, callback: CallbackList<Data>)
+    @CallSuper
+    fun requestAndCallback(requestData: Request, callback: CallbackList<Data>) {
+        this.requestData = requestData
+        if (requestData.isRefresh) {
+            this.refreshCallback = callback
+        } else {
+            this.loadMoreCallback = callback
+        }
+    }
 
     override fun requestAndCallback(view: Any, requestData: Request, callback: CallbackList<Data>) {
+        super.requestAndCallback(view, requestData, callback)
         requestAndCallback(requestData, callback)
+    }
+
+    @CallSuper
+    fun manualRun(requestData: Request) {
+        if (requestData.isRefresh) {
+            refreshCallback?.let {
+                request2List?.requestAndCallback(view!!, requestData, it)
+            }
+        } else {
+            loadMoreCallback?.let {
+                request2List?.requestAndCallback(view!!, requestData, it)
+            }
+        }
     }
 }
 
 interface Request2ListWithView<Request : RequestData, Data : QuickItemData, View> {
 
+    var request2List: Request2ListWithView<Request, Data, View>?
+    var view: View?
+    var requestData: Request?
+    var refreshCallback: CallbackList<Data>?
+    var loadMoreCallback: CallbackList<Data>?
+
     /**
      * 接口请求
      */
-    fun requestAndCallback(view: View, requestData: Request, callback: CallbackList<Data>)
+    @CallSuper
+    fun requestAndCallback(view: View, requestData: Request, callback: CallbackList<Data>) {
+        this.view = view
+        this.requestData = requestData
+        if (requestData.isRefresh) {
+            this.refreshCallback = callback
+        } else {
+            this.loadMoreCallback = callback
+        }
+    }
 
     /**
      * 刷新结束
      * 返回true表示刷新结束后自己刷新adapter
      */
-    fun refreshFinish(): Boolean { return false }
+    fun refreshFinish(): Boolean {
+        return false
+    }
 
     /**
      * 加载结束
      * 返回true表示刷新结束后自己刷新adapter
      */
-    fun loadMoreFinish(): Boolean { return false }
+    fun loadMoreFinish(): Boolean {
+        return false
+    }
+
+    /**
+     * 按照最后的请求手动再次调用1次
+     */
+    @CallSuper
+    fun manualRun() {
+        if (view != null && requestData != null) {
+            if (requestData!!.isRefresh) {
+                refreshCallback?.let {
+                    request2List?.requestAndCallback(view!!, requestData!!, it)
+                }
+            } else {
+                loadMoreCallback?.let {
+                    request2List?.requestAndCallback(view!!, requestData!!, it)
+                }
+            }
+        }
+    }
+
+    /**
+     * 按照新的请求手动再次调用1次
+     */
+    @CallSuper
+    fun manualRun(view: View, requestData: Request) {
+        if (requestData.isRefresh) {
+            refreshCallback?.let {
+                request2List?.requestAndCallback(view, requestData, it)
+            }
+        } else {
+            loadMoreCallback?.let {
+                request2List?.requestAndCallback(view, requestData, it)
+            }
+        }
+    }
 }
 
 fun <Request : RequestData, Data : QuickItemData> requestData2List(
     callbackF: (requestData: Request, callback: CallbackList<Data>) -> Unit
 ) = object : Request2List<Request, Data> {
+    override var request2List: Request2ListWithView<Request, Data, Any>? = this
+    override var view: Any? = null
+    override var requestData: Request? = null
+    override var refreshCallback: CallbackList<Data>? = null
+    override var loadMoreCallback: CallbackList<Data>? = null
 
     override fun requestAndCallback(requestData: Request, callback: CallbackList<Data>) {
+        super.requestAndCallback(requestData, callback)
         callbackF.invoke(requestData, callback)
     }
 }
@@ -53,8 +135,14 @@ fun <Request : RequestData, Data : QuickItemData> requestData2List(
 fun <Request : RequestData, Data : QuickItemData, View> requestData2ListWithView(
     callbackF: (view: View, requestData: Request, callback: CallbackList<Data>) -> Unit
 ) = object : Request2ListWithView<Request, Data, View> {
+    override var request2List: Request2ListWithView<Request, Data, View>? = this
+    override var view: View? = null
+    override var requestData: Request? = null
+    override var refreshCallback: CallbackList<Data>? = null
+    override var loadMoreCallback: CallbackList<Data>? = null
 
     override fun requestAndCallback(view: View, requestData: Request, callback: CallbackList<Data>) {
+        super.requestAndCallback(view, requestData, callback)
         callbackF.invoke(view, requestData, callback)
     }
 }
@@ -62,8 +150,14 @@ fun <Request : RequestData, Data : QuickItemData, View> requestData2ListWithView
 fun <Data : QuickItemData> request2List(
     callbackF: (requestData: RequestData, callback: CallbackList<Data>) -> Unit
 ) = object : Request2List<RequestData, Data> {
+    override var request2List: Request2ListWithView<RequestData, Data, Any>? = this
+    override var view: Any? = null
+    override var requestData: RequestData? = null
+    override var refreshCallback: CallbackList<Data>? = null
+    override var loadMoreCallback: CallbackList<Data>? = null
 
     override fun requestAndCallback(requestData: RequestData, callback: CallbackList<Data>) {
+        super.requestAndCallback(requestData, callback)
         callbackF.invoke(requestData, callback)
     }
 }
@@ -71,8 +165,14 @@ fun <Data : QuickItemData> request2List(
 fun <Data : QuickItemData, View> request2ListWithView(
     callbackF: (view: View, requestData: RequestData, callback: CallbackList<Data>) -> Unit
 ) = object : Request2ListWithView<RequestData, Data, View> {
+    override var request2List: Request2ListWithView<RequestData, Data, View>? = this
+    override var view: View? = null
+    override var requestData: RequestData? = null
+    override var refreshCallback: CallbackList<Data>? = null
+    override var loadMoreCallback: CallbackList<Data>? = null
 
     override fun requestAndCallback(view: View, requestData: RequestData, callback: CallbackList<Data>) {
+        super.requestAndCallback(view, requestData, callback)
         callbackF.invoke(view, requestData, callback)
     }
 }
