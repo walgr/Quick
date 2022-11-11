@@ -9,6 +9,7 @@ import com.wpf.app.quick.demo.http.request
 import com.wpf.app.quickrecyclerview.QuickRefreshRecyclerView
 import com.wpf.app.quickrecyclerview.helper.Request2RefreshView
 import com.wpf.app.quickrecyclerview.listeners.request2List
+import com.wpf.app.quickutil.LogUtil
 
 /**
  * Created by 王朋飞 on 2022/7/8.
@@ -36,6 +37,12 @@ class RefreshListTestActivity : QuickActivity(R.layout.activity_refresh_list, ti
                 mSmartRefreshLayout?.finishLoadMore()
             }
         }
+    }.refreshFinishWithSelf {
+        LogUtil.e("下拉刷新请求结束")
+        false
+    }.loadMoreFinishWithSelf {
+        LogUtil.e("上拉加载请求结束")
+        false
     }
 
     override fun initView() {

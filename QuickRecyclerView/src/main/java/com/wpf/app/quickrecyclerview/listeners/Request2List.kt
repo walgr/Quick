@@ -38,6 +38,8 @@ interface Request2ListWithView<Request : RequestData, Data : QuickItemData, View
     var requestData: Request?
     var refreshCallback: CallbackList<Data>?
     var loadMoreCallback: CallbackList<Data>?
+    var refreshRun: (() -> Boolean)?
+    var loadMoreRun: (() -> Boolean)?
 
     /**
      * 接口请求
@@ -58,7 +60,20 @@ interface Request2ListWithView<Request : RequestData, Data : QuickItemData, View
      * 返回true表示刷新结束后自己刷新adapter
      */
     fun refreshFinish(): Boolean {
+        refreshRun?.let {
+            return refreshFinish(it)
+        }
         return false
+    }
+
+    fun refreshFinish(run: () -> Boolean): Boolean {
+        this.refreshRun = run
+        return run()
+    }
+
+    fun refreshFinishWithSelf(run: () -> Boolean): Request2ListWithView<Request, Data, View> {
+        refreshFinish(run)
+        return this
     }
 
     /**
@@ -66,7 +81,20 @@ interface Request2ListWithView<Request : RequestData, Data : QuickItemData, View
      * 返回true表示刷新结束后自己刷新adapter
      */
     fun loadMoreFinish(): Boolean {
+        loadMoreRun?.let {
+            return loadMoreFinish(it)
+        }
         return false
+    }
+
+    fun loadMoreFinish(run: () -> Boolean): Boolean {
+        this.loadMoreRun = run
+        return run()
+    }
+
+    fun loadMoreFinishWithSelf(run: () -> Boolean): Request2ListWithView<Request, Data, View> {
+        loadMoreFinish(run)
+        return this
     }
 
     /**
@@ -125,6 +153,8 @@ fun <Request : RequestData, Data : QuickItemData> requestData2List(
     override var requestData: Request? = null
     override var refreshCallback: CallbackList<Data>? = null
     override var loadMoreCallback: CallbackList<Data>? = null
+    override var refreshRun: (() -> Boolean)? = null
+    override var loadMoreRun: (() -> Boolean)? = null
 
     override fun requestAndCallback(requestData: Request, callback: CallbackList<Data>) {
         super.requestAndCallback(requestData, callback)
@@ -140,6 +170,8 @@ fun <Request : RequestData, Data : QuickItemData, View> requestData2ListWithView
     override var requestData: Request? = null
     override var refreshCallback: CallbackList<Data>? = null
     override var loadMoreCallback: CallbackList<Data>? = null
+    override var refreshRun: (() -> Boolean)? = null
+    override var loadMoreRun: (() -> Boolean)? = null
 
     override fun requestAndCallback(view: View, requestData: Request, callback: CallbackList<Data>) {
         super.requestAndCallback(view, requestData, callback)
@@ -155,6 +187,8 @@ fun <Data : QuickItemData> request2List(
     override var requestData: RequestData? = null
     override var refreshCallback: CallbackList<Data>? = null
     override var loadMoreCallback: CallbackList<Data>? = null
+    override var refreshRun: (() -> Boolean)? = null
+    override var loadMoreRun: (() -> Boolean)? = null
 
     override fun requestAndCallback(requestData: RequestData, callback: CallbackList<Data>) {
         super.requestAndCallback(requestData, callback)
@@ -170,6 +204,8 @@ fun <Data : QuickItemData, View> request2ListWithView(
     override var requestData: RequestData? = null
     override var refreshCallback: CallbackList<Data>? = null
     override var loadMoreCallback: CallbackList<Data>? = null
+    override var refreshRun: (() -> Boolean)? = null
+    override var loadMoreRun: (() -> Boolean)? = null
 
     override fun requestAndCallback(view: View, requestData: RequestData, callback: CallbackList<Data>) {
         super.requestAndCallback(view, requestData, callback)
