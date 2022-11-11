@@ -37,10 +37,10 @@ class RefreshListTestActivity : QuickActivity(R.layout.activity_refresh_list, ti
                 mSmartRefreshLayout?.finishLoadMore()
             }
         }
-    }.refreshFinishWithSelf {
+    }.refreshFinish {
         LogUtil.e("下拉刷新请求结束")
         false
-    }.loadMoreFinishWithSelf {
+    }.loadMoreFinish {
         LogUtil.e("上拉加载请求结束")
         false
     }

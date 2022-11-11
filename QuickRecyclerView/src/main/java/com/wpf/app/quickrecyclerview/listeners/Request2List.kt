@@ -61,18 +61,18 @@ interface Request2ListWithView<Request : RequestData, Data : QuickItemData, View
      */
     fun refreshFinish(): Boolean {
         refreshRun?.let {
-            return refreshFinish(it)
+            return refreshFinishFun(it)
         }
         return false
     }
 
-    fun refreshFinish(run: () -> Boolean): Boolean {
+    fun refreshFinishFun(run: () -> Boolean): Boolean {
         this.refreshRun = run
         return run()
     }
 
-    fun refreshFinishWithSelf(run: () -> Boolean): Request2ListWithView<Request, Data, View> {
-        refreshFinish(run)
+    fun refreshFinish(run: () -> Boolean): Request2ListWithView<Request, Data, View> {
+        refreshFinishFun(run)
         return this
     }
 
@@ -82,18 +82,18 @@ interface Request2ListWithView<Request : RequestData, Data : QuickItemData, View
      */
     fun loadMoreFinish(): Boolean {
         loadMoreRun?.let {
-            return loadMoreFinish(it)
+            return loadMoreFinishFun(it)
         }
         return false
     }
 
-    fun loadMoreFinish(run: () -> Boolean): Boolean {
+    fun loadMoreFinishFun(run: () -> Boolean): Boolean {
         this.loadMoreRun = run
         return run()
     }
 
-    fun loadMoreFinishWithSelf(run: () -> Boolean): Request2ListWithView<Request, Data, View> {
-        loadMoreFinish(run)
+    fun loadMoreFinish(run: () -> Boolean): Request2ListWithView<Request, Data, View> {
+        loadMoreFinishFun(run)
         return this
     }
 
@@ -101,7 +101,7 @@ interface Request2ListWithView<Request : RequestData, Data : QuickItemData, View
      * 按照最后的请求手动再次调用1次
      */
     @CallSuper
-    fun manualRequest() {
+    fun manualRequest(): Request2ListWithView<Request, Data, View> {
         if (view != null && requestData != null) {
             if (requestData!!.isRefresh) {
                 refreshCallback?.let {
@@ -113,10 +113,11 @@ interface Request2ListWithView<Request : RequestData, Data : QuickItemData, View
                 }
             }
         }
+        return this
     }
 
     @CallSuper
-    fun manualRequest(requestData: Request) {
+    fun manualRequest(requestData: Request): Request2ListWithView<Request, Data, View> {
         if (requestData.isRefresh) {
             refreshCallback?.let {
                 request2List?.requestAndCallback(view!!, requestData, it)
@@ -126,13 +127,14 @@ interface Request2ListWithView<Request : RequestData, Data : QuickItemData, View
                 request2List?.requestAndCallback(view!!, requestData, it)
             }
         }
+        return this
     }
 
     /**
      * 按照新的请求手动再次调用1次
      */
     @CallSuper
-    fun manualRequest(view: View, requestData: Request) {
+    fun manualRequest(view: View, requestData: Request): Request2ListWithView<Request, Data, View> {
         if (requestData.isRefresh) {
             refreshCallback?.let {
                 request2List?.requestAndCallback(view, requestData, it)
@@ -142,6 +144,7 @@ interface Request2ListWithView<Request : RequestData, Data : QuickItemData, View
                 request2List?.requestAndCallback(view, requestData, it)
             }
         }
+        return this
     }
 }
 
