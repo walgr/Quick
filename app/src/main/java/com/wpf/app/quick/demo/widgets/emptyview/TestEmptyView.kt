@@ -6,8 +6,6 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import com.wpf.app.quick.demo.R
-import com.wpf.app.quickutil.bind.Bind
-import com.wpf.app.quickutil.bind.QuickBindWrap
 import com.wpf.app.quickutil.widgets.emptyview.*
 
 open class TestEmptyView(
