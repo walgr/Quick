@@ -15,10 +15,6 @@ import com.wpf.app.quickutil.LogUtil
 
 class RequestTestViewModel: QuickViewModel<RequestTestActivity>() {
 
-    override fun onViewCreated(baseView: RequestTestActivity) {
-        request2View.manualRequest()
-    }
-
 //    @SuppressLint("NonConstantResourceId", "StaticFieldLeak")
 //    @BindView(R.id.info)
 //    val info: TextView? = null
@@ -48,5 +44,9 @@ class RequestTestViewModel: QuickViewModel<RequestTestActivity>() {
         }.success {
             callback.callback(it?.data)
         }
-    }.isManual { true }.manualRequest()
+    }.isManual { true }
+
+    override fun onViewCreated(baseView: RequestTestActivity) {
+        request2View.manualRequest()
+    }
 }
