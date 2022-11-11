@@ -1,17 +1,14 @@
 package com.wpf.app.quick.demo.viewmodel
 
 import android.annotation.SuppressLint
-import android.widget.TextView
-import com.google.gson.Gson
-import com.wpf.app.quick.annotations.BindView
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.demo.RequestTestActivity
 import com.wpf.app.quick.demo.http.request
 import com.wpf.app.quick.activity.viewmodel.QuickViewModel
 import com.wpf.app.quick.annotations.BindData2View
+import com.wpf.app.quick.demo.http.TestApi
 import com.wpf.app.quickbind.helper.binddatahelper.Request2View
 import com.wpf.app.quickbind.interfaces.request2View
-import com.wpf.app.quickutil.LogUtil
 
 class RequestTestViewModel: QuickViewModel<RequestTestActivity>() {
 
@@ -42,7 +39,7 @@ class RequestTestViewModel: QuickViewModel<RequestTestActivity>() {
         request {
             首页文章列表(0)
         }.success {
-            callback.callback(it?.data)
+            callback.backData(it?.data)
         }
     }.isManual { true }
 

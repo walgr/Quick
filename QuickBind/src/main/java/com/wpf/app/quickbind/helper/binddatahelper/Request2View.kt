@@ -10,7 +10,7 @@ object Request2View : BindD2VHelper<View, Request2ViewWithView<out QuickRequestD
 
     override fun initView(view: View, data: Request2ViewWithView<out QuickRequestData, out View>) {
         val callback = object : Callback<QuickRequestData> {
-            override fun callback(data: QuickRequestData?) {
+            override fun backData(data: QuickRequestData?) {
                 data?.onCreateView(view)
             }
         }
