@@ -9,7 +9,6 @@ import com.wpf.app.quick.demo.http.request
 import com.wpf.app.quickrecyclerview.QuickRefreshRecyclerView
 import com.wpf.app.quickrecyclerview.helper.Request2RefreshView
 import com.wpf.app.quickrecyclerview.listeners.request2List
-import kotlinx.coroutines.delay
 
 /**
  * Created by 王朋飞 on 2022/7/8.
@@ -46,7 +45,7 @@ class RefreshListTestActivity : QuickActivity(R.layout.activity_refresh_list, ti
 
         mSmartRefreshLayout?.postDelayed({
             request2List.requestData?.loadMore()
-            request2List.manualRun()
+            request2List.manualRequest()
         }, 2000)
     }
 }
