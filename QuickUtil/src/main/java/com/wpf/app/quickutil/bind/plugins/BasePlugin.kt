@@ -18,8 +18,6 @@ import java.lang.reflect.Field
  */
 interface BasePlugin {
 
-//    fun sortOrder(): Int
-
     @NonNull
     fun getRealObj(@NonNull obj: Any, @Nullable viewModel: ViewModel?): Any {
         return viewModel ?: obj
@@ -64,6 +62,9 @@ interface BasePlugin {
         }
         if (obj is Bind) {
             rootView = obj.getView()
+        }
+        if (obj is View) {
+            rootView = obj
         }
         return rootView
     }

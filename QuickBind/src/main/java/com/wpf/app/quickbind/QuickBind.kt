@@ -96,7 +96,7 @@ object QuickBind: QuickBindI {
 
     override fun <T : Bind> bind(bind: T) {
         bind.getView()?.let {
-            bindBinder(bind, bind.getView()!!)
+            bindBinder(bind, it)
         }
         dealInPlugins(bind, null)
     }
