@@ -47,7 +47,7 @@ object QuickBind: QuickBindI {
     }
 
     override fun <T : BasePlugin> registerPlugin(index: Int, ann: KClass<out Annotation>, plugin: T) {
-        plugins.put(ann, plugin)
+        plugins[ann] = plugin
     }
 
     init {
@@ -167,7 +167,7 @@ object QuickBind: QuickBindI {
         if (obj == null) return
         try {
             if (viewModel != null) {
-                val viewModelFields: List<Field> = ReflectHelper.getFieldWithParent(viewModel)
+                val viewModelFields: List<Field> = ReflectHelper.getFieldAndParent(viewModel)
                 for (field in viewModelFields) {
                     val annotations = field.annotations.toMutableList()
                     annotations.sortBy { plugins.keys.indexOf(it.annotationClass) }
@@ -177,7 +177,7 @@ object QuickBind: QuickBindI {
                     annotations.clear()
                 }
             } else {
-                val fields: List<Field> = ReflectHelper.getFieldWithParent(obj)
+                val fields: List<Field> = ReflectHelper.getFieldAndParent(obj)
                 for (field in fields) {
                     val annotations = field.annotations.toMutableList()
                     annotations.sortBy { plugins.keys.indexOf(it.annotationClass) }

@@ -18,8 +18,9 @@ class 首页文章 : QuickRequestData() {
         val title: String? = null
     }
 
-    @SuppressLint("NonConstantResourceId")
-    @BindData2View(id = R.id.info, helper = Text2TextView::class)
+//    @SuppressLint("NonConstantResourceId")
+//    @BindData2View(id = R.id.info, helper = Text2TextView::class)
+    //自动赋值处理了
     val info = runOnContextWithSelf<String, 首页文章> { _, self ->
         "请求成功：" + self.curPage + "---" + self.datas?.toString()
     }

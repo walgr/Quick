@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModel
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-abstract class QuickBindingViewModel<T : ViewDataBinding> : ViewModel(), LifecycleObserver, ViewLifecycle {
+abstract class QuickBindingModel<T : ViewDataBinding> : ViewModel(), LifecycleObserver, ViewLifecycle {
     var mViewBinding: T? = null
 
     abstract fun onBindingCreated(mViewBinding: T?)

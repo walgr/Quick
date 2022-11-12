@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.View
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
+import com.wpf.app.quickbind.QuickBind
 import com.wpf.app.quickrecyclerview.QuickAdapter
 import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
 import com.wpf.app.quickutil.bind.Bind
@@ -21,19 +22,21 @@ open class QuickBindData @JvmOverloads constructor(
 
     @Transient
     private var mViewHolder: QuickViewHolder<QuickBindData>? = null
+
     @Transient
     private var mAdapter: QuickAdapter? = null
     private var dealBind = true
+
     @Transient
     private var mView: View? = null
+
     @Transient
     private var isFirstLoad = true
 
-//    @ExperimentalStdlibApi
     open fun onCreateViewHolder(itemView: View) {
         this.mView = itemView
         if (dealBind) {
-            QuickBindWrap.bind(this)
+            QuickBind.bind(this)
         }
     }
 
@@ -52,10 +55,9 @@ open class QuickBindData @JvmOverloads constructor(
         mView = viewHolder.itemView
         if (isFirstLoad) {
             onCreateViewHolder(itemView = viewHolder.itemView)
-        }
-        if (dealBind) {
-            QuickBindWrap.getBindPlugin()?.let {
-                QuickBindWrap.dealInPlugins(this, null, it)
+        } else {
+            if (dealBind) {
+                QuickBind.dealInPlugins(this, null, QuickBind.bindPlugin)
             }
         }
         isFirstLoad = false

@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.wpf.app.quick.demo.viewmodel.SelectListViewModel" />
+            type="com.wpf.app.quick.demo.viewmodel.SelectListModel" />
     </data>
 
     <RelativeLayout

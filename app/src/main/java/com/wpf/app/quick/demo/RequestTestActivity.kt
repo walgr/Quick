@@ -2,11 +2,12 @@ package com.wpf.app.quick.demo
 
 import android.content.Context
 import android.util.AttributeSet
-import com.wpf.app.quick.activity.QuickViewModelActivity
-import com.wpf.app.quick.demo.viewmodel.RequestTestViewModel
+import com.wpf.app.quick.activity.QuickViewBindingActivity
+import com.wpf.app.quick.demo.databinding.ActivityRequestTestBinding
+import com.wpf.app.quick.demo.viewmodel.RequestTestModel
 import com.wpf.app.quick.widgets.quickview.helper.GotoThis
 
-class RequestTestActivity : QuickViewModelActivity<RequestTestViewModel>(
+class RequestTestActivity : QuickViewBindingActivity<RequestTestModel, ActivityRequestTestBinding>(
     R.layout.activity_request_test,
     titleName = "接口测试页"
 ) {

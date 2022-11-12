@@ -16,7 +16,10 @@ import java.util.*
  */
 object ReflectHelper {
 
-    fun getFieldWithParent(@NonNull obj: Any): List<Field> {
+    /**
+     * 获取当前类和父类所有属性
+     */
+    fun getFieldAndParent(@NonNull obj: Any): List<Field> {
         val result = ArrayList<Field>()
         var curCls: Class<*>? = obj.javaClass
         while (curCls != null) {

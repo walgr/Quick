@@ -63,9 +63,6 @@ interface BasePlugin {
         if (obj is Bind) {
             rootView = obj.getView()
         }
-        if (obj is View) {
-            rootView = obj
-        }
         return rootView
     }
 

@@ -25,6 +25,10 @@ abstract class QuickItemView @JvmOverloads constructor(
 ) : View(mContext, attributeSet, defStyleAttr), Bind {
 
     init {
+        init()
+    }
+
+    private fun init() {
         initViewType()
         initView()
     }

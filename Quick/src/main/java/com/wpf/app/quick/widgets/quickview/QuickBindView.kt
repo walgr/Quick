@@ -30,9 +30,9 @@ open class QuickBindView @JvmOverloads constructor(
 
     @CallSuper
     override fun onBindViewHolder(position: Int) {
-        if (dealBind) {
-            QuickBind.dealInPlugins(this, null, QuickBind.bindPlugin)
-        }
+//        if (dealBind) {
+//            QuickBind.dealInPlugins(this, null, QuickBind.bindPlugin)
+//        }
     }
 
     fun noBind() {

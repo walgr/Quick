@@ -3,12 +3,12 @@ package com.wpf.app.quick.demo.viewmodel
 import android.view.View
 import com.wpf.app.quick.demo.databinding.ActivityRecyclerviewTestBinding
 import com.wpf.app.quick.demo.model.BindDataTestModel
-import com.wpf.app.quick.activity.viewmodel.QuickBindingViewModel
+import com.wpf.app.quick.activity.viewmodel.QuickBindingModel
 
 /**
  * Created by 王朋飞 on 2022/6/13.
  */
-class RecyclerViewTestViewModel : QuickBindingViewModel<ActivityRecyclerviewTestBinding>() {
+class RecyclerViewTestModel : QuickBindingModel<ActivityRecyclerviewTestBinding>() {
 
     override fun onBindingCreated(mViewBinding: ActivityRecyclerviewTestBinding?) {
 
