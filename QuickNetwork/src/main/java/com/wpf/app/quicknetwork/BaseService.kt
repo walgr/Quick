@@ -12,3 +12,7 @@ import com.wpf.app.quicknetwork.helper.RetrofitCreateHelper
 inline fun <reified Service, Data, Fail> request(run: Service.() -> RealCall<Data, Fail>): BaseRequest<Data, Fail> {
     return RetrofitCreateHelper.getService<Service>().run(run).enqueue(WpfRequest())
 }
+
+inline fun <Service, Data, Fail> requestCls(cls: Class<Service>, run: Service.() -> RealCall<Data, Fail>): BaseRequest<Data, Fail> {
+    return RetrofitCreateHelper.getServiceT(cls).run(run).enqueue(WpfRequest())
+}

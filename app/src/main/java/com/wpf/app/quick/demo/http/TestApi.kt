@@ -13,3 +13,9 @@ interface TestApi {
         @Path("page") page: Int
     ): TestCommonCall<首页文章>
 }
+
+object TestApiO {
+    fun Api(): Class<TestApi> {
+        return TestApi::class.java
+    }
+}

@@ -7,6 +7,7 @@ import com.wpf.app.quick.demo.RequestTestActivity
 import com.wpf.app.quick.demo.http.request
 import com.wpf.app.quick.annotations.BindData2View
 import com.wpf.app.quick.demo.databinding.ActivityRequestTestBinding
+import com.wpf.app.quick.demo.http.TestApi
 import com.wpf.app.quickbind.helper.binddatahelper.Request2View
 import com.wpf.app.quickbind.interfaces.request2View
 
@@ -30,6 +31,8 @@ class RequestTestModel: QuickBindingModel<ActivityRequestTestBinding>() {
 //        }
 //    }
 
+    val page = 0
+
     //代替上面注释的逻辑
     @SuppressLint("NonConstantResourceId", "StaticFieldLeak")
     @BindData2View(id = R.id.info, helper = Request2View::class)
@@ -42,6 +45,6 @@ class RequestTestModel: QuickBindingModel<ActivityRequestTestBinding>() {
     }.isManual { true }
 
     override fun onBindingCreated(mViewBinding: ActivityRequestTestBinding?) {
-        request2View.manualRequest()
+//        request2View.manualRequest()
     }
 }

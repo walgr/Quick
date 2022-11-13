@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="com.wpf.app.quick.demo.http.TestApi"/>
+        <import type="com.wpf.app.quick.demo.http.TestApiO"/>
 
+        <variable
+            name="viewModel"
+            type="com.wpf.app.quick.demo.viewmodel.RequestTestModel" />
     </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:apiClass="@{TestApiO.INSTANCE.Api()}"
+        app:methodName="@{`首页文章列表`}"
+
+        >
 
         <TextView
             android:id="@+id/info"
