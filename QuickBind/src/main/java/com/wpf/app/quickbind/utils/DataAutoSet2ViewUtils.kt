@@ -5,10 +5,13 @@ import android.view.ViewGroup
 import android.widget.Checkable
 import android.widget.TextView
 import androidx.core.view.children
+import com.wpf.app.quickbind.annotations.BindD2VHelper
 import com.wpf.app.quickbind.bindview.QuickRequestData
 import com.wpf.app.quickbind.interfaces.RunOnHolderWithSelf
 
 object DataAutoSet2ViewUtils {
+
+    var bind2ViewList: MutableList<BindD2VHelper<View, Any>> = arrayListOf()
 
     fun <T : QuickRequestData> autoSet(data: T, view: View) {
         setData2ViewGroup(view, data)
@@ -53,5 +56,12 @@ object DataAutoSet2ViewUtils {
                 view.isChecked = viewData == true
             }
         }
+        bind2ViewList.forEach { bind ->
+            bind.initView(view, data)
+        }
     }
+}
+
+interface BindData2View {
+    fun bind(view: View, data: Any)
 }
