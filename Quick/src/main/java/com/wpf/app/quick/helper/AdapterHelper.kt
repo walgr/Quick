@@ -15,8 +15,13 @@ import com.wpf.app.quickbind.interfaces.request2View
 import com.wpf.app.quicknetwork.base.BaseResponseI
 import com.wpf.app.quicknetwork.call.RealCall
 import com.wpf.app.quicknetwork.requestCls
+import com.wpf.app.quickrecyclerview.data.QuickItemData
+import com.wpf.app.quickrecyclerview.data.RequestData
+import com.wpf.app.quickrecyclerview.helper.Request2RefreshView
+import com.wpf.app.quickrecyclerview.listeners.RefreshView
+import com.wpf.app.quickrecyclerview.listeners.Request2ListWithView
+import com.wpf.app.quickrecyclerview.listeners.request2List
 import com.wpf.app.quickutil.LogUtil
-import java.lang.reflect.Type
 
 /**
  * Created by 王朋飞 on 2022/5/18.
@@ -61,25 +66,55 @@ fun onViewCheck(view: View, onChange: CompoundButton.OnCheckedChangeListener?) {
 }
 
 @BindingAdapter(value = ["apiClass", "methodName", "parameters"], requireAll = false)
-fun <T> View.request2This(apiCls: Class<T>, methodName: String, parameters: List<Any>?) {
+fun <T> View.request2View(apiCls: Class<T>, methodName: String, parameters: List<Any>?) {
     if (!apiCls.isInterface) return
-    val parameterTypes : Array<Class<*>> = parameters?.map {
+    val parameterTypes: Array<Class<*>> = parameters?.map {
         if (it.javaClass == Integer::class.java) Int::class.java else it.javaClass
     }?.toTypedArray() ?: arrayOf()
     val method = apiCls.getMethod(methodName, *parameterTypes)
-    val api: (T.() -> RealCall<BaseResponseI<out QuickRequestData, Any>, Any>) = object : (T) -> RealCall<BaseResponseI<out QuickRequestData, Any>, Any> {
-        override fun invoke(p1: T): RealCall<BaseResponseI<out QuickRequestData, Any>, Any> {
-            return method.invoke(p1, *(parameters?.toTypedArray() ?: arrayOf())) as RealCall<BaseResponseI<out QuickRequestData, Any>, Any>
+    val api: (T.() -> RealCall<BaseResponseI<out QuickRequestData, Any>, Any>) =
+        object : (T) -> RealCall<BaseResponseI<out QuickRequestData, Any>, Any> {
+            override fun invoke(p1: T): RealCall<BaseResponseI<out QuickRequestData, Any>, Any> {
+                return method.invoke(
+                    p1,
+                    *(parameters?.toTypedArray() ?: arrayOf())
+                ) as RealCall<BaseResponseI<out QuickRequestData, Any>, Any>
+            }
         }
-    }
     val request2View = request2View { callback ->
         requestCls(apiCls) {
             api()
         }.success {
             callback.backData(it?.dataI)
-        }.fail {
-            LogUtil.e("请求出错-${it.toString()}")
         }
     } as Request2ViewWithView<out QuickRequestData, out View>
     BindData2ViewHelper.bind(this, request2View, Request2View)
 }
+
+//@Deprecated("暂未开放")
+//@BindingAdapter(value = ["apiClass", "methodName", "parameters"], requireAll = false)
+//fun <T> View.request2List(apiCls: Class<T>, methodName: String, parameters: List<Any>?) {
+//    if (this !is RefreshView) return
+//    if (!apiCls.isInterface) return
+//    val parameterTypes: Array<Class<*>> = parameters?.map {
+//        if (it.javaClass == Integer::class.java) Int::class.java else it.javaClass
+//    }?.toTypedArray() ?: arrayOf()
+//    val method = apiCls.getMethod(methodName, *parameterTypes)
+//    val api: (T.() -> RealCall<BaseResponseI<out QuickItemData, Any>, Any>) =
+//        object : (T) -> RealCall<BaseResponseI<out QuickItemData, Any>, Any> {
+//            override fun invoke(p1: T): RealCall<BaseResponseI<out QuickItemData, Any>, Any> {
+//                return method.invoke(
+//                    p1,
+//                    *(parameters?.toTypedArray() ?: arrayOf())
+//                ) as RealCall<BaseResponseI<out QuickItemData, Any>, Any>
+//            }
+//        }
+//    val request2List = request2List { _, callback ->
+//        requestCls(apiCls) {
+//            api()
+//        }.success {
+//            callback.backData(arrayListOf())
+//        }
+//    } as Request2ListWithView<RequestData, QuickItemData, RefreshView>
+//    BindData2ViewHelper.bind(this, request2List, Request2RefreshView)
+//}

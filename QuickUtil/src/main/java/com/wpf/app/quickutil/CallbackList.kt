@@ -6,5 +6,5 @@ package com.wpf.app.quickutil
  */
 interface CallbackList<Data> {
 
-    fun callback(data: List<Data>?)
+    fun backData(data: List<Data>?)
 }

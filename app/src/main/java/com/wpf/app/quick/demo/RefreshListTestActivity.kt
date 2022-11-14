@@ -29,7 +29,7 @@ class RefreshListTestActivity : QuickActivity(R.layout.activity_refresh_list, ti
         request {
             首页文章列表(requestData.page)
         }.success {
-            callback.callback(it?.data?.datas)
+            callback.backData(it?.data?.datas)
         }.after {
             if (requestData.isRefresh) {
                 mSmartRefreshLayout?.finishRefresh()

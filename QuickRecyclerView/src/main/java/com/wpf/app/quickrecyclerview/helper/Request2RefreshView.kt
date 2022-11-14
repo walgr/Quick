@@ -1,6 +1,5 @@
 package com.wpf.app.quickrecyclerview.helper
 
-import android.view.View
 import com.wpf.app.quickbind.annotations.BindD2VHelper
 import com.wpf.app.quickrecyclerview.QuickAdapter
 import com.wpf.app.quickrecyclerview.QuickRefreshRecyclerView
@@ -12,15 +11,15 @@ import com.wpf.app.quickutil.CallbackList
 import java.lang.reflect.ParameterizedType
 
 object Request2RefreshView :
-    BindD2VHelper<View, Request2ListWithView<out RequestData, out QuickItemData, out RefreshView>> {
+    BindD2VHelper<RefreshView, Request2ListWithView<out RequestData, out QuickItemData, out RefreshView>> {
 
     override fun initView(
-        view: View,
+        view: RefreshView,
         data: Request2ListWithView<out RequestData, out QuickItemData, out RefreshView>
     ) {
         if (view is QuickRefreshRecyclerView) {
             view.setDataChangeListener(data as Request2ListWithView<RequestData, QuickItemData, QuickRefreshRecyclerView>)
-        } else if (view is RefreshView && view.getAdapter() is QuickAdapter) {
+        } else if (view.getAdapter() is QuickAdapter) {
             val quickAdapter = view.getAdapter() as QuickAdapter
             val requestData: RequestData = try {
                 ((data.javaClass.genericInterfaces[0] as ParameterizedType).actualTypeArguments[0] as Class<*>).newInstance() as RequestData
@@ -31,7 +30,7 @@ object Request2RefreshView :
             realData.view = view
             realData.requestData = requestData
             val refreshCallback = object : CallbackList<QuickItemData> {
-                override fun callback(data: List<QuickItemData>?) {
+                override fun backData(data: List<QuickItemData>?) {
                     quickAdapter.mDataList?.clear()
                     quickAdapter.appendList(data)
                     requestData.loadDataSize(data?.size ?: 0)
@@ -42,7 +41,7 @@ object Request2RefreshView :
             }
             realData.refreshCallback = refreshCallback
             val loadMoreCallback = object : CallbackList<QuickItemData> {
-                override fun callback(data: List<QuickItemData>?) {
+                override fun backData(data: List<QuickItemData>?) {
                     quickAdapter.appendList(data)
                     requestData.loadDataSize(data?.size ?: 0)
                     if (!realData.loadMoreFinish()) {
