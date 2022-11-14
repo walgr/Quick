@@ -7,14 +7,16 @@ import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import com.wpf.app.quick.widgets.CheckView
-import com.wpf.app.quicknetwork.base.BaseResponseIA
-import com.wpf.app.quicknetwork.base.WpfRequest
+import com.wpf.app.quickbind.bindview.QuickRequestData
+import com.wpf.app.quickbind.helper.binddatahelper.BindData2ViewHelper
+import com.wpf.app.quickbind.helper.binddatahelper.Request2View
+import com.wpf.app.quickbind.interfaces.Request2ViewWithView
+import com.wpf.app.quickbind.interfaces.request2View
+import com.wpf.app.quicknetwork.base.BaseResponseI
 import com.wpf.app.quicknetwork.call.RealCall
-import com.wpf.app.quicknetwork.helper.RetrofitCreateHelper
-import com.wpf.app.quicknetwork.request
 import com.wpf.app.quicknetwork.requestCls
 import com.wpf.app.quickutil.LogUtil
-import kotlin.jvm.functions.FunctionN
+import java.lang.reflect.Type
 
 /**
  * Created by 王朋飞 on 2022/5/18.
@@ -58,21 +60,26 @@ fun onViewCheck(view: View, onChange: CompoundButton.OnCheckedChangeListener?) {
     }
 }
 
-@BindingAdapter(value = ["apiClass", "methodName"], requireAll = true)
-fun <T> View.request2This(apiCls: Class<T>, methodName: String) {
-//    if (api == null) return
-//    val apiCls = api!!::class.java
-//    val apiCls = apiCls!!::class.java
+@BindingAdapter(value = ["apiClass", "methodName", "parameters"], requireAll = false)
+fun <T> View.request2This(apiCls: Class<T>, methodName: String, parameters: List<Any>?) {
     if (!apiCls.isInterface) return
-    val method = apiCls.getMethod(methodName, Int::class.java)
-    val fun1: (T.()-> RealCall<BaseResponseIA<Any>, Any>) = object : (T) -> RealCall<BaseResponseIA<Any>, Any> {
-        override fun invoke(p1: T): RealCall<BaseResponseIA<Any>, Any> {
-            return method.invoke(p1, 1) as RealCall<BaseResponseIA<Any>, Any>
+    val parameterTypes : Array<Class<*>> = parameters?.map {
+        if (it.javaClass == Integer::class.java) Int::class.java else it.javaClass
+    }?.toTypedArray() ?: arrayOf()
+    val method = apiCls.getMethod(methodName, *parameterTypes)
+    val api: (T.() -> RealCall<BaseResponseI<out QuickRequestData, Any>, Any>) = object : (T) -> RealCall<BaseResponseI<out QuickRequestData, Any>, Any> {
+        override fun invoke(p1: T): RealCall<BaseResponseI<out QuickRequestData, Any>, Any> {
+            return method.invoke(p1, *(parameters?.toTypedArray() ?: arrayOf())) as RealCall<BaseResponseI<out QuickRequestData, Any>, Any>
         }
     }
-    RetrofitCreateHelper.getServiceT(apiCls).run(fun1).enqueue(WpfRequest()).success {
-        LogUtil.e("请求-${it.toString()}")
-    }.fail {
-
-    }.after { LogUtil.e("请求结束") }
+    val request2View = request2View { callback ->
+        requestCls(apiCls) {
+            api()
+        }.success {
+            callback.backData(it?.dataI)
+        }.fail {
+            LogUtil.e("请求出错-${it.toString()}")
+        }
+    } as Request2ViewWithView<out QuickRequestData, out View>
+    BindData2ViewHelper.bind(this, request2View, Request2View)
 }

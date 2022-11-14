@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <import type="com.wpf.app.quick.demo.http.TestApi"/>
+        <import type="java.util.Arrays"/>
         <import type="com.wpf.app.quick.demo.http.TestApiO"/>
 
         <variable
@@ -16,8 +16,7 @@
         android:layout_height="match_parent"
         app:apiClass="@{TestApiO.INSTANCE.Api()}"
         app:methodName="@{`首页文章列表`}"
-
-        >
+        app:parameters="@{Arrays.asList(viewModel.page)}">
 
         <TextView
             android:id="@+id/info"

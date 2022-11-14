@@ -14,13 +14,13 @@ object DataAutoSet2ViewUtils {
         setData2ViewGroup(view, data)
     }
 
-    fun setData2ViewGroup(view: View, data: Any) {
+    private fun setData2ViewGroup(view: View, data: Any) {
         if (view is ViewGroup) {
             view.children.forEach {
                 if (it is ViewGroup) {
-                    setData2ViewGroup(view, data)
+                    setData2ViewGroup(it, data)
                 } else {
-                    setData2View(view, data)
+                    setData2View(it, data)
                 }
             }
         } else {
@@ -28,7 +28,7 @@ object DataAutoSet2ViewUtils {
         }
     }
 
-    fun setData2View(view: View, data: Any) {
+    private fun setData2View(view: View, data: Any) {
         val viewId = view.id
         val viewIdName = view.context.resources.getResourceEntryName(viewId)
         var viewData: Any? = null
