@@ -31,7 +31,7 @@ import kotlin.reflect.KClass
 object QuickBind: QuickBindI {
     private var bindSpFileName = "QuickViewSpBindFile"
 
-    private val plugins: ArrayMap<KClass<out Annotation>, BasePlugin> = ArrayMap()
+    private val plugins: LinkedHashMap<KClass<out Annotation>, BasePlugin> = LinkedHashMap()
     val bindPlugin = arrayMapOf<KClass<out Annotation>, BasePlugin>(Pair(BindData2View::class, BindData2ViewPlugin()))
 
     override fun getRegisterPlugins(): MutableMap<KClass<out Annotation>, BasePlugin> {
