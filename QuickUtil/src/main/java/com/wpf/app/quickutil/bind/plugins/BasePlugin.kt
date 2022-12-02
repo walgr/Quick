@@ -18,8 +18,7 @@ import java.lang.reflect.Field
  */
 interface BasePlugin {
 
-    @NonNull
-    fun getRealObj(@NonNull obj: Any, @Nullable viewModel: ViewModel?): Any {
+    fun getRealObj(obj: Any, viewModel: ViewModel?): Any {
         return viewModel ?: obj
     }
 
