@@ -4,7 +4,6 @@ import com.google.gson.Gson
 import com.wpf.app.quicknetwork.base.BaseRequest
 import com.wpf.app.quicknetwork.base.BaseResponseI
 import com.wpf.app.quicknetwork.base.BaseResponseIA
-import com.wpf.app.quickutil.LogUtil
 import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Response
@@ -20,7 +19,7 @@ open class RealCall<SResponse, FResponse>(private val rawCall: Call<SResponse>, 
      * 异步请求
      */
     fun <Request : BaseRequest<SResponse, FResponse>> enqueue(request: Request): Request {
-        GlobalScope.launch {
+        CoroutineScope(Dispatchers.IO).launch {
             request.funBefore.invoke()
             val result = withContext(Dispatchers.IO) {
                 try {
