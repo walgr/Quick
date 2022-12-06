@@ -19,7 +19,7 @@ open class RealCall<SResponse, FResponse>(private val rawCall: Call<SResponse>, 
      * 异步请求
      */
     fun <Request : BaseRequest<SResponse, FResponse>> enqueue(request: Request): Request {
-        CoroutineScope(Dispatchers.IO).launch {
+        CoroutineScope(Dispatchers.Default).launch {
             request.funBefore.invoke()
             val result = withContext(Dispatchers.IO) {
                 try {
