@@ -33,11 +33,11 @@ open class RealCall<SResponse, FResponse>(private val rawCall: Call<SResponse>, 
                 when (result) {
                     is Throwable -> {
                         try {
-                            if (fail is BaseResponseIA<*>) {
-                                request.funFail.invoke(fail.apply {
+                            if (fail is BaseResponseI<*, *>) {
+                                request.funFail.invoke((fail as BaseResponseI<*, Any>).apply {
                                     codeI = "-1"
                                     errorI = result.message
-                                })
+                                } as FResponse)
                             } else {
                                 request.funFail.invoke(fail)
                             }

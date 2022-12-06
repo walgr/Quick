@@ -9,6 +9,7 @@ import java.lang.reflect.Type
  * Created by 王朋飞 on 2022/7/22.
  *
  */
+@Deprecated("已废弃", level = DeprecationLevel.WARNING)
 class RealCallAdapterFactory private constructor(): CallAdapter.Factory() {
 
     companion object {

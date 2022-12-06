@@ -47,7 +47,6 @@ object RetrofitCreateHelper {
             val retrofitBuilder =
                 Retrofit.Builder()
                     .baseUrl(baseUrl)
-                    .addCallAdapterFactory(RealCallAdapterFactory.create())
                     .addCallAdapterFactory(NoResponseCallAdapterFactory.create())
                     .addCallAdapterFactory(CommonCallAdapterFactory.create())
                     .client(okHttp)

@@ -3,13 +3,12 @@ package com.wpf.app.quick.demo.viewmodel
 import android.annotation.SuppressLint
 import com.wpf.app.quick.activity.viewmodel.QuickBindingModel
 import com.wpf.app.quick.demo.R
-import com.wpf.app.quick.demo.RequestTestActivity
 import com.wpf.app.quick.demo.http.request
 import com.wpf.app.quick.annotations.BindData2View
 import com.wpf.app.quick.demo.databinding.ActivityRequestTestBinding
-import com.wpf.app.quick.demo.http.TestApi
 import com.wpf.app.quickbind.helper.binddatahelper.Request2View
 import com.wpf.app.quickbind.interfaces.request2View
+import com.wpf.app.quickutil.LogUtil
 
 class RequestTestModel: QuickBindingModel<ActivityRequestTestBinding>() {
 
@@ -36,15 +35,17 @@ class RequestTestModel: QuickBindingModel<ActivityRequestTestBinding>() {
     //代替上面注释的逻辑
     @SuppressLint("NonConstantResourceId", "StaticFieldLeak")
     @BindData2View(id = R.id.info, helper = Request2View::class)
-    val request2View = request2View { callback ->
+    val info = request2View { callback ->
         request {
             首页文章列表(0)
         }.success {
             callback.backData(it?.data)
+        }.fail {
+            LogUtil.e("接口错误：${it?.errorI}")
         }
     }.isManual { true }
 
     override fun onBindingCreated(mViewBinding: ActivityRequestTestBinding?) {
-//        request2View.manualRequest()
+        info.manualRequest()
     }
 }
