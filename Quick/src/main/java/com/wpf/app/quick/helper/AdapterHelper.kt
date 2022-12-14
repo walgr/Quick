@@ -81,7 +81,7 @@ fun <T> View.request2View(apiCls: Class<T>, methodName: String, parameters: List
                 ) as RealCall<BaseResponseI<out QuickRequestData, Any>, Any>
             }
         }
-    val request2View = request2View { callback ->
+    val request2View = request2View<QuickRequestData> { callback ->
         requestCls(apiCls) {
             api()
         }.success {

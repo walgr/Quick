@@ -2,10 +2,8 @@ package com.wpf.app.quickbind
 
 import android.app.Activity
 import android.app.Dialog
-import android.util.ArrayMap
 import android.view.View
 import androidx.annotation.UiThread
-import androidx.collection.arrayMapOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
@@ -32,14 +30,14 @@ object QuickBind: QuickBindI {
     private var bindSpFileName = "QuickViewSpBindFile"
 
     private val plugins: LinkedHashMap<KClass<out Annotation>, BasePlugin> = LinkedHashMap()
-    val bindPlugin = arrayMapOf<KClass<out Annotation>, BasePlugin>(Pair(BindData2View::class, BindData2ViewPlugin()))
+    val bindDataPlugin = mutableMapOf<KClass<out Annotation>, BasePlugin>(Pair(BindData2View::class, BindData2ViewPlugin()))
 
     override fun getRegisterPlugins(): MutableMap<KClass<out Annotation>, BasePlugin> {
         return plugins
     }
 
     override fun getBindPlugin(): MutableMap<KClass<out Annotation>, BasePlugin> {
-        return bindPlugin
+        return bindDataPlugin
     }
 
     override fun <T : BasePlugin> registerPlugin(ann: KClass<out Annotation>, plugin: T) {
@@ -147,7 +145,7 @@ object QuickBind: QuickBindI {
                 View::class.java
             ) as Constructor<out Databinder>
         } catch (e: ClassNotFoundException) {
-            findBindingConstructorForClass(cls.superclass)
+            findBindingConstructorForClass(cls.superclass as Class<*>)
         } catch (e: NoSuchMethodException) {
             throw RuntimeException("Unable to find binding constructor for $clsName", e)
         }

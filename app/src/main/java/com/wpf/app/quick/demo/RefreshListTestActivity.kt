@@ -5,6 +5,7 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.wpf.app.quick.activity.QuickActivity
 import com.wpf.app.quick.annotations.BindData2View
 import com.wpf.app.quick.annotations.BindView
+import com.wpf.app.quick.demo.http.model.首页文章
 import com.wpf.app.quick.demo.http.request
 import com.wpf.app.quickrecyclerview.QuickRefreshRecyclerView
 import com.wpf.app.quickrecyclerview.helper.Request2RefreshView
@@ -25,7 +26,7 @@ class RefreshListTestActivity : QuickActivity(R.layout.activity_refresh_list, ti
 
     @SuppressLint("NonConstantResourceId")
     @BindData2View(id = R.id.list, helper = Request2RefreshView::class)
-    val request2List = request2List { requestData, callback ->
+    val request2List = request2List<首页文章.文章> { requestData, callback ->
         request {
             首页文章列表(requestData.page)
         }.success {

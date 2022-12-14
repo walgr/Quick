@@ -6,6 +6,7 @@ import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.demo.http.request
 import com.wpf.app.quick.annotations.BindData2View
 import com.wpf.app.quick.demo.databinding.ActivityRequestTestBinding
+import com.wpf.app.quick.demo.http.model.首页文章
 import com.wpf.app.quickbind.helper.binddatahelper.Request2View
 import com.wpf.app.quickbind.interfaces.request2View
 import com.wpf.app.quickutil.LogUtil
@@ -35,7 +36,7 @@ class RequestTestModel: QuickBindingModel<ActivityRequestTestBinding>() {
     //代替上面注释的逻辑
     @SuppressLint("NonConstantResourceId", "StaticFieldLeak")
     @BindData2View(id = R.id.info, helper = Request2View::class)
-    val info = request2View { callback ->
+    val info = request2View<首页文章> { callback ->
         request {
             首页文章列表(0)
         }.success {
@@ -46,6 +47,7 @@ class RequestTestModel: QuickBindingModel<ActivityRequestTestBinding>() {
     }.isManual { true }
 
     override fun onBindingCreated(mViewBinding: ActivityRequestTestBinding?) {
+        //手动请求
         info.manualRequest()
     }
 }

@@ -57,7 +57,7 @@ open class QuickBindData @JvmOverloads constructor(
             onCreateViewHolder(itemView = viewHolder.itemView)
         } else {
             if (dealBind) {
-                QuickBind.dealInPlugins(this, null, QuickBind.bindPlugin)
+                QuickBind.dealInPlugins(this, null, QuickBind.bindDataPlugin)
             }
         }
         isFirstLoad = false

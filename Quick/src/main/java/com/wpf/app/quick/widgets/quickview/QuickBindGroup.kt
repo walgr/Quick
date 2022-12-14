@@ -36,7 +36,7 @@ open class QuickBindGroup<T : ViewGroup> @JvmOverloads constructor(
             isLoadFirst = false
         }
         if (dealBind) {
-            dealInPlugins(this, null, QuickBind.bindPlugin)
+            dealInPlugins(this, null, QuickBind.bindDataPlugin)
         }
     }
 
