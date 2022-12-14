@@ -1,6 +1,5 @@
 package com.wpf.app.quicknetwork.call
 
-import com.wpf.app.quicknetwork.base.BaseResponseIA
 import com.wpf.app.quicknetwork.base.BaseResponseS
 import retrofit2.Call
 

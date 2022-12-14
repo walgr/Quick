@@ -65,7 +65,7 @@ abstract class QuickBottomSheetDialog : BottomSheetDialog,
         mView = if (layoutView != null) {
             layoutView
         } else {
-            View.inflate(context, layoutId, null)
+            View.inflate(getViewContext(), layoutId, null)
         }
         setContentView(mView!!)
         val window = window

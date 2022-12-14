@@ -4,7 +4,6 @@ import com.google.gson.Gson
 import com.wpf.app.quicknetwork.base.BaseRequest
 import com.wpf.app.quicknetwork.base.BaseResponseI
 import com.wpf.app.quicknetwork.base.BaseResponseIA
-import com.wpf.app.quickutil.LogUtil
 import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Response
@@ -20,7 +19,7 @@ open class RealCall<SResponse, FResponse>(private val rawCall: Call<SResponse>, 
      * 异步请求
      */
     fun <Request : BaseRequest<SResponse, FResponse>> enqueue(request: Request): Request {
-        GlobalScope.launch {
+        CoroutineScope(Dispatchers.Default).launch {
             request.funBefore.invoke()
             val result = withContext(Dispatchers.IO) {
                 try {
@@ -33,11 +32,11 @@ open class RealCall<SResponse, FResponse>(private val rawCall: Call<SResponse>, 
                 when (result) {
                     is Throwable -> {
                         try {
-                            if (fail is BaseResponseIA<*>) {
-                                request.funFail.invoke(fail.apply {
+                            if (fail is BaseResponseI<*, *>) {
+                                request.funFail.invoke((fail as? BaseResponseI<*, Any>)?.apply {
                                     codeI = "-1"
                                     errorI = result.message
-                                })
+                                } as? FResponse)
                             } else {
                                 request.funFail.invoke(fail)
                             }
@@ -70,11 +69,11 @@ open class RealCall<SResponse, FResponse>(private val rawCall: Call<SResponse>, 
                             }
                         } catch (e: Exception) {
                             try {
-                                if (fail is BaseResponseIA<*>) {
-                                    request.funFail.invoke(fail.apply {
+                                if (fail is BaseResponseI<*, *>) {
+                                    request.funFail.invoke((fail as? BaseResponseI<Any, Any>)?.apply {
                                         codeI = code
                                         errorI = e.message
-                                    })
+                                    } as? FResponse)
                                 } else {
                                     request.funFail.invoke(fail)
                                 }

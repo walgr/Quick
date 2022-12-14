@@ -17,5 +17,5 @@ import java.lang.annotation.Target;
 public @interface BindData2View {
     @IdRes int id() default Constants.NO_RES_ID;
 
-    Class<? extends BindD2VHelper> helper() default BindD2VHelper.class;
+    Class<? extends BindD2VHHelper> helper() default BindD2VHHelper.class;
 }

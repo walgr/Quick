@@ -6,9 +6,8 @@ plugins {
 
 android {
     compileSdk rootProject.compileSdkVersion
-    buildFeatures {
-        dataBinding true
-    }
+    buildToolsVersion rootProject.androidTools
+
     defaultConfig {
         applicationId "com.wpf.app.quick"
         minSdk rootProject.minSdkVersion
@@ -31,6 +30,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        dataBinding true
+    }
 }
 
 dependencies {
@@ -47,10 +49,10 @@ dependencies {
     implementation 'androidx.paging:paging-runtime:3.1.1'
     implementation 'androidx.paging:paging-rxjava3:3.1.1'
     //viewpager2
-    implementation 'androidx.viewpager2:viewpager2:1.0.0'
+    implementation deps.viewpager2
     //Navigation
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.2'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.5.2'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
     //Sp存储
     implementation 'androidx.preference:preference-ktx:1.2.0'
     implementation 'androidx.datastore:datastore:1.0.0'

@@ -52,7 +52,7 @@ abstract class QuickDialog : Dialog, DialogSize, DialogLifecycle {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         dealSize()
-        mView = layoutView ?: View.inflate(context, layoutId, null)
+        mView = layoutView ?: View.inflate(getViewContext(), layoutId, null)
         setContentView(mView!!)
         if (window != null) {
             if (initDialogAnim() != DialogSize.NO_SET) {

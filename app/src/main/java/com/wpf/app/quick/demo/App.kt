@@ -27,7 +27,7 @@ class App : Application() {
     private fun initTestRequest() {
         RetrofitCreateHelper.newInstance(
             "https://www.wanandroid.com",
-            TestApi::class,
+            TestApi::class.java,
             arrayListOf(TestCommonCallAdapterFactory.create(), TestNoResponseCallAdapterFactory.create()),
             converterFactoryList = arrayListOf(TestGsonConverterFactory.create()),
             OkHttpCreateHelper.newInstance(interceptorList = arrayListOf(LogInterceptor()))

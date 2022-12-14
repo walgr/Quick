@@ -17,16 +17,16 @@ import kotlin.reflect.KClass
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-class BindFragmentsPlugin : BasePlugin {
+class BindFragmentsPlugin : BindBasePlugin {
 
     override fun dealField(
         obj: Any,
         viewModel: ViewModel?,
         field: Field
-    ): Boolean {
+    ) {
         try {
             val bindFragmentsAnn: BindFragments = field.getAnnotation(BindFragments::class.java)
-                ?: return false
+                ?: return
             field.isAccessible = true
             val viewPagerObj = field[getRealObj(obj, viewModel)]
             if (viewPagerObj is ViewPager) {
@@ -40,7 +40,7 @@ class BindFragmentsPlugin : BasePlugin {
                 } else if (obj is Fragment) {
                     fragmentManager = obj.childFragmentManager
                 }
-                if (fragmentManager == null) return true
+                if (fragmentManager == null) return
                 if (bindFragmentsAnn.withState) {
                     viewPager.adapter = FragmentsStateAdapter(
                         fragmentManager,
@@ -53,11 +53,9 @@ class BindFragmentsPlugin : BasePlugin {
                     )
                 }
             }
-            return true
         } catch (e: Exception) {
             e.printStackTrace()
         }
-        return false
     }
 
     private fun getFragment(

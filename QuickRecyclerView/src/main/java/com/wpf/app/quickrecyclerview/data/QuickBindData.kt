@@ -4,11 +4,11 @@ import android.content.Context
 import android.view.View
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
+import com.wpf.app.quickbind.QuickBind
 import com.wpf.app.quickrecyclerview.QuickAdapter
 import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
-import com.wpf.app.quickbind.QuickBind
-import com.wpf.app.quickbind.QuickBind.dealInPlugins
-import com.wpf.app.quickbind.interfaces.Bind
+import com.wpf.app.quickutil.bind.Bind
+import com.wpf.app.quickutil.bind.QuickBindWrap
 
 /**
  * Created by 王朋飞 on 2022/7/13.
@@ -16,22 +16,23 @@ import com.wpf.app.quickbind.interfaces.Bind
  */
 open class QuickBindData @JvmOverloads constructor(
     @LayoutRes open val layoutId: Int = 0,
-    @Transient
-    open val layoutView: View? = null,
+    @Transient open val layoutView: View? = null,
     isSuspension: Boolean = false,         //View是否悬浮置顶
 ) : QuickItemData(isSuspension = isSuspension), Bind {
 
     @Transient
     private var mViewHolder: QuickViewHolder<QuickBindData>? = null
+
     @Transient
     private var mAdapter: QuickAdapter? = null
     private var dealBind = true
+
     @Transient
     private var mView: View? = null
+
     @Transient
     private var isFirstLoad = true
 
-//    @ExperimentalStdlibApi
     open fun onCreateViewHolder(itemView: View) {
         this.mView = itemView
         if (dealBind) {
@@ -54,9 +55,10 @@ open class QuickBindData @JvmOverloads constructor(
         mView = viewHolder.itemView
         if (isFirstLoad) {
             onCreateViewHolder(itemView = viewHolder.itemView)
-        }
-        if (dealBind) {
-            dealInPlugins(this, null, QuickBind.bindPlugin)
+        } else {
+            if (dealBind) {
+                QuickBind.dealInPlugins(this, null, QuickBind.bindPlugin)
+            }
         }
         isFirstLoad = false
     }

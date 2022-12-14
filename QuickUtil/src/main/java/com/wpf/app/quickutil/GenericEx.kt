@@ -15,9 +15,9 @@ object GenericEx {
             if (actualType.isNotEmpty()) {
                 val type = actualType[0]
                 return if (type is ParameterizedType) {
-                    type.rawType as VM
+                    type.rawType as? VM
                 } else {
-                    type as VM
+                    type as? VM
                 }
             }
         }

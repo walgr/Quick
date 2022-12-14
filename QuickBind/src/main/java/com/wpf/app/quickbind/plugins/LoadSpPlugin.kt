@@ -12,16 +12,16 @@ import java.lang.reflect.Field
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-class LoadSpPlugin : BasePlugin {
+class LoadSpPlugin : BindBasePlugin {
 
     override fun dealField(
         obj: Any,
         viewModel: ViewModel?,
         field: Field
-    ): Boolean {
+    ) {
         try {
-            val loadSpAnn: LoadSp = field.getAnnotation(LoadSp::class.java) ?: return false
-            val context = getContext(obj) ?: return true
+            val loadSpAnn: LoadSp = field.getAnnotation(LoadSp::class.java) ?: return
+            val context = getContext(obj) ?: return
             var fileName = QuickBind.getBindSpFileName()
             if (!TextUtils.isEmpty(loadSpAnn.fileName)) {
                 fileName = loadSpAnn.fileName
@@ -36,10 +36,10 @@ class LoadSpPlugin : BasePlugin {
                 val valueObj: Any = Gson().fromJson(value, field.genericType)
                 field[getRealObj(obj, viewModel)] = valueObj
             }
-            return true
+            return
         } catch (e: Exception) {
             e.printStackTrace()
         }
-        return false
+        return
     }
 }

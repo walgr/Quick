@@ -1,8 +1,7 @@
 package com.wpf.app.quickrecyclerview.helper
 
 import android.widget.LinearLayout
-import androidx.recyclerview.widget.RecyclerView
-import com.wpf.app.quickbind.annotations.BindD2VHHelper
+import com.wpf.app.quickbind.annotations.BindD2VHelper
 import com.wpf.app.quickrecyclerview.QuickAdapter
 import com.wpf.app.quickrecyclerview.data.QuickItemData
 
@@ -11,10 +10,9 @@ import com.wpf.app.quickrecyclerview.data.QuickItemData
  * Created by 王朋飞 on 2022/7/20.
  *
  */
-object List2LinearLayout : BindD2VHHelper<LinearLayout, List<QuickItemData>> {
+object List2LinearLayout : BindD2VHelper<LinearLayout, List<QuickItemData>> {
 
     override fun initView(
-        viewHolder: RecyclerView.ViewHolder?,
         view: LinearLayout,
         data: List<QuickItemData>
     ) {

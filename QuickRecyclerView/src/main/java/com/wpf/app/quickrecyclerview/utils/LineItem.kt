@@ -1,6 +1,5 @@
 package com.wpf.app.quickrecyclerview.utils
 
-import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.ColorRes
 import com.wpf.app.quickbind.helper.binddatahelper.BindData2ViewHelper

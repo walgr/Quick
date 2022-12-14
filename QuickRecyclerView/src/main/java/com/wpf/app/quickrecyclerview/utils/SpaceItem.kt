@@ -20,7 +20,7 @@ open class SpaceItem(
     override fun onBindViewHolder(adapter: QuickAdapter, viewHolder: QuickViewHolder<QuickBindData>, position: Int) {
         super.onBindViewHolder(adapter, viewHolder, position)
         BindData2ViewHelper.bind(viewHolder.itemView.findViewById(R.id.rootView),
-            space, if (isVertical) Height2View else Width2View
+        space, if (isVertical) Height2View else Width2View
         )
     }
 }

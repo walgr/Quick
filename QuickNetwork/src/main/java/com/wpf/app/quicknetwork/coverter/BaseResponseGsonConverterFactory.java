@@ -7,8 +7,8 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 
+import com.wpf.app.quicknetwork.base.BaseResponse;
 import com.wpf.app.quicknetwork.base.BaseResponseS;
-import com.wpf.app.quicknetwork.base.BaseResponseI;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -20,6 +20,7 @@ import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.Writer;
 import java.lang.annotation.Annotation;
+import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -36,32 +37,50 @@ import retrofit2.Retrofit;
  * Created by wg on 2017/5/9.
  */
 
-public class WpfGsonConverterFactory extends Converter.Factory {
+public class BaseResponseGsonConverterFactory extends Converter.Factory {
 
     private final Gson gson;
 
-    private WpfGsonConverterFactory(Gson gson) {
+    private BaseResponseGsonConverterFactory(Gson gson) {
         if (gson == null) throw new NullPointerException("gson == null");
         this.gson = gson;
     }
 
-    public static WpfGsonConverterFactory create() {
+    public static BaseResponseGsonConverterFactory create() {
         return create(new Gson());
     }
 
-    public static WpfGsonConverterFactory create(Gson gson) {
-        return new WpfGsonConverterFactory(gson);
+    public static BaseResponseGsonConverterFactory create(Gson gson) {
+        return new BaseResponseGsonConverterFactory(gson);
     }
 
     @Override
     public Converter<ResponseBody, ?> responseBodyConverter(@NonNull Type type, @NonNull Annotation[] annotations, @NonNull Retrofit retrofit) {
-        if (!(type instanceof BaseResponseI) && !(type instanceof JSONObject) && !(type instanceof JSONArray)) {
-            BaseResponseS baseResponse = new BaseResponseS(type);
+        if (!(type instanceof ParameterizedType && ((ParameterizedType) type).getRawType() instanceof Class && parentIs((Class<?>) ((ParameterizedType) type).getRawType(), BaseResponse.class)) && !(type instanceof JSONObject) && !(type instanceof JSONArray)) {
+            BaseResponse<?> baseResponse = new BaseResponse<>();
             TypeAdapter<?> adapter = gson.getAdapter(TypeToken.getParameterized(baseResponse.getClass(), type));
             return new CustomGsonResponseBodyConverter<>(gson, adapter);
         }
         TypeAdapter<?> adapter = gson.getAdapter(TypeToken.get(type));
         return new CustomGsonResponseBodyConverter<>(gson, adapter);
+    }
+
+
+    private boolean parentIs(Class<?> curClass, Class<?> parentClass) {
+        Class<?> child = curClass;
+        while (child != null) {
+            if (parentClass.isInterface()) {
+                if (child.getInterfaces().length > 0 && parentIs(child.getInterfaces()[0], parentClass)) {
+                    return true;
+                } else {
+                    if (child == parentClass) return true;
+                }
+            } else {
+                if (child == parentClass) return true;
+            }
+            child = child.getSuperclass();
+        }
+        return false;
     }
 
     @Override

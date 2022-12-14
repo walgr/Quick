@@ -8,6 +8,8 @@
 
     PS：R2部分逻辑参照butterknife项目
 
+    项目目前处于初期建设阶段，文档粗略，功能可参照app里的demo。
+
 ### 项目功能
 
 1.基础Activity、ViewModelActivity、ViewBindingActivity、Fragment
@@ -46,4 +48,10 @@
 
     1.父选择基类支持悬浮和展开收起功能 已实现
 
-    2.BindFragment支持ViewPager2
+    2.BindFragment支持ViewPager2 已实现
+
+    3.可刷新List支持请求接口后自动加载 已实现
+    
+    4.布局View支持请求接口后自动映射赋值 已实现
+
+    5.布局xml支持接口请求并自动赋值 已实现

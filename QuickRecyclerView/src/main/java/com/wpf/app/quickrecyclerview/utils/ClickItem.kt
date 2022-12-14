@@ -1,6 +1,5 @@
 package com.wpf.app.quickrecyclerview.utils
 
-import android.view.View
 import com.wpf.app.quickbind.helper.binddatahelper.BindData2ViewHelper
 import com.wpf.app.quickbind.helper.binddatahelper.ItemClick
 import com.wpf.app.quickrecyclerview.data.QuickBindData

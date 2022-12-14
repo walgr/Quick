@@ -1,7 +1,6 @@
 package com.wpf.app.quick.widgets
 
 import android.content.Context
-import android.graphics.Color
 import android.graphics.Typeface
 import android.text.TextUtils
 import android.util.AttributeSet

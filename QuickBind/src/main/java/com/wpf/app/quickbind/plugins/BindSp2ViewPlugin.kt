@@ -14,17 +14,17 @@ import java.lang.reflect.Field
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-class BindSp2ViewPlugin : BasePlugin {
+class BindSp2ViewPlugin : BindBasePlugin {
 
     override fun dealField(
         obj: Any,
         viewModel: ViewModel?,
         field: Field
-    ): Boolean {
+    ) {
         val findViewA: BindSp2View =
-            field.getAnnotation(BindSp2View::class.java) ?: return false
+            field.getAnnotation(BindSp2View::class.java) ?: return
         field.isAccessible = true
-        val findView = field[getRealObj(obj, viewModel)] as View
+        val findView = field[getRealObj(obj, viewModel)] as? View
         if (findView is TextView) {
             setTextViewValue(
                 findView,
@@ -36,7 +36,7 @@ class BindSp2ViewPlugin : BasePlugin {
             )
         }
         field[getRealObj(obj, viewModel)] = findView
-        return true
+        return
 
     }
 

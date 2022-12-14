@@ -2,11 +2,11 @@ package com.wpf.app.quick.demo
 
 import android.annotation.SuppressLint
 import android.widget.TextView
-import com.wpf.app.quick.activity.QuickViewModelBindingActivity
+import com.wpf.app.quick.activity.QuickViewBindingActivity
 import com.wpf.app.quick.annotations.BindView
 import com.wpf.app.quick.annotations.GroupView
 import com.wpf.app.quick.demo.databinding.ActivityDataTestBinding
-import com.wpf.app.quick.demo.viewmodel.IntentDataTestViewModel
+import com.wpf.app.quick.demo.viewmodel.IntentDataTestModel
 import com.wpf.app.quickbind.utils.GroupViews
 
 
@@ -14,7 +14,7 @@ import com.wpf.app.quickbind.utils.GroupViews
  * Created by 王朋飞 on 2022/6/13.
  */
 class IntentDataTestActivity :
-    QuickViewModelBindingActivity<IntentDataTestViewModel, ActivityDataTestBinding>(
+    QuickViewBindingActivity<IntentDataTestModel, ActivityDataTestBinding>(
         R.layout.activity_data_test,
         titleName = "传输测试页"
     ) {

@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 /**
  * Created by 王朋飞 on 2022/7/6.
  */
-public interface BindD2VHelper<VH, V, Data> {
+public interface BindD2VHHelper<VH, V, Data> {
 
     void initView(@Nullable VH viewHolder, @NonNull V view, @NonNull Data data);
 }

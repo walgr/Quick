@@ -3,15 +3,15 @@ package com.wpf.app.quickbind.helper.binddatahelper
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.wpf.app.quickbind.annotations.BindD2VHHelper
+import com.wpf.app.quickbind.annotations.BindD2VHelper
 
 /**
  * Created by 王朋飞 on 2022/7/20.
  *
  */
-object Height2View : BindD2VHHelper<View, Int> {
+object Height2View : BindD2VHelper<View, Int> {
 
-    override fun initView(viewHolder: RecyclerView.ViewHolder?, view: View, data: Int) {
+    override fun initView(view: View, data: Int) {
         view.layoutParams?.let {
             it.height = data
             view.layoutParams = it

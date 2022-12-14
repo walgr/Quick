@@ -10,27 +10,27 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.lifecycle.ViewModel
 import androidx.viewpager.widget.ViewPager
 import com.wpf.app.quickbind.annotations.BindFragment
-import com.wpf.app.quickbind.interfaces.Bind
 import com.wpf.app.quickbind.interfaces.BindBaseFragment
 import com.wpf.app.quickbind.interfaces.BindViewModel
 import com.wpf.app.quickbind.utils.getViewContext
 import com.wpf.app.quickbind.viewpager.ViewPagerSize
+import com.wpf.app.quickutil.bind.Bind
 import java.lang.reflect.Field
 
 /**
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-class BindFragmentPlugin : BasePlugin {
+class BindFragmentPlugin : BindBasePlugin {
 
     override fun dealField(
         obj: Any,
         viewModel: ViewModel?,
         field: Field
-    ): Boolean {
+    ) {
         try {
             val bindFragmentAnn: BindFragment = field.getAnnotation(BindFragment::class.java)
-                ?: return false
+                ?: return
             field.isAccessible = true
             val viewPagerObj = field[getRealObj(obj, viewModel)]
             if (viewPagerObj is ViewPager) {
@@ -50,7 +50,7 @@ class BindFragmentPlugin : BasePlugin {
                 } else if (context is Fragment) {
                     fragmentManager = (context as Fragment).childFragmentManager
                 }
-                if (fragmentManager == null) return true
+                if (fragmentManager == null) return
                 if (bindFragmentAnn.withState) {
                     viewPager.adapter = object : FragmentStatePagerAdapter(
                         fragmentManager,
@@ -214,10 +214,8 @@ class BindFragmentPlugin : BasePlugin {
                     }
                 }
             }
-            return true
         } catch (e: Exception) {
             e.printStackTrace()
         }
-        return false
     }
 }

@@ -2,8 +2,10 @@ package com.wpf.app.quickbind
 
 import android.app.Activity
 import android.app.Dialog
+import android.util.ArrayMap
 import android.view.View
 import androidx.annotation.UiThread
+import androidx.collection.arrayMapOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
@@ -12,9 +14,11 @@ import com.wpf.app.quick.annotations.BindView
 import com.wpf.app.quick.annotations.GroupView
 import com.wpf.app.quick.runtime.Databinder
 import com.wpf.app.quickbind.annotations.*
-import com.wpf.app.quickbind.interfaces.Bind
 import com.wpf.app.quickbind.plugins.*
 import com.wpf.app.quickbind.utils.ReflectHelper
+import com.wpf.app.quickutil.bind.Bind
+import com.wpf.app.quickutil.bind.QuickBindI
+import com.wpf.app.quickutil.bind.plugins.BasePlugin
 import java.lang.reflect.Constructor
 import java.lang.reflect.Field
 import java.lang.reflect.InvocationTargetException
@@ -24,14 +28,25 @@ import kotlin.reflect.KClass
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-object QuickBind {
+object QuickBind: QuickBindI {
     private var bindSpFileName = "QuickViewSpBindFile"
 
-    private val plugins: MutableMap<KClass<out Annotation>, BasePlugin> = LinkedHashMap()
-    val bindPlugin: MutableMap<KClass<out Annotation>, BasePlugin> =
-        linkedMapOf(Pair(BindData2View::class, BindData2ViewPlugin()))
+    private val plugins: LinkedHashMap<KClass<out Annotation>, BasePlugin> = LinkedHashMap()
+    val bindPlugin = arrayMapOf<KClass<out Annotation>, BasePlugin>(Pair(BindData2View::class, BindData2ViewPlugin()))
 
-    fun <T : BasePlugin> registerPlugin(ann: KClass<out Annotation>, plugin: T) {
+    override fun getRegisterPlugins(): MutableMap<KClass<out Annotation>, BasePlugin> {
+        return plugins
+    }
+
+    override fun getBindPlugin(): MutableMap<KClass<out Annotation>, BasePlugin> {
+        return bindPlugin
+    }
+
+    override fun <T : BasePlugin> registerPlugin(ann: KClass<out Annotation>, plugin: T) {
+        plugins[ann] = plugin
+    }
+
+    override fun <T : BasePlugin> registerPlugin(index: Int, ann: KClass<out Annotation>, plugin: T) {
         plugins[ann] = plugin
     }
 
@@ -44,42 +59,44 @@ object QuickBind {
         registerPlugin(LoadSp::class, LoadSpPlugin())
         registerPlugin(BindFragments::class, BindFragmentsPlugin())
         registerPlugin(BindFragment::class, BindFragmentPlugin())
+        registerPlugin(BindFragments2::class, BindFragments2Plugin())
+        registerPlugin(BindFragment2::class, BindFragment2Plugin())
         registerPlugin(BindData2View::class, BindData2ViewPlugin())
     }
 
-    fun bind(activity: Activity) {
+    override fun bind(activity: Activity) {
         bind(activity, null)
     }
 
-    fun bind(activity: Activity, viewModel: ViewModel?) {
+    override fun bind(activity: Activity, viewModel: ViewModel?) {
         bindBinder(viewModel ?: activity, activity.window.decorView)
         dealInPlugins(activity, viewModel)
     }
 
-    fun bind(fragment: Fragment) {
+    override fun bind(fragment: Fragment) {
         bind(fragment, null)
     }
 
-    fun bind(fragment: Fragment, viewModel: ViewModel?) {
+    override fun bind(fragment: Fragment, viewModel: ViewModel?) {
         fragment.view?.let {
             bindBinder(viewModel ?: fragment, it)
         }
         dealInPlugins(fragment, viewModel)
     }
 
-    fun bind(viewHolder: RecyclerView.ViewHolder) {
+    override fun bind(viewHolder: RecyclerView.ViewHolder) {
         bindBinder(viewHolder, viewHolder.itemView)
         dealInPlugins(viewHolder, null)
     }
 
-    fun bind(dialog: Dialog) {
+    override fun bind(dialog: Dialog) {
         bindBinder(dialog, dialog.window!!.decorView)
         dealInPlugins(dialog, null)
     }
 
-    fun <T : Bind> bind(bind: T) {
+    override fun <T : Bind> bind(bind: T) {
         bind.getView()?.let {
-            bindBinder(bind, bind.getView()!!)
+            bindBinder(bind, it)
         }
         dealInPlugins(bind, null)
     }
@@ -138,11 +155,11 @@ object QuickBind {
         return bindingCtor
     }
 
-    fun dealInPlugins(obj: Any?, viewModel: ViewModel?) {
+    override fun dealInPlugins(obj: Any?, viewModel: ViewModel?) {
         dealInPlugins(obj, viewModel, plugins)
     }
 
-    fun dealInPlugins(
+    override fun dealInPlugins(
         obj: Any?,
         viewModel: ViewModel?,
         plugins: MutableMap<KClass<out Annotation>, BasePlugin>
@@ -150,7 +167,7 @@ object QuickBind {
         if (obj == null) return
         try {
             if (viewModel != null) {
-                val viewModelFields: List<Field> = ReflectHelper.getFieldWithParent(viewModel)
+                val viewModelFields: List<Field> = ReflectHelper.getFieldAndParent(viewModel)
                 for (field in viewModelFields) {
                     val annotations = field.annotations.toMutableList()
                     annotations.sortBy { plugins.keys.indexOf(it.annotationClass) }
@@ -160,7 +177,7 @@ object QuickBind {
                     annotations.clear()
                 }
             } else {
-                val fields: List<Field> = ReflectHelper.getFieldWithParent(obj)
+                val fields: List<Field> = ReflectHelper.getFieldAndParent(obj)
                 for (field in fields) {
                     val annotations = field.annotations.toMutableList()
                     annotations.sortBy { plugins.keys.indexOf(it.annotationClass) }

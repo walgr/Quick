@@ -10,6 +10,12 @@ interface TestApi {
 
     @GET("/article/list/{page}/json")
     fun 首页文章列表(
-        @Path("page") path: Int
+        @Path("page") page: Int
     ): TestCommonCall<首页文章>
+}
+
+object TestApiO {
+    fun Api(): Class<TestApi> {
+        return TestApi::class.java
+    }
 }

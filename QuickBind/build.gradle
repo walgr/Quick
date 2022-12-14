@@ -42,13 +42,16 @@ dependencies {
     compileOnly deps.glide
     //GSON
     compileOnly deps.gson
+    //viewpager2
+    compileOnly deps.viewpager2
 
     if (IS_REMOTE.toBoolean()) {
         api deps.quickbind.runtime
+        api deps.quickbind.network
     } else {
         api project(":Quick-runtime")
+        api project(":QuickNetwork")
     }
-
 }
 
 apply from: rootProject.file('gradle-mvn-push-aar.gradle')

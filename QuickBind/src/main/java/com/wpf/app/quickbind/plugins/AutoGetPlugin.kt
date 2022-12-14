@@ -13,18 +13,18 @@ import java.lang.reflect.ParameterizedType
  * Created by 王朋飞 on 2022/7/12.
  *
  */
-class AutoGetPlugin : BasePlugin {
+class AutoGetPlugin : BindBasePlugin {
 
-    override fun dealField(obj: Any, viewModel: ViewModel?, field: Field): Boolean {
+    override fun dealField(obj: Any, viewModel: ViewModel?, field: Field) {
         var objTemp = obj
-        val autoGet: AutoGet = field.getAnnotation(AutoGet::class.java) ?: return false
+        val autoGet: AutoGet = field.getAnnotation(AutoGet::class.java) ?: return
         var bundle: Bundle? = null
         if (objTemp is Activity) {
             bundle = objTemp.intent.extras
         } else if (objTemp is Fragment) {
             bundle = objTemp.arguments
         }
-        if (bundle == null) return true
+        if (bundle == null) return
         if (viewModel != null) {
             objTemp = viewModel
         }
@@ -39,7 +39,7 @@ class AutoGetPlugin : BasePlugin {
                 val value = bundle.getParcelable<Parcelable>(key)
                 if (value != null) {
                     field[objTemp] = value
-                    return true
+                    return
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -57,7 +57,7 @@ class AutoGetPlugin : BasePlugin {
                     }
                 } else {
                     field[objTemp] = value
-                    return true
+                    return
                 }
             }
         } catch (e: Exception) {
@@ -74,7 +74,7 @@ class AutoGetPlugin : BasePlugin {
         } catch (e: Exception) {
             e.printStackTrace()
         }
-        return true
+        return
     }
 
 

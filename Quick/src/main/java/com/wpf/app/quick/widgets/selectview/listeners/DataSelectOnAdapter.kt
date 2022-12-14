@@ -4,14 +4,14 @@ import com.wpf.app.quick.widgets.selectview.QuickSelectAdapter
 import com.wpf.app.quick.widgets.selectview.data.QuickChildSelectData
 import com.wpf.app.quick.widgets.selectview.data.QuickParentSelectData
 import com.wpf.app.quick.widgets.selectview.data.QuickSelectData
-import com.wpf.app.quickrecyclerview.listeners.DataChangeAdapter
+import com.wpf.app.quickrecyclerview.listeners.DataAdapter
 
 
 /**
  * Created by 王朋飞 on 2022/9/2.
  * 处理父子同级
  */
-interface DataSelectOnAdapter : DataChangeAdapter, SetSelectChange {
+interface DataSelectOnAdapter : DataAdapter, SetSelectChange {
 
     /**
      * Item点击
@@ -116,7 +116,7 @@ interface DataSelectOnAdapter : DataChangeAdapter, SetSelectChange {
             it.isSelect = true
         }
         if (dealChange) {
-            getAdapter().notifyDataSetChanged()
+            getQuickAdapter().notifyDataSetChanged()
         }
     }
 
@@ -137,12 +137,12 @@ interface DataSelectOnAdapter : DataChangeAdapter, SetSelectChange {
     }
 
     fun notifyItemChange() {
-        getAdapter().notifyDataSetChanged()
+        getQuickAdapter().notifyDataSetChanged()
     }
 
     fun notifyItemChange(changePos: List<Int>) {
         changePos.forEach {
-            if (it > -1) getAdapter().notifyItemChanged(it)
+            if (it > -1) getQuickAdapter().notifyItemChanged(it)
         }
     }
 
@@ -157,7 +157,7 @@ interface DataSelectOnAdapter : DataChangeAdapter, SetSelectChange {
     }
 
     fun getSelectAdapter(): QuickSelectAdapter {
-        return getAdapter() as QuickSelectAdapter
+        return getQuickAdapter() as QuickSelectAdapter
     }
 
     fun asSelectData(): MutableList<QuickSelectData>? {

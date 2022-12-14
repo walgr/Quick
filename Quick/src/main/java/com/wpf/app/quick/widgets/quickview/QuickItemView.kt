@@ -6,8 +6,8 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
-import com.wpf.app.quickbind.interfaces.Bind
 import com.wpf.app.quickbind.interfaces.RunOnContext
+import com.wpf.app.quickutil.bind.Bind
 import kotlin.math.abs
 
 /**
@@ -25,6 +25,10 @@ abstract class QuickItemView @JvmOverloads constructor(
 ) : View(mContext, attributeSet, defStyleAttr), Bind {
 
     init {
+        init()
+    }
+
+    private fun init() {
         initViewType()
         initView()
     }

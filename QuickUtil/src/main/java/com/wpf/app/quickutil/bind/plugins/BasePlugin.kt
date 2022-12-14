@@ -1,4 +1,4 @@
-package com.wpf.app.quickbind.plugins
+package com.wpf.app.quickutil.bind.plugins
 
 import android.app.Activity
 import android.app.Dialog
@@ -9,9 +9,7 @@ import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
-import com.wpf.app.quick.runtime.Databinder
-import com.wpf.app.quickbind.QuickBind
-import com.wpf.app.quickbind.interfaces.Bind
+import com.wpf.app.quickutil.bind.Bind
 import java.lang.reflect.Field
 
 /**
@@ -20,39 +18,8 @@ import java.lang.reflect.Field
  */
 interface BasePlugin {
 
-//    fun sortOrder(): Int
-
-    @NonNull
-    fun getRealObj(@NonNull obj: Any, @Nullable viewModel: ViewModel?): Any {
+    fun getRealObj(obj: Any, viewModel: ViewModel?): Any {
         return viewModel ?: obj
-    }
-
-    fun getSaveId(
-        @NonNull obj: Any,
-        @Nullable viewModel: ViewModel?,
-        @NonNull field: Field,
-        id: Int
-    ): Int {
-        val dataBinder: Databinder =
-            QuickBind.BINDEDMAP[getRealObj(obj, viewModel).javaClass] ?: return id
-        val value: Any? = dataBinder.getFieldValue(field.name + "BindViewId")
-        return if (value is Int) {
-            value
-        } else id
-    }
-
-    @Nullable
-    fun getSaveIdList(
-        @NonNull obj: Any,
-        @Nullable viewModel: ViewModel?,
-        @NonNull field: Field
-    ): ArrayList<Int>? {
-        val dataBinder: Databinder =
-            QuickBind.BINDEDMAP[getRealObj(obj, viewModel).javaClass] ?: return null
-        val value: Any? = dataBinder.getFieldValue(field.name)
-        return if (value is ArrayList<*>) {
-            value as ArrayList<Int>
-        } else null
     }
 
     fun getContext(obj: Any?): Context? {
@@ -114,5 +81,5 @@ interface BasePlugin {
         obj: Any,
         viewModel: ViewModel?,
         field: Field
-    ): Boolean
+    )
 }
