@@ -20,9 +20,10 @@ open class QuickSelectData(
     open var defaultSelect: Boolean = false,            //是否默认选中，true 清空后会再次选中
     open var isSelect: Boolean = defaultSelect,
     @LayoutRes override val layoutId: Int = 0,
-    override val layoutView: View? = null,
+    @Transient override val layoutView: View? = null,
     override val isSuspension: Boolean = false,         //View是否悬浮置顶
 ) : QuickClickData() {
+
     override fun onClick() {
 
     }
