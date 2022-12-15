@@ -5,7 +5,7 @@ import android.view.View
 abstract class QuickStateData(
     open var state: Boolean = false,
     override val layoutId: Int = 0,
-    override val layoutView: View? = null,
+    @Transient override val layoutView: View? = null,
     override val isSuspension: Boolean = false,
 ): QuickClickData() {
 

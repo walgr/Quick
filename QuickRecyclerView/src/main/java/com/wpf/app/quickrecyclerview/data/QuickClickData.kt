@@ -8,10 +8,12 @@ import com.wpf.app.quickrecyclerview.data.QuickBindData
 
 abstract class QuickClickData(
     override val layoutId: Int = 0,
+    @Transient
     override val layoutView: View? = null,
     override val isSuspension: Boolean = false,
 ): QuickBindData() {
 
+    @Transient
     @BindData2View(helper = ItemClick::class)
     private val itemClick = itemClick {
         onClick()
