@@ -32,7 +32,7 @@ class RefreshListTestActivity : QuickActivity(R.layout.activity_refresh_list, ti
         }.success {
             callback.backData(it?.data?.datas)
         }.after {
-            if (requestData.isRefresh) {
+            if (requestData.isViewRefresh) {
                 mSmartRefreshLayout?.finishRefresh()
             } else {
                 mSmartRefreshLayout?.finishLoadMore()

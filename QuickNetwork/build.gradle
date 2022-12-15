@@ -29,11 +29,11 @@ android {
 
 dependencies {
     compileOnly deps.androidx.annotations
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.30.1-eap13'
+    implementation deps.kotlin.kotlinxcoroutinescore
     //retrofit2-okhttp-gson
-    compileOnly 'com.squareup.retrofit2:retrofit:2.9.0'
-    compileOnly 'com.squareup.okhttp3:okhttp:4.10.0'
-    compileOnly 'com.google.code.gson:gson:2.10'
+    compileOnly deps.retrofit
+    compileOnly deps.okhttp
+    compileOnly deps.gson
 
     if (IS_REMOTE.toBoolean()) {
         api deps.quickbind.util
