@@ -46,6 +46,7 @@ class RequestTestModel: QuickBindingModel<ActivityRequestTestBinding>() {
     }.isManual { true }
 
     override fun onBindingCreated(mViewBinding: ActivityRequestTestBinding?) {
+        //手动请求
         info.manualRequest()
     }
 }

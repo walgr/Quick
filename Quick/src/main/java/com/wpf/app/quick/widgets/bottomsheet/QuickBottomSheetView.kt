@@ -102,11 +102,11 @@ open class QuickBottomSheetView(
         return mBehavior
     }
 
-    init {
-        initView()
-    }
-
     override fun getViewContext(): Context {
         return context
+    }
+
+    init {
+        initView()
     }
 }

@@ -11,18 +11,18 @@ open class RequestData @JvmOverloads constructor(
     open var pageSize: Int = 10
 ) {
 
-    var isRefresh = true
+    var isViewRefresh = true
     //刷新偏移量
-    var offset: Int = 0
+    open var offset: Int = 0
     open fun refresh() {
         page = 0
-        isRefresh = true
+        isViewRefresh = true
         offset = 0
     }
 
     open fun loadMore() {
         page++
-        isRefresh = false
+        isViewRefresh = false
     }
 
     /**

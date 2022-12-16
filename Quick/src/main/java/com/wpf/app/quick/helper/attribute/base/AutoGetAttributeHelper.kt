@@ -1,14 +1,9 @@
 package com.wpf.app.quick.helper.attribute.base
 
 import android.content.Context
-import android.content.res.XmlResourceParser
 import android.graphics.Color
-import android.util.ArrayMap
 import android.util.AttributeSet
-import androidx.annotation.ColorRes
-import androidx.annotation.DrawableRes
 import androidx.annotation.StyleableRes
-import androidx.collection.arrayMapOf
 import androidx.core.content.ContextCompat
 import java.lang.reflect.Field
 
@@ -24,7 +19,7 @@ open class AutoGetAttributeHelper constructor(
     @StyleableRes styleableId: IntArray
 ) : AttributeHelper(context, attributeSet, styleableId) {
 
-    private val fieldMap = arrayMapOf<String, Field>()
+    private val fieldMap = mutableMapOf<String, Field>()
 
     init {
         getAllClassField()

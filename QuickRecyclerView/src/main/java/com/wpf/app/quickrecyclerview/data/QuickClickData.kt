@@ -4,7 +4,6 @@ import android.view.View
 import com.wpf.app.quick.annotations.BindData2View
 import com.wpf.app.quickbind.helper.binddatahelper.ItemClick
 import com.wpf.app.quickbind.interfaces.itemClick
-import com.wpf.app.quickrecyclerview.data.QuickBindData
 
 abstract class QuickClickData(
     override val layoutId: Int = 0,

@@ -10,7 +10,6 @@ import android.widget.LinearLayout
 import android.widget.RadioGroup
 import android.widget.RelativeLayout
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.children
 import com.wpf.app.quickutil.GenericEx
 import com.wpf.app.quick.widgets.quickview.util.QuickMeasure
 
@@ -79,12 +78,20 @@ open class QuickViewGroup<T : ViewGroup> @JvmOverloads constructor(
         if (shadowView?.childCount != 0) return
         if (childCount == 0) return
         val childList = mutableListOf<View>()
-        childList.addAll(children.toMutableList())
+        childList.addAll(children())
         removeAllViews()
         shadowView?.removeAllViews()
         childList.forEach {
             this.shadowView?.addView(it)
         }
+    }
+
+    private fun children(): List<View> {
+        val result = arrayListOf<View>()
+        for (i in 0 until childCount) {
+            result.add(getChildAt(i))
+        }
+        return result
     }
 
     private fun addTToParent() {

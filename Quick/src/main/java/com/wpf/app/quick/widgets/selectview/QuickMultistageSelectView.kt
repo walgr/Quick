@@ -2,9 +2,9 @@ package com.wpf.app.quick.widgets.selectview
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import androidx.core.view.children
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import com.wpf.app.quick.widgets.selectview.listeners.SetSelectChange
@@ -37,12 +37,20 @@ open class QuickMultistageSelectView @JvmOverloads constructor(
 
     override fun onFinishInflate() {
         super.onFinishInflate()
-        children.forEachIndexed { index, it ->
+        children().forEachIndexed { index, it ->
             if (it is QuickSelectRecyclerView) {
                 addSelectRecyclerView(it, index)
             }
         }
         addListener()
+    }
+
+    private fun children(): List<View> {
+        val result = arrayListOf<View>()
+        for (i in 0 until childCount) {
+            result.add(getChildAt(i))
+        }
+        return result
     }
 
     private fun initView() {

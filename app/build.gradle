@@ -48,8 +48,7 @@ dependencies {
     //分页
     implementation 'androidx.paging:paging-runtime:3.1.1'
     implementation 'androidx.paging:paging-rxjava3:3.1.1'
-    //viewpager2
-    implementation deps.viewpager2
+
     //Navigation
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
@@ -77,6 +76,8 @@ dependencies {
     implementation deps.androidx.lifecycleviewmodelktx
     //列表
     implementation deps.androidx.recyclerview
+    //viewpager2
+    implementation deps.viewpager2
 //    implementation 'jp.wasabeef:recyclerview-animators:4.0.2'
     //retrofit2-okhttp-gson
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'

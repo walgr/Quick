@@ -18,7 +18,7 @@ interface Request2List<Request : RequestData, Data : QuickItemData> : Request2Li
     @CallSuper
     fun requestAndCallback(requestData: Request, callback: CallbackList<Data>) {
         this.requestData = requestData
-        if (requestData.isRefresh) {
+        if (requestData.isViewRefresh) {
             this.refreshCallback = callback
         } else {
             this.loadMoreCallback = callback
@@ -48,7 +48,7 @@ interface Request2ListWithView<Request : RequestData, Data : QuickItemData, View
     fun requestAndCallback(view: View, requestData: Request, callback: CallbackList<Data>) {
         this.view = view
         this.requestData = requestData
-        if (requestData.isRefresh) {
+        if (requestData.isViewRefresh) {
             this.refreshCallback = callback
         } else {
             this.loadMoreCallback = callback
@@ -103,7 +103,7 @@ interface Request2ListWithView<Request : RequestData, Data : QuickItemData, View
     @CallSuper
     fun manualRequest(): Request2ListWithView<Request, Data, View> {
         if (view != null && requestData != null) {
-            if (requestData!!.isRefresh) {
+            if (requestData!!.isViewRefresh) {
                 refreshCallback?.let {
                     request2List?.requestAndCallback(view!!, requestData!!, it)
                 }
@@ -118,7 +118,7 @@ interface Request2ListWithView<Request : RequestData, Data : QuickItemData, View
 
     @CallSuper
     fun manualRequest(requestData: Request): Request2ListWithView<Request, Data, View> {
-        if (requestData.isRefresh) {
+        if (requestData.isViewRefresh) {
             refreshCallback?.let {
                 request2List?.requestAndCallback(view!!, requestData, it)
             }
@@ -135,7 +135,7 @@ interface Request2ListWithView<Request : RequestData, Data : QuickItemData, View
      */
     @CallSuper
     fun manualRequest(view: View, requestData: Request): Request2ListWithView<Request, Data, View> {
-        if (requestData.isRefresh) {
+        if (requestData.isViewRefresh) {
             refreshCallback?.let {
                 request2List?.requestAndCallback(view, requestData, it)
             }

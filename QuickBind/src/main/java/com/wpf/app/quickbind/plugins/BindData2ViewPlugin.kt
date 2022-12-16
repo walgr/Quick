@@ -69,7 +69,7 @@ class BindData2ViewPlugin : BindBasePlugin {
     private fun parentClassIs(cur: Class<*>, parentName: String): Boolean {
         var cur = cur
         while (parentName != cur.simpleName) {
-            cur = cur.superclass
+            cur = cur.superclass as Class<*>
             if (ReflectHelper.canBreakScan(cur)) return false
             if (cur.simpleName == parentName) {
                 return true
