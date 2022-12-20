@@ -4,6 +4,7 @@ import android.view.View
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import com.wpf.app.quick.widgets.selectview.QuickSelectAdapter
+import com.wpf.app.quickbind.interfaces.RunOnContext
 import com.wpf.app.quickrecyclerview.QuickAdapter
 import com.wpf.app.quickrecyclerview.data.QuickBindData
 import com.wpf.app.quickrecyclerview.data.QuickClickData
@@ -21,6 +22,7 @@ open class QuickSelectData(
     open var isSelect: Boolean = defaultSelect,
     @LayoutRes override val layoutId: Int = 0,
     @Transient override val layoutView: View? = null,
+    @Transient override val layoutViewInContext: RunOnContext<View>? = null,
     override val isSuspension: Boolean = false,         //View是否悬浮置顶
 ) : QuickClickData() {
 

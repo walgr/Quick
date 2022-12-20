@@ -15,7 +15,7 @@ import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
 open class ClickItem @JvmOverloads constructor(
     override val layoutId: Int,
     open val clickSelf: RunItemClickWithSelf<ClickItem>? = null,
-    private val click: RunItemClick? = null,
+    open val click: RunItemClick? = null,
 ) : QuickBindData(layoutId) {
 
     override fun onBindViewHolder(adapter: QuickAdapter, viewHolder: QuickViewHolder<QuickBindData>, position: Int) {

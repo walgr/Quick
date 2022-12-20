@@ -7,6 +7,7 @@ import com.wpf.app.quick.widgets.selectview.QuickSelectAdapter
 import com.wpf.app.quickrecyclerview.data.QuickBindData
 import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
 import com.wpf.app.quickbind.interfaces.RunItemClickWithSelf
+import com.wpf.app.quickbind.interfaces.RunOnContext
 import com.wpf.app.quickutil.recyclerview.scrollToPositionAndOffset
 
 /**
@@ -30,7 +31,8 @@ open class QuickParentSelectData(
     @Transient
     override val maxLimitListener: MaxLimitListener? = null, //超出反馈
     @LayoutRes override val layoutId: Int = 0,
-    override val layoutView: View? = null,
+    @Transient override val layoutView: View? = null,
+    @Transient override val layoutViewInContext: RunOnContext<View>? = null,
 ) : QuickChildSelectData(
     onChildClick = onParentClick as? RunItemClickWithSelf<QuickChildSelectData>,
 ) {

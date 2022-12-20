@@ -22,3 +22,15 @@ open class QuickItemData(
         }
     }
 }
+
+fun QuickItemData?.and(other: QuickItemData) : List<QuickItemData>? {
+    if (this == null) return null
+    return arrayListOf(this, other)
+}
+
+fun QuickItemData?.and(otherList: List<QuickItemData>) : List<QuickItemData>? {
+    if (this == null) return null
+    return arrayListOf(this).apply {
+        addAll(otherList)
+    }
+}

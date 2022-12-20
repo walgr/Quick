@@ -15,12 +15,18 @@ import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
 open class SpaceItem(
     open val space: Int,
     open val isVertical: Boolean = true
-): QuickBindData(R.layout.adapter_space) {
+) : QuickBindData(R.layout.adapter_space) {
 
-    override fun onBindViewHolder(adapter: QuickAdapter, viewHolder: QuickViewHolder<QuickBindData>, position: Int) {
+    override fun onBindViewHolder(
+        adapter: QuickAdapter,
+        viewHolder: QuickViewHolder<QuickBindData>,
+        position: Int
+    ) {
         super.onBindViewHolder(adapter, viewHolder, position)
-        BindData2ViewHelper.bind(viewHolder.itemView.findViewById(R.id.rootView),
-        space, if (isVertical) Height2View else Width2View
+        BindData2ViewHelper.bind(
+            viewHolder.itemView.findViewById(R.id.rootView),
+            space,
+            if (isVertical) Height2View else Width2View
         )
     }
 }

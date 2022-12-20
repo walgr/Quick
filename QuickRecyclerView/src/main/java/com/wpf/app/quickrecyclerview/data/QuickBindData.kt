@@ -5,10 +5,10 @@ import android.view.View
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import com.wpf.app.quickbind.QuickBind
+import com.wpf.app.quickbind.interfaces.RunOnContext
 import com.wpf.app.quickrecyclerview.QuickAdapter
 import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
 import com.wpf.app.quickutil.bind.Bind
-import com.wpf.app.quickutil.bind.QuickBindWrap
 
 /**
  * Created by 王朋飞 on 2022/7/13.
@@ -17,6 +17,7 @@ import com.wpf.app.quickutil.bind.QuickBindWrap
 open class QuickBindData @JvmOverloads constructor(
     @LayoutRes open val layoutId: Int = 0,
     @Transient open val layoutView: View? = null,
+    @Transient open val layoutViewInContext: RunOnContext<View>? = null,
     isSuspension: Boolean = false,         //View是否悬浮置顶
 ) : QuickItemData(isSuspension = isSuspension), Bind {
 

@@ -48,7 +48,7 @@ open class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>()
 
             if (holderAnnotation == null) {
                 holder = if (findData is QuickBindData) {
-                    QuickViewHolder(viewGroup, findData.layoutId, findData.layoutView)
+                    QuickViewHolder(viewGroup, findData.layoutId, findData.layoutView, findData.layoutViewInContext)
                 } else {
                     throw RuntimeException("当前数据类未使用HolderClass注解指定ViewHolder")
                 }

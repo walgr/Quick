@@ -34,6 +34,14 @@ interface DataAdapter {
         getData()?.addAll(mDataList)
     }
 
+    fun addData(mDataList: List<QuickItemData>?) {
+        if (mDataList == null) return
+        if (getData() == null) {
+            setData(arrayListOf())
+        }
+        getData()?.addAll(mDataList)
+    }
+
     fun addData(data: QuickItemData) {
         if (getData() == null) {
             setData(arrayListOf())

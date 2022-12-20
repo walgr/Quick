@@ -11,18 +11,23 @@ import com.wpf.app.quickrecyclerview.data.QuickBindData
 import com.wpf.app.quickrecyclerview.data.QuickItemData
 import com.wpf.app.quickrecyclerview.listeners.QuickAdapterListener
 import com.wpf.app.quickbind.QuickBind
+import com.wpf.app.quickbind.interfaces.RunOnContext
 
 /**
  * Created by 王朋飞 on 2022/7/13.
  *
  */
 open class QuickViewHolder<T : QuickItemData> @JvmOverloads constructor(
-    open val mParent: ViewGroup,
-    @LayoutRes open val layoutId: Int = 0,
-    open val layoutView: View? = null,
+    mParent: ViewGroup,
+    @LayoutRes layoutId: Int = 0,
+    layoutView: View? = null,
+    layoutViewInContext: RunOnContext<View>? = null,
     open var dealBindView: Boolean = false,
     open var autoClick: Boolean = false
-) : RecyclerView.ViewHolder(layoutView ?: LayoutInflater.from(mParent.context).inflate(layoutId, mParent, false)) {
+) : RecyclerView.ViewHolder(
+    layoutView ?: layoutViewInContext?.run(mParent.context) ?: LayoutInflater.from(mParent.context)
+        .inflate(layoutId, mParent, false)
+) {
 
     private lateinit var mQuickAdapter: QuickAdapter
     var itemPosition: Int = -1
