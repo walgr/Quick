@@ -1,6 +1,7 @@
 package com.wpf.app.quickbind.helper.binddatahelper
 
 import android.view.View
+import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.recyclerview.widget.RecyclerView
 import com.wpf.app.quickbind.annotations.BindD2VHelper
@@ -12,7 +13,7 @@ import com.wpf.app.quickbind.annotations.BindD2VHelper
  */
 object Color2View: BindD2VHelper<View, Int> {
 
-    override fun initView(view: View, @DrawableRes data: Int) {
+    override fun initView(view: View, @ColorInt data: Int) {
         view.setBackgroundColor(data)
     }
 }

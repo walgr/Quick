@@ -2,6 +2,7 @@ package com.wpf.app.quick.demo
 
 import android.annotation.SuppressLint
 import android.widget.TextView
+import android.widget.Toast
 import com.wpf.app.quick.activity.QuickViewBindingActivity
 import com.wpf.app.quick.annotations.BindView
 import com.wpf.app.quick.annotations.GroupView
@@ -26,9 +27,11 @@ class IntentDataTestActivity :
     var textGroup: GroupViews? = null
 
     @SuppressLint("SetTextI18n")
-
     override fun initView(viewDataBinding: ActivityDataTestBinding?) {
         title?.text = "传输测试页Activity"
-        title?.postDelayed({ textGroup?.goneAll() }, 1000)
+        title?.postDelayed({
+            textGroup?.goneAll()
+            Toast.makeText(this, "传输数据成功", Toast.LENGTH_SHORT).show()
+        }, 1000)
     }
 }

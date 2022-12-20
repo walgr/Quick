@@ -1,12 +1,9 @@
 package com.wpf.app.quickrecyclerview.utils
 
-import android.view.ViewGroup
-import androidx.annotation.ColorRes
+import androidx.annotation.ColorInt
 import com.wpf.app.quickbind.helper.binddatahelper.BindData2ViewHelper
 import com.wpf.app.quickbind.helper.binddatahelper.Color2View
-import com.wpf.app.quickbind.helper.binddatahelper.Height2View
 import com.wpf.app.quickrecyclerview.QuickAdapter
-import com.wpf.app.quickrecyclerview.R
 import com.wpf.app.quickrecyclerview.data.QuickBindData
 import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
 
@@ -15,16 +12,13 @@ import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
  *
  */
 open class LineItem(
-    open val width: Int = 1,
-    open val height: Int = ViewGroup.LayoutParams.MATCH_PARENT,
-    @ColorRes
-    open val color: Int = 0,
-    override val isVertical: Boolean = true
-) : SpaceItem(space = width, isVertical) {
+    override val space: Int = 0,
+    override val isVertical: Boolean = true,
+    @ColorInt open val color: Int = 0
+) : SpaceItem(space, isVertical) {
 
     override fun onBindViewHolder(adapter: QuickAdapter, viewHolder: QuickViewHolder<QuickBindData>, position: Int) {
         super.onBindViewHolder(adapter, viewHolder, position)
-        BindData2ViewHelper.bind(viewHolder.itemView.findViewById(R.id.rootView), color, Color2View)
-        BindData2ViewHelper.bind(viewHolder.itemView.findViewById(R.id.rootView), height, Height2View)
+        BindData2ViewHelper.bind(viewHolder.itemView, color, Color2View)
     }
 }

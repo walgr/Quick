@@ -1,8 +1,10 @@
 package com.wpf.app.quickrecyclerview.utils
 
+import android.view.View
 import com.wpf.app.quickbind.helper.binddatahelper.BindData2ViewHelper
 import com.wpf.app.quickbind.helper.binddatahelper.Height2View
 import com.wpf.app.quickbind.helper.binddatahelper.Width2View
+import com.wpf.app.quickbind.interfaces.runOnContext
 import com.wpf.app.quickrecyclerview.QuickAdapter
 import com.wpf.app.quickrecyclerview.R
 import com.wpf.app.quickrecyclerview.data.QuickBindData
@@ -15,7 +17,9 @@ import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
 open class SpaceItem(
     open val space: Int,
     open val isVertical: Boolean = true
-) : QuickBindData(R.layout.adapter_space) {
+) : QuickBindData(layoutViewInContext = runOnContext {
+    View(it)
+}) {
 
     override fun onBindViewHolder(
         adapter: QuickAdapter,
@@ -24,7 +28,7 @@ open class SpaceItem(
     ) {
         super.onBindViewHolder(adapter, viewHolder, position)
         BindData2ViewHelper.bind(
-            viewHolder.itemView.findViewById(R.id.rootView),
+            viewHolder.itemView,
             space,
             if (isVertical) Height2View else Width2View
         )

@@ -67,6 +67,7 @@ class IntentDataTestModel : QuickBindingModel<ActivityDataTestBinding>() {
         printData()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun printData() {
         Log.i(TAG, intD.toString() + "")
         Log.i(TAG, floatD.toString() + "")
