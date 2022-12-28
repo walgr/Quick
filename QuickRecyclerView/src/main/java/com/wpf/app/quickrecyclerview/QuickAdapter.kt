@@ -43,16 +43,18 @@ open class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>()
                     return bindingHolder as QuickViewHolder<QuickItemData>
                 }
             }
-            val holderAnnotation = findData::class.java.getAnnotation(BindHolder::class.java)
-            var holder: QuickViewHolder<out QuickItemData>? = null
 
-            if (holderAnnotation == null) {
-                holder = if (findData is QuickBindData) {
-                    QuickViewHolder(viewGroup, findData.layoutId, findData.layoutView, findData.layoutViewInContext)
-                } else {
-                    throw RuntimeException("当前数据类未使用HolderClass注解指定ViewHolder")
-                }
+            var holder: QuickViewHolder<out QuickItemData>? = null
+            if (findData is QuickBindData) {
+                holder = QuickViewHolder(
+                    viewGroup,
+                    findData.layoutId,
+                    findData.layoutView,
+                    findData.layoutViewInContext
+                )
             } else {
+                val holderAnnotation = findData::class.java.getAnnotation(BindHolder::class.java)
+                    ?: throw RuntimeException("当前数据类未使用HolderClass注解指定ViewHolder")
                 try {
                     val holderCls = holderAnnotation.value
                     val holderConstructor = holderCls.java.getConstructor(ViewGroup::class.java)
