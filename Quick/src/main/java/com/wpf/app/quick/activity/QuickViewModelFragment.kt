@@ -20,7 +20,7 @@ open class QuickViewModelFragment<VM : QuickViewModel<out QuickView>> @JvmOverlo
     @LayoutRes override val layoutId: Int = 0,
     override val layoutView: View? = null,
     override val titleName: String = ""
-) : QuickFragment(), BindViewModel<VM> {
+) : QuickFragment(layoutId, layoutView, titleName = titleName), BindViewModel<VM> {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)

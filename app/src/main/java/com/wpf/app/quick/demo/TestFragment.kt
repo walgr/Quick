@@ -26,7 +26,7 @@ class TestFragment: QuickFragment(R.layout.fragment_test_viewpager2) {
         btnClean?.text = "Fragment${pos}"
     }
 
-    override fun getInitBundle(activity: Activity?, position: Int): Bundle? {
+    override fun getInitBundle(activity: Activity?, position: Int): Bundle {
         return Bundle().apply {
             putInt("pos", position)
         }

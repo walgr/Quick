@@ -18,7 +18,7 @@ abstract class QuickViewModelActivity<VM : QuickViewModel<out QuickView>> @JvmOv
     @LayoutRes override val layoutId: Int = 0,
     override val layoutView: View? = null,
     override val titleName: String = ""
-) : QuickActivity(layoutId, layoutView, titleName), BindViewModel<VM> {
+) : QuickActivity(layoutId, layoutView, titleName = titleName), BindViewModel<VM> {
     private var mViewModel: VM? = null
 
     override fun onSaveInstanceState(outState: Bundle) {

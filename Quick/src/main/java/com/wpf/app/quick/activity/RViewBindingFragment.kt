@@ -18,7 +18,7 @@ abstract class RViewBindingFragment<VM : QuickBindingModel<VB>, VB : ViewDataBin
     @IdRes open val listId: Int = 0,
     override val titleName: String = ""
 ) : QuickViewBindingFragment<VM, VB>(
-    layoutId, null, titleName
+    layoutId, titleName
 ) {
     private var mRecyclerView: QuickRecyclerView? = null
 

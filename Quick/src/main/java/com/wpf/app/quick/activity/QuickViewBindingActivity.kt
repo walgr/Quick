@@ -2,7 +2,6 @@ package com.wpf.app.quick.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -18,9 +17,8 @@ import com.wpf.app.quickbind.QuickBind
  */
 abstract class QuickViewBindingActivity<VM : QuickBindingModel<VB>, VB : ViewDataBinding> @JvmOverloads constructor(
     @LayoutRes override val layoutId: Int = 0,
-    override val layoutView: View? = null,
     override val titleName: String = ""
-) : QuickActivity(layoutId, layoutView, titleName) {
+) : QuickActivity(layoutId, titleName = titleName) {
 
     var mViewModel: VM? = null
         set(value) {

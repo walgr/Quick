@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import com.wpf.app.quickbind.QuickBind
 import com.wpf.app.quickbind.annotations.AutoGet
 import com.wpf.app.quickbind.interfaces.BindBaseFragment
+import com.wpf.app.quickbind.interfaces.RunOnContext
 
 /**
  * Created by 王朋飞 on 2022/7/13.
@@ -22,6 +23,7 @@ import com.wpf.app.quickbind.interfaces.BindBaseFragment
 abstract class QuickFragment @JvmOverloads constructor(
     @LayoutRes open val layoutId: Int = 0,
     open val layoutView: View? = null,
+    open val layoutViewInContext: RunOnContext<View>? = null,
     @AutoGet(titleKey) open val titleName: String = ""
 ) : Fragment(), BindBaseFragment, QuickView {
 
@@ -41,9 +43,13 @@ abstract class QuickFragment @JvmOverloads constructor(
         savedInstanceState: Bundle?
     ): View? {
         if (mView == null) {
-            mView = return if (layoutId != 0) {
-                inflater.inflate(layoutId, null)
-            } else layoutView
+            if (layoutId != 0) {
+                mView = inflater.inflate(layoutId, null)
+            } else if (layoutView != null) {
+                mView = layoutView
+            } else if (layoutViewInContext != null && container?.context != null) {
+                mView = layoutViewInContext?.run(container.context!!)
+            }
         }
         return mView
     }

@@ -20,9 +20,8 @@ import com.wpf.app.quickbind.QuickBind.bind
  */
 abstract class QuickViewBindingFragment<VM : QuickBindingModel<VB>, VB : ViewDataBinding> @JvmOverloads constructor(
     @LayoutRes override val layoutId: Int = 0,
-    override val layoutView: View? = null,
     override val titleName: String = ""
-) : QuickFragment(layoutId, layoutView, titleName) {
+) : QuickFragment(layoutId, titleName = titleName) {
 
     protected var mViewModel: VM? = null
 
