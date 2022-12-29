@@ -1,7 +1,6 @@
 package com.wpf.app.quickbind.helper.binddatahelper
 
 import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
 import com.wpf.app.quickbind.annotations.BindD2VHelper
 
 /**

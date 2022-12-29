@@ -2,7 +2,6 @@ package com.wpf.app.quickbind.helper.binddatahelper
 
 import android.widget.ImageView
 import androidx.fragment.app.FragmentActivity
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.wpf.app.quickbind.annotations.BindD2VHelper
 

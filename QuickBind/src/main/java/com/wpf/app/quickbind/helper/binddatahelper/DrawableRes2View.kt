@@ -3,7 +3,6 @@ package com.wpf.app.quickbind.helper.binddatahelper
 import android.view.View
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.RecyclerView
 import com.wpf.app.quickbind.annotations.BindD2VHelper
 
 
