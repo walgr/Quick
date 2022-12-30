@@ -10,6 +10,7 @@ import android.widget.LinearLayout
 import android.widget.RadioGroup
 import android.widget.RelativeLayout
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.wpf.app.quick.widgets.quickview.helper.GroupType
 import com.wpf.app.quick.widgets.quickview.helper.QuickViewGroupAttrSetHelper
 import com.wpf.app.quickutil.base.GenericEx
 import com.wpf.app.quick.widgets.quickview.util.QuickMeasure
@@ -56,19 +57,19 @@ open class QuickViewGroup<T : ViewGroup> @JvmOverloads constructor(
         if (this.shadowView != null) return
         attrSet?.let {
             when (it.groupType) {
-                0 -> {
+                GroupType.LinearLayout.type -> {
                     this.shadowView = LinearLayout(context, attributeSet, defStyleAttr) as T
                 }
-                1 -> {
+                GroupType.RelativeLayout.type -> {
                     this.shadowView = RelativeLayout(context, attributeSet, defStyleAttr) as T
                 }
-                2 -> {
+                GroupType.FrameLayout.type -> {
                     this.shadowView = FrameLayout(context, attributeSet, defStyleAttr) as T
                 }
-                3 -> {
+                GroupType.ConstraintLayout.type -> {
                     this.shadowView = ConstraintLayout(context, attributeSet, defStyleAttr) as T
                 }
-                4 -> {
+                GroupType.RadioGroup.type -> {
                     this.shadowView = RadioGroup(context, attributeSet) as T
                 }
             }
