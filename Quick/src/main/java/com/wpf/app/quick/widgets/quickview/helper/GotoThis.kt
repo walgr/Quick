@@ -13,7 +13,7 @@ open class GotoThis @JvmOverloads constructor(
     attributeSet: AttributeSet? = null,
     buttonText: String,
     activityCls: Class<out Activity>,
-    data: Map<String, Any?>?= null
+    data: Map<String, Any?>? = null
 ) : QuickBindView(
     mContext, attributeSet, layoutView = runOnContext { context ->
         MaterialButton(context, attributeSet).apply {

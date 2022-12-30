@@ -1,4 +1,4 @@
-package com.wpf.app.quick.widgets.quickview
+package com.wpf.app.quick.widgets.quickview.helper
 
 import android.content.Context
 import android.util.AttributeSet
