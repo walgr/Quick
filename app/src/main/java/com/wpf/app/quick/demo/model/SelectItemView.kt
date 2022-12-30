@@ -13,7 +13,6 @@ import com.wpf.app.quickbind.helper.binddatahelper.Text2TextView
 import com.wpf.app.quick.widgets.quickview.QuickSelectView
 import com.wpf.app.quickbind.interfaces.itemClick
 import com.wpf.app.quickbind.interfaces.runOnContext
-import com.wpf.app.quickbind.interfaces.runOnHolder
 
 /**
  * Created by 王朋飞 on 2022/7/8.
