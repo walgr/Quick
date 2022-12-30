@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
+import com.wpf.app.quick.widgets.quickview.helper.QuickViewGroupAttrSetHelper
 import com.wpf.app.quickutil.bind.Bind
 import kotlin.math.abs
 
