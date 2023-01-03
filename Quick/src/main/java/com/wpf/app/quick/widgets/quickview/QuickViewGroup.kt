@@ -21,8 +21,8 @@ import com.wpf.app.quick.widgets.quickview.util.QuickMeasure
  */
 open class QuickViewGroup<T : ViewGroup> @JvmOverloads constructor(
     mContext: Context,
-    val attributeSet: AttributeSet? = null,
-    val defStyleAttr: Int = 0,
+    open val attributeSet: AttributeSet? = null,
+    open val defStyleAttr: Int = 0,
 ) : ViewGroup(mContext, attributeSet, defStyleAttr) {
 
     protected var attrSet: QuickViewGroupAttrSetHelper? = null

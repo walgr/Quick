@@ -5,12 +5,14 @@ import android.graphics.Color
 import android.util.AttributeSet
 import androidx.annotation.StyleableRes
 import androidx.core.content.ContextCompat
+import kotlinx.coroutines.delay
 import java.lang.reflect.Field
 
 /**
  * Created by 王朋飞 on 2022/4/29.
  * 参数配置帮助类
  * 按照xml里配置顺序读取数据
+ * 字段属性不可设置默认值
  */
 
 open class AutoGetAttributeHelper constructor(

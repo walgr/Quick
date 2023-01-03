@@ -14,8 +14,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="gotoGlide"
-            android:textAllCaps="false"
-            android:text="ViewPager测试" />
+            android:text="ViewPager测试"
+            android:textAllCaps="false" />
 
         <Button
             android:layout_width="wrap_content"
@@ -51,6 +51,15 @@
             class="com.wpf.app.quick.demo.RequestTestActivity$GotoRequestTest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="2.5dp"
+            android:src="@color/black"
+            app:shapeAppearance="@style/CircleImageStyle"
+            app:strokeColor="@color/colorPrimary"
+            app:strokeWidth="5dp" />
 
         <com.wpf.app.quick.demo.model.SelectItemView
             android:layout_width="wrap_content"

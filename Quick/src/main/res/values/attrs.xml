@@ -115,4 +115,8 @@
         <attr name="layout" format="reference"/>
     </declare-styleable>
 
+    <declare-styleable name="AspectRatioView">
+        <attr name="ratio" format="float"/>
+    </declare-styleable>
+
 </resources>
