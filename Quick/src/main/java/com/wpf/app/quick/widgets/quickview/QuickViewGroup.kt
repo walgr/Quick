@@ -72,6 +72,9 @@ open class QuickViewGroup<T : ViewGroup> @JvmOverloads constructor(
                 GroupType.RadioGroup.type -> {
                     this.shadowView = RadioGroup(context, attributeSet) as T
                 }
+                 else -> {
+                     this.shadowView = LinearLayout(context, attributeSet, defStyleAttr) as T
+                 }
             }
         }
     }
