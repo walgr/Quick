@@ -87,6 +87,7 @@ dependencies {
     //activity-ktx
     implementation deps.androidx.activityktx
     implementation deps.androidx.appcompat
+    implementation deps.androidx.material
     //ViewModel-ktx
     implementation deps.androidx.lifecycleviewmodelktx
     //列表
