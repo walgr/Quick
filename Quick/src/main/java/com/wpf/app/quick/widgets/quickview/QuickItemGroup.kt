@@ -11,7 +11,7 @@ import kotlin.math.abs
 
 /**
  * Created by 王朋飞 on 2022/8/31.
- *
+ * layoutId
  */
 open class QuickItemGroup<T : ViewGroup> @JvmOverloads constructor(
     mContext: Context,
@@ -44,8 +44,7 @@ open class QuickItemGroup<T : ViewGroup> @JvmOverloads constructor(
     open fun initView() {
         initLayoutIdByXml()
         if (layoutId == 0) return
-        mView = inflate(context, this.layoutId, null)
-        addView(mView)
+        mView = inflate(context, this.layoutId, this)
     }
 
     private fun initLayoutIdByXml() {

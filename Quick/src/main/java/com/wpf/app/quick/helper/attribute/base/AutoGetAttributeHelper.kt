@@ -3,6 +3,7 @@ package com.wpf.app.quick.helper.attribute.base
 import android.content.Context
 import android.graphics.Color
 import android.util.AttributeSet
+import android.view.View
 import androidx.annotation.StyleableRes
 import androidx.core.content.ContextCompat
 import kotlinx.coroutines.delay
@@ -22,6 +23,7 @@ open class AutoGetAttributeHelper constructor(
 ) : AttributeHelper(context, attributeSet, styleableId) {
 
     private val fieldMap = mutableMapOf<String, Field>()
+    private var testView:View? = null
 
     init {
         getAllClassField()
@@ -29,6 +31,7 @@ open class AutoGetAttributeHelper constructor(
     }
 
     private fun getAttributeType(attributeSet: AttributeSet, @StyleableRes styleableId: IntArray) {
+        if (testView == null) testView = View(context)
         for (i in 0 until attributeSet.attributeCount) {
 //            val attributeResNameSpace = (attributeSet as? XmlResourceParser)?.getAttributeNamespace(i)
 //            if ("http://schemas.android.com/apk/res-auto" != attributeResNameSpace) continue
@@ -48,15 +51,21 @@ open class AutoGetAttributeHelper constructor(
                                 typeArray.getDimensionPixelSize(styleableId.indexOf(attributeId), 0)
                             )
                         } else if (attributeValue.startsWith("@")) {
-                            //获取资源id
+//                            //获取资源id
                             val res = attributeSet.getAttributeResourceValue(i, 0)
-                            try {
-                                field.set(this, ContextCompat.getColor(context, res))
-                            } catch (ignore: Exception) {
+//                            //获取layout
+                            field.set(this, res)
+                            if (testView?.isInEditMode == false) {
                                 try {
-                                    field.set(this, ContextCompat.getDrawable(context, res))
+                                    //获取color
+                                    field.set(this, ContextCompat.getColor(context, res))
                                 } catch (ignore: Exception) {
-                                    field.set(this, res)
+                                    try {
+                                        //获取drawable
+                                        field.set(this, ContextCompat.getDrawable(context, res))
+                                    } catch (ignore: Exception) {
+
+                                    }
                                 }
                             }
                         } else {
