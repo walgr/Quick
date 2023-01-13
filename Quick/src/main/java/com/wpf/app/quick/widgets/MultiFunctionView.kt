@@ -8,8 +8,10 @@ import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
@@ -255,7 +257,7 @@ class MultiFunctionView @JvmOverloads constructor(
     }
 
     fun setCheckBoxBackgroundColor(color: Int) {
-        checkBox.setBackgroundColor(color)
+        checkBox.setBackgroundColor(attributeHelper.getColorInt(context, color))
     }
 
     fun setCheckBoxChecked(checked: Boolean) {
@@ -323,11 +325,11 @@ class MultiFunctionView @JvmOverloads constructor(
     }
 
     fun setTitleColor(color: Int) {
-        title.setTextColor(color)
+        title.setTextColor(attributeHelper.getColorInt(context, color))
     }
 
     fun setTitleHintColor(color: Int) {
-        title.setHintTextColor(color)
+        title.setHintTextColor(attributeHelper.getColorInt(context, color))
     }
 
     fun setTitleSize(size: Float) {
@@ -362,11 +364,11 @@ class MultiFunctionView @JvmOverloads constructor(
     }
 
     fun setSubTitleColor(color: Int) {
-        subTitle.setTextColor(color)
+        subTitle.setTextColor(attributeHelper.getColorInt(context, color))
     }
 
     fun setSubTitleHintColor(color: Int) {
-        subTitle.setHintTextColor(color)
+        subTitle.setHintTextColor(attributeHelper.getColorInt(context, color))
     }
 
     fun setSubTitleSize(size: Float) {

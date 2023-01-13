@@ -4,9 +4,12 @@ import android.content.Context
 import android.graphics.Color
 import android.util.AttributeSet
 import android.view.View
+import androidx.annotation.ColorInt
 import androidx.annotation.StyleableRes
 import androidx.core.content.ContextCompat
+import com.wpf.app.quick.R
 import kotlinx.coroutines.delay
+import org.xmlpull.v1.XmlPullParser
 import java.lang.reflect.Field
 
 /**
@@ -55,19 +58,22 @@ open class AutoGetAttributeHelper constructor(
                             val res = attributeSet.getAttributeResourceValue(i, 0)
 //                            //获取layout
                             field.set(this, res)
-                            if (testView?.isInEditMode == false) {
-                                try {
-                                    //获取color
-                                    field.set(this, ContextCompat.getColor(context, res))
-                                } catch (ignore: Exception) {
-                                    try {
-                                        //获取drawable
-                                        field.set(this, ContextCompat.getDrawable(context, res))
-                                    } catch (ignore: Exception) {
-
-                                    }
-                                }
-                            }
+//                            if (testView?.isInEditMode == false) {
+//                                try {
+//                                    //获取color
+//                                    field.set(this, ContextCompat.getColor(context, res))
+//                                } catch (ignore: Exception) {
+//                                    try {
+//                                        //获取drawable
+//                                        field.set(this, ContextCompat.getDrawable(context, res))
+//                                    } catch (ignore: Exception) {
+//
+//                                    }
+//                                }
+//                            }
+                        } else if (attributeValue.startsWith("#")) {
+                            //获取资源id
+                            field.set(this, Color.parseColor(attributeValue))
                         } else {
                             field.set(this, attributeSet.getAttributeIntValue(i, 0))
                         }
@@ -98,6 +104,15 @@ open class AutoGetAttributeHelper constructor(
         val fieldList = this.javaClass.declaredFields
         fieldList.forEach {
             fieldMap[it.name] = it
+        }
+    }
+
+    @ColorInt
+    fun getColorInt(context: Context, color: Int): Int {
+        return if (color > 0) {
+            ContextCompat.getColor(context, color)
+        } else {
+            color
         }
     }
 }

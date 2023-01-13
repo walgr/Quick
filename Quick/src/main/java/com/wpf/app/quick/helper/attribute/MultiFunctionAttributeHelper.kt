@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.util.AttributeSet
 import android.view.ViewGroup
 import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import com.wpf.app.quick.R
 import com.wpf.app.quick.helper.attribute.base.AutoGetAttributeHelper
@@ -27,6 +28,7 @@ class MultiFunctionAttributeHelper(
     //CheckBox背景
     @DrawableRes
     var checkboxBackground: Int? = null
+    @ColorRes
     var checkboxBackgroundColor: Int? = null
 
     //CheckBox左右边距
@@ -38,9 +40,9 @@ class MultiFunctionAttributeHelper(
     @DrawableRes
     var titleBackground: Int? = null
     var titleSize: Int? = null
-    @ColorInt
+    @ColorRes
     var titleColor: Int? = null
-    @ColorInt
+    @ColorRes
     var titleHintColor: Int? = null
     var titleWpfStyle: Int? = null
     var titleMaxLine: Int? = null
@@ -50,9 +52,9 @@ class MultiFunctionAttributeHelper(
     @DrawableRes
     var subTitleBackground: Int? = null
     var subTitleSize: Int? = null
-    @ColorInt
+    @ColorRes
     var subTitleColor: Int? = null
-    @ColorInt
+    @ColorRes
     var subTitleHintColor: Int? = null
     var subTitleWpfStyle: Int? = null
     var subTitleMarginTop: Int? = null
