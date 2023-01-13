@@ -17,8 +17,7 @@ open class QuickItemGroup<T : ViewGroup> @JvmOverloads constructor(
     mContext: Context,
     attributeSet: AttributeSet? = null,
     defStyleAttr: Int = 0,
-    @LayoutRes
-    private var layoutId: Int = 0,
+    @LayoutRes private var layoutId: Int = 0,
     open var viewType: Int = 0,
 ) : QuickViewGroup<T>(mContext, attributeSet, defStyleAttr), Bind {
 
@@ -50,7 +49,7 @@ open class QuickItemGroup<T : ViewGroup> @JvmOverloads constructor(
     }
 
     private fun initLayoutIdByXml() {
-        layoutId = attrSet?.layout ?: 0
+        layoutId = attrSet?.layoutRes ?: layoutId
     }
 
     open fun onCreateViewHolder() {

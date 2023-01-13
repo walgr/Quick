@@ -112,7 +112,7 @@
             <enum name="ConstraintLayout" value="3" />
             <enum name="RadioGroup" value="4" />
         </attr>
-        <attr name="layout" format="reference"/>
+        <attr name="layoutRes" format="reference"/>
     </declare-styleable>
 
     <declare-styleable name="AspectRatioView">

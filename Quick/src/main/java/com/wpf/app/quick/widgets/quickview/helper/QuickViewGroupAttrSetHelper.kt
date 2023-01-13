@@ -16,7 +16,7 @@ class QuickViewGroupAttrSetHelper(
 
     val groupType: Int? = null
 
-    val layout: Int? = null
+    val layoutRes: Int? = null
 }
 
 enum class GroupType(val type: Int) {
