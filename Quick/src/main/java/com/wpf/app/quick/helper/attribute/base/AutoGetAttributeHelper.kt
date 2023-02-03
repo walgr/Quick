@@ -26,7 +26,7 @@ open class AutoGetAttributeHelper constructor(
 ) : AttributeHelper(context, attributeSet, styleableId) {
 
     private val fieldMap = mutableMapOf<String, Field>()
-    private var testView:View? = null
+    private var testView: View? = null
 
     init {
         getAllClassField()
@@ -58,19 +58,19 @@ open class AutoGetAttributeHelper constructor(
                             val res = attributeSet.getAttributeResourceValue(i, 0)
 //                            //获取layout
                             field.set(this, res)
-//                            if (testView?.isInEditMode == false) {
-//                                try {
-//                                    //获取color
-//                                    field.set(this, ContextCompat.getColor(context, res))
-//                                } catch (ignore: Exception) {
-//                                    try {
-//                                        //获取drawable
-//                                        field.set(this, ContextCompat.getDrawable(context, res))
-//                                    } catch (ignore: Exception) {
-//
-//                                    }
-//                                }
-//                            }
+                            if (testView?.isInEditMode == false) {
+                                try {
+                                    //获取color
+                                    field.set(this, ContextCompat.getColor(context, res))
+                                } catch (ignore: Exception) {
+                                    try {
+                                        //获取drawable
+                                        field.set(this, ContextCompat.getDrawable(context, res))
+                                    } catch (ignore: Exception) {
+
+                                    }
+                                }
+                            }
                         } else if (attributeValue.startsWith("#")) {
                             //获取资源id
                             field.set(this, Color.parseColor(attributeValue))
