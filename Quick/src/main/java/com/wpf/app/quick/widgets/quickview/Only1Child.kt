@@ -12,7 +12,7 @@ abstract class Only1Child @JvmOverloads constructor(
 
     override fun onFinishInflate() {
         super.onFinishInflate()
-        if (childCount != 1) {
+        if (childCount > 1) {
             throw RuntimeException("只允许1个子View")
         }
     }
