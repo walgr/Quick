@@ -19,7 +19,7 @@ import com.wpf.app.quickutil.startActivity
 class MainActivity : QuickViewBindingActivity<MainModel, ActivityMainBinding>(R.layout.activity_main, titleName = "快捷") {
 
     @SuppressLint("NonConstantResourceId")
-    @BindSp2View(bindSp = "绑定的SpKey1", defaultValue = "默认值1")
+//    @BindSp2View(bindSp = "绑定的SpKey1", defaultValue = "默认值1")
     @BindView(R.id.spTextView1)
     var text1: TextView? = null
 
@@ -34,18 +34,18 @@ class MainActivity : QuickViewBindingActivity<MainModel, ActivityMainBinding>(R.
 
     @SuppressLint("SetTextI18n")
     override fun initView() {
-        text1?.postDelayed(
-            { text1?.text = System.currentTimeMillis().toString() + "" },
-            1000
-        )
-        text2?.postDelayed(
-            { text2?.text = System.currentTimeMillis().toString() + "" },
-            1000
-        )
-        text3?.postDelayed(
-            { text3?.text = System.currentTimeMillis().toString() + "" },
-            1000
-        )
+//        text1?.postDelayed(
+//            { text1?.text = System.currentTimeMillis().toString() + "" },
+//            1000
+//        )
+//        text2?.postDelayed(
+//            { text2?.text = System.currentTimeMillis().toString() + "" },
+//            1000
+//        )
+//        text3?.postDelayed(
+//            { text3?.text = System.currentTimeMillis().toString() + "" },
+//            1000
+//        )
     }
 
     fun gotoR2Test(view: View?) {

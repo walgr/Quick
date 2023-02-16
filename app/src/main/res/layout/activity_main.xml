@@ -122,30 +122,38 @@
             android:id="@+id/testBindSpLL"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_gravity="bottom"
+            android:orientation="horizontal"
             android:layout_weight="1"
             android:gravity="bottom"
-            android:orientation="horizontal">
+            android:layout_gravity="bottom" >
 
-            <TextView
-                android:id="@+id/spTextView1"
+            <com.wpf.app.quick.widgets.quickview.inxml.LoadSp2Text
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:text="测试绑定1" />
+                app:bindKey="绑定的SpKey1"
+                app:defaultString="默认值1">
+
+                <TextView
+                    android:id="@+id/spTextView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:text="测试绑定1" />
+
+            </com.wpf.app.quick.widgets.quickview.inxml.LoadSp2Text>
 
             <TextView
                 android:id="@+id/spTextView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
+                android:layout_marginHorizontal="4dp"
                 android:text="测试绑定2" />
 
             <Button
                 android:id="@+id/spTextView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
+                android:layout_marginHorizontal="4dp"
                 android:text="测试绑定3" />
 
         </LinearLayout>

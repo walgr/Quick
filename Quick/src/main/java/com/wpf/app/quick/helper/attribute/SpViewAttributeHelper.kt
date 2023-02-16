@@ -12,7 +12,9 @@ import com.wpf.app.quick.helper.attribute.base.AutoGetAttributeHelper
 class SpViewAttributeHelper(
     context: Context,
     attributeSet: AttributeSet
-): AutoGetAttributeHelper(context, attributeSet, R.styleable.SpView) {
+): AutoGetAttributeHelper(context, attributeSet, R.styleable.LoadSp2Text) {
 
+    val fileName: String? = null
     val bindKey: String? = null
+    val defaultString: String? = null
 }

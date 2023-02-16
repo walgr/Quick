@@ -47,6 +47,7 @@ open class QuickViewGroup<T : ViewGroup> @JvmOverloads constructor(
     private fun initViewGroupByT() {
         if (this.shadowView != null) return
         val tCls: Class<T>? = GenericEx.get0Clazz(this)
+        if ("ViewGroup" == tCls?.simpleName) return
         tCls?.let {
             val t =
                 tCls.getConstructor(Context::class.java, AttributeSet::class.java, Int::class.java)
