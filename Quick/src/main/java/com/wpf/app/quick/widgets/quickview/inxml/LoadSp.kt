@@ -4,6 +4,9 @@ import android.content.Context
 import android.text.TextUtils
 import android.util.AttributeSet
 import android.widget.TextView
+import androidx.core.content.edit
+import androidx.core.widget.addTextChangedListener
+import androidx.core.widget.doAfterTextChanged
 import com.wpf.app.quick.helper.attribute.SpViewAttributeHelper
 import com.wpf.app.quick.widgets.quickview.AddToParentGroup
 import com.wpf.app.quickbind.QuickBind
@@ -23,16 +26,25 @@ class LoadSp2Text @JvmOverloads constructor(
     private var attributeHelper: SpViewAttributeHelper =
         SpViewAttributeHelper(context, attributeSet!!)
 
-    private val spData: String? = context.getSharedPreferences(
+    private val sharedPreference = context.getSharedPreferences(
         if (TextUtils.isEmpty(attributeHelper.fileName)) QuickBind.getBindSpFileName() else attributeHelper.fileName,
         Context.MODE_PRIVATE
-    ).getString(attributeHelper.bindKey, attributeHelper.defaultString)
+    )
+    private val spData: String? =
+        sharedPreference.getString(attributeHelper.bindKey, attributeHelper.defaultString)
 
     override fun onFinishInflate() {
         super.onFinishInflate()
         if (getChildAt(0) is TextView) {
             //只能套在基于TextView的View上
             getChildAt(0).asTo<TextView>()?.text = spData
+            if (attributeHelper.bindData2Sp == true) {
+                getChildAt(0).asTo<TextView>()?.doAfterTextChanged {
+                    sharedPreference.edit {
+                        putString(attributeHelper.bindKey, it?.toString() ?: "")
+                    }
+                }
+            }
         }
     }
 }

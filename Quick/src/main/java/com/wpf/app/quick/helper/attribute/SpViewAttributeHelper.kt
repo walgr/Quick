@@ -17,4 +17,5 @@ class SpViewAttributeHelper(
     val fileName: String? = null
     val bindKey: String? = null
     val defaultString: String? = null
+    val bindData2Sp: Boolean? = null
 }

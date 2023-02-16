@@ -34,18 +34,18 @@ class MainActivity : QuickViewBindingActivity<MainModel, ActivityMainBinding>(R.
 
     @SuppressLint("SetTextI18n")
     override fun initView() {
-//        text1?.postDelayed(
-//            { text1?.text = System.currentTimeMillis().toString() + "" },
-//            1000
-//        )
-//        text2?.postDelayed(
-//            { text2?.text = System.currentTimeMillis().toString() + "" },
-//            1000
-//        )
-//        text3?.postDelayed(
-//            { text3?.text = System.currentTimeMillis().toString() + "" },
-//            1000
-//        )
+        text1?.postDelayed(
+            { text1?.text = System.currentTimeMillis().toString() + "" },
+            1000
+        )
+        text2?.postDelayed(
+            { text2?.text = System.currentTimeMillis().toString() + "" },
+            1000
+        )
+        text3?.postDelayed(
+            { text3?.text = System.currentTimeMillis().toString() + "" },
+            1000
+        )
     }
 
     fun gotoR2Test(view: View?) {

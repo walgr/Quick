@@ -130,6 +130,7 @@
             <com.wpf.app.quick.widgets.quickview.inxml.LoadSp2Text
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:bindData2Sp="true"
                 app:bindKey="绑定的SpKey1"
                 app:defaultString="默认值1">
 

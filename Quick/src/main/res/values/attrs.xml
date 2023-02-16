@@ -94,6 +94,7 @@
         <attr name="fileName" format="string" />
         <attr name="bindKey" format="string" />
         <attr name="defaultString" format="string" />
+        <attr name="bindData2Sp" format="boolean" />
     </declare-styleable>
 
 </resources>
