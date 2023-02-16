@@ -17,10 +17,17 @@ open class QuickBindGroup<T : ViewGroup> @JvmOverloads constructor(
     mContext: Context,
     attributeSet: AttributeSet? = null,
     defStyleAttr: Int = 0,
+    override val addToParent: Boolean = true,
     @LayoutRes
     private val layoutId: Int = 0,
     private var dealBind: Boolean = true
-) : QuickItemGroup<T>(mContext, attributeSet, defStyleAttr, layoutId), Bind {
+) : QuickItemGroup<T>(
+    mContext,
+    attributeSet,
+    defStyleAttr,
+    addToParent = addToParent,
+    layoutId = layoutId
+), Bind {
 
     private var isLoadFirst = true
     override fun onCreateViewHolder() {

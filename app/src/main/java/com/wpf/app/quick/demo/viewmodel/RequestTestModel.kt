@@ -37,7 +37,7 @@ class RequestTestModel: QuickBindingModel<ActivityRequestTestBinding>() {
     @BindData2View(id = R.id.info, helper = Request2View::class)
     val info = request2View { callback ->
         request {
-            首页文章列表(0)
+            首页文章列表(page)
         }.success {
             callback.backData(it?.data)
         }.fail {

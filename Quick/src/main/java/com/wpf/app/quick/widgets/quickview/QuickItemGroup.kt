@@ -18,9 +18,10 @@ open class QuickItemGroup<T : ViewGroup> @JvmOverloads constructor(
     mContext: Context,
     attributeSet: AttributeSet? = null,
     defStyleAttr: Int = 0,
+    override val addToParent: Boolean = true,
     @LayoutRes private var layoutId: Int = 0,
     open var viewType: Int = 0,
-) : QuickViewGroup<T>(mContext, attributeSet, defStyleAttr), Bind {
+) : QuickViewGroup<T>(mContext, attributeSet, defStyleAttr, addToParent = addToParent), Bind {
 
     private var mView: View? = null
     var position: Int = -1

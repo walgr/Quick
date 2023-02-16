@@ -1,6 +1,7 @@
 package com.wpf.app.quick.demo.http.model
 
 import android.annotation.SuppressLint
+import com.google.gson.Gson
 import com.wpf.app.quick.annotations.BindData2View
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quickbind.bindview.QuickRequestData
@@ -20,8 +21,8 @@ class 首页文章 : QuickRequestData() {
 
 //    @SuppressLint("NonConstantResourceId")
 //    @BindData2View(id = R.id.info, helper = Text2TextView::class)
-    //自动赋值处理了
+    //自动赋值处理了 可以不用写上面的了
     val info = runOnContextWithSelf<String, 首页文章> { _, self ->
-        "请求成功：" + self.curPage + "---" + self.datas?.toString()
+        "请求成功：" + self.curPage + "---" + Gson().toJson(self.datas)
     }
 }

@@ -23,6 +23,7 @@ open class QuickViewGroup<T : ViewGroup> @JvmOverloads constructor(
     mContext: Context,
     open val attributeSet: AttributeSet? = null,
     open val defStyleAttr: Int = 0,
+    open val addToParent: Boolean = true,
 ) : ViewGroup(mContext, attributeSet, defStyleAttr) {
 
     protected var attrSet: QuickViewGroupAttrSetHelper? = null
@@ -120,7 +121,15 @@ open class QuickViewGroup<T : ViewGroup> @JvmOverloads constructor(
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         shadowView?.let {
             addChildToT()
-            addTToThis()
+            if (isInEditMode) {
+                addTToThis()
+            } else {
+                if (addToParent) {
+                    addTToParent()
+                } else {
+                    addTToThis()
+                }
+            }
             if (it is QuickMeasure) {
                 it.Measure(widthMeasureSpec, heightMeasureSpec)
             } else {

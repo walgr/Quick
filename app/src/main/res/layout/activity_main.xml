@@ -70,8 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:orientation="vertical"
-            app:groupType="LinearLayout"
-            app:layoutRes="@layout/holder_select_result_item">
+            app:groupType="LinearLayout">
 
             <TextView
                 android:id="@+id/t1"
