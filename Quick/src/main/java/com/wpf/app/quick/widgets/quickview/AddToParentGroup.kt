@@ -57,6 +57,10 @@ open class AddToParentGroup @JvmOverloads constructor(
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         val it = getChildAt(0)
+        if (it == null) {
+            super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+            return
+        }
         if (isInEditMode) {
             addTToParent()
         } else {
@@ -77,5 +81,4 @@ open class AddToParentGroup @JvmOverloads constructor(
         val it = getChildAt(0)
         it.layout(0, 0, it.measuredWidth, it.measuredHeight)
     }
-
 }

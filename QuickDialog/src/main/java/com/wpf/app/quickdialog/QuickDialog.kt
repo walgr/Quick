@@ -6,12 +6,15 @@ import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import androidx.annotation.LayoutRes
 import com.wpf.app.quickbind.QuickBind
 import com.wpf.app.quickdialog.helper.DialogSizeHelper
 import com.wpf.app.quickdialog.listeners.DialogLifecycle
 import com.wpf.app.quickdialog.listeners.DialogSize
+import com.wpf.app.quickdialog.minAndMaxLimit.MinAndMaxLimit
+import com.wpf.app.quickdialog.minAndMaxLimit.SizeLimitViewGroup
 
 /**
  * Created by 王朋飞 on 2022/6/16.
@@ -52,7 +55,12 @@ abstract class QuickDialog : Dialog, DialogSize, DialogLifecycle {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         dealSize()
-        mView = layoutView ?: View.inflate(getViewContext(), layoutId, null)
+        mView = layoutView ?: LayoutInflater.from(getViewContext()).inflate(layoutId, null)
+        if (initDialogAdaptiveHeight()) {
+            mView = SizeLimitViewGroup(getViewContext()).apply {
+                addView(mView)
+            }
+        }
         setContentView(mView!!)
         if (window != null) {
             if (initDialogAnim() != DialogSize.NO_SET) {

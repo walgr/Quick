@@ -48,6 +48,10 @@ class MainActivity : QuickViewBindingActivity<MainModel, ActivityMainBinding>(R.
         )
     }
 
+    fun gotoDialog(view: View?) {
+        startActivity(DialogTestActivity::class.java)
+    }
+
     fun gotoR2Test(view: View?) {
         try {
             startActivity(activityCls = Class.forName("com.wpf.app.r2test.R2TestActivity") as Class<Activity>)

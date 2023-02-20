@@ -3,11 +3,14 @@ package com.wpf.app.quickdialog.helper
 import android.view.Window
 import android.view.WindowManager
 import com.wpf.app.quickdialog.listeners.DialogSize
+import com.wpf.app.quickdialog.minAndMaxLimit.MinAndMaxLimit
+import com.wpf.app.quickutil.base.asTo
 
 /**
  * Created by 王朋飞 on 2022/6/17.
  */
 object DialogSizeHelper {
+
     fun dealSize(dialog: DialogSize, dialogWidth: Int, dialogHeight: Int) {
         if (dialog.getWindow() == null) return
         val window: Window = dialog.getWindow()!!
@@ -35,6 +38,7 @@ object DialogSizeHelper {
             if ((dialog.initDialogAdaptiveWidth() || dialog.initDialogWidth() == WindowManager.LayoutParams.WRAP_CONTENT) && dialog.getView() != null && dialog.initDialogWidthPercent() == DialogSize.NO_SET.toFloat()) {
                 dialog.getView()!!.post {
                     windowParams.width = dealDialogWidth(dialog, dialog.getView()!!.width)
+                    window.attributes = windowParams
                 }
             } else {
                 windowParams.width = dealDialogWidth(
@@ -43,9 +47,20 @@ object DialogSizeHelper {
                 )
             }
             if ((dialog.initDialogAdaptiveHeight() || dialog.initDialogHeight() == WindowManager.LayoutParams.WRAP_CONTENT) && dialog.getView() != null && dialog.initDialogHeightPercent() == DialogSize.NO_SET.toFloat()) {
-                dialog.getView()!!.post {
-                    windowParams.height = dealDialogHeight(dialog, dialog.getView()!!.height)
+                if (dialog.getView() is MinAndMaxLimit) {
+                    val minAndMaxLimit = dialog.getView().asTo<MinAndMaxLimit>()
+                    minAndMaxLimit?.maxHeight = dialog.initDialogMaxHeight()
+                    minAndMaxLimit?.getFirstChild()?.post {
+                        windowParams.height = dealDialogHeight(dialog, minAndMaxLimit.getFirstChild()!!.height)
+                        window.attributes = windowParams
+                    }
+                } else {
+                    dialog.getView()!!.post {
+                        windowParams.height = dealDialogHeight(dialog, dialog.getView()!!.height)
+                        window.attributes = windowParams
+                    }
                 }
+
             } else {
                 windowParams.height = dealDialogHeight(
                     dialog,

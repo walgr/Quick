@@ -35,11 +35,12 @@ class LoadSp2Text @JvmOverloads constructor(
 
     override fun onFinishInflate() {
         super.onFinishInflate()
-        if (getChildAt(0) is TextView) {
+        val firstChild = getChildAt(0)
+        if (firstChild is TextView) {
             //只能套在基于TextView的View上
-            getChildAt(0).asTo<TextView>()?.text = spData
+            firstChild.asTo<TextView>()?.text = spData
             if (attributeHelper.bindData2Sp == true) {
-                getChildAt(0).asTo<TextView>()?.doAfterTextChanged {
+                firstChild.asTo<TextView>()?.doAfterTextChanged {
                     sharedPreference.edit {
                         putString(attributeHelper.bindKey, it?.toString() ?: "")
                     }
