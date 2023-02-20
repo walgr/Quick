@@ -96,6 +96,4 @@ open class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>()
     override fun getQuickAdapter(): QuickAdapter {
         return this
     }
-
-
 }

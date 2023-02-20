@@ -4,9 +4,12 @@ import android.content.Context
 import android.view.View
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import com.wpf.app.quickbind.QuickBind
 import com.wpf.app.quickbind.interfaces.RunOnContext
 import com.wpf.app.quickrecyclerview.QuickAdapter
+import com.wpf.app.quickrecyclerview.constant.BRConstant
 import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
 import com.wpf.app.quickutil.bind.Bind
 
@@ -18,15 +21,18 @@ open class QuickBindData @JvmOverloads constructor(
     @LayoutRes open val layoutId: Int = 0,
     @Transient open val layoutView: View? = null,
     @Transient open val layoutViewInContext: RunOnContext<View>? = null,
-    isSuspension: Boolean = false,         //View是否悬浮置顶
+    isSuspension: Boolean = false,                      //View是否悬浮置顶
+    val isDealBinding: Boolean = false,                 //是否处理DataBinding
 ) : QuickItemData(isSuspension = isSuspension), Bind {
 
     @Transient
     private var mViewHolder: QuickViewHolder<QuickBindData>? = null
 
+    private var variableBinding: Map<Int, Any>? = null
+    var mViewBinding: ViewDataBinding? = null
+
     @Transient
     private var mAdapter: QuickAdapter? = null
-    private var dealBind = true
 
     @Transient
     private var mView: View? = null
@@ -34,10 +40,12 @@ open class QuickBindData @JvmOverloads constructor(
     @Transient
     private var isFirstLoad = true
 
+    @CallSuper
     open fun onCreateViewHolder(itemView: View) {
         this.mView = itemView
-        if (dealBind) {
-            QuickBind.bind(this)
+        QuickBind.bind(this)
+        if (isDealBinding) {
+            mViewBinding = DataBindingUtil.bind(itemView)
         }
     }
 
@@ -57,15 +65,23 @@ open class QuickBindData @JvmOverloads constructor(
         if (isFirstLoad) {
             onCreateViewHolder(itemView = viewHolder.itemView)
         } else {
-            if (dealBind) {
-                QuickBind.dealInPlugins(this, null, QuickBind.bindDataPlugin)
+            QuickBind.dealInPlugins(this, null, QuickBind.bindDataPlugin)
+        }
+        if (isDealBinding) {
+            if (mViewBinding != null) {
+                mViewBinding!!.setVariable(BRConstant.data, this)
+                mViewBinding!!.setVariable(BRConstant.adapter, adapter)
+                mViewBinding!!.setVariable(BRConstant.position, position)
+                if (variableBinding != null) {
+                    val kes: Set<Int> = variableBinding!!.keys
+                    for (key in kes) {
+                        mViewBinding!!.setVariable(key, variableBinding!![key])
+                    }
+                }
+                mViewBinding!!.executePendingBindings()
             }
         }
         isFirstLoad = false
-    }
-
-    fun noBind() {
-        this.dealBind = false
     }
 
     open fun getAdapter(): QuickAdapter? {
