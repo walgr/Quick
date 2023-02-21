@@ -8,11 +8,30 @@ interface EmptyViewStateI {
 }
 
 open class EmptyViewState : EmptyViewStateI {
-    override var curState: EmptyViewState = NoError()
+    override var curState: EmptyViewState = NoError.curState
 }
-open class NoError: EmptyViewState()                                                //正常状态
-open class Loading: EmptyViewState()                                                //加载状态
-open class Success: EmptyViewState()                                                //成功状态
-open class NetError(open val errorCode: Int = 200) : EmptyViewState()               //网络异常
-open class ExceptionError(open val errorCode: Int = 0) : EmptyViewState()           //代码异常
-open class CustomError(open val errorCode: Int = 0): EmptyViewState()               //自定义异常
+
+//正常状态
+open class NoError : EmptyViewState() {
+
+    companion object {
+        val curState: EmptyViewState = NoError()
+    }
+}
+
+//加载状态
+open class Loading : EmptyViewState()
+
+//成功状态
+open class Success : EmptyViewState()
+
+//网络异常
+open class NetError(open val errorCode: Int = 0) : EmptyViewState()
+
+//代码异常
+open class ExceptionError(open val errorCode: Int = 0, open val e: Throwable? = null) :
+    EmptyViewState()
+
+//自定义异常
+open class CustomError(open val errorCode: Int = 0, open val e: Throwable? = null) :
+    EmptyViewState()

@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.LinearLayout
 
-abstract class BaseEmptyView(
+abstract class BaseEmptyView @JvmOverloads constructor(
     mContext: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,

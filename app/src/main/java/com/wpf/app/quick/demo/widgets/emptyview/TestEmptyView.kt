@@ -8,14 +8,14 @@ import android.widget.TextView
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quickutil.widgets.emptyview.*
 
-open class TestEmptyView(
+open class TestEmptyView @JvmOverloads constructor(
     mContext: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
     override val layoutId: Int = R.layout.empty_layout,
     override val layoutView: View? = null,
     override var curState: EmptyViewState = Loading()
-): BaseEmptyView(mContext, attrs, defStyleAttr, layoutId, layoutView, curState) {
+) : BaseEmptyView(mContext, attrs, defStyleAttr, layoutId, layoutView, curState) {
 
     private var mImageView: ImageView? = null
     private var title: TextView? = null
@@ -27,31 +27,34 @@ open class TestEmptyView(
         title = view.findViewById(R.id.title)
         info = view.findViewById(R.id.info)
         btnNext = view.findViewById(R.id.btnNext)
-        visibility = View.GONE
+        changeState(NoError.curState)
     }
 
     override fun changeState(state: EmptyViewState) {
         super.changeState(state)
-        when (state) {
-            is NoError -> {
+        if (state is NoError) {
+            visibility = View.GONE
+        } else {
+            visibility = View.VISIBLE
+            when (state) {
+                is ExceptionError -> {
 
-            }
-            is CustomError -> {
+                }
+                is Loading -> {
 
-            }
-            is ExceptionError -> {
+                }
+                is NetError -> {
 
-            }
-            is Loading -> {
+                }
+                is Success -> {
 
-            }
-            is NetError -> {
+                }
+                is CustomError -> {
 
+                }
+                else -> {}
             }
-            is Success -> {
-
-            }
-            else -> {}
         }
+
     }
 }
