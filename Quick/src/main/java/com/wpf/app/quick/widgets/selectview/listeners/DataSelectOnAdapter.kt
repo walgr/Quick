@@ -21,7 +21,7 @@ interface DataSelectOnAdapter : DataAdapter, SetSelectChange {
         parentSelectData.childList?.forEach {
             it.isSelect = parentSelectData.isSelect
         }
-        parentSelectData.onChildChange(parentSelectData.getChildSelectList())
+        parentSelectData.onSelectChildChange(parentSelectData.getChildSelectList())
     }
 
     /**
@@ -54,7 +54,7 @@ interface DataSelectOnAdapter : DataAdapter, SetSelectChange {
         if (curItemSelect != childSelectData.isSelect) {
             childSelectData.onSelectChange(childSelectData.isSelect)
             getSelectAdapter().getOnSelectChangeListener()?.onSelectChange()
-            childSelectData.parent?.onChildChange(getSelectList())
+            childSelectData.parent?.onSelectChildChange(getSelectList())
         }
         notifyItemChange()
     }

@@ -72,7 +72,7 @@ open class QuickParentSelectData(
         }
     }
 
-    open fun onChildChange(selectList: List<QuickChildSelectData>?) {
+    open fun onSelectChildChange(selectList: List<QuickChildSelectData>?) {
 
     }
 

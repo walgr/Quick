@@ -8,7 +8,7 @@ import com.wpf.app.quickrecyclerview.data.QuickBindData
 
 open class Article : QuickBindData(layoutId = R.layout.holder_refresh_item) {
     @SuppressLint("NonConstantResourceId")
-//    @BindData2View(id = R.id.title, helper = Text2TextView::class)
+    @BindData2View(id = R.id.title, helper = Text2TextView::class)
     val title: String? = null
 
     fun newTitle(): String {
