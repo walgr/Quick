@@ -3,6 +3,7 @@ package com.wpf.app.quick.widgets.selectview.data
 import android.view.View
 import androidx.annotation.LayoutRes
 import com.wpf.app.quickbind.interfaces.RunOnContext
+import java.io.Serializable
 
 /**
  * Created by 王朋飞 on 2022/9/2.
@@ -29,7 +30,7 @@ open class QuickMultiSelectData(
     @Transient override val layoutView: View? = null,
     @Transient override val layoutViewInContext: RunOnContext<View>? = null,
     override val isSuspension: Boolean = false,         //View是否悬浮置顶
-) : QuickSelectData()
+) : QuickSelectData(), Serializable
 
 interface MaxLimitListener {
     fun beyondLimit(limitSize: Int)

@@ -12,6 +12,7 @@ import com.wpf.app.quickrecyclerview.QuickAdapter
 import com.wpf.app.quickrecyclerview.constant.BRConstant
 import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
 import com.wpf.app.quickutil.bind.Bind
+import java.io.Serializable
 
 /**
  * Created by 王朋飞 on 2022/7/13.
@@ -23,7 +24,7 @@ open class QuickBindData @JvmOverloads constructor(
     @Transient open val layoutViewInContext: RunOnContext<View>? = null,
     isSuspension: Boolean = false,                      //View是否悬浮置顶
     val isDealBinding: Boolean = false,                 //是否处理DataBinding
-) : QuickItemData(isSuspension = isSuspension), Bind {
+) : QuickItemData(isSuspension = isSuspension), Bind, Serializable {
 
     @Transient
     private var mViewHolder: QuickViewHolder<QuickBindData>? = null

@@ -7,6 +7,7 @@ import com.wpf.app.quickbind.interfaces.RunItemClick
 import com.wpf.app.quickbind.interfaces.RunItemClickWithSelf
 import com.wpf.app.quickrecyclerview.QuickAdapter
 import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
+import java.io.Serializable
 
 /**
  * Created by 王朋飞 on 2022/7/20.
@@ -16,7 +17,7 @@ open class ClickItem @JvmOverloads constructor(
     override val layoutId: Int,
     open val clickSelf: RunItemClickWithSelf<ClickItem>? = null,
     open val click: RunItemClick? = null,
-) : QuickBindData(layoutId) {
+) : QuickBindData(layoutId), Serializable {
 
     override fun onBindViewHolder(adapter: QuickAdapter, viewHolder: QuickViewHolder<QuickBindData>, position: Int) {
         super.onBindViewHolder(adapter, viewHolder, position)

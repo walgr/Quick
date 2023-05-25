@@ -2,6 +2,7 @@ package com.wpf.app.quickrecyclerview.data
 
 import android.view.View
 import com.wpf.app.quickbind.interfaces.RunOnContext
+import java.io.Serializable
 
 abstract class QuickStateData(
     open var state: Boolean = false,
@@ -9,7 +10,7 @@ abstract class QuickStateData(
     @Transient override val layoutView: View? = null,
     @Transient override val layoutViewInContext: RunOnContext<View>? = null,
     override val isSuspension: Boolean = false,
-): QuickClickData() {
+): QuickClickData(), Serializable {
 
     override fun onClick() {
         state = !state

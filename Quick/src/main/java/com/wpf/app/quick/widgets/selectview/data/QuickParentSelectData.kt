@@ -9,6 +9,7 @@ import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
 import com.wpf.app.quickbind.interfaces.RunItemClickWithSelf
 import com.wpf.app.quickbind.interfaces.RunOnContext
 import com.wpf.app.quickutil.recyclerview.scrollToPositionAndOffset
+import java.io.Serializable
 
 /**
  * Created by 王朋飞 on 2022/7/13.
@@ -35,7 +36,7 @@ open class QuickParentSelectData(
     @Transient override val layoutViewInContext: RunOnContext<View>? = null,
 ) : QuickChildSelectData(
     onChildClick = onParentClick as? RunItemClickWithSelf<QuickChildSelectData>,
-) {
+), Serializable {
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onItemClick() {

@@ -81,7 +81,7 @@ class IntentDataTestModel : QuickBindingModel<ActivityDataTestBinding>() {
         Log.i(TAG, array!![0].toString() + "")
         Log.i(TAG, listS!![0].userName + "")
         Log.i(TAG, listP!![0].text + "")
-        Log.i(TAG, arrayS!![0].userName + "")
+        Log.i(TAG, arrayS!![0].layoutId.toString() + "")
         Log.i(TAG, arrayP.toString() + "")
         title?.text = "数据测试页ViewModel"
     }

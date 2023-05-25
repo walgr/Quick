@@ -4,6 +4,7 @@ import android.view.View
 import androidx.annotation.LayoutRes
 import com.wpf.app.quickbind.interfaces.RunItemClickWithSelf
 import com.wpf.app.quickbind.interfaces.RunOnContext
+import java.io.Serializable
 
 /**
  * Created by 王朋飞 on 2022/7/13.
@@ -28,7 +29,7 @@ open class QuickChildSelectData(
     @LayoutRes override val layoutId: Int = 0,
     @Transient override val layoutView: View? = null,
     @Transient override val layoutViewInContext: RunOnContext<View>? = null,
-) : QuickMultiSelectData() {
+) : QuickMultiSelectData(), Serializable {
 
     fun getChildSelectSize(): Int {
         return getChildSelectList()?.size ?: 0

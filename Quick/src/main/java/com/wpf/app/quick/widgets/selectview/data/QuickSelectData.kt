@@ -10,6 +10,7 @@ import com.wpf.app.quickrecyclerview.data.QuickBindData
 import com.wpf.app.quickrecyclerview.data.QuickClickData
 import com.wpf.app.quickrecyclerview.data.QuickStateData
 import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
+import java.io.Serializable
 
 /**
  * Created by 王朋飞 on 2022/7/13.
@@ -24,7 +25,7 @@ open class QuickSelectData(
     @Transient override val layoutView: View? = null,
     @Transient override val layoutViewInContext: RunOnContext<View>? = null,
     override val isSuspension: Boolean = false,         //View是否悬浮置顶
-) : QuickClickData() {
+) : QuickClickData(), Serializable {
 
     override fun onClick() {
 

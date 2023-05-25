@@ -20,8 +20,8 @@ class ParentSelectItem : QuickParentSelectData(layoutId = R.layout.holder_select
     @BindData2View(id = R.id.title, helper = Text2TextView::class)
     var title = runOnHolder { "" + name + id + getParentName() + "(${getChildSelectSize()})" }
 
-    override fun onChildChange(selectList: List<QuickChildSelectData>?) {
-        super.onChildChange(selectList)
+    override fun onSelectChildChange(selectList: List<QuickChildSelectData>?) {
+        super.onSelectChildChange(selectList)
         title.run(getView()!!.findViewById(R.id.title))
         getViewHolder()?.itemPosition?.let {
             getAdapter()?.notifyItemChanged(getViewHolder()?.itemPosition!!)

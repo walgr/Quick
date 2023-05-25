@@ -9,6 +9,7 @@ import com.wpf.app.quickrecyclerview.QuickAdapter
 import com.wpf.app.quickrecyclerview.R
 import com.wpf.app.quickrecyclerview.data.QuickBindData
 import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
+import java.io.Serializable
 
 /**
  * Created by 王朋飞 on 2022/7/20.
@@ -19,7 +20,7 @@ open class SpaceItem(
     open val isVertical: Boolean = true
 ) : QuickBindData(layoutViewInContext = runOnContext {
     View(it)
-}) {
+}), Serializable {
 
     override fun onBindViewHolder(
         adapter: QuickAdapter,
