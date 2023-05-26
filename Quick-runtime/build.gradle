@@ -24,6 +24,7 @@ android {
         // We run a full lint analysis as build part in CI, so skip vital checks for assemble tasks.
         checkReleaseBuilds false
     }
+    namespace 'com.wpf.app.quick.runtime'
 
     libraryVariants.all {
         it.generateBuildConfigProvider.configure {

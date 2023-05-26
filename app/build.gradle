@@ -48,6 +48,7 @@ android {
     buildFeatures {
         dataBinding true
     }
+    namespace 'com.wpf.app.quick.demo'
 }
 
 dependencies {

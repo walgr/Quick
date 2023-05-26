@@ -25,6 +25,7 @@ android {
     kotlinOptions {
         jvmTarget = '11'
     }
+    namespace 'com.wpf.app.quickdialog'
 }
 
 dependencies {
