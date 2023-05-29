@@ -4,7 +4,7 @@ buildscript {
     ext {
         // Sdk and tools
         compileSdkVersion = 33
-        minSdkVersion = 23
+        minSdkVersion = 21
         targetSdkVersion = 33
         androidTools = '33.0.2'
         kotlin = '1.8.21'
