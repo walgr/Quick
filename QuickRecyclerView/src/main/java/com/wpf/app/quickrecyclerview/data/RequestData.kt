@@ -14,15 +14,17 @@ open class RequestData @JvmOverloads constructor(
     var isViewRefresh = true
     //刷新偏移量
     open var offset: Int = 0
-    open fun refresh() {
+    open fun refresh(): RequestData {
         page = 0
         isViewRefresh = true
         offset = 0
+        return this
     }
 
-    open fun loadMore() {
+    open fun loadMore(): RequestData {
         page++
         isViewRefresh = false
+        return this
     }
 
     /**
