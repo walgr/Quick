@@ -4,13 +4,17 @@ import android.content.Context
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModel
+import com.wpf.app.quicknetwork.base.RequestCoroutineScope
+import kotlinx.coroutines.Job
 
 /**
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-abstract class QuickBindingModel<T : ViewDataBinding> : ViewModel(), LifecycleObserver, ViewLifecycle {
+abstract class QuickBindingModel<T : ViewDataBinding> : ViewModel(), LifecycleObserver, ViewLifecycle, RequestCoroutineScope {
     var mViewBinding: T? = null
+
+    override var jobManager: MutableList<Job> = mutableListOf()
 
     abstract fun onBindingCreated(mViewBinding: T?)
 
@@ -20,5 +24,10 @@ abstract class QuickBindingModel<T : ViewDataBinding> : ViewModel(), LifecycleOb
 
     fun getContext(): Context? {
         return getViewBinding()?.root?.context
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        cancelJob()
     }
 }

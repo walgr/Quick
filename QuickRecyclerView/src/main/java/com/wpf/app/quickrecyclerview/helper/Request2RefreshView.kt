@@ -57,14 +57,12 @@ object Request2RefreshView :
                     super.onRefresh()
                     requestData.refresh()
                     realData.requestAndCallback(view, requestData, refreshCallback)
-                    realData.refreshFinish()
                 }
 
                 override fun onLoadMore() {
                     super.onLoadMore()
                     requestData.loadMore()
                     realData.requestAndCallback(view, requestData, loadMoreCallback)
-                    realData.loadMoreFinish()
                 }
             }
         } else {

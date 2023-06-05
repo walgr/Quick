@@ -26,22 +26,18 @@ class RefreshListTestActivity : QuickActivity(R.layout.activity_refresh_list, ti
     @SuppressLint("NonConstantResourceId")
     @BindData2View(id = R.id.list, helper = Request2RefreshView::class)
     val request2List = request2List { requestData, callback ->
-        request {
+        request(this) {
             首页文章列表(requestData.page)
         }.success {
-            callback.backData(it?.data?.datas)
-        }.after {
-            if (requestData.isViewRefresh) {
-                mSmartRefreshLayout?.finishRefresh()
-            } else {
-                mSmartRefreshLayout?.finishLoadMore()
-            }
+             callback.backData(it?.data?.datas)
         }
     }.refreshFinish {
         LogUtil.e("下拉刷新请求结束")
+        mSmartRefreshLayout?.finishRefresh()
         false
     }.loadMoreFinish {
         LogUtil.e("上拉加载请求结束")
+        mSmartRefreshLayout?.finishLoadMore()
         false
     }
 
@@ -54,5 +50,8 @@ class RefreshListTestActivity : QuickActivity(R.layout.activity_refresh_list, ti
             request2List.requestData?.loadMore()
             request2List.manualRequest()
         }, 2000)
+//        mSmartRefreshLayout?.postDelayed({
+//            finish()
+//        }, 500)
     }
 }

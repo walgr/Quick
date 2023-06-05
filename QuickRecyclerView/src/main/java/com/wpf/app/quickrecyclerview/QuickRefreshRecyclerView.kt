@@ -68,7 +68,6 @@ open class QuickRefreshRecyclerView @JvmOverloads constructor(
             mRequestData.refresh()
             (mDataChangeListener as? Request2ListWithView<RequestData, QuickItemData, QuickRefreshRecyclerView>)
                 ?.requestAndCallback(this, mRequestData, refreshCallback)
-            mDataChangeListener?.refreshFinish()
         }
     }
 
@@ -77,7 +76,6 @@ open class QuickRefreshRecyclerView @JvmOverloads constructor(
             mRequestData.loadMore()
             (mDataChangeListener as? Request2ListWithView<RequestData, QuickItemData, QuickRefreshRecyclerView>)
                 ?.requestAndCallback(this, mRequestData, loadMoreCallback)
-            mDataChangeListener?.loadMoreFinish()
         }
     }
 }

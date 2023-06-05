@@ -7,6 +7,11 @@ import androidx.appcompat.app.AppCompatActivity
 import com.wpf.app.quickbind.QuickBind
 import com.wpf.app.quickbind.annotations.AutoGet
 import com.wpf.app.quickbind.interfaces.RunOnContext
+import com.wpf.app.quicknetwork.base.RequestCoroutineScope
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlin.coroutines.CoroutineContext
 
 /**
  * Created by 王朋飞 on 2022/7/13.
@@ -17,7 +22,9 @@ abstract class QuickActivity @JvmOverloads constructor(
     open val layoutView: View? = null,
     open val layoutViewInContext: RunOnContext<View>? = null,
     @AutoGet(QuickFragment.titleKey) open val titleName: String = ""
-) : AppCompatActivity(), QuickView {
+) : AppCompatActivity(), QuickView, RequestCoroutineScope {
+
+    override var jobManager: MutableList<Job> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,5 +50,10 @@ abstract class QuickActivity @JvmOverloads constructor(
         } else if (layoutViewInContext != null) {
             setContentView(layoutViewInContext?.run(this))
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        cancelJob()
     }
 }

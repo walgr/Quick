@@ -15,7 +15,7 @@ buildscript {
 
         ext.deps = [
                 androidx      : [
-                        'activityktx'          : 'androidx.activity:activity-ktx:1.7.1',
+                        'activityktx'          : 'androidx.activity:activity-ktx:1.6.0',
                         'fragmentktx'          : 'androidx.fragment:fragment-ktx:1.5.7',
                         'appcompat'            : 'androidx.appcompat:appcompat:1.6.1',
                         'corektx'              : 'androidx.core:core-ktx:1.10.1',

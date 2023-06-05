@@ -61,18 +61,13 @@ interface Request2ListWithView<Request : RequestData, Data : QuickItemData, View
      */
     fun refreshFinish(): Boolean {
         refreshRun?.let {
-            return refreshFinishFun(it)
+            return it()
         }
         return false
     }
 
-    fun refreshFinishFun(run: () -> Boolean): Boolean {
-        this.refreshRun = run
-        return run()
-    }
-
     fun refreshFinish(run: () -> Boolean): Request2ListWithView<Request, Data, View> {
-        refreshFinishFun(run)
+        this.refreshRun = run
         return this
     }
 
@@ -82,18 +77,13 @@ interface Request2ListWithView<Request : RequestData, Data : QuickItemData, View
      */
     fun loadMoreFinish(): Boolean {
         loadMoreRun?.let {
-            return loadMoreFinishFun(it)
+            return it()
         }
         return false
     }
 
-    fun loadMoreFinishFun(run: () -> Boolean): Boolean {
-        this.loadMoreRun = run
-        return run()
-    }
-
     fun loadMoreFinish(run: () -> Boolean): Request2ListWithView<Request, Data, View> {
-        loadMoreFinishFun(run)
+        this.loadMoreRun = run
         return this
     }
 

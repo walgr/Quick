@@ -4,10 +4,11 @@ package com.wpf.app.quicknetwork.base
  * Created by 王朋飞 on 2022/7/22.
  *
  */
-class WpfRequest<SResponse, FResponse> : BaseRequest<SResponse, FResponse>() {
+class WpfRequest<SResponse, FResponse>(context: RequestCoroutineScope? = null) :
+    JobRequest<SResponse, FResponse>(context) {
 
     override fun isSuccess(response: SResponse?): Boolean {
-        if (response is BaseResponseI<*,*>) {
+        if (response is BaseResponseI<*, *>) {
             return response.isSuccess()
         }
         return response != null

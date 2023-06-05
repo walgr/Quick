@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import com.wpf.app.quicknetwork.base.BaseRequest
 import com.wpf.app.quicknetwork.base.BaseResponseI
 import com.wpf.app.quicknetwork.base.BaseResponseIA
+import com.wpf.app.quicknetwork.base.JobRequest
 import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Response
@@ -19,7 +20,7 @@ open class RealCall<SResponse, FResponse>(private val rawCall: Call<SResponse>, 
      * 异步请求
      */
     fun <Request : BaseRequest<SResponse, FResponse>> enqueue(request: Request): Request {
-        CoroutineScope(Dispatchers.Default).launch {
+        val job = CoroutineScope(Dispatchers.Default).launch {
             request.funBefore.invoke()
             val result = withContext(Dispatchers.IO) {
                 try {
@@ -86,6 +87,10 @@ open class RealCall<SResponse, FResponse>(private val rawCall: Call<SResponse>, 
                 }
                 request.funAfter.invoke()
             }
+        }
+        if (request is JobRequest<*, *>) {
+            job.invokeOnCompletion { request.context?.removeJob(job) }
+            request.context?.addJob(job)
         }
         return request
     }

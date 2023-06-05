@@ -11,6 +11,8 @@ import com.wpf.app.quickbind.QuickBind
 import com.wpf.app.quickbind.annotations.AutoGet
 import com.wpf.app.quickbind.interfaces.BindBaseFragment
 import com.wpf.app.quickbind.interfaces.RunOnContext
+import com.wpf.app.quicknetwork.base.RequestCoroutineScope
+import kotlinx.coroutines.Job
 
 /**
  * Created by 王朋飞 on 2022/7/13.
@@ -25,7 +27,9 @@ abstract class QuickFragment @JvmOverloads constructor(
     open val layoutView: View? = null,
     open val layoutViewInContext: RunOnContext<View>? = null,
     @AutoGet(titleKey) open val titleName: String = ""
-) : Fragment(), BindBaseFragment, QuickView {
+) : Fragment(), BindBaseFragment, QuickView, RequestCoroutineScope {
+
+    override var jobManager: MutableList<Job> = mutableListOf()
 
     private var mView: View? = null
 
@@ -62,6 +66,11 @@ abstract class QuickFragment @JvmOverloads constructor(
     private fun viewCreated(view: View?) {
         QuickBind.bind(this)
         initView(view)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        cancelJob()
     }
 
     companion object {
