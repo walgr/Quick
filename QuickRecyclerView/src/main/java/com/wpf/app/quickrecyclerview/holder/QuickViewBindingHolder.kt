@@ -25,7 +25,7 @@ open class QuickViewBindingHolder<T : QuickViewDataBinding<VB>, VB : ViewDataBin
     private var mViewData: T? = null
     var mViewBinding: VB? = null
 
-    protected open var variableBinding: Map<Int, Any>? = null
+    open var variableBinding: Map<Int, Any>? = null
 
     override fun onCreateViewHolder(itemView: View) {
         super.onCreateViewHolder(itemView)
