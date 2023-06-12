@@ -1,7 +1,8 @@
-package com.wpf.app.quickrecyclerview.holder
+package com.wpf.app.quickrecyclerview.annotations
 
 import androidx.databinding.ViewDataBinding
 import com.wpf.app.quickrecyclerview.data.QuickViewDataBinding
+import com.wpf.app.quickrecyclerview.holder.QuickViewBindingHolder
 import kotlin.reflect.KClass
 
 /**

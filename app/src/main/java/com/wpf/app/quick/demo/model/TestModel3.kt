@@ -3,7 +3,7 @@ package com.wpf.app.quick.demo.model
 import androidx.lifecycle.MutableLiveData
 import com.wpf.app.quick.demo.adapterholder.TestHolder3
 import com.wpf.app.quick.demo.databinding.HolderTest3Binding
-import com.wpf.app.quickrecyclerview.holder.BindBindingHolder
+import com.wpf.app.quickrecyclerview.annotations.BindBindingHolder
 import com.wpf.app.quickrecyclerview.data.QuickViewDataBinding
 
 /**

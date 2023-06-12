@@ -77,6 +77,6 @@ open class QuickViewHolder<T : QuickItemData> @JvmOverloads constructor(
     }
 
     open fun getViewData(): T? {
-        return mQuickAdapter.getData()?.get(bindingAdapterPosition) as T
+        return mQuickAdapter.getData()?.getOrNull(bindingAdapterPosition) as? T
     }
 }

@@ -2,6 +2,9 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+
+        <import type="android.view.View" />
+
         <variable
             name="data"
             type="com.wpf.app.quick.demo.http.model.Article" />
@@ -9,19 +12,29 @@
         <variable
             name="position"
             type="java.lang.Integer" />
+
+        <variable
+            name="adapter"
+            type="com.wpf.app.quickrecyclerview.QuickAdapter" />
     </data>
 
     <LinearLayout
-        android:orientation="vertical"
-        android:padding="16dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/title"
-            android:text="@{data.newTitle()}"
             android:layout_width="match_parent"
-            android:layout_height="50dp" />
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:gravity="center_vertical"
+            android:text="@{data.newTitle()}" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#eeeeee"
+            android:visibility="@{position==adapter.itemCount - 1 ?View.GONE:View.VISIBLE}" />
     </LinearLayout>
 </layout>

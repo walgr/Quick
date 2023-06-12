@@ -7,7 +7,7 @@ import com.wpf.app.quickrecyclerview.annotations.BindHolder
 import com.wpf.app.quickrecyclerview.data.QuickBindData
 import com.wpf.app.quickrecyclerview.data.QuickItemData
 import com.wpf.app.quickrecyclerview.data.QuickViewDataBinding
-import com.wpf.app.quickrecyclerview.holder.BindBindingHolder
+import com.wpf.app.quickrecyclerview.annotations.BindBindingHolder
 import com.wpf.app.quickrecyclerview.holder.QuickViewBindingHolder
 import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
 import com.wpf.app.quickrecyclerview.listeners.DataAdapter

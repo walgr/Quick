@@ -1,6 +1,5 @@
 package com.wpf.app.quickrecyclerview.data
 
-import androidx.databinding.BaseObservable
 import java.io.Serializable
 import kotlin.math.abs
 
@@ -11,7 +10,7 @@ import kotlin.math.abs
 open class QuickItemData(
     open var viewType: Int = 0,
     open val isSuspension: Boolean = false                 //View是否悬浮置顶
-): BaseObservable(), Serializable {
+): Serializable {
 
     init {
         initViewType()
