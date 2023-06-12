@@ -73,10 +73,10 @@ abstract class QuickDialog : Dialog, DialogSize, DialogLifecycle {
         initView(mView)
     }
 
-    protected var mScreenWidth = 0
-    protected var mScreenHeight = 0
+    private var mScreenWidth = 0
+    private var mScreenHeight = 0
 
-    protected fun dealSize() {
+    open fun dealSize() {
         val size = getScreenSize()
         mScreenWidth = size.x
         mScreenHeight = size.y
@@ -88,8 +88,8 @@ abstract class QuickDialog : Dialog, DialogSize, DialogLifecycle {
 
     abstract fun initView(view: View?)
 
-    protected var mNewWidth = DialogSize.NO_SET
-    protected var mNewHeight = DialogSize.NO_SET
+    open var mNewWidth = DialogSize.NO_SET
+    open var mNewHeight = DialogSize.NO_SET
 
     override fun getNewHeight(): Int {
         return mNewHeight
