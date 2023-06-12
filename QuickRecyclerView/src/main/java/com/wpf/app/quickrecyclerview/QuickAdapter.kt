@@ -38,7 +38,6 @@ open class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>()
                     val bindingHolderCls = it.value.java.getConstructor(ViewGroup::class.java)
                     val bindingHolder = bindingHolderCls.newInstance(viewGroup)
                             as QuickViewBindingHolder<QuickViewDataBinding<out ViewDataBinding>, out ViewDataBinding>
-                    bindingHolder.mViewData = findData
                     bindingHolder.onCreateViewHolder(bindingHolder.itemView)
                     return bindingHolder as QuickViewHolder<QuickItemData>
                 }

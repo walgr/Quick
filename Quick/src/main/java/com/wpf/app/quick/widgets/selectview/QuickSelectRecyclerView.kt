@@ -19,7 +19,7 @@ open class QuickSelectRecyclerView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : QuickRecyclerView(mContext, attrs, defStyleAttr), DataSelectOnAdapter, SetSelectChange {
 
-    override fun init() {
+    override fun initView() {
         layoutManager = LinearLayoutManager(context)
         mQuickAdapter = QuickSelectAdapter()
         mQuickAdapter.mRecyclerView = this

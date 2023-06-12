@@ -22,15 +22,14 @@ open class QuickViewBindingHolder<T : QuickViewDataBinding<VB>, VB : ViewDataBin
     override var dealBindView: Boolean = false,
 ) : QuickViewHolder<T>(mParent, layoutId = layoutId, layoutView = layoutView, dealBindView = dealBindView) {
 
-    var mViewData: T? = null
+    private var mViewData: T? = null
     var mViewBinding: VB? = null
 
-    protected var variableBinding: Map<Int, Any>? = null
+    protected open var variableBinding: Map<Int, Any>? = null
 
     override fun onCreateViewHolder(itemView: View) {
         super.onCreateViewHolder(itemView)
         mViewBinding = DataBindingUtil.bind(itemView)
-        mViewData!!.onHolderCreated(this)
         onCreateHolderEnd(itemView)
     }
 
@@ -39,6 +38,10 @@ open class QuickViewBindingHolder<T : QuickViewDataBinding<VB>, VB : ViewDataBin
     @CallSuper
     override fun onBindViewHolder(adapter: QuickAdapter, data: T?, position: Int) {
         super.onBindViewHolder(adapter, data, position)
+        if (mViewData == null) {
+            mViewData = data
+            mViewData?.onHolderCreated(this)
+        }
         if (mViewBinding != null) {
             mViewBinding!!.setVariable(BRConstant.data, data)
             mViewBinding!!.setVariable(BRConstant.adapter, adapter)

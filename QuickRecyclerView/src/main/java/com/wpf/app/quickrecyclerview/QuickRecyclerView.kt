@@ -19,10 +19,10 @@ open class QuickRecyclerView @JvmOverloads constructor(
     open lateinit var mQuickAdapter: QuickAdapter
 
     init {
-        init()
+        initView()
     }
 
-    open fun init() {
+    open fun initView() {
         layoutManager = LinearLayoutManager(context)
         mQuickAdapter = QuickAdapter()
         mQuickAdapter.mRecyclerView = this
