@@ -34,6 +34,7 @@ android {
 }
 
 dependencies {
+    implementation("org.jetbrains.kotlin:kotlin-reflect:${rootProject.kotlin}")
 
     compileOnly deps.androidx.appcompat
     //fragment-ktx
@@ -46,11 +47,6 @@ dependencies {
     compileOnly deps.androidx.recyclerview
 
     compileOnly deps.gson
-
-    //SmartRefreshLayout
-    compileOnly deps.refresh
-    compileOnly deps.refresh_header
-    compileOnly deps.refresh_footer
 
     if (IS_REMOTE.toBoolean()) {
         api deps.quickbind.bind

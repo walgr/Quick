@@ -8,11 +8,12 @@ import com.wpf.app.quickbind.interfaces.itemClick
 import java.io.Serializable
 
 abstract class QuickClickData @JvmOverloads constructor(
-    override val layoutId: Int = 0,
+    @Transient override val layoutId: Int = 0,
     @Transient override val layoutView: View? = null,
     @Transient override val layoutViewInContext: RunOnContext<View>? = null,
-    override val isSuspension: Boolean = false,
-): QuickBindData(), Serializable {
+    @Transient override var viewType: Int = 0,
+    @Transient override val isSuspension: Boolean = false,
+) : QuickBindData(viewType = viewType, isSuspension = isSuspension), Serializable {
 
     @Transient
     @BindData2View(helper = ItemClick::class)

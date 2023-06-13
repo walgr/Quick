@@ -23,7 +23,9 @@ abstract class QuickVBActivity<VM : QuickVBModel<VB>, VB : ViewDataBinding> @Jvm
     var mViewModel: VM? = null
         set(value) {
             field = value
-            setViewBinding()
+            if (value != null) {
+                setViewBinding()
+            }
         }
 
     var viewBinding: VB? = null
@@ -33,6 +35,7 @@ abstract class QuickVBActivity<VM : QuickVBModel<VB>, VB : ViewDataBinding> @Jvm
         viewBinding = DataBindingUtil.setContentView(this, layoutId)
         viewBinding?.lifecycleOwner = this
         viewBinding?.setVariable(BRConstant.viewModel, mViewModel)
+        setBindingVariable(viewBinding)
         viewBinding?.executePendingBindings()
         mViewModel?.mViewBinding = viewBinding
     }
@@ -88,6 +91,10 @@ abstract class QuickVBActivity<VM : QuickVBModel<VB>, VB : ViewDataBinding> @Jvm
     }
 
     open fun initView(viewDataBinding: VB?) {
+
+    }
+
+    open fun setBindingVariable(viewDataBinding: VB?) {
 
     }
 }

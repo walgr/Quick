@@ -49,9 +49,6 @@ class RefreshListTestActivity : QuickActivity(R.layout.activity_refresh_list, ti
 
         mSmartRefreshLayout?.postDelayed({
             request2List.manualRequest(request2List.requestData!!.loadMore())
-        }, 2000)
-//        mSmartRefreshLayout?.postDelayed({
-//            finish()
-//        }, 500)
+        }, 3000)
     }
 }

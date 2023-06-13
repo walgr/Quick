@@ -104,4 +104,6 @@ dependencies {
     implementation deps.refresh                     //核心必须依赖
     implementation deps.refresh_header               //经典刷新头
     implementation deps.refresh_footer               //经典加载
+
+    implementation deps.kotlin.kotlinxcoroutinescore
 }

@@ -6,11 +6,11 @@ import com.wpf.app.quickbind.QuickBind
 import com.wpf.app.quickbind.utils.DataAutoSet2ViewUtils
 import com.wpf.app.quickutil.bind.Bind
 
-open class QuickRequestData(
-    open val autoSet: Boolean = true,
-    override var viewType: Int = 0,
-    override val isSuspension: Boolean = false                 //View是否悬浮置顶
-) : QuickItemData(), Bind {
+open class QuickRequestData @JvmOverloads constructor(
+    @Transient open val autoSet: Boolean = true,
+    @Transient override var viewType: Int = 0,
+    @Transient override val isSuspension: Boolean = false                 //View是否悬浮置顶
+) : QuickItemData(viewType, isSuspension), Bind {
 
     @Transient
     private var mView: View? = null

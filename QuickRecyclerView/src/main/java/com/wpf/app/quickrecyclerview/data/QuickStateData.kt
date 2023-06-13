@@ -4,13 +4,14 @@ import android.view.View
 import com.wpf.app.quickbind.interfaces.RunOnContext
 import java.io.Serializable
 
-abstract class QuickStateData(
-    open var state: Boolean = false,
-    override val layoutId: Int = 0,
+abstract class QuickStateData @JvmOverloads constructor(
+    @Transient open var state: Boolean = false,
+    @Transient override val layoutId: Int = 0,
     @Transient override val layoutView: View? = null,
     @Transient override val layoutViewInContext: RunOnContext<View>? = null,
-    override val isSuspension: Boolean = false,
-): QuickClickData(), Serializable {
+    @Transient override var viewType: Int = 0,
+    @Transient override val isSuspension: Boolean = false,
+): QuickClickData(layoutId, layoutView, layoutViewInContext, viewType, isSuspension), Serializable {
 
     override fun onClick() {
         state = !state

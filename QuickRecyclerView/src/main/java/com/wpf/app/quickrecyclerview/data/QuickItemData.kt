@@ -7,9 +7,9 @@ import kotlin.math.abs
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-open class QuickItemData(
-    open var viewType: Int = 0,
-    open val isSuspension: Boolean = false                 //View是否悬浮置顶
+open class QuickItemData @JvmOverloads constructor(
+    @Transient open var viewType: Int = 0,
+    @Transient open val isSuspension: Boolean = false                 //View是否悬浮置顶
 ): Serializable {
 
     init {

@@ -18,7 +18,12 @@ object Request2RefreshView :
         data: Request2ListWithView<out RequestData, out QuickItemData, out RefreshView>
     ) {
         if (view is QuickRefreshRecyclerView) {
-            view.setDataChangeListener(data as Request2ListWithView<RequestData, QuickItemData, QuickRefreshRecyclerView>)
+            val dataAs = data as Request2ListWithView<RequestData, QuickItemData, QuickRefreshRecyclerView>
+            dataAs.view = view
+            dataAs.requestData?.let {
+                view.requestData = it
+            }
+            view.setDataChangeListener(dataAs)
         } else if (view.getAdapter() is QuickAdapter) {
             val quickAdapter = view.getAdapter() as QuickAdapter
             val requestData: RequestData = try {

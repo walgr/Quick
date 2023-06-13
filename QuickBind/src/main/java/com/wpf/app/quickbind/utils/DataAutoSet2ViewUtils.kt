@@ -1,5 +1,6 @@
 package com.wpf.app.quickbind.utils
 
+import android.text.TextUtils
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Checkable
@@ -32,7 +33,13 @@ object DataAutoSet2ViewUtils {
 
     private fun setData2View(view: View, data: Any) {
         val viewId = view.id
-        val viewIdName = view.context.resources.getResourceEntryName(viewId)
+        var viewIdName = ""
+        kotlin.runCatching {
+            if (viewId > 0) {
+                viewIdName = view.context.resources.getResourceEntryName(viewId)
+            }
+        }
+        if (TextUtils.isEmpty(viewIdName)) return
         var viewData: Any? = null
         kotlin.runCatching {
             data.javaClass.getDeclaredField(viewIdName).let {
