@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.wpf.app.quickbind.QuickBind
 import com.wpf.app.quickbind.interfaces.RunOnContext
+import com.wpf.app.quickbind.utils.DataAutoSet2ViewUtils
 import com.wpf.app.quickrecyclerview.QuickAdapter
 import com.wpf.app.quickrecyclerview.constant.BRConstant
 import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
@@ -24,6 +25,7 @@ open class QuickBindData @JvmOverloads constructor(
     @Transient open val layoutViewInContext: RunOnContext<View>? = null,
     isSuspension: Boolean = false,                      //View是否悬浮置顶
     private val isDealBinding: Boolean = false,         //是否处理DataBinding
+    private val autoSet: Boolean = false                 //自动映射
 ) : QuickItemData(isSuspension = isSuspension), Bind, Serializable {
 
     @Transient
@@ -67,6 +69,11 @@ open class QuickBindData @JvmOverloads constructor(
             onCreateViewHolder(itemView = viewHolder.itemView)
         } else {
             QuickBind.dealInPlugins(this, null, QuickBind.bindDataPlugin)
+        }
+        if (autoSet) {
+            mView?.let {
+                DataAutoSet2ViewUtils.autoSet(this, mView!!)
+            }
         }
         if (isDealBinding) {
             if (mViewBinding != null) {

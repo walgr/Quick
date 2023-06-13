@@ -1,7 +1,6 @@
 package com.wpf.app.quickbind.interfaces
 
 import androidx.annotation.CallSuper
-import com.wpf.app.quickbind.bindview.QuickRequestData
 import com.wpf.app.quickutil.Callback
 
 

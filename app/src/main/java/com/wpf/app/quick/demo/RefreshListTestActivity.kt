@@ -7,6 +7,7 @@ import com.wpf.app.quick.annotations.BindData2View
 import com.wpf.app.quick.annotations.BindView
 import com.wpf.app.quick.demo.http.request
 import com.wpf.app.quickrecyclerview.QuickRefreshRecyclerView
+import com.wpf.app.quickrecyclerview.data.RequestData
 import com.wpf.app.quickrecyclerview.helper.Request2RefreshView
 import com.wpf.app.quickrecyclerview.listeners.request2List
 import com.wpf.app.quickutil.LogUtil

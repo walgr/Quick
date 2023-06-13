@@ -34,4 +34,10 @@ open class RequestData @JvmOverloads constructor(
     open fun loadDataSize(size: Int) {
         offset += size
     }
+
+    companion object {
+        fun newInstance(): RequestData {
+            return RequestData()
+        }
+    }
 }

@@ -1,7 +1,6 @@
 package com.wpf.app.quickbind.helper.binddatahelper
 
 import android.view.View
-import com.wpf.app.quickbind.bindview.QuickRequestData
 import com.wpf.app.quickbind.annotations.BindD2VHelper
 import com.wpf.app.quickbind.interfaces.Request2ViewWithView
 import com.wpf.app.quickutil.Callback

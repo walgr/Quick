@@ -4,19 +4,20 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.view.View
 import android.widget.TextView
-import com.wpf.app.quick.activity.QuickViewBindingActivity
+import com.wpf.app.quick.activity.QuickVBActivity
 import com.wpf.app.quick.annotations.BindView
 import com.wpf.app.quick.demo.databinding.ActivityMainBinding
 import com.wpf.app.quick.demo.model.MyMessage
 import com.wpf.app.quick.demo.model.TestModel
 import com.wpf.app.quick.demo.viewmodel.MainModel
+import com.wpf.app.quick.demo.wanandroid.WanAndroidHomeActivity
 import com.wpf.app.quickbind.annotations.BindSp2View
 import com.wpf.app.quickutil.startActivity
 
 /**
  * Created by 王朋飞 on 2022/6/13.
  */
-class MainActivity : QuickViewBindingActivity<MainModel, ActivityMainBinding>(R.layout.activity_main, titleName = "快捷") {
+class MainActivity : QuickVBActivity<MainModel, ActivityMainBinding>(R.layout.activity_main, titleName = "快捷") {
 
     @SuppressLint("NonConstantResourceId")
 //    @BindSp2View(bindSp = "绑定的SpKey1", defaultValue = "默认值1")
@@ -46,6 +47,10 @@ class MainActivity : QuickViewBindingActivity<MainModel, ActivityMainBinding>(R.
             { text3?.text = System.currentTimeMillis().toString() + "" },
             1000
         )
+    }
+
+    fun gotoWanAndroid(view: View?) {
+        startActivity(WanAndroidHomeActivity::class.java)
     }
 
     fun gotoDialog(view: View?) {

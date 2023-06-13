@@ -6,7 +6,7 @@ import com.wpf.app.quick.demo.databinding.ActivitySelectTestBinding
 import com.wpf.app.quick.demo.model.ParentSelectItem
 import com.wpf.app.quick.demo.model.SelectItem
 import com.wpf.app.quick.demo.model.SelectResultItem
-import com.wpf.app.quick.activity.viewmodel.QuickBindingModel
+import com.wpf.app.quick.activity.viewmodel.QuickVBModel
 import com.wpf.app.quick.widgets.selectview.data.QuickChildSelectData
 import com.wpf.app.quick.widgets.selectview.listeners.OnSelectCallback
 
@@ -14,7 +14,7 @@ import com.wpf.app.quick.widgets.selectview.listeners.OnSelectCallback
  * Created by 王朋飞 on 2022/9/16.
  *
  */
-class SelectListModel : QuickBindingModel<ActivitySelectTestBinding>() {
+class SelectListModel : QuickVBModel<ActivitySelectTestBinding>() {
 
     val selectList: MutableLiveData<List<QuickChildSelectData>> = MutableLiveData()
 

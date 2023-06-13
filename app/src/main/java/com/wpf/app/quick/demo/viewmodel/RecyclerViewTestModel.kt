@@ -3,18 +3,17 @@ package com.wpf.app.quick.demo.viewmodel
 import android.view.View
 import com.wpf.app.quick.demo.databinding.ActivityRecyclerviewTestBinding
 import com.wpf.app.quick.demo.model.BindDataTestModel
-import com.wpf.app.quick.activity.viewmodel.QuickBindingModel
+import com.wpf.app.quick.activity.viewmodel.QuickVBModel
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quickrecyclerview.data.and
 import com.wpf.app.quickrecyclerview.utils.LineItem
-import com.wpf.app.quickrecyclerview.utils.SpaceItem
 import com.wpf.app.quickutil.base.dp2px
 import com.wpf.app.quickutil.base.toColor
 
 /**
  * Created by 王朋飞 on 2022/6/13.
  */
-class RecyclerViewTestModel : QuickBindingModel<ActivityRecyclerviewTestBinding>() {
+class RecyclerViewTestModel : QuickVBModel<ActivityRecyclerviewTestBinding>() {
 
     override fun onBindingCreated(mViewBinding: ActivityRecyclerviewTestBinding?) {
 

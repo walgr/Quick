@@ -11,14 +11,14 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import com.wpf.app.quickrecyclerview.constant.BRConstant
 import com.wpf.app.quickutil.base.ViewModelEx
-import com.wpf.app.quick.activity.viewmodel.QuickBindingModel
+import com.wpf.app.quick.activity.viewmodel.QuickVBModel
 import com.wpf.app.quickbind.QuickBind.bind
 
 /**
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-abstract class QuickViewBindingFragment<VM : QuickBindingModel<VB>, VB : ViewDataBinding> @JvmOverloads constructor(
+abstract class QuickViewBindingFragment<VM : QuickVBModel<VB>, VB : ViewDataBinding> @JvmOverloads constructor(
     @LayoutRes override val layoutId: Int = 0,
     override val titleName: String = ""
 ) : QuickFragment(layoutId, titleName = titleName) {

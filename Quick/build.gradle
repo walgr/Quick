@@ -47,6 +47,11 @@ dependencies {
 
     compileOnly deps.gson
 
+    //SmartRefreshLayout
+//    compileOnly deps.refresh
+//    compileOnly deps.refreshheader
+//    compileOnly deps.refreshfooter
+
     if (IS_REMOTE.toBoolean()) {
         api deps.quickbind.bind
         api deps.quickbind.util

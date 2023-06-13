@@ -11,7 +11,7 @@ import kotlinx.coroutines.Job
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-abstract class QuickBindingModel<T : ViewDataBinding> : ViewModel(), LifecycleObserver, ViewLifecycle, RequestCoroutineScope {
+abstract class QuickVBModel<T : ViewDataBinding> : ViewModel(), LifecycleObserver, ViewLifecycle, RequestCoroutineScope {
     var mViewBinding: T? = null
 
     override var jobManager: MutableList<Job> = mutableListOf()

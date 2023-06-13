@@ -1,4 +1,4 @@
-package com.wpf.app.quickbind.bindview
+package com.wpf.app.quickrecyclerview.data
 
 import android.view.View
 import androidx.annotation.LayoutRes
@@ -6,7 +6,11 @@ import com.wpf.app.quickbind.QuickBind
 import com.wpf.app.quickbind.utils.DataAutoSet2ViewUtils
 import com.wpf.app.quickutil.bind.Bind
 
-open class QuickRequestData(private val autoSet: Boolean = true) : Bind {
+open class QuickRequestData(
+    open val autoSet: Boolean = true,
+    override var viewType: Int = 0,
+    override val isSuspension: Boolean = false                 //View是否悬浮置顶
+) : QuickItemData(), Bind {
 
     @Transient
     private var mView: View? = null
@@ -22,5 +26,4 @@ open class QuickRequestData(private val autoSet: Boolean = true) : Bind {
     override fun getView(): View? {
         return mView
     }
-
 }

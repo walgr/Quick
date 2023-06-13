@@ -3,7 +3,7 @@ package com.wpf.app.quick.demo
 import android.annotation.SuppressLint
 import android.widget.TextView
 import android.widget.Toast
-import com.wpf.app.quick.activity.QuickViewBindingActivity
+import com.wpf.app.quick.activity.QuickVBActivity
 import com.wpf.app.quick.annotations.BindView
 import com.wpf.app.quick.annotations.GroupView
 import com.wpf.app.quick.demo.databinding.ActivityDataTestBinding
@@ -15,7 +15,7 @@ import com.wpf.app.quickbind.utils.GroupViews
  * Created by 王朋飞 on 2022/6/13.
  */
 class IntentDataTestActivity :
-    QuickViewBindingActivity<IntentDataTestModel, ActivityDataTestBinding>(
+    QuickVBActivity<IntentDataTestModel, ActivityDataTestBinding>(
         R.layout.activity_data_test,
         titleName = "传输测试页"
     ) {

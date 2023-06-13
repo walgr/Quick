@@ -14,7 +14,7 @@ buildscript {
         incap = '0.3'
 
         ext.deps = [
-                androidx      : [
+                androidx       : [
                         'activityktx'          : 'androidx.activity:activity-ktx:1.6.0',
                         'fragmentktx'          : 'androidx.fragment:fragment-ktx:1.5.7',
                         'appcompat'            : 'androidx.appcompat:appcompat:1.6.1',
@@ -26,7 +26,7 @@ buildscript {
                         'constraintlayout'     : 'androidx.constraintlayout:constraintlayout:2.1.4',
                         'runtime'              : 'com.google.android:android:4.1.1.4',
                 ],
-                'quickbind'   : [
+                'quickbind'    : [
                         'base'        : "com.wpf.app.quick:Quick:${release}",
                         'bind'        : "com.wpf.app.quick:QuickBind:${release}",
                         'annotations' : "com.wpf.app.quick:Quick-annotations:${release}",
@@ -38,35 +38,38 @@ buildscript {
                         'dialog'      : "com.wpf.app.quick:QuickDialog:${release}",
                         'plugin'      : "com.github.walgr.Quick:Quick-gradle-plugin:0.8.0"
                 ],
-                gradlePlugin  : "com.android.tools.build:gradle:7.4.2",
-                'kotlin'      : [
-                        'stdLibJdk8': "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlin}",
+                gradlePlugin   : "com.android.tools.build:gradle:7.4.2",
+                'kotlin'       : [
+                        'stdLibJdk8'           : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlin}",
                         'kotlinxcoroutinescore': "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1",
-                        'serialization': "org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1",
+                        'serialization'        : "org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1",
                 ],
-                'lint'        : [
+                'lint'         : [
                         'core'  : "com.android.tools.lint:lint:25.3.0",
                         'api'   : "com.android.tools.lint:lint-api:25.3.0",
                         'checks': "com.android.tools.lint:lint-checks:25.3.0",
                         'tests' : "com.android.tools.lint:lint-tests:25.3.0",
                 ],
-                javapoet      : 'com.squareup:javapoet:1.13.0',
-                truth         : 'com.google.truth:truth:0.42',
-                compiletesting: 'com.google.testing.compile:compile-testing:0.15',
-                'auto'        : [
+                javapoet       : 'com.squareup:javapoet:1.13.0',
+                truth          : 'com.google.truth:truth:0.42',
+                compiletesting : 'com.google.testing.compile:compile-testing:0.15',
+                'auto'         : [
                         'service': 'com.google.auto.service:auto-service:1.0.1',
                         'common' : 'com.google.auto:auto-common:1.2.1',
                 ],
-                'guava'       : 'com.google.guava:guava:31.1-jre',
-                'incap'       : [
+                'guava'        : 'com.google.guava:guava:31.1-jre',
+                'incap'        : [
                         'runtime'  : "net.ltgt.gradle.incap:incap:${incap}",
                         'processor': "net.ltgt.gradle.incap:incap-processor:${incap}",
                 ],
-                'gson'        : 'com.google.code.gson:gson:2.10.1',
-                'glide'       : 'com.github.bumptech.glide:glide:4.15.1',
-                'retrofit'    : 'com.squareup.retrofit2:retrofit:2.9.0',
-                'okhttp'      : 'com.squareup.okhttp3:okhttp:4.11.0',
-                'viewpager2'  : 'androidx.viewpager2:viewpager2:1.0.0',
+                'gson'         : 'com.google.code.gson:gson:2.10.1',
+                'glide'        : 'com.github.bumptech.glide:glide:4.15.1',
+                'retrofit'     : 'com.squareup.retrofit2:retrofit:2.9.0',
+                'okhttp'       : 'com.squareup.okhttp3:okhttp:4.11.0',
+                'viewpager2'   : 'androidx.viewpager2:viewpager2:1.0.0',
+//                'refresh'      : 'io.github.scwang90:refresh-layout-kernel:2.0.6',
+//                'refreshheader': 'io.github.scwang90:refresh-header-classics:2.0.6',
+//                'refreshfooter': 'io.github.scwang90:refresh-footer-classics:2.0.6',
         ]
     }
 

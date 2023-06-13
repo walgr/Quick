@@ -6,14 +6,13 @@ import android.widget.Checkable
 import android.widget.TextView
 import androidx.core.view.children
 import com.wpf.app.quickbind.annotations.BindD2VHelper
-import com.wpf.app.quickbind.bindview.QuickRequestData
 import com.wpf.app.quickbind.interfaces.RunOnHolderWithSelf
 
 object DataAutoSet2ViewUtils {
 
-    var bind2ViewList: MutableList<BindD2VHelper<View, Any>> = arrayListOf()
+    private var bind2ViewList: MutableList<BindD2VHelper<View, Any>> = arrayListOf()
 
-    fun <T : QuickRequestData> autoSet(data: T, view: View) {
+    fun <T: Any> autoSet(data: T, view: View) {
         setData2ViewGroup(view, data)
     }
 

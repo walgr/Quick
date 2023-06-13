@@ -8,14 +8,14 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import com.wpf.app.quickrecyclerview.constant.BRConstant
 import com.wpf.app.quickutil.base.ViewModelEx
-import com.wpf.app.quick.activity.viewmodel.QuickBindingModel
+import com.wpf.app.quick.activity.viewmodel.QuickVBModel
 import com.wpf.app.quickbind.QuickBind
 
 /**
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-abstract class QuickViewBindingActivity<VM : QuickBindingModel<VB>, VB : ViewDataBinding> @JvmOverloads constructor(
+abstract class QuickVBActivity<VM : QuickVBModel<VB>, VB : ViewDataBinding> @JvmOverloads constructor(
     @LayoutRes override val layoutId: Int = 0,
     override val titleName: String = ""
 ) : QuickActivity(layoutId, titleName = titleName) {
@@ -29,7 +29,7 @@ abstract class QuickViewBindingActivity<VM : QuickBindingModel<VB>, VB : ViewDat
     var viewBinding: VB? = null
         private set
 
-    fun setViewBinding() {
+    private fun setViewBinding() {
         viewBinding = DataBindingUtil.setContentView(this, layoutId)
         viewBinding?.lifecycleOwner = this
         viewBinding?.setVariable(BRConstant.viewModel, mViewModel)
@@ -40,13 +40,12 @@ abstract class QuickViewBindingActivity<VM : QuickBindingModel<VB>, VB : ViewDat
     override fun dealContentView() {
         super.dealContentView()
         val viewModelCls: Class<VM>? = ViewModelEx.get0Clazz(this)
-        if (viewModelCls != null) {
-            mViewModel =
-                ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory(application)).get(
-                    viewModelCls
-                )
+        if (viewModelCls != null && this !is QuickBindingActivity && viewModelCls != QuickVBModel::class.java) {
+            mViewModel = ViewModelProvider(
+                this,
+                ViewModelProvider.AndroidViewModelFactory(application)
+            )[viewModelCls]
             QuickBind.bind(this, mViewModel)
-//            mViewModel?.activity = this
             mViewModel?.onBindingCreated(viewBinding)
         } else {
             setViewBinding()

@@ -1,6 +1,5 @@
 package com.wpf.app.quicknetwork.helper
 
-import com.wpf.app.quicknetwork.call.RealCallAdapterFactory
 import com.wpf.app.quicknetwork.call.CommonCallAdapterFactory
 import com.wpf.app.quicknetwork.call.NoResponseCallAdapterFactory
 import okhttp3.OkHttpClient

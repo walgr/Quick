@@ -72,10 +72,6 @@ dependencies {
     implementation 'androidx.preference:preference-ktx:1.2.0'
     implementation 'androidx.datastore:datastore:1.0.0'
     implementation 'androidx.datastore:datastore-rxjava3:1.0.0'
-    //SmartRefreshLayout
-    implementation 'io.github.scwang90:refresh-layout-kernel:2.0.6'      //核心必须依赖
-    implementation 'io.github.scwang90:refresh-header-classics:2.0.6'    //经典刷新头
-    implementation 'io.github.scwang90:refresh-footer-classics:2.0.6'    //经典加载
 
     if (IS_REMOTE.toBoolean())
         implementation deps.quickbind.base
@@ -97,11 +93,15 @@ dependencies {
     implementation deps.viewpager2
 //    implementation 'jp.wasabeef:recyclerview-animators:4.0.2'
     //retrofit2-okhttp-gson
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
+    implementation deps.retrofit
+    implementation deps.okhttp
     implementation deps.gson
 
     implementation deps.glide
     //约束布局
     implementation deps.androidx.constraintlayout
+    //SmartRefreshLayout
+//    implementation deps.refresh                     //核心必须依赖
+//    implementation deps.refreshheader               //经典刷新头
+//    implementation deps.refreshfooter               //经典加载
 }
