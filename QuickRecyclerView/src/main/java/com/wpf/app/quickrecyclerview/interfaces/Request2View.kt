@@ -1,6 +1,7 @@
-package com.wpf.app.quickbind.interfaces
+package com.wpf.app.quickrecyclerview.interfaces
 
 import androidx.annotation.CallSuper
+import com.wpf.app.quickrecyclerview.data.QuickRequestData
 import com.wpf.app.quickutil.Callback
 
 

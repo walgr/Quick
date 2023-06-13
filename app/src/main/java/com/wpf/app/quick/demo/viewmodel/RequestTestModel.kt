@@ -6,8 +6,8 @@ import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.demo.http.request
 import com.wpf.app.quick.annotations.BindData2View
 import com.wpf.app.quick.demo.databinding.ActivityRequestTestBinding
-import com.wpf.app.quickbind.helper.binddatahelper.Request2View
-import com.wpf.app.quickbind.interfaces.request2View
+import com.wpf.app.quickrecyclerview.bind.Request2View
+import com.wpf.app.quickrecyclerview.interfaces.request2View
 import com.wpf.app.quickutil.LogUtil
 
 class RequestTestModel: QuickVBModel<ActivityRequestTestBinding>() {

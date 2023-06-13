@@ -101,7 +101,7 @@ dependencies {
     //约束布局
     implementation deps.androidx.constraintlayout
     //SmartRefreshLayout
-//    implementation deps.refresh                     //核心必须依赖
-//    implementation deps.refreshheader               //经典刷新头
-//    implementation deps.refreshfooter               //经典加载
+    implementation deps.refresh                     //核心必须依赖
+    implementation deps.refresh_header               //经典刷新头
+    implementation deps.refresh_footer               //经典加载
 }

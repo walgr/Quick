@@ -10,9 +10,9 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import com.wpf.app.quick.widgets.CheckView
 import com.wpf.app.quickbind.helper.binddatahelper.BindData2ViewHelper
-import com.wpf.app.quickbind.helper.binddatahelper.Request2View
-import com.wpf.app.quickbind.interfaces.Request2ViewWithView
-import com.wpf.app.quickbind.interfaces.request2View
+import com.wpf.app.quickrecyclerview.bind.Request2View
+import com.wpf.app.quickrecyclerview.interfaces.Request2ViewWithView
+import com.wpf.app.quickrecyclerview.interfaces.request2View
 import com.wpf.app.quicknetwork.base.BaseResponseI
 import com.wpf.app.quicknetwork.call.RealCall
 import com.wpf.app.quicknetwork.requestCls
@@ -24,9 +24,7 @@ import com.wpf.app.quickrecyclerview.helper.Request2RefreshView
 import com.wpf.app.quickrecyclerview.listeners.RefreshView
 import com.wpf.app.quickrecyclerview.listeners.Request2ListWithView
 import com.wpf.app.quickrecyclerview.listeners.request2List
-import com.wpf.app.quickrecyclerview.listeners.requestData2List
 import com.wpf.app.quickutil.LogUtil
-import java.lang.reflect.Type
 
 /**
  * Created by 王朋飞 on 2022/5/18.
@@ -112,7 +110,7 @@ fun <T> View.request2View(apiCls: Class<T>, methodName: String, parameters: Any?
             } as Request2ListWithView<out RequestData, out QuickItemData, out RefreshView>
             BindData2ViewHelper.bind(refreshView!!, request2List, Request2RefreshView)
         }
-    } else if (parameters is List<*>?) {
+    } else if (parameters is List<*>) {
         val parameterTypes: Array<Class<*>> = parameters?.map {
             if (it?.javaClass == Integer::class.java) Int::class.java else it!!.javaClass
         }?.toTypedArray() ?: arrayOf()
