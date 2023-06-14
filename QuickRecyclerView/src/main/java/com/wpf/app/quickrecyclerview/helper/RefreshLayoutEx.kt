@@ -23,3 +23,10 @@ fun View.autoRefresh() {
         (this as? SmartRefreshLayout)?.autoRefresh()
     }
 }
+
+fun View.autoRefreshOnlyAnim() {
+    //支持SmartRefreshLayout
+    if (this.javaClass.name == "com.scwang.smart.refresh.layout.SmartRefreshLayout") {
+        (this as? SmartRefreshLayout)?.autoRefreshAnimationOnly()
+    }
+}

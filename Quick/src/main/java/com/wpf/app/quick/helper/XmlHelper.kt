@@ -23,6 +23,7 @@ import com.wpf.app.quickrecyclerview.data.RequestData
 import com.wpf.app.quickrecyclerview.helper.Request2RefreshView
 import com.wpf.app.quickrecyclerview.helper.afterRequest
 import com.wpf.app.quickrecyclerview.helper.autoRefresh
+import com.wpf.app.quickrecyclerview.helper.autoRefreshOnlyAnim
 import com.wpf.app.quickrecyclerview.helper.bindRefreshView
 import com.wpf.app.quickrecyclerview.listeners.RefreshView
 import com.wpf.app.quickrecyclerview.listeners.Request2ListWithView
@@ -33,6 +34,8 @@ import com.wpf.app.quickutil.base.asTo
 import com.wpf.app.quickutil.widgets.getChild
 import kotlin.reflect.KClass
 import kotlin.reflect.KFunction
+import kotlin.reflect.full.declaredMembers
+import kotlin.reflect.full.memberFunctions
 
 /**
  * Created by 王朋飞 on 2022/5/18.
@@ -124,22 +127,42 @@ fun <T : Any, R : RequestData> ViewGroup.request2List(
     } ?: return
     val requestDataNew = requestData ?: RequestData()
     bindRefreshView(false)
-//    val parameterTypes: Array<Class<*>> = parameters?.map {
-//        if (it.javaClass == Integer::class.java) Int::class.java else it.javaClass
-//    }?.toTypedArray() ?: arrayOf()
-    val method = apiCls.members.toList().find {
+    val method = apiCls.memberFunctions.find {
         it.name == methodName
     } ?: return
-
+    val methodParametersName = method.parameters.map {
+        it.name
+    }.filter {
+        !it.isNullOrEmpty()
+    }
+    val methodFields = methodParametersName.map { parameterName ->
+        val findField = requestDataNew.javaClass.declaredFields.find {
+            it.name == parameterName
+        }
+        findField?.isAccessible = true
+        findField
+    }
     val api: (T, R) -> RealCall<BaseResponseI<out QuickItemData, Any>, Any> =
         object : (T, R) -> RealCall<BaseResponseI<out QuickItemData, Any>, Any> {
             override fun invoke(
                 p1: T,
                 requestData: R
             ): RealCall<BaseResponseI<out QuickItemData, Any>, Any> {
+                val methodValue = methodFields.map {
+                    it?.get(requestData)
+                }.toMutableList()
+                methodValue.addAll(
+                    if (otherArgument != null) {
+                        methodParametersName.map { parameterName ->
+                            otherArgument.find {
+                                it.first == parameterName
+                            }?.second
+                        }
+                    } else arrayListOf()
+                )
+                val methodTypeValue = methodValue.toTypedArray()
                 return method.call(
-                    p1,
-                    *(arrayOf(requestData.page))
+                    p1, *methodTypeValue
                 ) as RealCall<BaseResponseI<out QuickItemData, Any>, Any>
             }
         }
