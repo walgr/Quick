@@ -1,4 +1,4 @@
-package com.wpf.app.quick.demo.http.model
+package com.wpf.app.quick.demo.wanandroid.model
 
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quickrecyclerview.data.QuickBindData

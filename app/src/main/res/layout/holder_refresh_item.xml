@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="com.wpf.app.quick.demo.http.model.Article" />
+            type="com.wpf.app.quick.demo.wanandroid.model.Article" />
 
         <variable
             name="position"

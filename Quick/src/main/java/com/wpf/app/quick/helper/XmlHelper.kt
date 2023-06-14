@@ -1,5 +1,6 @@
 package com.wpf.app.quick.helper
 
+import android.app.Activity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Checkable
@@ -23,18 +24,14 @@ import com.wpf.app.quickrecyclerview.data.RequestData
 import com.wpf.app.quickrecyclerview.helper.Request2RefreshView
 import com.wpf.app.quickrecyclerview.helper.afterRequest
 import com.wpf.app.quickrecyclerview.helper.autoRefresh
-import com.wpf.app.quickrecyclerview.helper.autoRefreshOnlyAnim
 import com.wpf.app.quickrecyclerview.helper.bindRefreshView
 import com.wpf.app.quickrecyclerview.listeners.RefreshView
 import com.wpf.app.quickrecyclerview.listeners.Request2ListWithView
-import com.wpf.app.quickrecyclerview.listeners.request2List
 import com.wpf.app.quickrecyclerview.listeners.requestData2List
 import com.wpf.app.quickutil.LogUtil
 import com.wpf.app.quickutil.base.asTo
 import com.wpf.app.quickutil.widgets.getChild
 import kotlin.reflect.KClass
-import kotlin.reflect.KFunction
-import kotlin.reflect.full.declaredMembers
 import kotlin.reflect.full.memberFunctions
 
 /**
@@ -43,7 +40,7 @@ import kotlin.reflect.full.memberFunctions
  */
 
 @BindingAdapter(value = ["gotoClass", "parameters"], requireAll = false)
-fun <T> View.gotoActivity(gotoClass: Class<T>?, parameters: List<Any>?) {
+fun <T: Activity> View.gotoActivity(gotoClass: Class<T>?, parameters: List<Any>?) {
     LogUtil.e("-----", "clickView:${this}---activityClass:${gotoClass}")
 }
 

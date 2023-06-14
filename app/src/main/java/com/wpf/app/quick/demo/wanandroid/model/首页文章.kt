@@ -1,4 +1,4 @@
-package com.wpf.app.quick.demo.http.model
+package com.wpf.app.quick.demo.wanandroid.model
 
 import com.google.gson.Gson
 import com.wpf.app.quickbind.interfaces.runOnContextWithSelf
