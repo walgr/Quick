@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:apiClass="@{TestApiClass.INSTANCE.KClass}"
-            app:methodName="@{`首页文章列表`}"
+            app:methodName="@{TestApiClass.INSTANCE.首页文章列表()}"
             app:autoRefresh="@{true}"
             app:requestData="@{requestData}">
 
