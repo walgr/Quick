@@ -146,7 +146,7 @@ public class TestGsonConverterFactory extends Converter.Factory {
                 }
                 return t;
             } catch (Exception e) {
-                TestResponse exceReponse = new TestResponse();
+                TestResponse<?> exceReponse = new TestResponse<>();
                 exceReponse.setErrorCode("-1");
                 exceReponse.setErrorMsg(e.getMessage());
                 return (T) exceReponse;

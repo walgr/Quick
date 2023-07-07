@@ -10,8 +10,9 @@ import com.wpf.app.quickrecyclerview.bind.Request2View
 import com.wpf.app.quickrecyclerview.interfaces.request2View
 import com.wpf.app.quickutil.LogUtil
 
-class RequestTestModel: QuickVBModel<ActivityRequestTestBinding>() {
+class RequestTestModel : QuickVBModel<ActivityRequestTestBinding>() {
 
+    val requestParams = mutableMapOf("page" to 0, "pageSize" to 10)
     val page = 0
 
     //代替上面注释的逻辑
@@ -30,5 +31,6 @@ class RequestTestModel: QuickVBModel<ActivityRequestTestBinding>() {
     override fun onBindingCreated(mViewBinding: ActivityRequestTestBinding?) {
         //手动请求
         info.manualRequest()
+        requestParams["page"] = 1
     }
 }

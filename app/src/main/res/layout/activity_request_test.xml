@@ -4,7 +4,7 @@
 
     <data>
         <import type="java.util.Arrays"/>
-        <import type="com.wpf.app.quick.demo.http.TestApiO"/>
+        <import type="com.wpf.app.quick.demo.http.TestApiClass"/>
 
         <variable
             name="viewModel"
@@ -14,9 +14,9 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:apiClass="@{TestApiO.INSTANCE.Api()}"
+        app:apiClass="@{TestApiClass.INSTANCE.KClass}"
         app:methodName="@{`首页文章列表`}"
-        app:parameters="@{Arrays.asList(viewModel.page)}" >
+        app:parameters="@{viewModel.requestParams}">
 
         <TextView
             android:id="@+id/info"

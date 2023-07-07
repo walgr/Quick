@@ -4,10 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.wpf.app.quick.demo.wanandroid.WanAndroidHomeActivity"/>
-        <variable
-            name="data"
-            type="com.wpf.app.quick.demo.wanandroid.WanAndroidHomeActivity" />
+        <import type="com.wpf.app.quick.demo.wanandroid.WanAndroidHomeActivityClass"/>
     </data>
 
     <LinearLayout
@@ -20,7 +17,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="gotoWanAndroid"
+            app:clickGoto="@{WanAndroidHomeActivityClass.INSTANCE.KClass}"
             android:text="WanAndroid"
             android:textAllCaps="false"/>
 

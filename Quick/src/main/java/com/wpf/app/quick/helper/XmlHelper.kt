@@ -28,8 +28,8 @@ import com.wpf.app.quickrecyclerview.helper.bindRefreshView
 import com.wpf.app.quickrecyclerview.listeners.RefreshView
 import com.wpf.app.quickrecyclerview.listeners.Request2ListWithView
 import com.wpf.app.quickrecyclerview.listeners.requestData2List
-import com.wpf.app.quickutil.LogUtil
 import com.wpf.app.quickutil.base.asTo
+import com.wpf.app.quickutil.startActivity
 import com.wpf.app.quickutil.widgets.getChild
 import kotlin.reflect.KClass
 import kotlin.reflect.full.memberFunctions
@@ -39,9 +39,11 @@ import kotlin.reflect.full.memberFunctions
  *
  */
 
-@BindingAdapter(value = ["gotoClass", "parameters"], requireAll = false)
-fun <T: Activity> View.gotoActivity(gotoClass: Class<T>?, parameters: List<Any>?) {
-    LogUtil.e("-----", "clickView:${this}---activityClass:${gotoClass}")
+@BindingAdapter("clickGoto")
+fun <T: Activity> gotoActivity(view: View, gotoClass: KClass<T>) {
+    view.setOnClickListener {
+        view.context.startActivity(gotoClass.java)
+    }
 }
 
 @BindingAdapter("isSelect")
@@ -82,23 +84,33 @@ fun onViewCheck(view: View, onChange: CompoundButton.OnCheckedChangeListener?) {
 }
 
 @BindingAdapter(value = ["apiClass", "methodName", "parameters"], requireAll = false)
-fun <T> View.request2View(apiCls: Class<T>, methodName: String, parameters: List<Any>?) {
-    if (!apiCls.isInterface) return
-    val parameterTypes: Array<Class<*>> = parameters?.map {
-        if (it.javaClass == Integer::class.java) Int::class.java else it.javaClass
-    }?.toTypedArray() ?: arrayOf()
-    val method = apiCls.getMethod(methodName, *parameterTypes)
+fun <T: Any> View.request2View(apiCls: KClass<T>, methodName: String, parameters: Map<String, Any>? = null) {
+    if (!apiCls.java.isInterface) return
+    val method = apiCls.memberFunctions.find {
+        it.name == methodName
+    } ?: return
+    val methodParametersName = method.parameters.map {
+        it.name
+    }.filter {
+        !it.isNullOrEmpty()
+    }
     val api: (T.() -> RealCall<BaseResponseI<out QuickRequestData, Any>, Any>) =
         object : (T) -> RealCall<BaseResponseI<out QuickRequestData, Any>, Any> {
             override fun invoke(p1: T): RealCall<BaseResponseI<out QuickRequestData, Any>, Any> {
-                return method.invoke(
-                    p1,
-                    *(parameters?.toTypedArray() ?: arrayOf())
-                ) as RealCall<BaseResponseI<out QuickRequestData, Any>, Any>
+                val methodValue = arrayListOf<Any?>()
+                methodValue.addAll(
+                    if (parameters != null) {
+                        methodParametersName.map { parameterName ->
+                            parameters.getValue(parameterName!!)
+                        }
+                    } else arrayListOf()
+                )
+                val methodTypeValue = methodValue.toTypedArray()
+                return method.call(p1, *methodTypeValue) as RealCall<BaseResponseI<out QuickRequestData, Any>, Any>
             }
         }
     val request2View = request2View { callback ->
-        requestCls(apiCls) {
+        requestCls(apiCls.java) {
             api()
         }.success {
             callback.backData(it?.dataI)

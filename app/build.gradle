@@ -2,11 +2,11 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id("com.google.devtools.ksp") version "1.8.21-1.0.11"
 }
 
 android {
     compileSdk rootProject.compileSdkVersion
-    buildToolsVersion rootProject.androidTools
 
     defaultConfig {
         applicationId "com.wpf.app.quick"
@@ -15,6 +15,9 @@ android {
         versionCode 1
         versionName "1.0"
         multiDexEnabled = true
+    }
+    buildFeatures {
+        dataBinding true
     }
 
     signingConfigs {
@@ -30,8 +33,6 @@ android {
     buildTypes {
         release {
             minifyEnabled true
-            //Zipalign优化
-            zipAlignEnabled true
             // 移除无用的resource文件
             shrinkResources true
             signingConfig signingConfigs.release
@@ -44,9 +45,6 @@ android {
     }
     kotlinOptions {
         jvmTarget = '11'
-    }
-    buildFeatures {
-        dataBinding true
     }
     namespace 'com.wpf.app.quick.demo'
 }
@@ -78,6 +76,8 @@ dependencies {
     else {
         implementation project(":Quick")
         implementation project(":R2Test")
+        implementation project(":Quick-gradle-kotlin-plugin")
+        ksp project(":Quick-gradle-kotlin-plugin")
     }
     //ktx核心
     implementation deps.androidx.corektx
