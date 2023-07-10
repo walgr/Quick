@@ -36,6 +36,7 @@ buildscript {
                         'network'     : "com.wpf.app.quick:QuickNetwork:${release}",
                         'recyclerview': "com.wpf.app.quick:QuickRecyclerView:${release}",
                         'dialog'      : "com.wpf.app.quick:QuickDialog:${release}",
+                        'ksp_plugin'  : "com.wpf.app.quick:Quick-gradle-ksp-plugin:${release}",
                         'plugin'      : "com.github.walgr.Quick:Quick-gradle-plugin:0.8.0"
                 ],
                 gradlePlugin    : "com.android.tools.build:gradle:7.4.2",

@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <import type="java.util.Arrays"/>
         <import type="com.wpf.app.quick.demo.http.TestApiClass"/>
 
         <variable

@@ -2,6 +2,7 @@
 ./gradlew :QuickNetwork:publishToMavenLocal
 ./gradlew :Quick-annotations:publishToMavenLocal
 ./gradlew :Quick-runtime:publishToMavenLocal
+./gradlew :Quick-gradle-kotlin-plugin:publishToMavenLocal
 ./gradlew :Quick-gradle-plugin:publishToMavenLocal
 ./gradlew :Quick-compiler:publishToMavenLocal
 ./gradlew :QuickBind:publishToMavenLocal
