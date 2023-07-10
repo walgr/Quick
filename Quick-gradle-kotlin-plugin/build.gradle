@@ -9,9 +9,13 @@ java {
 }
 
 dependencies {
-    implementation("com.google.devtools.ksp:symbol-processing-api:1.8.21-1.0.11")
-    implementation("com.squareup:kotlinpoet-ksp:1.14.2")
-    implementation("com.squareup:javapoet:1.13.0")
+    implementation deps.ksp
+    implementation deps.kotlinpoet
+    implementation deps.javapoet
+    if (IS_REMOTE.toBoolean())
+        implementation deps.quickbind.annotations
+    else
+        implementation project(":Quick-annotations")
 }
 
 apply from: rootProject.file('gradle-mvn-push-jar.gradle')

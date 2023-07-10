@@ -6,8 +6,12 @@ import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
 import com.google.devtools.ksp.processing.SymbolProcessorProvider
 import com.google.devtools.ksp.symbol.KSAnnotated
 import com.google.devtools.ksp.symbol.KSClassDeclaration
-import com.wpf.plugins.activity.GetClass
-import com.wpf.plugins.activity.GetClassProcessor
+import com.google.devtools.ksp.symbol.KSPropertyDeclaration
+import com.wpf.app.quick.annotations.BindView
+import com.wpf.app.quick.annotations.GetClass
+import com.wpf.app.quick.annotations.GetFun
+import com.wpf.plugins.processor.BindViewProcessor
+import com.wpf.plugins.processor.GetClassProcessor
 
 internal class QuickSymbolProcessorProvider : SymbolProcessorProvider {
     override fun create(environment: SymbolProcessorEnvironment): SymbolProcessor =
@@ -16,13 +20,19 @@ internal class QuickSymbolProcessorProvider : SymbolProcessorProvider {
 
 internal class QuickSymbolProcessor(private val environment: SymbolProcessorEnvironment) :
     SymbolProcessor {
-    private val dealClass = arrayOf(GetClass::class.qualifiedName!!)
+
+    private val dealClass = arrayOf(
+        Pair(arrayOf(GetClass::class, GetFun::class), GetClassProcessor(environment)),
+        Pair(arrayOf(BindView::class), BindViewProcessor(environment)),
+    )
 
     override fun process(resolver: Resolver): List<KSAnnotated> {
-        dealClass.map { annClass ->
-            val symbols = resolver.getSymbolsWithAnnotation(annClass).filterIsInstance<KSClassDeclaration>()
+        dealClass.map { annClassProcessor ->
+            val symbols = annClassProcessor.first.flatMap {
+                resolver.getSymbolsWithAnnotation(it.qualifiedName!!)
+            }
             symbols.forEach {
-                it.accept(GetClassProcessor(environment), Unit)
+                it.accept(annClassProcessor.second, Unit)
             }
         }
         return emptyList()

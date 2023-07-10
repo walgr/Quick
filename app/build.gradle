@@ -73,12 +73,10 @@ dependencies {
 
     if (IS_REMOTE.toBoolean()) {
         implementation deps.quickbind.base
-        implementation deps.quickbind.ksp_plugin
         ksp deps.quickbind.ksp_plugin
     } else {
         implementation project(":Quick")
         implementation project(":R2Test")
-        implementation project(":Quick-gradle-kotlin-plugin")
         ksp project(":Quick-gradle-kotlin-plugin")
     }
     //ktx核心

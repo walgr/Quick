@@ -51,6 +51,8 @@ buildscript {
                         'checks': "com.android.tools.lint:lint-checks:25.3.0",
                         'tests' : "com.android.tools.lint:lint-tests:25.3.0",
                 ],
+                ksp             : 'com.google.devtools.ksp:symbol-processing-api:1.8.21-1.0.11',
+                kotlinpoet      : 'com.squareup:kotlinpoet-ksp:1.14.2',
                 javapoet        : 'com.squareup:javapoet:1.13.0',
                 truth           : 'com.google.truth:truth:0.42',
                 compiletesting  : 'com.google.testing.compile:compile-testing:0.15',
