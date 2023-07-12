@@ -765,6 +765,7 @@ final class BindingSet implements BindingInformationProvider {
         String packageName = getPackage(typeElement).getQualifiedName().toString();
         String className = typeElement.getQualifiedName().toString().substring(
                 packageName.length() + 1).replace('.', '$');
+
         return ClassName.get(packageName, className + "_ViewBinding");
     }
 

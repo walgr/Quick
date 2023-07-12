@@ -73,11 +73,11 @@ dependencies {
 
     if (IS_REMOTE.toBoolean()) {
         implementation deps.quickbind.base
-        ksp deps.quickbind.ksp_plugin
+        ksp deps.quickbind.compiler_ksp
     } else {
         implementation project(":Quick")
         implementation project(":R2Test")
-        ksp project(":Quick-gradle-kotlin-plugin")
+        ksp project(":Quick-compiler-ksp")
     }
     //ktx核心
     implementation deps.androidx.corektx
@@ -101,7 +101,7 @@ dependencies {
     //约束布局
     implementation deps.androidx.constraintlayout
     //SmartRefreshLayout
-    implementation deps.refresh                     //核心必须依赖
+    implementation deps.refresh                      //核心必须依赖
     implementation deps.refresh_header               //经典刷新头
     implementation deps.refresh_footer               //经典加载
 

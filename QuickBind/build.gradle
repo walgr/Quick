@@ -47,10 +47,10 @@ dependencies {
     compileOnly deps.viewpager2
 
     if (IS_REMOTE.toBoolean()) {
-        api deps.quickbind.runtime
+        api deps.quickbind.annotations
         api deps.quickbind.network
     } else {
-        api project(":Quick-runtime")
+        api project(":Quick-annotations")
         api project(":QuickNetwork")
     }
 }

@@ -11,8 +11,7 @@ import com.wpf.app.quickrecyclerview.holder.QuickViewBindingHolder
  */
 open class QuickViewDataBinding<VB : ViewDataBinding> @JvmOverloads constructor(
     @Transient @LayoutRes open var layoutId: Int = 0,
-    @Transient override var viewType: Int = 0
-) : QuickItemData(viewType), LifecycleObserver {
+) : QuickItemData(), LifecycleObserver {
 
     open fun onHolderCreated(viewHolder: QuickViewBindingHolder<out QuickViewDataBinding<VB>, VB>?) {}
 }

@@ -1,4 +1,4 @@
-package com.wpf.app.quick.gradle.plugin
+package com.wpf.app.quick.r2.gradle.plugin
 
 import com.squareup.javapoet.ClassName
 import com.squareup.javapoet.CodeBlock
@@ -9,7 +9,6 @@ import java.util.Locale
 import javax.lang.model.element.Modifier.FINAL
 import javax.lang.model.element.Modifier.PUBLIC
 import javax.lang.model.element.Modifier.STATIC
-
 
 private const val ANNOTATION_PACKAGE = "android.support.annotation"
 private const val ANDROIDX_ANNOTATION_PACKAGE = "androidx.annotation"

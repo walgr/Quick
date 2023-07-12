@@ -9,7 +9,7 @@ java {
 dependencies {
     compileOnly gradleApi()
 
-    implementation deps.gradlePlugin
+    compileOnly deps.gradlePlugin
     implementation deps.javapoet
     implementation deps.kotlin.stdLibJdk8
 }

@@ -12,6 +12,8 @@ dependencies {
     implementation deps.ksp
     implementation deps.kotlinpoet
     implementation deps.javapoet
+    implementation deps.kotlin_reflect
+
     if (IS_REMOTE.toBoolean())
         implementation deps.quickbind.annotations
     else

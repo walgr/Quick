@@ -14,26 +14,25 @@ import com.squareup.kotlinpoet.asClassName
 import com.wpf.app.quick.annotations.GetFun
 import kotlin.reflect.KClass
 
-class GetClassProcessor(private val environment: SymbolProcessorEnvironment) : BaseProcessor() {
+class GetClassProcessor(environment: SymbolProcessorEnvironment) : BaseProcessor(environment) {
 
     override fun visitClassDeclaration(classDeclaration: KSClassDeclaration, data: Unit) {
         super.visitClassDeclaration(classDeclaration, data)
         val classAddName = "Class"
-        val fileName = "$className$classAddName"
-        classDeclaration.getDeclaredFunctions().map {
-            environment.logger.warn("方法:${it.simpleName}")
+        outFileName = "$className$classAddName"
+        if (outFileSpec == null) {
+            outFileSpec = FileSpec.builder(packageName, outFileName!!)
         }
-        val fileSpec = FileSpec.builder(packageName, fileName)
-            .addType(
-                TypeSpec.objectBuilder(fileName)
+        outFileSpec?.addType(
+                TypeSpec.objectBuilder(outFileName!!)
                     .addFunction(
                         FunSpec.builder("getJClass")
                             .returns(
                                 Class::class.asClassName()
-                                    .parameterizedBy(ClassName(packageName, className))
+                                    .parameterizedBy(ClassName(packageName, className!!))
                             )
                             .addStatement(
-                                "return %T::class.java", ClassName(packageName, className)
+                                "return %T::class.java", ClassName(packageName, className!!)
                             )
                             .build()
                     )
@@ -41,10 +40,10 @@ class GetClassProcessor(private val environment: SymbolProcessorEnvironment) : B
                         FunSpec.builder("getKClass")
                             .returns(
                                 KClass::class.asClassName()
-                                    .parameterizedBy(ClassName(packageName, className))
+                                    .parameterizedBy(ClassName(packageName, className!!))
                             )
                             .addStatement(
-                                "return %T::class", ClassName(packageName, className)
+                                "return %T::class", ClassName(packageName, className!!)
                             )
                             .build()
                     )
@@ -60,19 +59,5 @@ class GetClassProcessor(private val environment: SymbolProcessorEnvironment) : B
                     }.asIterable())
                     .build()
             )
-            .build()
-        environment.codeGenerator.createNewFile(
-            if (classDeclaration.containingFile == null) Dependencies(true) else Dependencies(
-                true,
-                classDeclaration.containingFile!!
-            ),
-            packageName,
-            fileName,
-            extensionName = "kt"
-        ).use {
-            it.writer().use { writer ->
-                fileSpec.writeTo(writer)
-            }
-        }
     }
 }

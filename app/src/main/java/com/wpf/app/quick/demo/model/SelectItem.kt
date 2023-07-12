@@ -38,7 +38,7 @@ class ParentSelectItem : QuickParentSelectData(layoutId = R.layout.holder_select
         getView()?.isSelected = clicked
     }
 
-    override fun asTitleViewInChild(): QuickParentSelectData {
+    override fun asTitleViewInChild(): ParentTitleSelectItem {
         return ParentTitleSelectItem(name + id).also {
             it.id = id
         }
@@ -47,13 +47,13 @@ class ParentSelectItem : QuickParentSelectData(layoutId = R.layout.holder_select
 
 class ParentTitleSelectItem(
     @SuppressLint("NonConstantResourceId")
-    @BindData2View(id = R.id.selectAll, helper = Text2TextView::class)
+    @BindData2View(id = R.id.title, helper = Text2TextView::class)
     val title: String? = null
 ) : QuickParentSelectData(isSuspension = true, layoutId = R.layout.holder_select_parent_title_item) {
 
     private var isShowChild = true
     override fun onClick() {
-//        super.onClick()
+        super.onClick()
         val positionStart = getDataPos() + 1
         if (isShowChild) {
             LogUtil.e("收缩${title}")
@@ -88,5 +88,4 @@ open class SelectItem : QuickChildSelectData(layoutId = R.layout.holder_select_i
     @SuppressLint("NonConstantResourceId")
     @BindData2View(id = R.id.title, helper = Text2TextView::class)
     var title = runOnHolder { name + id + "属于:父" + parent?.id }
-
 }

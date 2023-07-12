@@ -40,7 +40,6 @@ open class QuickChildSelectData(
     }
 
     override fun onClick() {
-        super.onClick()
         onItemClick()
         if (this is QuickParentSelectData) {
             if (!canClick) {

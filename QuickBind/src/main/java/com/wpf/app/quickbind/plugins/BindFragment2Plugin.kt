@@ -1,6 +1,7 @@
 package com.wpf.app.quickbind.plugins
 
 import android.app.Activity
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
@@ -28,7 +29,7 @@ class BindFragment2Plugin : BindBasePlugin {
                 viewPager.offscreenPageLimit = bindFragmentAnn.limit
             }
             var context = obj
-            if (obj is Bind) {
+            if (obj is Bind && obj !is AppCompatActivity) {
                 obj.getView()?.let {
                     context = it.context
                 }

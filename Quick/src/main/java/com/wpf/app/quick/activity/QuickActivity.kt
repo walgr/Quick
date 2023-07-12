@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
+import com.wpf.app.quick.annotations.BindView
 import com.wpf.app.quickbind.QuickBind
 import com.wpf.app.quickbind.annotations.AutoGet
 import com.wpf.app.quickbind.interfaces.RunOnContext
 import com.wpf.app.quicknetwork.base.RequestCoroutineScope
+import com.wpf.app.quickutil.bind.Bind
 import kotlinx.coroutines.Job
 
 /**
@@ -19,7 +21,7 @@ abstract class QuickActivity @JvmOverloads constructor(
     open val layoutView: View? = null,
     open val layoutViewInContext: RunOnContext<View>? = null,
     @AutoGet(QuickFragment.titleKey) open val titleName: String = ""
-) : AppCompatActivity(), QuickView, RequestCoroutineScope {
+) : AppCompatActivity(), QuickView, RequestCoroutineScope, Bind {
 
     override var jobManager: MutableList<Job> = mutableListOf()
 
@@ -47,6 +49,10 @@ abstract class QuickActivity @JvmOverloads constructor(
         } else if (layoutViewInContext != null) {
             setContentView(layoutViewInContext?.run(this))
         }
+    }
+
+    override fun getView(): View? {
+        return window.decorView
     }
 
     override fun onDestroy() {

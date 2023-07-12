@@ -9,8 +9,8 @@ import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 import com.wpf.app.quick.annotations.BindData2View
 import com.wpf.app.quick.annotations.BindView
+import com.wpf.app.quick.annotations.Databinder
 import com.wpf.app.quick.annotations.GroupView
-import com.wpf.app.quick.runtime.Databinder
 import com.wpf.app.quickbind.annotations.*
 import com.wpf.app.quickbind.plugins.*
 import com.wpf.app.quickbind.utils.ReflectHelper
@@ -121,10 +121,10 @@ object QuickBind: QuickBindI {
         }
     }
 
-    val BINDINGS: MutableMap<Class<*>, Constructor<out Databinder>?> = LinkedHashMap()
+    val BINDINGS: MutableMap<Class<*>, Constructor<Databinder>?> = LinkedHashMap()
 
     @UiThread
-    private fun findBindingConstructorForClass(cls: Class<*>): Constructor<out Databinder>? {
+    private fun findBindingConstructorForClass(cls: Class<*>): Constructor<Databinder>? {
         var bindingCtor = BINDINGS[cls]
         if (bindingCtor != null || BINDINGS.containsKey(cls)) {
             return bindingCtor
@@ -139,11 +139,11 @@ object QuickBind: QuickBindI {
         }
         bindingCtor = try {
             val bindingClass =
-                cls.classLoader?.loadClass(clsPackage + ".Quick_" + clsSimpleName + "_ViewBinding")
+                cls.classLoader?.loadClass(clsPackage + ".Quick_" + clsSimpleName + "_ViewBinding_Ksp")
             bindingClass?.getConstructor(
                 cls,
                 View::class.java
-            ) as Constructor<out Databinder>
+            ) as Constructor<Databinder>
         } catch (e: ClassNotFoundException) {
             findBindingConstructorForClass(cls.superclass as Class<*>)
         } catch (e: NoSuchMethodException) {

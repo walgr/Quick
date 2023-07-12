@@ -1,4 +1,4 @@
-package com.wpf.app.quick.gradle.plugin
+package com.wpf.app.quick.r2.gradle.plugin
 
 import com.squareup.javapoet.CodeBlock
 import java.io.File

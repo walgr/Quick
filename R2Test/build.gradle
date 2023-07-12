@@ -1,11 +1,10 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
-    id 'kotlin-kapt'
     id("com.google.devtools.ksp") version "1.8.21-1.0.11"
 }
 
-apply plugin: 'com.wpf.app.quick'
+apply plugin: 'com.wpf.app.quick.r2'
 
 android {
     compileSdk rootProject.compileSdkVersion
@@ -40,11 +39,9 @@ dependencies {
 
     if (IS_REMOTE.toBoolean()) {
         api deps.quickbind.base
-        kapt deps.quickbind.compiler
-        ksp deps.quickbind.ksp_plugin
+        ksp deps.quickbind.compiler_ksp
     } else {
         api project(":Quick")
-        kapt project(":Quick-compiler")
-        ksp project(":Quick-gradle-kotlin-plugin")
+        ksp project(":Quick-compiler-ksp")
     }
 }

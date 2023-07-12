@@ -1,4 +1,4 @@
-package com.wpf.app.quick.gradle.plugin
+package com.wpf.app.quick.r2.gradle.plugin
 
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.FileCollection

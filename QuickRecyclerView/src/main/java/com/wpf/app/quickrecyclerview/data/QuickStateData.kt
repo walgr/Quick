@@ -9,9 +9,8 @@ abstract class QuickStateData @JvmOverloads constructor(
     @Transient override val layoutId: Int = 0,
     @Transient override val layoutView: View? = null,
     @Transient override val layoutViewInContext: RunOnContext<View>? = null,
-    @Transient override var viewType: Int = 0,
     @Transient override val isSuspension: Boolean = false,
-): QuickClickData(layoutId, layoutView, layoutViewInContext, viewType, isSuspension), Serializable {
+): QuickClickData(layoutId, layoutView, layoutViewInContext, isSuspension), Serializable {
 
     override fun onClick() {
         state = !state

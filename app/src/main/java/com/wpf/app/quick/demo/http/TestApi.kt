@@ -17,4 +17,11 @@ interface TestApi {
         @Path("page") page: Int,
         @Query("pageSize") pageSize: Int = 0,
     ): TestCommonCall<首页文章>
+
+    @GetFun
+    @GET("/article/list/{page}/json")
+    fun 首页文章列表1(
+        @Path("page") page: Int,
+        @Query("pageSize") pageSize: Int = 0,
+    ): TestCommonCall<首页文章>
 }

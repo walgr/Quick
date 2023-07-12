@@ -36,8 +36,8 @@ buildscript {
                         'network'     : "com.wpf.app.quick:QuickNetwork:${release}",
                         'recyclerview': "com.wpf.app.quick:QuickRecyclerView:${release}",
                         'dialog'      : "com.wpf.app.quick:QuickDialog:${release}",
-                        'ksp_plugin'  : "com.wpf.app.quick:Quick-gradle-ksp-plugin:${release}",
-                        'plugin'      : "com.github.walgr.Quick:Quick-gradle-plugin:0.8.0"
+                        'compiler_ksp': "com.wpf.app.quick:Quick-compiler-ksp:${release}",
+                        'plugin'      : "com.wpf.app.quick:Quick-gradle-plugin:0.8.4"
                 ],
                 gradlePlugin    : "com.android.tools.build:gradle:7.4.2",
                 'kotlin'        : [
@@ -51,8 +51,9 @@ buildscript {
                         'checks': "com.android.tools.lint:lint-checks:25.3.0",
                         'tests' : "com.android.tools.lint:lint-tests:25.3.0",
                 ],
-                ksp             : 'com.google.devtools.ksp:symbol-processing-api:1.8.21-1.0.11',
+                ksp             : "com.google.devtools.ksp:symbol-processing-api:${kotlin}-1.0.11",
                 kotlinpoet      : 'com.squareup:kotlinpoet-ksp:1.14.2',
+                kotlin_reflect  : "org.jetbrains.kotlin:kotlin-reflect:${kotlin}",
                 javapoet        : 'com.squareup:javapoet:1.13.0',
                 truth           : 'com.google.truth:truth:0.42',
                 compiletesting  : 'com.google.testing.compile:compile-testing:0.15',

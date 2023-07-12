@@ -1,4 +1,4 @@
-package com.wpf.app.quick.gradle.plugin
+package com.wpf.app.quick.r2.gradle.plugin
 
 import com.android.build.gradle.AppExtension
 import com.android.build.gradle.AppPlugin
@@ -21,12 +21,6 @@ class QuickPlugin : Plugin<Project> {
   override fun apply(project: Project) {
     project.plugins.all {
       when (it) {
-//        is FeaturePlugin -> {
-//          project.extensions[FeatureExtension::class].run {
-//            configureR2Generation(project, featureVariants)
-//            configureR2Generation(project, libraryVariants)
-//          }
-//        }
         is LibraryPlugin -> {
           project.extensions[LibraryExtension::class].run {
             configureR2Generation(project, libraryVariants)

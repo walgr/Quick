@@ -8,10 +8,9 @@ import kotlin.math.abs
  *
  */
 open class QuickItemData @JvmOverloads constructor(
-    @Transient open var viewType: Int = 0,
     @Transient open val isSuspension: Boolean = false                 //View是否悬浮置顶
 ): Serializable {
-
+    var viewType: Int = 0
     init {
         initViewType()
     }

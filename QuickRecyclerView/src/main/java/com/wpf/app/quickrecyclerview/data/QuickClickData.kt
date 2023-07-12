@@ -11,9 +11,8 @@ abstract class QuickClickData @JvmOverloads constructor(
     @Transient override val layoutId: Int = 0,
     @Transient override val layoutView: View? = null,
     @Transient override val layoutViewInContext: RunOnContext<View>? = null,
-    @Transient override var viewType: Int = 0,
     @Transient override val isSuspension: Boolean = false,
-) : QuickBindData(viewType = viewType, isSuspension = isSuspension), Serializable {
+) : QuickBindData(isSuspension = isSuspension), Serializable {
 
     @Transient
     @BindData2View(helper = ItemClick::class)

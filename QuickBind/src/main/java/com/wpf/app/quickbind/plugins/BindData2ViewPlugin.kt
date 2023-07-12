@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 import com.wpf.app.quick.annotations.BindD2VHHelper
 import com.wpf.app.quick.annotations.BindData2View
-import com.wpf.app.quick.annotations.internal.Constants
 import com.wpf.app.quickbind.interfaces.RunOnHolderWithSelf
 import com.wpf.app.quickbind.utils.ReflectHelper
 import java.lang.reflect.Field
@@ -35,7 +34,7 @@ class BindData2ViewPlugin : BindBasePlugin {
                 }
             }
             if (viewParent == null) return
-            if (bindId != Constants.NO_RES_ID) {
+            if (bindId != 0) {
                 val id = getSaveId(obj, viewModel, field, bindId)
                 findView = findView(viewParent, id)
             }
@@ -67,11 +66,11 @@ class BindData2ViewPlugin : BindBasePlugin {
     }
 
     private fun parentClassIs(cur: Class<*>, parentName: String): Boolean {
-        var cur = cur
-        while (parentName != cur.simpleName) {
-            cur = cur.superclass as Class<*>
-            if (ReflectHelper.canBreakScan(cur)) return false
-            if (cur.simpleName == parentName) {
+        var curCls = cur
+        while (parentName != curCls.simpleName) {
+            curCls = curCls.superclass as Class<*>
+            if (ReflectHelper.canBreakScan(curCls)) return false
+            if (curCls.simpleName == parentName) {
                 return true
             }
         }

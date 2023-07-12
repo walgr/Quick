@@ -23,7 +23,6 @@ open class QuickBindData @JvmOverloads constructor(
     @LayoutRes open val layoutId: Int = 0,
     @Transient open val layoutView: View? = null,
     @Transient open val layoutViewInContext: RunOnContext<View>? = null,
-    @Transient override var viewType: Int = 0,
     @Transient override val isSuspension: Boolean = false,   //View是否悬浮置顶
     private val isDealBinding: Boolean = false,          //是否处理DataBinding
     private val autoSet: Boolean = false                 //自动映射
