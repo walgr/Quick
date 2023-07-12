@@ -14,7 +14,6 @@ android {
         targetSdk rootProject.targetSdkVersion
         versionCode 1
         versionName "1.0"
-        multiDexEnabled = true
     }
     buildFeatures {
         dataBinding true
@@ -50,11 +49,10 @@ android {
 }
 
 dependencies {
-    implementation 'com.android.support:multidex:2.0.1'
     //lifecycle-ktx
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
     //lifecycle-ktx
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
     //statusBar
     implementation 'com.geyifeng.immersionbar:immersionbar:3.2.2'
     // kotlin扩展（可选）
