@@ -40,6 +40,7 @@
         <activity android:name=".RequestTestActivity"/>
         <activity android:name=".DialogTestActivity"/>
         <activity android:name=".wanandroid.WanAndroidHomeActivity"/>
+        <activity android:name=".wanandroid.WebViewActivity"/>
     </application>
 
 </manifest>

@@ -24,8 +24,8 @@ open class QuickBindData @JvmOverloads constructor(
     @Transient open val layoutView: View? = null,
     @Transient open val layoutViewInContext: RunOnContext<View>? = null,
     @Transient override val isSuspension: Boolean = false,   //View是否悬浮置顶
-    private val isDealBinding: Boolean = false,          //是否处理DataBinding
-    private val autoSet: Boolean = false                 //自动映射
+    @Transient open val isDealBinding: Boolean = false,      //是否处理DataBinding
+    @Transient open val autoSet: Boolean = false             //自动映射
 ) : QuickItemData(isSuspension = isSuspension), Bind, Serializable {
 
     @Transient

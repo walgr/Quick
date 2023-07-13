@@ -24,8 +24,8 @@ open class QuickSelectData(
     @LayoutRes override val layoutId: Int = 0,
     @Transient override val layoutView: View? = null,
     @Transient override val layoutViewInContext: RunOnContext<View>? = null,
-    override val isSuspension: Boolean = false,         //View是否悬浮置顶
-) : QuickClickData(), Serializable {
+    @Transient override val isSuspension: Boolean = false,         //View是否悬浮置顶
+) : QuickClickData(isSuspension = isSuspension), Serializable {
 
     override fun onClick() {
 
