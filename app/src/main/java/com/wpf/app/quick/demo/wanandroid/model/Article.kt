@@ -12,6 +12,6 @@ open class Article : QuickClickData(layoutId = R.layout.holder_refresh_item, aut
     val link: String? = null
 
     override fun onClick() {
-        getContext()?.startActivity(WebViewActivity::class.java, mapOf("url" to link))
+        getContext()?.startActivity(WebViewActivity::class.java, mapOf("url" to link, "title" to title))
     }
 }

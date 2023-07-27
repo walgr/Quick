@@ -13,6 +13,9 @@ import com.wpf.app.quickbind.annotations.AutoGet
 class WebViewActivity : QuickActivity(R.layout.activity_webview) {
 
     @AutoGet
+    var title: String? = null
+
+    @AutoGet
     var url: String? = null
 
     @SuppressLint("NonConstantResourceId")
@@ -20,6 +23,7 @@ class WebViewActivity : QuickActivity(R.layout.activity_webview) {
     val webView: WebView? = null
 
     override fun initView() {
+        supportActionBar?.title = title
         webView?.let {
             it.webChromeClient = WebChromeClient()
             it.webViewClient = WebViewClient()
