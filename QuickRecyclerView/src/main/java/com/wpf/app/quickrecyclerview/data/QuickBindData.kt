@@ -2,12 +2,13 @@ package com.wpf.app.quickrecyclerview.data
 
 import android.content.Context
 import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.wpf.app.quickbind.QuickBind
-import com.wpf.app.quickbind.interfaces.RunOnContext
+import com.wpf.app.quickbind.interfaces.RunOnContextWithSelf
 import com.wpf.app.quickbind.utils.DataAutoSet2ViewUtils
 import com.wpf.app.quickrecyclerview.QuickAdapter
 import com.wpf.app.quickrecyclerview.constant.BRConstant
@@ -17,16 +18,15 @@ import java.io.Serializable
 
 /**
  * Created by 王朋飞 on 2022/7/13.
- *
+ * 绑定数据到xml的Item
  */
 open class QuickBindData @JvmOverloads constructor(
-    @LayoutRes open val layoutId: Int = 0,
-    @Transient open val layoutView: View? = null,
-    @Transient open val layoutViewInContext: RunOnContext<View>? = null,
+    @Transient @LayoutRes override val layoutId: Int = 0,
+    @Transient override val layoutViewInContext: RunOnContextWithSelf<View, ViewGroup>? = null,
     @Transient override val isSuspension: Boolean = false,   //View是否悬浮置顶
     @Transient open val isDealBinding: Boolean = false,      //是否处理DataBinding
     @Transient open val autoSet: Boolean = false             //自动映射
-) : QuickItemData(isSuspension = isSuspension), Bind, Serializable {
+) : QuickViewData(), Bind, Serializable {
 
     @Transient
     private var mViewHolder: QuickViewHolder<QuickBindData>? = null

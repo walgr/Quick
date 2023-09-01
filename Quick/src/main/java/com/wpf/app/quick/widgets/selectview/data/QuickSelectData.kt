@@ -1,14 +1,14 @@
 package com.wpf.app.quick.widgets.selectview.data
 
 import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import com.wpf.app.quick.widgets.selectview.QuickSelectAdapter
-import com.wpf.app.quickbind.interfaces.RunOnContext
+import com.wpf.app.quickbind.interfaces.RunOnContextWithSelf
 import com.wpf.app.quickrecyclerview.QuickAdapter
 import com.wpf.app.quickrecyclerview.data.QuickBindData
 import com.wpf.app.quickrecyclerview.data.QuickClickData
-import com.wpf.app.quickrecyclerview.data.QuickStateData
 import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
 import java.io.Serializable
 
@@ -17,15 +17,14 @@ import java.io.Serializable
  *
  */
 open class QuickSelectData(
-    open var id: String? = null,
-    open var name: String? = null,
-    open var defaultSelect: Boolean = false,            //是否默认选中，true 清空后会再次选中
-    open var isSelect: Boolean = defaultSelect,
-    @LayoutRes override val layoutId: Int = 0,
-    @Transient override val layoutView: View? = null,
-    @Transient override val layoutViewInContext: RunOnContext<View>? = null,
+    @Transient open var id: String? = null,
+    @Transient open var name: String? = null,
+    @Transient open var defaultSelect: Boolean = false,            //是否默认选中，true 清空后会再次选中
+    @Transient open var isSelect: Boolean = defaultSelect,
+    @Transient @LayoutRes override val layoutId: Int = 0,
+    @Transient override val layoutViewInContext: RunOnContextWithSelf<View, ViewGroup>? = null,
     @Transient override val isSuspension: Boolean = false,         //View是否悬浮置顶
-) : QuickClickData(isSuspension = isSuspension), Serializable {
+) : QuickClickData(), Serializable {
 
     override fun onClick() {
 

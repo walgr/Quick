@@ -1,8 +1,10 @@
 package com.wpf.app.quick.widgets.selectview.data
 
 import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import com.wpf.app.quickbind.interfaces.RunOnContext
+import com.wpf.app.quickbind.interfaces.RunOnContextWithSelf
 import java.io.Serializable
 
 /**
@@ -16,20 +18,18 @@ import java.io.Serializable
  * 中途设置
  */
 open class QuickMultiSelectData(
-    open var canCancel: Boolean = true,                  //是否可以取消选择
-    open var singleSelect: Boolean = true,               //true 单选  false 多选
-    open val isGlobal: Boolean = true,                   //true 全局范围  false 同父范围
-    open var maxLimit: Int = 5,                          //多选最多数量
-    @Transient
-    open val maxLimitListener: MaxLimitListener? = null, //超出反馈
-    override var id: String? = null,
-    override var name: String? = null,
-    override var isSelect: Boolean = false,
-    override var defaultSelect: Boolean = false,        //是否默认选中，true清空后会再次选中
-    @LayoutRes override val layoutId: Int = 0,
-    @Transient override val layoutView: View? = null,
-    @Transient override val layoutViewInContext: RunOnContext<View>? = null,
-    override val isSuspension: Boolean = false,         //View是否悬浮置顶
+    @Transient open var canCancel: Boolean = true,                  //是否可以取消选择
+    @Transient open var singleSelect: Boolean = true,               //true 单选  false 多选
+    @Transient open val isGlobal: Boolean = true,                   //true 全局范围  false 同父范围
+    @Transient open var maxLimit: Int = 5,                          //多选最多数量
+    @Transient open val maxLimitListener: MaxLimitListener? = null, //超出反馈
+    @Transient override var id: String? = null,
+    @Transient override var name: String? = null,
+    @Transient override var isSelect: Boolean = false,
+    @Transient override var defaultSelect: Boolean = false,        //是否默认选中，true清空后会再次选中
+    @Transient @LayoutRes override val layoutId: Int = 0,
+    @Transient override val layoutViewInContext: RunOnContextWithSelf<View, ViewGroup>? = null,
+    @Transient override val isSuspension: Boolean = false,         //View是否悬浮置顶
 ) : QuickSelectData(), Serializable
 
 interface MaxLimitListener {

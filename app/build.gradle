@@ -2,7 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
-    id("com.google.devtools.ksp") version "1.8.21-1.0.11"
+    id("com.google.devtools.ksp") version "1.9.10-1.0.13"
 }
 
 android {
@@ -30,12 +30,25 @@ android {
         }
     }
     buildTypes {
+        debug {
+            kotlin {
+                sourceSets {
+                    main.kotlin.srcDirs += 'build/generated/ksp/debug/kotlin'
+                }
+            }
+        }
         release {
             minifyEnabled true
             // 移除无用的resource文件
             shrinkResources true
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            kotlin {
+                sourceSets {
+                    main.kotlin.srcDirs += 'build/generated/ksp/release/kotlin'
+                }
+            }
         }
     }
     compileOptions {
@@ -49,6 +62,10 @@ android {
 }
 
 dependencies {
+    //Compose
+    implementation "androidx.compose.ui:ui:${rootProject.composeVersion}"
+    implementation "androidx.compose.ui:ui-tooling-preview:${rootProject.composeVersion}"
+
     //lifecycle-ktx
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
     //lifecycle-ktx
@@ -58,7 +75,7 @@ dependencies {
     // kotlin扩展（可选）
     implementation 'com.geyifeng.immersionbar:immersionbar-ktx:3.2.2'
     //分页
-    implementation 'androidx.paging:paging-runtime:3.1.1'
+    implementation 'androidx.paging:paging-runtime-ktx:3.1.1'
     implementation 'androidx.paging:paging-rxjava3:3.1.1'
 
     //Navigation

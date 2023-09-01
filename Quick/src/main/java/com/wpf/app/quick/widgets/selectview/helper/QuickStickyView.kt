@@ -4,16 +4,17 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.wpf.app.quickrecyclerview.QuickAdapter
 import com.wpf.app.quickrecyclerview.data.QuickItemData
+import com.wpf.app.quickrecyclerview.data.QuickSuspensionData
 import com.wpf.app.quickutil.recyclerview.StickyView
 
 class QuickStickyView : StickyView {
 
     override fun isStickyView(recyclerView: RecyclerView, curView: View?): Boolean {
         val viewData = getViewData(recyclerView, curView)
-        if (viewData is QuickItemData) {
+        if (viewData is QuickSuspensionData) {
             return viewData.isSuspension
         }
-        return curView?.tag == "true"
+        return false
     }
 
     override fun getAllStickyList(adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>?): List<Int> {
@@ -44,15 +45,15 @@ class QuickStickyView : StickyView {
         return -1
     }
 
-    private fun getViewData(recyclerView: RecyclerView, view: View?): QuickItemData? {
+    private fun getViewData(recyclerView: RecyclerView, view: View?): QuickSuspensionData? {
         if (view == null) return null
         val viewPos = recyclerView.getChildAdapterPosition(view)
         val quickAdapter = recyclerView.adapter as? QuickAdapter
-        return quickAdapter?.mDataList?.getOrNull(viewPos)
+        return quickAdapter?.mDataList?.getOrNull(viewPos) as? QuickSuspensionData
     }
 
-    private fun getViewData(adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>?, viewPos: Int): QuickItemData? {
+    private fun getViewData(adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>?, viewPos: Int): QuickSuspensionData? {
         val quickAdapter = adapter as? QuickAdapter
-        return quickAdapter?.mDataList?.getOrNull(viewPos)
+        return quickAdapter?.mDataList?.getOrNull(viewPos) as? QuickSuspensionData
     }
 }

@@ -2,12 +2,13 @@ package com.wpf.app.quick.widgets.selectview.data
 
 import android.annotation.SuppressLint
 import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import com.wpf.app.quick.widgets.selectview.QuickSelectAdapter
 import com.wpf.app.quickrecyclerview.data.QuickBindData
 import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
 import com.wpf.app.quickbind.interfaces.RunItemClickWithSelf
-import com.wpf.app.quickbind.interfaces.RunOnContext
+import com.wpf.app.quickbind.interfaces.RunOnContextWithSelf
 import com.wpf.app.quickutil.recyclerview.scrollToPositionAndOffset
 import java.io.Serializable
 
@@ -16,24 +17,22 @@ import java.io.Serializable
  * 筛选父类
  */
 open class QuickParentSelectData(
-    open var canClick: Boolean = false,
-    override val isSuspension: Boolean = false,                 //父View是否悬浮置顶
-    override var parent: QuickParentSelectData? = null,
-    override var childList: MutableList<out QuickChildSelectData>? = null,
+    @Transient open var canClick: Boolean = false,
+    @Transient override val isSuspension: Boolean = false,                 //父View是否悬浮置顶
+    @Transient override var parent: QuickParentSelectData? = null,
+    @Transient override var childList: MutableList<out QuickChildSelectData>? = null,
     onParentClick: RunItemClickWithSelf<QuickParentSelectData>? = null,
-    override var id: String? = null,
-    override var name: String? = null,
-    override var defaultSelect: Boolean = false,
-    override var isSelect: Boolean = defaultSelect,
-    override var canCancel: Boolean = true,                  //是否可以取消选择
-    override var singleSelect: Boolean = true,               //true 单选  false 多选
-    override val isGlobal: Boolean = true,                   //true 全局范围  false 同父范围
-    override var maxLimit: Int = 5,                          //多选最多数量
-    @Transient
-    override val maxLimitListener: MaxLimitListener? = null, //超出反馈
+    @Transient override var id: String? = null,
+    @Transient override var name: String? = null,
+    @Transient override var defaultSelect: Boolean = false,
+    @Transient override var isSelect: Boolean = defaultSelect,
+    @Transient override var canCancel: Boolean = true,                  //是否可以取消选择
+    @Transient override var singleSelect: Boolean = true,               //true 单选  false 多选
+    @Transient override val isGlobal: Boolean = true,                   //true 全局范围  false 同父范围
+    @Transient override var maxLimit: Int = 5,                          //多选最多数量
+    @Transient override val maxLimitListener: MaxLimitListener? = null, //超出反馈
     @LayoutRes override val layoutId: Int = 0,
-    @Transient override val layoutView: View? = null,
-    @Transient override val layoutViewInContext: RunOnContext<View>? = null,
+    @Transient override val layoutViewInContext: RunOnContextWithSelf<View, ViewGroup>? = null,
 ) : QuickChildSelectData(
     onChildClick = onParentClick as? RunItemClickWithSelf<QuickChildSelectData>,
 ), Serializable {

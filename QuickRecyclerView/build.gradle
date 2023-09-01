@@ -26,6 +26,7 @@ android {
         jvmTarget = '11'
     }
     buildFeatures {
+        //noinspection DataBindingWithoutKapt
         dataBinding true
     }
     namespace 'com.wpf.app.quickrecyclerview'

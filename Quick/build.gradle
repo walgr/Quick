@@ -28,13 +28,23 @@ android {
     }
     buildFeatures {
         dataBinding true
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.3"
     }
     namespace 'com.wpf.app.quick'
 }
 
 dependencies {
+
     implementation deps.kotlin_reflect
     implementation deps.gson
+
+    //Compose
+    implementation "androidx.compose.ui:ui:${rootProject.composeVersion}"
+    implementation "androidx.compose.ui:ui-tooling-preview:${rootProject.composeVersion}"
+    debugImplementation "androidx.compose.ui:ui-tooling:${rootProject.composeVersion}"
 
     compileOnly deps.androidx.appcompat
     //fragment-ktx

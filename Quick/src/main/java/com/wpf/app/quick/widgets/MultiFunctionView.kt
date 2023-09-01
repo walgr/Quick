@@ -31,13 +31,13 @@ class MultiFunctionView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attributes, defStyleAttr), CheckView, LifecycleOwner {
 
-    private val mLifecycleRegistry = LifecycleRegistry(this)
+    override val lifecycle = LifecycleRegistry(this)
 
     private lateinit var attributeHelper: MultiFunctionAttributeHelper
 
     override fun onFinishInflate() {
         super.onFinishInflate()
-        mLifecycleRegistry.currentState = Lifecycle.State.STARTED
+        lifecycle.currentState = Lifecycle.State.STARTED
     }
 
     override fun onAttachedToWindow() {
@@ -46,14 +46,14 @@ class MultiFunctionView @JvmOverloads constructor(
 //        attributes?.let {
 //            attributeHelper = MultiFunctionAttributeHelper(context, attributes)
 //        }
-        mLifecycleRegistry.currentState = Lifecycle.State.RESUMED
+        lifecycle.currentState = Lifecycle.State.RESUMED
     }
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
         attributeHelper.recycle()
         setOnCheckedChangeListener(null)
-        mLifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+        lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     }
 
     init {
@@ -436,9 +436,6 @@ class MultiFunctionView @JvmOverloads constructor(
         checkBox.toggle()
     }
 
-    override fun getLifecycle(): Lifecycle {
-        return mLifecycleRegistry
-    }
 }
 
 interface CheckView : Checkable {

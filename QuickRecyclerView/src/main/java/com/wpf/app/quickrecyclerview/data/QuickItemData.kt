@@ -5,11 +5,9 @@ import kotlin.math.abs
 
 /**
  * Created by 王朋飞 on 2022/7/13.
- *
+ * 基类Item
  */
-open class QuickItemData @JvmOverloads constructor(
-    @Transient open val isSuspension: Boolean = false                 //View是否悬浮置顶
-): Serializable {
+open class QuickItemData: Serializable {
     var viewType: Int = 0
     init {
         initViewType()

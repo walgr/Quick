@@ -4,10 +4,10 @@ import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.wpf.app.quickrecyclerview.annotations.BindHolder
-import com.wpf.app.quickrecyclerview.data.QuickBindData
 import com.wpf.app.quickrecyclerview.data.QuickItemData
 import com.wpf.app.quickrecyclerview.data.QuickViewDataBinding
 import com.wpf.app.quickrecyclerview.annotations.BindBindingHolder
+import com.wpf.app.quickrecyclerview.data.QuickViewData
 import com.wpf.app.quickrecyclerview.holder.QuickViewBindingHolder
 import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
 import com.wpf.app.quickrecyclerview.listeners.DataAdapter
@@ -44,13 +44,8 @@ open class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>()
             }
 
             var holder: QuickViewHolder<out QuickItemData>? = null
-            if (findData is QuickBindData) {
-                holder = QuickViewHolder(
-                    viewGroup,
-                    findData.layoutId,
-                    findData.layoutView,
-                    findData.layoutViewInContext
-                )
+            if (findData is QuickViewData) {
+                holder = QuickViewHolder(viewGroup, findData.layoutId, findData.layoutViewInContext)
             } else {
                 val holderAnnotation = findData::class.java.getAnnotation(BindHolder::class.java)
                     ?: throw RuntimeException("当前数据类未使用HolderClass注解指定ViewHolder")

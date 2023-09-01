@@ -1,6 +1,5 @@
 package com.wpf.app.quickrecyclerview.holder
 
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.CallSuper
@@ -11,7 +10,9 @@ import com.wpf.app.quickrecyclerview.data.QuickBindData
 import com.wpf.app.quickrecyclerview.data.QuickItemData
 import com.wpf.app.quickrecyclerview.listeners.QuickAdapterListener
 import com.wpf.app.quickbind.QuickBind
-import com.wpf.app.quickbind.interfaces.RunOnContext
+import com.wpf.app.quickbind.interfaces.RunOnContextWithSelf
+import com.wpf.app.quickutil.base.getInflaterView
+import com.wpf.app.quickutil.base.getView
 
 /**
  * Created by 王朋飞 on 2022/7/13.
@@ -20,13 +21,14 @@ import com.wpf.app.quickbind.interfaces.RunOnContext
 open class QuickViewHolder<T : QuickItemData> @JvmOverloads constructor(
     mParent: ViewGroup,
     @LayoutRes layoutId: Int = 0,
-    layoutView: View? = null,
-    layoutViewInContext: RunOnContext<View>? = null,
+    layoutViewInContext: RunOnContextWithSelf<View, ViewGroup>? = null,
     open var dealBindView: Boolean = false,
     open var autoClick: Boolean = false
 ) : RecyclerView.ViewHolder(
-    layoutView ?: layoutViewInContext?.run(mParent.context) ?: LayoutInflater.from(mParent.context)
-        .inflate(layoutId, mParent, false)
+    layoutViewInContext?.run(mParent.context, mParent) ?: layoutId.getInflaterView(
+        mParent.context,
+        mParent
+    )
 ) {
 
     private lateinit var mQuickAdapter: QuickAdapter
