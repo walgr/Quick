@@ -8,7 +8,7 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.wpf.app.quickbind.QuickBind
-import com.wpf.app.quickbind.interfaces.RunOnContextWithSelf
+import com.wpf.app.quickutil.bind.RunOnContextWithSelf
 import com.wpf.app.quickbind.utils.DataAutoSet2ViewUtils
 import com.wpf.app.quickrecyclerview.QuickAdapter
 import com.wpf.app.quickrecyclerview.constant.BRConstant
@@ -23,9 +23,9 @@ import java.io.Serializable
 open class QuickBindData @JvmOverloads constructor(
     @Transient @LayoutRes override val layoutId: Int = 0,
     @Transient override val layoutViewInContext: RunOnContextWithSelf<View, ViewGroup>? = null,
-    @Transient override val isSuspension: Boolean = false,   //View是否悬浮置顶
     @Transient open val isDealBinding: Boolean = false,      //是否处理DataBinding
-    @Transient open val autoSet: Boolean = false             //自动映射
+    @Transient open val autoSet: Boolean = false,             //自动映射
+    @Transient override val isSuspension: Boolean = false   //View是否悬浮置顶
 ) : QuickViewData(), Bind, Serializable {
 
     @Transient

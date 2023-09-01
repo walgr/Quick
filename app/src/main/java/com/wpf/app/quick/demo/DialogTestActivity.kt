@@ -6,7 +6,7 @@ import android.widget.LinearLayout
 import com.google.android.material.button.MaterialButton
 import com.wpf.app.quick.activity.QuickActivity
 import com.wpf.app.quick.demo.dialog.TestDialog
-import com.wpf.app.quickbind.interfaces.runOnContext
+import com.wpf.app.quickutil.bind.runOnContext
 
 class DialogTestActivity : QuickActivity(
     layoutViewInContext = runOnContext {

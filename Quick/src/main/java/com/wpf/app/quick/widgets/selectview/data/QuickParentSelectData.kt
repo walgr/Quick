@@ -7,8 +7,8 @@ import androidx.annotation.LayoutRes
 import com.wpf.app.quick.widgets.selectview.QuickSelectAdapter
 import com.wpf.app.quickrecyclerview.data.QuickBindData
 import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
-import com.wpf.app.quickbind.interfaces.RunItemClickWithSelf
-import com.wpf.app.quickbind.interfaces.RunOnContextWithSelf
+import com.wpf.app.quickutil.bind.RunItemClickWithSelf
+import com.wpf.app.quickutil.bind.RunOnContextWithSelf
 import com.wpf.app.quickutil.recyclerview.scrollToPositionAndOffset
 import java.io.Serializable
 

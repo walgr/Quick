@@ -1,4 +1,4 @@
-package com.wpf.app.quickbind.interfaces
+package com.wpf.app.quickutil.bind
 
 import android.content.Context
 import android.view.View
@@ -15,7 +15,8 @@ interface RunOnContextWithSelf<Data, Self> : RunOnHolderWithSelf<Data, Self> {
     }
 }
 
-fun <Data, Self> runOnContextWithSelf(run: (Context, Self) -> Data) = object : RunOnContextWithSelf<Data, Self> {
+fun <Data, Self> runOnContextWithSelf(run: (Context, Self) -> Data) = object :
+    RunOnContextWithSelf<Data, Self> {
     override fun run(context: Context, self: Self): Data {
         return run(context, self)
     }

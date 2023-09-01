@@ -7,9 +7,8 @@ import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.annotations.BindData2View
 import com.wpf.app.quickrecyclerview.data.QuickClickData
 import com.wpf.app.quickbind.helper.binddatahelper.Url2ImageView
-import com.wpf.app.quickbind.interfaces.runOnContext
-import com.wpf.app.quickbind.interfaces.runOnContextWithSelf
-import com.wpf.app.quickbind.interfaces.runOnHolder
+import com.wpf.app.quickutil.bind.runOnContextWithSelf
+import com.wpf.app.quickutil.bind.runOnHolder
 import com.wpf.app.quickutil.LogUtil
 
 /**

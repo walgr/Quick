@@ -3,8 +3,7 @@ package com.wpf.app.quick.widgets.selectview.data
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
-import com.wpf.app.quickbind.interfaces.RunOnContext
-import com.wpf.app.quickbind.interfaces.RunOnContextWithSelf
+import com.wpf.app.quickutil.bind.RunOnContextWithSelf
 import java.io.Serializable
 
 /**

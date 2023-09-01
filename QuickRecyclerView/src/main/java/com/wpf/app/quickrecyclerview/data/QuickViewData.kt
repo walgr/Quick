@@ -3,7 +3,7 @@ package com.wpf.app.quickrecyclerview.data
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
-import com.wpf.app.quickbind.interfaces.RunOnContextWithSelf
+import com.wpf.app.quickutil.bind.RunOnContextWithSelf
 
 open class QuickViewData @JvmOverloads constructor(
     @LayoutRes open val layoutId: Int = 0,

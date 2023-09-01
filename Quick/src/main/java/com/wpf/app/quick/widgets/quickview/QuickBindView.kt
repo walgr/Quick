@@ -6,7 +6,7 @@ import android.view.View
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import com.wpf.app.quickbind.QuickBind
-import com.wpf.app.quickbind.interfaces.RunOnContext
+import com.wpf.app.quickutil.bind.RunOnContext
 
 /**
  * Created by 王朋飞 on 2022/7/13.

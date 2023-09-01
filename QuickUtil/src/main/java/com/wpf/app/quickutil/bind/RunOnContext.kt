@@ -1,4 +1,4 @@
-package com.wpf.app.quickbind.interfaces
+package com.wpf.app.quickutil.bind
 
 import android.content.Context
 import android.view.View

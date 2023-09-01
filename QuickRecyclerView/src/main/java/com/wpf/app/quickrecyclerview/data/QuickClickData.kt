@@ -4,9 +4,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.wpf.app.quick.annotations.BindData2View
 import com.wpf.app.quickbind.helper.binddatahelper.ItemClick
-import com.wpf.app.quickbind.interfaces.RunOnContext
-import com.wpf.app.quickbind.interfaces.RunOnContextWithSelf
-import com.wpf.app.quickbind.interfaces.itemClick
+import com.wpf.app.quickutil.bind.RunOnContextWithSelf
+import com.wpf.app.quickutil.bind.itemClick
 import java.io.Serializable
 
 /**

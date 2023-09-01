@@ -1,4 +1,4 @@
-package com.wpf.app.quickbind.interfaces
+package com.wpf.app.quickutil.bind
 
 import android.view.View
 
@@ -15,7 +15,8 @@ interface RunItemClickWithSelf<Self> : RunOnHolderWithSelf<View.OnClickListener,
     }
 }
 
-fun <Self> itemClickWithSelf(run: (Self) -> View.OnClickListener) = object : RunItemClickWithSelf<Self> {
+fun <Self> itemClickWithSelf(run: (Self) -> View.OnClickListener) = object :
+    RunItemClickWithSelf<Self> {
     override fun run(self: Self): View.OnClickListener {
         return run(self)
     }

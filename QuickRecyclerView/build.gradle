@@ -25,14 +25,22 @@ android {
     kotlinOptions {
         jvmTarget = '11'
     }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.3"
+    }
     buildFeatures {
         //noinspection DataBindingWithoutKapt
         dataBinding true
+        compose true
     }
     namespace 'com.wpf.app.quickrecyclerview'
 }
 
 dependencies {
+    //Compose
+    compileOnly "androidx.compose.ui:ui:${rootProject.composeVersion}"
+    compileOnly "androidx.compose.ui:ui-tooling-preview:${rootProject.composeVersion}"
+    debugCompileOnly "androidx.compose.ui:ui-tooling:${rootProject.composeVersion}"
     //列表
     compileOnly deps.androidx.recyclerview
     //SmartRefreshLayout

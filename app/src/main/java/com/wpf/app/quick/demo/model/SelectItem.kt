@@ -7,7 +7,7 @@ import com.wpf.app.quickbind.helper.binddatahelper.Select2CheckBox
 import com.wpf.app.quickbind.helper.binddatahelper.Text2TextView
 import com.wpf.app.quick.widgets.selectview.data.QuickChildSelectData
 import com.wpf.app.quick.widgets.selectview.data.QuickParentSelectData
-import com.wpf.app.quickbind.interfaces.runOnHolder
+import com.wpf.app.quickutil.bind.runOnHolder
 import com.wpf.app.quickutil.LogUtil
 
 /**

@@ -4,10 +4,8 @@ import android.view.View
 import com.wpf.app.quickbind.helper.binddatahelper.BindData2ViewHelper
 import com.wpf.app.quickbind.helper.binddatahelper.Height2View
 import com.wpf.app.quickbind.helper.binddatahelper.Width2View
-import com.wpf.app.quickbind.interfaces.runOnContext
-import com.wpf.app.quickbind.interfaces.runOnContextWithSelf
+import com.wpf.app.quickutil.bind.runOnContextWithSelf
 import com.wpf.app.quickrecyclerview.QuickAdapter
-import com.wpf.app.quickrecyclerview.R
 import com.wpf.app.quickrecyclerview.data.QuickBindData
 import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
 import java.io.Serializable

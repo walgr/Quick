@@ -1,7 +1,7 @@
 package com.wpf.app.quick.demo.wanandroid.model
 
 import com.google.gson.Gson
-import com.wpf.app.quickbind.interfaces.runOnContextWithSelf
+import com.wpf.app.quickutil.bind.runOnContextWithSelf
 import com.wpf.app.quickrecyclerview.data.QuickItemData
 import com.wpf.app.quickrecyclerview.data.QuickRequestList
 

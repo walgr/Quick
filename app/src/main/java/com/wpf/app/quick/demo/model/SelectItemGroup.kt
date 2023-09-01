@@ -12,8 +12,8 @@ import com.wpf.app.quickbind.helper.binddatahelper.ItemClick
 import com.wpf.app.quickbind.helper.binddatahelper.Select2CheckBox
 import com.wpf.app.quickbind.helper.binddatahelper.Text2TextView
 import com.wpf.app.quick.widgets.quickview.QuickSelectGroup
-import com.wpf.app.quickbind.interfaces.itemClick
-import com.wpf.app.quickbind.interfaces.runOnHolder
+import com.wpf.app.quickutil.bind.itemClick
+import com.wpf.app.quickutil.bind.runOnHolder
 
 /**
  * Created by 王朋飞 on 2022/7/8.

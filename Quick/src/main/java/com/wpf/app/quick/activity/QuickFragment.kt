@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import com.wpf.app.quickbind.QuickBind
 import com.wpf.app.quickbind.annotations.AutoGet
 import com.wpf.app.quickbind.interfaces.BindBaseFragment
-import com.wpf.app.quickbind.interfaces.RunOnContext
+import com.wpf.app.quickutil.bind.RunOnContext
 import com.wpf.app.quicknetwork.base.RequestCoroutineScope
 import com.wpf.app.quickutil.bind.Bind
 import kotlinx.coroutines.Job

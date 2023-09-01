@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 import com.wpf.app.quick.annotations.BindD2VHHelper
 import com.wpf.app.quick.annotations.BindData2View
-import com.wpf.app.quickbind.interfaces.RunOnHolderWithSelf
+import com.wpf.app.quickutil.bind.RunOnHolderWithSelf
 import com.wpf.app.quickbind.utils.ReflectHelper
 import java.lang.reflect.Field
 
