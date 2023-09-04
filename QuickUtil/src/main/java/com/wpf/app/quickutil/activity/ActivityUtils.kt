@@ -11,11 +11,11 @@ import java.util.ArrayList
  * Created by 王朋飞 on 2022/6/15.
  */
 
-fun <T : Activity> Context.startActivity(activityCls: Class<T>) {
-    startActivity(activityCls, data = null)
+fun <T : Activity> Context.quickStartActivity(activityCls: Class<T>) {
+    quickStartActivity(activityCls, data = null)
 }
 
-fun <T : Activity> Context.startActivity(
+fun <T : Activity> Context.quickStartActivity(
     activityCls: Class<T>,
     data: Map<String, Any?>?
 ) {
@@ -36,11 +36,11 @@ fun <T : Activity> Context.startActivity(
     startActivity(intent)
 }
 
-fun <T : Activity> Activity.startActivity(activityCls: Class<T>) {
-    startActivity(activityCls, data = null)
+fun <T : Activity> Activity.quickStartActivity(activityCls: Class<T>) {
+    quickStartActivity(activityCls, data = null)
 }
 
-fun <T : Activity> Activity.startActivity(
+fun <T : Activity> Activity.quickStartActivity(
     activityCls: Class<T>,
     data: Map<String, Any?>?
 ) {

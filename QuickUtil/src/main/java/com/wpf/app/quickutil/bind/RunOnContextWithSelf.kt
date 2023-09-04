@@ -15,7 +15,7 @@ interface RunOnContextWithSelf<Data, Self> : RunOnHolderWithSelf<Data, Self> {
     }
 }
 
-fun <Data, Self> runOnContextWithSelf(run: (Context, Self) -> Data) = object :
+inline fun <Data, Self> runOnContextWithSelf(crossinline run: (Context, Self) -> Data) = object :
     RunOnContextWithSelf<Data, Self> {
     override fun run(context: Context, self: Self): Data {
         return run(context, self)

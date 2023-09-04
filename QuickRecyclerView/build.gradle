@@ -38,7 +38,8 @@ android {
 
 dependencies {
     //Compose
-    compileOnly "androidx.compose.ui:ui:${rootProject.composeVersion}"
+//    compileOnly "androidx.compose.ui:ui:${rootProject.composeVersion}"
+    compileOnly "androidx.compose.foundation:foundation:${rootProject.composeVersion}"
     compileOnly "androidx.compose.ui:ui-tooling-preview:${rootProject.composeVersion}"
     debugCompileOnly "androidx.compose.ui:ui-tooling:${rootProject.composeVersion}"
     //列表

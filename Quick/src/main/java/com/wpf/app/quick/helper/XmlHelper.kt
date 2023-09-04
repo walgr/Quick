@@ -29,7 +29,7 @@ import com.wpf.app.quickrecyclerview.listeners.RefreshView
 import com.wpf.app.quickrecyclerview.listeners.Request2ListWithView
 import com.wpf.app.quickrecyclerview.listeners.requestData2List
 import com.wpf.app.quickutil.base.asTo
-import com.wpf.app.quickutil.startActivity
+import com.wpf.app.quickutil.quickStartActivity
 import com.wpf.app.quickutil.widgets.getChild
 import kotlin.reflect.KClass
 import kotlin.reflect.full.memberFunctions
@@ -42,7 +42,7 @@ import kotlin.reflect.full.memberFunctions
 @BindingAdapter("clickGoto")
 fun <T: Activity> gotoActivity(view: View, gotoClass: KClass<T>) {
     view.setOnClickListener {
-        view.context.startActivity(gotoClass.java)
+        view.context.quickStartActivity(gotoClass.java)
     }
 }
 

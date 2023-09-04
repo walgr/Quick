@@ -6,7 +6,7 @@ import android.util.AttributeSet
 import com.google.android.material.button.MaterialButton
 import com.wpf.app.quick.widgets.quickview.QuickBindView
 import com.wpf.app.quickutil.bind.runOnContext
-import com.wpf.app.quickutil.startActivity
+import com.wpf.app.quickutil.quickStartActivity
 
 open class GotoThis @JvmOverloads constructor(
     mContext: Context,
@@ -19,7 +19,7 @@ open class GotoThis @JvmOverloads constructor(
         MaterialButton(context, attributeSet).apply {
             text = buttonText
             setOnClickListener {
-                context.startActivity(activityCls, data)
+                context.quickStartActivity(activityCls, data)
             }
         }
     }

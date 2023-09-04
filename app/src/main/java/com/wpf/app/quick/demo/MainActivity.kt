@@ -12,7 +12,7 @@ import com.wpf.app.quick.demo.model.TestModel
 import com.wpf.app.quick.demo.viewmodel.MainModel
 import com.wpf.app.quick.demo.wanandroid.WanAndroidHomeActivity
 import com.wpf.app.quickbind.annotations.BindSp2View
-import com.wpf.app.quickutil.startActivity
+import com.wpf.app.quickutil.quickStartActivity
 
 /**
  * Created by 王朋飞 on 2022/6/13.
@@ -50,37 +50,37 @@ class MainActivity : QuickVBActivity<MainModel, ActivityMainBinding>(R.layout.ac
     }
 
     fun gotoWanAndroid(view: View?) {
-        startActivity(WanAndroidHomeActivity::class.java)
+        quickStartActivity(WanAndroidHomeActivity::class.java)
     }
 
     fun gotoDialog(view: View?) {
-        startActivity(DialogTestActivity::class.java)
+        quickStartActivity(DialogTestActivity::class.java)
     }
 
     fun gotoR2Test(view: View?) {
         try {
-            startActivity(activityCls = Class.forName("com.wpf.app.r2test.R2TestActivity") as Class<Activity>)
+            quickStartActivity(activityCls = Class.forName("com.wpf.app.r2test.R2TestActivity") as Class<Activity>)
         } catch (ignore: Exception) { }
     }
 
     fun gotoGlide(view: View?) {
-        startActivity(activityCls = ViewPagerBindFragmentTestActivity::class.java)
+        quickStartActivity(activityCls = ViewPagerBindFragmentTestActivity::class.java)
     }
 
     fun gotoRefreshList(view: View?) {
-        startActivity(activityCls = RefreshListTestActivity::class.java)
+        quickStartActivity(activityCls = RefreshListTestActivity::class.java)
     }
 
     fun gotoSelectList(view: View?) {
-        startActivity(activityCls = SelectListTestActivity::class.java)
+        quickStartActivity(activityCls = SelectListTestActivity::class.java)
     }
 
     fun gotoList(view: View?) {
-        startActivity(activityCls = RecyclerViewTestActivity::class.java)
+        quickStartActivity(activityCls = RecyclerViewTestActivity::class.java)
     }
 
     fun gotoData(view: View?) {
-        startActivity(activityCls = IntentDataTestActivity::class.java, object : HashMap<String, Any?>() {
+        quickStartActivity(activityCls = IntentDataTestActivity::class.java, object : HashMap<String, Any?>() {
             init {
                 put("activityTitle", "数据测试页")
                 put("intD", 2)
