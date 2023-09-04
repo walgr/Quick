@@ -20,7 +20,7 @@ import com.wpf.app.quickutil.base.getInflaterView
 open class QuickViewHolder<T : QuickItemData> @JvmOverloads constructor(
     mParent: ViewGroup,
     @LayoutRes layoutId: Int = 0,
-    layoutViewInContext: RunOnContextWithSelf<View, ViewGroup>? = null,
+    layoutViewInContext: RunOnContextWithSelf<ViewGroup, View>? = null,
     open var dealBindView: Boolean = false,
     open var autoClick: Boolean = false
 ) : RecyclerView.ViewHolder(

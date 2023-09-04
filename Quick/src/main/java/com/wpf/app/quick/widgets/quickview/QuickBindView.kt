@@ -19,23 +19,13 @@ open class QuickBindView @JvmOverloads constructor(
     @LayoutRes
     private val layoutId: Int = 0,
     layoutView: RunOnContext<View>? = null,
-    private var dealBind: Boolean = true
 ) : QuickItemView(mContext, attributeSet, defStyleAttr, layoutId, layoutView) {
 
     override fun onCreateViewHolder() {
-        if (dealBind) {
-            QuickBind.bind(this)
-        }
+        QuickBind.bind(this)
     }
 
-    @CallSuper
     override fun onBindViewHolder(position: Int) {
-//        if (dealBind) {
-//            QuickBind.dealInPlugins(this, null, QuickBind.bindDataPlugin)
-//        }
-    }
 
-    fun noBind() {
-        this.dealBind = false
     }
 }

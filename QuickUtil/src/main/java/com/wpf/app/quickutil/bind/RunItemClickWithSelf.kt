@@ -6,7 +6,7 @@ import android.view.View
  * Created by 王朋飞 on 2022/7/12.
  *
  */
-interface RunItemClickWithSelf<Self> : RunOnHolderWithSelf<View.OnClickListener, Self> {
+interface RunItemClickWithSelf<Self> : RunOnHolderWithSelf<Self, View.OnClickListener> {
 
     fun run(self: Self): View.OnClickListener
 

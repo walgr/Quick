@@ -10,6 +10,4 @@ class HttpRequest @JvmOverloads constructor(
     defStyleAttr: Int = 0,
 ) : AddToParentGroup(
     mContext, attributeSet, defStyleAttr
-) {
-    
-}
+)

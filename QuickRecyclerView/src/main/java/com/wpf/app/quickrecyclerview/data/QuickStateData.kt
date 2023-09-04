@@ -11,7 +11,7 @@ import java.io.Serializable
 abstract class QuickStateData @JvmOverloads constructor(
     @Transient open var state: Boolean = false,
     @Transient override val layoutId: Int = 0,
-    @Transient override val layoutViewInContext: RunOnContextWithSelf<View, ViewGroup>? = null,
+    @Transient override val layoutViewInContext: RunOnContextWithSelf<ViewGroup, View>? = null,
     @Transient override val isSuspension: Boolean = false,
     @Transient override val isDealBinding: Boolean = false,      //是否处理DataBinding
     @Transient override val autoSet: Boolean = false             //自动映射

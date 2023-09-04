@@ -18,8 +18,7 @@ abstract class QuickItemView @JvmOverloads constructor(
     mContext: Context,
     attributeSet: AttributeSet? = null,
     defStyleAttr: Int = 0,
-    @LayoutRes
-    private val layoutId: Int = 0,
+    @LayoutRes private val layoutId: Int = 0,
     private val layoutView: RunOnContext<View>? = null,
     open var viewType: Int = 0,
 ) : View(mContext, attributeSet, defStyleAttr), Bind {

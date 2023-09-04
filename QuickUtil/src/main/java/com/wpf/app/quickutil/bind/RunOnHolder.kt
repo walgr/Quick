@@ -6,15 +6,15 @@ import android.view.View
  * Created by 王朋飞 on 2022/7/12.
  *
  */
-interface RunOnHolder<Data> : RunOnHolderWithSelf<Data, Any> {
-    fun run(view: View): Data
-    override fun run(view: View, self: Any): Data {
+interface RunOnHolder<Return> : RunOnHolderWithSelf<Any, Return> {
+    fun run(view: View): Return
+    override fun run(view: View, self: Any): Return {
         return run(view)
     }
 }
 
-fun <Data> runOnHolder(run: (View) -> Data) = object : RunOnHolder<Data> {
-    override fun run(view: View): Data {
+fun <Return> runOnHolder(run: (View) -> Return) = object : RunOnHolder<Return> {
+    override fun run(view: View): Return {
         return run(view)
     }
 }

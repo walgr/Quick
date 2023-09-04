@@ -22,7 +22,7 @@ open class QuickSelectData(
     @Transient open var defaultSelect: Boolean = false,            //是否默认选中，true 清空后会再次选中
     @Transient open var isSelect: Boolean = defaultSelect,
     @Transient @LayoutRes override val layoutId: Int = 0,
-    @Transient override val layoutViewInContext: RunOnContextWithSelf<View, ViewGroup>? = null,
+    @Transient override val layoutViewInContext: RunOnContextWithSelf<ViewGroup, View>? = null,
     @Transient override val isSuspension: Boolean = false,         //View是否悬浮置顶
 ) : QuickClickData(), Serializable {
 

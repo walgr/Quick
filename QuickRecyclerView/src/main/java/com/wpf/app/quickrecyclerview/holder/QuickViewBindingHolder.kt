@@ -18,7 +18,7 @@ import com.wpf.app.quickrecyclerview.data.QuickViewDataBinding
 open class QuickViewBindingHolder<T : QuickViewDataBinding<VB>, VB : ViewDataBinding> @JvmOverloads constructor(
     mParent: ViewGroup,
     @LayoutRes layoutId: Int = 0,
-    layoutViewInContext: RunOnContextWithSelf<View, ViewGroup>? = null,
+    layoutViewInContext: RunOnContextWithSelf<ViewGroup, View>? = null,
     @Transient override var dealBindView: Boolean = false,
 ) : QuickViewHolder<T>(mParent, layoutId, layoutViewInContext, dealBindView) {
 

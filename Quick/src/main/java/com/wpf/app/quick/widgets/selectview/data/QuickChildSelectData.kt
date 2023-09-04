@@ -27,7 +27,7 @@ open class QuickChildSelectData(
     @Transient override var maxLimit: Int = 5,                             //多选最多数量
     @Transient override val maxLimitListener: MaxLimitListener? = null,    //超出反馈
     @Transient @LayoutRes override val layoutId: Int = 0,
-    @Transient override val layoutViewInContext: RunOnContextWithSelf<View, ViewGroup>? = null,
+    @Transient override val layoutViewInContext: RunOnContextWithSelf<ViewGroup, View>? = null,
 ) : QuickMultiSelectData(), Serializable {
 
     fun getChildSelectSize(): Int {

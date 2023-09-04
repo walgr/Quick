@@ -27,7 +27,7 @@ open class QuickMultiSelectData(
     @Transient override var isSelect: Boolean = false,
     @Transient override var defaultSelect: Boolean = false,        //是否默认选中，true清空后会再次选中
     @Transient @LayoutRes override val layoutId: Int = 0,
-    @Transient override val layoutViewInContext: RunOnContextWithSelf<View, ViewGroup>? = null,
+    @Transient override val layoutViewInContext: RunOnContextWithSelf<ViewGroup, View>? = null,
     @Transient override val isSuspension: Boolean = false,         //View是否悬浮置顶
 ) : QuickSelectData(), Serializable
 

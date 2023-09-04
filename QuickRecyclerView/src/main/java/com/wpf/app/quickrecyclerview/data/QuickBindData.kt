@@ -22,7 +22,7 @@ import java.io.Serializable
  */
 open class QuickBindData @JvmOverloads constructor(
     @Transient @LayoutRes override val layoutId: Int = 0,
-    @Transient override val layoutViewInContext: RunOnContextWithSelf<View, ViewGroup>? = null,
+    @Transient override val layoutViewInContext: RunOnContextWithSelf<ViewGroup, View>? = null,
     @Transient open val isDealBinding: Boolean = false,      //是否处理DataBinding
     @Transient open val autoSet: Boolean = false,             //自动映射
     @Transient override val isSuspension: Boolean = false   //View是否悬浮置顶

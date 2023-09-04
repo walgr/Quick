@@ -7,6 +7,6 @@ import com.wpf.app.quickutil.bind.RunOnContextWithSelf
 
 open class QuickViewData @JvmOverloads constructor(
     @LayoutRes open val layoutId: Int = 0,
-    @Transient open val layoutViewInContext: RunOnContextWithSelf<View, ViewGroup>? = null,
+    @Transient open val layoutViewInContext: RunOnContextWithSelf<ViewGroup, View>? = null,
     @Transient override val isSuspension: Boolean = false       //View是否悬浮置顶
 ) : QuickSuspensionData()

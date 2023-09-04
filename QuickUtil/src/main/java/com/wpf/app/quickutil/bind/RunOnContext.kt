@@ -7,16 +7,16 @@ import android.view.View
  * Created by 王朋飞 on 2022/7/12.
  *
  */
-interface RunOnContext<Data> : RunOnHolder<Data> {
-    fun run(context: Context): Data
+interface RunOnContext<Return> : RunOnHolder<Return> {
+    fun run(context: Context): Return
 
-    override fun run(view: View): Data {
+    override fun run(view: View): Return {
         return run(view.context)
     }
 }
 
-fun <Data> runOnContext(run: (Context) -> Data) = object : RunOnContext<Data> {
-    override fun run(context: Context): Data {
+fun <Return> runOnContext(run: (Context) -> Return) = object : RunOnContext<Return> {
+    override fun run(context: Context): Return {
         return run(context)
     }
 }
