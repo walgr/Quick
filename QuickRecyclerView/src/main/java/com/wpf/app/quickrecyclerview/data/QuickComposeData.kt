@@ -3,6 +3,8 @@ package com.wpf.app.quickrecyclerview.data
 import android.view.View
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ComposeView
+import com.wpf.app.quickrecyclerview.QuickAdapter
+import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
 import com.wpf.app.quickutil.bind.runOnContextWithSelf
 
 open class QuickComposeData<T>(
@@ -13,10 +15,15 @@ open class QuickComposeData<T>(
 ) : QuickBindData(layoutViewInContext = runOnContextWithSelf { context, _ ->
     ComposeView(context)
 }) {
-    override fun onCreateViewHolder(itemView: View) {
-        super.onCreateViewHolder(itemView)
-        if (itemView is ComposeView) {
-            itemView.setContent {
+
+    override fun onBindViewHolder(
+        adapter: QuickAdapter,
+        viewHolder: QuickViewHolder<QuickBindData>,
+        position: Int
+    ) {
+        super.onBindViewHolder(adapter, viewHolder, position)
+        if (viewHolder.itemView is ComposeView) {
+            (viewHolder.itemView as ComposeView).setContent {
                 onCompose.OnCompose(this@QuickComposeData as T)
             }
         }

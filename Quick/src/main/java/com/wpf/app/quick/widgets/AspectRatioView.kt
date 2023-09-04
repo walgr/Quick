@@ -10,7 +10,7 @@ import com.wpf.app.quick.widgets.quickview.QuickViewGroup
 /**
  * 长宽比Layout
  */
-class AspectRatioView @JvmOverloads constructor(
+open class AspectRatioView @JvmOverloads constructor(
     mContext: Context,
     override val attributeSet: AttributeSet? = null,
     defStyleAttr: Int = 0,
@@ -22,7 +22,10 @@ class AspectRatioView @JvmOverloads constructor(
 
     init {
         attributeSet?.let {
-            viewHelper = AspectRatioViewHelper(mContext, attributeSet)
+            viewHelper = AspectRatioViewHelper(mContext, it)
+            if (viewHelper.ratio == null) {
+                viewHelper.ratio = 1.0f
+            }
         }
     }
 
@@ -48,5 +51,5 @@ class AspectRatioViewHelper(
     attributeSet: AttributeSet,
 ) : AutoGetAttributeHelper(context, attributeSet, R.styleable.AspectRatioView) {
 
-    val ratio: Float? = null
+    var ratio: Float? = null
 }

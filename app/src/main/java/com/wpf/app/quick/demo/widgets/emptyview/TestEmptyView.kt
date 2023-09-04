@@ -3,9 +3,11 @@ package com.wpf.app.quick.demo.widgets.emptyview
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.wpf.app.quick.demo.R
+import com.wpf.app.quickutil.bind.RunOnContextWithSelf
 import com.wpf.app.quickutil.widgets.emptyview.*
 
 open class TestEmptyView @JvmOverloads constructor(
@@ -13,9 +15,9 @@ open class TestEmptyView @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
     override val layoutId: Int = R.layout.empty_layout,
-    override val layoutView: View? = null,
+    override val layoutView: RunOnContextWithSelf<ViewGroup, View>? = null,
     override var curState: EmptyViewState = Loading()
-) : BaseEmptyView(mContext, attrs, defStyleAttr, layoutId, layoutView, curState) {
+) : BaseEmptyView(mContext, attrs, defStyleAttr) {
 
     private var mImageView: ImageView? = null
     private var title: TextView? = null
