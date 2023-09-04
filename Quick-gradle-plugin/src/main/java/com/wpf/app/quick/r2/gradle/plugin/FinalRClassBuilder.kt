@@ -5,7 +5,6 @@ import com.squareup.javapoet.CodeBlock
 import com.squareup.javapoet.FieldSpec
 import com.squareup.javapoet.JavaFile
 import com.squareup.javapoet.TypeSpec
-import java.util.Locale
 import javax.lang.model.element.Modifier.FINAL
 import javax.lang.model.element.Modifier.PUBLIC
 import javax.lang.model.element.Modifier.STATIC
@@ -30,7 +29,7 @@ class FinalRClassBuilder(
     val result = TypeSpec.classBuilder(className)
         .addModifiers(PUBLIC, FINAL)
     for (type in SUPPORTED_TYPES) {
-      resourceTypes.get(type)?.let {
+      resourceTypes[type]?.let {
         result.addType(it.build())
       }
     }
@@ -57,9 +56,6 @@ class FinalRClassBuilder(
   }
 
   private fun getSupportAnnotationClass(type: String): ClassName {
-    return ClassName.get(ANDROIDX_ANNOTATION_PACKAGE, type.capitalize(Locale.US) + "Res")
+    return ClassName.get(ANDROIDX_ANNOTATION_PACKAGE, type.replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() } + "Res")
   }
-
-  // TODO https://youtrack.jetbrains.com/issue/KT-28933
-  private fun String.capitalize(locale: Locale) = substring(0, 1).toUpperCase(locale) + substring(1)
 }

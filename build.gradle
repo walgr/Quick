@@ -40,7 +40,7 @@ buildscript {
                         'recyclerview': "com.wpf.app.quick:QuickRecyclerView:${release}",
                         'dialog'      : "com.wpf.app.quick:QuickDialog:${release}",
                         'compiler_ksp': "com.wpf.app.quick:Quick-compiler-ksp:${release}",
-                        'plugin'      : "com.wpf.app.quick:Quick-gradle-plugin:0.8.4"
+                        'plugin'      : "com.wpf.app.quick:Quick-gradle-plugin:0.8.5"
                 ],
                 gradlePlugin    : "com.android.tools.build:gradle:${gradleVersion}",
                 'kotlin'        : [
