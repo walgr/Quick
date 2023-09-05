@@ -32,7 +32,7 @@ dependencies {
     compileOnly deps.androidx.fragmentktx
     //viewModel
     compileOnly deps.androidx.lifecycleviewmodelktx
-    compileOnly deps.androidx.annotations
+    compileOnly deps.androidx.annotation
     //列表
     compileOnly deps.androidx.recyclerview
 }

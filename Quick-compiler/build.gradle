@@ -10,7 +10,7 @@ java {
 dependencies {
     implementation fileTree(dir:'libs',include:['*.jar'])
 
-    compileOnly deps.androidx.annotations
+    compileOnly deps.androidx.annotation
     implementation deps.auto.common
     implementation deps.guava
     implementation deps.javapoet

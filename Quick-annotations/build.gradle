@@ -9,7 +9,7 @@ java {
 }
 
 dependencies {
-    compileOnly deps.androidx.annotations
+    compileOnly deps.androidx.annotation
 }
 
 apply from: rootProject.file('gradle-mvn-push-jar.gradle')

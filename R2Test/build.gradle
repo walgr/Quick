@@ -29,6 +29,7 @@ android {
     kotlinOptions {
         jvmTarget = '11'
     }
+    namespace 'com.wpf.app.r2test'
 }
 
 dependencies {

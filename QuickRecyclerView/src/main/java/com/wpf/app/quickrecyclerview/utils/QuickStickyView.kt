@@ -1,11 +1,10 @@
-package com.wpf.app.quick.widgets.selectview.helper
+package com.wpf.app.quickrecyclerview.utils
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.wpf.app.quickrecyclerview.QuickAdapter
 import com.wpf.app.quickrecyclerview.data.QuickItemData
 import com.wpf.app.quickrecyclerview.data.QuickSuspensionData
-import com.wpf.app.quickutil.recyclerview.StickyView
 
 class QuickStickyView : StickyView {
 

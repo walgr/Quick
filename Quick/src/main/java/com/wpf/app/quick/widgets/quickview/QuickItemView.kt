@@ -85,7 +85,8 @@ abstract class QuickItemView @JvmOverloads constructor(
     }
 
     //预览可见
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
+        super.onDraw(canvas)
         return getView()?.draw(canvas) ?: super.onDraw(canvas)
     }
 }

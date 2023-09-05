@@ -100,6 +100,7 @@ dependencies {
         ksp project(":Quick-compiler-ksp")
     }
     //ktx核心
+    implementation deps.androidx.annotation
     implementation deps.androidx.corektx
     //activity-ktx
     implementation deps.androidx.activityktx

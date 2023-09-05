@@ -11,10 +11,10 @@ import com.wpf.app.quick.widgets.selectview.listeners.SetSelectChange
 import com.wpf.app.quick.widgets.selectview.data.QuickChildSelectData
 import com.wpf.app.quick.widgets.selectview.data.QuickParentSelectData
 import com.wpf.app.quick.widgets.selectview.helper.ParentChildDataHelper
-import com.wpf.app.quick.widgets.selectview.helper.QuickStickyView
+import com.wpf.app.quickrecyclerview.utils.QuickStickyView
 import com.wpf.app.quick.widgets.selectview.listeners.OnSelectCallback
 import com.wpf.app.quick.widgets.selectview.listeners.OnSelectOnChange
-import com.wpf.app.quickutil.recyclerview.StickyItemDecoration
+import com.wpf.app.quickrecyclerview.utils.StickyItemDecoration
 
 /**
  * Created by 王朋飞 on 2022/9/5.

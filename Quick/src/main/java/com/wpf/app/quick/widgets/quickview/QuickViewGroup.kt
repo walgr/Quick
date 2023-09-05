@@ -156,7 +156,8 @@ open class QuickViewGroup<T : ViewGroup> @JvmOverloads constructor(
         }
     }
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
+        super.onDraw(canvas)
         (this.shadowView as? QuickMeasure)?.Draw(canvas)
     }
 

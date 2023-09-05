@@ -29,7 +29,7 @@ android {
 }
 
 dependencies {
-    compileOnly deps.androidx.annotations
+    compileOnly deps.androidx.annotation
     compileOnly deps.kotlin.kotlinxcoroutinescore
     //retrofit2-okhttp-gson
     compileOnly deps.retrofit

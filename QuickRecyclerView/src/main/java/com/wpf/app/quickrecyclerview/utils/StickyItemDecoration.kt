@@ -1,4 +1,4 @@
-package com.wpf.app.quickutil.recyclerview
+package com.wpf.app.quickrecyclerview.utils
 
 import android.graphics.Canvas
 import android.graphics.Paint
