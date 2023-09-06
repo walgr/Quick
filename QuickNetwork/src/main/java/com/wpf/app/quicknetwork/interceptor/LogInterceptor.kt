@@ -1,5 +1,8 @@
 package com.wpf.app.quicknetwork.interceptor
 
+import android.content.Context
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
 import com.wpf.app.quickutil.LogUtil.e
 import okhttp3.*
 import okhttp3.ResponseBody.Companion.toResponseBody
@@ -8,7 +11,10 @@ import java.io.IOException
 /**
  * Created by 王朋飞 on 2021/9/13.
  */
-class LogInterceptor : Interceptor {
+class LogInterceptor(context: Context) : Interceptor {
+
+    private val versionName = getPackageInfo(context)?.versionName
+
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         val startTime = System.currentTimeMillis()
@@ -20,7 +26,9 @@ class LogInterceptor : Interceptor {
         val duration = endTime - startTime
         e(TAG, "\n")
         e(TAG, "----------Start----------------")
-        e(TAG, "| $request")
+//        e(TAG, "| $request")
+        //            LogUtil.e(TAG, "| " + request.toString());
+        e(TAG, "| Request:{method=" + request.method + ", url=" + request.url + ", version=" + versionName + "}")
         val method = request.method
         if ("POST" == method) {
             val sb = StringBuilder()
@@ -39,6 +47,16 @@ class LogInterceptor : Interceptor {
         return response.newBuilder()
             .body(content.toResponseBody(mediaType))
             .build()
+    }
+
+    private fun getPackageInfo(context: Context): PackageInfo? {
+        kotlin.runCatching {
+            return context.packageManager.getPackageInfo(
+                context.packageName,
+                PackageManager.GET_CONFIGURATIONS
+            )
+        }
+        return null
     }
 
     /*

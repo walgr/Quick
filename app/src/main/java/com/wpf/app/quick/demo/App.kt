@@ -30,7 +30,7 @@ class App : Application() {
             TestApi::class.java,
             arrayListOf(TestCommonCallAdapterFactory.create(), TestNoResponseCallAdapterFactory.create()),
             converterFactoryList = arrayListOf(TestGsonConverterFactory.create()),
-            OkHttpCreateHelper.newInstance(interceptorList = arrayListOf(LogInterceptor()))
+            OkHttpCreateHelper.newInstance(interceptorList = arrayListOf(LogInterceptor(this)))
         )
     }
 }

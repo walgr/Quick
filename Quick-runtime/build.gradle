@@ -18,6 +18,9 @@ android {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
     }
+    kotlin {
+        jvmToolchain(11)
+    }
     lintOptions {
         textReport true
         textOutput 'stdout'

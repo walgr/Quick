@@ -5,7 +5,11 @@ plugins {
 
 android {
     compileSdk rootProject.compileSdkVersion
-
+    buildFeatures {
+        //noinspection DataBindingWithoutKapt
+        dataBinding true
+        compose true
+    }
     defaultConfig {
         minSdk rootProject.minSdkVersion
 
@@ -22,16 +26,14 @@ android {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
     }
+    kotlin {
+        jvmToolchain(11)
+    }
     kotlinOptions {
         jvmTarget = '11'
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.3"
-    }
-    buildFeatures {
-        //noinspection DataBindingWithoutKapt
-        dataBinding true
-        compose true
     }
     namespace 'com.wpf.app.quickrecyclerview'
 }

@@ -6,7 +6,9 @@ plugins {
 
 android {
     compileSdk rootProject.compileSdkVersion
-
+    buildFeatures {
+        dataBinding true
+    }
     defaultConfig {
         minSdk rootProject.minSdkVersion
 
@@ -23,11 +25,11 @@ android {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
     }
+    kotlin {
+        jvmToolchain(11)
+    }
     kotlinOptions {
         jvmTarget = '11'
-    }
-    buildFeatures {
-        dataBinding true
     }
     namespace 'com.wpf.app.quick'
 }
