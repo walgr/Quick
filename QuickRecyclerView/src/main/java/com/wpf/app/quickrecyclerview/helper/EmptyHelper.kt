@@ -1,10 +1,10 @@
 package com.wpf.app.quickrecyclerview.helper
 
-import androidx.recyclerview.widget.RecyclerView
 import com.wpf.app.quickrecyclerview.listeners.RefreshView
 import com.wpf.app.quickutil.LogUtil
 import com.wpf.app.quickutil.widgets.emptyview.BaseEmptyView
 import com.wpf.app.quickutil.widgets.emptyview.NetError
+import com.wpf.app.quickutil.widgets.emptyview.NoError
 
 object EmptyHelper {
 
@@ -22,8 +22,10 @@ object EmptyHelper {
             override fun onRefreshEnd(data: List<*>?) {
                 super.onRefreshEnd(data)
                 LogUtil.e("空数据页", "刷新结束")
-                if (data?.isEmpty() == false) {
+                if (data?.isEmpty() != true) {
                     emptyView.changeState(NetError())
+                } else {
+                    emptyView.changeState(NoError())
                 }
             }
 
