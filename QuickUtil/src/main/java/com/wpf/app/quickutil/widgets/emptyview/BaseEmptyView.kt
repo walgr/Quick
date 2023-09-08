@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import com.wpf.app.quickutil.base.matchLayoutParams
 import com.wpf.app.quickutil.bind.RunOnContextWithSelf
 
 abstract class BaseEmptyView @JvmOverloads constructor(
@@ -20,12 +21,20 @@ abstract class BaseEmptyView @JvmOverloads constructor(
         init()
     }
 
-    private fun init() {
-        val view = layoutView?.run(context, this) ?: View.inflate(context, layoutId, null)
-        addView(view)
-        initView(view)
-        changeState(curState)
+    protected var emptyView: View? = null
+    protected fun init() {
+        emptyView = layoutView?.run(context, this) ?: View.inflate(context, layoutId, null)
+        addView(emptyView, matchLayoutParams)
+        initView(emptyView!!)
     }
 
     abstract fun initView(view: View)
+
+    override fun setVisibility(visibility: Int) {
+        emptyView?.let {
+            it.visibility = visibility
+        } ?: let {
+            super.setVisibility(visibility)
+        }
+    }
 }

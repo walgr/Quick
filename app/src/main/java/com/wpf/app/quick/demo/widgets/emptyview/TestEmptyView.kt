@@ -3,21 +3,16 @@ package com.wpf.app.quick.demo.widgets.emptyview
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.wpf.app.quick.demo.R
-import com.wpf.app.quickutil.bind.RunOnContextWithSelf
 import com.wpf.app.quickutil.widgets.emptyview.*
 
-open class TestEmptyView @JvmOverloads constructor(
+class TestEmptyView @JvmOverloads constructor(
     mContext: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
-    override val layoutId: Int = R.layout.empty_layout,
-    override val layoutView: RunOnContextWithSelf<ViewGroup, View>? = null,
-    override var curState: EmptyViewState = Loading()
-) : BaseEmptyView(mContext, attrs, defStyleAttr) {
+) : BaseEmptyView(mContext, attrs, defStyleAttr, R.layout.empty_layout, curState = Loading()) {
 
     private var mImageView: ImageView? = null
     private var title: TextView? = null
@@ -35,9 +30,9 @@ open class TestEmptyView @JvmOverloads constructor(
     override fun changeState(state: EmptyViewState) {
         super.changeState(state)
         if (state is NoError) {
-            visibility = View.GONE
+            emptyView?.visibility = View.INVISIBLE
         } else {
-            visibility = View.VISIBLE
+            emptyView?.visibility = View.VISIBLE
             when (state) {
                 is ExceptionError -> {
 
@@ -46,7 +41,9 @@ open class TestEmptyView @JvmOverloads constructor(
 
                 }
                 is NetError -> {
-
+                    title?.text = "网络异常"
+                    info?.text = "暂无数据"
+                    btnNext?.text = "刷新重试"
                 }
                 is Success -> {
 

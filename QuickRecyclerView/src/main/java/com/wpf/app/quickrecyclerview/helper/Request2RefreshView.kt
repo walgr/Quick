@@ -27,7 +27,7 @@ object Request2RefreshView :
         } else if (view.getAdapter() is QuickAdapter) {
             val quickAdapter = view.getAdapter() as QuickAdapter
             val requestData: RequestData = try {
-                ((data.javaClass.genericInterfaces[0] as ParameterizedType).actualTypeArguments[0] as Class<*>).newInstance() as RequestData
+                ((data.javaClass.genericInterfaces[0] as ParameterizedType).actualTypeArguments[0] as Class<*>).getDeclaredConstructor().newInstance() as RequestData
             } catch (ignore: Exception) {
                 RequestData()
             }
@@ -36,6 +36,7 @@ object Request2RefreshView :
             realData.requestData = requestData
             val refreshCallback = object : CallbackList<QuickItemData> {
                 override fun backData(data: List<QuickItemData>?) {
+                    view.refreshView?.onRefreshEnd(data)
                     quickAdapter.mDataList?.clear()
                     quickAdapter.appendList(data)
                     requestData.loadDataSize(data?.size ?: 0)
@@ -47,6 +48,7 @@ object Request2RefreshView :
             realData.refreshCallback = refreshCallback
             val loadMoreCallback = object : CallbackList<QuickItemData> {
                 override fun backData(data: List<QuickItemData>?) {
+                    view.refreshView?.onLoadMoreEnd(data)
                     quickAdapter.appendList(data)
                     requestData.loadDataSize(data?.size ?: 0)
                     if (!realData.loadMoreFinish()) {

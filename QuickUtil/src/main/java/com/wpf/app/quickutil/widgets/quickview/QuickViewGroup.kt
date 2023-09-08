@@ -1,19 +1,24 @@
-package com.wpf.app.quick.widgets.quickview
+package com.wpf.app.quickutil.widgets.quickview
 
 import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
 import android.view.View
+import android.view.View.MeasureSpec
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.RadioGroup
 import android.widget.RelativeLayout
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.wpf.app.quick.widgets.quickview.helper.GroupType
-import com.wpf.app.quick.widgets.quickview.helper.QuickViewGroupAttrSetHelper
+import com.wpf.app.quickutil.LogUtil
+import com.wpf.app.quickutil.widgets.quickview.helper.GroupType
+import com.wpf.app.quickutil.widgets.quickview.helper.QuickViewGroupAttrSetHelper
 import com.wpf.app.quickutil.base.GenericEx
-import com.wpf.app.quick.widgets.quickview.util.QuickMeasure
+import com.wpf.app.quickutil.base.asTo
+import com.wpf.app.quickutil.base.matchLayoutParams
+import com.wpf.app.quickutil.widgets.quickview.util.QuickMeasure
+import com.wpf.app.quickutil.widgets.removeParent
 
 /**
  * Created by 王朋飞 on 2022/8/31.
@@ -21,9 +26,10 @@ import com.wpf.app.quick.widgets.quickview.util.QuickMeasure
  */
 open class QuickViewGroup<T : ViewGroup> @JvmOverloads constructor(
     mContext: Context,
-    open val attributeSet: AttributeSet? = null,
-    open val defStyleAttr: Int = 0,
+    val attributeSet: AttributeSet? = null,
+    val defStyleAttr: Int = 0,
     open val addToParent: Boolean = true,
+    open val childView: Array<View>? = null
 ) : ViewGroup(mContext, attributeSet, defStyleAttr) {
 
     protected var attrSet: QuickViewGroupAttrSetHelper? = null
@@ -52,6 +58,7 @@ open class QuickViewGroup<T : ViewGroup> @JvmOverloads constructor(
             val t =
                 tCls.getConstructor(Context::class.java, AttributeSet::class.java, Int::class.java)
             this.shadowView = t.newInstance(context, attributeSet, defStyleAttr)
+            this.shadowView?.layoutParams = matchLayoutParams
         }
     }
 
@@ -62,18 +69,23 @@ open class QuickViewGroup<T : ViewGroup> @JvmOverloads constructor(
                 GroupType.LinearLayout.type -> {
                     this.shadowView = LinearLayout(context, attributeSet, defStyleAttr) as T
                 }
+
                 GroupType.RelativeLayout.type -> {
                     this.shadowView = RelativeLayout(context, attributeSet, defStyleAttr) as T
                 }
+
                 GroupType.FrameLayout.type -> {
                     this.shadowView = FrameLayout(context, attributeSet, defStyleAttr) as T
                 }
+
                 GroupType.ConstraintLayout.type -> {
                     this.shadowView = ConstraintLayout(context, attributeSet, defStyleAttr) as T
                 }
+
                 GroupType.RadioGroup.type -> {
                     this.shadowView = RadioGroup(context, attributeSet) as T
                 }
+
                 else -> {
                     this.shadowView = LinearLayout(context, attributeSet, defStyleAttr) as T
                 }
@@ -82,6 +94,10 @@ open class QuickViewGroup<T : ViewGroup> @JvmOverloads constructor(
     }
 
     private fun addChildToT() {
+        childView?.forEach {
+            it.removeParent()
+            this.shadowView?.addView(it)
+        }
         if (shadowView?.childCount != 0) return
         if (childCount == 0) return
         val childList = mutableListOf<View>()
@@ -114,7 +130,7 @@ open class QuickViewGroup<T : ViewGroup> @JvmOverloads constructor(
         if (shadowView?.parent != null) return
         shadowView?.let {
             it.layoutParams = layoutParams
-            (this.shadowView?.parent as? ViewGroup)?.removeView(this.shadowView)
+            it.removeParent()
             this.addView(shadowView, 0)
         }
     }
@@ -140,6 +156,7 @@ open class QuickViewGroup<T : ViewGroup> @JvmOverloads constructor(
             val viewMeasureHeight = it.measuredHeight
             val specModeWidth = MeasureSpec.getMode(widthMeasureSpec)
             val specModeHeight = MeasureSpec.getMode(heightMeasureSpec)
+            LogUtil.e("width:$viewMeasureWidth")
             setMeasuredDimension(
                 MeasureSpec.makeMeasureSpec(viewMeasureWidth, specModeWidth),
                 MeasureSpec.makeMeasureSpec(viewMeasureHeight, specModeHeight)
@@ -150,9 +167,16 @@ open class QuickViewGroup<T : ViewGroup> @JvmOverloads constructor(
     }
 
     override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
-        this.shadowView?.let {
-            it.layout(0, 0, it.measuredWidth, it.measuredHeight)
-            (it as? QuickMeasure)?.Layout(changed, 0, 0, it.measuredWidth, it.measuredHeight)
+        this.shadowView?.let { shadowView ->
+            (shadowView as? QuickMeasure)?.Layout(
+                changed,
+                0,
+                0,
+                shadowView.measuredWidth,
+                shadowView.measuredHeight
+            ) ?: let {
+                shadowView.layout(0, 0, shadowView.measuredWidth, shadowView.measuredHeight)
+            }
         }
     }
 
@@ -166,20 +190,52 @@ open class QuickViewGroup<T : ViewGroup> @JvmOverloads constructor(
             is RadioGroup -> {
                 RadioGroup.LayoutParams(context, attrs)
             }
+
             is LinearLayout -> {
                 LinearLayout.LayoutParams(context, attrs)
             }
+
             is RelativeLayout -> {
                 RelativeLayout.LayoutParams(context, attrs)
             }
+
             is FrameLayout -> {
                 FrameLayout.LayoutParams(context, attrs)
             }
+
             is ConstraintLayout -> {
                 ConstraintLayout.LayoutParams(context, attrs)
             }
+
             else -> {
                 MarginLayoutParams(context, attrs)
+            }
+        }
+    }
+
+    companion object {
+        inline fun <reified T : ViewGroup> create(
+            mContext: Context,
+            attributeSet: AttributeSet? = null,
+            defStyleAttr: Int = 0,
+            addToParent: Boolean = true,
+            childView: Array<View>? = null
+        ) = object : QuickViewGroup<T>(
+            mContext,
+            attributeSet,
+            defStyleAttr,
+            addToParent = addToParent,
+            childView = childView
+        ) {}
+    }
+
+    fun build() {
+        post {
+            addChildToT()
+            if (addToParent) {
+                addTToParent()
+            } else {
+                addTToThis()
             }
         }
     }

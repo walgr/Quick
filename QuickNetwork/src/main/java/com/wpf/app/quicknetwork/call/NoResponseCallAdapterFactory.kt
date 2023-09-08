@@ -28,7 +28,7 @@ class NoResponseCallAdapterFactory private constructor(): CallAdapter.Factory() 
             val fResponseType = getParameterUpperBound(1, returnType)
             val sResponseClz = getRawType(sResponseType)
             val fResponseClz = getRawType(fResponseType)
-            val baseResponseF = BaseResponseS(fResponseClz.newInstance())
+            val baseResponseF = BaseResponseS(fResponseClz.getDeclaredConstructor().newInstance())
             return NoResponseCallAdapter(sResponseType, sResponseClz, baseResponseF)
         }
         return null

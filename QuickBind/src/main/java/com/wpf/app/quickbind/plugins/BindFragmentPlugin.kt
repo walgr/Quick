@@ -66,7 +66,7 @@ class BindFragmentPlugin : BindBasePlugin {
                         override fun getItem(i: Int): Fragment {
                             try {
                                 val baseFragment: BindBaseFragment =
-                                    bindFragmentAnn.fragment.java.newInstance() as BindBaseFragment
+                                    bindFragmentAnn.fragment.java.getDeclaredConstructor().newInstance() as BindBaseFragment
                                 if (obj is Bind) {
                                     val bundle = obj.bindData(i)
                                     if (bundle != null) {
@@ -145,7 +145,7 @@ class BindFragmentPlugin : BindBasePlugin {
                         override fun getItem(i: Int): Fragment {
                             try {
                                 val baseFragment: BindBaseFragment =
-                                    bindFragmentAnn.fragment.java.newInstance() as BindBaseFragment
+                                    bindFragmentAnn.fragment.java.getDeclaredConstructor().newInstance() as BindBaseFragment
                                 if (obj is Bind) {
                                     val bundle = obj.bindData(i)
                                     if (bundle != null) {

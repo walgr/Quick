@@ -32,6 +32,9 @@ android {
 }
 
 dependencies {
+    //约束布局
+    compileOnly deps.androidx.constraintlayout
+
     compileOnly deps.androidx.fragmentktx
     //viewModel
     compileOnly deps.androidx.lifecycleviewmodelktx

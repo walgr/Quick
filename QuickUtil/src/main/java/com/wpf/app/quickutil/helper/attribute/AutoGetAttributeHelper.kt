@@ -1,4 +1,4 @@
-package com.wpf.app.quick.helper.attribute.base
+package com.wpf.app.quickutil.helper.attribute
 
 import android.content.Context
 import android.graphics.Color
@@ -7,9 +7,6 @@ import android.view.View
 import androidx.annotation.ColorInt
 import androidx.annotation.StyleableRes
 import androidx.core.content.ContextCompat
-import com.wpf.app.quick.R
-import kotlinx.coroutines.delay
-import org.xmlpull.v1.XmlPullParser
 import java.lang.reflect.Field
 
 /**
@@ -31,6 +28,7 @@ open class AutoGetAttributeHelper constructor(
     init {
         getAllClassField()
         getAttributeType(attributeSet, styleableId)
+        recycle()
     }
 
     private fun getAttributeType(attributeSet: AttributeSet, @StyleableRes styleableId: IntArray) {

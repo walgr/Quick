@@ -5,7 +5,7 @@
 //import androidx.annotation.DrawableRes
 //import com.wpf.app.quick.R
 //import com.wpf.app.quick.constant.*
-//import com.wpf.app.quick.helper.attribute.base.AutoGetAttributeHelper
+//import com.wpf.app.quickutil.helper.attribute.AutoGetAttributeHelper
 //
 ///**
 // * Created by 王朋飞 on 2022/4/29.

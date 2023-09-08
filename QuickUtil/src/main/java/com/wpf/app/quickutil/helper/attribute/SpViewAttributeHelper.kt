@@ -1,9 +1,8 @@
-package com.wpf.app.quick.helper.attribute
+package com.wpf.app.quickutil.helper.attribute
 
 import android.content.Context
 import android.util.AttributeSet
-import com.wpf.app.quick.R
-import com.wpf.app.quick.helper.attribute.base.AutoGetAttributeHelper
+import com.wpf.app.quickutil.R
 
 /**
  * Created by 王朋飞 on 2022/6/10.

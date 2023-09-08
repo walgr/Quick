@@ -4,15 +4,15 @@ import android.content.Context
 import android.util.AttributeSet
 import android.widget.RelativeLayout
 import com.wpf.app.quick.R
-import com.wpf.app.quick.helper.attribute.base.AutoGetAttributeHelper
-import com.wpf.app.quick.widgets.quickview.QuickViewGroup
+import com.wpf.app.quickutil.helper.attribute.AutoGetAttributeHelper
+import com.wpf.app.quickutil.widgets.quickview.QuickViewGroup
 
 /**
  * 长宽比Layout
  */
 open class AspectRatioView @JvmOverloads constructor(
     mContext: Context,
-    override val attributeSet: AttributeSet? = null,
+    attributeSet: AttributeSet? = null,
     defStyleAttr: Int = 0,
 ) : QuickViewGroup<RelativeLayout>(
     mContext, attributeSet, defStyleAttr

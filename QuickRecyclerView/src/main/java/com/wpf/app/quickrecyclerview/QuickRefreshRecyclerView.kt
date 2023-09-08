@@ -29,6 +29,7 @@ open class QuickRefreshRecyclerView @JvmOverloads constructor(
     @JvmField
     val refreshCallback = object : CallbackList<QuickItemData> {
         override fun backData(data: List<QuickItemData>?) {
+            refreshView?.onRefreshEnd(data)
             getQuickAdapter().mDataList?.clear()
             getQuickAdapter().appendList(data)
             requestData.loadDataSize(data?.size ?: 0)
@@ -41,6 +42,7 @@ open class QuickRefreshRecyclerView @JvmOverloads constructor(
     @JvmField
     val loadMoreCallback = object : CallbackList<QuickItemData> {
         override fun backData(data: List<QuickItemData>?) {
+            refreshView?.onLoadMoreEnd(data)
             appendList(data)
             requestData.loadDataSize(data?.size ?: 0)
             if (mDataChangeListener?.loadMoreFinish() != true) {
@@ -64,18 +66,14 @@ open class QuickRefreshRecyclerView @JvmOverloads constructor(
     }
 
     override fun onRefresh() {
-        refreshView?.onRefresh() ?: let {
-            requestData.refresh()
-            (mDataChangeListener as? Request2ListWithView<RequestData, QuickItemData, QuickRefreshRecyclerView>)
-                ?.requestAndCallback(this, requestData, refreshCallback)
-        }
+        requestData.refresh()
+        (mDataChangeListener as? Request2ListWithView<RequestData, QuickItemData, QuickRefreshRecyclerView>)
+            ?.requestAndCallback(this, requestData, refreshCallback)
     }
 
     override fun onLoadMore() {
-        refreshView?.onLoadMore() ?: let {
-            requestData.loadMore()
-            (mDataChangeListener as? Request2ListWithView<RequestData, QuickItemData, QuickRefreshRecyclerView>)
-                ?.requestAndCallback(this, requestData, loadMoreCallback)
-        }
+        requestData.loadMore()
+        (mDataChangeListener as? Request2ListWithView<RequestData, QuickItemData, QuickRefreshRecyclerView>)
+            ?.requestAndCallback(this, requestData, loadMoreCallback)
     }
 }

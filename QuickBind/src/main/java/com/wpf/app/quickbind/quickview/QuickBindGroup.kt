@@ -1,13 +1,13 @@
-package com.wpf.app.quick.widgets.quickview
+package com.wpf.app.quickbind.quickview
 
 import android.content.Context
 import android.util.AttributeSet
 import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
-import com.wpf.app.quickbind.QuickBind
-import com.wpf.app.quickbind.QuickBind.dealInPlugins
 import com.wpf.app.quickutil.bind.Bind
+import com.wpf.app.quickutil.bind.QuickBindWrap
+import com.wpf.app.quickutil.widgets.quickview.QuickItemGroup
 
 /**
  * Created by 王朋飞 on 2022/7/13.
@@ -18,8 +18,7 @@ open class QuickBindGroup<T : ViewGroup> @JvmOverloads constructor(
     attributeSet: AttributeSet? = null,
     defStyleAttr: Int = 0,
     override val addToParent: Boolean = true,
-    @LayoutRes
-    private val layoutId: Int = 0,
+    @LayoutRes private val layoutId: Int = 0,
     private var dealBind: Boolean = true
 ) : QuickItemGroup<T>(
     mContext,
@@ -32,7 +31,7 @@ open class QuickBindGroup<T : ViewGroup> @JvmOverloads constructor(
     private var isLoadFirst = true
     override fun onCreateViewHolder() {
         if (dealBind) {
-            QuickBind.bind(this)
+            QuickBindWrap.bind(this)
         }
     }
 
@@ -43,7 +42,7 @@ open class QuickBindGroup<T : ViewGroup> @JvmOverloads constructor(
             isLoadFirst = false
         }
         if (dealBind) {
-            dealInPlugins(this, null, QuickBind.bindDataPlugin)
+            QuickBindWrap.dealInPlugins(this, null, QuickBindWrap.getBindPlugin())
         }
     }
 

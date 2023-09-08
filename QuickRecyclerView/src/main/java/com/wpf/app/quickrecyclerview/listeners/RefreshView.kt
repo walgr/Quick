@@ -14,4 +14,7 @@ interface RefreshView {
     fun onRefresh() {}
 
     fun onLoadMore() {}
+
+    fun onRefreshEnd(data: List<*>?) {}
+    fun onLoadMoreEnd(data: List<*>?) {}
 }

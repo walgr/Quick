@@ -1,16 +1,15 @@
-package com.wpf.app.quick.widgets.quickview.inxml
+package com.wpf.app.quickutil.widgets.quickview.inxml
 
 import android.content.Context
 import android.text.TextUtils
 import android.util.AttributeSet
 import android.widget.TextView
 import androidx.core.content.edit
-import androidx.core.widget.addTextChangedListener
 import androidx.core.widget.doAfterTextChanged
-import com.wpf.app.quick.helper.attribute.SpViewAttributeHelper
-import com.wpf.app.quick.widgets.quickview.AddToParentGroup
-import com.wpf.app.quickbind.QuickBind
+import com.wpf.app.quickutil.widgets.quickview.ChildToParentGroup
 import com.wpf.app.quickutil.base.asTo
+import com.wpf.app.quickutil.bind.QuickBindWrap
+import com.wpf.app.quickutil.helper.attribute.SpViewAttributeHelper
 
 /**
  * 给子View注入Sp内容
@@ -19,7 +18,7 @@ class LoadSp2Text @JvmOverloads constructor(
     mContext: Context,
     val attributeSet: AttributeSet? = null,
     defStyleAttr: Int = 0,
-) : AddToParentGroup(
+) : ChildToParentGroup(
     mContext, attributeSet, defStyleAttr
 ) {
 
@@ -27,7 +26,7 @@ class LoadSp2Text @JvmOverloads constructor(
         SpViewAttributeHelper(context, attributeSet!!)
 
     private val sharedPreference = context.getSharedPreferences(
-        if (TextUtils.isEmpty(attributeHelper.fileName)) QuickBind.getBindSpFileName() else attributeHelper.fileName,
+        if (TextUtils.isEmpty(attributeHelper.fileName)) QuickBindWrap.getBindSpFileName() else attributeHelper.fileName,
         Context.MODE_PRIVATE
     )
     private val spData: String? =

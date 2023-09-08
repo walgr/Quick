@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -13,10 +13,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <com.wpf.app.quickrecyclerview.QuickRefreshRecyclerView
-            android:id="@+id/list"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+
+            <com.wpf.app.quickrecyclerview.QuickRefreshRecyclerView
+                android:id="@+id/list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <com.wpf.app.quick.demo.widgets.emptyview.TestEmptyView
+                android:id="@+id/emptyLayout"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </RelativeLayout>
 
         <com.scwang.smart.refresh.footer.ClassicsFooter
             android:layout_width="match_parent"
@@ -24,4 +36,4 @@
 
     </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 
-</LinearLayout>
+</RelativeLayout>

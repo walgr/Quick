@@ -50,8 +50,8 @@ object QuickBindWrap: QuickBindI {
         return quickBindI?.getRegisterPlugins()
     }
 
-    override fun getBindPlugin(): MutableMap<KClass<out Annotation>, BasePlugin>? {
-        return quickBindI?.getBindPlugin()
+    override fun getBindPlugin(): MutableMap<KClass<out Annotation>, BasePlugin> {
+        return quickBindI!!.getBindPlugin()
     }
 
     override fun <T : BasePlugin> registerPlugin(ann: KClass<out Annotation>, plugin: T) {
@@ -74,4 +74,7 @@ object QuickBindWrap: QuickBindI {
         quickBindI?.dealInPlugins(obj, viewModel, plugins)
     }
 
+    override fun getBindSpFileName(): String? {
+        return quickBindI?.getBindSpFileName()
+    }
 }

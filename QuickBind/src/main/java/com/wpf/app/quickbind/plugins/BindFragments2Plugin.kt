@@ -50,7 +50,7 @@ class BindFragments2Plugin : BindBasePlugin {
         val fragments: MutableList<BindBaseFragment> = ArrayList()
         for ((position, fragmentCls) in fragmentClsArray.withIndex()) {
             try {
-                val baseFragment: Fragment = fragmentCls.java.newInstance() as Fragment
+                val baseFragment: Fragment = fragmentCls.java.getDeclaredConstructor().newInstance() as Fragment
                 if (baseFragment is BindBaseFragment) {
                     if (obj is Activity) {
                         baseFragment.arguments = baseFragment.getInitBundle(obj, position)

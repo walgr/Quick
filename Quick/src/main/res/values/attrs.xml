@@ -75,26 +75,8 @@
         <attr name="clickOnlyCheckBox" format="boolean" />
     </declare-styleable>
 
-    <declare-styleable name="QuickViewGroup">
-        <attr name="groupType" format="enum">
-            <enum name="LinearLayout" value="0" />
-            <enum name="RelativeLayout" value="1" />
-            <enum name="FrameLayout" value="2" />
-            <enum name="ConstraintLayout" value="3" />
-            <enum name="RadioGroup" value="4" />
-        </attr>
-        <attr name="layoutRes" format="reference"/>
-    </declare-styleable>
-
     <declare-styleable name="AspectRatioView">
         <attr name="ratio" format="float"/>
-    </declare-styleable>
-
-    <declare-styleable name="LoadSp2Text">
-        <attr name="fileName" format="string" />
-        <attr name="bindKey" format="string" />
-        <attr name="defaultString" format="string" />
-        <attr name="bindData2Sp" format="boolean" />
     </declare-styleable>
 
 </resources>

@@ -42,6 +42,8 @@ dependencies {
     //列表
     compileOnly deps.androidx.recyclerview
 
+    compileOnly deps.androidx.material
+
     //Glide
     compileOnly deps.glide
     //GSON

@@ -194,7 +194,7 @@ object QuickBind: QuickBindI {
         QuickBind.bindSpFileName = bindSpFileName
     }
 
-    fun getBindSpFileName(): String {
+    override fun getBindSpFileName(): String {
         return bindSpFileName
     }
 }

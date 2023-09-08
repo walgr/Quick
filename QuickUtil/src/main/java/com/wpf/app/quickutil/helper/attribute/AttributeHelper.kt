@@ -1,4 +1,4 @@
-package com.wpf.app.quick.helper.attribute.base
+package com.wpf.app.quickutil.helper.attribute
 
 import android.content.Context
 import android.util.AttributeSet

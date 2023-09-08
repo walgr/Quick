@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import com.wpf.app.quick.activity.QuickVBActivity
 import com.wpf.app.quick.demo.databinding.ActivityRequestTestBinding
 import com.wpf.app.quick.demo.viewmodel.RequestTestModel
-import com.wpf.app.quick.widgets.quickview.helper.GotoThis
+import com.wpf.app.quickbind.quickview.helper.GotoThis
 
 class RequestTestActivity : QuickVBActivity<RequestTestModel, ActivityRequestTestBinding>(
     R.layout.activity_request_test,

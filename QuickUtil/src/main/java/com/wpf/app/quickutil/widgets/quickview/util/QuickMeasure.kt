@@ -1,4 +1,4 @@
-package com.wpf.app.quick.widgets.quickview.util
+package com.wpf.app.quickutil.widgets.quickview.util
 
 import android.graphics.Canvas
 

@@ -1,9 +1,12 @@
-package com.wpf.app.quick.widgets.quickview
+package com.wpf.app.quickutil.widgets.quickview
 
 import android.content.Context
 import android.util.AttributeSet
 import android.view.ViewGroup
 
+/**
+ * 最多1个子View
+ */
 abstract class Only1Child @JvmOverloads constructor(
     mContext: Context,
     attributeSet: AttributeSet? = null,

@@ -6,8 +6,10 @@ import com.wpf.app.quick.activity.QuickActivity
 import com.wpf.app.quick.annotations.BindData2View
 import com.wpf.app.quick.annotations.BindView
 import com.wpf.app.quick.demo.http.request
+import com.wpf.app.quick.demo.widgets.emptyview.TestEmptyView
 import com.wpf.app.quickrecyclerview.QuickRefreshRecyclerView
 import com.wpf.app.quickrecyclerview.data.RequestData
+import com.wpf.app.quickrecyclerview.helper.EmptyHelper
 import com.wpf.app.quickrecyclerview.helper.Request2RefreshView
 import com.wpf.app.quickrecyclerview.listeners.request2List
 import com.wpf.app.quickutil.LogUtil
@@ -23,6 +25,10 @@ class RefreshListTestActivity : QuickActivity(R.layout.activity_refresh_list, ti
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.list)
     var mRecyclerView: QuickRefreshRecyclerView? = null
+
+    @SuppressLint("NonConstantResourceId")
+    @BindView(R.id.emptyLayout)
+    var emptyLayout: TestEmptyView? = null
 
     @SuppressLint("NonConstantResourceId")
     @BindData2View(id = R.id.list, helper = Request2RefreshView::class)
@@ -43,6 +49,7 @@ class RefreshListTestActivity : QuickActivity(R.layout.activity_refresh_list, ti
     }
 
     override fun initView() {
+        EmptyHelper.bind(mRecyclerView!!, emptyView = emptyLayout!!)
         mSmartRefreshLayout?.setOnRefreshListener { mRecyclerView?.onRefresh() }
         mSmartRefreshLayout?.setOnLoadMoreListener { mRecyclerView?.onLoadMore() }
         mSmartRefreshLayout?.autoRefresh()

@@ -46,7 +46,7 @@ class BindFragment2Plugin : BindBasePlugin {
 
     private fun getFragment(obj: Any, viewModel: ViewModel?, bindFragmentAnn: BindFragment2, viewPager: ViewPager2, position: Int): BindBaseFragment {
         val baseFragment: BindBaseFragment =
-            bindFragmentAnn.fragment.java.newInstance() as BindBaseFragment
+            bindFragmentAnn.fragment.java.getDeclaredConstructor().newInstance() as BindBaseFragment
         if (obj is Bind) {
             val bundle = obj.bindData(position)
             if (bundle != null) {

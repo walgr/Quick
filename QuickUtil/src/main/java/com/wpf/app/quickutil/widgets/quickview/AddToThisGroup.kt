@@ -1,4 +1,4 @@
-package com.wpf.app.quick.widgets.quickview
+package com.wpf.app.quickutil.widgets.quickview
 
 import android.content.Context
 import android.util.AttributeSet
@@ -8,19 +8,13 @@ open class AddToThisGroup @JvmOverloads constructor(
     mContext: Context,
     attributeSet: AttributeSet? = null,
     defStyleAttr: Int = 0,
-) : Only1Child(
-    mContext, attributeSet, defStyleAttr
-) {
-
-    private fun addTToThis() {
-        if (isInEditMode) {
-            layoutParams = getChildAt(0).layoutParams
-        }
-    }
+) : Only1Child(mContext, attributeSet, defStyleAttr) {
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         val it = getChildAt(0)
-        addTToThis()
+        if (isInEditMode) {
+            layoutParams = getChildAt(0).layoutParams
+        }
         it.measure(widthMeasureSpec, heightMeasureSpec)
         val viewMeasureWidth = it.measuredWidth
         val viewMeasureHeight = it.measuredHeight

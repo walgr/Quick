@@ -1,14 +1,12 @@
 package com.wpf.app.quick.helper.attribute
 
 import android.content.Context
-import android.graphics.Color
 import android.util.AttributeSet
 import android.view.ViewGroup
-import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import com.wpf.app.quick.R
-import com.wpf.app.quick.helper.attribute.base.AutoGetAttributeHelper
+import com.wpf.app.quickutil.helper.attribute.AutoGetAttributeHelper
 
 /**
  * Created by 王朋飞 on 2022/5/7.

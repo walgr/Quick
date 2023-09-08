@@ -47,10 +47,10 @@ class BindData2ViewPlugin : BindBasePlugin {
                     bindBaseHelper = it.get(getRealObj(obj, viewModel)) as? BindD2VHHelper<RecyclerView.ViewHolder, View, Any>
                 }
             } catch (ignore: Exception) {
-                bindBaseHelper = helper.newInstance()
+                bindBaseHelper = helper.getDeclaredConstructor().newInstance()
             }
             if (bindBaseHelper == null) {
-                bindBaseHelper = helper.newInstance()
+                bindBaseHelper = helper.getDeclaredConstructor().newInstance()
             }
             if (value is RunOnHolderWithSelf<*, *>) {
                 bindBaseHelper?.initView(viewParent as? RecyclerView.ViewHolder,

@@ -26,7 +26,7 @@ interface QuickBindI {
 
     fun getRegisterPlugins(): MutableMap<KClass<out Annotation>, BasePlugin>?
 
-    fun getBindPlugin(): MutableMap<KClass<out Annotation>, BasePlugin>?
+    fun getBindPlugin(): MutableMap<KClass<out Annotation>, BasePlugin>
 
     fun <T : BasePlugin> registerPlugin(ann: KClass<out Annotation>, plugin: T)
 
@@ -39,4 +39,6 @@ interface QuickBindI {
         viewModel: ViewModel?,
         plugins: MutableMap<KClass<out Annotation>, BasePlugin>
     )
+
+    fun getBindSpFileName(): String?
 }

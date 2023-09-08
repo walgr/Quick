@@ -71,7 +71,7 @@ class FragmentStateAdapter : FragmentStateAdapter, ViewPagerSize2 {
         position: Int
     ): BindBaseFragment {
         val baseFragment: BindBaseFragment =
-            bindFragmentAnn.fragment.java.newInstance() as BindBaseFragment
+            bindFragmentAnn.fragment.java.getDeclaredConstructor().newInstance() as BindBaseFragment
         if (obj is Bind) {
             val bundle = obj.bindData(position)
             if (bundle != null) {

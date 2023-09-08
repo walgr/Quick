@@ -1,10 +1,10 @@
-package com.wpf.app.quick.widgets.quickview.helper
+package com.wpf.app.quickbind.quickview.helper
 
 import android.app.Activity
 import android.content.Context
 import android.util.AttributeSet
 import com.google.android.material.button.MaterialButton
-import com.wpf.app.quick.widgets.quickview.QuickBindView
+import com.wpf.app.quickbind.quickview.QuickBindView
 import com.wpf.app.quickutil.bind.runOnContext
 import com.wpf.app.quickutil.quickStartActivity
 

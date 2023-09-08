@@ -1,9 +1,9 @@
-package com.wpf.app.quick.widgets.quickview.helper
+package com.wpf.app.quickutil.widgets.quickview.helper
 
 import android.content.Context
 import android.util.AttributeSet
-import com.wpf.app.quick.R
-import com.wpf.app.quick.helper.attribute.base.AutoGetAttributeHelper
+import com.wpf.app.quickutil.R
+import com.wpf.app.quickutil.helper.attribute.AutoGetAttributeHelper
 
 /**
  * Created by 王朋飞 on 2022/9/23.

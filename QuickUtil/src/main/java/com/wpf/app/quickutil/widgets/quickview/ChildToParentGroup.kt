@@ -1,4 +1,4 @@
-package com.wpf.app.quick.widgets.quickview
+package com.wpf.app.quickutil.widgets.quickview
 
 import android.content.Context
 import android.util.AttributeSet
@@ -10,9 +10,10 @@ import android.widget.RelativeLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 
 /**
- * 最多1个子View
+ * 子View添加到此View的父View上
+ * 可以在此类中做逻辑给子View附加逻辑
  */
-open class AddToParentGroup @JvmOverloads constructor(
+open class ChildToParentGroup @JvmOverloads constructor(
     mContext: Context,
     attributeSet: AttributeSet? = null,
     defStyleAttr: Int = 0,
@@ -62,7 +63,7 @@ open class AddToParentGroup @JvmOverloads constructor(
             return
         }
         if (isInEditMode) {
-            addTToParent()
+            addTToThis()
         } else {
             addTToParent()
         }
