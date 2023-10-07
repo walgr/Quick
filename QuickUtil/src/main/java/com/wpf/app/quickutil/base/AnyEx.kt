@@ -1,5 +1,7 @@
 package com.wpf.app.quickutil.base
 
-fun <T> Any?.asTo(): T? {
-    return this as? T?
+inline fun <reified T> Any?.asTo(): T? {
+    if (this == null) return null
+    if (this !is T) return null
+    return this
 }
