@@ -14,7 +14,7 @@ buildscript {
 
         incap = '0.3'
 
-        composeVersion = '1.5.1'
+        composeVersion = '1.5.3'
 
         ext.deps = [
                 androidx        : [
