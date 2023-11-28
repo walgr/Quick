@@ -31,17 +31,18 @@ buildscript {
                         'runtime'              : 'com.google.android:android:4.1.1.4',
                 ],
                 'quickbind'     : [
-                        'base'        : "com.wpf.app.quick:Quick:${release}",
-                        'bind'        : "com.wpf.app.quick:QuickBind:${release}",
-                        'annotations' : "com.wpf.app.quick:Quick-annotations:${release}",
-                        'runtime'     : "com.wpf.app.quick:Quick-runtime:${release}",
-                        'compiler'    : "com.wpf.app.quick:Quick-compiler:${release}",
-                        'util'        : "com.wpf.app.quick:QuickUtil:${release}",
-                        'network'     : "com.wpf.app.quick:QuickNetwork:${release}",
-                        'recyclerview': "com.wpf.app.quick:QuickRecyclerView:${release}",
-                        'dialog'      : "com.wpf.app.quick:QuickDialog:${release}",
-                        'compiler_ksp': "com.wpf.app.quick:Quick-compiler-ksp:${release}",
-                        'plugin'      : "com.wpf.app.quick:Quick-gradle-plugin:0.8.5"
+                        'base'         : "com.wpf.app.quick:Quick:${release}",
+                        'bind'         : "com.wpf.app.quick:QuickBind:${release}",
+                        'annotations'  : "com.wpf.app.quick:Quick-annotations:${release}",
+                        'runtime'      : "com.wpf.app.quick:Quick-runtime:${release}",
+                        'compiler'     : "com.wpf.app.quick:Quick-compiler:${release}",
+                        'util'         : "com.wpf.app.quick:QuickUtil:${release}",
+                        'network'      : "com.wpf.app.quick:QuickNetwork:${release}",
+                        'recyclerview' : "com.wpf.app.quick:QuickRecyclerView:${release}",
+                        'dialog'       : "com.wpf.app.quick:QuickDialog:${release}",
+                        'compiler_ksp' : "com.wpf.app.quick:Quick-compiler-ksp:${release}",
+                        'plugin'       : "com.wpf.app.quick:Quick-gradle-plugin:0.8.5",
+                        'pluginJetPack': "com.github.walgr.Quick:Quick-gradle-plugin:0.8.5",
                 ],
                 gradlePlugin    : "com.android.tools.build:gradle:${gradleVersion}",
                 'kotlin'        : [
@@ -83,7 +84,7 @@ buildscript {
 
     dependencies {
         if (!IS_REMOTE.toBoolean()) {
-            classpath deps.quickbind.plugin
+            classpath deps.quickbind.pluginJetPack
         }
     }
 }

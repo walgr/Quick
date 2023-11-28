@@ -20,31 +20,7 @@ open class AttributeHelper constructor(
         context.obtainStyledAttributes(attributeSet, styleableId, 0, 0)
     }
 
-    fun <T : Any> getAttribute(@StyleableRes index: Int, defValue: T): T {
-        when (defValue) {
-            is Int -> {
-                return typeArray.getInt(index, defValue) as T
-            }
-            is Float -> {
-                return typeArray.getFloat(index, defValue) as T
-            }
-            is String -> {
-                return (typeArray.getString(index) ?: defValue) as T
-            }
-            is Boolean -> {
-                return typeArray.getBoolean(index, defValue) as T
-            }
-            is ColorInt -> {
-                return typeArray.getColor(index, defValue as Int) as T
-            }
-            is Float -> {
-                return typeArray.getDimension(index, defValue) as T
-            }
-        }
-        return defValue
-    }
-
-    public fun recycle() {
+    fun recycle() {
         typeArray.recycle()
     }
 }

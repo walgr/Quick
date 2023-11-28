@@ -2,9 +2,7 @@ package com.wpf.app.quickrecyclerview.helper
 
 import com.wpf.app.quickrecyclerview.listeners.RefreshView
 import com.wpf.app.quickutil.LogUtil
-import com.wpf.app.quickutil.widgets.emptyview.BaseEmptyView
-import com.wpf.app.quickutil.widgets.emptyview.NetError
-import com.wpf.app.quickutil.widgets.emptyview.NoError
+import com.wpf.app.quickutil.widgets.emptyview.*
 
 object EmptyHelper {
 
@@ -13,19 +11,22 @@ object EmptyHelper {
 
             override fun onRefresh() {
                 super.onRefresh()
+                LogUtil.e("空数据页", "下拉刷新")
+                emptyView.changeState(Loading)
             }
 
             override fun onLoadMore() {
                 super.onLoadMore()
+                LogUtil.e("空数据页", "上拉加载")
             }
 
             override fun onRefreshEnd(data: List<*>?) {
                 super.onRefreshEnd(data)
                 LogUtil.e("空数据页", "刷新结束")
-                if (data?.isEmpty() != true) {
-                    emptyView.changeState(NetError())
+                if (data.isNullOrEmpty()) {
+                    emptyView.changeState(EmptyDataError)
                 } else {
-                    emptyView.changeState(NoError())
+                    emptyView.changeState(NoError)
                 }
             }
 

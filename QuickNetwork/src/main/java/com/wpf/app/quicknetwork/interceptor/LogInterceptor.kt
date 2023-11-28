@@ -8,6 +8,7 @@ import okhttp3.*
 import okhttp3.ResponseBody.Companion.toResponseBody
 import java.io.IOException
 
+
 /**
  * Created by 王朋飞 on 2021/9/13.
  */
@@ -18,20 +19,31 @@ class LogInterceptor(context: Context) : Interceptor {
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         val startTime = System.currentTimeMillis()
-        val request: Request = chain.request()
-        val response: Response = chain.proceed(chain.request())
+        val request = chain.request()
+        val response = chain.proceed(chain.request())
         val mediaType = response.body!!.contentType()
         val content = response.body!!.string()
         val endTime = System.currentTimeMillis()
         val duration = endTime - startTime
         e(TAG, "\n")
         e(TAG, "----------Start----------------")
-//        e(TAG, "| $request")
         //            LogUtil.e(TAG, "| " + request.toString());
-        e(TAG, "| Request:{method=" + request.method + ", url=" + request.url + ", version=" + versionName + "}")
+        e(TAG, (("| Request:{method=" + request.method) + ", url=" + request.url) + ", version=" + versionName + "}")
         val method = request.method
+        //            String headers = request.headers().toString();
+//            headers = headers.replaceAll("\n", " ");
+//            if (headers.length() > splitSize) {
+//                int i = 0;
+//                for (String string : splitString(headers)) {
+//                    LogUtil.e(TAG, (i++ == 0 ? "| Header:{" : "| ") + string);
+//                }
+//                System.out.println();
+//                LogUtil.e(TAG, "}");
+//            } else {
+//                LogUtil.e(TAG, "| Header:{" + headers + "}");
+//            }
         if ("POST" == method) {
-            val sb = StringBuilder()
+            val sb = java.lang.StringBuilder()
             if (request.body is FormBody) {
                 val body = request.body as FormBody?
                 for (i in 0 until body!!.size) {
@@ -42,7 +54,16 @@ class LogInterceptor(context: Context) : Interceptor {
             }
         }
         val result = decodeUnicode(content)
-        e(TAG, "| Response:$result")
+        if (result.length > splitSize) {
+            var i = 0
+            for (string in splitString(result)) {
+                e(TAG, (if (i++ == 0) "| Response:" else "| ") + string)
+            }
+            println()
+        } else {
+            e(TAG, "| Response:$result")
+        }
+        //            LogUtil.loge("| Response:" + result);
         e(TAG, "----------End:" + duration + "ms----------")
         return response.newBuilder()
             .body(content.toResponseBody(mediaType))
@@ -106,6 +127,21 @@ class LogInterceptor(context: Context) : Interceptor {
     private fun unicodeToString(unicode: String): String {
         val letter = unicode.replace("\\u", "").toInt(16).toChar() // 16进制parse整形字符串。
         return Character.valueOf(letter).toString()
+    }
+
+    /**
+     * 把字符串分割成最多2048长度的数组
+     */
+    private val splitSize: Int = 2048
+    private fun splitString(str: String): List<String> {
+        var strTemp = str
+        val result: MutableList<String> = ArrayList()
+        while (strTemp.length > splitSize) {
+            result.add(strTemp.substring(0, splitSize))
+            strTemp = strTemp.substring(splitSize)
+        }
+        result.add(strTemp)
+        return result
     }
 
     companion object {

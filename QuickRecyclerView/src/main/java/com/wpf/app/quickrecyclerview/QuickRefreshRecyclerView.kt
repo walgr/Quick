@@ -2,6 +2,7 @@ package com.wpf.app.quickrecyclerview
 
 import android.content.Context
 import android.util.AttributeSet
+import com.wpf.app.quicknetwork.utils.RequestCallback
 import com.wpf.app.quickrecyclerview.data.QuickItemData
 import com.wpf.app.quickrecyclerview.data.RequestData
 import com.wpf.app.quickrecyclerview.listeners.RefreshView
@@ -27,25 +28,25 @@ open class QuickRefreshRecyclerView @JvmOverloads constructor(
     var requestData = RequestData(0)
 
     @JvmField
-    val refreshCallback = object : CallbackList<QuickItemData> {
-        override fun backData(data: List<QuickItemData>?) {
+    val refreshCallback = object : RequestCallback<QuickItemData> {
+        override fun backData(data: List<QuickItemData>?, hasMore: Boolean) {
             refreshView?.onRefreshEnd(data)
             getQuickAdapter().mDataList?.clear()
             getQuickAdapter().appendList(data)
             requestData.loadDataSize(data?.size ?: 0)
-            if (mDataChangeListener?.refreshFinish() != true) {
+            if (mDataChangeListener?.refreshFinish(hasMore) != true) {
                 adapter.notifyDataSetChanged()
             }
         }
     }
 
     @JvmField
-    val loadMoreCallback = object : CallbackList<QuickItemData> {
-        override fun backData(data: List<QuickItemData>?) {
+    val loadMoreCallback = object : RequestCallback<QuickItemData> {
+        override fun backData(data: List<QuickItemData>?, hasMore: Boolean) {
             refreshView?.onLoadMoreEnd(data)
             appendList(data)
             requestData.loadDataSize(data?.size ?: 0)
-            if (mDataChangeListener?.loadMoreFinish() != true) {
+            if (mDataChangeListener?.loadMoreFinish(hasMore) != true) {
                 adapter.notifyItemRangeInserted(
                     size() - (data?.size ?: 0), (data?.size ?: 0)
                 )
@@ -53,7 +54,7 @@ open class QuickRefreshRecyclerView @JvmOverloads constructor(
         }
     }
 
-    private var mDataChangeListener: Request2ListWithView<out RequestData, out QuickItemData, QuickRefreshRecyclerView>? =
+    private var mDataChangeListener: Request2ListWithView<out RequestData, out QuickItemData, out RefreshView>? =
         null
 
     fun <Request : RequestData, Data : QuickItemData> setDataChangeListener(dataChangeListener: Request2ListWithView<Request, Data, QuickRefreshRecyclerView>) {
@@ -66,12 +67,14 @@ open class QuickRefreshRecyclerView @JvmOverloads constructor(
     }
 
     override fun onRefresh() {
+        refreshView?.onRefresh()
         requestData.refresh()
         (mDataChangeListener as? Request2ListWithView<RequestData, QuickItemData, QuickRefreshRecyclerView>)
             ?.requestAndCallback(this, requestData, refreshCallback)
     }
 
     override fun onLoadMore() {
+        refreshView?.onLoadMore()
         requestData.loadMore()
         (mDataChangeListener as? Request2ListWithView<RequestData, QuickItemData, QuickRefreshRecyclerView>)
             ?.requestAndCallback(this, requestData, loadMoreCallback)

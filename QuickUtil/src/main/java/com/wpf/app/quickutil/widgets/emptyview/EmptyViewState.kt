@@ -8,22 +8,19 @@ interface EmptyViewStateI {
 }
 
 open class EmptyViewState : EmptyViewStateI {
-    override var curState: EmptyViewState = NoError.curState
+    override var curState: EmptyViewState = NoError
 }
 
 //正常状态
-open class NoError : EmptyViewState() {
-
-    companion object {
-        val curState: EmptyViewState = NoError()
-    }
-}
+object NoError : EmptyViewState()
 
 //加载状态
-open class Loading : EmptyViewState()
+object Loading : EmptyViewState()
 
 //成功状态
-open class Success : EmptyViewState()
+object Success : EmptyViewState()
+
+object EmptyDataError : EmptyViewState()
 
 //网络异常
 open class NetError(open val errorCode: Int = 0) : EmptyViewState()

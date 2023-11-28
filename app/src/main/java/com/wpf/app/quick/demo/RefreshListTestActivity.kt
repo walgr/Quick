@@ -6,12 +6,13 @@ import com.wpf.app.quick.activity.QuickActivity
 import com.wpf.app.quick.annotations.BindData2View
 import com.wpf.app.quick.annotations.BindView
 import com.wpf.app.quick.demo.http.request
+import com.wpf.app.quick.demo.model.ListRequest
+import com.wpf.app.quick.demo.wanandroid.model.Article
 import com.wpf.app.quick.demo.widgets.emptyview.TestEmptyView
 import com.wpf.app.quickrecyclerview.QuickRefreshRecyclerView
-import com.wpf.app.quickrecyclerview.data.RequestData
 import com.wpf.app.quickrecyclerview.helper.EmptyHelper
 import com.wpf.app.quickrecyclerview.helper.Request2RefreshView
-import com.wpf.app.quickrecyclerview.listeners.request2List
+import com.wpf.app.quickrecyclerview.listeners.requestData2List
 import com.wpf.app.quickutil.LogUtil
 
 /**
@@ -32,19 +33,23 @@ class RefreshListTestActivity : QuickActivity(R.layout.activity_refresh_list, ti
 
     @SuppressLint("NonConstantResourceId")
     @BindData2View(id = R.id.list, helper = Request2RefreshView::class)
-    val request2List = request2List { requestData, callback ->
+    val request2List = requestData2List<ListRequest, Article> { requestData, callback ->
         request(this) {
-            首页文章列表(requestData.page)
+            首页文章列表(requestData.page, requestData.pageSize)
         }.success {
-             callback.backData(it?.data?.datas)
+            callback.backData(it?.data?.datas, !it?.data?.datas.isNullOrEmpty())
+        }.fail {
+            callback.backData(null, false)
         }
     }.refreshFinish {
         LogUtil.e("下拉刷新请求结束")
         mSmartRefreshLayout?.finishRefresh()
+        mSmartRefreshLayout?.setEnableLoadMore(it)
         false
     }.loadMoreFinish {
         LogUtil.e("上拉加载请求结束")
         mSmartRefreshLayout?.finishLoadMore()
+        mSmartRefreshLayout?.setEnableLoadMore(it)
         false
     }
 
@@ -53,9 +58,5 @@ class RefreshListTestActivity : QuickActivity(R.layout.activity_refresh_list, ti
         mSmartRefreshLayout?.setOnRefreshListener { mRecyclerView?.onRefresh() }
         mSmartRefreshLayout?.setOnLoadMoreListener { mRecyclerView?.onLoadMore() }
         mSmartRefreshLayout?.autoRefresh()
-
-        mSmartRefreshLayout?.postDelayed({
-            request2List.manualRequest(request2List.requestData!!.loadMore())
-        }, 3000)
     }
 }

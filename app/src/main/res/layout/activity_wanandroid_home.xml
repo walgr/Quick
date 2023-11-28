@@ -5,9 +5,10 @@
     <data>
         <import type="java.util.Arrays"/>
         <import type="com.wpf.app.quick.demo.http.TestApiClass"/>
+        <import type="com.wpf.app.quick.demo.wanandroid.model.WanRequestClass"/>
         <variable
             name="requestData"
-            type="com.wpf.app.quickrecyclerview.data.RequestData" />
+            type="com.wpf.app.quick.demo.wanandroid.model.WanRequest" />
     </data>
 
     <LinearLayout
@@ -21,8 +22,9 @@
             android:layout_height="match_parent"
             app:apiClass="@{TestApiClass.INSTANCE.KClass}"
             app:methodName="@{TestApiClass.INSTANCE.首页文章列表()}"
-            app:autoRefresh="@{true}"
-            app:requestData="@{requestData}">
+            app:requestData="@{requestData}"
+            app:requestDataType="@{WanRequestClass.INSTANCE.KClass}"
+            app:autoRefresh="@{true}">
 
             <com.scwang.smart.refresh.header.ClassicsHeader
                 android:layout_width="match_parent"

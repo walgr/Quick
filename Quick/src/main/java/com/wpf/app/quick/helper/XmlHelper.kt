@@ -30,6 +30,7 @@ import com.wpf.app.quickrecyclerview.listeners.Request2ListWithView
 import com.wpf.app.quickrecyclerview.listeners.requestData2List
 import com.wpf.app.quickutil.base.asTo
 import com.wpf.app.quickutil.quickStartActivity
+import com.wpf.app.quickutil.utils.getFieldWithSuper
 import com.wpf.app.quickutil.widgets.getChild
 import kotlin.reflect.KClass
 import kotlin.reflect.full.memberFunctions
@@ -40,7 +41,7 @@ import kotlin.reflect.full.memberFunctions
  */
 
 @BindingAdapter("clickGoto")
-fun <T: Activity> gotoActivity(view: View, gotoClass: KClass<T>) {
+fun <T : Activity> gotoActivity(view: View, gotoClass: KClass<T>) {
     view.setOnClickListener {
         view.context.quickStartActivity(gotoClass.java)
     }
@@ -84,7 +85,7 @@ fun onViewCheck(view: View, onChange: CompoundButton.OnCheckedChangeListener?) {
 }
 
 @BindingAdapter(value = ["apiClass", "methodName", "parameters"], requireAll = false)
-fun <T: Any> View.request2View(apiCls: KClass<T>, methodName: String, parameters: Map<String, Any>? = null) {
+fun <T : Any> View.request2View(apiCls: KClass<T>, methodName: String, parameters: Map<String, Any>? = null) {
     if (!apiCls.java.isInterface) return
     val method = apiCls.memberFunctions.find {
         it.name == methodName
@@ -120,7 +121,7 @@ fun <T: Any> View.request2View(apiCls: KClass<T>, methodName: String, parameters
 }
 
 @BindingAdapter(
-    value = ["apiClass", "methodName", "autoRefresh", "requestData", "otherArgument"],
+    value = ["apiClass", "methodName", "autoRefresh", "requestData", "requestDataType", "otherArgument"],
     requireAll = false
 )
 fun <T : Any, R : RequestData> ViewGroup.request2List(
@@ -128,13 +129,14 @@ fun <T : Any, R : RequestData> ViewGroup.request2List(
     methodName: String,
     autoRefresh: Boolean = true,
     requestData: R?,
+    requestDataType: KClass<R>? = null,
     otherArgument: List<Pair<String, Any>>? = null
 ) {
     if (!apiCls.java.isInterface) return
     val refreshView: RefreshView = getChild<RefreshView> {
         it is RefreshView
     } ?: return
-    val requestDataNew = requestData ?: RequestData()
+    val requestDataNew = requestData ?: requestDataType?.java?.getDeclaredConstructor()?.newInstance() ?: RequestData()
     bindRefreshView(false)
     val method = apiCls.memberFunctions.find {
         it.name == methodName
@@ -145,7 +147,7 @@ fun <T : Any, R : RequestData> ViewGroup.request2List(
         !it.isNullOrEmpty()
     }
     val methodFields = methodParametersName.map { parameterName ->
-        val findField = requestDataNew.javaClass.declaredFields.find {
+        val findField = requestDataNew.javaClass.getFieldWithSuper().find {
             it.name == parameterName
         }
         findField?.isAccessible = true
@@ -194,10 +196,8 @@ fun <T : Any, R : RequestData> ViewGroup.request2List(
         refreshView.requestData = requestDataNew
     }
     BindData2ViewHelper.bind(refreshView, request2List, Request2RefreshView)
-    if (autoRefresh && requestData == null) {
+    if (autoRefresh) {
         autoRefresh()
-    }
-    if (requestData != null) {
         request2List.manualRequest()
     }
 }

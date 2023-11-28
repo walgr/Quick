@@ -14,7 +14,7 @@ abstract class BaseEmptyView @JvmOverloads constructor(
     defStyleAttr: Int = 0,
     open val layoutId: Int = 0,
     open val layoutView: RunOnContextWithSelf<ViewGroup, View>? = null,
-    override var curState: EmptyViewState = Loading()
+    override var curState: EmptyViewState = Loading
 ) : LinearLayout(mContext, attrs, defStyleAttr), EmptyViewStateI {
 
     init {

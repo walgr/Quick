@@ -13,6 +13,6 @@ class WanAndroidHomeActivity :
 
     override fun initView(viewDataBinding: ActivityWanandroidHomeBinding?) {
         super.initView(viewDataBinding)
-        viewDataBinding?.list?.addItemDecoration(StickyItemDecoration(QuickStickyView()))
+//        viewDataBinding?.list?.addItemDecoration(StickyItemDecoration(QuickStickyView()))
     }
 }

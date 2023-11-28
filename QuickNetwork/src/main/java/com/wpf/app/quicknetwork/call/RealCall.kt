@@ -46,6 +46,7 @@ open class RealCall<SResponse, FResponse>(private val rawCall: Call<SResponse>, 
                             request.funFail.invoke(fail)
                         }
                     }
+
                     is Response<*> -> {
                         var code = ""
                         try {
@@ -53,19 +54,29 @@ open class RealCall<SResponse, FResponse>(private val rawCall: Call<SResponse>, 
                             if (request.isSuccess(body)) {
                                 request.funSuccess.invoke(body)
                             } else {
-                                if (body is BaseResponseI<*, *> && fail is BaseResponseI<*, *>) {
-                                    code = body.codeI ?: ""
-                                    if (fail.dataI != null) {
-                                        body.dataI = Gson().fromJson(
-                                            Gson().toJson(body.dataI),
-                                            (fail.dataI!!.javaClass as Type)
-                                        )
+                                if (fail is BaseResponseI<*, *>) {
+                                    if (body is BaseResponseI<*, *>) {
+                                        code = body.codeI ?: ""
+                                        if (fail.dataI != null) {
+                                            body.dataI = Gson().fromJson(
+                                                Gson().toJson(body.dataI),
+                                                (fail.dataI!!.javaClass as Type)
+                                            )
+                                        }
+                                        request.funFail.invoke((fail as? BaseResponseI<Any, Any>)?.apply {
+                                            codeI = body.codeI
+                                            errorI = body.errorI
+                                            dataI = body.dataI
+                                        } as? FResponse)
+                                    } else {
+                                        request.funFail.invoke((fail as? BaseResponseI<Any, Any>)?.apply {
+                                            codeI = result.code().toString()
+                                            errorI = result.message()
+                                            dataI = null
+                                        } as? FResponse)
                                     }
-                                    request.funFail.invoke((fail as? BaseResponseI<Any, Any>)?.apply {
-                                        codeI = body.codeI
-                                        errorI = body.errorI
-                                        dataI = body.dataI
-                                    } as? FResponse)
+                                } else {
+                                    request.funFail.invoke(fail)
                                 }
                             }
                         } catch (e: Exception) {
@@ -85,6 +96,7 @@ open class RealCall<SResponse, FResponse>(private val rawCall: Call<SResponse>, 
                         }
                     }
                 }
+
                 request.funAfter.invoke()
             }
         }
