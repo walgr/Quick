@@ -12,67 +12,53 @@ import androidx.lifecycle.ViewModelProvider
 import com.wpf.app.quickrecyclerview.constant.BRConstant
 import com.wpf.app.quickutil.base.ViewModelEx
 import com.wpf.app.quick.activity.viewmodel.QuickVBModel
+import com.wpf.app.quickbind.QuickBind
 import com.wpf.app.quickbind.QuickBind.bind
 
 /**
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-abstract class QuickViewBindingFragment<VM : QuickVBModel<VB>, VB : ViewDataBinding> @JvmOverloads constructor(
+abstract class QuickVBFragment<VM : QuickVBModel<VB>, VB : ViewDataBinding> @JvmOverloads constructor(
     @LayoutRes override val layoutId: Int = 0,
     override val titleName: String = ""
 ) : QuickFragment(layoutId, titleName = titleName) {
 
-    protected var mViewModel: VM? = null
-
-    override fun initView(view: View?) {}
-
-    open fun setViewModel(viewModel: VM) {
-        mViewModel = viewModel
-        setViewBinding()
-    }
+    private var mViewModel: VM? = null
+        set(value) {
+            field = value
+            if (value != null) {
+                setViewBinding()
+            }
+        }
 
     private var viewBinding: VB? = null
 
-    open fun getViewBinding(): VB? {
-        return viewBinding
-    }
-
-    open fun setViewBinding() {
-        if (view != null) {
-            viewBinding = DataBindingUtil.getBinding(requireView())
-            if (viewBinding != null) {
-                viewBinding!!.lifecycleOwner = this
-                viewBinding!!.setVariable(
-                    BRConstant.viewModel,
-                    mViewModel
-                )
-                viewBinding!!.executePendingBindings()
-            }
-            mViewModel?.mViewBinding = viewBinding
-        }
+    private fun setViewBinding() {
+        viewBinding = DataBindingUtil.bind(requireView())
+        viewBinding?.lifecycleOwner = this
+        viewBinding?.setVariable(BRConstant.viewModel, mViewModel)
+        setBindingVariable(viewBinding)
+        viewBinding?.executePendingBindings()
+        mViewModel?.mViewBinding = viewBinding
     }
 
     @CallSuper
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initViewModel()
         super.onViewCreated(view, savedInstanceState)
-        initView(getViewBinding())
+        initView(viewBinding)
     }
 
     open fun initViewModel() {
         val viewModelCls: Class<VM>? = ViewModelEx.get0Clazz(this)
-        if (viewModelCls != null && context != null) {
-            setViewModel(
-                ViewModelProvider(
-                    this,
-                    ViewModelProvider.AndroidViewModelFactory(requireContext().applicationContext as Application)
-                )[viewModelCls]
-            )
+        if (viewModelCls != null && viewModelCls != QuickVBModel::class.java) {
+            mViewModel = ViewModelProvider(
+                this,
+                ViewModelProvider.AndroidViewModelFactory(requireContext().applicationContext as Application)
+            )[viewModelCls]
             bind(this, mViewModel)
-            if (mViewModel != null) {
-                mViewModel!!.onBindingCreated(viewBinding!!)
-            }
+            mViewModel?.onBindingCreated(viewBinding)
         } else {
             setViewBinding()
         }
@@ -109,5 +95,10 @@ abstract class QuickViewBindingFragment<VM : QuickVBModel<VB>, VB : ViewDataBind
         mViewModel = null
     }
 
+    override fun initView(view: View?) {}
     abstract fun initView(viewDataBinding: VB?)
+
+    open fun setBindingVariable(view: VB?) {
+
+    }
 }

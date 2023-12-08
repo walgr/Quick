@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Parcelable
+import androidx.fragment.app.Fragment
 import java.io.Serializable
 import java.util.ArrayList
 
@@ -59,4 +60,15 @@ fun <T : Activity> Activity.quickStartActivity(
         }
     }
     startActivity(intent)
+}
+
+fun <T : Activity> Fragment.quickStartActivity(activityCls: Class<T>) {
+    quickStartActivity(activityCls, data = null)
+}
+
+fun <T : Activity> Fragment.quickStartActivity(
+    activityCls: Class<T>,
+    data: Map<String, Any?>?
+) {
+    activity?.quickStartActivity(activityCls, data)
 }

@@ -18,15 +18,13 @@ import com.wpf.app.quick.annotations.SaveId
 import java.io.File
 import kotlin.reflect.KClass
 
-class BindViewProcessor(environment: SymbolProcessorEnvironment) :
-    BaseProcessor(environment) {
+class BindViewProcessor(environment: SymbolProcessorEnvironment) : IdProcessor(environment) {
 
     companion object {
         val allowClass =
             arrayOf(BindView::class, BindData2View::class, SaveId::class, GroupView::class)
     }
 
-    private val outFileStartName = "Quick_"
     private val outFileEndName = "_ViewBinding_Ksp"
     private val bindData2ViewEndName = "BindViewId"
 
@@ -41,14 +39,12 @@ class BindViewProcessor(environment: SymbolProcessorEnvironment) :
         propertyName: String?
     ) {
         super.visitPropertyDeclaration(property, data, packageName, className, propertyName)
-        val fileStr =
-            if (property.containingFile == null) "" else File(property.containingFile!!.filePath).readText()
         //过滤非R2的
         if (!getAnnotationCode(
                 fileStr,
                 property.annotations.find {
                     allowClass.map { cls -> cls.simpleName }.contains(it.shortName.asString())
-                }!!.shortName.asString(),
+                }?.shortName?.asString() ?: "",
                 propertyName!!
             ).contains("R2")
         ) return
@@ -84,7 +80,7 @@ class BindViewProcessor(environment: SymbolProcessorEnvironment) :
                     .build()
             )
             val annotationArgumentCode =
-                getAnnotationArgumentIdCode(fileStr, BindData2View::class, BindData2View::id.name)
+                getAnnotationArgumentIdCode(fileStr, BindData2View::class).first()
             findViewFunBuilder?.addStatement("this.${propertyName + bindData2ViewEndName} = R.id.${annotationArgumentCode}")
         }
         property.annotations.find {
@@ -115,59 +111,10 @@ class BindViewProcessor(environment: SymbolProcessorEnvironment) :
         property.annotations.find {
             it.shortName.asString() == BindView::class.simpleName
         }?.let {
-            findViewFunBuilder?.addStatement("target.${propertyName} = source.findViewById(R.id.${propertyName})")
+            val annotationArgumentCode =
+                getAnnotationArgumentIdCode(fileStr, BindView::class).first()
+            findViewFunBuilder?.addStatement("target.${propertyName} = source.findViewById(R.id.${annotationArgumentCode})")
         }
-    }
-
-    private fun getAnnotationArgumentIdCode(
-        fileStr: String?,
-        annotation: KClass<out Annotation>,
-        argumentName: String
-    ): String {
-        return delR(
-            getAnnotationArgumentIdCode(
-                getAnnotationCode(
-                    fileStr,
-                    annotation.simpleName!!,
-                    propertyName!!
-                ), argumentName
-            )
-        )
-    }
-
-    /**
-     * 获取代码中注解内的代码内容
-     */
-    private fun getAnnotationCode(
-        fileStr: String?,
-        annotationName: String,
-        propertyName: String
-    ): String {
-        if (fileStr.isNullOrEmpty()) return ""
-        return fileStr.substringAfterAndBefore("@$annotationName", propertyName)
-            .substringAfterAndBefore("(", ")")
-    }
-
-    /**
-     * 获取注解内参数的代码内容
-     */
-    private fun getAnnotationArgumentIdCode(
-        annotationCode: String?,
-        argumentName: String
-    ): String? {
-        if (annotationCode.isNullOrEmpty()) return ""
-        return annotationCode.split(",").find {
-            it.contains(argumentName)
-        }?.substringAfter("=")?.trim()
-    }
-
-    private fun delR(argumentsCode: String?): String {
-        if (argumentsCode.isNullOrEmpty()) return ""
-        return argumentsCode.substringAfterLast(".")
-    }
-
-    private fun String.substringAfterAndBefore(after: String, before: String): String {
-        return substringAfter(after).substringBefore(before)
     }
 
     override fun visitEnd() {

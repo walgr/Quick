@@ -31,6 +31,7 @@ class SelectItemView @JvmOverloads constructor(
     @BindData2View(id = R.id.title, helper = Text2TextView::class)
     var title = runOnContext { "Data2View$position" }
 
+
     @BindData2View(helper = ItemClick::class)
     private val itemClick = itemClick {
         isSelect = !isSelect

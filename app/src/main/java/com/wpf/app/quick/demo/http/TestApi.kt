@@ -12,7 +12,7 @@ import retrofit2.http.Query
 interface TestApi {
 
     @GetFun
-    @GET("/article/list/{page}/{1}/json")
+    @GET("/article/list/{page}/json")
     fun 首页文章列表(
         @Path("page") page: Int,
         @Query("page_size") pageSize: Int = 10,

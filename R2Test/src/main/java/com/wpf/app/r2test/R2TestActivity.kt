@@ -17,7 +17,7 @@ class R2TestActivity : QuickActivity(R.layout.test_layout, titleName = "测试R2
     @JvmField
     @SuppressLint("NonConstantResourceId")
     @BindView(R2.id.info)
-    var info: TextView? = null
+    var info1: TextView? = null
 
     @JvmField
     @GroupView(idList = [R2.id.recyclerView, R2.id.info])
@@ -30,6 +30,6 @@ class R2TestActivity : QuickActivity(R.layout.test_layout, titleName = "测试R2
 
     @SuppressLint("SetTextI18n")
     override fun initView() {
-        info?.postDelayed({ mGroupViews?.goneAll() }, 1000)
+        info1?.postDelayed({ mGroupViews?.goneAll() }, 1000)
     }
 }

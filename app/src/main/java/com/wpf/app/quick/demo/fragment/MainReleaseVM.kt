@@ -1,86 +1,67 @@
-package com.wpf.app.quick.demo
+package com.wpf.app.quick.demo.fragment
 
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.view.View
 import android.widget.TextView
-import com.wpf.app.quick.activity.QuickVBActivity
+import com.wpf.app.quick.activity.viewmodel.QuickVBModel
 import com.wpf.app.quick.annotations.BindView
-import com.wpf.app.quick.demo.databinding.ActivityMainBinding
+import com.wpf.app.quick.demo.DialogTestActivity
+import com.wpf.app.quick.demo.IntentDataTestActivity
+import com.wpf.app.quick.demo.R
+import com.wpf.app.quick.demo.RecyclerViewTestActivity
+import com.wpf.app.quick.demo.RefreshListTestActivity
+import com.wpf.app.quick.demo.SelectListTestActivity
+import com.wpf.app.quick.demo.ViewPagerBindFragmentTestActivity
+import com.wpf.app.quick.demo.databinding.FragmentMainReleaseBinding
 import com.wpf.app.quick.demo.model.MyMessage
 import com.wpf.app.quick.demo.model.TestModel
-import com.wpf.app.quick.demo.viewmodel.MainModel
 import com.wpf.app.quick.demo.wanandroid.WanAndroidHomeActivity
 import com.wpf.app.quickbind.annotations.BindSp2View
 import com.wpf.app.quickutil.quickStartActivity
 
-/**
- * Created by 王朋飞 on 2022/6/13.
- */
-class MainActivity : QuickVBActivity<MainModel, ActivityMainBinding>(R.layout.activity_main, titleName = "快捷") {
+class MainReleaseVM: QuickVBModel<FragmentMainReleaseBinding>() {
 
-    @SuppressLint("NonConstantResourceId")
-//    @BindSp2View(bindSp = "绑定的SpKey1", defaultValue = "默认值1")
-    @BindView(R.id.spTextView1)
-    var text1: TextView? = null
-
-    @SuppressLint("NonConstantResourceId")
+    @SuppressLint("NonConstantResourceId", "StaticFieldLeak")
+    @BindSp2View(bindSp = "绑定的SpKey2", defaultValue = "默认值2")
     @BindView(R.id.spTextView2)
     var text2: TextView? = null
+    override fun onBindingCreated(mViewBinding: FragmentMainReleaseBinding?) {
 
-    @SuppressLint("NonConstantResourceId")
-    @BindSp2View(bindSp = "绑定的SpKey3", defaultValue = "默认值3")
-    @BindView(R.id.spTextView3)
-    var text3: TextView? = null
-
-    @SuppressLint("SetTextI18n")
-    override fun initView() {
-        text1?.postDelayed(
-            { text1?.text = System.currentTimeMillis().toString() + "" },
-            1000
-        )
-        text2?.postDelayed(
-            { text2?.text = System.currentTimeMillis().toString() + "" },
-            1000
-        )
-        text3?.postDelayed(
-            { text3?.text = System.currentTimeMillis().toString() + "" },
-            1000
-        )
     }
 
     fun gotoWanAndroid(view: View?) {
-        quickStartActivity(WanAndroidHomeActivity::class.java)
+        view?.context?.quickStartActivity(WanAndroidHomeActivity::class.java)
     }
 
     fun gotoDialog(view: View?) {
-        quickStartActivity(DialogTestActivity::class.java)
+        view?.context?.quickStartActivity(DialogTestActivity::class.java)
     }
 
     fun gotoR2Test(view: View?) {
         try {
-            quickStartActivity(activityCls = Class.forName("com.wpf.app.r2test.R2TestActivity") as Class<Activity>)
+            view?.context?.quickStartActivity(activityCls = Class.forName("com.wpf.app.r2test.R2TestActivity") as Class<Activity>)
         } catch (ignore: Exception) { }
     }
 
     fun gotoGlide(view: View?) {
-        quickStartActivity(activityCls = ViewPagerBindFragmentTestActivity::class.java)
+        view?.context?.quickStartActivity(activityCls = ViewPagerBindFragmentTestActivity::class.java)
     }
 
     fun gotoRefreshList(view: View?) {
-        quickStartActivity(activityCls = RefreshListTestActivity::class.java)
+        view?.context?.quickStartActivity(activityCls = RefreshListTestActivity::class.java)
     }
 
     fun gotoSelectList(view: View?) {
-        quickStartActivity(activityCls = SelectListTestActivity::class.java)
+        view?.context?.quickStartActivity(activityCls = SelectListTestActivity::class.java)
     }
 
     fun gotoList(view: View?) {
-        quickStartActivity(activityCls = RecyclerViewTestActivity::class.java)
+        view?.context?.quickStartActivity(activityCls = RecyclerViewTestActivity::class.java)
     }
 
     fun gotoData(view: View?) {
-        quickStartActivity(activityCls = IntentDataTestActivity::class.java, object : HashMap<String, Any?>() {
+        view?.context?.quickStartActivity(activityCls = IntentDataTestActivity::class.java, object : HashMap<String, Any?>() {
             init {
                 put("activityTitle", "数据测试页")
                 put("intD", 2)

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="com.wpf.app.quick.demo.wanandroid.WanAndroidHomeActivityClass"/>
+        <variable
+            name="viewModel"
+            type="com.wpf.app.quick.demo.fragment.MainReleaseVM" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:clickGoto="@{WanAndroidHomeActivityClass.INSTANCE.KClass}"
+            android:text="WanAndroid"
+            android:textAllCaps="false"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{viewModel::gotoDialog}"
+            android:text="弹窗测试"
+            android:textAllCaps="false" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{viewModel::gotoGlide}"
+            android:text="ViewPager测试"
+            android:textAllCaps="false" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{viewModel::gotoList}"
+            android:text="列表测试" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{viewModel::gotoData}"
+            android:text="数据测试" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{viewModel::gotoR2Test}"
+            android:text="R2测试" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{viewModel::gotoRefreshList}"
+            android:text="列表刷新测试" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{viewModel::gotoSelectList}"
+            android:text="选择列表测试" />
+
+        <view
+            class="com.wpf.app.quick.demo.RequestTestActivity$GotoRequestTest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="2.5dp"
+            android:src="@color/black"
+            app:shapeAppearance="@style/CircleImageStyle"
+            app:strokeColor="@color/colorPrimary"
+            app:strokeWidth="5dp" />
+
+        <com.wpf.app.quick.demo.model.SelectItemView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <com.wpf.app.quickutil.widgets.quickview.QuickItemGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical"
+            app:groupType="LinearLayout">
+
+            <TextView
+                android:id="@+id/t1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="子view1" />
+
+            <TextView
+                android:id="@+id/t2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/t1"
+                android:layout_marginTop="10dp"
+                android:text="子view2" />
+
+        </com.wpf.app.quickutil.widgets.quickview.QuickItemGroup>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/t3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="子view3" />
+
+            <TextView
+                android:id="@+id/t4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/t3"
+                android:layout_marginTop="10dp"
+                android:text="子view4" />
+
+        </RelativeLayout>
+
+        <com.wpf.app.quick.widgets.MultiFunctionView
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            app:title="写实"
+            app:titleColor="@color/purple_500"
+            app:titleHint="123"
+            app:titleHintColor="#000000" />
+
+        <LinearLayout
+            android:id="@+id/testBindSpLL"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:gravity="bottom"
+            android:orientation="horizontal">
+
+            <com.wpf.app.quickutil.widgets.quickview.inxml.LoadSp2Text
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:bindData2Sp="true"
+                app:bindKey="绑定的SpKey1"
+                app:defaultString="默认值1">
+
+                <TextView
+                    android:id="@+id/spTextView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:text="测试绑定1" />
+
+            </com.wpf.app.quickutil.widgets.quickview.inxml.LoadSp2Text>
+
+            <TextView
+                android:id="@+id/spTextView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
+                android:text="测试绑定2" />
+
+            <Button
+                android:id="@+id/spTextView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
+                android:text="测试绑定3" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>

@@ -2,14 +2,15 @@ package com.wpf.app.quick.activity
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
-import com.wpf.app.quickrecyclerview.constant.BRConstant
-import com.wpf.app.quickutil.base.ViewModelEx
 import com.wpf.app.quick.activity.viewmodel.QuickVBModel
 import com.wpf.app.quickbind.QuickBind
+import com.wpf.app.quickrecyclerview.constant.BRConstant
+import com.wpf.app.quickutil.base.ViewModelEx
 
 /**
  * Created by 王朋飞 on 2022/7/13.
@@ -20,7 +21,7 @@ abstract class QuickVBActivity<VM : QuickVBModel<VB>, VB : ViewDataBinding> @Jvm
     override val titleName: String = ""
 ) : QuickActivity(layoutId, titleName = titleName) {
 
-    var mViewModel: VM? = null
+    private var mViewModel: VM? = null
         set(value) {
             field = value
             if (value != null) {
@@ -28,8 +29,7 @@ abstract class QuickVBActivity<VM : QuickVBModel<VB>, VB : ViewDataBinding> @Jvm
             }
         }
 
-    var viewBinding: VB? = null
-        private set
+    private var viewBinding: VB? = null
 
     private fun setViewBinding() {
         viewBinding = DataBindingUtil.setContentView(this, layoutId)
@@ -75,6 +75,8 @@ abstract class QuickVBActivity<VM : QuickVBModel<VB>, VB : ViewDataBinding> @Jvm
         mViewModel?.onStop()
     }
 
+    @Deprecated("Deprecated by Android")
+    @CallSuper
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         mViewModel?.onActivityResult(requestCode, resultCode, data)
@@ -90,11 +92,11 @@ abstract class QuickVBActivity<VM : QuickVBModel<VB>, VB : ViewDataBinding> @Jvm
         initView(viewBinding)
     }
 
-    open fun initView(viewDataBinding: VB?) {
+    open fun initView(view: VB?) {
 
     }
 
-    open fun setBindingVariable(viewDataBinding: VB?) {
+    open fun setBindingVariable(view: VB?) {
 
     }
 }

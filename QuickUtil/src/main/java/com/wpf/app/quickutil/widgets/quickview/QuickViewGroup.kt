@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
 import android.view.View
-import android.view.View.MeasureSpec
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.LinearLayout
@@ -15,10 +14,9 @@ import com.wpf.app.quickutil.LogUtil
 import com.wpf.app.quickutil.widgets.quickview.helper.GroupType
 import com.wpf.app.quickutil.widgets.quickview.helper.QuickViewGroupAttrSetHelper
 import com.wpf.app.quickutil.base.GenericEx
-import com.wpf.app.quickutil.base.asTo
 import com.wpf.app.quickutil.base.matchLayoutParams
 import com.wpf.app.quickutil.widgets.quickview.util.QuickMeasure
-import com.wpf.app.quickutil.widgets.removeParent
+import com.wpf.app.quickutil.utils.removeParent
 
 /**
  * Created by 王朋飞 on 2022/8/31.
@@ -156,7 +154,6 @@ open class QuickViewGroup<T : ViewGroup> @JvmOverloads constructor(
             val viewMeasureHeight = it.measuredHeight
             val specModeWidth = MeasureSpec.getMode(widthMeasureSpec)
             val specModeHeight = MeasureSpec.getMode(heightMeasureSpec)
-            LogUtil.e("width:$viewMeasureWidth")
             setMeasuredDimension(
                 MeasureSpec.makeMeasureSpec(viewMeasureWidth, specModeWidth),
                 MeasureSpec.makeMeasureSpec(viewMeasureHeight, specModeHeight)

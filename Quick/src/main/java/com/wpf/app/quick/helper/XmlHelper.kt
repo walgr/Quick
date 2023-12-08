@@ -31,7 +31,7 @@ import com.wpf.app.quickrecyclerview.listeners.requestData2List
 import com.wpf.app.quickutil.base.asTo
 import com.wpf.app.quickutil.quickStartActivity
 import com.wpf.app.quickutil.utils.getFieldWithSuper
-import com.wpf.app.quickutil.widgets.getChild
+import com.wpf.app.quickutil.utils.getChild
 import kotlin.reflect.KClass
 import kotlin.reflect.full.memberFunctions
 

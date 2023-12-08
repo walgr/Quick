@@ -9,7 +9,7 @@ import java.io.Serializable
  * 带状态切换的Item
  */
 abstract class QuickStateData @JvmOverloads constructor(
-    @Transient open var state: Boolean = false,
+    @Transient open var selected: Boolean = false,
     @Transient override val layoutId: Int = 0,
     @Transient override val layoutViewInContext: RunOnContextWithSelf<ViewGroup, View>? = null,
     @Transient override val isSuspension: Boolean = false,
@@ -18,9 +18,9 @@ abstract class QuickStateData @JvmOverloads constructor(
 ) : QuickClickData(), Serializable {
 
     override fun onClick() {
-        state = !state
-        stateChange(state)
+        selected = !selected
+        selectChange(selected)
     }
 
-    abstract fun stateChange(state: Boolean)
+    abstract fun selectChange(selected: Boolean)
 }

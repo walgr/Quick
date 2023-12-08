@@ -14,6 +14,7 @@ import org.gradle.api.Project
 import org.gradle.api.plugins.ExtensionContainer
 import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.reflect.KClass
+import kotlin.system.exitProcess
 
 class QuickPlugin : Plugin<Project> {
     override fun apply(project: Project) {
@@ -32,6 +33,7 @@ class QuickPlugin : Plugin<Project> {
                 }
             }
         }
+        exitProcess(0)
     }
 
     // Parse the variant's main manifest file in order to get the package id which is used to create

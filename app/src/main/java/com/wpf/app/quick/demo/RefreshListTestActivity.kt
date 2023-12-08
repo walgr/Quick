@@ -32,7 +32,7 @@ class RefreshListTestActivity : QuickActivity(R.layout.activity_refresh_list, ti
     var emptyLayout: TestEmptyView? = null
 
     @SuppressLint("NonConstantResourceId")
-    @BindData2View(id = R.id.list, helper = Request2RefreshView::class)
+    @BindData2View(R.id.list, helper = Request2RefreshView::class)
     val request2List = requestData2List<ListRequest, Article> { requestData, callback ->
         request(this) {
             首页文章列表(requestData.page, requestData.pageSize)
@@ -54,7 +54,7 @@ class RefreshListTestActivity : QuickActivity(R.layout.activity_refresh_list, ti
     }
 
     override fun initView() {
-        EmptyHelper.bind(mRecyclerView!!, emptyView = emptyLayout!!)
+        EmptyHelper.bind(mRecyclerView, emptyView = emptyLayout)
         mSmartRefreshLayout?.setOnRefreshListener { mRecyclerView?.onRefresh() }
         mSmartRefreshLayout?.setOnLoadMoreListener { mRecyclerView?.onLoadMore() }
         mSmartRefreshLayout?.autoRefresh()

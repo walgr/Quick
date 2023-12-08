@@ -7,7 +7,7 @@ import com.wpf.app.quickrecyclerview.data.RequestData
  * Created by 王朋飞 on 2022/7/8.
  */
 @GetClass
-class WanRequest(page: Int = 1) : RequestData(page) {
+class WanRequest(page: Int = 1) : RequestData(page, 20) {
 
     override fun refresh(): WanRequest {
         return super.refresh() as WanRequest

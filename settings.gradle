@@ -33,8 +33,6 @@ if (!IS_REMOTE.toBoolean()) {
 include ':Quick'
 include ':QuickBind'
 include ':Quick-annotations'
-//include ':Quick-runtime'
-//include ':Quick-compiler'
 include ':Quick-gradle-plugin'
 include ':Quick-compiler-ksp'
 include ':QuickUtil'

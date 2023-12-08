@@ -7,16 +7,17 @@ import com.google.devtools.ksp.symbol.KSDeclaration
 import com.google.devtools.ksp.symbol.KSPropertyDeclaration
 import com.google.devtools.ksp.symbol.KSVisitorVoid
 import com.squareup.kotlinpoet.FileSpec
-import java.io.OutputStream
 
 open class BaseProcessor(private val environment: SymbolProcessorEnvironment) : KSVisitorVoid() {
     open lateinit var packageName: String       //包名
     open var className: String? = null         //类名
+    open var property: KSPropertyDeclaration? = null      //属性名称
     open var propertyName: String? = null      //属性名称
 
     var outFileName: String? = null
     var outFileSpec: FileSpec.Builder? = null
 
+    protected val outFileStartName = "Quick_"
     open fun visitEnd() {
         if (outFileName.isNullOrEmpty()) return
         environment.codeGenerator.createNewFile(
@@ -32,6 +33,7 @@ open class BaseProcessor(private val environment: SymbolProcessorEnvironment) : 
 
     override fun visitPropertyDeclaration(property: KSPropertyDeclaration, data: Unit) {
         super.visitPropertyDeclaration(property, data)
+        this.property = property
         getClassData(property)
         className = property.parentDeclaration?.simpleName?.getShortName()
         if (packageName.isEmpty() || className.isNullOrEmpty()) return

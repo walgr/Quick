@@ -6,7 +6,8 @@ import com.wpf.app.quickutil.widgets.emptyview.*
 
 object EmptyHelper {
 
-    fun bind(view: RefreshView, customRefreshView: RefreshView? = null, emptyView: BaseEmptyView) {
+    fun bind(view: RefreshView?, customRefreshView: RefreshView? = null, emptyView: BaseEmptyView?) {
+        if (view == null || emptyView == null) return
         view.refreshView = customRefreshView ?: object : RefreshView by view {
 
             override fun onRefresh() {
