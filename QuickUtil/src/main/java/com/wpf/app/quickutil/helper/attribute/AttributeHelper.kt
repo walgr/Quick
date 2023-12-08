@@ -10,19 +10,22 @@ import androidx.annotation.StyleableRes
  * 参数配置帮助类
  */
 
-open class AttributeHelper constructor(
+open class AttributeHelper(
     context: Context,
     attributeSet: AttributeSet,
     @StyleableRes styleableId: IntArray
 ) {
+
+    private var isRecycle = false
 
     val typeArray by lazy {
         context.obtainStyledAttributes(attributeSet, styleableId, 0, 0)
     }
 
     fun recycle() {
-        if (typeArray.length() != 0) {
+        if (!isRecycle) {
             typeArray.recycle()
+            isRecycle = true
         }
     }
 }
