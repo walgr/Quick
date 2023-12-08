@@ -17,6 +17,7 @@ import com.wpf.app.quickbind.annotations.BindFragments
 import com.wpf.app.quickbind.viewpager.QuickViewPager
 import com.wpf.app.quickutil.LogUtil
 import com.wpf.app.quickutil.base.toColor
+import com.wpf.app.quickutil.utils.onPageSelected
 
 class CodeMainActivity :
     QuickBindingActivity<ActivityMainCodeBinding>(R.layout.activity_main_code, titleName = "快捷") {
@@ -42,12 +43,9 @@ class CodeMainActivity :
     override fun initView(view: ActivityMainCodeBinding?) {
         super.initView(view)
         val tabs = arrayOf(Pair(R.drawable.ic_home, "正式场"), Pair(R.drawable.ic_test, "测试场"))
-        viewPager?.addOnPageChangeListener(object : SimpleOnPageChangeListener() {
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-                this@CodeMainActivity.tabs.posChange(position)
-            }
-        })
+        viewPager?.onPageSelected {
+            this@CodeMainActivity.tabs.posChange(it)
+        }
         this.tabs.posChange {
             LogUtil.e("当前选择$it")
             viewPager?.currentItem = it
