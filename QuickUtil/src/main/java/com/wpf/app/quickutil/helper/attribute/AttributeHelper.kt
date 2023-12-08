@@ -21,6 +21,8 @@ open class AttributeHelper constructor(
     }
 
     fun recycle() {
-        typeArray.recycle()
+        if (typeArray.length() != 0) {
+            typeArray.recycle()
+        }
     }
 }

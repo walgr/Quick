@@ -1,6 +1,7 @@
 package com.wpf.app.quick.demo
 
 import android.annotation.SuppressLint
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener
 import com.wpf.app.quick.activity.QuickBindingActivity
@@ -24,28 +25,39 @@ class CodeMainActivity :
     @TabInit(
         R.layout.tab_main,
         funName = "initTabMain",
-        initIdList = [IdView(R.id.tvName, ViewType.TextView)]
+        initIdList = [
+            IdView(R.id.tvName, ViewType.TextView),
+            IdView(R.id.ivIcon, ViewType.ImageView),
+        ]
     )
     private val tabs: TabManager = TabManager()
 
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.viewPager)
-    @BindFragments(fragments = [MainTestFragment::class, MainReleaseFragment::class], withState = false)
+    @BindFragments(
+        fragments = [MainReleaseFragment::class, MainTestFragment::class],
+        withState = false
+    )
     var viewPager: QuickViewPager? = null
     override fun initView(view: ActivityMainCodeBinding?) {
         super.initView(view)
-        val tabName = arrayOf("测试场", "正式场")
+        val tabs = arrayOf(Pair(R.drawable.ic_home, "正式场"), Pair(R.drawable.ic_test, "测试场"))
         viewPager?.addOnPageChangeListener(object : SimpleOnPageChangeListener() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                tabs.posChange(position)
+                this@CodeMainActivity.tabs.posChange(position)
             }
         })
-        tabs.posChange {
+        this.tabs.posChange {
             LogUtil.e("当前选择$it")
             viewPager?.currentItem = it
-        }.initTabMain(parent = view?.bottomTabs, size = tabName.size, repeatClick = false) { curPos: Int, isSelect: Boolean, tvName: TextView ->
-            tvName.text = tabName[curPos]
+        }.initTabMain(
+            parent = view?.bottomTabs,
+            size = tabs.size,
+            repeatClick = false
+        ) { curPos: Int, isSelect: Boolean, tvName: TextView, ivIcon: ImageView ->
+            tvName.text = tabs[curPos].second
+            ivIcon.setImageResource(tabs[curPos].first)
             tvName.setTextColor((if (isSelect) R.color.colorPrimary else R.color.black).toColor(this))
         }
     }

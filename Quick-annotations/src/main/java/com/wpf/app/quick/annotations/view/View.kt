@@ -1,6 +1,7 @@
 package com.wpf.app.quick.annotations.view
 
 enum class ViewType(val packageName: String, val className: String) {
+    //系统
     View("android.view", "View"),
     Space("android.view", "Space"),
     TextView("android.widget", "TextView"),
@@ -27,4 +28,8 @@ enum class ViewType(val packageName: String, val className: String) {
     GridLayout("android.widget", "GridLayout"),
     RecyclerView("androidx.recyclerview.widget", "RecyclerView"),
     WebView("android.webkit", "WebView"),
+
+
+    //第三方
+    LottieView("com.airbnb.lottie", "LottieAnimationView"),
 }

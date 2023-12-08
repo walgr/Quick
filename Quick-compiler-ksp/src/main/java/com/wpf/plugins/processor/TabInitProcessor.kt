@@ -48,17 +48,10 @@ class TabInitProcessor(environment: SymbolProcessorEnvironment) : IdProcessor(en
             )
         }
         val idNameList = getAnnotationArgumentIdCode(fileStr, TabInit::class)
-
         if (funBuilder == null) {
             funBuilder = FunSpec.builder(funName.ifEmpty { layoutIdName })
                 .receiver(ClassName("com.wpf.app.quick.helper.tab", "TabManager"))
                 .returns(ClassName("com.wpf.app.quick.helper.tab", "GroupManager"))
-                .addParameter(
-                    ParameterSpec.builder("layoutId", Int::class).addAnnotation(
-                        AnnotationSpec.builder(ClassName("androidx.annotation", "LayoutRes"))
-                            .build()
-                    ).defaultValue(layoutId.toString()).build()
-                )
                 .addParameter(
                     "parent",
                     ClassName("android.view", "ViewGroup").copy(nullable = true)
@@ -71,7 +64,13 @@ class TabInitProcessor(environment: SymbolProcessorEnvironment) : IdProcessor(en
                     ParameterSpec.builder("repeatClick", Boolean::class).defaultValue("false")
                         .build()
                 )
-                .addParameter(ParameterSpec.builder("initMain",
+                .addParameter(
+                    ParameterSpec.builder("layoutId", Int::class).addAnnotation(
+                        AnnotationSpec.builder(ClassName("androidx.annotation", "LayoutRes"))
+                            .build()
+                    ).defaultValue(layoutId.toString()).build()
+                )
+                .addParameter(ParameterSpec.builder("init",
                     LambdaTypeName.get(null, mutableListOf(
                         ParameterSpec.builder("curPos", Int::class).build(),
                         ParameterSpec.builder("isSelect", Boolean::class).build(),
@@ -89,8 +88,8 @@ class TabInitProcessor(environment: SymbolProcessorEnvironment) : IdProcessor(en
                 .addCode(
                     "val groupManager =\n" +
                             "        init(layoutId, parent, size, defaultPos, repeatClick) { curPos, isSelect, view ->\n" +
-                            "            initMain.invoke(curPos, isSelect, " +
-                            idTypePairList.joinToString { "findChild(view, ${it.first}), " }.dropLast(2) + ")\n" +
+                            "            init.invoke(curPos, isSelect, " +
+                            idNameList.joinToString { "findChild(view, R.id.${it})" } + ")\n" +
                             "        }\n" +
                             "    return groupManager"
                 )

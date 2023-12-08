@@ -7,6 +7,7 @@ import kotlin.reflect.KClass
 open class IdProcessor(environment: SymbolProcessorEnvironment) : BaseProcessor(environment) {
     protected val fileStr by lazy {
         if (property?.containingFile == null) "" else File(property!!.containingFile!!.filePath).readText()
+            .replace("\r", "").replace("\n", "").trim()
     }
 
     protected fun getAnnotationArgumentIdCode(
@@ -35,7 +36,7 @@ open class IdProcessor(environment: SymbolProcessorEnvironment) : BaseProcessor(
     ): String {
         if (fileStr.isNullOrEmpty() || annotationName.isNullOrEmpty()) return ""
         return fileStr.substringAfterAndBefore("@$annotationName", propertyName)
-            .substringAfterAndBefore("(", ")")
+            .substringAfterAndBeforeLast("(", ")")
     }
 
     /**
@@ -63,8 +64,25 @@ open class IdProcessor(environment: SymbolProcessorEnvironment) : BaseProcessor(
         return substringAfter(after).substringBefore(before)
     }
 
-    protected fun String.substringAfterAndBeforeNoInclude(after: String, before: String = ""): String {
+    protected fun String.substringAfterAndBeforeNoInclude(
+        after: String,
+        before: String = ""
+    ): String {
         if (before.isEmpty()) return substringAfter(after).replace(after, "")
         return substringAfter(after).replace(after, "").substringBefore(before).replace(before, "")
+    }
+
+    protected fun String.substringAfterAndBeforeLast(after: String, before: String = ""): String {
+        if (before.isEmpty()) return substringAfter(after)
+        return substringAfter(after).substringBeforeLast(before)
+    }
+
+    protected fun String.substringAfterAndBeforeLastNoInclude(
+        after: String,
+        before: String = ""
+    ): String {
+        if (before.isEmpty()) return substringAfter(after).replace(after, "")
+        return substringAfter(after).replace(after, "").substringBeforeLast(before)
+            .replace(before, "")
     }
 }

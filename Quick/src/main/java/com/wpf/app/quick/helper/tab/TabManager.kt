@@ -58,7 +58,7 @@ open class TabManager : GroupManager() {
                 addChild(parent, tabView)
                 (tabView.layoutParams as LinearLayout.LayoutParams).weight = 1f
                 if (parent !is TabLayout) {
-                    tabView.onceClick { tab ->
+                    tabView.onceClick(250) { tab ->
                         val viewPos = parent.indexOfChild(tab)
                         if (viewPos < 0 || viewPos >= size) return@onceClick
                         if (repeatClick || curPos != viewPos) {

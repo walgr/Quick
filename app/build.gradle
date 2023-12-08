@@ -130,6 +130,7 @@ dependencies {
     implementation deps.gson
 
     implementation deps.glide
+    implementation deps.lottie
     //约束布局
     implementation deps.androidx.constraintlayout
     //SmartRefreshLayout
