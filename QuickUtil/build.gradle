@@ -41,6 +41,7 @@ dependencies {
     compileOnly deps.androidx.annotation
     //列表
     compileOnly deps.androidx.recyclerview
+    compileOnly deps.androidx.material
 }
 
 apply from: rootProject.file('gradle-mvn-push-aar.gradle')

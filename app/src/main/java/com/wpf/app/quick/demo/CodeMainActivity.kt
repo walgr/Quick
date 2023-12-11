@@ -43,13 +43,7 @@ class CodeMainActivity :
     override fun initView(view: ActivityMainCodeBinding?) {
         super.initView(view)
         val tabs = arrayOf(Pair(R.drawable.ic_home, "正式场"), Pair(R.drawable.ic_test, "测试场"))
-        viewPager?.onPageSelected {
-            this@CodeMainActivity.tabs.posChange(it)
-        }
-        this.tabs.posChange {
-            LogUtil.e("当前选择$it")
-            viewPager?.currentItem = it
-        }.initTabMain(
+        this.tabs.initTabMain(
             parent = view?.bottomTabs,
             size = tabs.size,
             repeatClick = false
@@ -57,6 +51,6 @@ class CodeMainActivity :
             tvName.text = tabs[curPos].second
             ivIcon.setImageResource(tabs[curPos].first)
             tvName.setTextColor((if (isSelect) R.color.colorPrimary else R.color.black).toColor(this))
-        }
+        }.bindViewPager(viewPager)
     }
 }

@@ -5,10 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.annotation.LayoutRes
+import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.google.android.material.tabs.TabLayout.Tab
 import com.wpf.app.quickutil.base.asTo
+import com.wpf.app.quickutil.utils.onPageSelected
+import com.wpf.app.quickutil.utils.onTabSelected
 import com.wpf.app.quickutil.utils.onceClick
 
 /**
@@ -17,14 +20,29 @@ import com.wpf.app.quickutil.utils.onceClick
 open class TabManager : GroupManager() {
 
     private var curPos = 0
+    private var invokeChangeInInit = false
     override fun posChange(change: (curPos: Int) -> Unit): TabManager {
         super.posChange(change)
+        if (!isFirstInit && !invokeChangeInInit) {
+            change.invoke(curPos)
+        }
         return this
     }
 
     override fun posChange(curPos: Int) {
         super.posChange(curPos)
         init(layoutId, parent, size, curPos, repeatClick, false, init)
+    }
+
+    fun bindViewPager(viewPager: ViewPager?, smoothScroll: Boolean = true): TabManager {
+        if (viewPager == null) return this
+        posChange { pos ->
+            viewPager.setCurrentItem(pos, smoothScroll)
+        }
+        viewPager.onPageSelected {
+            posChange(it)
+        }
+        return this
     }
 
     @LayoutRes
@@ -43,7 +61,7 @@ open class TabManager : GroupManager() {
         repeatClick: Boolean = false,
         invokeChange: Boolean = true,
         init: ((curPos: Int, isSelect: Boolean, view: View) -> Unit)? = null
-    ): GroupManager {
+    ): TabManager {
         this.layoutId = layoutId
         this.parent = parent
         this.size = size
@@ -51,6 +69,7 @@ open class TabManager : GroupManager() {
         this.repeatClick = repeatClick
         this.init = init
         if (parent == null) return this
+        invokeChangeInInit = false
         repeat(size) { pos ->
             val parentChild = getChildAt(parent, pos)
             val tabView = parentChild ?: LayoutInflater.from(parent.context).inflate(layoutId, parent, false)
@@ -75,32 +94,22 @@ open class TabManager : GroupManager() {
         }
         curPos = defaultPos
         if (parent is TabLayout && isFirstInit) {
-            parent.addOnTabSelectedListener(object : OnTabSelectedListener {
-                override fun onTabSelected(tab: Tab?) {
-                    repeat (parent.tabCount) {
-                        if (tab != null) {
-                            val view: Tab? = parent.getTabAt(it)
-                            init?.invoke(it,  view == tab, tab.view)
-                            if (view == tab) {
-                                curPos = it
-                                change?.invoke(curPos)
-                            }
+            parent.onTabSelected { tab ->
+                repeat (parent.tabCount) {
+                    if (tab != null) {
+                        val view: Tab? = parent.getTabAt(it)
+                        init?.invoke(it,  view == tab, tab.view)
+                        if (view == tab) {
+                            curPos = it
+                            change?.invoke(curPos)
                         }
                     }
                 }
-
-                override fun onTabUnselected(tab: Tab?) {
-
-                }
-
-                override fun onTabReselected(tab: Tab?) {
-
-                }
-
-            })
+            }
         }
-        if (invokeChange) {
+        if (invokeChange && change != null) {
             change?.invoke(defaultPos)
+            invokeChangeInInit = true
         }
         isFirstInit = false
         return this

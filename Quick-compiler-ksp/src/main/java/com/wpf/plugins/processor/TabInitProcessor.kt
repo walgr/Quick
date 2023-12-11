@@ -51,7 +51,7 @@ class TabInitProcessor(environment: SymbolProcessorEnvironment) : IdProcessor(en
         if (funBuilder == null) {
             funBuilder = FunSpec.builder(funName.ifEmpty { layoutIdName })
                 .receiver(ClassName("com.wpf.app.quick.helper.tab", "TabManager"))
-                .returns(ClassName("com.wpf.app.quick.helper.tab", "GroupManager"))
+                .returns(ClassName("com.wpf.app.quick.helper.tab", "TabManager"))
                 .addParameter(
                     "parent",
                     ClassName("android.view", "ViewGroup").copy(nullable = true)
@@ -86,12 +86,12 @@ class TabInitProcessor(environment: SymbolProcessorEnvironment) : IdProcessor(en
                         }
                     ), UNIT)).build())
                 .addCode(
-                    "val groupManager =\n" +
+                    "val tabManager =\n" +
                             "        init(layoutId, parent, size, defaultPos, repeatClick) { curPos, isSelect, view ->\n" +
                             "            init.invoke(curPos, isSelect, " +
                             idNameList.joinToString { "findChild(view, R.id.${it})" } + ")\n" +
                             "        }\n" +
-                            "    return groupManager"
+                            "    return tabManager"
                 )
         }
     }

@@ -4,11 +4,8 @@ import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.view.ViewParent
-import androidx.viewpager.widget.ViewPager
-import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener
 import com.wpf.app.quickutil.base.asTo
 import com.wpf.app.quickutil.data.KVObject
-import java.lang.ref.SoftReference
 
 fun <V> ViewGroup.getChild(isViewGroup: (View) -> Boolean): V? {
     for(it in 0 until this.childCount) {
@@ -50,13 +47,4 @@ fun View.onceClick(interval: Long = 1000L, onClickListener: OnClickListener) {
             KVObject.put(viewKey, curTime)
         }
     }
-}
-
-fun ViewPager.onPageSelected(pageSelected: (position: Int) -> Unit) {
-    addOnPageChangeListener(object : SimpleOnPageChangeListener() {
-        override fun onPageSelected(position: Int) {
-            super.onPageSelected(position)
-            pageSelected.invoke(position)
-        }
-    })
 }
