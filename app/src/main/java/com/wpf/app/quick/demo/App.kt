@@ -5,7 +5,7 @@ import com.wpf.app.quickrecyclerview.constant.BRConstant
 import com.wpf.app.quick.demo.http.TestApi
 import com.wpf.app.quick.demo.http.TestGsonConverterFactory
 import com.wpf.app.quick.demo.http.call.TestCommonCallAdapterFactory
-import com.wpf.app.quick.demo.http.call.TestNoResponseCallAdapterFactory
+import com.wpf.app.quick.demo.http.call.TestNormalCallAdapterFactory
 import com.wpf.app.quicknetwork.helper.OkHttpCreateHelper
 import com.wpf.app.quicknetwork.helper.RetrofitCreateHelper
 import com.wpf.app.quicknetwork.interceptor.LogInterceptor
@@ -28,7 +28,7 @@ class App : Application() {
         RetrofitCreateHelper.newInstance(
             "https://www.wanandroid.com",
             TestApi::class.java,
-            arrayListOf(TestCommonCallAdapterFactory.create(), TestNoResponseCallAdapterFactory.create()),
+            arrayListOf(TestCommonCallAdapterFactory.create(), TestNormalCallAdapterFactory.create()),
             converterFactoryList = arrayListOf(TestGsonConverterFactory.create()),
             OkHttpCreateHelper.newInstance(interceptorList = arrayListOf(LogInterceptor(this)))
         )

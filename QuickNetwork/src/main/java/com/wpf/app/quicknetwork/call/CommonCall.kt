@@ -8,4 +8,4 @@ import retrofit2.Call
  *
  */
 open class CommonCall<SResponse>(rawCall: Call<BaseResponseS<SResponse>>, fail: BaseResponseS<Any>)
-    : NoResponseCall<SResponse, Any>(rawCall, fail)
+    : NormalCall<SResponse, Any>(rawCall, fail)
