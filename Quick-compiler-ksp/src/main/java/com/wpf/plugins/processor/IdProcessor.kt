@@ -60,8 +60,8 @@ open class IdProcessor(environment: SymbolProcessorEnvironment) : BaseProcessor(
     }
 
     protected fun String.substringAfterAndBefore(after: String, before: String = ""): String {
-        if (before.isEmpty()) return substringAfter(after)
-        return substringAfter(after).substringBefore(before)
+        if (before.isEmpty()) return substringAfterLast(after)
+        return substringAfterLast(after).substringBefore(before)
     }
 
     protected fun String.substringAfterAndBeforeNoInclude(

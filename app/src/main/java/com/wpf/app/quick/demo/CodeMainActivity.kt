@@ -3,7 +3,6 @@ package com.wpf.app.quick.demo
 import android.annotation.SuppressLint
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener
 import com.wpf.app.quick.activity.QuickBindingActivity
 import com.wpf.app.quick.annotations.BindView
 import com.wpf.app.quick.annotations.IdView
@@ -15,9 +14,8 @@ import com.wpf.app.quick.demo.fragment.MainTestFragment
 import com.wpf.app.quick.helper.tab.TabManager
 import com.wpf.app.quickbind.annotations.BindFragments
 import com.wpf.app.quickbind.viewpager.QuickViewPager
-import com.wpf.app.quickutil.LogUtil
 import com.wpf.app.quickutil.base.toColor
-import com.wpf.app.quickutil.utils.onPageSelected
+import com.wpf.quick.helper.initTabMain
 
 class CodeMainActivity :
     QuickBindingActivity<ActivityMainCodeBinding>(R.layout.activity_main_code, titleName = "快捷") {

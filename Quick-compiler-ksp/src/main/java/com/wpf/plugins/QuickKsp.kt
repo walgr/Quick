@@ -32,31 +32,54 @@ internal class QuickSymbolProcessor(private val environment: SymbolProcessorEnvi
     override fun process(resolver: Resolver): List<KSAnnotated> {
         val processorMap = mutableMapOf<String, BaseProcessor>()
         dealClass.forEach { annClassProcessor ->
-            val symbols = annClassProcessor.first.flatMap {
-                resolver.getSymbolsWithAnnotation(it.qualifiedName!!)
-            }
-            if (symbols.isEmpty()) {
-                return@forEach
-            }
-            val symbolMap = mutableListOf<Pair<String, MutableList<KSAnnotated>>>()
-            symbols.map { symbol ->
-                val file = "${symbol.containingFile?.filePath}"
-                val ksAnnotatedList = symbolMap.find {
-                    it.first == file
-                }?.second
-                ksAnnotatedList?.add(symbol) ?: symbolMap.add(Pair(file, mutableListOf(symbol)))
-            }
-            symbolMap.forEach {
-                it.second.forEachIndexed { index, symbol ->
+            if (annClassProcessor.first.first() == TabInit::class) {
+                val symbols = annClassProcessor.first.flatMap {
+                    resolver.getSymbolsWithAnnotation(it.qualifiedName!!)
+                }
+                if (symbols.isEmpty()) {
+                    return@forEach
+                }
+                val symbolMap = mutableListOf<Pair<String, MutableList<KSAnnotated>>>()
+                symbols.map { symbol ->
                     val file = "${symbol.containingFile?.filePath}"
-                    var processor = processorMap[file + annClassProcessor.second.simpleName]
-                    if (processor == null) {
-                        processor = annClassProcessor.second.primaryConstructor!!.call(environment)
-                        processorMap[file + annClassProcessor.second.simpleName] = processor
-                    }
+                    val ksAnnotatedList = symbolMap.find {
+                        it.first == file
+                    }?.second
+                    ksAnnotatedList?.add(symbol) ?: symbolMap.add(Pair(file, mutableListOf(symbol)))
+                }
+                val processor = annClassProcessor.second.primaryConstructor!!.call(environment)
+                symbols.forEach { symbol ->
                     symbol.accept(processor, Unit)
-                    if (index == it.second.size - 1) {
-                        processor.visitEnd()
+                }
+                processor.visitEnd()
+            } else {
+                val symbols = annClassProcessor.first.flatMap {
+                    resolver.getSymbolsWithAnnotation(it.qualifiedName!!)
+                }
+                if (symbols.isEmpty()) {
+                    return@forEach
+                }
+                val symbolMap = mutableListOf<Pair<String, MutableList<KSAnnotated>>>()
+                symbols.map { symbol ->
+                    val file = "${symbol.containingFile?.filePath}"
+                    val ksAnnotatedList = symbolMap.find {
+                        it.first == file
+                    }?.second
+                    ksAnnotatedList?.add(symbol) ?: symbolMap.add(Pair(file, mutableListOf(symbol)))
+                }
+                symbolMap.forEach {
+                    it.second.forEachIndexed { index, symbol ->
+                        val file = "${symbol.containingFile?.filePath}"
+                        var processor = processorMap[file + annClassProcessor.second.simpleName]
+                        if (processor == null) {
+                            processor =
+                                annClassProcessor.second.primaryConstructor!!.call(environment)
+                            processorMap[file + annClassProcessor.second.simpleName] = processor
+                        }
+                        symbol.accept(processor, Unit)
+                        if (index == it.second.size - 1) {
+                            processor.visitEnd()
+                        }
                     }
                 }
             }
