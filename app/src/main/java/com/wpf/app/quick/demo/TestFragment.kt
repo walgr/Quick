@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import com.wpf.app.quick.activity.QuickFragment
-import com.wpf.app.quick.annotations.BindView
+import com.wpf.app.quick.annotations.bind.BindView
 import com.wpf.app.quickbind.annotations.AutoGet
 
 /**

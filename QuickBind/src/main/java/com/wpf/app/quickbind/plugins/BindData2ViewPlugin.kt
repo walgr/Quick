@@ -3,8 +3,8 @@ package com.wpf.app.quickbind.plugins
 import android.view.View
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
-import com.wpf.app.quick.annotations.BindD2VHHelper
-import com.wpf.app.quick.annotations.BindData2View
+import com.wpf.app.quick.annotations.bind.BindD2VHHelper
+import com.wpf.app.quick.annotations.bind.BindData2View
 import com.wpf.app.quickutil.bind.RunOnHolderWithSelf
 import com.wpf.app.quickbind.utils.ReflectHelper
 import java.lang.reflect.Field

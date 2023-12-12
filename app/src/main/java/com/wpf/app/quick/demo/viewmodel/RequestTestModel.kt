@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import com.wpf.app.quick.activity.viewmodel.QuickVBModel
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.demo.http.request
-import com.wpf.app.quick.annotations.BindData2View
+import com.wpf.app.quick.annotations.bind.BindData2View
 import com.wpf.app.quick.demo.databinding.ActivityRequestTestBinding
 import com.wpf.app.quickrecyclerview.bind.Request2View
 import com.wpf.app.quickrecyclerview.interfaces.request2View

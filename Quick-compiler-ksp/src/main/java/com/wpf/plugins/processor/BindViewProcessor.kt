@@ -10,13 +10,11 @@ import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.PropertySpec
 import com.squareup.kotlinpoet.TypeSpec
 import com.squareup.kotlinpoet.asClassName
-import com.wpf.app.quick.annotations.BindData2View
-import com.wpf.app.quick.annotations.BindView
-import com.wpf.app.quick.annotations.Databinder
-import com.wpf.app.quick.annotations.GroupView
-import com.wpf.app.quick.annotations.SaveId
-import java.io.File
-import kotlin.reflect.KClass
+import com.wpf.app.quick.annotations.bind.BindData2View
+import com.wpf.app.quick.annotations.bind.BindView
+import com.wpf.app.quick.annotations.bind.Databinder
+import com.wpf.app.quick.annotations.bind.GroupView
+import com.wpf.app.quick.annotations.bind.SaveId
 
 class BindViewProcessor(environment: SymbolProcessorEnvironment) : IdProcessor(environment) {
 

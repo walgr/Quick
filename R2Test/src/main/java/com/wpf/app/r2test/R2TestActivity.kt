@@ -3,9 +3,9 @@ package com.wpf.app.r2test
 import android.annotation.SuppressLint
 import android.widget.TextView
 import com.wpf.app.quick.activity.QuickActivity
-import com.wpf.app.quick.annotations.BindData2View
-import com.wpf.app.quick.annotations.BindView
-import com.wpf.app.quick.annotations.GroupView
+import com.wpf.app.quick.annotations.bind.BindData2View
+import com.wpf.app.quick.annotations.bind.BindView
+import com.wpf.app.quick.annotations.bind.GroupView
 import com.wpf.app.quickbind.helper.binddatahelper.Text2TextView
 import com.wpf.app.quickbind.utils.GroupViews
 

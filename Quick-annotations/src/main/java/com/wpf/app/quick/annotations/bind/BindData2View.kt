@@ -1,4 +1,4 @@
-package com.wpf.app.quick.annotations
+package com.wpf.app.quick.annotations.bind
 
 import androidx.annotation.IdRes
 import kotlin.reflect.KClass

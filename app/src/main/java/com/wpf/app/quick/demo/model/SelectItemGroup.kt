@@ -6,7 +6,7 @@ import android.util.AttributeSet
 import android.widget.LinearLayout
 import android.widget.Toast
 import com.wpf.app.quick.demo.R
-import com.wpf.app.quick.annotations.BindData2View
+import com.wpf.app.quick.annotations.bind.BindData2View
 import com.wpf.app.quickbind.helper.binddatahelper.BindData2ViewHelper
 import com.wpf.app.quickbind.helper.binddatahelper.ItemClick
 import com.wpf.app.quickbind.helper.binddatahelper.Select2CheckBox

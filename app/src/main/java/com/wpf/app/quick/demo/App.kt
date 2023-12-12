@@ -3,9 +3,9 @@ package com.wpf.app.quick.demo
 import android.app.Application
 import com.wpf.app.quickrecyclerview.constant.BRConstant
 import com.wpf.app.quick.demo.http.TestApi
+import com.wpf.app.quick.demo.http.TestCommonCallAdapterFactory
 import com.wpf.app.quick.demo.http.TestGsonConverterFactory
-import com.wpf.app.quick.demo.http.call.TestCommonCallAdapterFactory
-import com.wpf.app.quick.demo.http.call.TestNormalCallAdapterFactory
+import com.wpf.app.quick.demo.http.TestNormalCallAdapterFactory
 import com.wpf.app.quicknetwork.helper.OkHttpCreateHelper
 import com.wpf.app.quicknetwork.helper.RetrofitCreateHelper
 import com.wpf.app.quicknetwork.interceptor.LogInterceptor

@@ -3,8 +3,8 @@ package com.wpf.app.quick.demo
 import android.annotation.SuppressLint
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.wpf.app.quick.activity.QuickActivity
-import com.wpf.app.quick.annotations.BindData2View
-import com.wpf.app.quick.annotations.BindView
+import com.wpf.app.quick.annotations.bind.BindData2View
+import com.wpf.app.quick.annotations.bind.BindView
 import com.wpf.app.quick.demo.http.request
 import com.wpf.app.quick.demo.model.ListRequest
 import com.wpf.app.quick.demo.wanandroid.model.Article

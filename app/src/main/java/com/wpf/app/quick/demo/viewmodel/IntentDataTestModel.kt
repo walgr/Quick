@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.util.Log
 import android.widget.TextView
 import com.wpf.app.quick.demo.R
-import com.wpf.app.quick.annotations.BindView
+import com.wpf.app.quick.annotations.bind.BindView
 import com.wpf.app.quick.demo.databinding.ActivityDataTestBinding
 import com.wpf.app.quick.demo.model.MyMessage
 import com.wpf.app.quick.demo.model.TestModel

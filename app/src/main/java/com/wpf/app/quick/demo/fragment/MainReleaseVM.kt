@@ -5,7 +5,7 @@ import android.app.Activity
 import android.view.View
 import android.widget.TextView
 import com.wpf.app.quick.activity.viewmodel.QuickVBModel
-import com.wpf.app.quick.annotations.BindView
+import com.wpf.app.quick.annotations.bind.BindView
 import com.wpf.app.quick.demo.DialogTestActivity
 import com.wpf.app.quick.demo.IntentDataTestActivity
 import com.wpf.app.quick.demo.R

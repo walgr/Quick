@@ -3,7 +3,7 @@ package com.wpf.app.quick.demo.dialog
 import android.content.Context
 import android.view.Gravity
 import android.view.View
-import com.wpf.app.quick.annotations.BindData2View
+import com.wpf.app.quick.annotations.bind.BindData2View
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.demo.model.MyMessage
 import com.wpf.app.quickdialog.QuickDialog

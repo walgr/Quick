@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.view.ViewGroup
 import android.widget.TextView
 import com.wpf.app.quick.demo.R
-import com.wpf.app.quick.annotations.BindView
+import com.wpf.app.quick.annotations.bind.BindView
 import com.wpf.app.quick.demo.model.TestModel
 import com.wpf.app.quickrecyclerview.QuickAdapter
 import com.wpf.app.quickrecyclerview.holder.QuickViewHolder

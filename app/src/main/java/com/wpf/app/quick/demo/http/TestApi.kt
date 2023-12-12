@@ -1,8 +1,7 @@
 package com.wpf.app.quick.demo.http
 
-import com.wpf.app.quick.annotations.GetClass
-import com.wpf.app.quick.annotations.GetFun
-import com.wpf.app.quick.demo.http.call.TestCommonCall
+import com.wpf.app.quick.annotations.getclass.GetClass
+import com.wpf.app.quick.annotations.getclass.GetFun
 import com.wpf.app.quick.demo.wanandroid.model.首页文章
 import retrofit2.http.GET
 import retrofit2.http.Path

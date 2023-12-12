@@ -1,4 +1,4 @@
-package com.wpf.app.quick.annotations
+package com.wpf.app.quick.annotations.tab
 
 import androidx.annotation.LayoutRes
 

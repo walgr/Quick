@@ -1,6 +1,6 @@
 package com.wpf.app.quick.demo.wanandroid.model
 
-import com.wpf.app.quick.annotations.GetClass
+import com.wpf.app.quick.annotations.getclass.GetClass
 import com.wpf.app.quickrecyclerview.data.RequestData
 
 /**

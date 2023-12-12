@@ -2,6 +2,7 @@ package com.wpf.plugins.processor
 
 import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
 import com.google.devtools.ksp.symbol.KSAnnotation
+import com.google.devtools.ksp.symbol.KSFile
 import com.google.devtools.ksp.symbol.KSPropertyDeclaration
 import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.ClassName
@@ -10,8 +11,8 @@ import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.LambdaTypeName
 import com.squareup.kotlinpoet.ParameterSpec
 import com.squareup.kotlinpoet.UNIT
-import com.wpf.app.quick.annotations.TabInit
-import com.wpf.app.quick.annotations.view.ViewType
+import com.wpf.app.quick.annotations.tab.TabInit
+import com.wpf.app.quick.annotations.tab.view.ViewType
 
 class TabInitProcessor(environment: SymbolProcessorEnvironment) : IdProcessor(environment) {
     private var funBuilderMap = mutableMapOf<String, FunSpec.Builder>()

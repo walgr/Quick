@@ -4,8 +4,8 @@ import android.annotation.SuppressLint
 import android.widget.TextView
 import android.widget.Toast
 import com.wpf.app.quick.activity.QuickVBActivity
-import com.wpf.app.quick.annotations.BindView
-import com.wpf.app.quick.annotations.GroupView
+import com.wpf.app.quick.annotations.bind.BindView
+import com.wpf.app.quick.annotations.bind.GroupView
 import com.wpf.app.quick.demo.databinding.ActivityDataTestBinding
 import com.wpf.app.quick.demo.viewmodel.IntentDataTestModel
 import com.wpf.app.quickbind.utils.GroupViews

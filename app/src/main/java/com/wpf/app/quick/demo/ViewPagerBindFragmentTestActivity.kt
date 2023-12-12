@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.widget.Toast
 import androidx.viewpager2.widget.ViewPager2
 import com.wpf.app.quick.activity.QuickActivity
-import com.wpf.app.quick.annotations.BindView
+import com.wpf.app.quick.annotations.bind.BindView
 import com.wpf.app.quickbind.annotations.BindFragment2
 import com.wpf.app.quickbind.viewpager2.ViewPager2Helper
 

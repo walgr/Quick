@@ -1,7 +1,11 @@
 package com.wpf.app.quick.demo.http
 
+import com.wpf.app.quick.annotations.request.GenerateCommonCall
+import com.wpf.app.quick.annotations.request.GenerateNormalCall
 import com.wpf.app.quicknetwork.base.BaseResponseIS
 
+@GenerateCommonCall("TestCommon")
+@GenerateNormalCall("TestNormal")
 open class TestResponse<Data>: BaseResponseIS<Data> {
     var data: Data? = null
     var errorCode: String? = null

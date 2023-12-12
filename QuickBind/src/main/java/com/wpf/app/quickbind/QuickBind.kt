@@ -7,10 +7,10 @@ import androidx.annotation.UiThread
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
-import com.wpf.app.quick.annotations.BindData2View
-import com.wpf.app.quick.annotations.BindView
-import com.wpf.app.quick.annotations.Databinder
-import com.wpf.app.quick.annotations.GroupView
+import com.wpf.app.quick.annotations.bind.BindData2View
+import com.wpf.app.quick.annotations.bind.BindView
+import com.wpf.app.quick.annotations.bind.Databinder
+import com.wpf.app.quick.annotations.bind.GroupView
 import com.wpf.app.quickbind.annotations.*
 import com.wpf.app.quickbind.plugins.*
 import com.wpf.app.quickbind.utils.ReflectHelper

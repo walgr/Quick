@@ -1,7 +1,7 @@
 package com.wpf.app.quick.demo.model
 
 import android.annotation.SuppressLint
-import com.wpf.app.quick.annotations.BindData2View
+import com.wpf.app.quick.annotations.bind.BindData2View
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quickbind.helper.binddatahelper.Text2TextView
 import com.wpf.app.quick.widgets.selectview.data.QuickChildSelectData

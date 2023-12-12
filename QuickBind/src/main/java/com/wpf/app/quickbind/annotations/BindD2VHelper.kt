@@ -1,7 +1,7 @@
 package com.wpf.app.quickbind.annotations
 
 import androidx.recyclerview.widget.RecyclerView
-import com.wpf.app.quick.annotations.BindD2VHHelper
+import com.wpf.app.quick.annotations.bind.BindD2VHHelper
 
 /**
  * Created by 王朋飞 on 2022/9/5.

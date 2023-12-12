@@ -1,4 +1,4 @@
-package com.wpf.app.quick.annotations.view
+package com.wpf.app.quick.annotations.tab.view
 
 enum class ViewType(val packageName: String, val className: String) {
     //系统

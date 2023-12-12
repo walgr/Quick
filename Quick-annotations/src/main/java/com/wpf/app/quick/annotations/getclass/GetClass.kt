@@ -1,4 +1,4 @@
-package com.wpf.app.quick.annotations
+package com.wpf.app.quick.annotations.getclass
 
 @Target(AnnotationTarget.CLASS, AnnotationTarget.ANNOTATION_CLASS)
 @Retention(AnnotationRetention.SOURCE)

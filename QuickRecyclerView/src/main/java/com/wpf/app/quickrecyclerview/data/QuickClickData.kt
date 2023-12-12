@@ -2,7 +2,7 @@ package com.wpf.app.quickrecyclerview.data
 
 import android.view.View
 import android.view.ViewGroup
-import com.wpf.app.quick.annotations.BindData2View
+import com.wpf.app.quick.annotations.bind.BindData2View
 import com.wpf.app.quickbind.helper.binddatahelper.ItemClick
 import com.wpf.app.quickutil.bind.RunOnContextWithSelf
 import com.wpf.app.quickutil.bind.itemClick

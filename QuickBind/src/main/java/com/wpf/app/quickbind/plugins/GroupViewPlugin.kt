@@ -1,7 +1,7 @@
 package com.wpf.app.quickbind.plugins
 
 import androidx.lifecycle.ViewModel
-import com.wpf.app.quick.annotations.GroupView
+import com.wpf.app.quick.annotations.bind.GroupView
 import com.wpf.app.quickbind.utils.GroupViews
 import java.lang.reflect.Field
 

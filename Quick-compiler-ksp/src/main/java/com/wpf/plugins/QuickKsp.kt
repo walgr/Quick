@@ -6,11 +6,15 @@ import com.google.devtools.ksp.processing.SymbolProcessor
 import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
 import com.google.devtools.ksp.processing.SymbolProcessorProvider
 import com.google.devtools.ksp.symbol.KSAnnotated
-import com.wpf.app.quick.annotations.GetClass
-import com.wpf.app.quick.annotations.GetFun
-import com.wpf.app.quick.annotations.TabInit
+import com.wpf.app.quick.annotations.tab.TabInit
+import com.wpf.app.quick.annotations.getclass.GetClass
+import com.wpf.app.quick.annotations.getclass.GetFun
+import com.wpf.app.quick.annotations.request.GenerateCommonCall
+import com.wpf.app.quick.annotations.request.GenerateNormalCall
 import com.wpf.plugins.processor.BaseProcessor
 import com.wpf.plugins.processor.BindViewProcessor
+import com.wpf.plugins.processor.GenerateCommonCallProcessor
+import com.wpf.plugins.processor.GenerateNormalCallProcessor
 import com.wpf.plugins.processor.GetClassProcessor
 import com.wpf.plugins.processor.TabInitProcessor
 import kotlin.reflect.full.primaryConstructor
@@ -24,9 +28,11 @@ internal class QuickSymbolProcessor(private val environment: SymbolProcessorEnvi
     SymbolProcessor {
 
     private val dealClass = arrayOf(
-        Pair(arrayOf(TabInit::class), TabInitProcessor::class),
-        Pair(arrayOf(GetClass::class, GetFun::class), GetClassProcessor::class),
         Pair(BindViewProcessor.allowClass, BindViewProcessor::class),
+        Pair(arrayOf(GetClass::class, GetFun::class), GetClassProcessor::class),
+        Pair(arrayOf(TabInit::class), TabInitProcessor::class),
+        Pair(arrayOf(GenerateNormalCall::class), GenerateNormalCallProcessor::class),
+        Pair(arrayOf(GenerateCommonCall::class), GenerateCommonCallProcessor::class),
     )
 
     override fun process(resolver: Resolver): List<KSAnnotated> {

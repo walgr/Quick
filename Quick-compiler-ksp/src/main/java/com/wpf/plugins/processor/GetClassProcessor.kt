@@ -9,7 +9,7 @@ import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.TypeSpec
 import com.squareup.kotlinpoet.asClassName
-import com.wpf.app.quick.annotations.GetFun
+import com.wpf.app.quick.annotations.getclass.GetFun
 import kotlin.reflect.KClass
 
 class GetClassProcessor(environment: SymbolProcessorEnvironment) : BaseProcessor(environment) {

@@ -6,7 +6,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.activity.OnBackPressedCallback
 import com.wpf.app.quick.activity.QuickActivity
-import com.wpf.app.quick.annotations.BindView
+import com.wpf.app.quick.annotations.bind.BindView
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quickbind.annotations.AutoGet
 

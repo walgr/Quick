@@ -1,4 +1,4 @@
-package com.wpf.app.quick.annotations
+package com.wpf.app.quick.annotations.bind
 
 /**
  * Created by 王朋飞 on 2022/7/6.

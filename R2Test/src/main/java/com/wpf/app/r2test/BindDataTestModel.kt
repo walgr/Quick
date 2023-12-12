@@ -3,7 +3,7 @@ package com.wpf.app.r2test
 import android.annotation.SuppressLint
 import android.view.ViewGroup
 import android.widget.ImageView
-import com.wpf.app.quick.annotations.BindData2View
+import com.wpf.app.quick.annotations.bind.BindData2View
 import com.wpf.app.quickrecyclerview.data.QuickClickData
 import com.wpf.app.quickbind.helper.binddatahelper.Url2ImageView
 import com.wpf.app.quickutil.bind.runOnContextWithSelf

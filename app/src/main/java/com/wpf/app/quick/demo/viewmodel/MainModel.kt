@@ -3,7 +3,7 @@ package com.wpf.app.quick.demo.viewmodel
 import android.annotation.SuppressLint
 import android.widget.TextView
 import com.wpf.app.quick.demo.R
-import com.wpf.app.quick.annotations.BindView
+import com.wpf.app.quick.annotations.bind.BindView
 import com.wpf.app.quick.demo.databinding.ActivityMainBinding
 import com.wpf.app.quick.activity.viewmodel.QuickVBModel
 import com.wpf.app.quickbind.annotations.BindSp2View
