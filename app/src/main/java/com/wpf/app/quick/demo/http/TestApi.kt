@@ -2,12 +2,14 @@ package com.wpf.app.quick.demo.http
 
 import com.wpf.app.quick.annotations.getclass.GetClass
 import com.wpf.app.quick.annotations.getclass.GetFun
+import com.wpf.app.quick.annotations.request.GenerateRequest
 import com.wpf.app.quick.demo.wanandroid.model.首页文章
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
 @GetClass
+@GenerateRequest(fileName = "TestService")
 interface TestApi {
 
     @GetFun

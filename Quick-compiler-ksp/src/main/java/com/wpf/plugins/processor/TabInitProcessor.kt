@@ -24,8 +24,6 @@ class TabInitProcessor(environment: SymbolProcessorEnvironment) : IdProcessor(en
         propertyName: String?
     ) {
         super.visitPropertyDeclaration(property, data, packageName, className, propertyName)
-
-
         val tabInitAnn = property.annotations.find {
             it.shortName.getShortName().contains(TabInit::class.simpleName!!)
         }

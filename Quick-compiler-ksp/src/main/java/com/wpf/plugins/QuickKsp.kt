@@ -11,10 +11,12 @@ import com.wpf.app.quick.annotations.getclass.GetClass
 import com.wpf.app.quick.annotations.getclass.GetFun
 import com.wpf.app.quick.annotations.request.GenerateCommonCall
 import com.wpf.app.quick.annotations.request.GenerateNormalCall
+import com.wpf.app.quick.annotations.request.GenerateRequest
 import com.wpf.plugins.processor.BaseProcessor
 import com.wpf.plugins.processor.BindViewProcessor
 import com.wpf.plugins.processor.GenerateCommonCallProcessor
 import com.wpf.plugins.processor.GenerateNormalCallProcessor
+import com.wpf.plugins.processor.GenerateRequestProcessor
 import com.wpf.plugins.processor.GetClassProcessor
 import com.wpf.plugins.processor.TabInitProcessor
 import kotlin.reflect.full.primaryConstructor
@@ -33,6 +35,7 @@ internal class QuickSymbolProcessor(private val environment: SymbolProcessorEnvi
         Pair(arrayOf(TabInit::class), TabInitProcessor::class),
         Pair(arrayOf(GenerateNormalCall::class), GenerateNormalCallProcessor::class),
         Pair(arrayOf(GenerateCommonCall::class), GenerateCommonCallProcessor::class),
+        Pair(arrayOf(GenerateRequest::class), GenerateRequestProcessor::class),
     )
 
     override fun process(resolver: Resolver): List<KSAnnotated> {

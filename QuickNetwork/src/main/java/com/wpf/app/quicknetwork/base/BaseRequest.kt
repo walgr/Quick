@@ -2,7 +2,7 @@ package com.wpf.app.quicknetwork.base
 
 /**
  * Created by 王朋飞 on 2022/7/22.
- *
+ * 注解使用此类，移动需要修改注解代码
  */
 abstract class BaseRequest<SResponse, FResponse> {
 
