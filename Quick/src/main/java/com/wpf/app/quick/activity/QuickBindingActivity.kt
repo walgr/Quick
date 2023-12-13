@@ -9,6 +9,6 @@ import com.wpf.app.quick.activity.viewmodel.QuickVBModel
  *
  */
 abstract class QuickBindingActivity<VB : ViewDataBinding> @JvmOverloads constructor(
-    @LayoutRes override val layoutId: Int = 0,
-    override val titleName: String = ""
+    @LayoutRes layoutId: Int = 0,
+    titleName: String = ""
 ) : QuickVBActivity<QuickVBModel<VB>, VB>(layoutId, titleName = titleName)

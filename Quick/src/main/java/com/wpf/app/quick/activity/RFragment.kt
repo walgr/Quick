@@ -10,7 +10,7 @@ import com.wpf.app.quickrecyclerview.QuickRecyclerView
  *
  */
 open class RFragment(
-    override val titleName: String = ""
+    titleName: String = ""
 ) : QuickFragment(R.layout.fragment_recyclerview, titleName = titleName) {
 
     private var mRecyclerView: QuickRecyclerView? = null

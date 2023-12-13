@@ -17,9 +17,9 @@ import com.wpf.app.quickbind.interfaces.BindViewModel
  *
  */
 open class QuickViewModelFragment<VM : QuickViewModel<out QuickView>> @JvmOverloads constructor(
-    @LayoutRes override val layoutId: Int = 0,
-    override val layoutView: View? = null,
-    override val titleName: String = ""
+    @LayoutRes layoutId: Int = 0,
+    layoutView: View? = null,
+    titleName: String = ""
 ) : QuickFragment(layoutId, layoutView, titleName = titleName), BindViewModel<VM> {
 
     override fun onSaveInstanceState(outState: Bundle) {

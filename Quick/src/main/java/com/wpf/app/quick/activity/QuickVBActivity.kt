@@ -18,7 +18,7 @@ import com.wpf.app.quickutil.base.ViewModelEx
  */
 abstract class QuickVBActivity<VM : QuickVBModel<VB>, VB : ViewDataBinding> @JvmOverloads constructor(
     @LayoutRes override val layoutId: Int = 0,
-    override val titleName: String = ""
+    titleName: String = ""
 ) : QuickActivity(layoutId, titleName = titleName) {
 
     private var mViewModel: VM? = null

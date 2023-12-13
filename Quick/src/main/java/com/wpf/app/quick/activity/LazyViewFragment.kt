@@ -12,11 +12,11 @@ import com.wpf.app.quickbind.annotations.AutoGet
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-abstract class LazyViewFragment(
+abstract class LazyViewFragment @JvmOverloads constructor(
     @LayoutRes override val layoutId: Int = 0,
     override val layoutView: View? = null,
-    @AutoGet(titleKey) override val titleName: String = ""
-) : QuickFragment() {
+    titleName: String = ""
+) : QuickFragment(layoutId, layoutView, titleName = titleName) {
 
     protected var rootView: View? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {

@@ -15,9 +15,9 @@ import com.wpf.app.quickbind.interfaces.BindViewModel
  *
  */
 abstract class QuickViewModelActivity<VM : QuickViewModel<out QuickView>> @JvmOverloads constructor(
-    @LayoutRes override val layoutId: Int = 0,
-    override val layoutView: View? = null,
-    override val titleName: String = ""
+    @LayoutRes layoutId: Int = 0,
+    layoutView: View? = null,
+    titleName: String = ""
 ) : QuickActivity(layoutId, layoutView, titleName = titleName), BindViewModel<VM> {
     private var mViewModel: VM? = null
 

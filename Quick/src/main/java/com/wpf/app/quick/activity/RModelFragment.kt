@@ -13,10 +13,10 @@ import com.wpf.app.quickrecyclerview.QuickRecyclerView
  *
  */
 open class RModelFragment<VM : QuickViewModel<out QuickView>> @JvmOverloads constructor(
-    @LayoutRes override val layoutId: Int = 0,
+    @LayoutRes layoutId: Int = 0,
     @IdRes open val listId: Int = 0,
-    override val titleName: String = ""
-) : QuickViewModelFragment<VM>(layoutId = layoutId) {
+    titleName: String = ""
+) : QuickViewModelFragment<VM>(layoutId = layoutId, titleName = titleName) {
     private var mRecyclerView: QuickRecyclerView? = null
 
     @CallSuper

@@ -14,9 +14,9 @@ import com.wpf.app.quickrecyclerview.QuickRecyclerView
  *
  */
 abstract class RViewBindingFragment<VM : QuickVBModel<VB>, VB : ViewDataBinding> @JvmOverloads constructor(
-    @LayoutRes override val layoutId: Int = 0,
+    @LayoutRes layoutId: Int = 0,
     @IdRes open val listId: Int = 0,
-    override val titleName: String = ""
+    titleName: String = ""
 ) : QuickVBFragment<VM, VB>(
     layoutId, titleName
 ) {

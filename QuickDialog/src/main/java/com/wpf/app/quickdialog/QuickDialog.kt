@@ -28,7 +28,7 @@ abstract class QuickDialog : Dialog, DialogSize, DialogLifecycle {
     constructor(
         mContext: Context,
         themeId: Int = 0,
-        layoutId: Int = 0,
+        @LayoutRes layoutId: Int = 0,
         layoutView: View? = null
     ) : super(mContext, themeId) {
         this.layoutId = layoutId
@@ -39,7 +39,7 @@ abstract class QuickDialog : Dialog, DialogSize, DialogLifecycle {
         mContext: Context,
         cancelable: Boolean = false,
         cancelListener: DialogInterface.OnCancelListener? = null,
-        layoutId: Int = 0,
+        @LayoutRes layoutId: Int = 0,
         layoutView: View? = null
     ) : super(mContext, cancelable, cancelListener) {
         this.layoutId = layoutId
