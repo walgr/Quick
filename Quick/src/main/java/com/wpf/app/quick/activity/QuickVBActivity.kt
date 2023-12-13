@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.wpf.app.quick.activity.viewmodel.QuickVBModel
 import com.wpf.app.quickbind.QuickBind
 import com.wpf.app.quickrecyclerview.constant.BRConstant
-import com.wpf.app.quickutil.base.ViewModelEx
+import com.wpf.app.quickutil.other.ViewModelEx
 
 /**
  * Created by 王朋飞 on 2022/7/13.

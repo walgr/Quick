@@ -7,10 +7,11 @@ import android.view.View
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import androidx.lifecycle.ViewModelProvider
-import com.wpf.app.quickutil.base.ViewModelEx
+import com.wpf.app.quickutil.other.ViewModelEx
 import com.wpf.app.quick.activity.viewmodel.QuickViewModel
 import com.wpf.app.quickbind.QuickBind
 import com.wpf.app.quickbind.interfaces.BindViewModel
+import com.wpf.app.quickutil.bind.RunOnContext
 
 /**
  * Created by 王朋飞 on 2022/7/13.
@@ -19,8 +20,10 @@ import com.wpf.app.quickbind.interfaces.BindViewModel
 open class QuickViewModelFragment<VM : QuickViewModel<out QuickView>> @JvmOverloads constructor(
     @LayoutRes layoutId: Int = 0,
     layoutView: View? = null,
+    layoutViewInContext: RunOnContext<View>? = null,
     titleName: String = ""
-) : QuickFragment(layoutId, layoutView, titleName = titleName), BindViewModel<VM> {
+) : QuickFragment(layoutId, layoutView, layoutViewInContext, titleName = titleName),
+    BindViewModel<VM> {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)

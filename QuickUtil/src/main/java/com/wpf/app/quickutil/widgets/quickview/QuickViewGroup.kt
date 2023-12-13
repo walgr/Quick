@@ -10,13 +10,12 @@ import android.widget.LinearLayout
 import android.widget.RadioGroup
 import android.widget.RelativeLayout
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.wpf.app.quickutil.LogUtil
 import com.wpf.app.quickutil.widgets.quickview.helper.GroupType
 import com.wpf.app.quickutil.widgets.quickview.helper.QuickViewGroupAttrSetHelper
-import com.wpf.app.quickutil.base.GenericEx
-import com.wpf.app.quickutil.base.matchLayoutParams
+import com.wpf.app.quickutil.other.GenericEx
+import com.wpf.app.quickutil.other.matchLayoutParams
 import com.wpf.app.quickutil.widgets.quickview.util.QuickMeasure
-import com.wpf.app.quickutil.utils.removeParent
+import com.wpf.app.quickutil.other.removeParent
 
 /**
  * Created by 王朋飞 on 2022/8/31.

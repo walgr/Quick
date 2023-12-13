@@ -28,10 +28,10 @@ import com.wpf.app.quickrecyclerview.helper.bindRefreshView
 import com.wpf.app.quickrecyclerview.listeners.RefreshView
 import com.wpf.app.quickrecyclerview.listeners.Request2ListWithView
 import com.wpf.app.quickrecyclerview.listeners.requestData2List
-import com.wpf.app.quickutil.base.asTo
-import com.wpf.app.quickutil.quickStartActivity
-import com.wpf.app.quickutil.utils.getFieldWithSuper
-import com.wpf.app.quickutil.utils.getChild
+import com.wpf.app.quickutil.other.asTo
+import com.wpf.app.quickutil.activity.quickStartActivity
+import com.wpf.app.quickutil.other.getFieldWithSuper
+import com.wpf.app.quickutil.other.getChild
 import kotlin.reflect.KClass
 import kotlin.reflect.full.memberFunctions
 

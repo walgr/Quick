@@ -10,10 +10,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import com.wpf.app.quickrecyclerview.constant.BRConstant
-import com.wpf.app.quickutil.base.ViewModelEx
+import com.wpf.app.quickutil.other.ViewModelEx
 import com.wpf.app.quick.activity.viewmodel.QuickVBModel
-import com.wpf.app.quickbind.QuickBind
 import com.wpf.app.quickbind.QuickBind.bind
+import com.wpf.app.quickutil.bind.RunOnContext
 
 /**
  * Created by 王朋飞 on 2022/7/13.
@@ -21,8 +21,10 @@ import com.wpf.app.quickbind.QuickBind.bind
  */
 abstract class QuickVBFragment<VM : QuickVBModel<VB>, VB : ViewDataBinding> @JvmOverloads constructor(
     @LayoutRes layoutId: Int = 0,
+    layoutView: View? = null,
+    layoutViewInContext: RunOnContext<View>? = null,
     titleName: String = ""
-) : QuickFragment(layoutId, titleName = titleName) {
+) : QuickFragment(layoutId, layoutView, layoutViewInContext, titleName = titleName) {
 
     private var mViewModel: VM? = null
         set(value) {

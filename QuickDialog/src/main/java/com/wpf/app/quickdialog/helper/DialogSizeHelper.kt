@@ -4,7 +4,7 @@ import android.view.Window
 import android.view.WindowManager
 import com.wpf.app.quickdialog.listeners.DialogSize
 import com.wpf.app.quickdialog.minAndMaxLimit.MinAndMaxLimit
-import com.wpf.app.quickutil.base.asTo
+import com.wpf.app.quickutil.other.asTo
 
 /**
  * Created by 王朋飞 on 2022/6/17.

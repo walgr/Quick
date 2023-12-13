@@ -6,13 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import com.wpf.app.quickbind.QuickBind
-import com.wpf.app.quickbind.annotations.AutoGet
 
 /**
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-abstract class LazyViewFragment @JvmOverloads constructor(
+abstract class QuickLazyViewFragment @JvmOverloads constructor(
     @LayoutRes override val layoutId: Int = 0,
     override val layoutView: View? = null,
     titleName: String = ""

@@ -1,4 +1,4 @@
-package com.wpf.app.quickutil.utils
+package com.wpf.app.quickutil.other
 
 import androidx.viewpager.widget.ViewPager
 

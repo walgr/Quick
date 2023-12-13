@@ -1,10 +1,9 @@
-package com.wpf.app.quickutil.utils
+package com.wpf.app.quickutil.other
 
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.view.ViewParent
-import com.wpf.app.quickutil.base.asTo
 import com.wpf.app.quickutil.data.KVObject
 
 fun <V> ViewGroup.getChild(isViewGroup: (View) -> Boolean): V? {
@@ -35,6 +34,21 @@ fun View.removeParent() {
 fun <T : View>T.addToParent(parent: ViewParent): T {
     parent.asTo<ViewGroup>()?.addView(this)
     return this
+}
+
+fun View?.allChild(): List<View> {
+    if (this == null) return listOf()
+    if (this !is ViewGroup) return listOf()
+    val childList = mutableListOf<View>()
+    repeat(childCount) {
+        val child = getChildAt(it)
+        childList.addAll(if (child is ViewGroup) {
+            child.allChild()
+        } else {
+            listOf(child)
+        })
+    }
+    return childList
 }
 
 fun View.onceClick(interval: Long = 1000L, onClickListener: OnClickListener) {

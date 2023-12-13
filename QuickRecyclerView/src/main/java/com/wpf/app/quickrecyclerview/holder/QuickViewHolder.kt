@@ -11,7 +11,7 @@ import com.wpf.app.quickrecyclerview.data.QuickItemData
 import com.wpf.app.quickrecyclerview.listeners.QuickAdapterListener
 import com.wpf.app.quickbind.QuickBind
 import com.wpf.app.quickutil.bind.RunOnContextWithSelf
-import com.wpf.app.quickutil.base.getInflaterView
+import com.wpf.app.quickutil.other.getInflaterView
 
 /**
  * Created by 王朋飞 on 2022/7/13.

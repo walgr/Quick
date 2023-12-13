@@ -7,12 +7,11 @@ import android.widget.LinearLayout
 import androidx.annotation.LayoutRes
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.google.android.material.tabs.TabLayout.Tab
-import com.wpf.app.quickutil.base.asTo
-import com.wpf.app.quickutil.utils.onPageSelected
-import com.wpf.app.quickutil.utils.onTabSelected
-import com.wpf.app.quickutil.utils.onceClick
+import com.wpf.app.quickutil.other.asTo
+import com.wpf.app.quickutil.other.onPageSelected
+import com.wpf.app.quickutil.other.onTabSelected
+import com.wpf.app.quickutil.other.onceClick
 
 /**
  * 挪动位置需要同步修改TabInitProcessor里的包名

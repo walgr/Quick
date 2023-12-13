@@ -1,4 +1,4 @@
-package com.wpf.app.quickutil
+package com.wpf.app.quickutil.activity
 
 import android.app.Activity
 import android.content.Context

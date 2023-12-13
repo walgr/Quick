@@ -14,7 +14,7 @@ import com.wpf.app.quick.demo.fragment.MainTestFragment
 import com.wpf.app.quick.helper.tab.TabManager
 import com.wpf.app.quickbind.annotations.BindFragments
 import com.wpf.app.quickbind.viewpager.QuickViewPager
-import com.wpf.app.quickutil.base.toColor
+import com.wpf.app.quickutil.other.toColor
 import com.wpf.quick.helper.initTabMain
 
 class CodeMainActivity :

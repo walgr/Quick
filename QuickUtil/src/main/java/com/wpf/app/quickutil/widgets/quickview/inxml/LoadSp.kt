@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.core.content.edit
 import androidx.core.widget.doAfterTextChanged
 import com.wpf.app.quickutil.widgets.quickview.ChildToParentGroup
-import com.wpf.app.quickutil.base.asTo
+import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.bind.QuickBindWrap
 import com.wpf.app.quickutil.helper.attribute.SpViewAttributeHelper
 

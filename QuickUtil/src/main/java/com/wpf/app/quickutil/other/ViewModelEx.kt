@@ -1,4 +1,4 @@
-package com.wpf.app.quickutil.base
+package com.wpf.app.quickutil.other
 
 import androidx.lifecycle.ViewModel
 import java.lang.reflect.ParameterizedType

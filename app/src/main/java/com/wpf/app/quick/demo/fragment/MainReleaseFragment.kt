@@ -8,7 +8,10 @@ import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.demo.databinding.FragmentMainReleaseBinding
 import com.wpf.app.quickbind.annotations.BindSp2View
 
-class MainReleaseFragment: QuickVBFragment<MainReleaseVM, FragmentMainReleaseBinding>(R.layout.fragment_main_release, "正式场") {
+class MainReleaseFragment : QuickVBFragment<MainReleaseVM, FragmentMainReleaseBinding>(
+    R.layout.fragment_main_release,
+    titleName = "正式场"
+) {
 
     @SuppressLint("NonConstantResourceId")
     @BindSp2View(bindSp = "绑定的SpKey1", defaultValue = "默认值1")

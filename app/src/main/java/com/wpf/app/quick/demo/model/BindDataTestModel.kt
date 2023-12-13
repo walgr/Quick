@@ -1,7 +1,6 @@
 package com.wpf.app.quick.demo.model
 
 import android.annotation.SuppressLint
-import android.view.ViewGroup
 import android.widget.ImageView
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.annotations.bind.BindData2View
@@ -10,13 +9,14 @@ import com.wpf.app.quickbind.helper.binddatahelper.Url2ImageView
 import com.wpf.app.quickutil.bind.runOnContextWithSelf
 import com.wpf.app.quickutil.bind.runOnHolder
 import com.wpf.app.quickutil.LogUtil
+import com.wpf.app.quickutil.other.wrapLayoutParams
 
 /**
  * Created by 王朋飞 on 2022/7/5.
  */
 class BindDataTestModel : QuickClickData(layoutViewInContext = runOnContextWithSelf { it, _ ->
     ImageView(it).apply {
-        layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        layoutParams = wrapLayoutParams
         id = R.id.img
     }
 }) {
