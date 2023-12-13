@@ -1,5 +1,6 @@
 package com.wpf.app.quick.activity
 
+import android.view.View
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
@@ -11,6 +12,7 @@ open class QuickListVBActivity<VM : QuickVBModel<VB>, VB : ViewDataBinding> @Jvm
     dataList: List<QuickItemData>? = null,
     dataLoader: (RequestData.() -> List<QuickItemData>?)? = null,
     @LayoutRes layoutId: Int = 0,
+    layoutView: View? = null,
     @IdRes listId: Int = 0,
     titleName: String = ""
-) : QuickFragmentActivity(QuickListVBFragment<VM, VB>(dataList, dataLoader, layoutId, listId, titleName = titleName))
+) : QuickFragmentActivity(QuickListVBFragment<VM, VB>(dataList, dataLoader, layoutId, layoutView, listId, titleName = titleName))

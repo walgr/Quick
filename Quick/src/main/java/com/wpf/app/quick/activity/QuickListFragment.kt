@@ -21,15 +21,12 @@ open class QuickListFragment @JvmOverloads constructor(
     private val dataList: List<QuickItemData>? = null,
     private val dataLoader: (RequestData.() -> List<QuickItemData>?)? = null,
     @LayoutRes layoutId: Int = 0,
+    layoutView: View? = null,
     @IdRes val listId: Int = 0,
     titleName: String = ""
-) : QuickFragment(layoutViewInContext = runOnContext {
-    if (layoutId == 0) {
-        QuickRefreshRecyclerView(it).apply {
-            layoutParams = matchLayoutParams
-        }
-    } else {
-        layoutId.getInflaterView(it)
+) : QuickFragment(layoutId, layoutView, layoutViewInContext = runOnContext {
+    QuickRefreshRecyclerView(it).apply {
+        layoutParams = matchLayoutParams
     }
 }, titleName = titleName) {
 

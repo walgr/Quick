@@ -6,7 +6,7 @@ import android.util.AttributeSet
 import com.google.android.material.button.MaterialButton
 import com.wpf.app.quickbind.quickview.QuickBindView
 import com.wpf.app.quickutil.bind.runOnContext
-import com.wpf.app.quickutil.quickStartActivity
+import com.wpf.app.quickutil.activity.quickStartActivity
 
 open class GotoThis @JvmOverloads constructor(
     mContext: Context,

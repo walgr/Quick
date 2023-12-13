@@ -23,16 +23,13 @@ open class QuickListVBFragment<VM : QuickVBModel<VB>, VB : ViewDataBinding> @Jvm
     private val dataList: List<QuickItemData>? = null,
     private val dataLoader: (RequestData.() -> List<QuickItemData>?)? = null,
     @LayoutRes layoutId: Int = 0,
+    layoutView: View? = null,
     @IdRes val listId: Int = 0,
     titleName: String = ""
 ) : QuickVBFragment<VM, VB>(
-    layoutViewInContext = runOnContext {
-        if (layoutId == 0) {
-            QuickRefreshRecyclerView(it).apply {
-                layoutParams = matchLayoutParams
-            }
-        } else {
-            layoutId.getInflaterView(it)
+    layoutId, layoutView, layoutViewInContext = runOnContext {
+        QuickRefreshRecyclerView(it).apply {
+            layoutParams = matchLayoutParams
         }
     }, titleName = titleName
 ) {

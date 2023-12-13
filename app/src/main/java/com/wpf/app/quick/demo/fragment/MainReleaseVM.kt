@@ -18,7 +18,7 @@ import com.wpf.app.quick.demo.model.MyMessage
 import com.wpf.app.quick.demo.model.TestModel
 import com.wpf.app.quick.demo.wanandroid.WanAndroidHomeActivity
 import com.wpf.app.quickbind.annotations.BindSp2View
-import com.wpf.app.quickutil.quickStartActivity
+import com.wpf.app.quickutil.activity.quickStartActivity
 
 class MainReleaseVM: QuickVBModel<FragmentMainReleaseBinding>() {
 

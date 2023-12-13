@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import com.wpf.app.quick.demo.wanandroid.WebViewActivity
 import com.wpf.app.quickrecyclerview.data.QuickComposeData
 import com.wpf.app.quickrecyclerview.data.runOnCompose
-import com.wpf.app.quickutil.quickStartActivity
+import com.wpf.app.quickutil.activity.quickStartActivity
 
 @OptIn(InternalComposeApi::class)
 open class Article : QuickComposeData<Article>(onCompose = runOnCompose { self ->
