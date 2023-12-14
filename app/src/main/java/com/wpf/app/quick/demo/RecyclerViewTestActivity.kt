@@ -23,5 +23,6 @@ class RecyclerViewTestActivity :
         ),
         layoutId = R.layout.activity_recyclerview_test,
         listId = R.id.list,
-        titleName = "列表测试页"
+        titleName = "列表测试页",
+        getVMFormActivity = true
     )

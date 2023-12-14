@@ -14,7 +14,8 @@ open class QuickListVBActivity<VM : QuickVBModel<VB>, VB : ViewDataBinding> @Jvm
     @LayoutRes layoutId: Int = 0,
     layoutView: View? = null,
     @IdRes listId: Int = 0,
-    titleName: String = ""
+    titleName: String = "",
+    getVMFormActivity: Boolean = false,
 ) : QuickFragmentActivity(
     QuickListVBFragment<VM, VB>(
         dataList,
@@ -23,6 +24,6 @@ open class QuickListVBActivity<VM : QuickVBModel<VB>, VB : ViewDataBinding> @Jvm
         layoutView,
         listId,
         titleName = titleName,
-        getVMFormActivity = true
+        getVMFormActivity = getVMFormActivity
     )
 )

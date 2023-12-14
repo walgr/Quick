@@ -13,5 +13,16 @@ open class QuickListVMActivity<VM : QuickViewModel<out QuickView>> @JvmOverloads
     @LayoutRes layoutId: Int = 0,
     layoutView: View? = null,
     @IdRes listId: Int = 0,
-    titleName: String = ""
-): QuickFragmentActivity(QuickListVMFragment<VM>(dataList, dataLoader, layoutId, layoutView, listId, titleName = titleName))
+    titleName: String = "",
+    getVMFormActivity: Boolean = false,
+) : QuickFragmentActivity(
+    QuickListVMFragment<VM>(
+        dataList,
+        dataLoader,
+        layoutId,
+        layoutView,
+        listId,
+        titleName = titleName,
+        getVMFormActivity = getVMFormActivity
+    )
+)

@@ -14,10 +14,10 @@ import com.wpf.app.quickbind.interfaces.BindViewModel
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-abstract class QuickViewModelActivity<VM : QuickViewModel<out QuickView>> @JvmOverloads constructor(
+abstract class QuickVMActivity<VM : QuickViewModel<out QuickView>> @JvmOverloads constructor(
     @LayoutRes layoutId: Int = 0,
     layoutView: View? = null,
-    titleName: String = ""
+    titleName: String = "",
 ) : QuickActivity(layoutId, layoutView, titleName = titleName), BindViewModel<VM> {
     private var mViewModel: VM? = null
 

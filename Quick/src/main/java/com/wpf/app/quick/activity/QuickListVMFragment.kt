@@ -12,7 +12,6 @@ import com.wpf.app.quickrecyclerview.data.RequestData
 import com.wpf.app.quickutil.other.matchLayoutParams
 import com.wpf.app.quickutil.bind.runOnContext
 import com.wpf.app.quickutil.other.allChild
-import com.wpf.app.quickutil.other.getInflaterView
 
 /**
  * Created by 王朋飞 on 2022/7/13.
@@ -24,14 +23,15 @@ open class QuickListVMFragment<VM : QuickViewModel<out QuickView>> @JvmOverloads
     @LayoutRes layoutId: Int = 0,
     layoutView: View? = null,
     @IdRes val listId: Int = 0,
-    titleName: String = ""
-) : QuickViewModelFragment<VM>(
+    titleName: String = "",
+    getVMFormActivity: Boolean = false,
+) : QuickVMFragment<VM>(
     layoutId, layoutView,
     layoutViewInContext = runOnContext {
         QuickRefreshRecyclerView(it).apply {
             layoutParams = matchLayoutParams
         }
-    }, titleName = titleName
+    }, titleName = titleName, getVMFormActivity = getVMFormActivity
 ) {
     private var mRecyclerView: QuickRecyclerView? = null
     private val requestData = RequestData()

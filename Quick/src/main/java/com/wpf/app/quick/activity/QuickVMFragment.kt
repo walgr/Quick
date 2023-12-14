@@ -17,11 +17,12 @@ import com.wpf.app.quickutil.bind.RunOnContext
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-open class QuickViewModelFragment<VM : QuickViewModel<out QuickView>> @JvmOverloads constructor(
+open class QuickVMFragment<VM : QuickViewModel<out QuickView>> @JvmOverloads constructor(
     @LayoutRes layoutId: Int = 0,
     layoutView: View? = null,
     layoutViewInContext: RunOnContext<View>? = null,
-    titleName: String = ""
+    titleName: String = "",
+    private val getVMFormActivity: Boolean = false,         //是否获取父Activity的VM
 ) : QuickFragment(layoutId, layoutView, layoutViewInContext, titleName = titleName),
     BindViewModel<VM> {
 
@@ -60,11 +61,11 @@ open class QuickViewModelFragment<VM : QuickViewModel<out QuickView>> @JvmOverlo
 
     @CallSuper
     override fun initView(view: View?) {
-        initViewModel()
+        initViewModel(this)
     }
 
-    open fun initViewModel() {
-        val vmClass: Class<VM>? = ViewModelEx.get0Clazz(this)
+    open fun initViewModel(obj: Any) {
+        val vmClass: Class<VM>? = ViewModelEx.get0Clazz(obj)
         if (vmClass != null && context != null) {
             mViewModel = ViewModelProvider(
                 this,
@@ -75,6 +76,13 @@ open class QuickViewModelFragment<VM : QuickViewModel<out QuickView>> @JvmOverlo
                 QuickBind.bind(this, it)
                 it.onViewCreated(this)
             }
+        }
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        if (mViewModel == null && getVMFormActivity) {
+            initViewModel(requireActivity())
         }
     }
 
