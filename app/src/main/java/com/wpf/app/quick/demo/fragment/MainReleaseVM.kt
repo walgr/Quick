@@ -31,11 +31,11 @@ class MainReleaseVM: QuickVBModel<FragmentMainReleaseBinding>() {
     }
 
     fun gotoWanAndroid(view: View?) {
-        view?.context?.quickStartActivity(WanAndroidHomeActivity::class.java)
+        view?.context?.quickStartActivity<WanAndroidHomeActivity>()
     }
 
     fun gotoDialog(view: View?) {
-        view?.context?.quickStartActivity(DialogTestActivity::class.java)
+        view?.context?.quickStartActivity<DialogTestActivity>()
     }
 
     fun gotoR2Test(view: View?) {
@@ -45,23 +45,23 @@ class MainReleaseVM: QuickVBModel<FragmentMainReleaseBinding>() {
     }
 
     fun gotoGlide(view: View?) {
-        view?.context?.quickStartActivity(activityCls = ViewPagerBindFragmentTestActivity::class.java)
+        view?.context?.quickStartActivity<ViewPagerBindFragmentTestActivity>()
     }
 
     fun gotoRefreshList(view: View?) {
-        view?.context?.quickStartActivity(activityCls = RefreshListTestActivity::class.java)
+        view?.context?.quickStartActivity<RefreshListTestActivity>()
     }
 
     fun gotoSelectList(view: View?) {
-        view?.context?.quickStartActivity(activityCls = SelectListTestActivity::class.java)
+        view?.context?.quickStartActivity<SelectListTestActivity>()
     }
 
     fun gotoList(view: View?) {
-        view?.context?.quickStartActivity(activityCls = RecyclerViewTestActivity::class.java)
+        view?.context?.quickStartActivity<RecyclerViewTestActivity>()
     }
 
     fun gotoData(view: View?) {
-        view?.context?.quickStartActivity(activityCls = IntentDataTestActivity::class.java, object : HashMap<String, Any?>() {
+        view?.context?.quickStartActivity<IntentDataTestActivity>(object : HashMap<String, Any?>() {
             init {
                 put("activityTitle", "数据测试页")
                 put("intD", 2)
@@ -95,8 +95,8 @@ class MainReleaseVM: QuickVBModel<FragmentMainReleaseBinding>() {
                         add(TestModel("92"))
                     }
                 })
-                put("arrayS", arrayOf<MyMessage>(MyMessage("101"), MyMessage("102")))
-                put("arrayP", arrayOf<TestModel>(TestModel("101"), TestModel("102"))) //暂不支持
+                put("arrayS", arrayOf(MyMessage("101"), MyMessage("102")))
+                put("arrayP", arrayOf(TestModel("101"), TestModel("102"))) //暂不支持
             }
         })
     }

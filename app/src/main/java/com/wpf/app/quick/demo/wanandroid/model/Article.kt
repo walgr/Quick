@@ -26,8 +26,7 @@ open class Article : QuickComposeData<Article>(onCompose = runOnCompose { self -
             .clickable {
                 self
                     .getContext()
-                    ?.quickStartActivity(
-                        WebViewActivity::class.java,
+                    ?.quickStartActivity<WebViewActivity>(
                         mapOf("url" to self.link, "title" to self.title)
                     )
             },

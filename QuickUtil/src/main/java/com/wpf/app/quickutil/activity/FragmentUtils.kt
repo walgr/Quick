@@ -24,7 +24,7 @@ object FragmentUtils {
                 bundle.putSerializable(key, value)
             }
         }
-        fragment.setArguments(bundle)
+        fragment.arguments = bundle
         return fragment
     }
 }

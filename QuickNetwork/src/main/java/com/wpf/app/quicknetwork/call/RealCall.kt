@@ -3,7 +3,6 @@ package com.wpf.app.quicknetwork.call
 import com.google.gson.Gson
 import com.wpf.app.quicknetwork.base.BaseRequest
 import com.wpf.app.quicknetwork.base.BaseResponseI
-import com.wpf.app.quicknetwork.base.BaseResponseIA
 import com.wpf.app.quicknetwork.base.JobRequest
 import kotlinx.coroutines.*
 import retrofit2.Call
