@@ -23,22 +23,27 @@ abstract class QuickVBFragment<VM : QuickVBModel<VB>, VB : ViewDataBinding> @Jvm
     @LayoutRes layoutId: Int = 0,
     layoutView: View? = null,
     layoutViewInContext: RunOnContext<View>? = null,
-    titleName: String = ""
+    titleName: String = "",
+    private val getVMFormActivity: Boolean = false,         //是否获取父Activity的VM, VB
 ) : QuickFragment(layoutId, layoutView, layoutViewInContext, titleName = titleName) {
 
     private var mViewModel: VM? = null
         set(value) {
             field = value
             if (value != null) {
+                bind(this, value)
                 setViewBinding()
+                value.onBindingCreated(viewBinding)
             }
         }
 
     private var viewBinding: VB? = null
 
     private fun setViewBinding() {
-        viewBinding = DataBindingUtil.bind(requireView())
-        viewBinding?.lifecycleOwner = this
+        if (viewBinding == null) {
+            viewBinding = DataBindingUtil.bind(requireView())
+            viewBinding?.lifecycleOwner = this
+        }
         viewBinding?.setVariable(BRConstant.viewModel, mViewModel)
         setBindingVariable(viewBinding)
         viewBinding?.executePendingBindings()
@@ -47,20 +52,26 @@ abstract class QuickVBFragment<VM : QuickVBModel<VB>, VB : ViewDataBinding> @Jvm
 
     @CallSuper
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        initViewModel()
+        initViewModel(this)
         super.onViewCreated(view, savedInstanceState)
         initView(viewBinding)
     }
 
-    open fun initViewModel() {
-        val viewModelCls: Class<VM>? = ViewModelEx.get0Clazz(this)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        if (mViewModel == null && getVMFormActivity) {
+            initViewModel(requireActivity())
+            initView(viewBinding)
+        }
+    }
+
+    open fun initViewModel(obj: Any) {
+        val viewModelCls: Class<VM>? = ViewModelEx.get0Clazz(obj)
         if (viewModelCls != null && viewModelCls != QuickVBModel::class.java) {
             mViewModel = ViewModelProvider(
                 this,
                 ViewModelProvider.AndroidViewModelFactory(requireContext().applicationContext as Application)
             )[viewModelCls]
-            bind(this, mViewModel)
-            mViewModel?.onBindingCreated(viewBinding)
         } else {
             setViewBinding()
         }

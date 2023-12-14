@@ -15,4 +15,14 @@ open class QuickListVBActivity<VM : QuickVBModel<VB>, VB : ViewDataBinding> @Jvm
     layoutView: View? = null,
     @IdRes listId: Int = 0,
     titleName: String = ""
-) : QuickFragmentActivity(QuickListVBFragment<VM, VB>(dataList, dataLoader, layoutId, layoutView, listId, titleName = titleName))
+) : QuickFragmentActivity(
+    QuickListVBFragment<VM, VB>(
+        dataList,
+        dataLoader,
+        layoutId,
+        layoutView,
+        listId,
+        titleName = titleName,
+        getVMFormActivity = true
+    )
+)
