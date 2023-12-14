@@ -8,6 +8,9 @@ class MainTestFragment : QuickVBFragment<MainTestVM, FragmentMainTestBinding>(
     R.layout.fragment_main_test,
     titleName = "测试场"
 ) {
-    override fun initView(viewDataBinding: FragmentMainTestBinding?) {
+    override fun initView(view: FragmentMainTestBinding?) {
+        view?.shadow1?.postDelayed({
+            view.shadow1.text = "2"
+        }, 3000)
     }
 }

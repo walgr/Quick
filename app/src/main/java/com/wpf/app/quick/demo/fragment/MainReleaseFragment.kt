@@ -28,7 +28,7 @@ class MainReleaseFragment : QuickVBFragment<MainReleaseVM, FragmentMainReleaseBi
     var text3: TextView? = null
 
     @SuppressLint("SetTextI18n")
-    override fun initView(viewDataBinding: FragmentMainReleaseBinding?) {
+    override fun initView(view: FragmentMainReleaseBinding?) {
         text1?.postDelayed(
             { text1?.text = System.currentTimeMillis().toString() + "" },
             1000

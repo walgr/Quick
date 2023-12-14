@@ -12,14 +12,14 @@ import androidx.annotation.StyleableRes
 
 open class AttributeHelper(
     context: Context,
-    attributeSet: AttributeSet,
+    attributeSet: AttributeSet?,
     @StyleableRes styleableId: IntArray
 ) {
 
     private var isRecycle = false
 
     val typeArray by lazy {
-        context.obtainStyledAttributes(attributeSet, styleableId, 0, 0)
+        context.obtainStyledAttributes(attributeSet, styleableId)
     }
 
     fun recycle() {

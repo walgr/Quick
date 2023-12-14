@@ -109,7 +109,7 @@ abstract class QuickVBFragment<VM : QuickVBModel<VB>, VB : ViewDataBinding> @Jvm
     }
 
     override fun initView(view: View?) {}
-    abstract fun initView(viewDataBinding: VB?)
+    abstract fun initView(view: VB?)
 
     open fun setBindingVariable(view: VB?) {
 

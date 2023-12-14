@@ -79,4 +79,7 @@
         <attr name="ratio" format="float"/>
     </declare-styleable>
 
+    <declare-styleable name="ViewShadow">
+        <attr name="key" format="string"/>
+    </declare-styleable>
 </resources>

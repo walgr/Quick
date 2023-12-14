@@ -16,9 +16,9 @@ import java.lang.reflect.Field
  * 字段属性不可设置默认值
  */
 
-open class AutoGetAttributeHelper constructor(
+open class AutoGetAttributeHelper(
     private val context: Context,
-    attributeSet: AttributeSet,
+    attributeSet: AttributeSet?,
     @StyleableRes styleableId: IntArray
 ) : AttributeHelper(context, attributeSet, styleableId) {
 
@@ -31,7 +31,8 @@ open class AutoGetAttributeHelper constructor(
         recycle()
     }
 
-    private fun getAttributeType(attributeSet: AttributeSet, @StyleableRes styleableId: IntArray) {
+    private fun getAttributeType(attributeSet: AttributeSet?, @StyleableRes styleableId: IntArray) {
+        if (attributeSet == null) return
         if (testView == null) testView = View(context)
         for (i in 0 until attributeSet.attributeCount) {
 //            val attributeResNameSpace = (attributeSet as? XmlResourceParser)?.getAttributeNamespace(i)

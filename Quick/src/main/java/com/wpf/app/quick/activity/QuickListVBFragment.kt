@@ -56,7 +56,7 @@ open class QuickListVBFragment<VM : QuickVBModel<VB>, VB : ViewDataBinding> @Jvm
         super.initView(view)
     }
 
-    override fun initView(viewDataBinding: VB?) {
+    override fun initView(view: VB?) {
 
     }
 

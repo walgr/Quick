@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.widget.ImageView
 import android.widget.TextView
 import com.wpf.app.quick.activity.QuickBindingActivity
+import com.wpf.app.quick.activity.QuickFragment
 import com.wpf.app.quick.annotations.bind.BindView
 import com.wpf.app.quick.annotations.tab.IdView
 import com.wpf.app.quick.annotations.tab.TabInit
@@ -40,7 +41,10 @@ class CodeMainActivity :
     var viewPager: QuickViewPager? = null
     override fun initView(view: ActivityMainCodeBinding?) {
         super.initView(view)
-        val tabs = arrayOf(Pair(R.drawable.ic_home, "正式场"), Pair(R.drawable.ic_test, "测试场"))
+        val tabs = arrayOf(
+            Pair(R.drawable.ic_home, "正式场"),
+            Pair(R.drawable.ic_test, "测试场")
+        )
         this.tabs.initTabMain(
             parent = view?.bottomTabs,
             size = tabs.size,
