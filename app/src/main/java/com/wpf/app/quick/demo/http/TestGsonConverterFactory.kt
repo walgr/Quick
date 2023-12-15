@@ -1,158 +1,154 @@
-package com.wpf.app.quick.demo.http;
+package com.wpf.app.quick.demo.http
 
-import androidx.annotation.NonNull;
-import com.google.gson.Gson;
-import com.google.gson.TypeAdapter;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
-import okio.Buffer;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import retrofit2.Converter;
-import retrofit2.Retrofit;
-
-import java.io.*;
-import java.lang.annotation.Annotation;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.util.Map;
+import com.google.gson.Gson
+import com.google.gson.TypeAdapter
+import com.google.gson.reflect.TypeToken
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.ResponseBody
+import okio.Buffer
+import org.json.JSONArray
+import org.json.JSONObject
+import retrofit2.Converter
+import retrofit2.Retrofit
+import java.io.ByteArrayInputStream
+import java.io.IOException
+import java.io.InputStream
+import java.io.InputStreamReader
+import java.io.OutputStreamWriter
+import java.io.Reader
+import java.io.Writer
+import java.lang.reflect.ParameterizedType
+import java.lang.reflect.Type
+import java.nio.charset.StandardCharsets
 
 /**
  * Created by wg on 2017/5/9.
  */
+class TestGsonConverterFactory private constructor(gson: Gson?) : Converter.Factory() {
+    private val gson: Gson
 
-public class TestGsonConverterFactory extends Converter.Factory {
-
-    private final Gson gson;
-
-    private TestGsonConverterFactory(Gson gson) {
-        if (gson == null) throw new NullPointerException("gson == null");
-        this.gson = gson;
+    init {
+        if (gson == null) throw NullPointerException("gson == null")
+        this.gson = gson
     }
 
-    public static TestGsonConverterFactory create() {
-        return create(new Gson());
-    }
-
-    public static TestGsonConverterFactory create(Gson gson) {
-        return new TestGsonConverterFactory(gson);
-    }
-
-    @Override
-    public Converter<ResponseBody, ?> responseBodyConverter(@NonNull Type type, @NonNull Annotation[] annotations, @NonNull Retrofit retrofit) {
-        if (!(type instanceof ParameterizedType && ((ParameterizedType) type).getRawType() instanceof Class && parentIs((Class<?>) ((ParameterizedType) type).getRawType(), TestResponse.class)) && !(type instanceof JSONObject) && !(type instanceof JSONArray)) {
-            TestResponse<?> baseResponse = new TestResponse<>();
-            TypeAdapter<?> adapter = gson.getAdapter(TypeToken.getParameterized(baseResponse.getClass(), type));
-            return new CustomGsonResponseBodyConverter<>(gson, adapter);
+    override fun responseBodyConverter(
+        type: Type,
+        annotations: Array<Annotation>,
+        retrofit: Retrofit
+    ): Converter<ResponseBody, *> {
+        if (!(type is ParameterizedType && type.rawType is Class<*> && parentIs(
+                type.rawType as Class<*>, TestResponse::class.java
+            )) && type !is JSONObject && type !is JSONArray
+        ) {
+            val baseResponse: TestResponse<*> = TestResponse<Any>()
+            val adapter = gson.getAdapter(TypeToken.getParameterized(baseResponse.javaClass, type))
+            return CustomGsonResponseBodyConverter(gson, adapter)
         }
-        TypeAdapter<?> adapter = gson.getAdapter(TypeToken.get(type));
-        return new CustomGsonResponseBodyConverter<>(gson, adapter);
+        val adapter = gson.getAdapter(TypeToken.get(type))
+        return CustomGsonResponseBodyConverter(gson, adapter)
     }
 
-    private boolean parentIs(Class<?> curClass, Class<?> parentClass) {
-        Class<?> child = curClass;
+    private fun parentIs(curClass: Class<*>, parentClass: Class<*>): Boolean {
+        var child: Class<*>? = curClass
         while (child != null) {
-            if (parentClass.isInterface()) {
-                if (child.getInterfaces().length > 0 && parentIs(child.getInterfaces()[0], parentClass)) {
-                    return true;
+            if (parentClass.isInterface) {
+                if (child.interfaces.size > 0 && parentIs(child.interfaces[0], parentClass)) {
+                    return true
                 } else {
-                    if (child == parentClass) return true;
+                    if (child == parentClass) return true
                 }
             } else {
-                if (child == parentClass) return true;
+                if (child == parentClass) return true
             }
-            child = child.getSuperclass();
+            child = child.superclass
         }
-        return false;
+        return false
     }
 
-    @Override
-    public Converter<?, RequestBody> requestBodyConverter(@NonNull Type type, @NonNull Annotation[] parameterAnnotations, @NonNull Annotation[] methodAnnotations, @NonNull Retrofit retrofit) {
-        TypeAdapter<?> adapter = gson.getAdapter(TypeToken.get(type));
-        return new CustomGsonRequestBodyConverter<>(gson, adapter);
+    override fun requestBodyConverter(
+        type: Type,
+        parameterAnnotations: Array<Annotation>,
+        methodAnnotations: Array<Annotation>,
+        retrofit: Retrofit
+    ): Converter<*, RequestBody> {
+        val adapter = gson.getAdapter(TypeToken.get(type))
+        return CustomGsonRequestBodyConverter(gson, adapter)
     }
 
-    static final class CustomGsonRequestBodyConverter<T> implements Converter<T, RequestBody> {
-        private final MediaType MEDIA_TYPE = MediaType.parse("application/json; charset=UTF-8");
-        private final Charset UTF_8 = StandardCharsets.UTF_8;
-
-        private final Gson gson;
-        private final TypeAdapter<T> adapter;
-
-        CustomGsonRequestBodyConverter(Gson gson, TypeAdapter<T> adapter) {
-            this.gson = gson;
-            this.adapter = adapter;
-        }
-
-        @Override
-        public RequestBody convert(@NonNull T value) throws IOException {
-            Buffer buffer = new Buffer();
-            Writer writer = new OutputStreamWriter(buffer.outputStream(), UTF_8);
-            JsonWriter jsonWriter = gson.newJsonWriter(writer);
-            adapter.write(jsonWriter, value);
-            jsonWriter.close();
-            return RequestBody.Companion.create(buffer.readByteString(), MEDIA_TYPE);
+    internal class CustomGsonRequestBodyConverter<T>(
+        private val gson: Gson,
+        private val adapter: TypeAdapter<T>
+    ) : Converter<T, RequestBody> {
+        @Throws(IOException::class)
+        override fun convert(value: T): RequestBody {
+            val buffer = Buffer()
+            val writer: Writer = OutputStreamWriter(buffer.outputStream(), StandardCharsets.UTF_8)
+            val jsonWriter = gson.newJsonWriter(writer)
+            adapter.write(jsonWriter, value)
+            jsonWriter.close()
+            return buffer.readByteString().toRequestBody("application/json; charset=UTF-8".toMediaType())
         }
     }
 
-    static final class CustomGsonResponseBodyConverter<T> implements Converter<ResponseBody, T> {
-        private final Gson gson;
-        private final TypeAdapter<T> adapter;
-        private final Charset UTF_8 = StandardCharsets.UTF_8;
-
-        CustomGsonResponseBodyConverter(Gson gson, TypeAdapter<T> adapter) {
-            this.gson = gson;
-            this.adapter = adapter;
-        }
-
-        @Override
-        public T convert(ResponseBody value) throws IOException {
-            String response = value.string();
-            TestResponse<?> httpStatus = gson.fromJson(response, TestResponse.class);
+    internal class CustomGsonResponseBodyConverter<T>(
+        private val gson: Gson,
+        private val adapter: TypeAdapter<T>
+    ) : Converter<ResponseBody, T> {
+        private val UTF_8 = StandardCharsets.UTF_8
+        @Throws(IOException::class)
+        override fun convert(value: ResponseBody): T {
+            val response = value.string()
+            val httpStatus = gson.fromJson(response, TestResponse::class.java)
             if (!httpStatus.isSuccess()) {
                 //处理失败
-                return (T) httpStatus;
+                return httpStatus as T
             } else {
                 //接口成功
             }
-            MediaType contentType = value.contentType();
-            Charset charset = contentType != null ? contentType.charset(UTF_8) : UTF_8;
-            InputStream inputStream = new ByteArrayInputStream(response.getBytes());
-            Reader reader = new InputStreamReader(inputStream, charset);
-            JsonReader jsonReader = gson.newJsonReader(reader);
-
-            try {
-                T t = adapter.read(jsonReader);
+            val contentType = value.contentType()
+            val charset = if (contentType != null) contentType.charset(UTF_8) else UTF_8
+            val inputStream: InputStream = ByteArrayInputStream(response.toByteArray())
+            val reader: Reader = InputStreamReader(inputStream, charset)
+            val jsonReader = gson.newJsonReader(reader)
+            return try {
+                val t = adapter.read(jsonReader)
                 // 数据解析异常则返回jsonobject对象
-                if (t instanceof JSONObject) {
-                    return (T) new JSONObject(response);
-                } else if (t instanceof JSONArray) {
-                    return (T) new JSONArray(response);
-                } else if (t instanceof TestResponse) {
-                    if (((TestResponse<?>) t).getData() instanceof JSONObject) {
-                        ((TestResponse<JSONObject>) t).setData(new JSONObject(new Gson().toJson(httpStatus.getData())));
-                    } else if (((TestResponse<?>) t).getData() instanceof JSONArray) {
-                        ((TestResponse<JSONArray>) t).setData(new JSONArray(new Gson().toJson(httpStatus.getData())));
-                    } else if (((TestResponse<?>) t).getData() instanceof Map) {
-                        ((TestResponse<Map>) t).setData((Map) httpStatus.getData());
+                if (t is JSONObject) {
+                    return JSONObject(response) as T
+                } else if (t is JSONArray) {
+                    return JSONArray(response) as T
+                } else if (t is TestResponse<*>) {
+                    if ((t as TestResponse<*>).data is JSONObject) {
+                        (t as TestResponse<JSONObject?>).data =
+                            JSONObject(Gson().toJson(httpStatus.data))
+                    } else if ((t as TestResponse<*>).data is JSONArray) {
+                        (t as TestResponse<JSONArray?>).data =
+                            JSONArray(Gson().toJson(httpStatus.data))
+                    } else if ((t as TestResponse<*>).data is Map<*, *>) {
+                        (t as TestResponse<Map<*, *>?>).data = httpStatus.data as Map<*, *>?
                     }
-                    return (T) t;
+                    return t
                 }
-                return t;
-            } catch (Exception e) {
-                TestResponse<?> exceReponse = new TestResponse<>();
-                exceReponse.setErrorCode("-1");
-                exceReponse.setErrorMsg(e.getMessage());
-                return (T) exceReponse;
+                t
+            } catch (e: Exception) {
+                val exceReponse: TestResponse<*> = TestResponse<Any>()
+                exceReponse.errorCode = "-1"
+                exceReponse.errorMsg = e.message
+                exceReponse as T
             } finally {
-                value.close();
+                value.close()
             }
+        }
+    }
+
+    companion object {
+        @JvmOverloads
+        fun create(gson: Gson? = Gson()): TestGsonConverterFactory {
+            return TestGsonConverterFactory(gson)
         }
     }
 }
