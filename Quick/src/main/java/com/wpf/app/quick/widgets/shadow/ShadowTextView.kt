@@ -1,45 +1,36 @@
 package com.wpf.app.quick.widgets.shadow
 
 import android.content.Context
-import android.text.TextUtils
+import android.content.res.ColorStateList
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import androidx.annotation.ColorInt
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.MutableLiveData
-import com.wpf.app.quickutil.data.KVObject
 
-class ShadowTextView @JvmOverloads constructor(
+open class ShadowTextView @JvmOverloads constructor(
     context: Context,
-    attrs: AttributeSet? = null,
+    override val attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
-    override var key: String = ""
+    override var key: String = "",
+    abilityList: List<ShadowData<out Any>>? = null
 ) : AppCompatTextView(context, attrs, defStyleAttr), ShadowView {
 
-    private val funcKeyText = "text"
-    private val textLive by lazy {
-        KVObject.get<Map<String, MutableLiveData<CharSequence?>>>(key)?.get(funcKeyText)
-    }
-
     init {
-        if (TextUtils.isEmpty(key)) {
-            key = ShadowViewAttr(context, attrs).key ?: ""
-        }
-        KVObject.putIfNull(key) {
-            mapOf(
-                funcKeyText to MutableLiveData<CharSequence?>()
+        initShadow(
+            context,
+            abilityList ?: listOf(
+                ShadowLive.textLiveData,
+                ShadowLive.textSizeLiveData,
+                ShadowLive.textColorLiveData,
+                ShadowLive.textColorStateListLiveData,
+                ShadowLive.backgroundLiveData
             )
-        }
-        textLive?.observe(context as LifecycleOwner) {
-            text = it
-        }
+        )
     }
 
     override fun onAttachedToWindow() {
         super<AppCompatTextView>.onAttachedToWindow()
         super<ShadowView>.onAttachedToWindow()
-        if (textLive?.value == null) {
-            textLive?.value = text
-        }
     }
 
     override fun onDetachedFromWindow() {
@@ -48,9 +39,47 @@ class ShadowTextView @JvmOverloads constructor(
     }
 
     override fun setText(text: CharSequence?, type: BufferType?) {
-        super.setText(text, type)
-        if (!TextUtils.isEmpty(key) && textLive?.value != text) {
-            textLive?.value = text
-        }
+        super<AppCompatTextView>.setText(text, type)
+        super<ShadowView>.setText(text, type)
+    }
+
+    override fun setTextColor(@ColorInt color: Int) {
+        super<AppCompatTextView>.setTextColor(color)
+        super<ShadowView>.setTextColor(color)
+    }
+
+    override fun getTextColor(): Int {
+        return super.getCurrentTextColor()
+    }
+
+    override fun setTextColor(colors: ColorStateList?) {
+        super<AppCompatTextView>.setTextColor(colors)
+        super<ShadowView>.setTextColor(colors)
+    }
+
+    override fun getTextColorStateList(): ColorStateList? {
+        return super.getTextColors()
+    }
+
+    override fun setTextSize(unit: Int, size: Float) {
+        super<AppCompatTextView>.setTextSize(unit, size)
+        super<ShadowView>.setTextSize(unit, size)
+    }
+
+    override fun getTextSize(): Float {
+        return super<AppCompatTextView>.getTextSize()
+    }
+
+    override fun getText(): CharSequence {
+        return super<AppCompatTextView>.getText()
+    }
+
+    override fun getBackground(): Drawable? {
+        return super<AppCompatTextView>.getBackground()
+    }
+
+    override fun setBackground(background: Drawable?) {
+        super<AppCompatTextView>.setBackground(background)
+        super<ShadowView>.setBackground(background)
     }
 }

@@ -1,55 +1,34 @@
 package com.wpf.app.quick.widgets.shadow
 
 import android.content.Context
-import android.text.TextUtils
+import android.content.res.ColorStateList
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatToggleButton
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.MutableLiveData
-import com.wpf.app.quickutil.data.KVObject
 
-class ShadowToggleButton @JvmOverloads constructor(
+open class ShadowToggleButton @JvmOverloads constructor(
     context: Context,
-    attrs: AttributeSet? = null,
-    override var key: String = ""
+    override val attrs: AttributeSet? = null,
+    override var key: String = "",
+    abilityList: List<ShadowData<out Any>>? = null
 ) : AppCompatToggleButton(context, attrs), ShadowView {
 
-    private val funcKeyChecked = "checked"
-    private val checkedLive by lazy {
-        KVObject.get<Map<String, MutableLiveData<Boolean>>>(key)?.get(funcKeyChecked)
-    }
-    private val funcKeyText = "text"
-    private val textLive by lazy {
-        KVObject.get<Map<String, MutableLiveData<CharSequence?>>>(key)?.get(funcKeyText)
-    }
-
     init {
-        if (TextUtils.isEmpty(key)) {
-            key = ShadowViewAttr(context, attrs).key ?: ""
-        }
-        KVObject.putIfNull(key) {
-            mapOf(
-                funcKeyChecked to MutableLiveData<Boolean>(),
-                funcKeyText to MutableLiveData<CharSequence?>()
+        initShadow(
+            context,
+            abilityList ?: listOf(
+                ShadowLive.textLiveData,
+                ShadowLive.textSizeLiveData,
+                ShadowLive.textColorLiveData,
+                ShadowLive.textColorStateListLiveData,
+                ShadowLive.checkedLiveData
             )
-        }
-        checkedLive?.observe(context as LifecycleOwner) {
-            isChecked = it
-        }
-        textLive?.observe(context as LifecycleOwner) {
-            text = it
-        }
+        )
     }
 
     override fun onAttachedToWindow() {
         super<AppCompatToggleButton>.onAttachedToWindow()
         super<ShadowView>.onAttachedToWindow()
-        if (checkedLive?.value == null) {
-            checkedLive?.value = isChecked
-        }
-        if (textLive?.value == null) {
-            textLive?.value = text
-        }
     }
 
     override fun onDetachedFromWindow() {
@@ -58,16 +37,57 @@ class ShadowToggleButton @JvmOverloads constructor(
     }
 
     override fun setChecked(checked: Boolean) {
-        super.setChecked(checked)
-        if (!TextUtils.isEmpty(key) && checkedLive?.value != checked) {
-            checkedLive?.value = checked
-        }
+        super<AppCompatToggleButton>.setChecked(checked)
+        super<ShadowView>.setChecked(checked)
+    }
+
+    override fun isChecked(): Boolean {
+        return super<AppCompatToggleButton>.isChecked()
     }
 
     override fun setText(text: CharSequence?, type: BufferType?) {
-        super.setText(text, type)
-        if (!TextUtils.isEmpty(key) && textLive?.value != text) {
-            textLive?.value = text
-        }
+        super<AppCompatToggleButton>.setText(text, type)
+        super<ShadowView>.setText(text, type)
+    }
+
+    override fun getText(): CharSequence {
+        return super<AppCompatToggleButton>.getText()
+    }
+
+
+    override fun setTextColor(color: Int) {
+        super<AppCompatToggleButton>.setTextColor(color)
+        super<ShadowView>.setTextColor(color)
+    }
+
+    override fun getTextColor(): Int {
+        return super.getCurrentTextColor()
+    }
+
+    override fun setTextColor(colors: ColorStateList?) {
+        super<AppCompatToggleButton>.setTextColor(colors)
+        super<ShadowView>.setTextColor(colors)
+    }
+
+    override fun getTextColorStateList(): ColorStateList? {
+        return super.getTextColors()
+    }
+
+    override fun setTextSize(unit: Int, size: Float) {
+        super<AppCompatToggleButton>.setTextSize(unit, size)
+        super<ShadowView>.setTextSize(unit, size)
+    }
+
+    override fun getTextSize(): Float {
+        return super<AppCompatToggleButton>.getTextSize()
+    }
+
+    override fun getBackground(): Drawable? {
+        return super<AppCompatToggleButton>.getBackground()
+    }
+
+    override fun setBackground(background: Drawable?) {
+        super<AppCompatToggleButton>.setBackground(background)
+        super<ShadowView>.setBackground(background)
     }
 }
