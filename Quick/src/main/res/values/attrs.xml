@@ -76,10 +76,20 @@
     </declare-styleable>
 
     <declare-styleable name="AspectRatioView">
-        <attr name="ratio" format="float"/>
+        <attr name="ratio" format="float" />
     </declare-styleable>
 
     <declare-styleable name="ViewShadow">
-        <attr name="key" format="string"/>
+        <attr name="key" format="string" />
+        <attr name="bindTypes" format="flags">
+            <flag name="visibility" value="0x00000001"/>
+            <flag name="text" value="0x00000010"/>
+            <flag name="textSize" value="0x00000100"/>
+            <flag name="textColor" value="0x00001000"/>
+            <flag name="textColorStateList" value="0x00010000"/>
+            <flag name="isSelect" value="0x00100000"/>
+            <flag name="checked" value="0x01000000"/>
+            <flag name="background" value="0x10000000"/>
+        </attr>
     </declare-styleable>
 </resources>

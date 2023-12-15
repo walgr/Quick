@@ -9,22 +9,31 @@ import android.view.View
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.lifecycle.MutableLiveData
+import com.wpf.app.quick.widgets.shadow.ShadowLiveFactory.liveDataList
 import com.wpf.app.quickutil.data.KVObject
 
 interface ShadowView {
     val attrs: AttributeSet?
     var key: String
+    var bindTypes: Array<Int>?
 
     fun initShadow(context: Context, liveKey: List<ShadowData<Any>>) {
         if (TextUtils.isEmpty(key)) {
-            key = ShadowViewAttr(context, attrs).key ?: ""
+            val attr = ShadowViewAttr(context, attrs)
+            key = attr.key ?: ""
+            bindTypes = attr.bindTypes?.replace("0x", "")?.map {
+                it.toString().toInt()
+            }?.reversed()?.toTypedArray()
+        }
+        val liveKeyFilter = if (bindTypes == null ) liveKey else liveDataList.filter {
+            bindTypes == null || bindTypes?.getOrNull(liveDataList.indexOf(it)) == 1
         }
         KVObject.putIfNull(key) {
-            liveKey.associate {
+            liveKeyFilter.associate {
                 Pair(it.first, it.second.invoke())
             }
         }
-        liveKey.forEach {
+        liveKeyFilter.forEach {
             it.third?.invoke(context, this)
         }
     }

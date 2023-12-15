@@ -10,6 +10,7 @@ open class ShadowCheckBox @JvmOverloads constructor(
     context: Context,
     override val attrs: AttributeSet? = null,
     override var key: String = "",
+    override var bindTypes: Array<Int>? = null,
     abilityList: List<ShadowData<out Any>>? = null
 ) : AppCompatCheckBox(context, attrs), ShadowView {
 

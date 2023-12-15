@@ -10,4 +10,5 @@ open class ShadowViewAttr(
     attrs: AttributeSet? = null,
 ) : AutoGetAttributeHelper(context, attrs, R.styleable.ViewShadow) {
     var key: String? = null
+    var bindTypes: String? = null
 }

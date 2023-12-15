@@ -55,7 +55,9 @@
                 android:gravity="center"
                 android:text="2"
                 android:checked="true"
-                app:key="test2"/>
+                app:key="test2"
+                app:bindTypes="checked"
+                />
 
             <View
                 android:layout_width="10dp"
@@ -67,6 +69,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 app:key="test2"
+                app:bindTypes="checked"
                 />
 
         </LinearLayout>
@@ -95,6 +98,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 app:key="test2"
+                app:bindTypes="text"
                 />
 
         </LinearLayout>
