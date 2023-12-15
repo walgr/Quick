@@ -5,6 +5,7 @@ import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.text.TextUtils
 import android.util.AttributeSet
+import android.view.View
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.lifecycle.MutableLiveData
@@ -28,25 +29,35 @@ interface ShadowView {
         }
     }
 
+    fun setVisibility(visibility: Int) {
+        checkKey {
+            getLiveData<Int>(ShadowLiveFactory.visibilityLiveData.first)?.noEqualSet(visibility)
+        }
+    }
+
+    fun getVisibility(): Int {
+        return View.VISIBLE
+    }
+
     fun getText(): CharSequence? {
         return null!!
     }
 
     fun setText(text: CharSequence?, type: TextView.BufferType?) {
         checkKey {
-            getLiveData<CharSequence>(ShadowLive.textLiveData.first)?.noEqualSet(text)
+            getLiveData<CharSequence>(ShadowLiveFactory.textLiveData.first)?.noEqualSet(text)
         }
     }
 
     fun setTextColor(@ColorInt color: Int) {
         checkKey {
-            getLiveData<Int>(ShadowLive.textColorLiveData.first)?.noEqualSet(color)
+            getLiveData<Int>(ShadowLiveFactory.textColorLiveData.first)?.noEqualSet(color)
         }
     }
 
     fun setTextColor(colors: ColorStateList?) {
         checkKey {
-            getLiveData<ColorStateList>(ShadowLive.textColorStateListLiveData.first)?.noEqualSet(colors)
+            getLiveData<ColorStateList>(ShadowLiveFactory.textColorStateListLiveData.first)?.noEqualSet(colors)
         }
     }
 
@@ -60,7 +71,7 @@ interface ShadowView {
 
     fun setTextSize(unit: Int, size: Float) {
         checkKey {
-            getLiveData<TextSize>(ShadowLive.textSizeLiveData.first).noEqualSet(TextSize(unit, size)) { o1, o2 ->
+            getLiveData<TextSize>(ShadowLiveFactory.textSizeLiveData.first).noEqualSet(TextSize(unit, size)) { o1, o2 ->
                 o1?.unit == o2?.unit && o1?.size == o2?.size
             }
         }
@@ -76,19 +87,29 @@ interface ShadowView {
 
     fun setChecked(checked: Boolean) {
         checkKey {
-            getLiveData<Boolean>(ShadowLive.checkedLiveData.first)?.noEqualSet(checked)
+            getLiveData<Boolean>(ShadowLiveFactory.checkedLiveData.first)?.noEqualSet(checked)
+        }
+    }
+
+    fun isSelected(): Boolean {
+        return false
+    }
+
+    fun setSelected(selected: Boolean) {
+        checkKey {
+            getLiveData<Boolean>(ShadowLiveFactory.isSelectLiveData.first)?.noEqualSet(selected)
         }
     }
 
     fun setImageDrawable(drawable: Drawable?) {
         checkKey {
-            getLiveData<Drawable>(ShadowLive.imageLiveData.first)?.noEqualSet(drawable)
+            getLiveData<Drawable>(ShadowLiveFactory.imageLiveData.first)?.noEqualSet(drawable)
         }
     }
 
     fun setBackground(background: Drawable?) {
         checkKey {
-            getLiveData<Drawable>(ShadowLive.backgroundLiveData.first)?.noEqualSet(background)
+            getLiveData<Drawable>(ShadowLiveFactory.backgroundLiveData.first)?.noEqualSet(background)
         }
     }
 
@@ -102,7 +123,7 @@ interface ShadowView {
 
     fun onAttachedToWindow() {
         ShadowViewManager.onAttachedToWindow(this)
-        ShadowLive.liveDataList.forEach {
+        ShadowLiveFactory.liveDataList.forEach {
             it.four?.invoke(this)
         }
     }

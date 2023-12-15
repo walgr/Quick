@@ -16,8 +16,10 @@ open class ShadowImageView @JvmOverloads constructor(
         initShadow(
             context,
             abilityList ?: listOf(
-                ShadowLive.imageLiveData,
-                ShadowLive.backgroundLiveData
+                ShadowLiveFactory.visibilityLiveData,
+                ShadowLiveFactory.imageLiveData,
+                ShadowLiveFactory.isSelectLiveData,
+                ShadowLiveFactory.backgroundLiveData
             )
         )
     }
@@ -48,5 +50,23 @@ open class ShadowImageView @JvmOverloads constructor(
 
     override fun getBackground(): Drawable? {
         return super<AppCompatImageView>.getBackground()
+    }
+
+    override fun isSelected(): Boolean {
+        return super<AppCompatImageView>.isSelected()
+    }
+
+    override fun setSelected(selected: Boolean) {
+        super<AppCompatImageView>.setSelected(selected)
+        super<ShadowView>.setSelected(selected)
+    }
+
+    override fun setVisibility(visibility: Int) {
+        super<AppCompatImageView>.setVisibility(visibility)
+        super<ShadowView>.setVisibility(visibility)
+    }
+
+    override fun getVisibility(): Int {
+        return super<AppCompatImageView>.getVisibility()
     }
 }

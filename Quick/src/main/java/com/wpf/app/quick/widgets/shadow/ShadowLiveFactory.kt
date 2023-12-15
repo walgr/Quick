@@ -11,18 +11,36 @@ import com.wpf.app.quickutil.data.Quadruple
 
 typealias ShadowData<T> = Quadruple<String, () -> MutableLiveData<out T>, ((Context, ShadowView) -> Unit)?, (ShadowView.() -> Unit)?>
 
-object ShadowLive {
+object ShadowLiveFactory {
     val liveDataList by lazy {
         arrayOf(
+            visibilityLiveData,
             textLiveData,
             textColorLiveData,
             textSizeLiveData,
             textColorStateListLiveData,
+            isSelectLiveData,
             checkedLiveData,
             imageLiveData,
             backgroundLiveData
         )
     }
+
+    private const val visibilityLiveDataKey = "visibility"
+    val visibilityLiveData: ShadowData<Int> = Quadruple(
+        visibilityLiveDataKey, { MutableLiveData<Int>() },
+        object : ((Context, ShadowView) -> Unit) {
+            override fun invoke(context: Context, shadowView: ShadowView) {
+                shadowView.getLiveData<Int>(visibilityLiveDataKey)
+                    ?.observe(context as LifecycleOwner) {
+                        shadowView.setVisibility(it)
+                    }
+            }
+        }, object : (ShadowView) -> Unit {
+            override fun invoke(p1: ShadowView) {
+                p1.getLiveData<Int>(visibilityLiveDataKey)?.nullSet(p1.getVisibility())
+            }
+        })
 
     private const val textLiveDataKey = "text"
     val textLiveData: ShadowData<CharSequence> = Quadruple(
@@ -88,6 +106,24 @@ object ShadowLive {
                     p1.getLiveData<ColorStateList>(textColorStateListLiveDataKey)?.nullSet(p1.getTextColorStateList())
                 }
             })
+
+    private const val isSelectLiveDataKey = "isSelect"
+    val isSelectLiveData: ShadowData<Boolean> =
+        Quadruple(isSelectLiveDataKey, { MutableLiveData<Boolean>() },
+            object : ((Context, ShadowView) -> Unit) {
+                override fun invoke(context: Context, shadowView: ShadowView) {
+                    shadowView.getLiveData<Boolean>(isSelectLiveDataKey)
+                        ?.observe(context as LifecycleOwner) {
+                            shadowView.setSelected(it)
+                        }
+                }
+
+            }, object : (ShadowView) -> Unit {
+                override fun invoke(p1: ShadowView) {
+                    p1.getLiveData<Boolean>(isSelectLiveDataKey)?.nullSet(p1.isSelected())
+                }
+            })
+
 
     private const val checkedLiveDataKey = "checked"
     val checkedLiveData: ShadowData<Boolean> =

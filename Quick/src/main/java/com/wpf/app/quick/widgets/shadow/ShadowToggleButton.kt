@@ -17,11 +17,13 @@ open class ShadowToggleButton @JvmOverloads constructor(
         initShadow(
             context,
             abilityList ?: listOf(
-                ShadowLive.textLiveData,
-                ShadowLive.textSizeLiveData,
-                ShadowLive.textColorLiveData,
-                ShadowLive.textColorStateListLiveData,
-                ShadowLive.checkedLiveData
+                ShadowLiveFactory.visibilityLiveData,
+                ShadowLiveFactory.textLiveData,
+                ShadowLiveFactory.textSizeLiveData,
+                ShadowLiveFactory.textColorLiveData,
+                ShadowLiveFactory.textColorStateListLiveData,
+                ShadowLiveFactory.isSelectLiveData,
+                ShadowLiveFactory.checkedLiveData
             )
         )
     }
@@ -43,6 +45,15 @@ open class ShadowToggleButton @JvmOverloads constructor(
 
     override fun isChecked(): Boolean {
         return super<AppCompatToggleButton>.isChecked()
+    }
+
+    override fun isSelected(): Boolean {
+        return super<AppCompatToggleButton>.isSelected()
+    }
+
+    override fun setSelected(selected: Boolean) {
+        super<AppCompatToggleButton>.setSelected(selected)
+        super<ShadowView>.setSelected(selected)
     }
 
     override fun setText(text: CharSequence?, type: BufferType?) {
@@ -89,5 +100,14 @@ open class ShadowToggleButton @JvmOverloads constructor(
     override fun setBackground(background: Drawable?) {
         super<AppCompatToggleButton>.setBackground(background)
         super<ShadowView>.setBackground(background)
+    }
+
+    override fun setVisibility(visibility: Int) {
+        super<AppCompatToggleButton>.setVisibility(visibility)
+        super<ShadowView>.setVisibility(visibility)
+    }
+
+    override fun getVisibility(): Int {
+        return super<AppCompatToggleButton>.getVisibility()
     }
 }

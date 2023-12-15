@@ -2,6 +2,7 @@ package com.wpf.app.quick.demo.fragment
 
 import android.annotation.SuppressLint
 import androidx.compose.ui.graphics.Color
+import androidx.core.view.isVisible
 import com.wpf.app.quick.activity.QuickVBFragment
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.demo.databinding.FragmentMainTestBinding
@@ -30,7 +31,11 @@ class MainTestFragment : QuickVBFragment<MainTestVM, FragmentMainTestBinding>(
                 view.shadow1.text = (index + 1).toString()
                 val newColor = colorList[index]
                 view.shadow1.setTextColor(newColor)
+                view.shadow1.visibility
             }
+        }
+        view?.shadow6?.setOnCheckedChangeListener { _, isChecked ->
+            view.shadow8.isVisible = isChecked
         }
     }
 }

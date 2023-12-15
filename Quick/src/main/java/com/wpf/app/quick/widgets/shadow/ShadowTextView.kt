@@ -19,11 +19,13 @@ open class ShadowTextView @JvmOverloads constructor(
         initShadow(
             context,
             abilityList ?: listOf(
-                ShadowLive.textLiveData,
-                ShadowLive.textSizeLiveData,
-                ShadowLive.textColorLiveData,
-                ShadowLive.textColorStateListLiveData,
-                ShadowLive.backgroundLiveData
+                ShadowLiveFactory.visibilityLiveData,
+                ShadowLiveFactory.textLiveData,
+                ShadowLiveFactory.textSizeLiveData,
+                ShadowLiveFactory.textColorLiveData,
+                ShadowLiveFactory.textColorStateListLiveData,
+                ShadowLiveFactory.isSelectLiveData,
+                ShadowLiveFactory.backgroundLiveData
             )
         )
     }
@@ -81,5 +83,23 @@ open class ShadowTextView @JvmOverloads constructor(
     override fun setBackground(background: Drawable?) {
         super<AppCompatTextView>.setBackground(background)
         super<ShadowView>.setBackground(background)
+    }
+
+    override fun isSelected(): Boolean {
+        return super<AppCompatTextView>.isSelected()
+    }
+
+    override fun setSelected(selected: Boolean) {
+        super<AppCompatTextView>.setSelected(selected)
+        super<ShadowView>.setSelected(selected)
+    }
+
+    override fun setVisibility(visibility: Int) {
+        super<AppCompatTextView>.setVisibility(visibility)
+        super<ShadowView>.setVisibility(visibility)
+    }
+
+    override fun getVisibility(): Int {
+        return super<AppCompatTextView>.getVisibility()
     }
 }

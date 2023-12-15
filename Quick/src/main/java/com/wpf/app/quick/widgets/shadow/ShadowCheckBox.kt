@@ -17,11 +17,13 @@ open class ShadowCheckBox @JvmOverloads constructor(
         initShadow(
             context,
             abilityList ?: listOf(
-                ShadowLive.textLiveData,
-                ShadowLive.textSizeLiveData,
-                ShadowLive.textColorLiveData,
-                ShadowLive.textColorStateListLiveData,
-                ShadowLive.checkedLiveData
+                ShadowLiveFactory.visibilityLiveData,
+                ShadowLiveFactory.textLiveData,
+                ShadowLiveFactory.textSizeLiveData,
+                ShadowLiveFactory.textColorLiveData,
+                ShadowLiveFactory.textColorStateListLiveData,
+                ShadowLiveFactory.isSelectLiveData,
+                ShadowLiveFactory.checkedLiveData,
             )
         )
     }
@@ -43,6 +45,15 @@ open class ShadowCheckBox @JvmOverloads constructor(
 
     override fun isChecked(): Boolean {
         return super<AppCompatCheckBox>.isChecked()
+    }
+
+    override fun isSelected(): Boolean {
+        return super<AppCompatCheckBox>.isSelected()
+    }
+
+    override fun setSelected(selected: Boolean) {
+        super<AppCompatCheckBox>.setSelected(selected)
+        super<ShadowView>.setSelected(selected)
     }
 
     override fun setText(text: CharSequence?, type: BufferType?) {
@@ -88,5 +99,14 @@ open class ShadowCheckBox @JvmOverloads constructor(
     override fun setBackground(background: Drawable?) {
         super<AppCompatCheckBox>.setBackground(background)
         super<ShadowView>.setBackground(background)
+    }
+
+    override fun setVisibility(visibility: Int) {
+        super<AppCompatCheckBox>.setVisibility(visibility)
+        super<ShadowView>.setVisibility(visibility)
+    }
+
+    override fun getVisibility(): Int {
+        return super<AppCompatCheckBox>.getVisibility()
     }
 }
