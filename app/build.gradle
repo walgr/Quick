@@ -2,7 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
-    id("com.google.devtools.ksp") version "1.9.10-1.0.13"
+    id("com.google.devtools.ksp") version "$ksp"
 }
 
 android {
@@ -61,7 +61,7 @@ android {
         }
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.3"
+        kotlinCompilerExtensionVersion = "$composeVersion"
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11

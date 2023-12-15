@@ -30,7 +30,7 @@ class TabInitProcessor(environment: SymbolProcessorEnvironment) : IdProcessor(en
         if (tabInitAnn?.arguments == null) return
         outFileName = "TabInitHelper"
         val layoutIdName = getAnnotationArgumentIdCode(fileStr, TabInit::class, "layout").first()
-        val layoutId = tabInitAnn.arguments[0].value as Int
+        val layoutId = tabInitAnn.arguments[0].value as? Int ?: 0
         val funName = tabInitAnn.arguments[1].value as? String ?: ""
         val idTypeStrList =
             (tabInitAnn.arguments[if (funName.isEmpty()) 1 else 2].value as ArrayList<KSAnnotation>).map { it.arguments.joinToString() }

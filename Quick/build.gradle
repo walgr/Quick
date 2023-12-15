@@ -39,15 +39,15 @@ dependencies {
     implementation deps.kotlin_reflect
     implementation deps.gson
 
-    compileOnly deps.androidx.appcompat
+    implementation deps.androidx.appcompat
     //fragment-ktx
-    compileOnly deps.androidx.fragmentktx
+    implementation deps.androidx.fragmentktx
 
-    compileOnly deps.androidx.material
+    implementation deps.androidx.material
     //约束布局
-    compileOnly deps.androidx.constraintlayout
+    implementation deps.androidx.constraintlayout
     //列表
-    compileOnly deps.androidx.recyclerview
+    implementation deps.androidx.recyclerview
 
     if (IS_REMOTE.toBoolean()) {
         api deps.quickbind.bind

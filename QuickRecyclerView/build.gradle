@@ -33,7 +33,7 @@ android {
         jvmTarget = '11'
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.3"
+        kotlinCompilerExtensionVersion = "$composeVersion"
     }
     namespace 'com.wpf.app.quickrecyclerview'
 }
@@ -44,12 +44,16 @@ dependencies {
     compileOnly "androidx.compose.foundation:foundation:${rootProject.composeVersion}"
     compileOnly "androidx.compose.ui:ui-tooling-preview:${rootProject.composeVersion}"
     debugCompileOnly "androidx.compose.ui:ui-tooling:${rootProject.composeVersion}"
+
     //列表
     compileOnly deps.androidx.recyclerview
     //SmartRefreshLayout
     compileOnly deps.refresh
     compileOnly deps.refresh_header
     compileOnly deps.refresh_footer
+
+    //解决构建jdk8冲突失败
+    implementation deps.kotlin.stdLibJdk8
 
     if (IS_REMOTE.toBoolean()) {
         api deps.quickbind.util

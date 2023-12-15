@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.widget.ImageView
 import android.widget.TextView
 import com.wpf.app.quick.activity.QuickBindingActivity
-import com.wpf.app.quick.activity.QuickFragment
 import com.wpf.app.quick.annotations.bind.BindView
 import com.wpf.app.quick.annotations.tab.IdView
 import com.wpf.app.quick.annotations.tab.TabInit
