@@ -56,7 +56,6 @@
                 android:text="2"
                 android:checked="true"
                 app:key="test2"
-                app:bindTypes="checked"
                 />
 
             <View

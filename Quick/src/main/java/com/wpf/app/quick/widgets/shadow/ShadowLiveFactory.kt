@@ -13,17 +13,36 @@ typealias ShadowData<T> = Quadruple<String, () -> MutableLiveData<out T>, ((Cont
 
 object ShadowLiveFactory {
     val liveDataList by lazy {
-        arrayOf(
-            visibilityLiveData,
-            textLiveData,
-            textColorLiveData,
-            textSizeLiveData,
-            textColorStateListLiveData,
-            isSelectLiveData,
-            checkedLiveData,
-            imageLiveData,
-            backgroundLiveData
+        mapOf(
+            1 to visibilityLiveData,
+            2 to backgroundLiveData,
+            4 to textLiveData,
+            8 to textSizeLiveData,
+            10 to textColorLiveData,
+            20 to textColorStateListLiveData,
+            40 to isSelectLiveData,
+            80 to checkedLiveData,
+            100 to imageLiveData,
         )
+    }
+    val liveDataAssembleList by lazy {
+        val assembleMap = mutableMapOf<Int, List<ShadowData<out Any>>>()
+        val assembleTemp = mutableMapOf<Int, ShadowData<out Any>>()
+        val keys = liveDataList.keys
+        keys.sorted().forEach {
+            if (assembleTemp.isEmpty() || assembleTemp.keys.maxOf { key -> key.toString().length }.toString().length <= it.toString().length) {
+                assembleTemp[it] = liveDataList[it] as ShadowData<out Any>
+            } else {
+                assembleTemp.clear()
+                assembleTemp[it] = liveDataList[it] as ShadowData<out Any>
+            }
+            if (assembleTemp.size > 1) {
+                assembleMap[assembleTemp.keys.sum()] = assembleTemp.values.flatMap { value ->
+                    listOf(value)
+                }
+            }
+        }
+        assembleMap
     }
 
     private const val visibilityLiveDataKey = "visibility"

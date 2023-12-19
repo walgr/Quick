@@ -12,7 +12,7 @@ open class ShadowTextView @JvmOverloads constructor(
     override val attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
     override var key: String = "",
-    override var bindTypes: Array<Int>? = null,
+    override var bindTypes: List<ShadowData<out Any>>? = null,
     abilityList: List<ShadowData<out Any>>? = null
 ) : AppCompatTextView(context, attrs, defStyleAttr), ShadowView {
 

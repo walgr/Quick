@@ -9,31 +9,64 @@ import android.view.View
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.lifecycle.MutableLiveData
+import com.wpf.app.quick.widgets.shadow.ShadowLiveFactory.liveDataAssembleList
 import com.wpf.app.quick.widgets.shadow.ShadowLiveFactory.liveDataList
+import com.wpf.app.quickutil.LogUtil
 import com.wpf.app.quickutil.data.KVObject
 
 interface ShadowView {
     val attrs: AttributeSet?
     var key: String
-    var bindTypes: Array<Int>?
+    var bindTypes: List<ShadowData<out Any>>?
 
+    private fun getBuildType(buildTypeStr: String?): List<String>? {
+        if (buildTypeStr == null) return null
+        val result = mutableListOf<String>()
+        buildTypeStr.toCharArray().reversed().filterIndexed { index, c ->
+            if (index != 0) {
+                val fillInStr = (10 * index).toString()
+                result.add(c.toString() + fillInStr.substring(fillInStr.length - 1))
+            } else {
+                result.add(c.toString())
+            }
+        }
+        return result.filter {
+            it != "0"
+        }
+    }
+
+    @OptIn(ExperimentalStdlibApi::class)
     fun initShadow(context: Context, liveKey: List<ShadowData<Any>>) {
         if (TextUtils.isEmpty(key)) {
             val attr = ShadowViewAttr(context, attrs)
             key = attr.key ?: ""
-            bindTypes = attr.bindTypes?.replace("0x", "")?.map {
-                it.toString().toInt()
-            }?.reversed()?.toTypedArray()
+            val bindTypeStr = getBuildType(attr.bindTypes?.replace("0x", ""))
+            bindTypes = if (bindTypeStr == null) liveKey else liveDataList.filter {
+                bindTypeStr.contains(it.key.toString())
+            }.values.toMutableList().plus(
+                bindTypeStr.flatMap {
+                    liveDataAssembleList[it.hexToInt(HexFormat.Default)] ?: mutableListOf()
+                }.toMutableList()
+            )
         }
-        val liveKeyFilter = if (bindTypes == null ) liveKey else liveDataList.filter {
-            bindTypes == null || bindTypes?.getOrNull(liveDataList.indexOf(it)) == 1
-        }
-        KVObject.putIfNull(key) {
-            liveKeyFilter.associate {
+        LogUtil.e("同步", "$this:bindTypes---" + bindTypes?.joinToString())
+        if (bindTypes == null) return
+        var keyLiveMap = KVObject.get<MutableMap<String, MutableLiveData<out Any>>>(key)
+        if (keyLiveMap == null) {
+            val liveKeyFilterMap = bindTypes!!.associate {
                 Pair(it.first, it.second.invoke())
-            }
+            }.toMutableMap()
+            KVObject.put(key, liveKeyFilterMap)
+            keyLiveMap = liveKeyFilterMap
+        } else {
+            val liveKeyFilterMap = bindTypes!!.filter {
+                !keyLiveMap.keys.contains(it.first)
+            }.associate {
+                Pair(it.first, it.second.invoke())
+            }.toMutableMap()
+            keyLiveMap.putAll(liveKeyFilterMap)
         }
-        liveKeyFilter.forEach {
+        bindTypes!!.forEach {
             it.third?.invoke(context, this)
         }
     }
@@ -132,8 +165,8 @@ interface ShadowView {
 
     fun onAttachedToWindow() {
         ShadowViewManager.onAttachedToWindow(this)
-        ShadowLiveFactory.liveDataList.forEach {
-            it.four?.invoke(this)
+        liveDataList.forEach {
+            it.value.four?.invoke(this)
         }
     }
     fun onDetachedFromWindow() {
