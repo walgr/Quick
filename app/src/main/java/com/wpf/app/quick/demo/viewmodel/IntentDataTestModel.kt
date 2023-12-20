@@ -63,7 +63,7 @@ class IntentDataTestModel : QuickVBModel<ActivityDataTestBinding>() {
     @BindView(R.id.title1)
     var title: TextView? = null
 
-    override fun onBindingCreated(mViewBinding: ActivityDataTestBinding?) {
+    override fun onBindingCreated(view: ActivityDataTestBinding?) {
         printData()
     }
 

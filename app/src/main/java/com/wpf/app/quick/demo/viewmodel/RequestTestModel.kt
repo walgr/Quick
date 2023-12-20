@@ -28,7 +28,7 @@ class RequestTestModel : QuickVBModel<ActivityRequestTestBinding>() {
         }
     }.isManual { true }
 
-    override fun onBindingCreated(mViewBinding: ActivityRequestTestBinding?) {
+    override fun onBindingCreated(view: ActivityRequestTestBinding?) {
         //手动请求
         info.manualRequest()
         requestParams["page"] = 1

@@ -16,7 +16,7 @@ abstract class QuickVBModel<T : ViewDataBinding> : ViewModel(), LifecycleObserve
 
     override var jobManager: MutableList<Job> = mutableListOf()
 
-    abstract fun onBindingCreated(mViewBinding: T?)
+    abstract fun onBindingCreated(view: T?)
 
     fun getViewBinding(): T? {
         return mViewBinding

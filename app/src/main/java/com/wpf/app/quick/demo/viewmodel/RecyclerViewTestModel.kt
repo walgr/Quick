@@ -15,7 +15,7 @@ import com.wpf.app.quickutil.other.toColor
  */
 class RecyclerViewTestModel : QuickVBModel<ActivityRecyclerviewTestBinding>() {
 
-    override fun onBindingCreated(mViewBinding: ActivityRecyclerviewTestBinding?) {
+    override fun onBindingCreated(view: ActivityRecyclerviewTestBinding?) {
 
     }
 

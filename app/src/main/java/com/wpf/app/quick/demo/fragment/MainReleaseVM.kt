@@ -26,7 +26,7 @@ class MainReleaseVM: QuickVBModel<FragmentMainReleaseBinding>() {
     @BindSp2View(bindSp = "绑定的SpKey2", defaultValue = "默认值2")
     @BindView(R.id.spTextView2)
     var text2: TextView? = null
-    override fun onBindingCreated(mViewBinding: FragmentMainReleaseBinding?) {
+    override fun onBindingCreated(view: FragmentMainReleaseBinding?) {
 
     }
 

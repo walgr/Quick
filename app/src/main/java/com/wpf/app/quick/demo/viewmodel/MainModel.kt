@@ -18,7 +18,7 @@ class MainModel : QuickVBModel<ActivityMainBinding>() {
     @BindView(R.id.spTextView2)
     var text2: TextView? = null
 
-    override fun onBindingCreated(mViewBinding: ActivityMainBinding?) {
+    override fun onBindingCreated(view: ActivityMainBinding?) {
 
     }
 }

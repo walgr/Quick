@@ -18,21 +18,21 @@ class SelectListModel : QuickVBModel<ActivitySelectTestBinding>() {
 
     val selectList: MutableLiveData<List<QuickChildSelectData>> = MutableLiveData()
 
-    override fun onBindingCreated(mViewBinding: ActivitySelectTestBinding?) {
-        mViewBinding?.selectList?.mOnSelectCallback = object :
+    override fun onBindingCreated(view: ActivitySelectTestBinding?) {
+        view?.selectList?.mOnSelectCallback = object :
             OnSelectCallback {
             override fun onSelectResult(selectResult: List<QuickChildSelectData>?) {
                 selectResult?.let {
                     selectList.value = it
                 }
-                mViewBinding?.selectResult?.setNewData(selectResult?.map {
+                view?.selectResult?.setNewData(selectResult?.map {
                     SelectResultItem(it.isSelect, it.parent, it.id, it.name)
                 })
             }
         }
-        mViewBinding?.selectResult?.layoutManager =
+        view?.selectResult?.layoutManager =
             LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false)
-        mViewBinding?.selectList?.bindResult(mViewBinding.selectResult)
+        view?.selectList?.bindResult(view.selectResult)
         loadData()
     }
 
