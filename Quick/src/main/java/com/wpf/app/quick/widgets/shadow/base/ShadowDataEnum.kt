@@ -1,9 +1,7 @@
-package com.wpf.app.quick.widgets.shadow
+package com.wpf.app.quick.widgets.shadow.base
 
 import android.content.Context
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
-import android.widget.TextView
 
 typealias RealValueFun<T> = ((ShadowView) -> T?)
 enum class ShadowDataEnum(

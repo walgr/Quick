@@ -1,4 +1,4 @@
-package com.wpf.app.quick.widgets.shadow
+package com.wpf.app.quick.widgets.shadow.base
 
 import android.content.Context
 import android.content.res.ColorStateList
@@ -9,8 +9,8 @@ import android.view.View
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.lifecycle.MutableLiveData
-import com.wpf.app.quick.widgets.shadow.ShadowLiveFactory.liveDataAssembleList
-import com.wpf.app.quick.widgets.shadow.ShadowLiveFactory.liveDataList
+import com.wpf.app.quick.widgets.shadow.base.ShadowLiveFactory.liveDataAssembleList
+import com.wpf.app.quick.widgets.shadow.base.ShadowLiveFactory.liveDataList
 import com.wpf.app.quickutil.LogUtil
 import com.wpf.app.quickutil.data.KVObject
 

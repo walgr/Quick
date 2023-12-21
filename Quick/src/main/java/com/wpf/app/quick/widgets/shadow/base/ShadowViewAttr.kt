@@ -1,4 +1,4 @@
-package com.wpf.app.quick.widgets.shadow
+package com.wpf.app.quick.widgets.shadow.base
 
 import android.content.Context
 import android.util.AttributeSet

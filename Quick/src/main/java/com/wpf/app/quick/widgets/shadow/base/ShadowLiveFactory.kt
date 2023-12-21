@@ -1,4 +1,4 @@
-package com.wpf.app.quick.widgets.shadow
+package com.wpf.app.quick.widgets.shadow.base
 
 import android.content.Context
 import android.content.res.ColorStateList
@@ -13,7 +13,7 @@ typealias ShadowData<T> = Quadruple<String, () -> MutableLiveData<out T>, ((Cont
 
 object ShadowLiveFactory {
     val liveDataList by lazy {
-        mapOf(
+        mutableMapOf(
             1 to visibilityLiveData,
             2 to backgroundLiveData,
             4 to textLiveData,
@@ -24,6 +24,9 @@ object ShadowLiveFactory {
             80 to checkedLiveData,
             100 to imageLiveData,
         )
+    }
+    fun addCustomData(liveData: Pair<Int, ShadowData<out Any>>) {
+        liveDataList[liveData.first] = liveData.second
     }
     val liveDataAssembleList by lazy {
         val assembleMap = mutableMapOf<Int, List<ShadowData<out Any>>>()
@@ -89,7 +92,8 @@ object ShadowLiveFactory {
                 }
             }, object : (ShadowView) -> Unit {
                 override fun invoke(p1: ShadowView) {
-                    p1.getLiveData<TextSize>(textSizeLiveDataKey)?.nullSet(TextSize(TypedValue.COMPLEX_UNIT_PX, p1.getTextSize()))
+                    p1.getLiveData<TextSize>(textSizeLiveDataKey)
+                        ?.nullSet(TextSize(TypedValue.COMPLEX_UNIT_PX, p1.getTextSize()))
                 }
             })
 
@@ -122,7 +126,8 @@ object ShadowLiveFactory {
 
             }, object : (ShadowView) -> Unit {
                 override fun invoke(p1: ShadowView) {
-                    p1.getLiveData<ColorStateList>(textColorStateListLiveDataKey)?.nullSet(p1.getTextColorStateList())
+                    p1.getLiveData<ColorStateList>(textColorStateListLiveDataKey)
+                        ?.nullSet(p1.getTextColorStateList())
                 }
             })
 

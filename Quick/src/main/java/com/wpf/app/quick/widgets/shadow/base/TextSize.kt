@@ -1,4 +1,4 @@
-package com.wpf.app.quick.widgets.shadow
+package com.wpf.app.quick.widgets.shadow.base
 
 data class TextSize(
     val unit: Int,

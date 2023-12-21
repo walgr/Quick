@@ -1,4 +1,4 @@
-package com.wpf.app.quick.widgets.shadow
+package com.wpf.app.quick.widgets.shadow.base
 
 import com.wpf.app.quickutil.data.KVObject
 

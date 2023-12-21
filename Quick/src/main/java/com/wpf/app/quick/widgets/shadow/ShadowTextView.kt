@@ -6,6 +6,9 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import androidx.annotation.ColorInt
 import androidx.appcompat.widget.AppCompatTextView
+import com.wpf.app.quick.widgets.shadow.base.ShadowData
+import com.wpf.app.quick.widgets.shadow.base.ShadowLiveFactory
+import com.wpf.app.quick.widgets.shadow.base.ShadowView
 
 open class ShadowTextView @JvmOverloads constructor(
     context: Context,
