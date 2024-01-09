@@ -11,14 +11,16 @@ import com.wpf.app.quick.demo.dialog.TestDialog
 import com.wpf.app.quickdialog.DialogManager
 import com.wpf.app.quickdialog.showInManager
 import com.wpf.app.quickutil.bind.runOnContext
+import com.wpf.app.quickutil.other.dp2px
 
 class DialogTestActivity : QuickActivity(
     layoutViewInContext = runOnContext {
         LinearLayout(it).apply {
+            setPadding(16.dp2px(it), 0, 16.dp2px(it), 0)
             orientation = LinearLayout.VERTICAL
             gravity = Gravity.CENTER
             addView(MaterialButton(it).apply {
-                text = "弹窗1"
+                text = "弹窗"
                 id = R.id.btnNext
             })
         }
@@ -27,9 +29,9 @@ class DialogTestActivity : QuickActivity(
 
     override fun initView() {
         findViewById<Button>(R.id.btnNext).setOnClickListener {
-            Test3Dialog(this).showInManager()
+            Test3Dialog(this).showInManager(showWithOther = true)
             it.postDelayed({
-                Test2Dialog(this).showInManager()
+                Test2Dialog(this).showInManager(recoverInDismiss = false)
             }, 1000)
             it.postDelayed({
                 TestDialog(this).showInManager()

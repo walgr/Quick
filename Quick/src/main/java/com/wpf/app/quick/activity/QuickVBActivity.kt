@@ -25,15 +25,19 @@ abstract class QuickVBActivity<VM : QuickVBModel<VB>, VB : ViewDataBinding> @Jvm
         set(value) {
             field = value
             if (value != null) {
+                QuickBind.bind(this, value)
                 setViewBinding()
+                value.onBindingCreated(viewBinding)
             }
         }
 
     private var viewBinding: VB? = null
 
     private fun setViewBinding() {
-        viewBinding = DataBindingUtil.setContentView(this, layoutId)
-        viewBinding?.lifecycleOwner = this
+        if (viewBinding == null) {
+            viewBinding = DataBindingUtil.setContentView(this, layoutId)
+            viewBinding?.lifecycleOwner = this
+        }
         viewBinding?.setVariable(BRConstant.viewModel, mViewModel)
         setBindingVariable(viewBinding)
         viewBinding?.executePendingBindings()
@@ -41,15 +45,13 @@ abstract class QuickVBActivity<VM : QuickVBModel<VB>, VB : ViewDataBinding> @Jvm
     }
 
     override fun dealContentView() {
-        super.dealContentView()
+//        super.dealContentView()
         val viewModelCls: Class<VM>? = ViewModelEx.get0Clazz(this)
         if (viewModelCls != null && this !is QuickBindingActivity && viewModelCls != QuickVBModel::class.java) {
             mViewModel = ViewModelProvider(
                 this,
                 ViewModelProvider.AndroidViewModelFactory(application)
             )[viewModelCls]
-            QuickBind.bind(this, mViewModel)
-            mViewModel?.onBindingCreated(viewBinding)
         } else {
             setViewBinding()
         }

@@ -1,5 +1,6 @@
 package com.wpf.app.quick.activity
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
@@ -53,6 +54,8 @@ abstract class QuickActivity @JvmOverloads constructor(
     override fun getView(): View? {
         return window.decorView
     }
+
+    fun requireContext() = this
 
     override fun onDestroy() {
         super.onDestroy()

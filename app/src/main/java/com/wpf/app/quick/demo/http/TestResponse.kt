@@ -6,10 +6,11 @@ import com.wpf.app.quicknetwork.base.BaseResponseIS
 
 @GenerateCommonCall("TestCommon")
 @GenerateNormalCall("TestNormal")
-open class TestResponse<Data>: BaseResponseIS<Data> {
-    var data: Data? = null
-    var errorCode: String? = null
-    var errorMsg: String? = null
+open class TestResponse<Data> @JvmOverloads constructor(
+    var data: Data? = null,
+    var errorCode: String? = null,
+    var errorMsg: String? = null,
+): BaseResponseIS<Data> {
     override var codeI: String? = null
         get() = errorCode
         set(value) {
@@ -28,11 +29,4 @@ open class TestResponse<Data>: BaseResponseIS<Data> {
             field = value
             data = value
         }
-
-    //给CallAdapter确定类型使用
-    internal constructor()
-    internal constructor(data: Class<Data>)
-    internal constructor(data: Data?) {
-        this.data = data
-    }
 }

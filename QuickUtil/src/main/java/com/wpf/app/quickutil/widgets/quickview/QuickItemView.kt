@@ -52,7 +52,11 @@ abstract class QuickItemView @JvmOverloads constructor(
             val parentGroup = parent as? ViewGroup ?: return@post
             position = parentGroup.indexOfChild(this)
             parentGroup.removeView(this)
-            parentGroup.addView(mView, position, ViewGroup.LayoutParams(layoutParams.width, layoutParams.height))
+            parentGroup.addView(
+                mView,
+                position,
+                ViewGroup.LayoutParams(layoutParams.width, layoutParams.height)
+            )
             visibility = GONE
             onCreateViewHolder()
             onBindViewHolder(position)
@@ -86,7 +90,7 @@ abstract class QuickItemView @JvmOverloads constructor(
 
     //预览可见
     override fun onDraw(canvas: Canvas) {
+        getView()?.draw(canvas)
         super.onDraw(canvas)
-        return getView()?.draw(canvas) ?: super.onDraw(canvas)
     }
 }

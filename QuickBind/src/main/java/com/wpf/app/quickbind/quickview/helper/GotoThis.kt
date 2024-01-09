@@ -8,6 +8,7 @@ import com.wpf.app.quickbind.quickview.QuickBindView
 import com.wpf.app.quickutil.bind.runOnContext
 import com.wpf.app.quickutil.activity.quickStartActivity
 
+@Deprecated("预览不了")
 open class GotoThis @JvmOverloads constructor(
     mContext: Context,
     attributeSet: AttributeSet? = null,

@@ -67,7 +67,7 @@ abstract class QuickVBFragment<VM : QuickVBModel<VB>, VB : ViewDataBinding> @Jvm
 
     open fun initViewModel(obj: Any) {
         val viewModelCls: Class<VM>? = ViewModelEx.get0Clazz(obj)
-        if (viewModelCls != null && viewModelCls != QuickVBModel::class.java) {
+        if (viewModelCls != null && this !is QuickBindingFragment && viewModelCls != QuickVBModel::class.java) {
             mViewModel = ViewModelProvider(
                 this,
                 ViewModelProvider.AndroidViewModelFactory(requireContext().applicationContext as Application)
@@ -97,6 +97,7 @@ abstract class QuickVBFragment<VM : QuickVBModel<VB>, VB : ViewDataBinding> @Jvm
         mViewModel?.onStop()
     }
 
+    @Deprecated("Deprecated by Fragment")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         mViewModel?.onActivityResult(requestCode, resultCode, data)
@@ -109,7 +110,9 @@ abstract class QuickVBFragment<VM : QuickVBModel<VB>, VB : ViewDataBinding> @Jvm
     }
 
     override fun initView(view: View?) {}
-    abstract fun initView(view: VB?)
+    open fun initView(view: VB?) {
+
+    }
 
     open fun setBindingVariable(view: VB?) {
 

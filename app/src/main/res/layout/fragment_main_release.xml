@@ -5,6 +5,8 @@
 
     <data>
         <import type="com.wpf.app.quick.demo.wanandroid.WanAndroidHomeActivityClass"/>
+        <import type="com.wpf.app.quick.demo.RequestTestActivityClass"/>
+        <import type="com.wpf.app.quick.demo.ShadowViewTestActivityClass"/>
         <variable
             name="viewModel"
             type="com.wpf.app.quick.demo.fragment.MainReleaseVM" />
@@ -72,10 +74,19 @@
                 android:onClick="@{viewModel::gotoSelectList}"
                 android:text="选择列表测试" />
 
-            <view
-                class="com.wpf.app.quick.demo.RequestTestActivity$GotoRequestTest"
+            <Button
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:clickGoto="@{RequestTestActivityClass.INSTANCE.KClass}"
+                android:text="接口请求测试"
+                android:textAllCaps="false"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:clickGoto="@{ShadowViewTestActivityClass.INSTANCE.KClass}"
+                android:text="View同步测试"
+                android:textAllCaps="false"/>
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:layout_width="50dp"
