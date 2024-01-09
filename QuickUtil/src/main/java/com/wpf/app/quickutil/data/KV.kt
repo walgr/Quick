@@ -1,6 +1,6 @@
 package com.wpf.app.quickutil.data
 
-object KVObject {
+object KV {
     private val data = mutableMapOf<Any, Any?>()
 
     fun put(key: Any, data: Any?) {

@@ -9,14 +9,14 @@ import com.wpf.app.quickbind.helper.binddatahelper.Url2ImageView
 import com.wpf.app.quickutil.bind.runOnContextWithSelf
 import com.wpf.app.quickutil.bind.runOnHolder
 import com.wpf.app.quickutil.LogUtil
-import com.wpf.app.quickutil.other.wrapLayoutParams
+import com.wpf.app.quickutil.other.matchWrapLayoutParams
 
 /**
  * Created by 王朋飞 on 2022/7/5.
  */
 class BindDataTestModel : QuickClickData(layoutViewInContext = runOnContextWithSelf { it, _ ->
     ImageView(it).apply {
-        layoutParams = wrapLayoutParams
+        layoutParams = matchWrapLayoutParams
         id = R.id.img
     }
 }) {

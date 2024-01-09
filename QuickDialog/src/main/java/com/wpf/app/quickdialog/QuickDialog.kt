@@ -15,6 +15,7 @@ import com.wpf.app.quickdialog.listeners.DialogLifecycle
 import com.wpf.app.quickdialog.listeners.DialogSize
 import com.wpf.app.quickdialog.minAndMaxLimit.MinAndMaxLimit
 import com.wpf.app.quickdialog.minAndMaxLimit.SizeLimitViewGroup
+import com.wpf.app.quickutil.bind.RunOnContext
 
 /**
  * Created by 王朋飞 on 2022/6/16.
@@ -24,15 +25,18 @@ abstract class QuickDialog : Dialog, DialogSize, DialogLifecycle {
     @LayoutRes
     var layoutId: Int = 0
     var layoutView: View? = null
+    var layoutViewInContext: RunOnContext<View>? = null
 
     constructor(
         mContext: Context,
         themeId: Int = 0,
         @LayoutRes layoutId: Int = 0,
-        layoutView: View? = null
+        layoutView: View? = null,
+        layoutViewInContext: RunOnContext<View>? = null,
     ) : super(mContext, themeId) {
         this.layoutId = layoutId
         this.layoutView = layoutView
+        this.layoutViewInContext = layoutViewInContext
     }
 
     constructor(
@@ -40,10 +44,12 @@ abstract class QuickDialog : Dialog, DialogSize, DialogLifecycle {
         cancelable: Boolean = false,
         cancelListener: DialogInterface.OnCancelListener? = null,
         @LayoutRes layoutId: Int = 0,
-        layoutView: View? = null
+        layoutView: View? = null,
+        layoutViewInContext: RunOnContext<View>? = null,
     ) : super(mContext, cancelable, cancelListener) {
         this.layoutId = layoutId
         this.layoutView = layoutView
+        this.layoutViewInContext = layoutViewInContext
     }
 
     public override fun onStart() {
@@ -55,7 +61,7 @@ abstract class QuickDialog : Dialog, DialogSize, DialogLifecycle {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         dealSize()
-        mView = layoutView ?: LayoutInflater.from(getViewContext()).inflate(layoutId, null)
+        mView = layoutViewInContext?.run(getViewContext()) ?: layoutView ?: LayoutInflater.from(getViewContext()).inflate(layoutId, null)
         if (initDialogAdaptiveHeight()) {
             mView = SizeLimitViewGroup(getViewContext()).apply {
                 addView(mView)

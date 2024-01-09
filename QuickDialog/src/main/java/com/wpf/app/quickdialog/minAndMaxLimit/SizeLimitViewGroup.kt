@@ -35,7 +35,7 @@ class SizeLimitViewGroup @JvmOverloads constructor(
         super.onMeasure(widthSpec, heightSpec)
     }
 
-    var firstChildView: View? = null
+    private var firstChildView: View? = null
 
     override fun getFirstChild(): View? {
         if (firstChildView == null) {

@@ -12,7 +12,7 @@ import androidx.lifecycle.MutableLiveData
 import com.wpf.app.quick.widgets.shadow.base.ShadowLiveFactory.liveDataAssembleList
 import com.wpf.app.quick.widgets.shadow.base.ShadowLiveFactory.liveDataList
 import com.wpf.app.quickutil.LogUtil
-import com.wpf.app.quickutil.data.KVObject
+import com.wpf.app.quickutil.data.KV
 
 interface ShadowView {
     val attrs: AttributeSet?
@@ -51,12 +51,12 @@ interface ShadowView {
         }
         LogUtil.e("同步", "$this:bindTypes---" + bindTypes?.joinToString())
         if (bindTypes == null) return
-        var keyLiveMap = KVObject.get<MutableMap<String, MutableLiveData<out Any>>>(key)
+        var keyLiveMap = KV.get<MutableMap<String, MutableLiveData<out Any>>>(key)
         if (keyLiveMap == null) {
             val liveKeyFilterMap = bindTypes!!.associate {
                 Pair(it.first, it.second.invoke())
             }.toMutableMap()
-            KVObject.put(key, liveKeyFilterMap)
+            KV.put(key, liveKeyFilterMap)
             keyLiveMap = liveKeyFilterMap
         } else {
             val liveKeyFilterMap = bindTypes!!.filter {
@@ -174,7 +174,7 @@ interface ShadowView {
     }
 
     fun <T: Any> getLiveData(mapKey: String?): MutableLiveData<T>? {
-        return KVObject.get<Map<String, MutableLiveData<T>>>(key)?.get(mapKey)
+        return KV.get<Map<String, MutableLiveData<T>>>(key)?.get(mapKey)
     }
 
     fun checkKey(result: () -> Unit) {
