@@ -24,19 +24,19 @@ class AutoTagLayout @JvmOverloads constructor(
             init?.invoke(this) ?: let {
                 attrs?.let {
                     val autoTagAttrs = AutoTagLayoutAttr(context, attrs)
-                    autoTagAttrs.flexDirection?.let {
+                    autoTagAttrs.tagDirection?.let {
                         this.flexDirection = it
                     }
-                    autoTagAttrs.flexWrap?.let {
+                    autoTagAttrs.tagWrap?.let {
                         this.flexWrap = it
                     }
-                    autoTagAttrs.alignItems?.let {
+                    autoTagAttrs.tagAlignItems?.let {
                         this.alignItems = it
                     }
-                    autoTagAttrs.alignContent?.let {
+                    autoTagAttrs.tagAlignContent?.let {
                         this.alignContent = it
                     }
-                    autoTagAttrs.justifyContent?.let {
+                    autoTagAttrs.tagJustifyContent?.let {
                         this.justifyContent = it
                     }
                     autoTagAttrs.maxLine?.let {
@@ -54,17 +54,23 @@ class AutoTagLayout @JvmOverloads constructor(
     internal class AutoTagLayoutAttr(
         context: Context,
         attrs: AttributeSet? = null,
-    ): AutoGetAttributeHelper(context, attrs, R.styleable.AutoTagLayout) {
+    ) : AutoGetAttributeHelper(context, attrs, R.styleable.AutoTagLayout) {
+
         @FlexDirection
-        val flexDirection: Int? = null
+        val tagDirection: Int? = null
+
         @FlexWrap
-        val flexWrap: Int? = null
+        val tagWrap: Int? = null
+
         @AlignItems
-        val alignItems: Int? = null
+        val tagAlignItems: Int? = null
+
         @AlignContent
-        val alignContent: Int? = null
+        val tagAlignContent: Int? = null
+
         @JustifyContent
-        val justifyContent: Int? = null
+        val tagJustifyContent: Int? = null
+
         val maxLine: Int? = null
     }
 }

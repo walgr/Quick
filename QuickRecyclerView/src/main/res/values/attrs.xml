@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="AutoTagLayout">
-        <attr name="flexDirection">
+        <attr name="tagDirection">
             <enum name="row" value="0"/>
             <enum name="row_reverse" value="1"/>
             <enum name="column" value="2"/>
             <enum name="column_reverse" value="3"/>
         </attr>
 
-        <attr name="flexWrap">
+        <attr name="tagWrap">
             <enum name="nowrap" value="0"/>
             <enum name="wrap" value="1"/>
             <enum name="wrap_reverse" value="2"/>
@@ -20,7 +20,7 @@
             want to use the flex-flow similar way to the web.
          -->
 
-        <attr name="justifyContent">
+        <attr name="tagJustifyContent">
             <enum name="flex_start" value="0"/>
             <enum name="flex_end" value="1"/>
             <enum name="center" value="2"/>
@@ -29,7 +29,7 @@
             <enum name="space_evenly" value="5"/>
         </attr>
 
-        <attr name="alignItems">
+        <attr name="tagAlignItems">
             <enum name="flex_start" value="0"/>
             <enum name="flex_end" value="1"/>
             <enum name="center" value="2"/>
@@ -37,7 +37,7 @@
             <enum name="stretch" value="4"/>
         </attr>
 
-        <attr name="alignContent">
+        <attr name="tagAlignContent">
             <enum name="flex_start" value="0"/>
             <enum name="flex_end" value="1"/>
             <enum name="center" value="2"/>
