@@ -10,4 +10,4 @@ import java.io.Serializable
 class MyMessage(
     var userName: String = "",
     var msg: String = ""
-) : QuickBindData(R.layout.holder_message_my), Serializable
+) : QuickBindData(R.layout.holder_message_my, autoSet = true), Serializable

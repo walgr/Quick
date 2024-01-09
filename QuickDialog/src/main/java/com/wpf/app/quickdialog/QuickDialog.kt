@@ -144,6 +144,12 @@ abstract class QuickDialog : Dialog, DialogSize, DialogLifecycle {
         onDialogClose()
     }
 
+    var listener: DialogInterface.OnDismissListener? = null
+    override fun setOnDismissListener(listener: DialogInterface.OnDismissListener?) {
+        super.setOnDismissListener(listener)
+        this.listener = listener
+    }
+
     override fun getViewContext(): Context {
         return context
     }

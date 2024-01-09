@@ -29,7 +29,7 @@ class DialogTestActivity : QuickActivity(
         findViewById<Button>(R.id.btnNext).setOnClickListener {
             Test3Dialog(this).showInManager()
             it.postDelayed({
-                Test2Dialog(this).showInManager(showWithOther = true)
+                Test2Dialog(this).showInManager()
             }, 1000)
             it.postDelayed({
                 TestDialog(this).showInManager()

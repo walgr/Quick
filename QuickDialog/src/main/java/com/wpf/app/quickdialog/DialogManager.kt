@@ -32,7 +32,10 @@ object DialogManager {
             priority
         }
         val priorityDialogInMap = showingDialog[realPriority]
-        val priorityDialog = PriorityDialog(dialog, realPriority, null, recoverInDismiss, showWithOther)
+        val dialogDismissListener = if (dialog is QuickDialog) {
+            dialog.listener
+        } else null
+        val priorityDialog = PriorityDialog(dialog, realPriority, dialogDismissListener, recoverInDismiss, showWithOther)
         if (priorityDialogInMap == null) {
             showingDialog[realPriority] = mutableListOf(priorityDialog)
         } else {
@@ -47,6 +50,7 @@ object DialogManager {
                 it.dismiss()
             }
             dialog.setOnDismissListener { dialogI ->
+                dialogDismissListener?.onDismiss(dialogI)
                 val allDialogs = showingDialog.values.flatten()
                 val curPriorityDialog = allDialogs.findLast {
                     it.dialog == dialogI && !it.isDismissByManager

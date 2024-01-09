@@ -6,7 +6,7 @@ import android.content.DialogInterface.OnDismissListener
 data class PriorityDialog(
     internal val dialog: Dialog,
     internal val priority: Int = DialogManager.AUTO_PRIORITY,
-    internal val onDismissListener: OnDismissListener? = null,
+    internal val dismissListener: OnDismissListener? = null,
     //是否优先级高的弹窗消失后自我恢复
     internal val recoverInDismiss: Boolean = true,
     //是否不随其他弹窗影响
@@ -25,6 +25,7 @@ data class PriorityDialog(
     fun dismiss() {
         if (isShowing()) {
             dialog.dismiss()
+            dismissListener?.onDismiss(dialog)
             isDismissByShowing = true
         }
     }

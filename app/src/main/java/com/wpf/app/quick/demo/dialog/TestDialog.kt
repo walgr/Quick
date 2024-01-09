@@ -19,9 +19,21 @@ class TestDialog(
 
     @BindData2View(id = R.id.list, helper = List2RecyclerView::class)
     val listData = arrayListOf(
-        MyMessage(),
-        MyMessage(),
-        MyMessage()
+        MyMessage(msg = "1"),
+        MyMessage(msg = "20"),
+        MyMessage(msg = "300"),
+        MyMessage(msg = "1"),
+        MyMessage(msg = "20"),
+        MyMessage(msg = "300"),
+        MyMessage(msg = "1"),
+        MyMessage(msg = "20"),
+        MyMessage(msg = "300"),
+        MyMessage(msg = "1"),
+        MyMessage(msg = "20"),
+        MyMessage(msg = "300"),
+        MyMessage(msg = "1"),
+        MyMessage(msg = "20"),
+        MyMessage(msg = "300"),
     )
 
     override fun initView(view: View?) {

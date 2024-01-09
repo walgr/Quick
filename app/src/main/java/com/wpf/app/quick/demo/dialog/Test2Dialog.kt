@@ -15,9 +15,6 @@ class Test2Dialog(
     layoutViewInContext = runOnContext {
         TextView(context).apply {
             text = "Test2Dialog"
-            layoutParams = wrapMarginLayoutParams.apply {
-                bottomMargin = 10.dp2px(it)
-            }
         }
     }
 ) {
