@@ -27,7 +27,7 @@ open class QuickItemGroup<T : ViewGroup> @JvmOverloads constructor(
 
     override fun init() {
         if (attrSet == null) {
-            attributeSet?.let {
+            attrs?.let {
                 attrSet = QuickViewGroupAttrSetHelper(context, it)
             }
         }

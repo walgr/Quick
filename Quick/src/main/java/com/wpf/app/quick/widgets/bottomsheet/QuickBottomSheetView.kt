@@ -40,7 +40,7 @@ open class QuickBottomSheetView(
     }
 
     open fun setLayoutParam() {
-        var layoutParams: ViewGroup.LayoutParams = getLayoutParams()
+        var layoutParams: ViewGroup.LayoutParams = layoutParams
         if (layoutParams is CoordinatorLayout.LayoutParams) {
             val layoutParamsC: CoordinatorLayout.LayoutParams =
                 layoutParams
@@ -56,7 +56,7 @@ open class QuickBottomSheetView(
 
     fun setHeight(height: Int) {
         if (height < -1) return
-        var layoutParams: ViewGroup.LayoutParams = getLayoutParams()
+        var layoutParams: ViewGroup.LayoutParams = layoutParams
         if (layoutParams is CoordinatorLayout.LayoutParams) {
             val layoutParamsC: CoordinatorLayout.LayoutParams =
                 layoutParams

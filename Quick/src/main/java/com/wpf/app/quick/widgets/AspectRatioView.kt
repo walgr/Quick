@@ -2,9 +2,11 @@ package com.wpf.app.quick.widgets
 
 import android.content.Context
 import android.util.AttributeSet
+import android.widget.FrameLayout
 import android.widget.RelativeLayout
 import com.wpf.app.quick.R
 import com.wpf.app.quickutil.helper.attribute.AutoGetAttributeHelper
+import com.wpf.app.quickutil.widgets.quickview.ChildToParentGroup
 import com.wpf.app.quickutil.widgets.quickview.QuickViewGroup
 
 /**
@@ -14,7 +16,7 @@ open class AspectRatioView @JvmOverloads constructor(
     mContext: Context,
     attributeSet: AttributeSet? = null,
     defStyleAttr: Int = 0,
-) : QuickViewGroup<RelativeLayout>(
+) : FrameLayout(
     mContext, attributeSet, defStyleAttr
 ) {
 
@@ -34,12 +36,23 @@ open class AspectRatioView @JvmOverloads constructor(
         val specWidth = MeasureSpec.getSize(widthMeasureSpec)
         val specModeHeight = MeasureSpec.getMode(heightMeasureSpec)
         val specHeight = MeasureSpec.getSize(heightMeasureSpec)
-        if (specModeWidth != MeasureSpec.AT_MOST && specModeWidth != MeasureSpec.UNSPECIFIED) {
+        if (specModeWidth != MeasureSpec.AT_MOST && specModeWidth != MeasureSpec.UNSPECIFIED && specHeight > specWidth) {
             //以宽度为主
-            super.onMeasure(widthMeasureSpec, MeasureSpec.makeMeasureSpec((specWidth * viewHelper.ratio!!).toInt(), specModeHeight))
-        } else if (specModeHeight != MeasureSpec.AT_MOST && specModeHeight != MeasureSpec.UNSPECIFIED) {
+            super.onMeasure(
+                widthMeasureSpec,
+                MeasureSpec.makeMeasureSpec(
+                    (specWidth * viewHelper.ratio!!).toInt(),
+                    specModeHeight
+                )
+            )
+        } else if (specModeHeight != MeasureSpec.AT_MOST && specModeHeight != MeasureSpec.UNSPECIFIED && specHeight < specWidth) {
             //以高度为主
-            super.onMeasure(MeasureSpec.makeMeasureSpec((specHeight * viewHelper.ratio!!).toInt(), specModeWidth), heightMeasureSpec)
+            super.onMeasure(
+                MeasureSpec.makeMeasureSpec(
+                    (specHeight * (1 / viewHelper.ratio!!).toInt()),
+                    specModeWidth
+                ), heightMeasureSpec
+            )
         } else {
             super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         }
