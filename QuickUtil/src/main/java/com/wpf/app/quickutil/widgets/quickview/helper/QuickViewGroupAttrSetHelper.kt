@@ -25,4 +25,5 @@ enum class GroupType(val type: Int) {
     FrameLayout(2),
     ConstraintLayout(3),
     RadioGroup(4),
+    TabLayout(5),
 }

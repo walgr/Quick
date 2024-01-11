@@ -1,7 +1,6 @@
 package com.wpf.app.quickutil.widgets.quickview
 
 import android.content.Context
-import android.graphics.Canvas
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
@@ -11,15 +10,13 @@ import android.widget.RadioGroup
 import android.widget.RelativeLayout
 import androidx.annotation.CallSuper
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.children
-import com.wpf.app.quickutil.LogUtil
+import com.google.android.material.tabs.TabLayout
+import com.wpf.app.quickutil.other.GenericEx
+import com.wpf.app.quickutil.other.asTo
+import com.wpf.app.quickutil.other.matchLayoutParams
 import com.wpf.app.quickutil.widgets.quickview.helper.GroupType
 import com.wpf.app.quickutil.widgets.quickview.helper.QuickViewGroupAttrSetHelper
-import com.wpf.app.quickutil.other.GenericEx
-import com.wpf.app.quickutil.other.matchLayoutParams
-import com.wpf.app.quickutil.widgets.quickview.util.QuickMeasure
-import com.wpf.app.quickutil.other.removeParent
-import kotlinx.coroutines.InternalCoroutinesApi
+import kotlin.reflect.KProperty
 
 /**
  * Created by 王朋飞 on 2022/8/31.
@@ -40,7 +37,8 @@ open class QuickViewGroup<T : ViewGroup> @JvmOverloads constructor(
         init()
     }
 
-    private var shadowView: T? = null
+    var shadowView: T? = null
+        private set
 
     @CallSuper
     open fun init() {
@@ -73,6 +71,9 @@ open class QuickViewGroup<T : ViewGroup> @JvmOverloads constructor(
         if (this.shadowView != null) return
         attrSet?.let {
             when (it.groupType) {
+                GroupType.TabLayout.type -> {
+                    this.shadowView = TabLayout(context, attrs, defStyleAttr) as T
+                }
                 GroupType.LinearLayout.type -> {
                     this.shadowView = LinearLayout(context, attrs, defStyleAttr) as T
                 }
@@ -158,17 +159,34 @@ open class QuickViewGroup<T : ViewGroup> @JvmOverloads constructor(
     }
 
     fun getChildAtInShadow(index: Int): View? {
+        if (shadowView is TabLayout) {
+            return shadowView.asTo<TabLayout>()?.getTabAt(index)?.view
+        }
         return shadowView?.getChildAt(index)
     }
 
     fun indexOfChildInShadow(child: View?): Int {
-        return shadowView?.indexOfChild(child) ?: 0
+        if (shadowView is TabLayout) {
+            val tabLayout = shadowView.asTo<TabLayout>() ?: return -1
+            repeat(tabLayout.tabCount) {
+                if (child == tabLayout.getTabAt(it)?.view)
+                    return it
+            }
+            return -1
+        }
+        return shadowView?.indexOfChild(child) ?: -1
     }
 
     override fun addView(child: View?, index: Int, params: LayoutParams?) {
         val childIsShadow = child == shadowView
         if (!childIsShadow) {
-            shadowView?.addView(child, index, params)
+            if (shadowView is TabLayout) {
+                shadowView.asTo<TabLayout>()?.apply {
+                    addTab(newTab().setCustomView(child))
+                }
+            } else {
+                shadowView?.addView(child, index, params)
+            }
         }
         if (!addToParent || isInEditMode) {
             if (childIsShadow) {
@@ -178,16 +196,37 @@ open class QuickViewGroup<T : ViewGroup> @JvmOverloads constructor(
     }
 
     override fun removeView(view: View?) {
+        if (shadowView is TabLayout) {
+            shadowView.asTo<TabLayout>()?.apply {
+                repeat(tabCount) {
+                    val tab = getTabAt(it)
+                    tab?.let {
+                        if (view == tab.view)
+                            removeTab(tab)
+                    }
+                }
+            }
+            return
+        }
         shadowView?.removeView(view) ?: super.removeView(view)
     }
 
-    fun getRealChildCount(): Int = shadowView?.childCount ?: 0
+    fun getRealChildCount(): Int {
+        if (shadowView is TabLayout) {
+            return shadowView.asTo<TabLayout>()?.tabCount ?: 0
+        }
+        return shadowView?.childCount ?: 0
+    }
 
     override fun generateDefaultLayoutParams(): LayoutParams {
         return generateLayoutParams(attrs)
     }
     override fun generateLayoutParams(attrs: AttributeSet?): LayoutParams {
         return when (shadowView) {
+            is TabLayout -> {
+                LinearLayout.LayoutParams(context, attrs)
+            }
+
             is RadioGroup -> {
                 RadioGroup.LayoutParams(context, attrs)
             }

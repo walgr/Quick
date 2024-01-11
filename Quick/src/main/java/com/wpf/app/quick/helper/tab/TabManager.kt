@@ -80,6 +80,7 @@ open class TabManager : GroupManager() {
 
     private fun init(parent: ViewGroup, invokeChange: Boolean = true) {
         invokeChangeInInit = false
+        val tabLayout = getTabLayout(parent)
         repeat(size) { pos ->
             val realPos = pos + oldParentCount
             val tabView =
@@ -89,7 +90,7 @@ open class TabManager : GroupManager() {
             if (isFirstInit) {
                 addChild(parent, tabView)
                 (tabView.layoutParams as? LinearLayout.LayoutParams)?.weight = 1f
-                if (parent !is TabLayout) {
+                if (tabLayout == null) {
                     tabView.onceClick(250) { tab ->
                         val viewPos = indexOfChild(parent, tab) - oldParentCount
                         if (viewPos < 0 || viewPos >= size + oldParentCount) return@onceClick
@@ -107,15 +108,17 @@ open class TabManager : GroupManager() {
             init?.invoke(pos, defaultPos == pos, tabView)
         }
         curPos = defaultPos
-        if (parent is TabLayout && isFirstInit) {
-            parent.onTabSelected { tab ->
-                repeat(parent.tabCount) {
-                    if (tab != null) {
-                        val view: Tab? = parent.getTabAt(it)
-                        init?.invoke(it, view == tab, tab.view)
-                        if (view == tab) {
-                            curPos = it
-                            change?.invoke(curPos)
+        if (isFirstInit) {
+            tabLayout?.apply {
+                onTabSelected { tab ->
+                    repeat(tabCount) {
+                        if (tab != null) {
+                            val view: Tab? = getTabAt(it)
+                            init?.invoke(it, view == tab, tab.view)
+                            if (view == tab) {
+                                curPos = it
+                                change?.invoke(curPos)
+                            }
                         }
                     }
                 }
@@ -126,6 +129,13 @@ open class TabManager : GroupManager() {
             invokeChangeInInit = true
         }
         isFirstInit = false
+    }
+
+    private fun getTabLayout(parent: ViewGroup): TabLayout? {
+        if (parent is QuickViewGroup<*> && parent.shadowView is TabLayout) {
+            return parent.shadowView?.asTo<TabLayout>()
+        }
+        return parent.asTo<TabLayout>()
     }
 
     private fun indexOfChild(parent: ViewGroup, child: View): Int {
@@ -142,6 +152,10 @@ open class TabManager : GroupManager() {
 
     private fun getChildCount(parent: ViewGroup): Int {
         return when (parent) {
+            is TabLayout -> {
+                parent.tabCount
+            }
+
             is QuickViewGroup<*> -> {
                 parent.getRealChildCount()
             }
