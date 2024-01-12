@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
-import com.wpf.app.quickutil.widgets.quickview.helper.QuickViewGroupAttrSetHelper
+import com.wpf.app.quickutil.widgets.quickview.helper.QuickViewGroupAttrSet
 import com.wpf.app.quickutil.bind.Bind
 import kotlin.math.abs
 
@@ -28,7 +28,7 @@ open class QuickItemGroup<T : ViewGroup> @JvmOverloads constructor(
     override fun init() {
         if (attrSet == null) {
             attrs?.let {
-                attrSet = QuickViewGroupAttrSetHelper(context, it)
+                attrSet = QuickViewGroupAttrSet(context, it)
             }
         }
         initView()

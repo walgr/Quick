@@ -3,11 +3,8 @@ package com.wpf.app.quick.widgets
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.FrameLayout
-import android.widget.RelativeLayout
 import com.wpf.app.quick.R
-import com.wpf.app.quickutil.helper.attribute.AutoGetAttributeHelper
-import com.wpf.app.quickutil.widgets.quickview.ChildToParentGroup
-import com.wpf.app.quickutil.widgets.quickview.QuickViewGroup
+import com.wpf.app.quickutil.helper.attribute.AutoGetAttribute
 
 /**
  * 长宽比Layout
@@ -62,7 +59,7 @@ open class AspectRatioView @JvmOverloads constructor(
 class AspectRatioViewHelper(
     context: Context,
     attributeSet: AttributeSet,
-) : AutoGetAttributeHelper(context, attributeSet, R.styleable.AspectRatioView) {
+) : AutoGetAttribute(context, attributeSet, R.styleable.AspectRatioView) {
 
     var ratio: Float? = null
 }

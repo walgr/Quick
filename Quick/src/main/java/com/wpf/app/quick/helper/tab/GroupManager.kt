@@ -22,4 +22,8 @@ open class GroupManager {
     open fun <T : View> findChild(parent: View, @IdRes id: Int): T {
         return parent.findViewById(id)
     }
+
+    interface OnGroupChangeListener {
+        fun onChange(view: View)
+    }
 }

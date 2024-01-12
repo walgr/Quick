@@ -2,7 +2,7 @@ package com.wpf.app.quick.helper.attribute
 
 import android.content.Context
 import android.util.AttributeSet
-import com.wpf.app.quickutil.helper.attribute.SpViewAttributeHelper
+import com.wpf.app.quickutil.helper.attribute.SpViewAttribute
 
 /**
  * Created by 王朋飞 on 2022/6/10.
@@ -10,10 +10,10 @@ import com.wpf.app.quickutil.helper.attribute.SpViewAttributeHelper
  *
  */
 interface ViewSpHelper {
-    var attributeHelper: SpViewAttributeHelper?
+    var attributeHelper: SpViewAttribute?
 
     fun initAttributeHelper(context: Context, attributes: AttributeSet) {
-        attributeHelper = SpViewAttributeHelper(context, attributes)
+        attributeHelper = SpViewAttribute(context, attributes)
     }
 
     fun getValue(context: Context): String {

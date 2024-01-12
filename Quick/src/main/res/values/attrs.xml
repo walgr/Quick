@@ -93,4 +93,8 @@
             <flag name="image" value="0x100"/>
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="BottomTabLayout">
+        <attr name="animView" format="reference" />
+    </declare-styleable>
 </resources>

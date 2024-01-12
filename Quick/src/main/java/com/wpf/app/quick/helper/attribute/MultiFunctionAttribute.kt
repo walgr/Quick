@@ -6,16 +6,16 @@ import android.view.ViewGroup
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import com.wpf.app.quick.R
-import com.wpf.app.quickutil.helper.attribute.AutoGetAttributeHelper
+import com.wpf.app.quickutil.helper.attribute.AutoGetAttribute
 
 /**
  * Created by 王朋飞 on 2022/5/7.
  *
  */
-class MultiFunctionAttributeHelper(
+class MultiFunctionAttribute(
     context: Context,
     attributeSet: AttributeSet
-) : AutoGetAttributeHelper(context, attributeSet, R.styleable.MultiFunctionView) {
+) : AutoGetAttribute(context, attributeSet, R.styleable.MultiFunctionView) {
 
     var showCheckBox: Boolean? = null
     var isCheck: Boolean? = null

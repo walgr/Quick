@@ -3,16 +3,16 @@ package com.wpf.app.quickutil.widgets.quickview.helper
 import android.content.Context
 import android.util.AttributeSet
 import com.wpf.app.quickutil.R
-import com.wpf.app.quickutil.helper.attribute.AutoGetAttributeHelper
+import com.wpf.app.quickutil.helper.attribute.AutoGetAttribute
 
 /**
  * Created by 王朋飞 on 2022/9/23.
  *
  */
-class QuickViewGroupAttrSetHelper(
+class QuickViewGroupAttrSet(
     mContext: Context,
     attributeSet: AttributeSet,
-) : AutoGetAttributeHelper(mContext, attributeSet, R.styleable.QuickViewGroup) {
+) : AutoGetAttribute(mContext, attributeSet, R.styleable.QuickViewGroup) {
 
     val groupType: Int? = null
 

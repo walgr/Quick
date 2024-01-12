@@ -9,7 +9,7 @@ import androidx.core.widget.doAfterTextChanged
 import com.wpf.app.quickutil.widgets.quickview.ChildToParentGroup
 import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.bind.QuickBindWrap
-import com.wpf.app.quickutil.helper.attribute.SpViewAttributeHelper
+import com.wpf.app.quickutil.helper.attribute.SpViewAttribute
 
 /**
  * 给子View注入Sp内容
@@ -22,8 +22,8 @@ class LoadSp2Text @JvmOverloads constructor(
     mContext, attributeSet, defStyleAttr
 ) {
 
-    private var attributeHelper: SpViewAttributeHelper =
-        SpViewAttributeHelper(context, attributeSet!!)
+    private var attributeHelper: SpViewAttribute =
+        SpViewAttribute(context, attributeSet!!)
 
     private val sharedPreference = context.getSharedPreferences(
         if (TextUtils.isEmpty(attributeHelper.fileName)) QuickBindWrap.getBindSpFileName() else attributeHelper.fileName,

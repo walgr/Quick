@@ -8,7 +8,7 @@ import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
-import com.wpf.app.quickutil.helper.attribute.AutoGetAttributeHelper
+import com.wpf.app.quickutil.helper.attribute.AutoGetAttribute
 
 class AutoTagLayout @JvmOverloads constructor(
     context: Context,
@@ -54,7 +54,7 @@ class AutoTagLayout @JvmOverloads constructor(
     internal class AutoTagLayoutAttr(
         context: Context,
         attrs: AttributeSet? = null,
-    ) : AutoGetAttributeHelper(context, attrs, R.styleable.AutoTagLayout) {
+    ) : AutoGetAttribute(context, attrs, R.styleable.AutoTagLayout) {
 
         @FlexDirection
         val tagDirection: Int? = null

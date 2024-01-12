@@ -16,7 +16,7 @@ import androidx.lifecycle.LifecycleRegistry
 import com.wpf.app.quick.R
 import com.wpf.app.quick.helper.ScaleTypeHelper
 import com.wpf.app.quick.helper.TypefaceHelper
-import com.wpf.app.quick.helper.attribute.MultiFunctionAttributeHelper
+import com.wpf.app.quick.helper.attribute.MultiFunctionAttribute
 
 /**
  * Created by 王朋飞 on 2022/5/7.
@@ -33,7 +33,7 @@ class MultiFunctionView @JvmOverloads constructor(
 
     private val mLifecycleRegistry = LifecycleRegistry(this)
 
-    private lateinit var attributeHelper: MultiFunctionAttributeHelper
+    private lateinit var attributeHelper: MultiFunctionAttribute
 
     override fun onFinishInflate() {
         super.onFinishInflate()
@@ -58,7 +58,7 @@ class MultiFunctionView @JvmOverloads constructor(
 
     init {
         attributes?.let {
-            attributeHelper = MultiFunctionAttributeHelper(context, attributes)
+            attributeHelper = MultiFunctionAttribute(context, attributes)
         }
         initView()
         loadViewAttribute()

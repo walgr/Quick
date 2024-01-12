@@ -15,8 +15,7 @@ import com.wpf.app.quickutil.other.GenericEx
 import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.other.matchLayoutParams
 import com.wpf.app.quickutil.widgets.quickview.helper.GroupType
-import com.wpf.app.quickutil.widgets.quickview.helper.QuickViewGroupAttrSetHelper
-import kotlin.reflect.KProperty
+import com.wpf.app.quickutil.widgets.quickview.helper.QuickViewGroupAttrSet
 
 /**
  * Created by 王朋飞 on 2022/8/31.
@@ -25,13 +24,13 @@ import kotlin.reflect.KProperty
 //@InternalCoroutinesApi
 open class QuickViewGroup<T : ViewGroup> @JvmOverloads constructor(
     mContext: Context,
-    val attrs: AttributeSet? = null,
-    val defStyleAttr: Int = 0,
+    open val attrs: AttributeSet? = null,
+    open val defStyleAttr: Int = 0,
     open val addToParent: Boolean = true,
     open val childView: Array<View>? = null
 ) : ViewGroup(mContext, attrs, defStyleAttr) {
 
-    protected var attrSet: QuickViewGroupAttrSetHelper? = null
+    protected var attrSet: QuickViewGroupAttrSet? = null
 
     init {
         init()
@@ -44,7 +43,7 @@ open class QuickViewGroup<T : ViewGroup> @JvmOverloads constructor(
     open fun init() {
         if (attrSet == null) {
             attrs?.let {
-                attrSet = QuickViewGroupAttrSetHelper(context, it)
+                attrSet = QuickViewGroupAttrSet(context, it)
             }
         }
         initViewGroupByXml()
@@ -157,6 +156,10 @@ open class QuickViewGroup<T : ViewGroup> @JvmOverloads constructor(
             shadowView.layout(0, 0, shadowView.measuredWidth, shadowView.measuredHeight)
         }
     }
+
+//    override fun onDraw(canvas: Canvas) {
+//        shadowView?.draw(canvas) ?: super.onDraw(canvas)
+//    }
 
     fun getChildAtInShadow(index: Int): View? {
         if (shadowView is TabLayout) {

@@ -53,8 +53,10 @@ open class TabManager : GroupManager() {
     private var defaultPos: Int = 0
     private var repeatClick: Boolean = false
     private var init: ((curPos: Int, isSelect: Boolean, view: View) -> Unit)? = null
+
     private var isFirstInit = true
     private var oldParentCount = 0
+    private var newInit: ((Int, Boolean, View) -> Unit)? = null
     fun init(
         @LayoutRes layoutId: Int = 0,
         parent: ViewGroup?,
@@ -71,14 +73,21 @@ open class TabManager : GroupManager() {
         this.repeatClick = repeatClick
         this.init = init
         if (parent == null) return this
+        var onGroupChangeListener: OnGroupChangeListener? = null
         if (isFirstInit) {
             oldParentCount = getChildCount(parent)
+            if (parent is OnGroupChangeListener) {
+                onGroupChangeListener = parent
+            }
+            newInit = object : ((Int, Boolean, View) -> Unit) {
+                override fun invoke(p1: Int, p2: Boolean, p3: View) {
+                    init?.invoke(p1, p2, p3)
+                    if (p2) {
+                        onGroupChangeListener?.onChange(p3)
+                    }
+                }
+            }
         }
-        init(parent, invokeChange)
-        return this
-    }
-
-    private fun init(parent: ViewGroup, invokeChange: Boolean = true) {
         invokeChangeInInit = false
         val tabLayout = getTabLayout(parent)
         repeat(size) { pos ->
@@ -97,7 +106,8 @@ open class TabManager : GroupManager() {
                         if (repeatClick || curPos != viewPos) {
                             repeat(size) { pos ->
                                 val realPos1 = pos + oldParentCount
-                                init?.invoke(pos, pos == viewPos, getChildAt(parent, realPos1)!!)
+                                val childView = getChildAt(parent, realPos1)!!
+                                newInit?.invoke(pos, pos == viewPos, childView)
                             }
                             curPos = viewPos
                             change?.invoke(viewPos)
@@ -105,7 +115,7 @@ open class TabManager : GroupManager() {
                     }
                 }
             }
-            init?.invoke(pos, defaultPos == pos, tabView)
+            newInit?.invoke(pos, defaultPos == pos, tabView)
         }
         curPos = defaultPos
         if (isFirstInit) {
@@ -114,7 +124,7 @@ open class TabManager : GroupManager() {
                     repeat(tabCount) {
                         if (tab != null) {
                             val view: Tab? = getTabAt(it)
-                            init?.invoke(it, view == tab, tab.view)
+                            newInit?.invoke(it, view == tab, tab.view)
                             if (view == tab) {
                                 curPos = it
                                 change?.invoke(curPos)
@@ -129,6 +139,7 @@ open class TabManager : GroupManager() {
             invokeChangeInInit = true
         }
         isFirstInit = false
+        return this
     }
 
     private fun getTabLayout(parent: ViewGroup): TabLayout? {

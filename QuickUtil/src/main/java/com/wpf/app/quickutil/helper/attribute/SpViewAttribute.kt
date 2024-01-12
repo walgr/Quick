@@ -8,10 +8,10 @@ import com.wpf.app.quickutil.R
  * Created by 王朋飞 on 2022/6/10.
  *
  */
-class SpViewAttributeHelper(
+class SpViewAttribute(
     context: Context,
     attributeSet: AttributeSet
-): AutoGetAttributeHelper(context, attributeSet, R.styleable.LoadSp2Text) {
+): AutoGetAttribute(context, attributeSet, R.styleable.LoadSp2Text) {
 
     val fileName: String? = null
     val bindKey: String? = null

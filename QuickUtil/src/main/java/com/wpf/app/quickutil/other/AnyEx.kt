@@ -8,6 +8,6 @@ inline fun <reified T> Any?.asTo(): T? {
     return this
 }
 
-fun Any.printLog() {
-    LogUtil.e(this.toString())
+fun Any.printLog(otherMsg: String = "", tag: String = LogUtil.tag) {
+    LogUtil.e(tag, otherMsg + if (this is Float) this.toBigDecimal() else this)
 }

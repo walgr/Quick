@@ -6,7 +6,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#f7f7f7"
+        android:background="#eeeeee"
         android:orientation="vertical">
 
         <com.wpf.app.quickbind.viewpager.QuickViewPager
@@ -17,10 +17,11 @@
 
         <com.wpf.app.quick.widgets.BottomTabLayout
             android:id="@+id/bottomTabs"
-            android:orientation="horizontal"
             android:background="@color/white"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="56dp">
+            android:layout_height="56dp"
+            app:animView="@+id/ivIcon">
 
 
 
