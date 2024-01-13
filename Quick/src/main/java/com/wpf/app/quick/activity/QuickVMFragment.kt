@@ -46,6 +46,7 @@ open class QuickVMFragment<VM : QuickViewModel<out QuickView>> @JvmOverloads con
         mViewModel?.onStop()
     }
 
+    @Deprecated("Deprecated by Android")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         mViewModel?.onActivityResult(requestCode, resultCode, data)
@@ -79,6 +80,7 @@ open class QuickVMFragment<VM : QuickViewModel<out QuickView>> @JvmOverloads con
         }
     }
 
+    @Deprecated("Deprecated by Android")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         if (mViewModel == null && getVMFormActivity) {

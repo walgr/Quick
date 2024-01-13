@@ -57,6 +57,7 @@ abstract class QuickVBFragment<VM : QuickVBModel<VB>, VB : ViewDataBinding> @Jvm
         initView(viewBinding)
     }
 
+    @Deprecated("Deprecated by Android")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         if (mViewModel == null && getVMFormActivity) {

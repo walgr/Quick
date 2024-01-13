@@ -41,6 +41,7 @@ abstract class QuickVMActivity<VM : QuickViewModel<out QuickView>> @JvmOverloads
         mViewModel?.onStop()
     }
 
+    @Deprecated("Deprecated by Android")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         mViewModel?.onActivityResult(requestCode, resultCode, data)

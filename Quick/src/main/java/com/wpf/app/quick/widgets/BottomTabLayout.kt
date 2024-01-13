@@ -13,6 +13,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateInterpolator
+import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.annotation.IdRes
 import androidx.core.view.drawToBitmap
@@ -22,7 +23,9 @@ import com.wpf.app.quickutil.helper.anim
 import com.wpf.app.quickutil.helper.attribute.AutoGetAttributeHelper
 import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.other.emptyPut
+import com.wpf.app.quickutil.other.printLog
 import com.wpf.app.quickutil.widgets.quickview.QuickViewGroup
+import java.util.LinkedList
 import kotlin.math.max
 
 open class BottomTabLayout @JvmOverloads constructor(
@@ -36,16 +39,21 @@ open class BottomTabLayout @JvmOverloads constructor(
     private var viewCenterX: Float = 0f
         get() = if (isInEditMode) 40f else field
     private var viewHeight = 0
-    private var oldCurView: View? = null
-    private var curView: View? = null
+    private val oldCurView: View?
+        get() = if (viewDeque.size <= 1) null else viewDeque.firstOrNull()
+    private val curView: View?
+        get() = viewDeque.lastOrNull()
+    private val viewDeque: ArrayDeque<View> = ArrayDeque()
     private var viewBitmap: MutableMap<View, Bitmap> = mutableMapOf()
     private var animViewId: Int = 0
     override fun onChange(view: View) {
         if (animViewId == 0) return
         val animView = view.findViewById<View>(animViewId)
         animView.post {
-            oldCurView = curView
-            curView = animView
+            if (viewDeque.size == 2) {
+                viewDeque.removeFirst()
+            }
+            viewDeque.add(animView)
             viewBitmap.emptyPut(animView, animView.drawToBitmap())
             circleR = max(animView.width, animView.height).toFloat()
             val location = intArrayOf(0, 0)
@@ -66,7 +74,7 @@ open class BottomTabLayout @JvmOverloads constructor(
             } else {
                 oldLastOffsetX = lastOffsetX
                 anim = (lastOffsetX..circleCenterX).anim(
-                    200, interpolator = AccelerateInterpolator()
+                    5000, interpolator = AccelerateInterpolator()
                 ) {
                     onAnimProgress((it - oldLastOffsetX) / (circleCenterX - oldLastOffsetX))
                     curX = it
@@ -75,9 +83,8 @@ open class BottomTabLayout @JvmOverloads constructor(
         }
     }
 
-    private var curAnimProcess: Float = 0f
+    private var curAnimProcess: Float = -1f
     private fun onAnimProgress(progress: Float) {
-        if (progress < 0 || progress == -0.0f) return
         curAnimProcess = progress
         viewBitmap.keys.forEach {
             if (it != curView) {
@@ -176,6 +183,9 @@ open class BottomTabLayout @JvmOverloads constructor(
             strokeWidth = 10f
         }
     }
+    private val bitmapPaint by lazy {
+        Paint()
+    }
     private val path by lazy {
         Path()
     }
@@ -195,6 +205,7 @@ open class BottomTabLayout @JvmOverloads constructor(
             field = value
             invalidate()
         }
+
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         if (isInEditMode) {
@@ -227,22 +238,15 @@ open class BottomTabLayout @JvmOverloads constructor(
     }
 
     private fun drawAnimView(canvas: Canvas) {
-        viewBitmap[curView]?.let {
+        bitmapPaint.alpha = (255 * if (curAnimProcess > 0.5f) curAnimProcess else (1-curAnimProcess)).toInt()
+        viewBitmap[if (curAnimProcess > 0.5f || oldCurView == null) curView else oldCurView]?.let {
             canvas.drawBitmap(
                 it,
                 curX + it.width / 2 + smallCircleR,
                 smallCircleR - it.width / 2,
-                paint
+                bitmapPaint
             )
         }
-//        viewBitmap[oldCurView]?.let {
-//            canvas.drawBitmap(
-//                it,
-//                viewCenterX - allPathWidth / 2f + it.width / 2 + smallCircleR,
-//                (smallCircleR - it.width / 2) * (curAnimProcess),
-//                paint
-//            )
-//        }
     }
 
     private fun dealParentClipChild() {

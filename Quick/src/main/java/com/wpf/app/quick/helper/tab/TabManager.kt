@@ -9,7 +9,6 @@ import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.Tab
 import com.wpf.app.quickutil.other.asTo
-import com.wpf.app.quickutil.other.matchLayoutParams
 import com.wpf.app.quickutil.other.onPageSelected
 import com.wpf.app.quickutil.other.onTabSelected
 import com.wpf.app.quickutil.other.onceClick
@@ -21,6 +20,7 @@ import com.wpf.app.quickutil.widgets.quickview.QuickViewGroup
 open class TabManager : GroupManager() {
 
     private var curPos = 0
+    private var invokeChange: Boolean = true
     private var invokeChangeInInit = false
     override fun posChange(change: (curPos: Int) -> Unit): TabManager {
         super.posChange(change)
@@ -32,7 +32,8 @@ open class TabManager : GroupManager() {
 
     override fun posChange(curPos: Int) {
         super.posChange(curPos)
-        init(layoutId, parent, size, curPos, repeatClick, false, init)
+        invokeChange = false
+        init(layoutId, parent, size, curPos, repeatClick, init)
     }
 
     fun bindViewPager(viewPager: ViewPager?, smoothScroll: Boolean = true): TabManager {
@@ -41,7 +42,9 @@ open class TabManager : GroupManager() {
             viewPager.setCurrentItem(pos, smoothScroll)
         }
         viewPager.onPageSelected {
-            posChange(it)
+            if (it != curPos) {
+                posChange(it)
+            }
         }
         return this
     }
@@ -63,7 +66,6 @@ open class TabManager : GroupManager() {
         size: Int,
         defaultPos: Int = 0,
         repeatClick: Boolean = false,
-        invokeChange: Boolean = true,
         init: ((curPos: Int, isSelect: Boolean, view: View) -> Unit)? = null
     ): TabManager {
         this.layoutId = layoutId
@@ -87,8 +89,8 @@ open class TabManager : GroupManager() {
                     }
                 }
             }
+            invokeChangeInInit = false
         }
-        invokeChangeInInit = false
         val tabLayout = getTabLayout(parent)
         repeat(size) { pos ->
             val realPos = pos + oldParentCount
@@ -110,7 +112,7 @@ open class TabManager : GroupManager() {
                                 newInit?.invoke(pos, pos == viewPos, childView)
                             }
                             curPos = viewPos
-                            change?.invoke(viewPos)
+                            change?.invoke(curPos)
                         }
                     }
                 }
@@ -134,9 +136,10 @@ open class TabManager : GroupManager() {
                 }
             }
         }
-        if (invokeChange && change != null) {
+        if (invokeChange) {
             change?.invoke(defaultPos)
             invokeChangeInInit = true
+            invokeChange = false
         }
         isFirstInit = false
         return this
