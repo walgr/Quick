@@ -74,7 +74,7 @@ open class BottomTabLayout @JvmOverloads constructor(
             } else {
                 oldLastOffsetX = lastOffsetX
                 anim = (lastOffsetX..circleCenterX).anim(
-                    5000, interpolator = AccelerateInterpolator()
+                    200, interpolator = AccelerateInterpolator()
                 ) {
                     onAnimProgress((it - oldLastOffsetX) / (circleCenterX - oldLastOffsetX))
                     curX = it
