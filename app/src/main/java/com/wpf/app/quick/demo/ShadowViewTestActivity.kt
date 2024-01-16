@@ -5,7 +5,7 @@ import androidx.core.view.isVisible
 import com.wpf.app.quick.activity.QuickBindingActivity
 import com.wpf.app.quick.annotations.getclass.GetClass
 import com.wpf.app.quick.demo.databinding.ActivityShadowTestBinding
-import com.wpf.app.quickutil.TimeDelayHelper
+import com.wpf.app.quickutil.helper.TimeDelayHelper
 import com.wpf.app.quickutil.other.toColor
 
 @GetClass

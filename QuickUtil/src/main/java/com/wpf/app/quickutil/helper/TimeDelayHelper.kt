@@ -1,4 +1,4 @@
-package com.wpf.app.quickutil
+package com.wpf.app.quickutil.helper
 
 import java.util.Timer
 import java.util.TimerTask

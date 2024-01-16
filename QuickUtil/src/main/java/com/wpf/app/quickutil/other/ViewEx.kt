@@ -62,3 +62,10 @@ fun View.onceClick(interval: Long = 1000L, onClickListener: OnClickListener) {
         }
     }
 }
+
+fun View?.getLocationInWindow(): IntArray {
+    val location = intArrayOf(0, 0)
+    if (this == null) return location
+    getLocationInWindow(location)
+    return location
+}

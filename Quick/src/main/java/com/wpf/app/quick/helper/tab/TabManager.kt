@@ -8,6 +8,7 @@ import androidx.annotation.LayoutRes
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.Tab
+import com.wpf.app.quick.widgets.BottomTabLayout
 import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.other.onPageSelected
 import com.wpf.app.quickutil.other.onTabSelected
@@ -36,8 +37,13 @@ open class TabManager : GroupManager() {
         init(layoutId, parent, size, curPos, repeatClick, init)
     }
 
+    private var viewPager: ViewPager? = null
     fun bindViewPager(viewPager: ViewPager?, smoothScroll: Boolean = true): TabManager {
+        this.viewPager = viewPager
         if (viewPager == null) return this
+        if (parent is BottomTabLayout) {
+            parent?.asTo<BottomTabLayout>()?.bindViewPager(viewPager)
+        }
         posChange { pos ->
             viewPager.setCurrentItem(pos, smoothScroll)
         }
@@ -80,6 +86,9 @@ open class TabManager : GroupManager() {
             oldParentCount = getChildCount(parent)
             if (parent is OnGroupChangeListener) {
                 onGroupChangeListener = parent
+            }
+            if (parent is BottomTabLayout) {
+                parent.asTo<BottomTabLayout>()?.bindViewPager(viewPager)
             }
             newInit = object : ((Int, Boolean, View) -> Unit) {
                 override fun invoke(p1: Int, p2: Boolean, p3: View) {

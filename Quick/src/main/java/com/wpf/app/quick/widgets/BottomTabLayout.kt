@@ -13,19 +13,21 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateInterpolator
-import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.annotation.IdRes
+import androidx.core.view.children
 import androidx.core.view.drawToBitmap
+import androidx.viewpager.widget.ViewPager
 import com.wpf.app.quick.R
 import com.wpf.app.quick.helper.tab.GroupManager
 import com.wpf.app.quickutil.helper.anim
 import com.wpf.app.quickutil.helper.attribute.AutoGetAttributeHelper
 import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.other.emptyPut
-import com.wpf.app.quickutil.other.printLog
+import com.wpf.app.quickutil.other.getLocationInWindow
+import com.wpf.app.quickutil.other.onPageScrollStateChanged
+import com.wpf.app.quickutil.other.onPageScrolled
 import com.wpf.app.quickutil.widgets.quickview.QuickViewGroup
-import java.util.LinkedList
 import kotlin.math.max
 
 open class BottomTabLayout @JvmOverloads constructor(
@@ -35,7 +37,31 @@ open class BottomTabLayout @JvmOverloads constructor(
 ) : QuickViewGroup<LinearLayout>(context, attrs, defStyleAttr, addToParent = false),
     GroupManager.OnGroupChangeListener {
 
-    private var anim: Animator? = null
+    private val viewList: MutableList<View> = mutableListOf()
+    private val viewDeque: ArrayDeque<View> = ArrayDeque()
+    private var viewLocation: MutableMap<View, FloatArray> = mutableMapOf()
+    private var viewBitmap: MutableMap<View, Bitmap> = mutableMapOf()
+    private fun initChildView() {
+        post {
+            viewDeque.clear()
+            shadowView?.children?.forEach { child ->
+                child.findViewById<View>(animViewId)?.let {
+                    viewLocation[it] = it.getLocationInWindow().let {
+                        FloatArray(2).apply {
+                            this[0] = it[0].toFloat()
+                            this[1] = it[1].toFloat()
+                        }
+                    }
+                    viewList.add(it)
+                    viewBitmap.emptyPut(it, it.drawToBitmap())
+                }
+            }
+            viewList.getOrNull(0)?.let {
+                viewDeque.add(viewList[0])
+            }
+        }
+    }
+
     private var viewCenterX: Float = 0f
         get() = if (isInEditMode) 40f else field
     private var viewHeight = 0
@@ -43,49 +69,110 @@ open class BottomTabLayout @JvmOverloads constructor(
         get() = if (viewDeque.size <= 1) null else viewDeque.firstOrNull()
     private val curView: View?
         get() = viewDeque.lastOrNull()
-    private val viewDeque: ArrayDeque<View> = ArrayDeque()
-    private var viewBitmap: MutableMap<View, Bitmap> = mutableMapOf()
     private var animViewId: Int = 0
+    private var anim: Animator? = null
     override fun onChange(view: View) {
         if (animViewId == 0) return
         val animView = view.findViewById<View>(animViewId)
         animView.post {
-            if (viewDeque.size == 2) {
-                viewDeque.removeFirst()
+            if (!isBindViewPager || scrollCurPosition == -1) {
+                if (viewDeque.size == 2) {
+                    viewDeque.removeFirst()
+                }
+                viewDeque.add(animView)
             }
-            viewDeque.add(animView)
-            viewBitmap.emptyPut(animView, animView.drawToBitmap())
             circleR = max(animView.width, animView.height).toFloat()
-            val location = intArrayOf(0, 0)
-            animView.getLocationInWindow(location)
-            viewCenterX = location[0] + animView.width / 2f
+            viewCenterX = (viewLocation[animView]?.first() ?: 0f) + animView.width / 2f
             viewHeight = animView.height
             contentAppend = 10f
             paddingTopH = 2 * contentR - circleR
 
-            if (anim != null) {
-                anim?.cancel()
-            }
-            val circleCenterX = viewCenterX - allPathWidth / 2f
-            if (lastOffsetX == 0f) {
-                onAnimProgress(1f)
+            endX = viewCenterX - allPathWidth / 2f
+            if (lastCurX == -1f) {
+                onAnimProgress(if (isBindViewPager && scrollCurPosition != -1) 0f else 1f)
                 //初始时不做动画
-                curX = circleCenterX
+                curX = endX
             } else {
-                oldLastOffsetX = lastOffsetX
-                anim = (lastOffsetX..circleCenterX).anim(
+                startX = lastCurX
+                if (scrollCurPosition != -1) {
+                    return@post
+                }
+                anim?.cancel()
+                anim = (startX..endX).anim(
                     200, interpolator = AccelerateInterpolator()
                 ) {
-                    onAnimProgress((it - oldLastOffsetX) / (circleCenterX - oldLastOffsetX))
+                    onAnimProgress((it - startX) / (endX - startX))
                     curX = it
                 }
             }
         }
     }
 
-    private var curAnimProcess: Float = -1f
+    private var isBindViewPager = false
+    private var lastPositionOffsetPixels = -1
+    private var scrollCurPosition = -1
+    fun bindViewPager(viewPager: ViewPager?) {
+        if (viewPager == null) return
+        isBindViewPager = true
+        post {
+            viewPager.onPageScrollStateChanged {
+                if (it == ViewPager.SCROLL_STATE_DRAGGING) {
+                    scrollCurPosition = viewPager.currentItem
+                } else if (it == ViewPager.SCROLL_STATE_IDLE) {
+                    lastPositionOffsetPixels = -1
+                }
+            }
+            viewPager.onPageScrolled { _, positionOffset, positionOffsetPixels ->
+                if (positionOffsetPixels == 0) return@onPageScrolled
+                val isScrollRight = positionOffsetPixels >= lastPositionOffsetPixels
+                if (lastPositionOffsetPixels == -1) {
+                    lastPositionOffsetPixels = if (isScrollRight) 0 else positionOffsetPixels
+                }
+
+                if (isScrollRight) {
+                    var rightPos = scrollCurPosition + 1
+                    if (rightPos >= viewList.size) {
+                        rightPos = viewList.size - 1
+                    }
+                    viewList.getOrNull(rightPos)?.let {
+                        if (curView != it) {
+                            if (viewDeque.size == 2) {
+                                viewDeque.removeFirst()
+                            }
+                            viewDeque.add(it)
+                        }
+                    }
+                } else {
+                    var leftPos = scrollCurPosition - 1
+                    if (leftPos < 0) {
+                        leftPos = 0
+                    }
+                    viewList.getOrNull(leftPos)?.let {
+                        if (oldCurView != it) {
+                            if (viewDeque.size == 2) {
+                                viewDeque.removeFirst()
+                            }
+                            viewDeque.add(it)
+                        }
+                    }
+                }
+                startX = viewLocation[oldCurView]!!.first()
+                endX = viewLocation[curView]!!.first()
+                val viewInterval = endX - startX
+                onAnimProgress(if (isScrollRight) positionOffset else (1 - positionOffset))
+                curX =
+                    curAnimProcess * viewInterval + startX + oldCurView!!.width / 2 - allPathWidth / 2
+            }
+        }
+    }
+
+    private var curAnimProcess: Float = 0f
     private fun onAnimProgress(progress: Float) {
+        if (progress < 0 || progress > 1) return
         curAnimProcess = progress
+        if (curAnimProcess == -0.0f) {
+            curAnimProcess = 0f
+        }
         viewBitmap.keys.forEach {
             if (it != curView) {
                 it.alpha = progress
@@ -172,8 +259,7 @@ open class BottomTabLayout @JvmOverloads constructor(
     private val allPathWidth: Float
         get() = 2 * (smallCircleR + circleR)
 
-    private var oldLastOffsetX = 0f
-    private var lastOffsetX = 0f
+
     private var paddingTopH = 0f
         get() = if (isInEditMode) 2 * contentR - circleR else field
 
@@ -200,12 +286,15 @@ open class BottomTabLayout @JvmOverloads constructor(
         background.asTo<ColorDrawable>()?.color ?: Color.TRANSPARENT
     }
 
+    private var startX = 0f
+    private var endX = 0f
     private var curX = 0f
         set(value) {
             field = value
             invalidate()
         }
 
+    private var lastCurX: Float = -1f
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         if (isInEditMode) {
@@ -217,29 +306,30 @@ open class BottomTabLayout @JvmOverloads constructor(
         val sc = canvas.saveLayer(0f, -paddingTopH, width, height, null)
         drawBgCircle(canvas)
         drawAnimView(canvas)
-        lastOffsetX = curX
+        lastCurX = curX
         canvas.restoreToCount(sc)
     }
 
     private fun drawBgCircle(canvas: Canvas) {
         path.rewind()
         path.addRect(0f, 0f, width, height, Path.Direction.CW)
-        circleTopPath.offset(curX - lastOffsetX, 0f)
-        leftCirclePath.offset(curX - lastOffsetX, 0f)
-        rightCirclePath.offset(curX - lastOffsetX, 0f)
-        circlePath.offset(curX - lastOffsetX, 0f)
+        circleTopPath.offset(curX - lastCurX, 0f)
+        leftCirclePath.offset(curX - lastCurX, 0f)
+        rightCirclePath.offset(curX - lastCurX, 0f)
+        circlePath.offset(curX - lastCurX, 0f)
         path.op(circleTopPath, Path.Op.DIFFERENCE)
         path.op(leftCirclePath, Path.Op.DIFFERENCE)
         path.op(rightCirclePath, Path.Op.DIFFERENCE)
         path.op(circlePath, Path.Op.DIFFERENCE)
-        contentCirclePath.offset(curX - lastOffsetX, 0f)
+        contentCirclePath.offset(curX - lastCurX, 0f)
         path.addPath(contentCirclePath)
         canvas.drawPath(path, paint)
     }
 
     private fun drawAnimView(canvas: Canvas) {
-        bitmapPaint.alpha = (255 * if (curAnimProcess > 0.5f) curAnimProcess else (1-curAnimProcess)).toInt()
-        viewBitmap[if (curAnimProcess > 0.5f || oldCurView == null) curView else oldCurView]?.let {
+        bitmapPaint.alpha =
+            (255 * if (curAnimProcess > 0.5f) curAnimProcess else (1 - curAnimProcess)).toInt()
+        viewBitmap[if (curAnimProcess > 0.5f) curView else oldCurView]?.let {
             canvas.drawBitmap(
                 it,
                 curX + it.width / 2 + smallCircleR,
@@ -258,7 +348,7 @@ open class BottomTabLayout @JvmOverloads constructor(
         background = ColorDrawable(Color.TRANSPARENT)
         shadowView?.background = background
         this.post { dealParentClipChild() }
-
+        initChildView()
         AutoGetAttributeHelper.init<BottomTabLayoutAttr>(
             context,
             attrs,
