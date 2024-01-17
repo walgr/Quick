@@ -1,6 +1,7 @@
 package com.wpf.app.quick.demo
 
 import android.annotation.SuppressLint
+import android.view.View
 import android.widget.Toast
 import androidx.viewpager2.widget.ViewPager2
 import com.wpf.app.quick.activity.QuickActivity
@@ -19,7 +20,7 @@ class ViewPagerBindFragmentTestActivity : QuickActivity(R.layout.activity_test_v
     @BindView(R.id.viewPager)
     val viewPager: ViewPager2? = null
 
-    override fun initView() {
+    override fun initView(view: View?) {
         viewPager?.setCurrentItem(5, false)
         viewPager?.adapter?.notifyDataSetChanged()
         Toast.makeText(this, "3秒后刷新", Toast.LENGTH_SHORT).show()

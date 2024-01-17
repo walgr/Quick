@@ -73,7 +73,7 @@ abstract class QuickVMActivity<VM : QuickViewModel<out QuickView>> @JvmOverloads
         return mViewModel
     }
 
-    override fun initView() {
+    override fun initView(view: View?) {
 
     }
 }

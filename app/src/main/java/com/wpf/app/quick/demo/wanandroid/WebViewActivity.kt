@@ -1,6 +1,7 @@
 package com.wpf.app.quick.demo.wanandroid
 
 import android.annotation.SuppressLint
+import android.view.View
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -22,7 +23,7 @@ class WebViewActivity : QuickActivity(R.layout.activity_webview) {
     @BindView(R.id.webView)
     val webView: WebView? = null
 
-    override fun initView() {
+    override fun initView(view: View?) {
         supportActionBar?.title = title
         webView?.let {
             it.webChromeClient = WebChromeClient()

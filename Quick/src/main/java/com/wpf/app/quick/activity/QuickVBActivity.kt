@@ -2,6 +2,7 @@ package com.wpf.app.quick.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
@@ -10,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.wpf.app.quick.activity.viewmodel.QuickVBModel
 import com.wpf.app.quickbind.QuickBind
 import com.wpf.app.quickrecyclerview.constant.BRConstant
+import com.wpf.app.quickutil.bind.RunOnContext
 import com.wpf.app.quickutil.other.ViewModelEx
 
 /**
@@ -18,8 +20,10 @@ import com.wpf.app.quickutil.other.ViewModelEx
  */
 abstract class QuickVBActivity<VM : QuickVBModel<VB>, VB : ViewDataBinding> @JvmOverloads constructor(
     @LayoutRes override val layoutId: Int = 0,
+    layoutView: View? = null,
+    layoutViewInContext: RunOnContext<View>? = null,
     titleName: String = ""
-) : QuickActivity(layoutId, titleName = titleName) {
+) : QuickActivity(layoutId, layoutView, layoutViewInContext, titleName) {
 
     private var mViewModel: VM? = null
         set(value) {
@@ -35,7 +39,13 @@ abstract class QuickVBActivity<VM : QuickVBModel<VB>, VB : ViewDataBinding> @Jvm
 
     private fun setViewBinding() {
         if (viewBinding == null) {
-            viewBinding = DataBindingUtil.setContentView(this, layoutId)
+            if (layoutId != 0) {
+                viewBinding = DataBindingUtil.setContentView(this, layoutId)
+            } else {
+                getView()?.let {
+                    viewBinding = DataBindingUtil.bind(it)
+                }
+            }
             viewBinding?.lifecycleOwner = this
         }
         viewBinding?.setVariable(BRConstant.viewModel, mViewModel)
@@ -90,7 +100,7 @@ abstract class QuickVBActivity<VM : QuickVBModel<VB>, VB : ViewDataBinding> @Jvm
         mViewModel = null
     }
 
-    override fun initView() {
+    override fun initView(view: View?) {
         initView(viewBinding)
     }
 

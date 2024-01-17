@@ -1,6 +1,7 @@
 package com.wpf.app.r2test
 
 import android.annotation.SuppressLint
+import android.view.View
 import android.widget.TextView
 import com.wpf.app.quick.activity.QuickActivity
 import com.wpf.app.quick.annotations.bind.BindData2View
@@ -29,7 +30,7 @@ class R2TestActivity : QuickActivity(R.layout.test_layout, titleName = "测试R2
     var titleStr: CharSequence = "测试R2成功"
 
     @SuppressLint("SetTextI18n")
-    override fun initView() {
+    override fun initView(view: View?) {
         info1?.postDelayed({ mGroupViews?.goneAll() }, 1000)
     }
 }

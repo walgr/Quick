@@ -1,6 +1,7 @@
 package com.wpf.app.quick.demo
 
 import android.view.Gravity
+import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
 import com.google.android.material.button.MaterialButton
@@ -27,7 +28,7 @@ class DialogTestActivity : QuickActivity(
     }
 ) {
 
-    override fun initView() {
+    override fun initView(view: View?) {
         findViewById<Button>(R.id.btnNext).setOnClickListener {
             Test3Dialog(this).showInManager(showWithOther = true)
             it.postDelayed({

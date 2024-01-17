@@ -1,6 +1,7 @@
 package com.wpf.app.quick.demo
 
 import android.annotation.SuppressLint
+import android.view.View
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.wpf.app.quick.activity.QuickActivity
 import com.wpf.app.quick.annotations.bind.BindData2View
@@ -53,7 +54,7 @@ class RefreshListTestActivity : QuickActivity(R.layout.activity_refresh_list, ti
         false
     }
 
-    override fun initView() {
+    override fun initView(view: View?) {
         EmptyHelper.bind(mRecyclerView, emptyView = emptyLayout)
         mSmartRefreshLayout?.setOnRefreshListener { mRecyclerView?.onRefresh() }
         mSmartRefreshLayout?.setOnLoadMoreListener { mRecyclerView?.onLoadMore() }

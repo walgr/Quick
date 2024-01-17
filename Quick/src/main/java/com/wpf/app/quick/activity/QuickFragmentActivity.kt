@@ -1,5 +1,6 @@
 package com.wpf.app.quick.activity
 
+import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import androidx.fragment.app.Fragment
@@ -20,7 +21,7 @@ open class QuickFragmentActivity(
         }
     }
 ) {
-    override fun initView() {
+    override fun initView(view: View?) {
         supportFragmentManager.commit {
             add(R.id.root, fragment)
         }

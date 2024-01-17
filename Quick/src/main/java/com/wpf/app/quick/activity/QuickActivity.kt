@@ -29,11 +29,11 @@ abstract class QuickActivity @JvmOverloads constructor(
         super.onCreate(savedInstanceState)
         dealContentView()
         QuickBind.bind(this)
-        initView()
+        initView(getView())
         setTitleName()
     }
 
-    abstract fun initView()
+    abstract fun initView(view: View?)
 
     open fun setTitleName() {
         if (titleName.isNotEmpty()) {
@@ -52,7 +52,7 @@ abstract class QuickActivity @JvmOverloads constructor(
     }
 
     override fun getView(): View? {
-        return window.decorView
+        return window.decorView.findViewById(android.R.id.content)
     }
 
     fun requireContext() = this
