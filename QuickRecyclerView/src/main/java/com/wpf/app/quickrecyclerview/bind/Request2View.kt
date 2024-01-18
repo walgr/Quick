@@ -4,7 +4,7 @@ import android.view.View
 import com.wpf.app.quickbind.annotations.BindD2VHelper
 import com.wpf.app.quickrecyclerview.data.QuickRequestData
 import com.wpf.app.quickrecyclerview.interfaces.Request2ViewWithView
-import com.wpf.app.quickutil.Callback
+import com.wpf.app.quickutil.callback.Callback
 
 object Request2View : BindD2VHelper<View, Request2ViewWithView<out QuickRequestData, out View>> {
 

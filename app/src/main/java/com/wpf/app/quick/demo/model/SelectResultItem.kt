@@ -4,8 +4,8 @@ import android.annotation.SuppressLint
 import com.wpf.app.quick.annotations.bind.BindData2View
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quickbind.helper.binddatahelper.Text2TextView
-import com.wpf.app.quick.widgets.selectview.data.QuickChildSelectData
-import com.wpf.app.quick.widgets.selectview.data.QuickParentSelectData
+import com.wpf.app.quickwidget.selectview.data.QuickChildSelectData
+import com.wpf.app.quickwidget.selectview.data.QuickParentSelectData
 import com.wpf.app.quickutil.bind.itemClickRun
 import com.wpf.app.quickutil.bind.itemClickWithSelf
 

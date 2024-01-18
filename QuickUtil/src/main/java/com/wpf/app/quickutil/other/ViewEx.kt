@@ -4,6 +4,8 @@ import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.view.ViewParent
+import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager.widget.ViewPager
 import com.wpf.app.quickutil.data.KV
 
 fun <V> ViewGroup.getChild(isViewGroup: (View) -> Boolean): V? {
@@ -68,4 +70,27 @@ fun View?.getLocationInWindow(): IntArray {
     if (this == null) return location
     getLocationInWindow(location)
     return location
+}
+
+
+/**
+ * Created by 王朋飞 on 2022/7/27.
+ * 请在onAttachedToWindow中执行
+ * 返回view所在的Fragment或Activity
+ */
+fun View.getViewContext(): Any? {
+    var viewParent: ViewParent? = parent ?: return null
+    while (viewParent != null) {
+        if (viewParent is ViewPager) {
+            val fragments = (viewParent.context as AppCompatActivity).supportFragmentManager.fragments
+            fragments.forEach {
+                if (it.view?.findViewById<View>(id) != null) {
+                    return it
+                }
+            }
+        }
+        viewParent = viewParent.parent
+        if (viewParent == null) break
+    }
+    return null
 }

@@ -11,10 +11,10 @@ import com.wpf.app.quick.demo.model.ListRequest
 import com.wpf.app.quick.demo.wanandroid.model.Article
 import com.wpf.app.quick.demo.widgets.emptyview.TestEmptyView
 import com.wpf.app.quickrecyclerview.QuickRefreshRecyclerView
-import com.wpf.app.quickrecyclerview.helper.EmptyHelper
+import com.wpf.app.quickwidget.emptyview.EmptyHelper
 import com.wpf.app.quickrecyclerview.helper.Request2RefreshView
 import com.wpf.app.quickrecyclerview.listeners.requestData2List
-import com.wpf.app.quickutil.LogUtil
+import com.wpf.app.quickutil.log.LogUtil
 
 /**
  * Created by 王朋飞 on 2022/7/8.

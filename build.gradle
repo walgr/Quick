@@ -36,6 +36,7 @@ buildscript {
                         'runtime'      : "com.wpf.app.quick:Quick-runtime:${release}",
                         'compiler'     : "com.wpf.app.quick:Quick-compiler:${release}",
                         'util'         : "com.wpf.app.quick:QuickUtil:${release}",
+                        'widget'       : "com.wpf.app.quick:QuickWidget:${release}",
                         'network'      : "com.wpf.app.quick:QuickNetwork:${release}",
                         'recyclerview' : "com.wpf.app.quick:QuickRecyclerView:${release}",
                         'dialog'       : "com.wpf.app.quick:QuickDialog:${release}",

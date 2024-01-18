@@ -2,7 +2,7 @@ package com.wpf.app.quickrecyclerview.interfaces
 
 import androidx.annotation.CallSuper
 import com.wpf.app.quickrecyclerview.data.QuickRequestData
-import com.wpf.app.quickutil.Callback
+import com.wpf.app.quickutil.callback.Callback
 
 
 interface Request2View<Data : QuickRequestData> : Request2ViewWithView<Data, Any> {

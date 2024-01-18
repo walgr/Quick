@@ -5,9 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Checkable
 import android.widget.TextView
-import androidx.core.view.children
 import com.wpf.app.quickbind.annotations.BindD2VHelper
 import com.wpf.app.quickutil.bind.RunOnHolderWithSelf
+import com.wpf.app.quickutil.other.allChild
 
 object DataAutoSet2ViewUtils {
 
@@ -19,7 +19,7 @@ object DataAutoSet2ViewUtils {
 
     private fun setData2ViewGroup(view: View, data: Any) {
         if (view is ViewGroup) {
-            view.children.forEach {
+            view.allChild().forEach {
                 if (it is ViewGroup) {
                     setData2ViewGroup(it, data)
                 } else {

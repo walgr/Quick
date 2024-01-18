@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <com.wpf.app.quick.widgets.shadow.ShadowTextView
+            <com.wpf.app.quickwidget.shadow.ShadowTextView
                 android:id="@+id/shadow1"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
@@ -31,7 +31,7 @@
                 android:layout_width="10dp"
                 android:layout_height="0dp"/>
 
-            <com.wpf.app.quick.widgets.shadow.ShadowTextView
+            <com.wpf.app.quickwidget.shadow.ShadowTextView
                 android:id="@+id/shadow2"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
@@ -48,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <com.wpf.app.quick.widgets.shadow.ShadowCheckBox
+            <com.wpf.app.quickwidget.shadow.ShadowCheckBox
                 android:id="@+id/shadow3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
                 android:layout_width="10dp"
                 android:layout_height="0dp"/>
 
-            <com.wpf.app.quick.widgets.shadow.ShadowCheckBox
+            <com.wpf.app.quickwidget.shadow.ShadowCheckBox
                 android:id="@+id/shadow4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -78,7 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <com.wpf.app.quick.widgets.shadow.ShadowToggleButton
+            <com.wpf.app.quickwidget.shadow.ShadowToggleButton
                 android:id="@+id/shadow5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -91,7 +91,7 @@
                 android:layout_width="10dp"
                 android:layout_height="0dp"/>
 
-            <com.wpf.app.quick.widgets.shadow.ShadowToggleButton
+            <com.wpf.app.quickwidget.shadow.ShadowToggleButton
                 android:id="@+id/shadow6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -107,7 +107,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <com.wpf.app.quick.widgets.shadow.ShadowImageView
+            <com.wpf.app.quickwidget.shadow.ShadowImageView
                 android:id="@+id/shadow7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -118,7 +118,7 @@
                 android:layout_width="10dp"
                 android:layout_height="0dp"/>
 
-            <com.wpf.app.quick.widgets.shadow.ShadowImageView
+            <com.wpf.app.quickwidget.shadow.ShadowImageView
                 android:id="@+id/shadow8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

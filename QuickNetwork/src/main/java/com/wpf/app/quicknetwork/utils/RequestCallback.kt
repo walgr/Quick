@@ -1,6 +1,6 @@
 package com.wpf.app.quicknetwork.utils
 
-import com.wpf.app.quickutil.CallbackList
+import com.wpf.app.quickutil.callback.CallbackList
 
 interface RequestCallback<Data>: CallbackList<Data> {
     override fun backData(data: List<Data>?) {

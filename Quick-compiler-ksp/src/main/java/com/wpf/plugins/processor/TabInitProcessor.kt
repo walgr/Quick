@@ -47,8 +47,8 @@ class TabInitProcessor(environment: SymbolProcessorEnvironment) : IdProcessor(en
         }
         val idNameList = getAnnotationArgumentIdCode(fileStr, TabInit::class)
         funBuilderMap[funName.ifEmpty { layoutIdName }] = FunSpec.builder(funName.ifEmpty { layoutIdName })
-            .receiver(ClassName("com.wpf.app.quick.helper.tab", "TabManager"))
-            .returns(ClassName("com.wpf.app.quick.helper.tab", "TabManager"))
+            .receiver(ClassName("com.wpf.app.quickwidget.tab.", "TabManager"))
+            .returns(ClassName("com.wpf.app.quickwidget.tab.", "TabManager"))
             .addParameter(
                 "parent",
                 ClassName("android.view", "ViewGroup").copy(nullable = true)

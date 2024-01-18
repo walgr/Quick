@@ -55,12 +55,14 @@ dependencies {
         api deps.quickbind.network
         api deps.quickbind.recyclerview
         api deps.quickbind.dialog
+        api deps.quickbind.widget
     } else {
         api project(":QuickBind")
         api project(":QuickUtil")
         api project(":QuickNetwork")
         api project(":QuickRecyclerView")
         api project(":QuickDialog")
+        api project(":QuickWidget")
     }
 }
 

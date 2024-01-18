@@ -7,7 +7,7 @@ import com.wpf.app.quickrecyclerview.data.QuickClickData
 import com.wpf.app.quickbind.helper.binddatahelper.Url2ImageView
 import com.wpf.app.quickutil.bind.runOnContextWithSelf
 import com.wpf.app.quickutil.bind.runOnHolder
-import com.wpf.app.quickutil.LogUtil
+import com.wpf.app.quickutil.log.LogUtil
 import com.wpf.app.quickutil.other.matchWrapLayoutParams
 
 /**

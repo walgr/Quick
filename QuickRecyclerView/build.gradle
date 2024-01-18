@@ -47,7 +47,6 @@ dependencies {
 
     //列表
     compileOnly deps.androidx.recyclerview
-    implementation("com.google.android.flexbox:flexbox:3.0.0")
 
     //SmartRefreshLayout
     compileOnly deps.refresh

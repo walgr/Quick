@@ -83,22 +83,22 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-tooling:${rootProject.composeVersion}"
 
     //lifecycle-ktx
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.2'
     //lifecycle-ktx
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.2'
     //statusBar
     implementation 'com.geyifeng.immersionbar:immersionbar:3.2.2'
     // kotlin扩展（可选）
     implementation 'com.geyifeng.immersionbar:immersionbar-ktx:3.2.2'
     //分页
-    implementation 'androidx.paging:paging-runtime-ktx:3.1.1'
-    implementation 'androidx.paging:paging-rxjava3:3.1.1'
+    implementation 'androidx.paging:paging-runtime-ktx:3.2.1'
+    implementation 'androidx.paging:paging-rxjava3:3.2.1'
 
     //Navigation
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.7.5'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.7.5'
     //Sp存储
-    implementation 'androidx.preference:preference-ktx:1.2.0'
+    implementation 'androidx.preference:preference-ktx:1.2.1'
     implementation 'androidx.datastore:datastore:1.0.0'
     implementation 'androidx.datastore:datastore-rxjava3:1.0.0'
 

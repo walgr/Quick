@@ -8,7 +8,7 @@ import android.widget.CompoundButton
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
-import com.wpf.app.quick.widgets.CheckView
+import com.wpf.app.quickwidget.item.CheckView
 import com.wpf.app.quickbind.helper.binddatahelper.BindData2ViewHelper
 import com.wpf.app.quickrecyclerview.bind.Request2View
 import com.wpf.app.quickrecyclerview.interfaces.Request2ViewWithView

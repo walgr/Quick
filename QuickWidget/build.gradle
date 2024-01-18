@@ -1,0 +1,55 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    compileSdk rootProject.compileSdkVersion
+    defaultConfig {
+        minSdk rootProject.minSdkVersion
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlin {
+        jvmToolchain(11)
+    }
+    kotlinOptions {
+        jvmTarget = '11'
+    }
+    namespace 'com.wpf.app.quickwidget'
+}
+
+dependencies {
+
+    implementation deps.androidx.appcompat
+
+    implementation deps.androidx.material
+    //约束布局
+    implementation deps.androidx.constraintlayout
+    //列表
+    implementation deps.androidx.recyclerview
+    implementation("com.google.android.flexbox:flexbox:3.0.0")
+
+    if (IS_REMOTE.toBoolean()) {
+        api deps.quickbind.bind
+        api deps.quickbind.util
+        api deps.quickbind.recyclerview
+        api deps.quickbind.dialog
+    } else {
+        api project(":QuickBind")
+        api project(":QuickUtil")
+        api project(":QuickRecyclerView")
+        api project(":QuickDialog")
+    }
+}
+
+apply from: rootProject.file('gradle-mvn-push-aar.gradle')

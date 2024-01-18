@@ -5,7 +5,7 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-    <com.wpf.app.quickrecyclerview.AutoTagLayout
+    <com.wpf.app.quickwidget.list.tag.AutoTagLayout
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

@@ -2,7 +2,6 @@ package com.wpf.app.quickbind.utils
 
 import android.app.Dialog
 import android.view.View
-import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
@@ -19,7 +18,7 @@ object ReflectHelper {
     /**
      * 获取当前类和父类所有属性
      */
-    fun getFieldAndParent(@NonNull obj: Any): List<Field> {
+    fun getFieldAndParent(obj: Any): List<Field> {
         val result = ArrayList<Field>()
         var curCls: Class<*>? = obj.javaClass
         while (curCls != null) {

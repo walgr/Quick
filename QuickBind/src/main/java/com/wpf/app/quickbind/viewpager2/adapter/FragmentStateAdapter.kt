@@ -9,9 +9,9 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.wpf.app.quickbind.annotations.BindFragment2
 import com.wpf.app.quickbind.interfaces.BindBaseFragment
 import com.wpf.app.quickbind.interfaces.BindViewModel
-import com.wpf.app.quickbind.utils.getViewContext
 import com.wpf.app.quickbind.viewpager2.ViewPagerSize2
 import com.wpf.app.quickutil.bind.Bind
+import com.wpf.app.quickutil.other.getViewContext
 
 class FragmentStateAdapter : FragmentStateAdapter, ViewPagerSize2 {
 

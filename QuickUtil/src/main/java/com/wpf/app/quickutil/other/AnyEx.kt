@@ -1,6 +1,6 @@
 package com.wpf.app.quickutil.other
 
-import com.wpf.app.quickutil.LogUtil
+import com.wpf.app.quickutil.log.LogUtil
 
 inline fun <reified T> Any?.asTo(): T? {
     if (this == null) return null

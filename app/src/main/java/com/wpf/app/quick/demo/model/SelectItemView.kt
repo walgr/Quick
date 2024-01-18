@@ -10,7 +10,7 @@ import com.wpf.app.quickbind.helper.binddatahelper.BindData2ViewHelper
 import com.wpf.app.quickbind.helper.binddatahelper.ItemClick
 import com.wpf.app.quickbind.helper.binddatahelper.Select2CheckBox
 import com.wpf.app.quickbind.helper.binddatahelper.Text2TextView
-import com.wpf.app.quickbind.quickview.QuickSelectView
+import com.wpf.app.quickwidget.quickview.bind.QuickSelectView
 import com.wpf.app.quickutil.bind.itemClick
 import com.wpf.app.quickutil.bind.runOnContext
 

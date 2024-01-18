@@ -100,7 +100,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
-            <com.wpf.app.quickutil.widgets.quickview.QuickItemGroup
+            <com.wpf.app.quickwidget.quickview.QuickItemGroup
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -121,7 +121,7 @@
                     android:layout_marginTop="10dp"
                     android:text="子view2" />
 
-            </com.wpf.app.quickutil.widgets.quickview.QuickItemGroup>
+            </com.wpf.app.quickwidget.quickview.QuickItemGroup>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -145,7 +145,7 @@
 
             </RelativeLayout>
 
-            <com.wpf.app.quick.widgets.MultiFunctionView
+            <com.wpf.app.quickwidget.item.MultiFunctionView
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 app:title="写实"
@@ -162,7 +162,7 @@
                 android:gravity="bottom"
                 android:orientation="horizontal">
 
-                <com.wpf.app.quickutil.widgets.quickview.inxml.LoadSp2Text
+                <com.wpf.app.quickwidget.quickview.inxml.LoadSp2Text
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:bindData2Sp="true"
@@ -176,7 +176,7 @@
                         android:layout_marginHorizontal="4dp"
                         android:text="测试绑定1" />
 
-                </com.wpf.app.quickutil.widgets.quickview.inxml.LoadSp2Text>
+                </com.wpf.app.quickwidget.quickview.inxml.LoadSp2Text>
 
                 <TextView
                     android:id="@+id/spTextView2"

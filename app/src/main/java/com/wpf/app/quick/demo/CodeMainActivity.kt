@@ -11,7 +11,7 @@ import com.wpf.app.quick.annotations.tab.view.ViewType
 import com.wpf.app.quick.demo.databinding.ActivityMainCodeBinding
 import com.wpf.app.quick.demo.fragment.MainReleaseFragment
 import com.wpf.app.quick.demo.fragment.MainTestFragment
-import com.wpf.app.quick.helper.tab.TabManager
+import com.wpf.app.quickwidget.tab.TabManager
 import com.wpf.app.quickbind.annotations.BindFragments
 import com.wpf.app.quickbind.viewpager.QuickViewPager
 import com.wpf.app.quickutil.other.toColor

@@ -12,9 +12,9 @@ import androidx.viewpager.widget.ViewPager
 import com.wpf.app.quickbind.annotations.BindFragment
 import com.wpf.app.quickbind.interfaces.BindBaseFragment
 import com.wpf.app.quickbind.interfaces.BindViewModel
-import com.wpf.app.quickbind.utils.getViewContext
 import com.wpf.app.quickbind.viewpager.ViewPagerSize
 import com.wpf.app.quickutil.bind.Bind
+import com.wpf.app.quickutil.other.getViewContext
 import java.lang.reflect.Field
 
 /**

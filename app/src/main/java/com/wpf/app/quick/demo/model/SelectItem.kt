@@ -5,10 +5,10 @@ import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.annotations.bind.BindData2View
 import com.wpf.app.quickbind.helper.binddatahelper.Select2CheckBox
 import com.wpf.app.quickbind.helper.binddatahelper.Text2TextView
-import com.wpf.app.quick.widgets.selectview.data.QuickChildSelectData
-import com.wpf.app.quick.widgets.selectview.data.QuickParentSelectData
+import com.wpf.app.quickwidget.selectview.data.QuickChildSelectData
+import com.wpf.app.quickwidget.selectview.data.QuickParentSelectData
 import com.wpf.app.quickutil.bind.runOnHolder
-import com.wpf.app.quickutil.LogUtil
+import com.wpf.app.quickutil.log.LogUtil
 
 /**
  * Created by 王朋飞 on 2022/7/8.

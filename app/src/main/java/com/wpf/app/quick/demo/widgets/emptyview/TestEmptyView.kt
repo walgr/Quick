@@ -8,7 +8,15 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.wpf.app.quick.demo.R
-import com.wpf.app.quickutil.widgets.emptyview.*
+import com.wpf.app.quickwidget.emptyview.BaseEmptyView
+import com.wpf.app.quickwidget.emptyview.CustomError
+import com.wpf.app.quickwidget.emptyview.EmptyDataError
+import com.wpf.app.quickwidget.emptyview.EmptyViewState
+import com.wpf.app.quickwidget.emptyview.ExceptionError
+import com.wpf.app.quickwidget.emptyview.Loading
+import com.wpf.app.quickwidget.emptyview.NetError
+import com.wpf.app.quickwidget.emptyview.NoError
+import com.wpf.app.quickwidget.emptyview.Success
 
 class TestEmptyView @JvmOverloads constructor(
     mContext: Context,
