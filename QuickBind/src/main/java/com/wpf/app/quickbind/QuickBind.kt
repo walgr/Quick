@@ -63,19 +63,23 @@ object QuickBind: QuickBindI {
     }
 
     override fun bind(activity: Activity) {
+        super.bind(activity)
         bind(activity, null)
     }
 
     override fun bind(activity: Activity, viewModel: ViewModel?) {
+        super.bind(activity, viewModel)
         bindBinder(viewModel ?: activity, activity.window.decorView)
         dealInPlugins(activity, viewModel)
     }
 
     override fun bind(fragment: Fragment) {
+        super.bind(fragment)
         bind(fragment, null)
     }
 
     override fun bind(fragment: Fragment, viewModel: ViewModel?) {
+        super.bind(fragment, viewModel)
         fragment.view?.let {
             bindBinder(viewModel ?: fragment, it)
         }

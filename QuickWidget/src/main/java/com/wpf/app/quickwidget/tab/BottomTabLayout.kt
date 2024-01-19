@@ -21,7 +21,6 @@ import androidx.viewpager.widget.ViewPager
 import com.wpf.app.quickutil.helper.anim
 import com.wpf.app.quickutil.helper.attribute.AutoGetAttributeHelper
 import com.wpf.app.quickutil.other.asTo
-import com.wpf.app.quickutil.other.emptyPut
 import com.wpf.app.quickutil.view.getLocationInWindow
 import com.wpf.app.quickutil.view.onPageScrollStateChanged
 import com.wpf.app.quickutil.view.onPageScrolled
@@ -52,7 +51,9 @@ open class BottomTabLayout @JvmOverloads constructor(
                         }
                     }
                     viewList.add(it)
-                    viewBitmap.emptyPut(it, it.drawToBitmap())
+                    viewBitmap.getOrPut(it) {
+                        it.drawToBitmap()
+                    }
                 }
             }
             viewList.getOrNull(0)?.let {

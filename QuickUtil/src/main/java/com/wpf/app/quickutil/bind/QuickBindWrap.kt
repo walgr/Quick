@@ -19,18 +19,22 @@ object QuickBindWrap: QuickBindI {
     }
 
     override fun bind(activity: Activity) {
+        super.bind(activity)
         quickBindI?.bind(activity)
     }
 
     override fun bind(activity: Activity, viewModel: ViewModel?) {
+        super.bind(activity, viewModel)
         quickBindI?.bind(activity, viewModel)
     }
 
     override fun bind(fragment: Fragment) {
+        super.bind(fragment)
         quickBindI?.bind(fragment)
     }
 
     override fun bind(fragment: Fragment, viewModel: ViewModel?) {
+        super.bind(fragment, viewModel)
         quickBindI?.bind(fragment, viewModel)
     }
 
@@ -74,7 +78,7 @@ object QuickBindWrap: QuickBindI {
         quickBindI?.dealInPlugins(obj, viewModel, plugins)
     }
 
-    override fun getBindSpFileName(): String? {
-        return quickBindI?.getBindSpFileName()
+    override fun getBindSpFileName(): String {
+        return quickBindI!!.getBindSpFileName()
     }
 }
