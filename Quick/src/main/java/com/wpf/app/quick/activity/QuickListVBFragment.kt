@@ -10,10 +10,9 @@ import com.wpf.app.quickrecyclerview.QuickRecyclerView
 import com.wpf.app.quickrecyclerview.QuickRefreshRecyclerView
 import com.wpf.app.quickrecyclerview.data.QuickItemData
 import com.wpf.app.quickrecyclerview.data.RequestData
-import com.wpf.app.quickutil.other.matchLayoutParams
+import com.wpf.app.quickutil.view.matchLayoutParams
 import com.wpf.app.quickutil.bind.runOnContext
-import com.wpf.app.quickutil.other.allChild
-import com.wpf.app.quickutil.other.getInflaterView
+import com.wpf.app.quickutil.view.allChild
 
 /**
  * Created by 王朋飞 on 2022/7/13.

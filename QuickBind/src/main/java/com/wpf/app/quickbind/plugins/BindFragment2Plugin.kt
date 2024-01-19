@@ -12,7 +12,7 @@ import com.wpf.app.quickbind.interfaces.BindViewModel
 import com.wpf.app.quickbind.viewpager2.ViewPagerSize2
 import com.wpf.app.quickbind.viewpager2.adapter.FragmentStateAdapter
 import com.wpf.app.quickutil.bind.Bind
-import com.wpf.app.quickutil.other.getViewContext
+import com.wpf.app.quickutil.view.getViewContext
 import java.lang.reflect.Field
 
 class BindFragment2Plugin : BindBasePlugin {

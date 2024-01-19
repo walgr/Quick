@@ -9,7 +9,7 @@ import com.wpf.app.quickbind.helper.binddatahelper.Url2ImageView
 import com.wpf.app.quickutil.bind.runOnContextWithSelf
 import com.wpf.app.quickutil.bind.runOnHolder
 import com.wpf.app.quickutil.log.LogUtil
-import com.wpf.app.quickutil.other.matchWrapLayoutParams
+import com.wpf.app.quickutil.view.matchWrapLayoutParams
 
 /**
  * Created by 王朋飞 on 2022/7/5.

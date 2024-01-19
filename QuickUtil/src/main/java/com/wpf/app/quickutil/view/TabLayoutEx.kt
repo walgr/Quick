@@ -1,4 +1,4 @@
-package com.wpf.app.quickutil.other
+package com.wpf.app.quickutil.view
 
 import com.google.android.material.tabs.TabLayout
 

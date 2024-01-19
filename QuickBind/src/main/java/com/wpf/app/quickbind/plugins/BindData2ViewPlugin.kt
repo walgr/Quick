@@ -49,9 +49,6 @@ class BindData2ViewPlugin : BindBasePlugin {
             } catch (ignore: Exception) {
                 bindBaseHelper = helper.getDeclaredConstructor().newInstance()
             }
-            if (bindBaseHelper == null) {
-                bindBaseHelper = helper.getDeclaredConstructor().newInstance()
-            }
             if (value is RunOnHolderWithSelf<*, *>) {
                 bindBaseHelper?.initView(viewParent as? RecyclerView.ViewHolder,
                     findView, (value as RunOnHolderWithSelf<Any, Any>).run(findView, obj))

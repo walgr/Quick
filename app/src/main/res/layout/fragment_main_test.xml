@@ -3,16 +3,72 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="fragment"
+            type="com.wpf.app.quick.demo.fragment.MainTestFragment" />
     </data>
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
+    <RelativeLayout
+        android:padding="16dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <com.wpf.app.quickwidget.group.QuickLinearLayout
+            android:id="@+id/llRoot"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:animateLayoutChanges="true"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:itemSpace="10dp">
 
+            <com.wpf.app.quickwidget.group.QuickLinearLayout
+                android:id="@+id/ll1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:itemSpace="10dp">
 
-    </LinearLayout>
+                <View
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:background="@color/colorPrimary" />
+
+                <View
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:background="@color/colorPrimary" />
+
+            </com.wpf.app.quickwidget.group.QuickLinearLayout>
+
+            <com.wpf.app.quickwidget.group.QuickLinearLayout
+                android:id="@+id/ll2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:itemSpace="10dp">
+
+                <View
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:background="@color/colorPrimary" />
+
+                <View
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:background="@color/colorPrimary" />
+
+            </com.wpf.app.quickwidget.group.QuickLinearLayout>
+
+        </com.wpf.app.quickwidget.group.QuickLinearLayout>
+
+        <SeekBar
+            android:id="@+id/seekbar"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="100"/>
+    </RelativeLayout>
+
 </layout>

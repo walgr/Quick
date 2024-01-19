@@ -1,12 +1,15 @@
-package com.wpf.app.quickutil.other
+package com.wpf.app.quickutil.view
 
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
+import android.view.ViewGroup.MarginLayoutParams
 import android.view.ViewParent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.wpf.app.quickutil.data.KV
+import com.wpf.app.quickutil.other.asTo
+import com.wpf.app.quickutil.other.to
 
 fun <V> ViewGroup.getChild(isViewGroup: (View) -> Boolean): V? {
     for(it in 0 until this.childCount) {
@@ -93,4 +96,20 @@ fun View.getViewContext(): Any? {
         if (viewParent == null) break
     }
     return null
+}
+
+fun View.setMarginEnd(margin: Int) {
+    layoutParams.to<MarginLayoutParams>().marginEnd = margin
+}
+
+fun View.setMarginStart(margin: Int) {
+    layoutParams.to<MarginLayoutParams>().marginStart = margin
+}
+
+fun View.setTopMargin(margin: Int) {
+    layoutParams.to<MarginLayoutParams>().topMargin = margin
+}
+
+fun View.seBottomMargin(margin: Int) {
+    layoutParams.to<MarginLayoutParams>().bottomMargin = margin
 }

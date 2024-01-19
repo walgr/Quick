@@ -1,4 +1,4 @@
-package com.wpf.app.quickutil.other
+package com.wpf.app.quickutil.view
 
 import android.content.Context
 import android.view.LayoutInflater

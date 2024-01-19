@@ -17,24 +17,30 @@ import java.lang.reflect.Field
  */
 
 open class AutoGetAttribute(
-    private val context: Context,
+    context: Context,
     attributeSet: AttributeSet?,
     @StyleableRes styleableId: IntArray,
-    private var saveData: Any? = null                       //数据保存的地方
+    //数据保存的地方
+    private var saveData: Any? = null,
 ) : AttributeHelper(context, attributeSet, styleableId) {
 
     private val fieldMap = mutableMapOf<String, Field>()
-    private var testView: View? = null
+    private val testView: View by lazy {
+        View(context)
+    }
 
     init {
         getAllClassField()
-        getAttributeType(attributeSet, styleableId)
+        getAttributeType(context, attributeSet, styleableId)
         recycle()
     }
 
-    private fun getAttributeType(attributeSet: AttributeSet?, @StyleableRes styleableId: IntArray) {
+    private fun getAttributeType(
+        context: Context,
+        attributeSet: AttributeSet?,
+        @StyleableRes styleableId: IntArray
+    ) {
         if (attributeSet == null) return
-        if (testView == null) testView = View(context)
         for (i in 0 until attributeSet.attributeCount) {
 //            val attributeResNameSpace = (attributeSet as? XmlResourceParser)?.getAttributeNamespace(i)
 //            if ("http://schemas.android.com/apk/res-auto" != attributeResNameSpace) continue
@@ -47,18 +53,21 @@ open class AutoGetAttribute(
                     java.lang.Integer::class.java, Int::class.java -> {
                         //只能获取dp、sp、资源id
                         val attributeValue = attributeSet.getAttributeValue(i)
-                        if (attributeValue.contains("dip") || attributeValue.contains("sp")) {
+                        if (attributeValue.contains("dip")
+                            || attributeValue.contains("dp")
+                            || attributeValue.contains("sp")
+                        ) {
                             //获取dp或sp
                             field.set(
                                 saveData ?: this,
                                 typeArray.getDimensionPixelSize(styleableId.indexOf(attributeId), 0)
                             )
                         } else if (attributeValue.startsWith("@")) {
-//                            //获取资源id
+                            //获取资源id
                             val res = attributeSet.getAttributeResourceValue(i, 0)
-//                            //获取layout
+                            //获取layout
                             field.set(saveData ?: this, res)
-                            if (testView?.isInEditMode == false) {
+                            if (!testView.isInEditMode) {
                                 try {
                                     //获取color
                                     val colorInt = ContextCompat.getColor(context, res)
@@ -84,15 +93,19 @@ open class AutoGetAttribute(
                             field.set(saveData ?: this, attributeSet.getAttributeIntValue(i, 0))
                         }
                     }
+
                     java.lang.Float::class.java, Float::class.java -> {
                         field.set(saveData ?: this, attributeSet.getAttributeFloatValue(i, 0f))
                     }
+
                     java.lang.String::class.java, String::class.java -> {
                         field.set(saveData ?: this, attributeSet.getAttributeValue(i))
                     }
+
                     java.lang.Boolean::class.java, Boolean::class.java -> {
                         field.set(saveData ?: this, attributeSet.getAttributeBooleanValue(i, false))
                     }
+
                     Color::class.java -> {
                         val attributeValue = attributeSet.getAttributeValue(i)
                         if (attributeValue.startsWith("#")) {
@@ -110,8 +123,7 @@ open class AutoGetAttribute(
         if (saveData == null) {
             saveData = this
         }
-        val fieldList = saveData!!.javaClass.declaredFields
-        fieldList.forEach {
+        saveData!!.javaClass.declaredFields.forEach {
             fieldMap[it.name] = it
         }
     }

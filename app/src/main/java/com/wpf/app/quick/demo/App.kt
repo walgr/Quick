@@ -17,10 +17,7 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         //配置全局ViewBinding
-        BRConstant.viewModel = BR.viewModel
-        BRConstant.data = BR.data
-        BRConstant.adapter = BR.adapter
-        BRConstant.position = BR.position
+        BRConstant.initByBR(BR::class.java)
         initTestRequest()
     }
 

@@ -14,7 +14,7 @@ import com.google.android.material.tabs.TabLayout
 import com.wpf.app.quickutil.helper.attribute.AutoGetAttribute
 import com.wpf.app.quickutil.other.GenericEx
 import com.wpf.app.quickutil.other.asTo
-import com.wpf.app.quickutil.other.matchLayoutParams
+import com.wpf.app.quickutil.view.matchLayoutParams
 import com.wpf.app.quickwidget.R
 
 /**

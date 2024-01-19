@@ -22,9 +22,9 @@ import com.wpf.app.quickutil.helper.anim
 import com.wpf.app.quickutil.helper.attribute.AutoGetAttributeHelper
 import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.other.emptyPut
-import com.wpf.app.quickutil.other.getLocationInWindow
-import com.wpf.app.quickutil.other.onPageScrollStateChanged
-import com.wpf.app.quickutil.other.onPageScrolled
+import com.wpf.app.quickutil.view.getLocationInWindow
+import com.wpf.app.quickutil.view.onPageScrollStateChanged
+import com.wpf.app.quickutil.view.onPageScrolled
 import com.wpf.app.quickwidget.quickview.QuickViewGroup
 import com.wpf.app.quickwidget.R
 import kotlin.math.max

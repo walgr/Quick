@@ -19,7 +19,7 @@ open class QuickBindView @JvmOverloads constructor(
     @LayoutRes
     private val layoutId: Int = 0,
     layoutView: RunOnContext<View>? = null,
-) : com.wpf.app.quickwidget.quickview.QuickItemView(mContext, attributeSet, defStyleAttr, layoutId, layoutView) {
+) : QuickItemView(mContext, attributeSet, defStyleAttr, layoutId, layoutView) {
 
     override fun onCreateViewHolder() {
         QuickBind.bind(this)

@@ -54,7 +54,7 @@ class AutoTagLayout @JvmOverloads constructor(
     }
 
 
-    internal class AutoTagLayoutAttr(
+    private class AutoTagLayoutAttr(
         context: Context,
         attrs: AttributeSet? = null,
     ) : AutoGetAttribute(context, attrs, R.styleable.AutoTagLayout) {
