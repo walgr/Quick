@@ -79,7 +79,9 @@ open class BottomTabLayout @JvmOverloads constructor(
                 if (viewDeque.size == 2) {
                     viewDeque.removeFirst()
                 }
-                viewDeque.add(animView)
+                if (!viewDeque.contains(animView)) {
+                    viewDeque.add(animView)
+                }
             }
             circleR = max(animView.width, animView.height).toFloat()
             viewCenterX = (viewLocation[animView]?.first() ?: 0f) + animView.width / 2f
@@ -123,7 +125,7 @@ open class BottomTabLayout @JvmOverloads constructor(
                 }
             }
             viewPager.onPageScrolled { _, positionOffset, positionOffsetPixels ->
-                if (positionOffsetPixels == 0) return@onPageScrolled
+                if (positionOffsetPixels == 0 || scrollCurPosition == -1) return@onPageScrolled
                 val isScrollRight = positionOffsetPixels >= lastPositionOffsetPixels
                 if (lastPositionOffsetPixels == -1) {
                     lastPositionOffsetPixels = if (isScrollRight) 0 else positionOffsetPixels

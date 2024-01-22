@@ -9,6 +9,7 @@ import com.wpf.app.quickbind.QuickBind
 import com.wpf.app.quickbind.annotations.AutoGet
 import com.wpf.app.quickutil.bind.RunOnContext
 import com.wpf.app.quicknetwork.base.RequestCoroutineScope
+import com.wpf.app.quickutil.activity.contentView
 import com.wpf.app.quickutil.bind.Bind
 import kotlinx.coroutines.Job
 
@@ -52,7 +53,7 @@ abstract class QuickActivity @JvmOverloads constructor(
     }
 
     override fun getView(): View? {
-        return window.decorView.findViewById(android.R.id.content)
+        return window.contentView()
     }
 
     fun requireContext() = this

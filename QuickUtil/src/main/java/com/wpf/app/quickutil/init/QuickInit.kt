@@ -1,4 +1,4 @@
-package com.wpf.app.quickutil
+package com.wpf.app.quickutil.init
 
 import android.content.Context
 import java.lang.ref.SoftReference

@@ -11,7 +11,7 @@ import com.wpf.app.quickrecyclerview.data.QuickItemData
 import com.wpf.app.quickrecyclerview.listeners.QuickAdapterListener
 import com.wpf.app.quickbind.QuickBind
 import com.wpf.app.quickutil.bind.RunOnContextWithSelf
-import com.wpf.app.quickutil.view.getInflaterView
+import com.wpf.app.quickutil.view.resource.toView
 
 /**
  * Created by 王朋飞 on 2022/7/13.
@@ -24,7 +24,7 @@ open class QuickViewHolder<T : QuickItemData> @JvmOverloads constructor(
     open var dealBindView: Boolean = false,
     open var autoClick: Boolean = false
 ) : RecyclerView.ViewHolder(
-    layoutViewInContext?.run(mParent.context, mParent) ?: layoutId.getInflaterView(
+    layoutViewInContext?.run(mParent.context, mParent) ?: layoutId.toView(
         mParent.context,
         mParent
     )

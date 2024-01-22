@@ -6,7 +6,7 @@ import androidx.annotation.CallSuper
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
-import com.wpf.app.quickutil.QuickInit
+import com.wpf.app.quickutil.init.QuickInit
 import com.wpf.app.quickutil.bind.plugins.BasePlugin
 import kotlin.reflect.KClass
 

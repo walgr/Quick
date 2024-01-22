@@ -2,8 +2,6 @@ package com.wpf.app.quickutil.init
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.wpf.app.quickutil.ApplicationInitRegister
-import com.wpf.app.quickutil.QuickInit
 import com.wpf.app.quickutil.bind.QuickBindWrap
 import java.lang.ref.SoftReference
 

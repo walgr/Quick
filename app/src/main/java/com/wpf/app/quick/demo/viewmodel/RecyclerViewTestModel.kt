@@ -8,7 +8,7 @@ import com.wpf.app.quick.demo.R
 import com.wpf.app.quickrecyclerview.data.and
 import com.wpf.app.quickrecyclerview.utils.LineItem
 import com.wpf.app.quickutil.view.dp2px
-import com.wpf.app.quickutil.view.toColor
+import com.wpf.app.quickutil.view.resource.toColor
 
 /**
  * Created by 王朋飞 on 2022/6/13.

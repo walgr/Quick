@@ -11,6 +11,8 @@ import com.wpf.app.quick.activity.QuickVMFragment
 import com.wpf.app.quick.activity.QuickView
 import com.wpf.app.quick.activity.viewmodel.QuickVBModel
 import com.wpf.app.quick.activity.viewmodel.QuickViewModel
+import com.wpf.app.quickdialog.QuickDialog
+import com.wpf.app.quickdialog.QuickDialogFragment
 
 fun View.toFragment(
     titleName: String = "",
@@ -77,6 +79,22 @@ inline fun <reified VM : QuickVBModel<VB>, reified VB : ViewDataBinding> View.to
         override fun initView(view: VB?) {
             super.initView(view)
             onActivityInit?.invoke(view)
+        }
+    }
+}
+
+fun View.toDialog(onDialogInit: ((view: View?) -> Unit)? = null): QuickDialog {
+    return object : QuickDialog(this.context, layoutView = this) {
+        override fun initView(view: View?) {
+            onDialogInit?.invoke(view)
+        }
+    }
+}
+
+fun View.toDialogFragment(onDialogInit: ((view: View?) -> Unit)? = null): QuickDialogFragment {
+    return object : QuickDialogFragment(layoutView = this) {
+        override fun initView(view: View?) {
+            onDialogInit?.invoke(view)
         }
     }
 }

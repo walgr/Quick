@@ -6,7 +6,7 @@ import com.wpf.app.quick.activity.QuickBindingActivity
 import com.wpf.app.quick.annotations.getclass.GetClass
 import com.wpf.app.quick.demo.databinding.ActivityShadowTestBinding
 import com.wpf.app.quickutil.helper.TimeDelayHelper
-import com.wpf.app.quickutil.view.toColor
+import com.wpf.app.quickutil.view.resource.toColor
 
 @GetClass
 class ShadowViewTestActivity: QuickBindingActivity<ActivityShadowTestBinding>(
