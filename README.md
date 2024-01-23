@@ -10,6 +10,8 @@
 
     项目目前处于初期建设阶段，文档粗略，功能可参照app里的demo。
 
+    有好想法欢迎提issue，我来实现。
+
 ### 项目功能
 
 1.基础Activity、ViewModelActivity、ViewBindingActivity、Fragment

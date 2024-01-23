@@ -13,7 +13,7 @@ open class QuickSelectGroup<T : ViewGroup> @JvmOverloads constructor(
     mContext: Context,
     attributeSet: AttributeSet? = null,
     defStyleAttr: Int = 0,
-    override val addToParent: Boolean = true,
+    override var addToParent: Boolean = true,
     open val id: String? = null,
     open val isSelect: Boolean = false,
     @LayoutRes val layoutId: Int,

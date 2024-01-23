@@ -14,22 +14,17 @@ import kotlin.math.abs
  */
 open class QuickItemGroup<T : ViewGroup> @JvmOverloads constructor(
     mContext: Context,
-    attributeSet: AttributeSet? = null,
+    attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
-    override val addToParent: Boolean = true,
+    override var addToParent: Boolean = true,
     @LayoutRes private var layoutId: Int = 0,
     open var viewType: Int = 0,
-) : QuickViewGroup<T>(mContext, attributeSet, defStyleAttr, addToParent = addToParent), Bind {
+) : QuickViewGroup<T>(mContext, attrs, defStyleAttr, addToParent = addToParent), Bind {
 
     private var mView: View? = null
     var position: Int = -1
 
     override fun init() {
-        if (attrSet == null) {
-            attrs?.let {
-                attrSet = QuickViewGroupAttrSet(context, it)
-            }
-        }
         initView()
         initViewType()
         super.init()
@@ -48,7 +43,7 @@ open class QuickItemGroup<T : ViewGroup> @JvmOverloads constructor(
     }
 
     private fun initLayoutIdByXml() {
-        layoutId = attrSet?.layoutRes ?: layoutId
+        layoutId = attrSet.layoutRes
     }
 
     open fun onCreateViewHolder() {

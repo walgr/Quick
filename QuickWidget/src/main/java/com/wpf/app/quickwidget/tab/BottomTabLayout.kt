@@ -1,6 +1,7 @@
 package com.wpf.app.quickwidget.tab
 
 import android.animation.Animator
+import android.app.Activity
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -17,7 +18,9 @@ import android.widget.LinearLayout
 import androidx.annotation.IdRes
 import androidx.core.view.children
 import androidx.core.view.drawToBitmap
+import androidx.core.view.get
 import androidx.viewpager.widget.ViewPager
+import com.wpf.app.quickutil.activity.contentView
 import com.wpf.app.quickutil.helper.anim
 import com.wpf.app.quickutil.helper.attribute.AutoGetAttributeHelper
 import com.wpf.app.quickutil.other.asTo
@@ -51,8 +54,10 @@ open class BottomTabLayout @JvmOverloads constructor(
                         }
                     }
                     viewList.add(it)
-                    viewBitmap.getOrPut(it) {
-                        it.drawToBitmap()
+                    if (it.measuredWidth != 0) {
+                        viewBitmap.getOrPut(it) {
+                            it.drawToBitmap()
+                        }
                     }
                 }
             }
@@ -342,7 +347,13 @@ open class BottomTabLayout @JvmOverloads constructor(
     }
 
     private fun dealParentClipChild() {
-        parent?.asTo<ViewGroup>()?.clipChildren = false
+        if (context is Activity) {
+            (context as Activity).contentView()?.asTo<ViewGroup>()?.get(0)?.let {
+                it.asTo<ViewGroup>()?.clipChildren = false
+            }
+        } else {
+            parent?.asTo<ViewGroup>()?.clipChildren = false
+        }
     }
 
     init {

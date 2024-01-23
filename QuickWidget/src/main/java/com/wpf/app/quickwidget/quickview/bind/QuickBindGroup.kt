@@ -17,7 +17,7 @@ open class QuickBindGroup<T : ViewGroup> @JvmOverloads constructor(
     mContext: Context,
     attributeSet: AttributeSet? = null,
     defStyleAttr: Int = 0,
-    override val addToParent: Boolean = true,
+    override var addToParent: Boolean = true,
     @LayoutRes private val layoutId: Int = 0,
     private var dealBind: Boolean = true
 ) : QuickItemGroup<T>(

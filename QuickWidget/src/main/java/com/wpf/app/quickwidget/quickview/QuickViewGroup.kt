@@ -1,9 +1,12 @@
 package com.wpf.app.quickwidget.quickview
 
 import android.content.Context
+import android.graphics.Canvas
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.RadioGroup
@@ -12,6 +15,7 @@ import androidx.annotation.CallSuper
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.tabs.TabLayout
 import com.wpf.app.quickutil.helper.attribute.AutoGetAttribute
+import com.wpf.app.quickutil.helper.attribute.AutoGetAttributeHelper
 import com.wpf.app.quickutil.other.GenericEx
 import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.view.matchLayoutParams
@@ -23,16 +27,17 @@ import com.wpf.app.quickwidget.R
  */
 //@InternalCoroutinesApi
 open class QuickViewGroup<T : ViewGroup> @JvmOverloads constructor(
-    mContext: Context,
-    open val attrs: AttributeSet? = null,
+    context: Context,
+    private val attrs: AttributeSet? = null,
     open val defStyleAttr: Int = 0,
-    open val addToParent: Boolean = true,
+    open var addToParent: Boolean = true,
     open val childView: Array<View>? = null
-) : ViewGroup(mContext, attrs, defStyleAttr) {
+) : ViewGroup(context, attrs, defStyleAttr) {
 
-    protected var attrSet: QuickViewGroupAttrSet? = null
+    protected val attrSet: QuickViewGroupAttrSet
 
     init {
+        attrSet = AutoGetAttributeHelper.init(context, attrs, R.styleable.QuickViewGroup)
         init()
     }
 
@@ -41,16 +46,14 @@ open class QuickViewGroup<T : ViewGroup> @JvmOverloads constructor(
 
     @CallSuper
     open fun init() {
-        if (attrSet == null) {
-            attrs?.let {
-                attrSet = QuickViewGroupAttrSet(context, it)
-            }
+        attrSet.addToParent?.let {
+            addToParent = it
         }
         initViewGroupByXml()
         initViewGroupByT()
         addChildToT()
         if (!addToParent || isInEditMode) {
-            addTToThis()
+            addT()
         }
     }
 
@@ -68,34 +71,33 @@ open class QuickViewGroup<T : ViewGroup> @JvmOverloads constructor(
 
     private fun initViewGroupByXml() {
         if (this.shadowView != null) return
-        attrSet?.let {
-            when (it.groupType) {
-                GroupType.TabLayout.type -> {
-                    this.shadowView = TabLayout(context, attrs, defStyleAttr) as T
-                }
-                GroupType.LinearLayout.type -> {
-                    this.shadowView = LinearLayout(context, attrs, defStyleAttr) as T
-                }
+        when (attrSet.groupType) {
+            GroupType.TabLayout.type -> {
+                this.shadowView = TabLayout(context, attrs, defStyleAttr) as T
+            }
 
-                GroupType.RelativeLayout.type -> {
-                    this.shadowView = RelativeLayout(context, attrs, defStyleAttr) as T
-                }
+            GroupType.LinearLayout.type -> {
+                this.shadowView = LinearLayout(context, attrs, defStyleAttr) as T
+            }
 
-                GroupType.FrameLayout.type -> {
-                    this.shadowView = FrameLayout(context, attrs, defStyleAttr) as T
-                }
+            GroupType.RelativeLayout.type -> {
+                this.shadowView = RelativeLayout(context, attrs, defStyleAttr) as T
+            }
 
-                GroupType.ConstraintLayout.type -> {
-                    this.shadowView = ConstraintLayout(context, attrs, defStyleAttr) as T
-                }
+            GroupType.FrameLayout.type -> {
+                this.shadowView = FrameLayout(context, attrs, defStyleAttr) as T
+            }
 
-                GroupType.RadioGroup.type -> {
-                    this.shadowView = RadioGroup(context, attrs) as T
-                }
+            GroupType.ConstraintLayout.type -> {
+                this.shadowView = ConstraintLayout(context, attrs, defStyleAttr) as T
+            }
 
-                else -> {
-                    this.shadowView = LinearLayout(context, attrs, defStyleAttr) as T
-                }
+            GroupType.RadioGroup.type -> {
+                this.shadowView = RadioGroup(context, attrs) as T
+            }
+
+            else -> {
+                this.shadowView = LinearLayout(context, attrs, defStyleAttr) as T
             }
         }
     }
@@ -144,7 +146,7 @@ open class QuickViewGroup<T : ViewGroup> @JvmOverloads constructor(
                 MeasureSpec.makeMeasureSpec(viewMeasureHeight, specModeHeight)
             )
             if (addToParent && !isInEditMode) {
-                addTToParent()
+                addT()
             }
         } ?: let {
             super.onMeasure(widthMeasureSpec, heightMeasureSpec)
@@ -156,10 +158,6 @@ open class QuickViewGroup<T : ViewGroup> @JvmOverloads constructor(
             shadowView.layout(0, 0, shadowView.measuredWidth, shadowView.measuredHeight)
         }
     }
-
-//    override fun onDraw(canvas: Canvas) {
-//        shadowView?.draw(canvas) ?: super.onDraw(canvas)
-//    }
 
     fun getChildAtInShadow(index: Int): View? {
         if (shadowView is TabLayout) {
@@ -221,9 +219,45 @@ open class QuickViewGroup<T : ViewGroup> @JvmOverloads constructor(
         return shadowView?.childCount ?: 0
     }
 
+    override fun setClipChildren(clipChildren: Boolean) {
+        super.setClipChildren(clipChildren)
+        shadowView?.clipChildren = clipChildren
+    }
+
+    override fun setAlpha(alpha: Float) {
+        super.setAlpha(alpha)
+        shadowView?.alpha = alpha
+    }
+
+    override fun setActivated(activated: Boolean) {
+        super.setActivated(activated)
+        shadowView?.isActivated = activated
+    }
+
+    override fun setAnimation(animation: Animation?) {
+        super.setAnimation(animation)
+        shadowView?.animation = animation
+    }
+
+    override fun setBackground(background: Drawable?) {
+        super.setBackground(background)
+        shadowView?.background = background
+    }
+
+    override fun setBackgroundColor(color: Int) {
+        super.setBackgroundColor(color)
+        shadowView?.setBackgroundColor(color)
+    }
+
+    override fun setBackgroundResource(resid: Int) {
+        super.setBackgroundResource(resid)
+        shadowView?.setBackgroundResource(resid)
+    }
+
     override fun generateDefaultLayoutParams(): LayoutParams {
         return generateLayoutParams(attrs)
     }
+
     override fun generateLayoutParams(attrs: AttributeSet?): LayoutParams {
         return when (shadowView) {
             is TabLayout -> {
@@ -279,15 +313,11 @@ open class QuickViewGroup<T : ViewGroup> @JvmOverloads constructor(
     }
 }
 
-class QuickViewGroupAttrSet(
-    mContext: Context,
-    attributeSet: AttributeSet,
-) : AutoGetAttribute(mContext, attributeSet, R.styleable.QuickViewGroup) {
-
-    val groupType: Int? = null
-
-    val layoutRes: Int? = null
-}
+class QuickViewGroupAttrSet @JvmOverloads constructor(
+    val addToParent: Boolean? = null,
+    val groupType: Int = 0,
+    val layoutRes: Int = 0,
+)
 
 enum class GroupType(val type: Int) {
     LinearLayout(0),

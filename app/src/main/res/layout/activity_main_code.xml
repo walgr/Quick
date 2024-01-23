@@ -3,17 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <com.wpf.app.quickwidget.quickview.QuickViewGroup
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#eeeeee"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:groupType="LinearLayout"
+        app:addToParent="false">
 
         <com.wpf.app.quickbind.viewpager.QuickViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            />
 
         <com.wpf.app.quickwidget.tab.BottomTabLayout
             android:id="@+id/bottomTabs"
@@ -24,9 +27,8 @@
             app:animView="@+id/ivIcon">
 
 
-
         </com.wpf.app.quickwidget.tab.BottomTabLayout>
 
-    </LinearLayout>
+    </com.wpf.app.quickwidget.quickview.QuickViewGroup>
 
 </layout>
