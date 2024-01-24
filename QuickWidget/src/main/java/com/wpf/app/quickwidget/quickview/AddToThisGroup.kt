@@ -22,8 +22,8 @@ open class AddToThisGroup @JvmOverloads constructor(
         val specModeWidth = MeasureSpec.getMode(widthMeasureSpec)
         val specModeHeight = MeasureSpec.getMode(heightMeasureSpec)
         setMeasuredDimension(
-            resolveSize(viewMeasureWidth, specModeWidth),
-            resolveSize(viewMeasureHeight, specModeHeight)
+            MeasureSpec.makeMeasureSpec(viewMeasureWidth, specModeWidth),
+            MeasureSpec.makeMeasureSpec(viewMeasureHeight, specModeHeight)
         )
     }
 

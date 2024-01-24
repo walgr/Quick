@@ -80,8 +80,8 @@ abstract class QuickItemView @JvmOverloads constructor(
         val viewMeasureWidth = getView()?.measuredWidth ?: 0
         val viewMeasureHeight = getView()?.measuredHeight ?: 0
         setMeasuredDimension(
-            resolveSize(viewMeasureWidth, specModeWidth),
-            resolveSize(viewMeasureHeight, specModeHeight)
+            MeasureSpec.makeMeasureSpec(viewMeasureWidth, specModeWidth),
+            MeasureSpec.makeMeasureSpec(viewMeasureHeight, specModeHeight)
         )
         addToParent()
     }

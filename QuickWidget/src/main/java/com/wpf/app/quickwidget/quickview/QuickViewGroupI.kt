@@ -11,6 +11,7 @@ import android.widget.RelativeLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.tabs.TabLayout
 import com.wpf.app.quickutil.other.GenericEx
+import com.wpf.app.quickutil.view.allChild
 import com.wpf.app.quickutil.view.matchLayoutParams
 
 enum class GroupType(val type: Int) {
@@ -22,7 +23,7 @@ enum class GroupType(val type: Int) {
     TabLayout(5),
 }
 
-interface QuickViewGroupI<T : ViewGroup> {
+internal interface QuickViewGroupI<T : ViewGroup> {
     fun initViewGroupByXml(
         shadowView: View?,
         groupType: Int,
@@ -80,6 +81,12 @@ interface QuickViewGroupI<T : ViewGroup> {
             return t as T
         }
         return null
+    }
+
+    fun addChildToT(shadowView: ViewGroup?, curView: ViewGroup) {
+        curView.allChild().forEach {
+            shadowView?.addView(it)
+        }
     }
 
     fun addTToParent(shadowView: View?, curView: ViewGroup) {

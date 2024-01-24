@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.widget.FrameLayout
 import android.widget.LinearLayout
@@ -54,17 +55,12 @@ open class QuickViewGroupNoAttrs<T : ViewGroup> @JvmOverloads constructor(
         if (isInEditMode) {
             addToParent = false
         }
+        setWillNotDraw(false)
         shadowView = initViewGroupByXml(shadowView, attrSet.groupType, context, attrs, defStyleAttr)
             ?: initViewGroupByT(shadowView, context, attrs, defStyleAttr)
-        addChildToT()
+        addChildToT(shadowView, this)
         if (!addToParent) {
             addT(false, shadowView, this)
-        }
-    }
-
-    private fun addChildToT() {
-        childView?.forEach {
-            this.shadowView?.addView(it)
         }
     }
 
