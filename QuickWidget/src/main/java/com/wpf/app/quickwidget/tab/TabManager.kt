@@ -12,7 +12,7 @@ import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.view.onPageSelected
 import com.wpf.app.quickutil.view.onTabSelected
 import com.wpf.app.quickutil.view.onceClick
-import com.wpf.app.quickwidget.quickview.QuickViewGroup
+import com.wpf.app.quickwidget.quickview.QuickViewGroupNoAttrs
 
 /**
  * 挪动位置需要同步修改TabInitProcessor里的包名
@@ -154,7 +154,7 @@ open class TabManager : GroupManager() {
     }
 
     private fun getTabLayout(parent: ViewGroup): TabLayout? {
-        if (parent is QuickViewGroup<*> && parent.shadowView is TabLayout) {
+        if (parent is QuickViewGroupNoAttrs<*> && parent.shadowView is TabLayout) {
             return parent.shadowView?.asTo<TabLayout>()
         }
         return parent.asTo<TabLayout>()
@@ -162,7 +162,7 @@ open class TabManager : GroupManager() {
 
     private fun indexOfChild(parent: ViewGroup, child: View): Int {
         return when (parent) {
-            is QuickViewGroup<*> -> {
+            is QuickViewGroupNoAttrs<*> -> {
                 parent.indexOfChildInShadow(child)
             }
 
@@ -178,7 +178,7 @@ open class TabManager : GroupManager() {
                 parent.tabCount
             }
 
-            is QuickViewGroup<*> -> {
+            is QuickViewGroupNoAttrs<*> -> {
                 parent.getRealChildCount()
             }
 
@@ -194,7 +194,7 @@ open class TabManager : GroupManager() {
                 parent.getTabAt(pos).asTo<Tab>()?.view
             }
 
-            is QuickViewGroup<*> -> {
+            is QuickViewGroupNoAttrs<*> -> {
                 parent.getChildAtInShadow(pos)
             }
 
@@ -210,7 +210,7 @@ open class TabManager : GroupManager() {
                 parent.addTab(parent.newTab().setCustomView(child))
             }
 
-            is QuickViewGroup<*> -> {
+            is QuickViewGroupNoAttrs<*> -> {
                 parent.addView(child)
             }
 

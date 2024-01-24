@@ -48,19 +48,21 @@ abstract class QuickItemView @JvmOverloads constructor(
         } else {
             layoutView?.run(context)
         }
-        post {
-            val parentGroup = parent as? ViewGroup ?: return@post
-            position = parentGroup.indexOfChild(this)
-            parentGroup.removeView(this)
-            parentGroup.addView(
-                mView,
-                position,
-                ViewGroup.LayoutParams(layoutParams.width, layoutParams.height)
-            )
-            visibility = GONE
-            onCreateViewHolder()
-            onBindViewHolder(position)
-        }
+    }
+
+    private fun addToParent() {
+        val parentGroup = parent as? ViewGroup ?: return
+        position = parentGroup.indexOfChild(this)
+        parentGroup.removeView(this)
+        getView()?.setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom)
+        parentGroup.addView(mView, position, layoutParams)
+        onCreateViewHolder()
+        onBindViewHolder(position)
+    }
+
+    override fun setPadding(left: Int, top: Int, right: Int, bottom: Int) {
+        super.setPadding(left, top, right, bottom)
+        getView()?.setPadding(left, top, right, bottom)
     }
 
     abstract fun onCreateViewHolder()
@@ -81,6 +83,7 @@ abstract class QuickItemView @JvmOverloads constructor(
             resolveSize(viewMeasureWidth, specModeWidth),
             resolveSize(viewMeasureHeight, specModeHeight)
         )
+        addToParent()
     }
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {

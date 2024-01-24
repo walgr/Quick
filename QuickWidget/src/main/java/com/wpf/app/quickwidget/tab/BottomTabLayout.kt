@@ -31,7 +31,7 @@ import com.wpf.app.quickwidget.quickview.QuickViewGroup
 import com.wpf.app.quickwidget.R
 import kotlin.math.max
 
-open class BottomTabLayout @JvmOverloads constructor(
+class BottomTabLayout @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,

@@ -1,6 +1,7 @@
 package com.wpf.app.quickwidget.quickview.inxml
 
 import android.content.Context
+import android.graphics.Canvas
 import android.text.TextUtils
 import android.util.AttributeSet
 import android.widget.TextView
@@ -11,6 +12,7 @@ import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.bind.QuickBindWrap
 import com.wpf.app.quickutil.helper.attribute.AutoGetAttribute
 import com.wpf.app.quickwidget.R
+import com.wpf.app.quickwidget.quickview.Only1Child
 
 /**
  * 给子View注入Sp内容
@@ -19,7 +21,7 @@ class LoadSp2Text @JvmOverloads constructor(
     mContext: Context,
     val attributeSet: AttributeSet? = null,
     defStyleAttr: Int = 0,
-) : ChildToParentGroup(
+) : Only1Child<TextView>(
     mContext, attributeSet, defStyleAttr
 ) {
 
@@ -35,15 +37,13 @@ class LoadSp2Text @JvmOverloads constructor(
 
     override fun onFinishInflate() {
         super.onFinishInflate()
-        val firstChild = getChildAt(0)
-        if (firstChild is TextView) {
-            //只能套在基于TextView的View上
-            firstChild.asTo<TextView>()?.text = spData
-            if (attributeHelper.bindData2Sp == true) {
-                firstChild.asTo<TextView>()?.doAfterTextChanged {
-                    sharedPreference.edit {
-                        putString(attributeHelper.bindKey, it?.toString() ?: "")
-                    }
+        val firstChild = getChildAtInShadow(0)
+        //只能套在基于TextView的View上
+        firstChild.asTo<TextView>()?.text = spData
+        if (attributeHelper.bindData2Sp == true) {
+            firstChild.asTo<TextView>()?.doAfterTextChanged {
+                sharedPreference.edit {
+                    putString(attributeHelper.bindKey, it?.toString() ?: "")
                 }
             }
         }

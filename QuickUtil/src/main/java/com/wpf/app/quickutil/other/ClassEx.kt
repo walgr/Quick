@@ -12,3 +12,14 @@ fun Class<*>.getFieldWithSuper(): List<Field> {
     }
     return fieldList
 }
+
+fun Class<*>.getClassWithSuper(): List<Class<*>> {
+    val list = mutableListOf<Class<*>>()
+    list.add(this)
+    var parentCls = superclass
+    while (parentCls != null && parentCls != Any::class.java) {
+        list.add(parentCls)
+        parentCls = parentCls.superclass
+    }
+    return list
+}

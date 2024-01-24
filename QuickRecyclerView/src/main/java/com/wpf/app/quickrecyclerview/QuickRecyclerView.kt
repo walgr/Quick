@@ -16,7 +16,7 @@ open class QuickRecyclerView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : RecyclerView(mContext, attrs, defStyleAttr), DataAdapter {
 
-    open lateinit var mQuickAdapter: QuickAdapter
+     protected val mQuickAdapter: QuickAdapter = QuickAdapter()
 
     init {
         initView()
@@ -24,12 +24,11 @@ open class QuickRecyclerView @JvmOverloads constructor(
 
     open fun initView() {
         layoutManager = LinearLayoutManager(context)
-        mQuickAdapter = QuickAdapter()
         mQuickAdapter.mRecyclerView = this
         adapter = mQuickAdapter
     }
 
-    override fun getQuickAdapter() : QuickAdapter {
+    override fun getQuickAdapter(): QuickAdapter {
         return mQuickAdapter
     }
 }

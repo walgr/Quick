@@ -8,10 +8,9 @@ import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
-import com.wpf.app.quickrecyclerview.QuickAdapter
 import com.wpf.app.quickrecyclerview.QuickRecyclerView
-import com.wpf.app.quickrecyclerview.R
 import com.wpf.app.quickutil.helper.attribute.AutoGetAttribute
+import com.wpf.app.quickwidget.R
 
 class AutoTagLayout @JvmOverloads constructor(
     context: Context,
@@ -48,7 +47,6 @@ class AutoTagLayout @JvmOverloads constructor(
                 }
             }
         }
-        mQuickAdapter = QuickAdapter()
         mQuickAdapter.mRecyclerView = this
         adapter = mQuickAdapter
     }

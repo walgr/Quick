@@ -2,13 +2,14 @@ package com.wpf.app.quickwidget.quickview
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.View
 import android.view.ViewGroup
 
 open class AddToThisGroup @JvmOverloads constructor(
     mContext: Context,
     attributeSet: AttributeSet? = null,
     defStyleAttr: Int = 0,
-) : Only1Child(mContext, attributeSet, defStyleAttr) {
+) : Only1Child<View>(mContext, attributeSet, defStyleAttr) {
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         val it = getChildAt(0)

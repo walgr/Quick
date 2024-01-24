@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <import type="com.wpf.app.quick.demo.wanandroid.WanAndroidHomeActivityClass"/>
@@ -100,51 +99,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
-            <com.wpf.app.quickwidget.quickview.QuickItemGroup
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:orientation="vertical"
-                app:groupType="LinearLayout">
-
-                <TextView
-                    android:id="@+id/t1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="子view1" />
-
-                <TextView
-                    android:id="@+id/t2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/t1"
-                    android:layout_marginTop="10dp"
-                    android:text="子view2" />
-
-            </com.wpf.app.quickwidget.quickview.QuickItemGroup>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/t3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="子view3" />
-
-                <TextView
-                    android:id="@+id/t4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/t3"
-                    android:layout_marginTop="10dp"
-                    android:text="子view4" />
-
-            </RelativeLayout>
-
             <com.wpf.app.quickwidget.item.MultiFunctionView
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
@@ -156,10 +110,8 @@
             <LinearLayout
                 android:id="@+id/testBindSpLL"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_gravity="bottom"
-                android:layout_weight="1"
-                android:gravity="bottom"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <com.wpf.app.quickwidget.quickview.inxml.LoadSp2Text
@@ -182,10 +134,9 @@
                     android:id="@+id/spTextView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="4dp"
                     android:text="测试绑定2" />
 
-                <Button
+                <TextView
                     android:id="@+id/spTextView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
