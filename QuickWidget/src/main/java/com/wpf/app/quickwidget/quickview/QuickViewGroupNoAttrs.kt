@@ -34,7 +34,7 @@ open class QuickViewGroupNoAttrs<T : ViewGroup> @JvmOverloads constructor(
 
     init {
         attrSet = AutoGetAttributeHelper.init(context, attrs, R.styleable.QuickViewGroup)
-        init()
+        this.init()
     }
 
     var shadowView: T? = null
@@ -214,28 +214,6 @@ open class QuickViewGroupNoAttrs<T : ViewGroup> @JvmOverloads constructor(
             else -> {
                 MarginLayoutParams(context, attrs)
             }
-        }
-    }
-
-    companion object {
-        inline fun <reified T : ViewGroup> create(
-            mContext: Context,
-            attributeSet: AttributeSet? = null,
-            defStyleAttr: Int = 0,
-            addToParent: Boolean = true,
-            childView: Array<View>? = null
-        ) = object : QuickViewGroupNoAttrs<T>(
-            mContext,
-            attributeSet,
-            defStyleAttr,
-            addToParent = addToParent,
-            childView = childView
-        ) {}
-    }
-
-    fun build() {
-        post {
-            addT(addToParent, shadowView, this)
         }
     }
 

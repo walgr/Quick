@@ -17,7 +17,7 @@ open class ShadowImageView @JvmOverloads constructor(
 ) : AppCompatImageView(context, attrs), ShadowView {
 
     init {
-        initShadow(
+        this.initShadow(
             context,
             abilityList ?: listOf(
                 ShadowLiveFactory.visibilityLiveData,

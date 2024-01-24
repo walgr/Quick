@@ -11,10 +11,8 @@ import kotlin.reflect.KClass
 object QuickBindWrap: QuickBindI {
     private var quickBindI: QuickBindI? = null
     init {
-        try {
+        runCatching {
             quickBindI = Class.forName("com.wpf.app.quickbind.QuickBind").getField("INSTANCE").get(null) as QuickBindI
-        } catch (e : Exception) {
-            e.printStackTrace()
         }
     }
 

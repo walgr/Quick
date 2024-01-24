@@ -18,7 +18,7 @@ open class ShadowCheckBox @JvmOverloads constructor(
 ) : AppCompatCheckBox(context, attrs), ShadowView {
 
     init {
-        initShadow(
+        this.initShadow(
             context,
             abilityList ?: listOf(
                 ShadowLiveFactory.visibilityLiveData,

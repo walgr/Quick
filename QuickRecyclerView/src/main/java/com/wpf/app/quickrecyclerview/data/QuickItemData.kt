@@ -10,7 +10,7 @@ import kotlin.math.abs
 open class QuickItemData: Serializable {
     var viewType: Int = 0
     init {
-        initViewType()
+        this.initViewType()
     }
 
     open fun initViewType() {

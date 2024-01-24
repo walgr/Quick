@@ -19,7 +19,7 @@ open class QuickRecyclerView @JvmOverloads constructor(
      protected val mQuickAdapter: QuickAdapter = QuickAdapter()
 
     init {
-        initView()
+        this.initView()
     }
 
     open fun initView() {

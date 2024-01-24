@@ -24,7 +24,7 @@ abstract class QuickFragment @JvmOverloads constructor(
     @LayoutRes open val layoutId: Int = 0,
     open val layoutView: View? = null,
     open val layoutViewInContext: RunOnContext<View>? = null,
-    @AutoGet(titleKey) open val titleName: String = ""
+    @AutoGet(titleKey) val titleName: String = ""
 ) : Fragment(), BindBaseFragment, QuickView, RequestCoroutineScope, Bind {
 
     override var jobManager: MutableList<Job> = mutableListOf()

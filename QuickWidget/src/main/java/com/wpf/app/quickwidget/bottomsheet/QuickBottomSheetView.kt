@@ -107,6 +107,6 @@ open class QuickBottomSheetView(
     }
 
     init {
-        initView()
+        this.initView()
     }
 }
