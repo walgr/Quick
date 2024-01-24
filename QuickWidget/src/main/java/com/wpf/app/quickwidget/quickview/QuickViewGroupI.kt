@@ -13,6 +13,7 @@ import com.google.android.material.tabs.TabLayout
 import com.wpf.app.quickutil.other.GenericEx
 import com.wpf.app.quickutil.view.allChild
 import com.wpf.app.quickutil.view.matchLayoutParams
+import java.lang.reflect.Constructor
 
 enum class GroupType(val type: Int) {
     LinearLayout(0),
@@ -25,42 +26,50 @@ enum class GroupType(val type: Int) {
 
 internal interface QuickViewGroupI<T : ViewGroup> {
     fun initViewGroupByXml(
-        shadowView: View?,
+        shadowView: ViewGroup?,
         groupType: Int,
         context: Context,
         attrs: AttributeSet? = null,
         defStyleAttr: Int = 0
-    ): T? {
-        if (shadowView != null) return shadowView as T
+    ): ViewGroup? {
+        if (shadowView != null) return shadowView
         return when (groupType) {
             GroupType.TabLayout.type -> {
-                TabLayout(context, attrs, defStyleAttr) as T
+                TabLayout(context, attrs, defStyleAttr)
             }
 
             GroupType.LinearLayout.type -> {
-                LinearLayout(context, attrs, defStyleAttr) as T
+                LinearLayout(context, attrs, defStyleAttr)
             }
 
             GroupType.RelativeLayout.type -> {
-                RelativeLayout(context, attrs, defStyleAttr) as T
+                RelativeLayout(context, attrs, defStyleAttr)
             }
 
             GroupType.FrameLayout.type -> {
-                FrameLayout(context, attrs, defStyleAttr) as T
+                FrameLayout(context, attrs, defStyleAttr)
             }
 
             GroupType.ConstraintLayout.type -> {
-                ConstraintLayout(context, attrs, defStyleAttr) as T
+                ConstraintLayout(context, attrs, defStyleAttr)
             }
 
             GroupType.RadioGroup.type -> {
-                RadioGroup(context, attrs) as T
+                RadioGroup(context, attrs)
             }
 
             else -> {
-                LinearLayout(context, attrs, defStyleAttr) as T
+                initOtherViewGroupByXml(context, attrs, defStyleAttr)
             }
         }
+    }
+
+    fun initOtherViewGroupByXml(
+        context: Context,
+        attrs: AttributeSet? = null,
+        defStyleAttr: Int = 0
+    ): ViewGroup? {
+        return null
     }
 
     fun initViewGroupByT(
@@ -73,12 +82,24 @@ internal interface QuickViewGroupI<T : ViewGroup> {
         val tCls: Class<T>? = GenericEx.get0Clazz(this)
         if ("ViewGroup" == tCls?.simpleName) return shadowView
         tCls?.let {
-            val t =
-                tCls.getConstructor(Context::class.java, AttributeSet::class.java, Int::class.java)
-            t.newInstance(context, attrs, defStyleAttr).apply {
+            val t = tCls.constructors.findLast {
+                val parameters = it.parameterTypes
+                if (parameters.size == 3 || parameters.size == 2) {
+                    (parameters.contains(Context::class.java)
+                            && parameters.contains(AttributeSet::class.java)
+                            && parameters.contains(Int::class.java))
+                            || (parameters.contains(Context::class.java)
+                            && parameters.contains(AttributeSet::class.java))
+                } else false
+            } as? Constructor<T> ?: return null
+            val tInstance = (if (t.parameterTypes.size == 3) t.newInstance(
+                context,
+                attrs,
+                defStyleAttr
+            ) else t.newInstance(context, attrs)).apply {
                 layoutParams = matchLayoutParams
             }
-            return t as T
+            return tInstance as T
         }
         return null
     }
@@ -97,7 +118,12 @@ internal interface QuickViewGroupI<T : ViewGroup> {
         curView.layoutParams?.let {
             shadowView?.layoutParams = it
         }
-        shadowView?.setPadding(curView.paddingLeft, curView.paddingTop, curView.paddingRight, curView.paddingBottom)
+        shadowView?.setPadding(
+            curView.paddingLeft,
+            curView.paddingTop,
+            curView.paddingRight,
+            curView.paddingBottom
+        )
         parentGroup.addView(shadowView, position)
     }
 

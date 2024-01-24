@@ -14,8 +14,6 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateInterpolator
-import android.view.animation.AlphaAnimation
-import android.view.animation.Animation
 import android.widget.LinearLayout
 import androidx.annotation.IdRes
 import androidx.core.view.children
@@ -37,7 +35,7 @@ class BottomTabLayout @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
-) : QuickViewGroup<LinearLayout>(context, attrs, defStyleAttr, addToParent = false),
+) : QuickViewGroup<LinearLayout>(context, attrs, defStyleAttr, addToParent = false, forceGenerics = true),
     GroupManager.OnGroupChangeListener {
 
     private val viewList: MutableList<View> = mutableListOf()

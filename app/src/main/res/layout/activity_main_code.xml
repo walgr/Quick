@@ -8,8 +8,7 @@
         android:layout_height="match_parent"
         android:background="#eeeeee"
         android:orientation="vertical"
-        app:groupType="LinearLayout"
-        app:addToParent="false">
+        app:groupType="LinearLayout">
 
         <com.wpf.app.quickbind.viewpager.QuickViewPager
             android:id="@+id/viewPager"
@@ -21,9 +20,9 @@
         <com.wpf.app.quickwidget.tab.BottomTabLayout
             android:id="@+id/bottomTabs"
             android:background="@color/white"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="56dp"
+            android:orientation="horizontal"
             app:animView="@+id/ivIcon">
 
 

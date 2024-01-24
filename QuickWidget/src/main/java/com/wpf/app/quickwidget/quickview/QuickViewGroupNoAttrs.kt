@@ -21,13 +21,13 @@ import com.wpf.app.quickwidget.R
  * Created by 王朋飞 on 2022/8/31.
  *
  */
-//@InternalCoroutinesApi
 open class QuickViewGroupNoAttrs<T : ViewGroup> @JvmOverloads constructor(
     context: Context,
     private val attrs: AttributeSet? = null,
-    open val defStyleAttr: Int = 0,
-    open var addToParent: Boolean = true,
-    open val childView: Array<View>? = null
+    private val defStyleAttr: Int = 0,
+    private var addToParent: Boolean = true,
+    private val childView: Array<View>? = null,
+    private val forceGenerics: Boolean = false          //强制泛型初始化
 ) : ViewGroup(context, attrs, defStyleAttr), QuickViewGroupI<T> {
 
     protected val attrSet: QuickViewGroupAttrSet
@@ -37,7 +37,7 @@ open class QuickViewGroupNoAttrs<T : ViewGroup> @JvmOverloads constructor(
         this.init()
     }
 
-    var shadowView: T? = null
+    var shadowView: ViewGroup? = null
         private set
 
     @CallSuper
@@ -48,8 +48,12 @@ open class QuickViewGroupNoAttrs<T : ViewGroup> @JvmOverloads constructor(
         if (isInEditMode) {
             addToParent = false
         }
-        shadowView = initViewGroupByXml(shadowView, attrSet.groupType, context, attrs, defStyleAttr)
-            ?: initViewGroupByT(shadowView, context, attrs, defStyleAttr)
+        shadowView = if (forceGenerics) {
+            initViewGroupByT(shadowView, context, attrs, defStyleAttr)
+        } else {
+            initViewGroupByXml(shadowView, attrSet.groupType, context, attrs, defStyleAttr)
+                ?: initViewGroupByT(shadowView, context, attrs, defStyleAttr)
+        }
         addChildToT(shadowView, this)
         if (!addToParent) {
             addT(false, shadowView, this)
@@ -176,13 +180,13 @@ open class QuickViewGroupNoAttrs<T : ViewGroup> @JvmOverloads constructor(
         shadowView?.setBackgroundResource(resid)
     }
 
-    override fun generateDefaultLayoutParams(): LayoutParams {
-        return generateLayoutParams(attrs)
-    }
-
     override fun setPadding(left: Int, top: Int, right: Int, bottom: Int) {
         super.setPadding(left, top, right, bottom)
         shadowView?.setPadding(left, top, right, bottom)
+    }
+
+    override fun generateDefaultLayoutParams(): LayoutParams {
+        return generateLayoutParams(attrs)
     }
 
     override fun generateLayoutParams(attrs: AttributeSet?): LayoutParams {
@@ -212,9 +216,13 @@ open class QuickViewGroupNoAttrs<T : ViewGroup> @JvmOverloads constructor(
             }
 
             else -> {
-                MarginLayoutParams(context, attrs)
+                generateOtherLayoutParams(attrs)
             }
         }
+    }
+
+    open fun generateOtherLayoutParams(attrs: AttributeSet?): LayoutParams {
+        return MarginLayoutParams(context, attrs)
     }
 
     protected class QuickViewGroupAttrSet @JvmOverloads constructor(
