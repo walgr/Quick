@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <declare-styleable name="QuickRecyclerView">
+        <attr name="space" format="dimension" />
+        <attr name="spaceType" />
+        <attr name="color" format="color|reference" />
+        <attr name="includeFirst" format="boolean" />
+        <attr name="includeLast" format="boolean" />
+    </declare-styleable>
 
+    <attr name="spaceType" format="enum">
+        <enum name="center" value="0" />
+        <enum name="start" value="1" />
+        <enum name="end" value="2" />
+    </attr>
 </resources>

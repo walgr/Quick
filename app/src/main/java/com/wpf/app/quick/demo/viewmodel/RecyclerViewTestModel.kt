@@ -22,7 +22,6 @@ class RecyclerViewTestModel : QuickVBModel<ActivityRecyclerviewTestBinding>() {
         getViewBinding()?.list?.addData(
             BindDataTestModel()
         )
-        getViewBinding()?.list?.getQuickAdapter()
-            ?.notifyItemInserted(getViewBinding()?.list?.size() ?: 0)
+        getViewBinding()?.list?.getQuickAdapter()?.notifyDataSetChanged()
     }
 }

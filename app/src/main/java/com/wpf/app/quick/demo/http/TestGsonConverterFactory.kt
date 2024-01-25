@@ -3,7 +3,6 @@ package com.wpf.app.quick.demo.http
 import com.google.gson.Gson
 import com.google.gson.TypeAdapter
 import com.google.gson.reflect.TypeToken
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -27,13 +26,7 @@ import java.nio.charset.StandardCharsets
 /**
  * Created by wg on 2017/5/9.
  */
-class TestGsonConverterFactory private constructor(gson: Gson?) : Converter.Factory() {
-    private val gson: Gson
-
-    init {
-        if (gson == null) throw NullPointerException("gson == null")
-        this.gson = gson
-    }
+class TestGsonConverterFactory private constructor(private val gson: Gson) : Converter.Factory() {
 
     override fun responseBodyConverter(
         type: Type,
@@ -56,7 +49,7 @@ class TestGsonConverterFactory private constructor(gson: Gson?) : Converter.Fact
         var child: Class<*>? = curClass
         while (child != null) {
             if (parentClass.isInterface) {
-                if (child.interfaces.size > 0 && parentIs(child.interfaces[0], parentClass)) {
+                if (child.interfaces.isNotEmpty() && parentIs(child.interfaces[0], parentClass)) {
                     return true
                 } else {
                     if (child == parentClass) return true
@@ -147,7 +140,7 @@ class TestGsonConverterFactory private constructor(gson: Gson?) : Converter.Fact
 
     companion object {
         @JvmOverloads
-        fun create(gson: Gson? = Gson()): TestGsonConverterFactory {
+        fun create(gson: Gson = Gson()): TestGsonConverterFactory {
             return TestGsonConverterFactory(gson)
         }
     }

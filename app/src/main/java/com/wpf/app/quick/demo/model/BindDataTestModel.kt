@@ -18,6 +18,7 @@ class BindDataTestModel : QuickClickData(layoutViewInContext = runOnContextWithS
     ImageView(it).apply {
         layoutParams = matchWrapLayoutParams
         id = R.id.img
+
     }
 }) {
     @SuppressLint("NonConstantResourceId")
