@@ -41,9 +41,11 @@
         implementation 'com.github.walgr.Quick:Quick:latest'
 
         看需求依赖
+        implementation 'com.github.walgr.Quick:QuickUtil:latest'
         implementation 'com.github.walgr.Quick:QuickNetwork:latest'
         implementation 'com.github.walgr.Quick:QuickDialog:latest'
         implementation 'com.github.walgr.Quick:QuickRecyclerView:latest'
+        implementation 'com.github.walgr.Quick:QuickWidget:latest'
     }
 
 ### 未来功能
