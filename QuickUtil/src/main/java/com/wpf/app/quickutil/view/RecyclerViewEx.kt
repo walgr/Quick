@@ -1,4 +1,4 @@
-package com.wpf.app.quickutil.view.recyclerview
+package com.wpf.app.quickutil.view
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView

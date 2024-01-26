@@ -11,7 +11,7 @@ import com.wpf.app.quick.demo.dialog.Test3Dialog
 import com.wpf.app.quick.demo.dialog.TestDialog
 import com.wpf.app.quickdialog.showInManager
 import com.wpf.app.quickutil.bind.runOnContext
-import com.wpf.app.quickutil.view.dp2px
+import com.wpf.app.quickutil.helper.dp2px
 
 class DialogTestActivity : QuickActivity(
     layoutViewInContext = runOnContext {

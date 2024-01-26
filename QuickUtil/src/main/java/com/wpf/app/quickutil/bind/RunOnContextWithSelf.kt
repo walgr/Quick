@@ -15,9 +15,10 @@ interface RunOnContextWithSelf<Self, Return> : RunOnHolderWithSelf<Self, Return>
     }
 }
 
-inline fun <Return, Self> runOnContextWithSelf(crossinline run: (Context, Self) -> Return) = object :
-    RunOnContextWithSelf< Self, Return> {
-    override fun run(context: Context, self: Self): Return {
-        return run(context, self)
+inline fun <Self, Return> runOnContextWithSelf(crossinline run: (Context, Self) -> Return) =
+    object :
+        RunOnContextWithSelf<Self, Return> {
+        override fun run(context: Context, self: Self): Return {
+            return run(context, self)
+        }
     }
-}

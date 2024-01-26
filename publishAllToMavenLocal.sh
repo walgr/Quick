@@ -8,3 +8,4 @@
 ./gradlew :QuickDialog:publishToMavenLocal
 ./gradlew :QuickWidget:publishToMavenLocal
 ./gradlew :Quick:publishToMavenLocal
+./gradlew :QuickWork:publishToMavenLocal

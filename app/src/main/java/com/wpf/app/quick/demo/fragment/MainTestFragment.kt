@@ -3,7 +3,7 @@ package com.wpf.app.quick.demo.fragment
 import com.wpf.app.quick.activity.QuickBindingFragment
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.demo.databinding.FragmentMainTestBinding
-import com.wpf.app.quickutil.view.dp2px
+import com.wpf.app.quickutil.helper.dp2px
 import com.wpf.app.quickutil.view.onProgressChanged
 
 class MainTestFragment : QuickBindingFragment<FragmentMainTestBinding>(

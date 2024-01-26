@@ -1,4 +1,4 @@
-package com.wpf.app.quickutil.view
+package com.wpf.app.quickutil.helper
 
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams

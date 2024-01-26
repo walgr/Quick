@@ -12,7 +12,7 @@ class 首页文章 : QuickRequestList() {
 //    @SuppressLint("NonConstantResourceId")
 //    @BindData2View(id = R.id.info, helper = Text2TextView::class)
     //自动赋值处理了 可以不用写上面的了
-    val info = runOnContextWithSelf<String, 首页文章> { _, self ->
+    val info = runOnContextWithSelf<首页文章, String> { _, self ->
         "请求成功：" + self.curPage + "---" + Gson().toJson(self.datas)
     }
 

@@ -32,7 +32,7 @@ open class QuickBindData @JvmOverloads constructor(
     private var mViewHolder: QuickViewHolder<QuickBindData>? = null
 
     private var variableBinding: Map<Int, Any>? = null
-    var mViewBinding: ViewDataBinding? = null
+    private var mViewBinding: ViewDataBinding? = null
 
     @Transient
     private var mAdapter: QuickAdapter? = null
