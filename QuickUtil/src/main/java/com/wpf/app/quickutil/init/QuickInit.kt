@@ -26,6 +26,7 @@ object QuickInit {
 }
 
 interface ApplicationInitRegister {
+    val context: SoftReference<Context>?
     fun init(applicationContext: Context)
 
     fun getContext(): Context?

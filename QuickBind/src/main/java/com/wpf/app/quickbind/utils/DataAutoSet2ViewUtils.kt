@@ -7,7 +7,7 @@ import android.widget.Checkable
 import android.widget.TextView
 import com.wpf.app.quickbind.annotations.BindD2VHelper
 import com.wpf.app.quickutil.bind.RunOnHolderWithSelf
-import com.wpf.app.quickutil.view.allChild
+import com.wpf.app.quickutil.helper.allChild
 
 object DataAutoSet2ViewUtils {
 

@@ -11,7 +11,6 @@ import com.wpf.app.quick.activity.viewmodel.QuickVBModel
 class RecyclerViewTestModel : QuickVBModel<ActivityRecyclerviewTestBinding>() {
 
     override fun onBindingCreated(view: ActivityRecyclerviewTestBinding?) {
-
     }
 
     fun clean(view: View?) {

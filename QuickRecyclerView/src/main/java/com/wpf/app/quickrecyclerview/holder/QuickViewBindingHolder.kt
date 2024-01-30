@@ -9,39 +9,32 @@ import androidx.databinding.ViewDataBinding
 import com.wpf.app.quickutil.bind.RunOnContextWithSelf
 import com.wpf.app.quickrecyclerview.QuickAdapter
 import com.wpf.app.quickrecyclerview.constant.BRConstant
-import com.wpf.app.quickrecyclerview.data.QuickViewDataBinding
+import com.wpf.app.quickrecyclerview.data.QuickItemData
 
 /**
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-open class QuickViewBindingHolder<T : QuickViewDataBinding<VB>, VB : ViewDataBinding> @JvmOverloads constructor(
+open class QuickViewBindingHolder<T: QuickItemData, VB : ViewDataBinding> @JvmOverloads constructor(
     mParent: ViewGroup,
     @LayoutRes layoutId: Int = 0,
     layoutViewInContext: RunOnContextWithSelf<ViewGroup, View>? = null,
-    @Transient override var dealBindView: Boolean = false,
-) : QuickViewHolder<T>(mParent, layoutId, layoutViewInContext, dealBindView) {
+    dealBindView: Boolean = false,
+    autoClick: Boolean = false,
+) : QuickViewHolder<T>(mParent, layoutId, layoutViewInContext, dealBindView, autoClick) {
 
-    private var mViewData: T? = null
-    var mViewBinding: VB? = null
+    private var mViewBinding: VB? = null
 
     open var variableBinding: Map<Int, Any>? = null
 
     override fun onCreateViewHolder(itemView: View) {
         super.onCreateViewHolder(itemView)
         mViewBinding = DataBindingUtil.bind(itemView)
-        onCreateHolderEnd(itemView)
     }
-
-    open fun onCreateHolderEnd(itemView: View) {}
 
     @CallSuper
     override fun onBindViewHolder(adapter: QuickAdapter, data: T?, position: Int) {
         super.onBindViewHolder(adapter, data, position)
-        if (mViewData == null) {
-            mViewData = data
-            mViewData?.onHolderCreated(this)
-        }
         if (mViewBinding != null) {
             mViewBinding!!.setVariable(BRConstant.data, data)
             mViewBinding!!.setVariable(BRConstant.adapter, adapter)
@@ -55,4 +48,6 @@ open class QuickViewBindingHolder<T : QuickViewDataBinding<VB>, VB : ViewDataBin
             mViewBinding!!.executePendingBindings()
         }
     }
+
+    fun getViewBinding(): VB? = mViewBinding
 }

@@ -9,8 +9,7 @@ import com.wpf.app.quickutil.bind.Bind
  * 可以网络请求的数据Item
  */
 open class QuickRequestData @JvmOverloads constructor(
-    @Transient open val autoSet: Boolean = true,
-    @Transient override val isSuspension: Boolean = false                 //View是否悬浮置顶
+    open val autoSet: Boolean = true,
 ) : QuickSuspensionData(), Bind {
 
     @Transient

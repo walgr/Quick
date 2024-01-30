@@ -14,7 +14,7 @@ import java.io.Serializable
  *
  */
 open class ClickItem @JvmOverloads constructor(
-    override val layoutId: Int,
+    layoutId: Int,
     open val clickSelf: RunItemClickWithSelf<ClickItem>? = null,
     open val click: RunItemClick? = null,
 ) : QuickBindData(layoutId), Serializable {

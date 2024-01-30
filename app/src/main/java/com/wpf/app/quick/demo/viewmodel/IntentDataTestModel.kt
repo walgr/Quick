@@ -7,7 +7,6 @@ import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.annotations.bind.BindView
 import com.wpf.app.quick.demo.databinding.ActivityDataTestBinding
 import com.wpf.app.quick.demo.model.MyMessage
-import com.wpf.app.quick.demo.model.TestModel
 import com.wpf.app.quick.activity.viewmodel.QuickVBModel
 import com.wpf.app.quickbind.annotations.AutoGet
 
@@ -36,9 +35,6 @@ class IntentDataTestModel : QuickVBModel<ActivityDataTestBinding>() {
     var data: MyMessage? = null
 
     @AutoGet
-    var data1: TestModel? = null
-
-    @AutoGet
     var map: Map<String, Any>? = null
 
     @AutoGet
@@ -52,12 +48,6 @@ class IntentDataTestModel : QuickVBModel<ActivityDataTestBinding>() {
 
     @AutoGet
     var arrayS: Array<MyMessage>? = null
-
-    @AutoGet
-    var listP: List<TestModel>? = null
-
-    @AutoGet
-    var arrayP: Array<TestModel>? = null
 
     @SuppressLint("NonConstantResourceId", "StaticFieldLeak")
     @BindView(R.id.title1)
@@ -75,14 +65,11 @@ class IntentDataTestModel : QuickVBModel<ActivityDataTestBinding>() {
         Log.i(TAG, charD.toString() + "")
         Log.i(TAG, byteD.toString() + "")
         Log.i(TAG, data.toString() + "")
-        Log.i(TAG, data1.toString() + "")
         Log.i(TAG, map.toString() + "")
         Log.i(TAG, list.toString() + "")
         Log.i(TAG, array!![0].toString() + "")
         Log.i(TAG, listS!![0].userName + "")
-        Log.i(TAG, listP!![0].text + "")
         Log.i(TAG, arrayS!![0].layoutId.toString() + "")
-        Log.i(TAG, arrayP.toString() + "")
         title?.text = "数据测试页ViewModel"
     }
 }

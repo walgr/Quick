@@ -15,7 +15,6 @@ import com.wpf.app.quick.demo.SelectListTestActivity
 import com.wpf.app.quick.demo.ViewPagerBindFragmentTestActivity
 import com.wpf.app.quick.demo.databinding.FragmentMainReleaseBinding
 import com.wpf.app.quick.demo.model.MyMessage
-import com.wpf.app.quick.demo.model.TestModel
 import com.wpf.app.quick.demo.wanandroid.WanAndroidHomeActivity
 import com.wpf.app.quickbind.annotations.BindSp2View
 import com.wpf.app.quickutil.activity.quickStartActivity
@@ -70,7 +69,6 @@ class MainReleaseVM: QuickVBModel<FragmentMainReleaseBinding>() {
                 put("charD", 'b')
                 put("byteD", 6.toByte())
                 put("data", MyMessage("31"))
-                put("data1", TestModel("41"))
                 put("map", object : HashMap<String?, String?>() {
                     init {
                         put("map1", "51")
@@ -89,14 +87,7 @@ class MainReleaseVM: QuickVBModel<FragmentMainReleaseBinding>() {
                         add(MyMessage("82"))
                     }
                 })
-                put("listP", object : ArrayList<TestModel?>() {
-                    init {
-                        add(TestModel("91"))
-                        add(TestModel("92"))
-                    }
-                })
                 put("arrayS", arrayOf(MyMessage("101"), MyMessage("102")))
-                put("arrayP", arrayOf(TestModel("101"), TestModel("102"))) //暂不支持
             }
         })
     }

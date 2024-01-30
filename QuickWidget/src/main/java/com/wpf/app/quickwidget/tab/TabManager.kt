@@ -11,7 +11,7 @@ import com.google.android.material.tabs.TabLayout.Tab
 import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.view.onPageSelected
 import com.wpf.app.quickutil.view.onTabSelected
-import com.wpf.app.quickutil.view.onceClick
+import com.wpf.app.quickutil.helper.onceClick
 import com.wpf.app.quickwidget.quickview.QuickViewGroupNoAttrs
 
 /**

@@ -5,8 +5,8 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import com.wpf.app.quickutil.view.matchLayoutParams
 import com.wpf.app.quickutil.bind.RunOnContextWithSelf
+import com.wpf.app.quickutil.helper.matchLayoutParams
 
 abstract class BaseEmptyView @JvmOverloads constructor(
     mContext: Context,

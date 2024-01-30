@@ -1,7 +1,6 @@
 package com.wpf.app.quickutil.helper
 
 import android.view.View
-import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
 import android.view.ViewParent
@@ -56,13 +55,13 @@ fun View?.allChild(): List<View> {
     return childList
 }
 
-fun View.onceClick(interval: Long = 1000L, onClickListener: OnClickListener) {
+fun View.onceClick(interval: Long = 1000L, onClickListener: (View) -> Unit) {
     setOnClickListener {
         val viewKey = this.toString()
         val lastClickTime: Long = KV.get(viewKey, 0L)
         val curTime = System.currentTimeMillis()
         if (lastClickTime == 0L || curTime - lastClickTime > interval) {
-            onClickListener.onClick(it)
+            onClickListener.invoke(it)
             KV.put(viewKey, curTime)
         }
     }

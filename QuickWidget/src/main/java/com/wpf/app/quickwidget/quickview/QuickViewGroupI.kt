@@ -10,9 +10,9 @@ import android.widget.RadioGroup
 import android.widget.RelativeLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.tabs.TabLayout
+import com.wpf.app.quickutil.helper.allChild
+import com.wpf.app.quickutil.helper.matchLayoutParams
 import com.wpf.app.quickutil.other.GenericEx
-import com.wpf.app.quickutil.view.allChild
-import com.wpf.app.quickutil.view.matchLayoutParams
 import java.lang.reflect.Constructor
 
 enum class GroupType(val type: Int) {

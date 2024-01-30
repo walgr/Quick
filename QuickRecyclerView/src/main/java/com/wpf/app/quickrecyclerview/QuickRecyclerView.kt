@@ -19,7 +19,7 @@ open class QuickRecyclerView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : RecyclerView(mContext, attrs, defStyleAttr), DataAdapter {
 
-    protected val mQuickAdapter: QuickAdapter = QuickAdapter()
+    protected var mQuickAdapter: QuickAdapter = QuickAdapter()
     private val attr: QuickRecyclerViewAttr
 
     init {

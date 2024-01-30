@@ -10,12 +10,18 @@ import java.io.Serializable
  */
 abstract class QuickStateData @JvmOverloads constructor(
     @Transient open var selected: Boolean = false,
-    @Transient override val layoutId: Int = 0,
-    @Transient override val layoutViewInContext: RunOnContextWithSelf<ViewGroup, View>? = null,
-    @Transient override val isSuspension: Boolean = false,
-    @Transient override val isDealBinding: Boolean = false,      //是否处理DataBinding
-    @Transient override val autoSet: Boolean = false             //自动映射
-) : QuickClickData(), Serializable {
+    layoutId: Int = 0,
+    layoutViewInContext: RunOnContextWithSelf<ViewGroup, View>? = null,
+    isDealBinding: Boolean = false,      //是否处理DataBinding
+    autoSet: Boolean = false,             //自动映射
+    isSuspension: Boolean = false,
+) : QuickClickData(
+    layoutId = layoutId,
+    layoutViewInContext = layoutViewInContext,
+    isDealBinding = isDealBinding,
+    autoSet = autoSet,
+    isSuspension = isSuspension
+), Serializable {
 
     override fun onClick() {
         selected = !selected

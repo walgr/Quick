@@ -3,13 +3,7 @@ package com.wpf.app.quickwidget.quickview
 import android.content.Context
 import android.util.AttributeSet
 import android.view.ViewGroup
-import android.widget.FrameLayout
-import android.widget.LinearLayout
-import android.widget.RadioGroup
-import android.widget.RelativeLayout
-import androidx.constraintlayout.widget.ConstraintLayout
-import com.google.android.material.tabs.TabLayout
-import com.wpf.app.quickutil.view.removeParent
+import com.wpf.app.quickutil.helper.removeParent
 
 /**
  * 子View添加到此View的父View上

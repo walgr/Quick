@@ -6,11 +6,11 @@ import com.wpf.app.quickutil.bind.QuickBindWrap
 import java.lang.ref.SoftReference
 
 object SpManager: ApplicationInitRegister {
-    private var context: SoftReference<Context>? = null
+    override var context: SoftReference<Context>? = null
     private var spMap: MutableMap<String, SharedPreferences> = mutableMapOf()
 
     fun getSharedPreference(fileName: String = QuickBindWrap.getBindSpFileName()): SharedPreferences? {
-        context?.get()?.let {
+        getContext()?.let {
             spMap.getOrPut(fileName) {
                 it.getSharedPreferences(fileName, Context.MODE_PRIVATE)
             }

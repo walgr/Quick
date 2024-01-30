@@ -2,7 +2,7 @@ package com.wpf.app.quickrecyclerview.helper
 
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.wpf.app.quickrecyclerview.listeners.RefreshView
-import com.wpf.app.quickutil.view.getChild
+import com.wpf.app.quickutil.helper.getChild
 
 fun SmartRefreshLayout.bindRefreshView(autoRefresh: Boolean) {
     val refreshView: RefreshView? = this.getChild {

@@ -2,7 +2,6 @@ package com.wpf.app.quickwidget.selectview.data
 
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.LayoutRes
 import com.wpf.app.quickutil.bind.RunItemClickWithSelf
 import com.wpf.app.quickutil.bind.RunOnContextWithSelf
 import java.io.Serializable
@@ -13,22 +12,39 @@ import java.io.Serializable
  */
 open class QuickChildSelectData(
     @Transient open var isInOne: Boolean = false,
+    isSuspension: Boolean = false,                 //View是否悬浮置顶
     @Transient open var parent: QuickParentSelectData? = null,
-    @Transient override val isSuspension: Boolean = false,                 //View是否悬浮置顶
     @Transient open var childList: MutableList<out QuickChildSelectData>? = null,
     @Transient open val onChildClick: RunItemClickWithSelf<QuickChildSelectData>? = null,
-    @Transient override var id: String? = null,
-    @Transient override var name: String? = null,
-    @Transient override var defaultSelect: Boolean = false,
-    @Transient override var isSelect: Boolean = defaultSelect,
-    @Transient override var canCancel: Boolean = true,                     //是否可以取消选择
-    @Transient override var singleSelect: Boolean = false,                 //true 单选  false 多选
-    @Transient override val isGlobal: Boolean = true,                      //true 全局范围  false 同父范围
-    @Transient override var maxLimit: Int = 5,                             //多选最多数量
-    @Transient override val maxLimitListener: MaxLimitListener? = null,    //超出反馈
-    @Transient @LayoutRes override val layoutId: Int = 0,
-    @Transient override val layoutViewInContext: RunOnContextWithSelf<ViewGroup, View>? = null,
-) : QuickMultiSelectData(), Serializable {
+    id: String? = null,
+    name: String? = null,
+    defaultSelect: Boolean = false,
+    isSelect: Boolean = defaultSelect,
+    canCancel: Boolean = true,                     //是否可以取消选择
+    singleSelect: Boolean = false,                 //true 单选  false 多选
+    isGlobal: Boolean = true,                      //true 全局范围  false 同父范围
+    maxLimit: Int = 5,                             //多选最多数量
+    maxLimitListener: MaxLimitListener? = null,    //超出反馈
+    layoutId: Int = 0,
+    layoutViewInContext: RunOnContextWithSelf<ViewGroup, View>? = null,
+    isDealBinding: Boolean = false,                                 //是否处理DataBinding
+    autoSet: Boolean = false,                                        //自动映射
+) : QuickMultiSelectData(
+    canCancel = canCancel,
+    singleSelect = singleSelect,
+    isGlobal = isGlobal,
+    maxLimit = maxLimit,
+    maxLimitListener = maxLimitListener,
+    id = id,
+    name = name,
+    isSelect = isSelect,
+    defaultSelect = defaultSelect,
+    layoutId = layoutId,
+    layoutViewInContext = layoutViewInContext,
+    isDealBinding = isDealBinding,
+    autoSet = autoSet,
+    isSuspension = isSuspension
+), Serializable {
 
     fun getChildSelectSize(): Int {
         return getChildSelectList()?.size ?: 0

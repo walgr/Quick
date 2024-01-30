@@ -14,7 +14,7 @@ import com.wpf.app.quickbind.interfaces.BindBaseFragment
 import com.wpf.app.quickbind.interfaces.BindViewModel
 import com.wpf.app.quickbind.viewpager.ViewPagerSize
 import com.wpf.app.quickutil.bind.Bind
-import com.wpf.app.quickutil.view.getViewContext
+import com.wpf.app.quickutil.helper.getViewContext
 import java.lang.reflect.Field
 
 /**

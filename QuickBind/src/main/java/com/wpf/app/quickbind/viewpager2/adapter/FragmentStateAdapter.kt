@@ -11,7 +11,7 @@ import com.wpf.app.quickbind.interfaces.BindBaseFragment
 import com.wpf.app.quickbind.interfaces.BindViewModel
 import com.wpf.app.quickbind.viewpager2.ViewPagerSize2
 import com.wpf.app.quickutil.bind.Bind
-import com.wpf.app.quickutil.view.getViewContext
+import com.wpf.app.quickutil.helper.getViewContext
 
 class FragmentStateAdapter : FragmentStateAdapter, ViewPagerSize2 {
 
