@@ -22,7 +22,6 @@ class ViewPagerBindFragmentTestActivity : QuickActivity(R.layout.activity_test_v
 
     override fun initView(view: View?) {
         viewPager?.setCurrentItem(5, false)
-        viewPager?.adapter?.notifyDataSetChanged()
         Toast.makeText(this, "3秒后刷新", Toast.LENGTH_SHORT).show()
         viewPager?.postDelayed({
             ViewPager2Helper.notifyPagerSize(viewPager, 20)

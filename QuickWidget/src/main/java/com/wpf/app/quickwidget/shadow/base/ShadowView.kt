@@ -11,7 +11,6 @@ import androidx.annotation.ColorInt
 import androidx.lifecycle.MutableLiveData
 import com.wpf.app.quickwidget.shadow.base.ShadowLiveFactory.liveDataAssembleList
 import com.wpf.app.quickwidget.shadow.base.ShadowLiveFactory.liveDataList
-import com.wpf.app.quickutil.log.LogUtil
 import com.wpf.app.quickutil.data.KV
 
 interface ShadowView {
@@ -49,7 +48,6 @@ interface ShadowView {
                 }.toMutableList()
             )
         }
-        LogUtil.e("同步", "$this:bindTypes---" + bindTypes?.joinToString())
         if (bindTypes == null) return
         var keyLiveMap = KV.get<MutableMap<String, MutableLiveData<out Any>>>(key)
         if (keyLiveMap == null) {

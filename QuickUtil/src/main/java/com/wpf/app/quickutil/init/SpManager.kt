@@ -18,14 +18,6 @@ object SpManager: ApplicationInitRegister {
         return spMap[fileName]
     }
 
-    override fun init(applicationContext: Context) {
-        this.context = SoftReference(applicationContext)
-    }
-
-    override fun getContext(): Context? {
-        return context?.get()
-    }
-
     init {
         QuickInit.register(this)
     }

@@ -13,14 +13,13 @@ import com.wpf.app.quickbind.QuickBind
 import com.wpf.app.quickdialog.helper.DialogSizeHelper
 import com.wpf.app.quickdialog.listeners.DialogLifecycle
 import com.wpf.app.quickdialog.listeners.DialogSize
-import com.wpf.app.quickdialog.minAndMaxLimit.MinAndMaxLimit
 import com.wpf.app.quickdialog.minAndMaxLimit.SizeLimitViewGroup
 import com.wpf.app.quickutil.bind.RunOnContext
 
 /**
  * Created by 王朋飞 on 2022/6/16.
  */
-abstract class QuickDialog : Dialog, DialogSize, DialogLifecycle {
+open class QuickDialog : Dialog, DialogSize, DialogLifecycle {
 
     @LayoutRes
     var layoutId: Int = 0
@@ -92,7 +91,9 @@ abstract class QuickDialog : Dialog, DialogSize, DialogLifecycle {
         return mView
     }
 
-    abstract fun initView(view: View?)
+    open fun initView(view: View?) {
+
+    }
 
     open var mNewWidth = DialogSize.NO_SET
     open var mNewHeight = DialogSize.NO_SET
@@ -133,10 +134,6 @@ abstract class QuickDialog : Dialog, DialogSize, DialogLifecycle {
         onDialogPrepare()
         super.show()
         onDialogOpen()
-    }
-
-    fun show(context: Any?) {
-        show()
     }
 
     override fun dismiss() {

@@ -9,6 +9,7 @@ import com.wpf.app.quick.demo.http.TestNormalCallAdapterFactory
 import com.wpf.app.quicknetwork.helper.OkHttpCreateHelper
 import com.wpf.app.quicknetwork.helper.RetrofitCreateHelper
 import com.wpf.app.quicknetwork.interceptor.LogInterceptor
+import com.wpf.app.quickutil.init.QuickInit
 
 /**
  * Created by 王朋飞 on 2022/6/13.
@@ -19,6 +20,7 @@ class App : Application() {
         //配置全局ViewBinding
         BRConstant.initByBR(BR::class.java)
         initTestRequest()
+        QuickInit.init(this)
     }
 
     private fun initTestRequest() {

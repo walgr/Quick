@@ -112,3 +112,7 @@ fun View.setTopMargin(margin: Int) {
 fun View.seBottomMargin(margin: Int) {
     layoutParams.to<MarginLayoutParams>().bottomMargin = margin
 }
+
+fun View.postDelayed(delayMillis: Long, action: Runnable) {
+    postDelayed(action, delayMillis)
+}

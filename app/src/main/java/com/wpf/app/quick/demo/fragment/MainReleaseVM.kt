@@ -22,11 +22,14 @@ import com.wpf.app.quickutil.activity.quickStartActivity
 class MainReleaseVM: QuickVBModel<FragmentMainReleaseBinding>() {
 
     @SuppressLint("NonConstantResourceId", "StaticFieldLeak")
-    @BindSp2View(bindSp = "绑定的SpKey2", defaultValue = "默认值2")
-    @BindView(R.id.spTextView2)
-    var text2: TextView? = null
+    @BindSp2View(bindSp = "绑定的SpKey3", defaultValue = "默认值3")
+    @BindView(R.id.spTextView3)
+    var text3: TextView? = null
     override fun onBindingCreated(view: FragmentMainReleaseBinding?) {
-
+        text3?.postDelayed(
+            { text3?.text = System.currentTimeMillis().toString() + "" },
+            1000
+        )
     }
 
     fun gotoWanAndroid(view: View?) {

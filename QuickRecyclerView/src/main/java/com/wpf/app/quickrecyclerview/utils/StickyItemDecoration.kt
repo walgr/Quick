@@ -75,7 +75,7 @@ class StickyItemDecoration(
 
     override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         super.onDrawOver(c, parent, state)
-        if (parent.adapter!!.itemCount <= 0) return
+        if (parent.adapter!!.itemCount <= 0 || parent.layoutManager !is LinearLayoutManager) return
         mLayoutManager = parent.layoutManager as? LinearLayoutManager
         mCurrentUIFindStickView = false
         clearStickyPositionList()

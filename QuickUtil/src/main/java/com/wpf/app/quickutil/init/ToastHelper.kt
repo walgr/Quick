@@ -12,14 +12,6 @@ object ToastHelper : ApplicationInitRegister {
         }
     }
 
-    override fun init(applicationContext: Context) {
-        context = SoftReference(applicationContext)
-    }
-
-    override fun getContext(): Context? {
-        return context?.get()
-    }
-
     init {
         QuickInit.register(this)
     }

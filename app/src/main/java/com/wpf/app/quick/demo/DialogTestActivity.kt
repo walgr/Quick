@@ -11,12 +11,12 @@ import com.wpf.app.quick.demo.dialog.Test3Dialog
 import com.wpf.app.quick.demo.dialog.TestDialog
 import com.wpf.app.quickdialog.showInManager
 import com.wpf.app.quickutil.bind.runOnContext
-import com.wpf.app.quickutil.helper.dp2px
+import com.wpf.app.quickutil.helper.dp
 
 class DialogTestActivity : QuickActivity(
     layoutViewInContext = runOnContext {
         LinearLayout(it).apply {
-            setPadding(16.dp2px(it), 0, 16.dp2px(it), 0)
+            setPadding(16.dp(), 0, 16.dp(), 0)
             orientation = LinearLayout.VERTICAL
             gravity = Gravity.CENTER
             addView(MaterialButton(it).apply {

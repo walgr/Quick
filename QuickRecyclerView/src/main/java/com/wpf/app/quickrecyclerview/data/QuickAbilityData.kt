@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.annotation.IdRes
 import androidx.databinding.ViewDataBinding
 import com.wpf.app.quickrecyclerview.QuickAdapter
-import com.wpf.app.quickrecyclerview.ability.QuickAbility
 import com.wpf.app.quickrecyclerview.ability.QuickContextAbility
 import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
 import com.wpf.app.quickutil.bind.RunOnContextWithSelf
@@ -65,15 +64,19 @@ open class QuickAbilityData(
     }
 }
 
-fun suspension(func: () -> Boolean): List<QuickAbility<QuickAbilityData>> {
-    return mutableListOf(object : QuickAbility<QuickAbilityData> {
-        override fun getPrimeKey() = "suspension"
-        override fun onCreateHolder(context: Context, self: QuickAbilityData) {
-            super.onCreateHolder(context, self)
-            self.isSuspension = func.invoke()
-        }
-    })
-}
+//fun suspension(func: () -> Boolean): List<QuickAbility<QuickAbilityData>> {
+//    return suspension<QuickAbilityData> { func.invoke() }
+//}
+//
+//fun <T : QuickAbilityData> suspension(func: T.() -> Boolean): List<QuickAbility<QuickAbilityData>> {
+//    return mutableListOf(object : QuickAbility<QuickAbilityData> {
+//        override fun getPrimeKey() = "suspension"
+//        override fun beforeBindHolder(context: Context, self: QuickAbilityData) {
+//            super.beforeBindHolder(context, self)
+//            self.isSuspension = func.invoke(self as T)
+//        }
+//    })
+//}
 
 fun <VB : ViewDataBinding> binding(
     func: VB.() -> Unit

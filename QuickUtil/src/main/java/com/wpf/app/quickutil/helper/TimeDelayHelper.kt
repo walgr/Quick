@@ -38,6 +38,7 @@ object TimeDelayHelper {
                     delay.timeout.invoke()
                 }
             }
+            newMap.clear()
         } catch (e: Exception) {
             e.printStackTrace()
         }

@@ -1,20 +1,25 @@
 package com.wpf.app.quickutil.helper
 
 import android.content.Context
+import com.wpf.app.quickutil.init.QuickInit
 
 /**
  * Created by 王朋飞 on 2022/7/20.
  *
  */
 
-fun Int.dp2px(context: Context?): Int {
-    if (context == null) return 0
+fun Int.dp(context: Context? = QuickInit.getContext()): Int {
+    if (context == null) {
+        throw RuntimeException("context is null")
+    }
     val scale: Float = context.resources.displayMetrics.density
     return (this * scale + 0.5f).toInt()
 }
 
-fun Float.dp2px(context: Context?): Int {
-    if (context == null) return 0
+fun Float.dp(context: Context? = QuickInit.getContext()): Int {
+    if (context == null) {
+        throw RuntimeException("context is null")
+    }
     val scale: Float = context.resources.displayMetrics.density
     return (this * scale + 0.5f).toInt()
 }

@@ -3,9 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <import type="com.wpf.app.quick.demo.wanandroid.WanAndroidHomeActivityClass"/>
-        <import type="com.wpf.app.quick.demo.RequestTestActivityClass"/>
-        <import type="com.wpf.app.quick.demo.ShadowViewTestActivityClass"/>
+
+        <import type="com.wpf.app.quick.demo.wanandroid.WanAndroidHomeActivityClass" />
+
+        <import type="com.wpf.app.quick.demo.RequestTestActivityClass" />
+
+        <import type="com.wpf.app.quick.demo.ShadowViewTestActivityClass" />
+
         <variable
             name="viewModel"
             type="com.wpf.app.quick.demo.fragment.MainReleaseVM" />
@@ -24,9 +28,9 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:clickGoto="@{WanAndroidHomeActivityClass.INSTANCE.KClass}"
                 android:text="WanAndroid"
-                android:textAllCaps="false"/>
+                android:textAllCaps="false"
+                app:clickGoto="@{WanAndroidHomeActivityClass.INSTANCE.KClass}" />
 
             <Button
                 android:layout_width="wrap_content"
@@ -75,16 +79,16 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:clickGoto="@{RequestTestActivityClass.INSTANCE.KClass}"
                 android:text="接口请求测试"
-                android:textAllCaps="false"/>
+                android:textAllCaps="false"
+                app:clickGoto="@{RequestTestActivityClass.INSTANCE.KClass}" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:clickGoto="@{ShadowViewTestActivityClass.INSTANCE.KClass}"
                 android:text="View同步测试"
-                android:textAllCaps="false"/>
+                android:textAllCaps="false"
+                app:clickGoto="@{ShadowViewTestActivityClass.INSTANCE.KClass}" />
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:layout_width="50dp"
@@ -114,21 +118,12 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <com.wpf.app.quickwidget.quickview.inxml.LoadSp2Text
+                <TextView
+                    android:id="@+id/spTextView1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:bindData2Sp="true"
-                    app:bindKey="绑定的SpKey1"
-                    app:defaultString="默认值1">
-
-                    <TextView
-                        android:id="@+id/spTextView1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="4dp"
-                        android:text="测试绑定1" />
-
-                </com.wpf.app.quickwidget.quickview.inxml.LoadSp2Text>
+                    android:layout_marginHorizontal="4dp"
+                    android:text="测试绑定1" />
 
                 <TextView
                     android:id="@+id/spTextView2"

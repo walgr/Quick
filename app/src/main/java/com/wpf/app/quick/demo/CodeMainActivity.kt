@@ -53,6 +53,5 @@ class CodeMainActivity :
             ivIcon.setImageResource(tabs[curPos].first)
             tvName.setTextColor((if (isSelect) R.color.colorPrimary else R.color.black).toColor(this))
         }.bindViewPager(viewPager)
-
     }
 }

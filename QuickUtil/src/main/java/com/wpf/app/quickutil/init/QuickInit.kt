@@ -7,9 +7,8 @@ object QuickInit {
     private var application: SoftReference<Context>? = null
     private var initRegister = mutableListOf<ApplicationInitRegister>()
     fun init(applicationContext: Context) {
-        if (application == null) {
-            application = SoftReference(applicationContext)
-        }
+        if (application != null) return
+        application = SoftReference(applicationContext)
         initRegister.forEach {
             it.init(applicationContext)
         }
@@ -23,11 +22,17 @@ object QuickInit {
             }
         }
     }
+
+    fun getContext() = application?.get()
 }
 
 interface ApplicationInitRegister {
-    val context: SoftReference<Context>?
-    fun init(applicationContext: Context)
+    var context: SoftReference<Context>?
+    fun init(applicationContext: Context) {
+        context = SoftReference(applicationContext)
+    }
 
-    fun getContext(): Context?
+    fun getContext(): Context? {
+        return context?.get()
+    }
 }

@@ -19,13 +19,9 @@ class MainReleaseFragment : QuickVBFragment<MainReleaseVM, FragmentMainReleaseBi
     var text1: TextView? = null
 
     @SuppressLint("NonConstantResourceId")
+    @BindSp2View(bindSp = "绑定的SpKey2", defaultValue = "默认值2")
     @BindView(R.id.spTextView2)
     var text2: TextView? = null
-
-    @SuppressLint("NonConstantResourceId")
-    @BindSp2View(bindSp = "绑定的SpKey3", defaultValue = "默认值3")
-    @BindView(R.id.spTextView3)
-    var text3: TextView? = null
 
     @SuppressLint("SetTextI18n")
     override fun initView(view: FragmentMainReleaseBinding?) {
@@ -35,10 +31,6 @@ class MainReleaseFragment : QuickVBFragment<MainReleaseVM, FragmentMainReleaseBi
         )
         text2?.postDelayed(
             { text2?.text = System.currentTimeMillis().toString() + "" },
-            1000
-        )
-        text3?.postDelayed(
-            { text3?.text = System.currentTimeMillis().toString() + "" },
             1000
         )
     }

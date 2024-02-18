@@ -18,8 +18,7 @@ import com.wpf.app.quickutil.other.printLog
  * Created by 王朋飞 on 2022/7/5.
  */
 class BindDataTestModel : QuickAbilityData(R.layout.holder_image,
-    abilityList =
-    binding<HolderImageBinding> {
+    abilityList = binding<HolderImageBinding> {
         tvTitle.text.printLog("当前View-")
     }.with(clickWSelf<BindDataTestModel> {
         ToastHelper.show("点击了:${getViewPos()}")

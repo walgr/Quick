@@ -39,7 +39,7 @@ class FragmentStateAdapter : FragmentStateAdapter, ViewPagerSize2 {
     private var bindFragmentAnn: BindFragment2
 
     override fun getItemCount(): Int {
-        return if (getPageSize() == -1) bindFragmentAnn.defaultSize else getPageSize()!!
+        return if (getPageSize() == -1) bindFragmentAnn.defaultSize else getPageSize()
     }
 
     override fun createFragment(position: Int): Fragment {
@@ -47,7 +47,7 @@ class FragmentStateAdapter : FragmentStateAdapter, ViewPagerSize2 {
     }
 
     private var pageSizeI = -1
-    override fun getPageSize(): Int? {
+    override fun getPageSize(): Int {
         return pageSizeI
     }
 
@@ -55,7 +55,7 @@ class FragmentStateAdapter : FragmentStateAdapter, ViewPagerSize2 {
         pageSizeI = size
     }
 
-    override fun getAdapter(): FragmentStateAdapter? {
+    override fun getAdapter(): FragmentStateAdapter {
         return this
     }
 

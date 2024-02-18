@@ -13,5 +13,5 @@ import kotlin.reflect.KClass
 annotation class BindFragment2(
     val fragment: KClass<out BindBaseFragment>,
     val limit: Int = 0,
-    val defaultSize: Int = 0
+    val defaultSize: Int = 1
 )
