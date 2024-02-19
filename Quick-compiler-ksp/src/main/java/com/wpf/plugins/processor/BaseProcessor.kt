@@ -7,6 +7,7 @@ import com.google.devtools.ksp.symbol.KSDeclaration
 import com.google.devtools.ksp.symbol.KSPropertyDeclaration
 import com.google.devtools.ksp.symbol.KSVisitorVoid
 import com.squareup.kotlinpoet.FileSpec
+import java.io.File
 
 open class BaseProcessor(private val environment: SymbolProcessorEnvironment) : KSVisitorVoid() {
     open lateinit var packageName: String       //包名
@@ -18,6 +19,13 @@ open class BaseProcessor(private val environment: SymbolProcessorEnvironment) : 
     var outFileSpec: FileSpec.Builder? = null
 
     protected val outFileStartName = "Quick_"
+
+    protected val mainPath by lazy {
+        if (property?.containingFile == null) null else File(
+            property!!.containingFile!!.filePath.substringBefore("java")
+        ).path
+    }
+
     open fun visitEnd() {
         if (outFileName.isNullOrEmpty()) return
         environment.codeGenerator.createNewFile(
@@ -41,7 +49,13 @@ open class BaseProcessor(private val environment: SymbolProcessorEnvironment) : 
         visitPropertyDeclaration(property, data, packageName, className!!, propertyName)
     }
 
-    open fun visitPropertyDeclaration(property: KSPropertyDeclaration, data: Unit, packageName: String, className: String, propertyName: String?) {
+    open fun visitPropertyDeclaration(
+        property: KSPropertyDeclaration,
+        data: Unit,
+        packageName: String,
+        className: String,
+        propertyName: String?
+    ) {
 
     }
 
@@ -53,7 +67,12 @@ open class BaseProcessor(private val environment: SymbolProcessorEnvironment) : 
         visitClassDeclaration(classDeclaration, data, packageName, className!!)
     }
 
-    open fun visitClassDeclaration(classDeclaration: KSClassDeclaration, data: Unit, packageName: String, className: String) {
+    open fun visitClassDeclaration(
+        classDeclaration: KSClassDeclaration,
+        data: Unit,
+        packageName: String,
+        className: String
+    ) {
 
     }
 

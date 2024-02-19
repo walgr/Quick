@@ -12,7 +12,6 @@ import com.squareup.kotlinpoet.ParameterSpec
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.TypeVariableName
 import com.wpf.app.quick.annotations.request.GenerateRequest
-import com.wpf.app.quick.annotations.tab.TabInit
 
 class GenerateRequestProcessor(environment: SymbolProcessorEnvironment) :
     BaseProcessor(environment) {

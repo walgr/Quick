@@ -29,7 +29,6 @@ enum class ViewType(val packageName: String, val className: String) {
     RecyclerView("androidx.recyclerview.widget", "RecyclerView"),
     WebView("android.webkit", "WebView"),
 
-
     //第三方
     LottieView("com.airbnb.lottie", "LottieAnimationView"),
 }

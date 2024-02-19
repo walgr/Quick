@@ -59,6 +59,14 @@ open class IdProcessor(environment: SymbolProcessorEnvironment) : BaseProcessor(
         return argumentsCode.substringAfterLast(".")
     }
 
+    protected fun String.indexOfWithAfter(string: String, after: String): Int {
+        return substringAfter(after).indexOf(string) + substringBefore(after).length + after.length + 1
+    }
+
+    protected fun String.indexOfWithBefore(string: String, before: String): Int {
+        return substringBefore(before).lastIndexOf(string)
+    }
+
     protected fun String.substringAfterAndBefore(after: String, before: String = ""): String {
         if (before.isEmpty()) return substringAfterLast(after)
         return substringAfterLast(after).substringBefore(before)
