@@ -31,4 +31,6 @@ enum class ViewType(val packageName: String, val className: String) {
 
     //第三方
     LottieView("com.airbnb.lottie", "LottieAnimationView"),
+
+    CustomView("", ""),
 }

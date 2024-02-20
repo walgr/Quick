@@ -29,22 +29,30 @@ class TabInitProcessor(environment: SymbolProcessorEnvironment) : IdProcessor(en
             it.shortName.getShortName().contains(TabInit::class.simpleName!!)
         }
         if (tabInitAnn?.arguments == null) return
-        outFileName = "TabInitHelper"
         val layoutIdName = getAnnotationArgumentIdCode(fileStr, TabInit::class, "layout").first()
-        val layoutId = tabInitAnn.arguments[0].value as? Int ?: 0
-        val funName = tabInitAnn.arguments[1].value as? String ?: ""
+        val layoutId = tabInitAnn.arguments[0].value as? Int ?: return
+        val funName = tabInitAnn.arguments[1].value as? String ?: return
         val idTypeStrList =
             (tabInitAnn.arguments[if (funName.isEmpty()) 1 else 2].value as ArrayList<KSAnnotation>).map { it.arguments.joinToString() }
-        val idTypePairList = idTypeStrList.map {
-            Pair(
-                it.substringAfterAndBeforeNoInclude("id:"),
-                ViewType.valueOf(
+        outFileName = "TabInitHelper"
+        val idTypePairList: MutableList<Triple<String, String, String>> = idTypeStrList.map {
+            val id = it.substringAfterAndBeforeNoInclude("id:", ",")
+            if (!it.contains(ViewType.CustomView.name)) {
+                val viewType = ViewType.valueOf(
                     it.substringAfterAndBeforeNoInclude(
                         "viewClass:${ViewType::class.java.name}.",
                         ","
                     )
                 )
-            )
+                Triple(id, viewType.packageName, viewType.className)
+            } else {
+                val clsName = it.substringAfterAndBeforeNoInclude("className:", ",")
+                Triple(
+                    id,
+                    clsName.replace("." + clsName.split(".").last(), ""),
+                    clsName.split(".").last()
+                )
+            }
         }.toMutableList()
         if (idTypePairList.isEmpty()) {
             var layoutFileStr = File(
@@ -67,20 +75,20 @@ class TabInitProcessor(environment: SymbolProcessorEnvironment) : IdProcessor(en
                     )
                     val typeStr = typeIdStr.substringAfterAndBeforeNoInclude("<", idFind).trim()
                     val idStr = typeIdStr.substringAfterAndBeforeNoInclude(idFind, "\"").trim()
-                    idTypePairList.add(
-                        Pair(
-                            "R.id.${idStr}",
-                            if (typeStr.contains(".")) ViewType.valueOf(
-                                typeStr.split(".").last()
-                            ) else ViewType.valueOf(typeStr)
-                        )
-                    )
+                    val pkg = if (typeStr.contains(".")) {
+                        typeStr.replace("." + typeStr.split(".").last(), "")
+                    } else ViewType.valueOf(typeStr).packageName
+                    val clsName = if (typeStr.contains(".")) {
+                        typeStr.split(".").last()
+                    } else ViewType.valueOf(typeStr).className
+                    idTypePairList.add(Triple("R.id.${idStr}", pkg, clsName))
                 } while (findPos != -1)
             }
         }
+        val initTabFunName = "initTab"
         val code = "val tabManager =\n" +
                 "        init(layoutId, parent, size, defaultPos, repeatClick) { curPos, isSelect, view ->\n" +
-                "            init.invoke(curPos, isSelect, " +
+                "            ${initTabFunName}.invoke(curPos, isSelect, " +
                 idTypePairList.joinToString {
                     "view.findViewById(${
                         it.first.replace(
@@ -97,7 +105,12 @@ class TabInitProcessor(environment: SymbolProcessorEnvironment) : IdProcessor(en
                 "R"
             )
         }.toTypedArray()
-        val idNameList = if (code.contains("%T")) idTypePairList.map { it.first.replace("R.id.", "") } else getAnnotationArgumentIdCode(fileStr, TabInit::class)
+        val idNameList = if (code.contains("%T")) idTypePairList.map {
+            it.first.replace(
+                "R.id.",
+                ""
+            )
+        } else getAnnotationArgumentIdCode(fileStr, TabInit::class)
         funBuilderMap[funName.ifEmpty { layoutIdName }] =
             FunSpec.builder(funName.ifEmpty { layoutIdName })
                 .receiver(ClassName("com.wpf.app.quickwidget.tab.", "TabManager"))
@@ -120,7 +133,7 @@ class TabInitProcessor(environment: SymbolProcessorEnvironment) : IdProcessor(en
                             .build()
                     ).defaultValue(layoutId.toString()).build()
                 )
-                .addParameter(ParameterSpec.builder("init",
+                .addParameter(ParameterSpec.builder(initTabFunName,
                     LambdaTypeName.get(null, mutableListOf(
                         ParameterSpec.builder("curPos", Int::class).build(),
                         ParameterSpec.builder("isSelect", Boolean::class).build(),
@@ -129,8 +142,8 @@ class TabInitProcessor(environment: SymbolProcessorEnvironment) : IdProcessor(en
                             ParameterSpec.builder(
                                 it,
                                 ClassName(
-                                    idTypePairList[index].second.packageName,
-                                    idTypePairList[index].second.className
+                                    idTypePairList[index].second,
+                                    idTypePairList[index].third
                                 )
                             ).build()
                         }
