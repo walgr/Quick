@@ -24,7 +24,7 @@ android {
         jvmTarget = '11'
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "$composeVersion"
+        kotlinCompilerExtensionVersion = "$composeCompilerVersion"
     }
     namespace 'com.wpf.app.quickrecyclerview'
 }

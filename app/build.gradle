@@ -61,7 +61,7 @@ android {
         }
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "$composeVersion"
+        kotlinCompilerExtensionVersion = "$composeCompilerVersion"
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11

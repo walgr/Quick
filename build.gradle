@@ -8,17 +8,18 @@ buildscript {
         minSdkVersion = 21
         targetSdkVersion = 34
         androidTools = '34.0.0'
-        kotlin = "1.9.20"
-        ksp = "1.9.20-1.0.14"
+        kotlin = "1.9.22"
+        ksp = "1.9.22-1.0.17"
 
         release = VERSION_NAME
 
-        composeVersion = '1.5.4'
+        composeVersion = '1.6.1'
+        composeCompilerVersion = '1.5.9'
 
         ext.deps = [
                 androidx      : [
-                        'activity'             : 'androidx.activity:activity:1.8.1',
-                        'activityktx'          : 'androidx.activity:activity-ktx:1.8.1',
+                        'activity'             : 'androidx.activity:activity:1.8.2',
+                        'activityktx'          : 'androidx.activity:activity-ktx:1.8.2',
                         'fragmentktx'          : 'androidx.fragment:fragment-ktx:1.6.2',
                         'appcompat'            : 'androidx.appcompat:appcompat:1.6.1',
                         'corektx'              : 'androidx.core:core-ktx:1.12.0',
