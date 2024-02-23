@@ -3,14 +3,17 @@ package com.wpf.app.quick.demo.model
 import android.annotation.SuppressLint
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.annotations.bind.BindData2View
+import com.wpf.app.quick.demo.databinding.DragItemBinding
 import com.wpf.app.quick.demo.databinding.HolderImageBinding
 import com.wpf.app.quickbind.helper.binddatahelper.Text2TextView
 import com.wpf.app.quickbind.helper.binddatahelper.Url2ImageView
 import com.wpf.app.quickrecyclerview.data.QuickAbilityData
 import com.wpf.app.quickrecyclerview.data.binding
+import com.wpf.app.quickrecyclerview.data.bindingSwipe
 import com.wpf.app.quickrecyclerview.data.clickWSelf
 import com.wpf.app.quickrecyclerview.data.with
 import com.wpf.app.quickutil.bind.runOnHolder
+import com.wpf.app.quickutil.helper.onceClick
 import com.wpf.app.quickutil.init.ToastHelper
 import com.wpf.app.quickutil.other.printLog
 
@@ -22,7 +25,19 @@ class BindDataTestModel : QuickAbilityData(R.layout.holder_image,
         tvTitle.text.printLog("当前View-")
     }.with(clickWSelf<BindDataTestModel> {
         ToastHelper.show("点击了:${getViewPos()}")
-    })
+    }).with(
+        bindingSwipe<BindDataTestModel, DragItemBinding>(
+            R.layout.drag_item,
+            canSwipe = { true }) { self, swipeLayout ->
+            btnCopy.onceClick {
+                swipeLayout.quickClose()
+                ToastHelper.show("复制完成：${self.getViewPos()}")
+            }
+            btnDel.onceClick {
+                swipeLayout.quickClose()
+                ToastHelper.show("删除完成：${self.getViewPos()}")
+            }
+        })
 ) {
     @SuppressLint("NonConstantResourceId")
     @BindData2View(id = R.id.img, helper = Url2ImageView::class)

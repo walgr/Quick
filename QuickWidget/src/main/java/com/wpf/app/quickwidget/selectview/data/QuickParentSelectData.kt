@@ -8,7 +8,7 @@ import com.wpf.app.quickrecyclerview.data.QuickBindData
 import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
 import com.wpf.app.quickutil.bind.RunItemClickWithSelf
 import com.wpf.app.quickutil.bind.RunOnContextWithSelf
-import com.wpf.app.quickutil.view.scrollToPositionAndOffset
+import com.wpf.app.quickutil.widget.scrollToPositionAndOffset
 import java.io.Serializable
 
 /**

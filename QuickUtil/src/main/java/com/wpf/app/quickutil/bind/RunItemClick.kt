@@ -15,7 +15,11 @@ interface RunItemClick : RunItemClickWithSelf<Any> {
     }
 }
 
-fun itemClick(listener: View.OnClickListener) = object : RunItemClick {
+fun itemClick(primeKey: String = "", listener: View.OnClickListener) = object : RunItemClick {
+    override fun primeKey(): String {
+        return primeKey
+    }
+
     override fun run(): View.OnClickListener {
         return listener
     }
@@ -25,4 +29,5 @@ fun itemClick(listener: View.OnClickListener) = object : RunItemClick {
     }
 }
 
-fun itemClickRun(listener: View.OnClickListener) = itemClick(listener).run()
+fun itemClickRun(primeKey: String = "", listener: View.OnClickListener) =
+    itemClick(primeKey, listener).run()

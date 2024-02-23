@@ -116,3 +116,5 @@ fun View.seBottomMargin(margin: Int) {
 fun View.postDelayed(delayMillis: Long, action: Runnable) {
     postDelayed(action, delayMillis)
 }
+
+fun View.parent() = parent as? ViewGroup

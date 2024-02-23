@@ -26,7 +26,7 @@ open class QuickViewHolder<T : QuickItemData> @JvmOverloads constructor(
 ) : RecyclerView.ViewHolder(
     layoutViewInContext?.run(mParent.context, mParent) ?: layoutId.toView(
         mParent.context,
-        mParent
+        mParent,
     )
 ) {
 

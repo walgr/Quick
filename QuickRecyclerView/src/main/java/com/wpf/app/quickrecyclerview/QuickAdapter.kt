@@ -32,7 +32,7 @@ open class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>()
         }?.let { findData ->
             var holder: QuickViewHolder<QuickItemData>? = null
             if (findData is QuickBindData) {
-                findData.onCreateHolder(viewGroup.context)
+                findData.beforeCreateHolder(viewGroup)
                 if (findData.isDealBinding) {
                     holder = QuickViewBindingHolder<QuickItemData, ViewDataBinding>(
                         viewGroup,
@@ -45,7 +45,15 @@ open class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>()
                 holder = QuickViewHolder(viewGroup, findData.layoutId, findData.layoutViewInContext)
             }
             holder?.mQuickAdapter = this
-            holder?.onCreateViewHolder(holder.itemView)
+            holder?.let {
+                if (findData is QuickBindData) {
+                    findData.beforeHolderOnCreateHolder(holder)
+                }
+                holder.onCreateViewHolder(holder.itemView)
+                if (findData is QuickBindData) {
+                    findData.afterHolderOnCreateHolder(holder)
+                }
+            }
             return holder as QuickViewHolder<QuickItemData>
         }
         return null!!

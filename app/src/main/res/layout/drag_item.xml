@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/btnCopy"
+            android:layout_width="64dp"
+            android:layout_height="match_parent"
+            android:text="复制"
+            android:gravity="center"
+            android:background="@color/teal_200" />
+
+        <TextView
+            android:id="@+id/btnDel"
+            android:layout_width="64dp"
+            android:layout_height="match_parent"
+            android:text="删除"
+            android:gravity="center"
+            android:background="@color/colorPrimary" />
+
+    </LinearLayout>
+</layout>

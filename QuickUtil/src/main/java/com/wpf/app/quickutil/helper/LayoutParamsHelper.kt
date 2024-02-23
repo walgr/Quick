@@ -9,6 +9,8 @@ val matchWrapLayoutParams =
     ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
 val wrapLayoutParams =
     ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+val wrapMatchLayoutParams =
+    ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT)
 
 val matchMarginLayoutParams =
     MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
@@ -16,6 +18,8 @@ val matchWrapMarginLayoutParams =
     MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
 val wrapMarginLayoutParams =
     MarginLayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+val wrapMatchMarginLayoutParams =
+    MarginLayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT)
 
 fun <T : ViewGroup.LayoutParams> T.with(width: Int = -1, height: Int = -1): T {
     if (width != -1) {

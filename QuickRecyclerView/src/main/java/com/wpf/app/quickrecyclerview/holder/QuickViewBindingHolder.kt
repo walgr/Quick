@@ -23,13 +23,15 @@ open class QuickViewBindingHolder<T: QuickItemData, VB : ViewDataBinding> @JvmOv
     autoClick: Boolean = false,
 ) : QuickViewHolder<T>(mParent, layoutId, layoutViewInContext, dealBindView, autoClick) {
 
-    private var mViewBinding: VB? = null
+    internal var mViewBinding: VB? = null
 
     open var variableBinding: Map<Int, Any>? = null
 
     override fun onCreateViewHolder(itemView: View) {
         super.onCreateViewHolder(itemView)
-        mViewBinding = DataBindingUtil.bind(itemView)
+        if (mViewBinding == null) {
+            mViewBinding = DataBindingUtil.bind(itemView)
+        }
     }
 
     @CallSuper

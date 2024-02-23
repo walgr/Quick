@@ -5,7 +5,7 @@ import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.demo.databinding.FragmentMainTestBinding
 import com.wpf.app.quickutil.helper.dp
 import com.wpf.app.quickutil.helper.postDelayed
-import com.wpf.app.quickutil.view.onProgressChanged
+import com.wpf.app.quickutil.widget.onProgressChanged
 
 class MainTestFragment : QuickBindingFragment<FragmentMainTestBinding>(
     R.layout.fragment_main_test,

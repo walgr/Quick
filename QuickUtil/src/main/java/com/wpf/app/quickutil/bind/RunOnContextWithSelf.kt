@@ -15,9 +15,15 @@ interface RunOnContextWithSelf<Self, Return> : RunOnHolderWithSelf<Self, Return>
     }
 }
 
-inline fun <Self, Return> runOnContextWithSelf(crossinline run: (Context, Self) -> Return) =
-    object :
-        RunOnContextWithSelf<Self, Return> {
+inline fun <Self, Return> runOnContextWithSelf(
+    primeKey: String = "",
+    crossinline run: (Context, Self) -> Return
+) =
+    object : RunOnContextWithSelf<Self, Return> {
+        override fun primeKey(): String {
+            return primeKey
+        }
+
         override fun run(context: Context, self: Self): Return {
             return run(context, self)
         }

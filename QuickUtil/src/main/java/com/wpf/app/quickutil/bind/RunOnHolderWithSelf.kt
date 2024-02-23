@@ -8,11 +8,20 @@ import android.view.View
  */
 interface RunOnHolderWithSelf<Self, Return> {
     fun run(view: View, self: Self): Return
-}
 
-fun <Self, Return> runOnHolderWithSelf(run: (View, Self) -> Return) = object :
-    RunOnHolderWithSelf<Self, Return> {
-    override fun run(view: View, self: Self): Return {
-        return run(view, self)
+    fun primeKey(): String {
+        return ""
     }
 }
+
+fun <Self, Return> runOnHolderWithSelf(run: (View, Self) -> Return, primeKey: String = "") =
+    object :
+        RunOnHolderWithSelf<Self, Return> {
+        override fun primeKey(): String {
+            return primeKey
+        }
+
+        override fun run(view: View, self: Self): Return {
+            return run(view, self)
+        }
+    }

@@ -81,7 +81,6 @@ plugins {
     id 'com.android.application' version "${gradleVersion}" apply false
     id 'com.android.library' version "${gradleVersion}" apply false
     id 'org.jetbrains.kotlin.android' version "${kotlin}" apply false
-//    id 'com.wpf.app.quick.r2' version "0.9.3" apply false
 }
 
 tasks.register('clean', Delete) {

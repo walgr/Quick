@@ -9,8 +9,8 @@ import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.Tab
 import com.wpf.app.quickutil.other.asTo
-import com.wpf.app.quickutil.view.onPageSelected
-import com.wpf.app.quickutil.view.onTabSelected
+import com.wpf.app.quickutil.widget.onPageSelected
+import com.wpf.app.quickutil.widget.onTabSelected
 import com.wpf.app.quickutil.helper.onceClick
 import com.wpf.app.quickwidget.quickview.QuickViewGroupNoAttrs
 

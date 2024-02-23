@@ -13,8 +13,13 @@ interface RunOnHolder<Return> : RunOnHolderWithSelf<Any, Return> {
     }
 }
 
-fun <Return> runOnHolder(run: (View) -> Return) = object : RunOnHolder<Return> {
-    override fun run(view: View): Return {
-        return run(view)
+fun <Return> runOnHolder(primeKey: String = "", run: (View) -> Return) =
+    object : RunOnHolder<Return> {
+        override fun primeKey(): String {
+            return primeKey
+        }
+
+        override fun run(view: View): Return {
+            return run(view)
+        }
     }
-}

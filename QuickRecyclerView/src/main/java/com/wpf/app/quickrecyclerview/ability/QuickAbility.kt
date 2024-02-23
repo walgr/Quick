@@ -2,15 +2,14 @@ package com.wpf.app.quickrecyclerview.ability
 
 import android.content.Context
 import android.view.View
-import com.wpf.app.quickrecyclerview.QuickAdapter
 
 interface QuickAbility<T> : QuickContextAbility<T> {
 
-    fun beforeCreateHolder(quickAdapter: QuickAdapter) {
+    fun beforeCreateHolder(self: T) {
 
     }
 
-    fun afterCreateHolder(quickAdapter: QuickAdapter) {
+    fun afterCreateHolder(self: T) {
 
     }
 
@@ -22,19 +21,19 @@ interface QuickAbility<T> : QuickContextAbility<T> {
 
     }
 
-    override fun beforeCreateHolder(itemView: View, quickAdapter: QuickAdapter) {
-        beforeCreateHolder(quickAdapter)
+    override fun beforeOnCreateHolder(itemView: View, self: T) {
+        beforeCreateHolder(self)
     }
 
-    override fun afterCreateHolder(itemView: View, quickAdapter: QuickAdapter) {
-        afterCreateHolder(quickAdapter)
+    override fun afterOnCreateHolder(itemView: View, self: T) {
+        afterCreateHolder(self)
     }
 
-    override fun beforeBindHolder(context: Context, self: T) {
+    override fun beforeOnBindHolder(context: Context, self: T) {
         beforeBindHolder(self)
     }
 
-    override fun afterBindHolder(context: Context, self: T) {
+    override fun afterOnBindHolder(context: Context, self: T) {
         afterBindHolder(self)
     }
 

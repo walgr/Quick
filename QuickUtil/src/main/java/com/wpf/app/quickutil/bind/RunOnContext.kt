@@ -15,8 +15,13 @@ interface RunOnContext<Return> : RunOnHolder<Return> {
     }
 }
 
-fun <Return> runOnContext(run: (Context) -> Return) = object : RunOnContext<Return> {
-    override fun run(context: Context): Return {
-        return run(context)
+fun <Return> runOnContext(primeKey: String = "", run: (Context) -> Return) =
+    object : RunOnContext<Return> {
+        override fun primeKey(): String {
+            return primeKey
+        }
+
+        override fun run(context: Context): Return {
+            return run(context)
+        }
     }
-}

@@ -13,4 +13,10 @@
         <enum name="start" value="1" />
         <enum name="end" value="2" />
     </attr>
+
+    <declare-styleable name="SwipeMenuLayout">
+        <attr name="swipeEnable" format="boolean"/>
+        <attr name="ios" format="boolean"/>
+        <attr name="leftSwipe" format="boolean"/>
+    </declare-styleable>
 </resources>

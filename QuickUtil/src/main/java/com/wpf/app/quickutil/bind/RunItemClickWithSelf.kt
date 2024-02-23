@@ -15,8 +15,12 @@ interface RunItemClickWithSelf<Self> : RunOnHolderWithSelf<Self, View.OnClickLis
     }
 }
 
-fun <Self> itemClickWithSelf(run: (Self) -> View.OnClickListener) = object :
+fun <Self> itemClickWithSelf(primeKey: String = "", run: (Self) -> View.OnClickListener) = object :
     RunItemClickWithSelf<Self> {
+    override fun primeKey(): String {
+        return primeKey
+    }
+
     override fun run(self: Self): View.OnClickListener {
         return run(self)
     }

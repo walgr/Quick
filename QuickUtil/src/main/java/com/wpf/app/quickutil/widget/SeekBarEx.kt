@@ -1,4 +1,4 @@
-package com.wpf.app.quickutil.view
+package com.wpf.app.quickutil.widget
 
 import android.widget.SeekBar
 
