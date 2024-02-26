@@ -9,7 +9,7 @@ import com.wpf.app.quickbind.helper.binddatahelper.Text2TextView
 import com.wpf.app.quickbind.helper.binddatahelper.Url2ImageView
 import com.wpf.app.quickrecyclerview.data.QuickAbilityData
 import com.wpf.app.quickrecyclerview.data.binding
-import com.wpf.app.quickrecyclerview.data.bindingSwipe
+import com.wpf.app.quickrecyclerview.data.bindingSwipeMenu
 import com.wpf.app.quickrecyclerview.data.clickWSelf
 import com.wpf.app.quickrecyclerview.data.with
 import com.wpf.app.quickutil.bind.runOnHolder
@@ -26,7 +26,7 @@ class BindDataTestModel : QuickAbilityData(R.layout.holder_image,
     }.with(clickWSelf<BindDataTestModel> {
         ToastHelper.show("点击了:${getViewPos()}")
     }).with(
-        bindingSwipe<BindDataTestModel, DragItemBinding>(
+        bindingSwipeMenu<BindDataTestModel, DragItemBinding>(
             R.layout.drag_item,
             canSwipe = { true }) { self, swipeLayout ->
             btnCopy.onceClick {

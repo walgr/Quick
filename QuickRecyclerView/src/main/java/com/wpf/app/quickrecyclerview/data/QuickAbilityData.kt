@@ -186,12 +186,12 @@ fun <T : QuickAbilityData> clickWSelf(
         })
 }
 
-fun <T : QuickAbilityData, VB : ViewDataBinding> bindingSwipe(
+fun <T : QuickAbilityData, VB : ViewDataBinding> bindingSwipeMenu(
     @LayoutRes layoutId: Int,
     canSwipe: T.() -> Boolean = { true },
     func: VB.(self: T, swipeLayout: SwipeMenuLayout) -> Unit
 ): List<QuickContextAbility<QuickAbilityData>> {
-    return swipe(layoutId, canSwipe, func = object : (T, View, SwipeMenuLayout) -> Unit {
+    return swipeMenu(layoutId, canSwipe, func = object : (T, View, SwipeMenuLayout) -> Unit {
         override fun invoke(p1: T, swipeView: View, swipeLayout: SwipeMenuLayout) {
             func.invoke(DataBindingUtil.bind(swipeView)!!, p1, swipeLayout)
         }
@@ -201,7 +201,7 @@ fun <T : QuickAbilityData, VB : ViewDataBinding> bindingSwipe(
 /**
  * 侧滑
  */
-fun <T : QuickAbilityData> swipe(
+fun <T : QuickAbilityData> swipeMenu(
     @LayoutRes layoutId: Int,
     canSwipe: T.() -> Boolean = { true },
     func: T.(swipeView: View, swipeLayout: SwipeMenuLayout) -> Unit
