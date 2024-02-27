@@ -622,6 +622,16 @@ class SwipeMenuLayout @JvmOverloads constructor(
         }
     }
 
+    override fun setOnLongClickListener(l: OnLongClickListener?) {
+        if (l == null) {
+            contentView().setOnLongClickListener(null)
+            return
+        }
+        contentView().setOnLongClickListener {
+            l.onLongClick(it.parent())
+        }
+    }
+
     companion object {
         /**
          * 返回ViewCache
