@@ -47,7 +47,7 @@ class AutoTagLayout @JvmOverloads constructor(
                 }
             }
         }
-        mQuickAdapter.mRecyclerView = this
+        mQuickAdapter.setRecyclerView(this)
         adapter = mQuickAdapter
     }
 

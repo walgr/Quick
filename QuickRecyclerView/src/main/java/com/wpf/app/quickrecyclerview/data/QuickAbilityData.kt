@@ -3,10 +3,13 @@ package com.wpf.app.quickrecyclerview.data
 import android.content.Context
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.CallSuper
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.wpf.app.quickrecyclerview.QuickAdapter
 import com.wpf.app.quickrecyclerview.ability.QuickContextAbility
 import com.wpf.app.quickrecyclerview.holder.QuickViewBindingHolder
@@ -41,25 +44,28 @@ open class QuickAbilityData(
     isSuspension: Boolean = false,                                              //View是否悬浮置顶
     @Transient val abilityList: List<QuickContextAbility<QuickAbilityData>> = mutableListOf(),
 ) : QuickBindData(layoutId, layoutViewInContext, isDealBinding, autoSet, isSuspension) {
-    private val extraParameter: LinkedHashMap<String, Any> = linkedMapOf()
-    override fun beforeCreateHolder(mParent: ViewGroup) {
+    @CallSuper
+    override fun beforeAdapterCreateHolder(mParent: ViewGroup) {
         abilityList.forEach {
-            it.beforeCreateHolder(mParent, this)
+            it.beforeAdapterCreateHolder(mParent, this)
         }
     }
 
+    @CallSuper
     override fun beforeHolderOnCreateHolder(holder: QuickViewHolder<QuickItemData>) {
         abilityList.forEach {
             it.beforeHolderOnCreateHolder(holder, this)
         }
     }
 
+    @CallSuper
     override fun afterHolderOnCreateHolder(holder: QuickViewHolder<QuickItemData>) {
         abilityList.forEach {
             it.afterHolderOnCreateHolder(holder, this)
         }
     }
 
+    @CallSuper
     override fun onCreateViewHolder(itemView: View) {
         abilityList.forEach {
             it.beforeOnCreateHolder(itemView, this)
@@ -70,6 +76,7 @@ open class QuickAbilityData(
         }
     }
 
+    @CallSuper
     override fun onBindViewHolder(
         adapter: QuickAdapter,
         viewHolder: QuickViewHolder<QuickBindData>,
@@ -84,10 +91,27 @@ open class QuickAbilityData(
         }
     }
 
-    private fun getRealData(itemView: View): QuickAbilityData {
-        return getAdapter()?.getRealTypeData<QuickAbilityData>()?.find {
-            it.getView() == itemView
-        }!!
+    internal fun getViewRealData(viewHolder: RecyclerView.ViewHolder): QuickAbilityData? {
+        return getAdapter()?.getData()?.get(viewHolder.bindingAdapterPosition) as? QuickAbilityData
+    }
+
+    fun closeSwipeMenu() {
+        getView()?.asTo<SwipeMenuLayout>()?.smoothClose()
+    }
+
+    internal fun cleanData() {
+        getAdapter()?.extraParameter?.clear()
+    }
+
+    internal fun putData(key: String, value: Any) {
+        getAdapter()?.extraParameter?.put(key, value)
+    }
+
+    internal fun <T : Any> getData(key: String, defaultValue: T) =
+        getAdapter()?.extraParameter?.get(key) as? T ?: defaultValue
+
+    internal fun remove(key: String) {
+        getAdapter()?.extraParameter?.remove(key)
     }
 }
 
@@ -135,9 +159,12 @@ fun <VB : ViewDataBinding, T : QuickAbilityData> bindWSelfWAdapter(
     return mutableListOf(
         object : QuickContextAbility<QuickAbilityData> {
             override fun getPrimeKey() = "binding"
-            override fun beforeCreateHolder(mParent: ViewGroup, self: QuickAbilityData) {
-                super.beforeCreateHolder(mParent, self)
-                self.isDealBinding = true
+            override fun beforeAdapterCreateHolder(
+                mParent: ViewGroup,
+                selfOnlyBase: QuickAbilityData
+            ) {
+                super.beforeAdapterCreateHolder(mParent, selfOnlyBase)
+                selfOnlyBase.isDealBinding = true
             }
 
             override fun afterOnBindHolder(context: Context, self: QuickAbilityData) {
@@ -149,51 +176,70 @@ fun <VB : ViewDataBinding, T : QuickAbilityData> bindWSelfWAdapter(
         })
 }
 
-fun click(
-    @IdRes viewId: Int = 0,
-    func: View.() -> Unit
-): List<QuickContextAbility<QuickAbilityData>> {
-    return clickWSelf<QuickAbilityData>(viewId) {
-        func.invoke(it)
-    }
-}
-
-fun <T : QuickAbilityData> clickWSelf(
+fun <T : QuickAbilityData> click(
     @IdRes viewId: Int = 0,
     func: T.(View) -> Unit
 ): List<QuickContextAbility<QuickAbilityData>> {
     return mutableListOf(
         object : QuickContextAbility<QuickAbilityData> {
             override fun getPrimeKey() = "click"
-            override fun afterOnCreateHolder(itemView: View, self: QuickAbilityData) {
-                super.afterOnCreateHolder(itemView, self)
+
+            override fun afterHolderOnCreateHolder(
+                holder: QuickViewHolder<QuickItemData>,
+                selfOnlyBase: QuickAbilityData
+            ) {
+                super.afterHolderOnCreateHolder(holder, selfOnlyBase)
                 if (viewId == 0) {
-                    itemView.setOnClickListener {
-                        func.invoke(
-                            self.getAdapter()?.getRealTypeData<QuickAbilityData>()?.find { find ->
-                                find.getView() == itemView
-                            } as T, it)
+                    holder.itemView.setOnClickListener {
+                        func.invoke(selfOnlyBase.getViewRealData(holder) as T, it)
                     }
                 } else {
-                    itemView.findViewById<View>(viewId).setOnClickListener {
-                        func.invoke(
-                            self.getAdapter()?.getRealTypeData<QuickAbilityData>()?.find { find ->
-                                find.getView() == itemView
-                            } as T, it)
+                    holder.itemView.findViewById<View>(viewId).setOnClickListener {
+                        func.invoke(selfOnlyBase.getViewRealData(holder) as T, it)
                     }
                 }
             }
         })
 }
 
-fun <T : QuickAbilityData, VB : ViewDataBinding> bindingSwipeMenu(
+fun <T : QuickAbilityData> longClick(
+    @IdRes viewId: Int = 0,
+    func: T.(View) -> Boolean
+): List<QuickContextAbility<QuickAbilityData>> {
+    return mutableListOf(
+        object : QuickContextAbility<QuickAbilityData> {
+            override fun getPrimeKey() = "longClick"
+
+            override fun afterHolderOnCreateHolder(
+                holder: QuickViewHolder<QuickItemData>,
+                selfOnlyBase: QuickAbilityData
+            ) {
+                super.afterHolderOnCreateHolder(holder, selfOnlyBase)
+                if (viewId == 0) {
+                    holder.itemView.setOnLongClickListener {
+                        func.invoke(selfOnlyBase.getViewRealData(holder) as T, it)
+                    }
+                } else {
+                    holder.itemView.findViewById<View>(viewId).setOnLongClickListener {
+                        func.invoke(selfOnlyBase.getViewRealData(holder) as T, it)
+                    }
+                }
+            }
+        })
+}
+
+fun <VB : ViewDataBinding, T : QuickAbilityData> bindSwipeMenu(
     @LayoutRes layoutId: Int,
     canSwipe: T.() -> Boolean = { true },
     func: VB.(self: T, swipeLayout: SwipeMenuLayout) -> Unit
 ): List<QuickContextAbility<QuickAbilityData>> {
     return swipeMenu(layoutId, canSwipe, func = object : (T, View, SwipeMenuLayout) -> Unit {
         override fun invoke(p1: T, swipeView: View, swipeLayout: SwipeMenuLayout) {
-            func.invoke(DataBindingUtil.bind(swipeView)!!, p1, swipeLayout)
+            func.invoke(
+                DataBindingUtil.getBinding(swipeView) ?: DataBindingUtil.bind(swipeView)!!,
+                p1,
+                swipeLayout
+            )
         }
     })
 }
@@ -209,35 +255,36 @@ fun <T : QuickAbilityData> swipeMenu(
     return mutableListOf(
         object : QuickContextAbility<QuickAbilityData> {
             override fun getPrimeKey() = "swipe"
-
-            override fun beforeCreateHolder(mParent: ViewGroup, self: QuickAbilityData) {
-                super.beforeCreateHolder(mParent, self)
-                val canSwipeValue = canSwipe.invoke(self as T)
-                if (!canSwipeValue) return
-                val oldLayoutViewInContext = self.layoutViewInContext
-                if (getPrimeKey() == oldLayoutViewInContext?.primeKey()) return
-                self.layoutViewInContext = runOnContextWithSelf(getPrimeKey()) { _, _ ->
-                    val itemView =
-                        oldLayoutViewInContext?.run(mParent.context, mParent)
-                            ?: self.layoutId.toView(
-                                mParent.context,
-                                mParent
-                            )
-                    val swipeView = layoutId.toView(mParent.context)
-                    SwipeMenuLayout(mParent.context).apply {
-                        addView(itemView)
-                        addView(swipeView, wrapMatchMarginLayoutParams)
-                        layoutParams = itemView.layoutParams
+            override fun beforeAdapterCreateHolder(
+                mParent: ViewGroup,
+                selfOnlyBase: QuickAbilityData
+            ) {
+                super.beforeAdapterCreateHolder(mParent, selfOnlyBase)
+                val oldLayoutViewInGroup = selfOnlyBase.layoutViewInViewGroup
+                if (getPrimeKey() == oldLayoutViewInGroup?.primeKey()) return
+                selfOnlyBase.layoutViewInViewGroup =
+                    runOnContextWithSelf(getPrimeKey()) { _, parent ->
+                        val itemView =
+                            oldLayoutViewInGroup?.run(parent.context, parent)
+                                ?: selfOnlyBase.layoutId.toView(
+                                    parent.context,
+                                    parent
+                                )
+                        val swipeView = layoutId.toView(parent.context)
+                        SwipeMenuLayout(parent.context).apply {
+                            addView(itemView)
+                            addView(swipeView, wrapMatchMarginLayoutParams)
+                            layoutParams = itemView.layoutParams
+                        }
                     }
-                }
             }
 
             override fun beforeHolderOnCreateHolder(
                 holder: QuickViewHolder<QuickItemData>,
-                self: QuickAbilityData
+                selfOnlyBase: QuickAbilityData
             ) {
-                super.beforeHolderOnCreateHolder(holder, self)
-                if (self.isDealBinding) {
+                super.beforeHolderOnCreateHolder(holder, selfOnlyBase)
+                if (selfOnlyBase.isDealBinding) {
                     holder.to<QuickViewBindingHolder<QuickAbilityData, ViewDataBinding>>().apply {
                         holder.itemView.asTo<SwipeMenuLayout>()?.contentView()?.let {
                             this.mViewBinding = DataBindingUtil.bind(it)
@@ -247,10 +294,72 @@ fun <T : QuickAbilityData> swipeMenu(
                 }
             }
 
-            override fun afterOnCreateHolder(itemView: View, self: QuickAbilityData) {
-                super.afterOnCreateHolder(itemView, self)
-                val swipeLayout = itemView.to<SwipeMenuLayout>()
-                func.invoke(self as T, swipeLayout.getChildAt(1), swipeLayout)
+            override fun afterOnBindHolder(context: Context, self: QuickAbilityData) {
+                super.afterOnBindHolder(context, self)
+                self.getViewHolder()?.getItemView()?.asTo<SwipeMenuLayout>()?.let {
+                    it.isSwipeEnable = canSwipe.invoke(self as T)
+                    func.invoke(self, it.getChildAt(1), it)
+                }
             }
         })
+}
+
+fun <T : QuickAbilityData> swap(
+    canSwap: T.() -> Boolean = { true },
+): List<QuickContextAbility<QuickAbilityData>> {
+    return mutableListOf(
+        object : QuickContextAbility<QuickAbilityData> {
+            override fun getPrimeKey() = "swap"
+
+            override fun beforeHolderOnCreateHolder(
+                holder: QuickViewHolder<QuickItemData>,
+                selfOnlyBase: QuickAbilityData
+            ) {
+                super.beforeHolderOnCreateHolder(holder, selfOnlyBase)
+                val isAddSwapKey = "isAddSwap"
+                val isAddSwap: Boolean = selfOnlyBase.getData(isAddSwapKey, false)
+                if (isAddSwap) return
+                selfOnlyBase.putData(isAddSwapKey, true)
+                ItemTouchHelper(object : ItemTouchHelper.Callback() {
+                    override fun getMovementFlags(
+                        recyclerView: RecyclerView,
+                        viewHolder: RecyclerView.ViewHolder
+                    ): Int {
+                        val adapter =
+                            recyclerView.adapter.asTo<QuickAdapter>() ?: return makeMovementFlags(
+                                0,
+                                0
+                            )
+                        val firstData = adapter.getData()?.first { it is QuickAbilityData }
+                            ?.asTo<QuickAbilityData>() ?: return makeMovementFlags(0, 0)
+                        val dragFlags =
+                            if (canSwap.invoke(firstData.getViewRealData(viewHolder) as T)) (ItemTouchHelper.UP or ItemTouchHelper.DOWN) else 0
+                        return makeMovementFlags(dragFlags, 0)
+                    }
+
+                    override fun onMove(
+                        recyclerView: RecyclerView,
+                        viewHolder: RecyclerView.ViewHolder,
+                        target: RecyclerView.ViewHolder
+                    ): Boolean {
+                        recyclerView.adapter.asTo<QuickAdapter>()?.onMove(
+                            viewHolder.bindingAdapterPosition,
+                            target.bindingAdapterPosition
+                        )
+                        return true
+                    }
+
+                    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+
+                    }
+
+                }).apply {
+                    val oldLayoutManager = selfOnlyBase.getRecyclerView()?.layoutManager
+                    selfOnlyBase.getRecyclerView()?.layoutManager = null
+                    attachToRecyclerView(selfOnlyBase.getRecyclerView())
+                    selfOnlyBase.getRecyclerView()?.layoutManager = oldLayoutManager
+                }
+            }
+        }
+    )
 }

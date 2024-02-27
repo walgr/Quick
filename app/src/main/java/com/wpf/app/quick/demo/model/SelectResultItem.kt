@@ -24,7 +24,7 @@ class SelectResultItem(
         itemClickRun {
             self.isSelect = false
             self.getAdapter()?.getData()?.remove(self)
-            self.getAdapter()?.notifyItemRemoved(self.getDataPos())
+            self.getAdapter()?.notifyItemRemoved(self.getViewPos())
             self.getAdapter()?.getOnSelectChangeListener()?.onSelectChange()
         }
     }) {

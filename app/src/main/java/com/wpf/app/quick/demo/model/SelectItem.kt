@@ -54,7 +54,7 @@ class ParentTitleSelectItem(
     private var isShowChild = true
     override fun onClick() {
         super.onClick()
-        val positionStart = getDataPos() + 1
+        val positionStart = getViewPos() + 1
         if (isShowChild) {
             LogUtil.e("收缩${title}")
             if (parent?.childList?.isEmpty() == true) return

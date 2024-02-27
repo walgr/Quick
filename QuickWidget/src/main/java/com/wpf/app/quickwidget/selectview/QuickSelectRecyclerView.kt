@@ -22,7 +22,7 @@ open class QuickSelectRecyclerView @JvmOverloads constructor(
     override fun initView() {
         layoutManager = LinearLayoutManager(context)
         mQuickAdapter = QuickSelectAdapter()
-        mQuickAdapter.mRecyclerView = this
+        mQuickAdapter.setRecyclerView(this)
         adapter = mQuickAdapter
     }
 

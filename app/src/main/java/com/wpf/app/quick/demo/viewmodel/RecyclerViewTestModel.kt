@@ -22,7 +22,7 @@ class RecyclerViewTestModel : QuickVBModel<ActivityRecyclerviewTestBinding>() {
 
     fun addMessage(view: View?) {
         getViewBinding()?.list?.addData(
-            BindDataTestModel()
+            BindDataTestModel(getViewBinding()?.list?.getQuickAdapter()?.size() ?: 0)
         )
         getViewBinding()?.list?.getQuickAdapter()?.notifyDataSetChanged()
     }

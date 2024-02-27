@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import androidx.databinding.ViewDataBinding
+import androidx.recyclerview.widget.RecyclerView
 import com.wpf.app.quickbind.QuickBind
 import com.wpf.app.quickutil.bind.RunOnContextWithSelf
 import com.wpf.app.quickbind.utils.DataAutoSet2ViewUtils
@@ -27,7 +28,7 @@ open class QuickBindData @JvmOverloads constructor(
     isSuspension: Boolean = false                   //View是否悬浮置顶
 ) : QuickViewData(
     layoutId = layoutId,
-    layoutViewInContext = layoutViewInContext,
+    layoutViewInViewGroup = layoutViewInContext,
     isSuspension = isSuspension
 ), Bind, Serializable {
 
@@ -79,16 +80,20 @@ open class QuickBindData @JvmOverloads constructor(
         return mAdapter
     }
 
+    open fun setAdapter(adapter: QuickAdapter) {
+        this.mAdapter = adapter
+    }
+
     open fun getViewHolder(): QuickViewHolder<QuickBindData>? {
         return mViewHolder
     }
 
-    fun <VB : ViewDataBinding> getViewBinding(): VB? {
-        return getViewHolder()?.asTo<QuickViewBindingHolder<QuickItemData, VB>>()?.getViewBinding()
+    fun getRecyclerView(): RecyclerView? {
+        return getAdapter()?.getRecyclerView()
     }
 
-    open fun getDataPos(): Int {
-        return getAdapter()?.getData()?.indexOf(this) ?: 0
+    fun <VB : ViewDataBinding> getViewBinding(): VB? {
+        return getViewHolder()?.asTo<QuickViewBindingHolder<QuickItemData, VB>>()?.getViewBinding()
     }
 
     open fun getViewPos(): Int {

@@ -10,28 +10,31 @@ interface QuickContextAbility<T> {
     fun getPrimeKey(): String
     /**
      * 在QuickAdapter的onCreateViewHolder初始化Holder之前调用
-     * @param self 假对象只能使用公共参数
+     * @param selfOnlyBase 假对象只能使用公共参数
      */
-    fun beforeCreateHolder(mParent: ViewGroup, self: T) {
+    fun beforeAdapterCreateHolder(mParent: ViewGroup, selfOnlyBase: T) {
 
     }
-    fun beforeHolderOnCreateHolder(holder: QuickViewHolder<QuickItemData>, self: T) {
+    fun beforeHolderOnCreateHolder(holder: QuickViewHolder<QuickItemData>, selfOnlyBase: T) {
 
     }
-    fun afterHolderOnCreateHolder(holder: QuickViewHolder<QuickItemData>, self: T) {
+    fun afterHolderOnCreateHolder(holder: QuickViewHolder<QuickItemData>, selfOnlyBase: T) {
 
     }
 
     /**
-     * @param self 真对象能使用全部数据
+     * @param selfOnlyFirst 假对象只有首次有效
      */
 
-    fun beforeOnCreateHolder(itemView: View, self: T) {
+    fun beforeOnCreateHolder(itemView: View, selfOnlyFirst: T) {
 
     }
-    fun afterOnCreateHolder(itemView: View, self: T) {
+    fun afterOnCreateHolder(itemView: View, selfOnlyFirst: T) {
 
     }
+    /**
+     * @param self 真对象能使用全部数据
+     */
     fun beforeOnBindHolder(context: Context, self: T) {
 
     }

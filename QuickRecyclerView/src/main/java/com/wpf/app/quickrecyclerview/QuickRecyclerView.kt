@@ -34,7 +34,7 @@ open class QuickRecyclerView @JvmOverloads constructor(
         if (attr.space != null) {
             addItemDecoration(SpaceItemDecoration(attr.space, attr.spaceType, attr.includeFirst, attr.includeLast))
         }
-        mQuickAdapter.mRecyclerView = this
+        mQuickAdapter.setRecyclerView(this)
         adapter = mQuickAdapter
     }
 

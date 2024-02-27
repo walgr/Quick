@@ -21,7 +21,9 @@ open class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>()
     var mDataList: MutableList<QuickItemData>? = null
 
     private var mQuickAdapterListener: QuickAdapterListener<QuickItemData>? = null
-    var mRecyclerView: RecyclerView? = null
+    private var mRecyclerView: RecyclerView? = null
+
+    internal val extraParameter: LinkedHashMap<String, Any> = linkedMapOf()
 
     override fun onCreateViewHolder(
         viewGroup: ViewGroup,
@@ -32,17 +34,18 @@ open class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>()
         }?.let { findData ->
             var holder: QuickViewHolder<QuickItemData>? = null
             if (findData is QuickBindData) {
-                findData.beforeCreateHolder(viewGroup)
+                findData.setAdapter(this)
+                findData.beforeAdapterCreateHolder(viewGroup)
                 if (findData.isDealBinding) {
                     holder = QuickViewBindingHolder<QuickItemData, ViewDataBinding>(
                         viewGroup,
                         findData.layoutId,
-                        findData.layoutViewInContext
+                        findData.layoutViewInViewGroup
                     )
                 }
             }
             if (holder == null && findData is QuickViewData) {
-                holder = QuickViewHolder(viewGroup, findData.layoutId, findData.layoutViewInContext)
+                holder = QuickViewHolder(viewGroup, findData.layoutId, findData.layoutViewInViewGroup)
             }
             holder?.mQuickAdapter = this
             holder?.let {
@@ -82,5 +85,13 @@ open class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>()
 
     override fun getQuickAdapter(): QuickAdapter {
         return this
+    }
+
+    fun setRecyclerView(recyclerView: RecyclerView) {
+        this.mRecyclerView = recyclerView
+    }
+
+    fun getRecyclerView(): RecyclerView? {
+        return mRecyclerView
     }
 }

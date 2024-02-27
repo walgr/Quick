@@ -21,12 +21,12 @@ interface QuickAbility<T> : QuickContextAbility<T> {
 
     }
 
-    override fun beforeOnCreateHolder(itemView: View, self: T) {
-        beforeCreateHolder(self)
+    override fun beforeOnCreateHolder(itemView: View, selfOnlyFirst: T) {
+        beforeCreateHolder(selfOnlyFirst)
     }
 
-    override fun afterOnCreateHolder(itemView: View, self: T) {
-        afterCreateHolder(self)
+    override fun afterOnCreateHolder(itemView: View, selfOnlyFirst: T) {
+        afterCreateHolder(selfOnlyFirst)
     }
 
     override fun beforeOnBindHolder(context: Context, self: T) {

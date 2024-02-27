@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.OvershootInterpolator
 import com.wpf.app.quickrecyclerview.R
+import com.wpf.app.quickutil.helper.parent
 
 /**
  * 【Item侧滑删除菜单】
@@ -612,7 +613,13 @@ class SwipeMenuLayout @JvmOverloads constructor(
     fun contentView() = getChildAt(0)!!
 
     override fun setOnClickListener(l: OnClickListener?) {
-        contentView().setOnClickListener(l)
+        if (l == null) {
+            contentView().setOnClickListener(null)
+            return
+        }
+        contentView().setOnClickListener {
+            l.onClick(it.parent())
+        }
     }
 
     companion object {

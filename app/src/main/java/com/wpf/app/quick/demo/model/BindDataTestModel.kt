@@ -8,9 +8,10 @@ import com.wpf.app.quick.demo.databinding.HolderImageBinding
 import com.wpf.app.quickbind.helper.binddatahelper.Text2TextView
 import com.wpf.app.quickbind.helper.binddatahelper.Url2ImageView
 import com.wpf.app.quickrecyclerview.data.QuickAbilityData
-import com.wpf.app.quickrecyclerview.data.binding
-import com.wpf.app.quickrecyclerview.data.bindingSwipeMenu
-import com.wpf.app.quickrecyclerview.data.clickWSelf
+import com.wpf.app.quickrecyclerview.data.bindSwipeMenu
+import com.wpf.app.quickrecyclerview.data.bindWSelf
+import com.wpf.app.quickrecyclerview.data.click
+import com.wpf.app.quickrecyclerview.data.swap
 import com.wpf.app.quickrecyclerview.data.with
 import com.wpf.app.quickutil.bind.runOnHolder
 import com.wpf.app.quickutil.helper.onceClick
@@ -20,24 +21,26 @@ import com.wpf.app.quickutil.other.printLog
 /**
  * Created by 王朋飞 on 2022/7/5.
  */
-class BindDataTestModel : QuickAbilityData(R.layout.holder_image,
-    abilityList = binding<HolderImageBinding> {
-        tvTitle.text.printLog("当前View-")
-    }.with(clickWSelf<BindDataTestModel> {
-        ToastHelper.show("点击了:${getViewPos()}")
-    }).with(
-        bindingSwipeMenu<BindDataTestModel, DragItemBinding>(
+class BindDataTestModel(private val index: Int = 0) : QuickAbilityData(R.layout.holder_image,
+    abilityList = bindWSelf<HolderImageBinding, BindDataTestModel> {
+        tvTitle.text.printLog("当前View-", "index:${it.index}")
+    }
+        .with(click<BindDataTestModel> {
+            ToastHelper.show("点击了位置:${this.index}")
+        })
+        .with(bindSwipeMenu<DragItemBinding, BindDataTestModel>(
             R.layout.drag_item,
-            canSwipe = { true }) { self, swipeLayout ->
+            canSwipe = { this.index != 2 }) { self, swipeLayout ->
             btnCopy.onceClick {
-                swipeLayout.quickClose()
-                ToastHelper.show("复制完成：${self.getViewPos()}")
+                swipeLayout.smoothClose()
+                ToastHelper.show("复制完成：${self.index}")
             }
             btnDel.onceClick {
-                swipeLayout.quickClose()
-                ToastHelper.show("删除完成：${self.getViewPos()}")
+                swipeLayout.smoothClose()
+                ToastHelper.show("删除完成：${self.index}")
             }
         })
+        .with(swap<BindDataTestModel> { this.index != 3 })
 ) {
     @SuppressLint("NonConstantResourceId")
     @BindData2View(id = R.id.img, helper = Url2ImageView::class)
@@ -47,6 +50,6 @@ class BindDataTestModel : QuickAbilityData(R.layout.holder_image,
     @SuppressLint("NonConstantResourceId")
     @BindData2View(id = R.id.tvTitle, helper = Text2TextView::class)
     val title = runOnHolder {
-        "Title:${getViewPos()}"
+        "Title:${index}"
     }
 }
