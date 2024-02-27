@@ -44,6 +44,12 @@ open class QuickAbilityData(
     isSuspension: Boolean = false,                                              //View是否悬浮置顶
     @Transient val abilityList: List<QuickContextAbility<QuickAbilityData>> = mutableListOf(),
 ) : QuickBindData(layoutId, layoutViewInContext, isDealBinding, autoSet, isSuspension) {
+
+    @CallSuper
+    fun initViewType(position: Int): Int {
+        return abilityList.find { it.getPrimeKey() == "resetViewType" }?.initViewType(position) ?: viewType
+    }
+
     @CallSuper
     override fun beforeAdapterCreateHolder(mParent: ViewGroup) {
         abilityList.forEach {
@@ -363,3 +369,16 @@ fun <T : QuickAbilityData> swap(
         }
     )
 }
+
+fun resetViewType(
+    reset: (position: Int) -> Int
+): List<QuickContextAbility<QuickAbilityData>> {
+    return mutableListOf(
+        object : QuickContextAbility<QuickAbilityData> {
+            override fun getPrimeKey() = "resetViewType"
+
+            override fun initViewType(position: Int): Int {
+                return reset.invoke(position)
+            }
+        })
+    }

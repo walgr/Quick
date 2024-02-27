@@ -8,9 +8,14 @@ import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
 
 interface QuickContextAbility<T> {
     fun getPrimeKey(): String
+
+    fun initViewType(position: Int): Int {
+        return 0
+    }
+
     /**
      * 在QuickAdapter的onCreateViewHolder初始化Holder之前调用
-     * @param selfOnlyBase 假对象只能使用公共参数
+     * @param selfOnlyBase 假对象只能使用初始化相关参数
      */
     fun beforeAdapterCreateHolder(mParent: ViewGroup, selfOnlyBase: T) {
 

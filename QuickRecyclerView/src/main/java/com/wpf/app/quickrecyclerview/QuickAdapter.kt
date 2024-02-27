@@ -3,6 +3,7 @@ package com.wpf.app.quickrecyclerview
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
+import com.wpf.app.quickrecyclerview.data.QuickAbilityData
 import com.wpf.app.quickrecyclerview.data.QuickBindData
 import com.wpf.app.quickrecyclerview.data.QuickItemData
 import com.wpf.app.quickrecyclerview.data.QuickViewData
@@ -68,6 +69,12 @@ open class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>()
     }
 
     override fun getItemViewType(position: Int): Int {
+        mDataList?.get(position)?.let {
+            if (it is QuickAbilityData) {
+                it.viewType =  it.initViewType(position)
+            }
+            return it.viewType
+        }
         return mDataList?.get(position)?.viewType ?: super.getItemViewType(position)
     }
 
