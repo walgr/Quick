@@ -28,6 +28,3 @@ fun itemClick(primeKey: String = "", listener: View.OnClickListener) = object : 
         return listener
     }
 }
-
-fun itemClickRun(primeKey: String = "", listener: View.OnClickListener) =
-    itemClick(primeKey, listener).run()

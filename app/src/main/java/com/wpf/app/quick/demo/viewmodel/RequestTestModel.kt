@@ -8,14 +8,14 @@ import com.wpf.app.quick.annotations.bind.BindData2View
 import com.wpf.app.quick.demo.databinding.ActivityRequestTestBinding
 import com.wpf.app.quickrecyclerview.bind.Request2View
 import com.wpf.app.quickrecyclerview.interfaces.request2View
+import com.wpf.app.quickutil.helper.postDelay
 import com.wpf.app.quickutil.log.LogUtil
 
 class RequestTestModel : QuickVBModel<ActivityRequestTestBinding>() {
 
     val requestParams = mutableMapOf("page" to 0, "pageSize" to 10)
-    val page = 0
+    private var page = 0
 
-    //代替上面注释的逻辑
     @SuppressLint("NonConstantResourceId", "StaticFieldLeak")
     @BindData2View(id = R.id.info, helper = Request2View::class)
     val info = request2View { callback ->
@@ -26,11 +26,13 @@ class RequestTestModel : QuickVBModel<ActivityRequestTestBinding>() {
         }.fail {
             LogUtil.e("接口错误：${it?.errorI}")
         }
-    }.isManual { true }
+    }.autoRequest { false }
 
     override fun onBindingCreated(view: ActivityRequestTestBinding?) {
         //手动请求
-        info.manualRequest()
-        requestParams["page"] = 1
+        view?.info?.postDelay(1000) {
+            page = 1
+            info.manualRequest()
+        }
     }
 }

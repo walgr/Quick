@@ -57,7 +57,7 @@ fun View?.allChild(): List<View> {
 
 fun View.onceClick(interval: Long = 1000L, onClickListener: (View) -> Unit) {
     setOnClickListener {
-        val viewKey = this.toString()
+        val viewKey = it.toString()
         val lastClickTime: Long = KV.get(viewKey, 0L)
         val curTime = System.currentTimeMillis()
         if (lastClickTime == 0L || curTime - lastClickTime > interval) {
@@ -113,7 +113,7 @@ fun View.seBottomMargin(margin: Int) {
     layoutParams.to<MarginLayoutParams>().bottomMargin = margin
 }
 
-fun View.postDelayed(delayMillis: Long, action: Runnable) {
+fun View.postDelay(delayMillis: Long, action: Runnable) {
     postDelayed(action, delayMillis)
 }
 

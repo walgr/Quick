@@ -47,8 +47,8 @@ interface Request2ViewWithView<Data : QuickRequestData, View> {
         return false
     }
 
-    fun isManual(manual: (() -> Boolean)?): Request2ViewWithView<Data, View> {
-        isManual = isManualFun(manual)
+    fun autoRequest(manual: (() -> Boolean)?): Request2ViewWithView<Data, View> {
+        isManual = !isManualFun(manual)
         return this
     }
 

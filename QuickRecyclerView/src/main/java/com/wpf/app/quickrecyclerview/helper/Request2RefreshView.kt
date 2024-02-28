@@ -45,7 +45,7 @@ object Request2RefreshView :
                 override fun backData(data: List<QuickItemData>?, hasMore: Boolean) {
                     view.refreshView?.onLoadMoreEnd(data)
                     quickAdapter.appendList(data)
-                    requestData.loadDataSize(data?.size ?: 0)
+                    realData.requestData?.loadDataSize(data?.size ?: 0)
                     if (!realData.loadMoreFinish(hasMore)) {
                         quickAdapter.notifyDataSetChanged()
                     }
@@ -56,13 +56,13 @@ object Request2RefreshView :
 
                 override fun onRefresh() {
                     super.onRefresh()
-                    requestData.refresh()
+                    realData.requestData?.refresh()
                     realData.requestAndCallback(view, requestData, realData.refreshCallback!!)
                 }
 
                 override fun onLoadMore() {
                     super.onLoadMore()
-                    requestData.loadMore()
+                    realData.requestData?.loadMore()
                     realData.requestAndCallback(view, requestData, realData.loadMoreCallback!!)
                 }
             }

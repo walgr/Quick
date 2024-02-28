@@ -4,6 +4,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.wpf.app.quickutil.bind.RunItemClickWithSelf
 import com.wpf.app.quickutil.bind.RunOnContextWithSelf
+import com.wpf.app.quickutil.other.asTo
 import java.io.Serializable
 
 /**
@@ -15,7 +16,7 @@ open class QuickChildSelectData(
     isSuspension: Boolean = false,                 //View是否悬浮置顶
     @Transient open var parent: QuickParentSelectData? = null,
     @Transient open var childList: MutableList<out QuickChildSelectData>? = null,
-    @Transient open val onChildClick: RunItemClickWithSelf<QuickChildSelectData>? = null,
+    @Transient open val onChildClick: RunItemClickWithSelf<out QuickChildSelectData>? = null,
     id: String? = null,
     name: String? = null,
     defaultSelect: Boolean = false,
@@ -66,7 +67,7 @@ open class QuickChildSelectData(
             getAdapter()?.onChildClick(this)
         }
         getViewHolder()?.itemView?.let {
-            onChildClick?.run(it, this)?.onClick(it)
+            onChildClick?.asTo<RunItemClickWithSelf<QuickChildSelectData>>()?.run(it, this)?.onClick(it)
         }
     }
 

@@ -332,10 +332,7 @@ fun <T : QuickAbilityData> swap(
                         viewHolder: RecyclerView.ViewHolder
                     ): Int {
                         val adapter =
-                            recyclerView.adapter.asTo<QuickAdapter>() ?: return makeMovementFlags(
-                                0,
-                                0
-                            )
+                            recyclerView.adapter.asTo<QuickAdapter>() ?: return makeMovementFlags(0, 0)
                         val firstData = adapter.getData()?.first { it is QuickAbilityData }
                             ?.asTo<QuickAbilityData>() ?: return makeMovementFlags(0, 0)
                         val dragFlags =

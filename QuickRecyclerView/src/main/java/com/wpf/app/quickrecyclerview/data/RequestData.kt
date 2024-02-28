@@ -7,8 +7,8 @@ import androidx.annotation.CallSuper
  *
  */
 open class RequestData @JvmOverloads constructor(
-    open var page: Int = 0,
-    open var pageSize: Int = 10
+    var page: Int = 0,
+    var pageSize: Int = 10
 ) {
     private val firstPage = page
 

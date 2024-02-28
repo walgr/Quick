@@ -2,7 +2,6 @@ package com.wpf.app.quickrecyclerview.listeners
 
 import androidx.annotation.CallSuper
 import com.wpf.app.quicknetwork.utils.RequestCallback
-import com.wpf.app.quickrecyclerview.R
 import com.wpf.app.quickrecyclerview.data.QuickItemData
 import com.wpf.app.quickrecyclerview.data.RequestData
 import java.lang.reflect.ParameterizedType
@@ -12,7 +11,9 @@ import java.lang.reflect.ParameterizedType
  *
  */
 typealias Run = (hasMore: Boolean) -> Boolean
-interface Request2List<Request : RequestData, Data : QuickItemData> : Request2ListWithView<Request, Data, Any> {
+
+interface Request2List<Request : RequestData, Data : QuickItemData> :
+    Request2ListWithView<Request, Data, Any> {
 
     /**
      * 接口请求
@@ -27,7 +28,11 @@ interface Request2List<Request : RequestData, Data : QuickItemData> : Request2Li
         }
     }
 
-    override fun requestAndCallback(view: Any, requestData: Request, callback: RequestCallback<Data>) {
+    override fun requestAndCallback(
+        view: Any,
+        requestData: Request,
+        callback: RequestCallback<Data>
+    ) {
         super.requestAndCallback(view, requestData, callback)
         requestAndCallback(requestData, callback)
     }
@@ -138,6 +143,11 @@ interface Request2ListWithView<Request : RequestData, Data : QuickItemData, View
         }
         return this
     }
+
+//    fun setRequestData(requestData: Request) {
+//        this.requestData = requestData
+//        view.asTo<QuickRefreshRecyclerView>()?.requestData = requestData
+//    }
 }
 
 fun <Request : RequestData, Data : QuickItemData> requestData2List(
@@ -176,7 +186,11 @@ fun <Request : RequestData, Data : QuickItemData, View> requestData2ListWithView
     override var refreshRun: Run? = null
     override var loadMoreRun: Run? = null
 
-    override fun requestAndCallback(view: View, requestData: Request, callback: RequestCallback<Data>) {
+    override fun requestAndCallback(
+        view: View,
+        requestData: Request,
+        callback: RequestCallback<Data>
+    ) {
         super.requestAndCallback(view, requestData, callback)
         callbackF.invoke(view, requestData, callback)
     }
@@ -210,7 +224,11 @@ fun <Data : QuickItemData, View> request2ListWithView(
     override var refreshRun: Run? = null
     override var loadMoreRun: Run? = null
 
-    override fun requestAndCallback(view: View, requestData: RequestData, callback: RequestCallback<Data>) {
+    override fun requestAndCallback(
+        view: View,
+        requestData: RequestData,
+        callback: RequestCallback<Data>
+    ) {
         super.requestAndCallback(view, requestData, callback)
         callbackF.invoke(view, requestData, callback)
     }

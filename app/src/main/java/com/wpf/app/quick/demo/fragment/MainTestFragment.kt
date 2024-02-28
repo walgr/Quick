@@ -4,7 +4,7 @@ import com.wpf.app.quick.activity.QuickBindingFragment
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.demo.databinding.FragmentMainTestBinding
 import com.wpf.app.quickutil.helper.dp
-import com.wpf.app.quickutil.helper.postDelayed
+import com.wpf.app.quickutil.helper.postDelay
 import com.wpf.app.quickutil.widget.onProgressChanged
 
 class MainTestFragment : QuickBindingFragment<FragmentMainTestBinding>(
@@ -13,7 +13,7 @@ class MainTestFragment : QuickBindingFragment<FragmentMainTestBinding>(
 ) {
     override fun initView(view: FragmentMainTestBinding?) {
         super.initView(view)
-        view?.llRoot?.postDelayed(2000) {
+        view?.llRoot?.postDelay(2000) {
             view.llRoot.setNewItemSpaceWithAnim(20.dp())
             view.ll1.setNewItemSpaceWithAnim(20.dp())
             view.ll2.setNewItemSpaceWithAnim(20.dp())

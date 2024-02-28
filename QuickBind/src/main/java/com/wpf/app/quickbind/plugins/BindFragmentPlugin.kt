@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.wpf.app.quickbind.plugins
 
 import android.app.Activity
@@ -21,6 +23,7 @@ import java.lang.reflect.Field
  * Created by 王朋飞 on 2022/7/13.
  *
  */
+@Suppress("DEPRECATION")
 class BindFragmentPlugin : BindBasePlugin {
 
     override fun dealField(
@@ -134,7 +137,8 @@ class BindFragmentPlugin : BindBasePlugin {
                         }
                     }
                 } else {
-                    viewPager.adapter = object : FragmentPagerAdapter(fragmentManager) {
+                    viewPager.adapter = object : FragmentPagerAdapter(fragmentManager,
+                        BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
                         private val mBaseFragmentList: HashMap<Int, BindBaseFragment> = HashMap()
 
                         override fun notifyDataSetChanged() {

@@ -55,7 +55,7 @@ abstract class QuickVBActivity<VM : QuickVBModel<VB>, VB : ViewDataBinding> @Jvm
     }
 
     override fun dealContentView() {
-//        super.dealContentView()
+        super.dealContentView()
         val viewModelCls: Class<VM>? = ViewModelEx.get0Clazz(this)
         if (viewModelCls != null && this !is QuickBindingActivity && viewModelCls != QuickVBModel::class.java) {
             mViewModel = ViewModelProvider(

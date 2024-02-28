@@ -6,7 +6,6 @@ import com.wpf.app.quick.demo.R
 import com.wpf.app.quickbind.helper.binddatahelper.Text2TextView
 import com.wpf.app.quickwidget.selectview.data.QuickChildSelectData
 import com.wpf.app.quickwidget.selectview.data.QuickParentSelectData
-import com.wpf.app.quickutil.bind.itemClickRun
 import com.wpf.app.quickutil.bind.itemClickWithSelf
 
 /**
@@ -20,13 +19,11 @@ class SelectResultItem(
     override var name: String?,
 ) : QuickChildSelectData(
     layoutId = R.layout.holder_select_result_item,
-    onChildClick = itemClickWithSelf { self ->
-        itemClickRun {
-            self.isSelect = false
-            self.getAdapter()?.getData()?.remove(self)
-            self.getAdapter()?.notifyItemRemoved(self.getViewPos())
-            self.getAdapter()?.getOnSelectChangeListener()?.onSelectChange()
-        }
+    onChildClick = itemClickWithSelf {
+        this.isSelect = false
+        getAdapter()?.getData()?.remove(this)
+        getAdapter()?.notifyItemRemoved(this.getViewPos())
+        getAdapter()?.getOnSelectChangeListener()?.onSelectChange()
     }) {
     @SuppressLint("NonConstantResourceId")
     @BindData2View(id = R.id.title, helper = Text2TextView::class)

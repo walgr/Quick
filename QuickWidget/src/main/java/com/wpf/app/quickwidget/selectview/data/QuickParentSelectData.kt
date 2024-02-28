@@ -8,6 +8,7 @@ import com.wpf.app.quickrecyclerview.data.QuickBindData
 import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
 import com.wpf.app.quickutil.bind.RunItemClickWithSelf
 import com.wpf.app.quickutil.bind.RunOnContextWithSelf
+import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.widget.scrollToPositionAndOffset
 import java.io.Serializable
 
@@ -20,7 +21,7 @@ open class QuickParentSelectData(
     isSuspension: Boolean = false,                 //父View是否悬浮置顶
     parent: QuickParentSelectData? = null,
     childList: MutableList<out QuickChildSelectData>? = null,
-    onParentClick: RunItemClickWithSelf<QuickParentSelectData>? = null,
+    onParentClick: RunItemClickWithSelf<out QuickParentSelectData>? = null,
     id: String? = null,
     name: String? = null,
     defaultSelect: Boolean = false,
@@ -37,7 +38,7 @@ open class QuickParentSelectData(
 ) : QuickChildSelectData(
     parent = parent,
     childList = childList,
-    onChildClick = onParentClick as? RunItemClickWithSelf<QuickChildSelectData>,
+    onChildClick = onParentClick.asTo<RunItemClickWithSelf<QuickChildSelectData>>(),
     id = id,
     name = name,
     defaultSelect = defaultSelect,
