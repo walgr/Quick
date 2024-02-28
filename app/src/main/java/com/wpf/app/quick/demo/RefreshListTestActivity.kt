@@ -44,15 +44,15 @@ class RefreshListTestActivity : QuickActivity(R.layout.activity_refresh_list, ti
         }
     }.initRequestData {
         page = 1
-    }.refreshFinish {
+    }.refreshFinish { hasMore ->
         LogUtil.e("下拉刷新请求结束")
         mSmartRefreshLayout?.finishRefresh()
-        mSmartRefreshLayout?.setEnableLoadMore(it)
+        mSmartRefreshLayout?.setEnableLoadMore(hasMore)
         false
-    }.loadMoreFinish {
+    }.loadMoreFinish { hasMore ->
         LogUtil.e("上拉加载请求结束")
         mSmartRefreshLayout?.finishLoadMore()
-        mSmartRefreshLayout?.setEnableLoadMore(it)
+        mSmartRefreshLayout?.setEnableLoadMore(hasMore)
         false
     }
 
