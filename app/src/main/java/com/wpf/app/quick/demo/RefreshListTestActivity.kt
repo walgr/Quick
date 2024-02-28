@@ -42,6 +42,8 @@ class RefreshListTestActivity : QuickActivity(R.layout.activity_refresh_list, ti
         }.fail {
             callback.backData(null, false)
         }
+    }.initRequestData {
+        page = 1
     }.refreshFinish {
         LogUtil.e("下拉刷新请求结束")
         mSmartRefreshLayout?.finishRefresh()

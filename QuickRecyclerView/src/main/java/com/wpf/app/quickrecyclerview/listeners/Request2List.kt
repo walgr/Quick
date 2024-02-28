@@ -62,6 +62,11 @@ interface Request2ListWithView<Request : RequestData, Data : QuickItemData, View
         }
     }
 
+    fun initRequestData(build: Request.() -> Unit): Request2ListWithView<Request, Data, View> {
+        requestData?.resetData(build)
+        return this
+    }
+
     /**
      * 刷新结束
      * 返回true表示刷新结束后自己刷新adapter

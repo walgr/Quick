@@ -10,7 +10,7 @@ open class RequestData @JvmOverloads constructor(
     var page: Int = 0,
     var pageSize: Int = 10
 ) {
-    private val firstPage = page
+    private var firstPage = page
 
     var isViewRefresh = true
     //刷新偏移量
@@ -34,5 +34,10 @@ open class RequestData @JvmOverloads constructor(
     @CallSuper
     open fun loadDataSize(size: Int) {
         offset += size
+    }
+
+    internal fun <T : RequestData> resetData(build: T.() -> Unit) {
+        build.invoke(this as T)
+        this.firstPage = this.page
     }
 }
