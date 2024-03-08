@@ -15,7 +15,6 @@
             android:layout_height="48dp"
             android:elevation="5dp"
             app:showBackIcon="false"
-            app:contentGravity="start"
             app:titleStr="正式场">
 
             <TextView

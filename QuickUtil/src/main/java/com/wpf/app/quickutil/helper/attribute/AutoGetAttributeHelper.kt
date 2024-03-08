@@ -8,9 +8,10 @@ object AutoGetAttributeHelper {
     inline fun <reified T : Any> init(
         context: Context,
         attrs: AttributeSet? = null,
-        @StyleableRes styleableId: IntArray
+        @StyleableRes styleableId: IntArray,
+        attrData: T? = null
     ): T {
-        val data = T::class.java.getDeclaredConstructor().newInstance()
+        val data = attrData ?: T::class.java.getDeclaredConstructor().newInstance()
         if (attrs != null) {
             AutoGetAttribute(context, attrs, styleableId, data)
         }

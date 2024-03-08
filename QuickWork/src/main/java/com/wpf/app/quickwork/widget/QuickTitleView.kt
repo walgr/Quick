@@ -20,6 +20,7 @@ import androidx.core.view.updateLayoutParams
 import com.wpf.app.quickutil.helper.attribute.AutoGetAttributeHelper
 import com.wpf.app.quickutil.helper.dp
 import com.wpf.app.quickutil.helper.toView
+import com.wpf.app.quickutil.other.printLog
 import com.wpf.app.quickwork.R
 import kotlin.math.max
 
@@ -37,7 +38,7 @@ class QuickTitleView @JvmOverloads constructor(
     private var moreGroup: ViewGroup? = null
     private var line: View? = null
 
-    private var style: QuickTitleStyle
+    private lateinit var style: QuickTitleStyle
 
     private var commonClickListener: CommonClickListener? = null
 
@@ -48,12 +49,8 @@ class QuickTitleView @JvmOverloads constructor(
             commonStyle = QuickTitleStyle()
             it.invoke(commonStyle!!, context)
         }
-        val attrData: QuickTitleStyle =
-            AutoGetAttributeHelper.init(context, attrs, R.styleable.QuickTitleView)
-        this.style = commonStyle ?: attrData
-        if (commonStyle != null) {
-            this.style.copyNew(attrData)
-        }
+        this.style =
+            AutoGetAttributeHelper.init(context, attrs, R.styleable.QuickTitleView, commonStyle)
         R.layout.toolbar_layout.toView(context, this, true)
         minimumHeight = 44.dp(context)
         contentLayout = findViewById(R.id.contentLayout)
@@ -161,16 +158,16 @@ class QuickTitleView @JvmOverloads constructor(
             }
             if (gravity == CONTENT_GRAVITY_CENTER) {
                 horizontalBias = 0.5f
-                if (style.isLinearLayout == true) {
+                if (style.isLinearLayout == true && style.isAbsoluteCenter == true) {
                     post {
-                        val leftViewW = ivBack!!.width
+                        val leftViewW = ivBack!!.width + marginStart
                         val rightViewW = moreGroup!!.width + moreGroup!!.marginEnd
                         val maxW = max(leftViewW, rightViewW)
                         val isDealLeft = maxW == rightViewW
                         titleGroup?.setPadding(
-                            paddingLeft + if (isDealLeft) max(0, maxW - leftViewW - marginStart) else 0,
+                            paddingLeft + if (isDealLeft) max(0, maxW - leftViewW) else 0,
                             paddingTop,
-                            paddingRight + if (!isDealLeft) max(0, maxW - rightViewW - space) else 0,
+                            paddingRight + if (!isDealLeft) max(0, maxW - rightViewW) else 0,
                             paddingBottom
                         )
                     }
@@ -245,7 +242,7 @@ class QuickTitleView @JvmOverloads constructor(
 
     override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
         super.onLayout(changed, l, t, r, b)
-        if (isInEditMode && titleGroup != null && ivBack != null && moreGroup != null) {
+        if (isInEditMode && style.isAbsoluteCenter == true && titleGroup != null && ivBack != null && moreGroup != null) {
             style.apply {
                 val minL =
                     if (showBackIcon == true && isLinearLayout == true) ivBack!!.width else (space
@@ -325,6 +322,7 @@ class QuickTitleView @JvmOverloads constructor(
         @DrawableRes var background: Int? = null,
 
         @ContentGravity var contentGravity: Int? = null,
+        var isAbsoluteCenter: Boolean? = null,               //是否绝对居中，title文字在屏幕中央
         var isLinearLayout: Boolean? = null,
 
         var showLine: Boolean? = null,
@@ -396,25 +394,9 @@ class QuickTitleView @JvmOverloads constructor(
             if (this.titleSpace == null) {
                 this.titleSpace = 0
             }
-        }
-
-        fun copyNew(new: QuickTitleStyle) {
-            background = new.background ?: background
-            contentGravity = new.contentGravity ?: contentGravity
-            isLinearLayout = new.isLinearLayout ?: isLinearLayout
-            showLine = new.showLine ?: showLine
-            showBackIcon = new.showBackIcon ?: showBackIcon
-            backIcon = new.backIcon ?: backIcon
-            titleStr = new.titleStr ?: titleStr
-            titleColor = new.titleColor ?: titleColor
-            titleBold = new.titleBold ?: titleBold
-            titleSize = new.titleSize ?: titleSize
-            subTitleStr = new.subTitleStr ?: subTitleStr
-            subTitleColor = new.subTitleColor ?: subTitleColor
-            subTitleBold = new.subTitleBold ?: subTitleBold
-            subTitleSize = new.subTitleSize ?: subTitleSize
-            space = new.space ?: space
-            titleSpace = new.titleSpace ?: titleSpace
+            if (this.isAbsoluteCenter == null) {
+                this.isAbsoluteCenter = true
+            }
         }
     }
 }

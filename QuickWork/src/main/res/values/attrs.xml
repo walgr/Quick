@@ -2,6 +2,7 @@
 <resources>
     <declare-styleable name="QuickTitleView">
         <attr name="isLinearLayout" format="boolean" />
+        <attr name="isAbsoluteCenter" format="boolean" />
         <attr name="showBackIcon" format="boolean" />
         <attr name="contentGravity" format="enum">
             <enum name="center" value="0"/>
