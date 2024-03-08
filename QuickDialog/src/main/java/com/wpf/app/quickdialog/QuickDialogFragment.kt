@@ -69,7 +69,7 @@ abstract class QuickDialogFragment @JvmOverloads constructor(
         onDialogOpen()
     }
 
-    abstract fun initView(view: View?)
+    abstract fun initView(view: View)
 
     protected var mScreenWidth = 0
     protected var mScreenHeight = 0

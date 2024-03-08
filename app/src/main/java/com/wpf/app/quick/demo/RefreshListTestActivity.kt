@@ -15,11 +15,12 @@ import com.wpf.app.quickwidget.emptyview.EmptyHelper
 import com.wpf.app.quickrecyclerview.helper.Request2RefreshView
 import com.wpf.app.quickrecyclerview.listeners.requestData2List
 import com.wpf.app.quickutil.log.LogUtil
+import com.wpf.app.quickwork.activity.QuickTitleActivity
 
 /**
  * Created by 王朋飞 on 2022/7/8.
  */
-class RefreshListTestActivity : QuickActivity(R.layout.activity_refresh_list, titleName = "列表刷新页") {
+class RefreshListTestActivity : QuickTitleActivity(R.layout.activity_refresh_list, titleName = "列表刷新页") {
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.refreshLayout)
     var mSmartRefreshLayout: SmartRefreshLayout? = null
@@ -43,7 +44,7 @@ class RefreshListTestActivity : QuickActivity(R.layout.activity_refresh_list, ti
             callback.backData(null, false)
         }
     }.initRequestData {
-        page = 1
+        page = 0
     }.refreshFinish { hasMore ->
         LogUtil.e("下拉刷新请求结束")
         mSmartRefreshLayout?.finishRefresh()
@@ -56,7 +57,7 @@ class RefreshListTestActivity : QuickActivity(R.layout.activity_refresh_list, ti
         false
     }
 
-    override fun initView(view: View?) {
+    override fun initView(view: View) {
         EmptyHelper.bind(mRecyclerView, emptyView = emptyLayout)
         mSmartRefreshLayout?.setOnRefreshListener { mRecyclerView?.onRefresh() }
         mSmartRefreshLayout?.setOnLoadMoreListener { mRecyclerView?.onLoadMore() }

@@ -16,14 +16,14 @@ abstract class QuickVBModel<T : ViewDataBinding> : ViewModel(), LifecycleObserve
 
     override var jobManager: MutableList<Job> = mutableListOf()
 
-    abstract fun onBindingCreated(view: T?)
+    abstract fun onBindingCreated(view: T)
 
-    fun getViewBinding(): T? {
-        return mViewBinding
+    fun getViewBinding(): T {
+        return mViewBinding!!
     }
 
     fun getContext(): Context? {
-        return getViewBinding()?.root?.context
+        return getViewBinding().root.context
     }
 
     override fun onDestroy() {

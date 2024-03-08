@@ -13,6 +13,7 @@ import com.wpf.app.quickbind.interfaces.BindBaseFragment
 import com.wpf.app.quickutil.bind.RunOnContext
 import com.wpf.app.quicknetwork.base.RequestCoroutineScope
 import com.wpf.app.quickutil.bind.Bind
+import com.wpf.app.quickutil.helper.InitViewHelper
 import kotlinx.coroutines.Job
 
 /**
@@ -24,7 +25,7 @@ abstract class QuickFragment @JvmOverloads constructor(
     @LayoutRes open val layoutId: Int = 0,
     open val layoutView: View? = null,
     open val layoutViewInContext: RunOnContext<View>? = null,
-    @AutoGet(titleKey) val titleName: String = ""
+    @AutoGet(TITLE_KEY) val titleName: String = ""
 ) : Fragment(), BindBaseFragment, QuickView, RequestCoroutineScope, Bind {
 
     override var jobManager: MutableList<Job> = mutableListOf()
@@ -33,11 +34,11 @@ abstract class QuickFragment @JvmOverloads constructor(
 
     init {
         val bundle = Bundle()
-        bundle.putString(titleKey, this.titleName)
+        bundle.putString(TITLE_KEY, this.titleName)
         arguments = bundle
     }
 
-    abstract fun initView(view: View?)
+    abstract fun initView(view: View)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,13 +46,7 @@ abstract class QuickFragment @JvmOverloads constructor(
         savedInstanceState: Bundle?
     ): View? {
         if (mView == null) {
-            if (layoutId != 0) {
-                mView = inflater.inflate(layoutId, null)
-            } else if (layoutView != null) {
-                mView = layoutView
-            } else if (layoutViewInContext != null && container?.context != null) {
-                mView = layoutViewInContext?.run(container.context!!)
-            }
+            mView = InitViewHelper.init(container?.context!!, layoutId, layoutView, layoutViewInContext)
         }
         return mView
     }
@@ -61,7 +56,7 @@ abstract class QuickFragment @JvmOverloads constructor(
         viewCreated(view)
     }
 
-    private fun viewCreated(view: View?) {
+    private fun viewCreated(view: View) {
         QuickBind.bind(this)
         initView(view)
     }
@@ -76,6 +71,6 @@ abstract class QuickFragment @JvmOverloads constructor(
     }
 
     companion object {
-        const val titleKey = "title"
+        const val TITLE_KEY = "title"
     }
 }

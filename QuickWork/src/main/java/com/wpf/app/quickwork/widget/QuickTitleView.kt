@@ -19,7 +19,9 @@ import androidx.core.view.marginEnd
 import androidx.core.view.updateLayoutParams
 import com.wpf.app.quickutil.helper.attribute.AutoGetAttributeHelper
 import com.wpf.app.quickutil.helper.dp
+import com.wpf.app.quickutil.helper.toColor
 import com.wpf.app.quickutil.helper.toView
+import com.wpf.app.quickutil.other.printLog
 import com.wpf.app.quickwork.R
 import kotlin.math.max
 
@@ -29,7 +31,7 @@ class QuickTitleView @JvmOverloads constructor(
     defStyleAttr: Int = 0,
 ) : LinearLayout(context, attrs, defStyleAttr) {
 
-    private var contentLayout: ConstraintLayout? = null
+    private var contentLayout: ViewGroup? = null
     private var titleGroup: ViewGroup? = null
     private var ivBack: ImageView? = null
     private var tvTitle: TextView? = null
@@ -43,16 +45,11 @@ class QuickTitleView @JvmOverloads constructor(
 
     init {
         orientation = VERTICAL
-        var commonStyle: QuickTitleStyle? = null
-        commonStyleBuilder?.let {
-            commonStyle = QuickTitleStyle()
-            it.invoke(commonStyle!!, context)
-        }
         this.style =
-            AutoGetAttributeHelper.init(context, attrs, R.styleable.QuickTitleView, commonStyle)
+            AutoGetAttributeHelper.init(context, attrs, R.styleable.QuickTitleView, commonStyle?.copy())
         R.layout.toolbar_layout.toView(context, this, true)
         minimumHeight = 44.dp(context)
-        contentLayout = findViewById(R.id.contentLayout)
+        contentLayout = findViewById(R.id.titleContentLayout)
         titleGroup = findViewById(R.id.titleGroup)
         ivBack = findViewById(R.id.ivBack)
         tvTitle = findViewById(R.id.tvTitle)
@@ -95,7 +92,6 @@ class QuickTitleView @JvmOverloads constructor(
             }
 
             titleStr?.let {
-                showTitle(it.isNotEmpty())
                 setTitle(it)
             }
             titleColor?.let {
@@ -109,7 +105,6 @@ class QuickTitleView @JvmOverloads constructor(
             }
 
             subTitleStr?.let {
-                showSubTitle(it.isNotEmpty())
                 setSubTitle(it)
             }
             subTitleColor?.let {
@@ -181,11 +176,7 @@ class QuickTitleView @JvmOverloads constructor(
         }
     }
 
-    fun showTitle(show: Boolean) {
-        tvTitle?.isVisible = show
-    }
-
-    fun setTitle(title: String) {
+    fun setTitle(title: CharSequence?) {
         tvTitle?.text = title
     }
 
@@ -209,8 +200,9 @@ class QuickTitleView @JvmOverloads constructor(
         tvSubTitle?.isVisible = show
     }
 
-    fun setSubTitle(title: String) {
+    fun setSubTitle(title: CharSequence?) {
         tvSubTitle?.text = title
+        showSubTitle(title?.isNotEmpty() == true)
     }
 
     fun setSubTitleColor(@ColorInt color: Int) {
@@ -272,7 +264,7 @@ class QuickTitleView @JvmOverloads constructor(
     }
 
     override fun addView(child: View?, index: Int, params: ViewGroup.LayoutParams?) {
-        if (child == null || child.id == R.id.contentLayout || child.id == R.id.line) {
+        if (child == null || child.id == R.id.titleContentLayout || child.id == R.id.line) {
             super.addView(child, index, params)
         } else {
             moreGroup?.addView(child, moreGroup!!.childCount, params)
@@ -293,11 +285,15 @@ class QuickTitleView @JvmOverloads constructor(
             QuickTitleView.commonClickListener = commonClickListener
         }
 
-        private var commonStyleBuilder: (QuickTitleStyle.(context: Context) -> Unit)? = null
-        fun commonStyleBuilder(builder: QuickTitleStyle.(context: Context) -> Unit) {
-            commonStyleBuilder = builder
+        private var commonStyle: QuickTitleStyle? = null
+        fun commonStyleBuilder(
+            context: Context, builder: QuickTitleStyle.(context: Context) -> Unit
+        ) {
+            commonStyle = QuickTitleStyle()
+            builder.invoke(commonStyle!!, context)
         }
     }
+
 
     interface CommonClickListener {
         fun onBackClick(view: View) {
@@ -367,7 +363,7 @@ class QuickTitleView @JvmOverloads constructor(
                 this.titleStr = ""
             }
             if (this.titleColor == null) {
-                this.titleColor = Color.WHITE
+                this.titleColor = android.R.color.white.toColor(context)
             }
             if (this.titleBold == null) {
                 this.titleBold = true
@@ -379,7 +375,7 @@ class QuickTitleView @JvmOverloads constructor(
                 this.subTitleStr = ""
             }
             if (this.subTitleColor == null) {
-                this.subTitleColor = Color.WHITE
+                this.subTitleColor = android.R.color.white.toColor(context)
             }
             if (this.subTitleBold == null) {
                 this.subTitleBold = false

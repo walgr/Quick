@@ -23,7 +23,7 @@ class TestFragment: QuickFragment(R.layout.fragment_test_viewpager2) {
     val pos: Int = 0
 
     @SuppressLint("SetTextI18n")
-    override fun initView(view: View?) {
+    override fun initView(view: View) {
         btnClean?.text = "Fragment${pos}"
         pos.printLog("当前:")
     }

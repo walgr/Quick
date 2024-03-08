@@ -30,7 +30,7 @@ class R2TestActivity : QuickActivity(R.layout.test_layout, titleName = "测试R2
     var titleStr: CharSequence = "测试R2成功"
 
     @SuppressLint("SetTextI18n")
-    override fun initView(view: View?) {
+    override fun initView(view: View) {
         info1?.postDelayed({ mGroupViews?.goneAll() }, 1000)
     }
 }

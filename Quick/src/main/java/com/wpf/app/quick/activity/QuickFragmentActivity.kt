@@ -21,7 +21,7 @@ open class QuickFragmentActivity(
         }
     }
 ) {
-    override fun initView(view: View?) {
+    override fun initView(view: View) {
         supportFragmentManager.commit {
             add(R.id.root, fragment)
         }

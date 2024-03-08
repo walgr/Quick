@@ -11,14 +11,14 @@ class MainTestFragment : QuickBindingFragment<FragmentMainTestBinding>(
     R.layout.fragment_main_test,
     titleName = "测试场"
 ) {
-    override fun initView(view: FragmentMainTestBinding?) {
+    override fun initView(view: FragmentMainTestBinding) {
         super.initView(view)
-        view?.llRoot?.postDelay(2000) {
+        view.llRoot.postDelay(2000) {
             view.llRoot.setNewItemSpaceWithAnim(20.dp())
             view.ll1.setNewItemSpaceWithAnim(20.dp())
             view.ll2.setNewItemSpaceWithAnim(20.dp())
         }
-        view?.seekbar?.onProgressChanged { _, progress, _ ->
+        view.seekbar.onProgressChanged { _, progress, _ ->
             view.llRoot.setNewItemSpace(progress)
             view.ll1.setNewItemSpace(progress)
             view.ll2.setNewItemSpace(progress)

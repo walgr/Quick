@@ -27,7 +27,7 @@ class DialogTestActivity : QuickActivity(
     }
 ) {
 
-    override fun initView(view: View?) {
+    override fun initView(view: View) {
         findViewById<Button>(R.id.btnNext).setOnClickListener {
             Test3Dialog(this).showInManager(showWithOther = true)
             it.postDelayed({

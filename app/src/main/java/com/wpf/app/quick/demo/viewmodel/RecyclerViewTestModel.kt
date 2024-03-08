@@ -12,18 +12,18 @@ import com.wpf.app.quickrecyclerview.utils.StickyItemDecoration
  */
 class RecyclerViewTestModel : QuickVBModel<ActivityRecyclerviewTestBinding>() {
 
-    override fun onBindingCreated(view: ActivityRecyclerviewTestBinding?) {
-        view?.list?.addItemDecoration(StickyItemDecoration(QuickStickyView()))
+    override fun onBindingCreated(view: ActivityRecyclerviewTestBinding) {
+        view.list.addItemDecoration(StickyItemDecoration(QuickStickyView()))
     }
 
     fun clean(view: View?) {
-        getViewBinding()?.list?.cleanAll()
+        getViewBinding().list.cleanAll()
     }
 
-    fun addMessage(view: View?) {
-        getViewBinding()?.list?.addData(
-            BindDataTestModel(getViewBinding()?.list?.getQuickAdapter()?.size() ?: 0)
+    fun addMessage(view: View) {
+        getViewBinding().list.addData(
+            BindDataTestModel(getViewBinding().list.getQuickAdapter().size())
         )
-        getViewBinding()?.list?.getQuickAdapter()?.notifyDataSetChanged()
+        getViewBinding().list.getQuickAdapter().notifyDataSetChanged()
     }
 }

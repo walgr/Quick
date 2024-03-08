@@ -37,14 +37,14 @@ open class QuickListVBFragment<VM : QuickVBModel<VB>, VB : ViewDataBinding> @Jvm
     private val requestData = RequestData()
 
     @CallSuper
-    override fun initView(view: View?) {
+    override fun initView(view: View) {
         mRecyclerView = if (layoutId == 0) {
             view as? QuickRefreshRecyclerView
         } else {
             if (listId == 0) {
-                view?.allChild()?.find { it is QuickRecyclerView } as? QuickRecyclerView
+                view.allChild().find { it is QuickRecyclerView } as? QuickRecyclerView
             } else {
-                view?.findViewById(listId)
+                view.findViewById(listId)
             }
         }
         if (dataLoader == null) {
@@ -55,7 +55,7 @@ open class QuickListVBFragment<VM : QuickVBModel<VB>, VB : ViewDataBinding> @Jvm
         super.initView(view)
     }
 
-    override fun initView(view: VB?) {
+    override fun initView(view: VB) {
 
     }
 

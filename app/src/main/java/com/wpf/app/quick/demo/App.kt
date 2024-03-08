@@ -13,7 +13,9 @@ import com.wpf.app.quicknetwork.helper.RetrofitCreateHelper
 import com.wpf.app.quicknetwork.interceptor.LogInterceptor
 import com.wpf.app.quickutil.activity.activity
 import com.wpf.app.quickutil.helper.dp
+import com.wpf.app.quickutil.helper.toColor
 import com.wpf.app.quickutil.init.QuickInit
+import com.wpf.app.quickutil.other.printLog
 import com.wpf.app.quickwork.widget.QuickTitleView
 
 /**
@@ -27,17 +29,17 @@ class App : Application() {
         initTestRequest()
         QuickInit.init(this)
 
-        QuickTitleView.commonStyleBuilder {
+        QuickTitleView.commonStyleBuilder(this) {
             background = R.color.purple_700
             contentGravity = QuickTitleView.CONTENT_GRAVITY_START
             showBackIcon = true
             backIcon = com.wpf.app.quickwork.R.drawable.baseline_arrow_back_ios_new_20_white
             titleBold = true
             titleSize = 20.dp(it)
-            titleColor = Color.WHITE
+            titleColor = R.color.white.toColor(it)
             subTitleBold = false
             subTitleSize = 14.dp(it)
-            subTitleColor = Color.WHITE
+            subTitleColor = R.color.white.toColor(it)
             showBackIcon = true
             showLine = false
             isLinearLayout = true

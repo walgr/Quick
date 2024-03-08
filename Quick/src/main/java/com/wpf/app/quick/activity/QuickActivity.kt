@@ -1,9 +1,9 @@
 package com.wpf.app.quick.activity
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import com.wpf.app.quickbind.QuickBind
@@ -12,7 +12,6 @@ import com.wpf.app.quickutil.bind.RunOnContext
 import com.wpf.app.quicknetwork.base.RequestCoroutineScope
 import com.wpf.app.quickutil.activity.contentView
 import com.wpf.app.quickutil.bind.Bind
-import com.wpf.app.quickutil.helper.allChild
 import com.wpf.app.quickutil.other.asTo
 import kotlinx.coroutines.Job
 
@@ -24,7 +23,7 @@ abstract class QuickActivity @JvmOverloads constructor(
     @LayoutRes open val layoutId: Int = 0,
     open val layoutView: View? = null,
     open val layoutViewInContext: RunOnContext<View>? = null,
-    @AutoGet(QuickFragment.titleKey) open val titleName: String = ""
+    @AutoGet(QuickFragment.TITLE_KEY) open val titleName: String = ""
 ) : AppCompatActivity(), QuickView, RequestCoroutineScope, Bind {
 
     override var jobManager: MutableList<Job> = mutableListOf()
@@ -37,7 +36,7 @@ abstract class QuickActivity @JvmOverloads constructor(
         setTitleName()
     }
 
-    abstract fun initView(view: View?)
+    abstract fun initView(view: View)
 
     open fun setTitleName() {
         if (titleName.isNotEmpty()) {
@@ -46,20 +45,28 @@ abstract class QuickActivity @JvmOverloads constructor(
     }
 
     protected open fun dealContentView() {
-        if (layoutId != 0) {
-            setContentView(layoutId)
+        if (layoutViewInContext != null) {
+            setContentView(layoutViewInContext?.run(this))
         } else if (layoutView != null) {
             setContentView(layoutView)
-        } else if (layoutViewInContext != null) {
-            setContentView(layoutViewInContext?.run(this))
+        } else if (layoutId != 0) {
+            setContentView(layoutId)
         }
     }
 
-    override fun getView(): View? {
-        return window.contentView()?.asTo<ViewGroup>()?.getChildAt(0)
+    override fun getView(): View {
+        return contentView().asTo<ViewGroup>()?.getChildAt(0)!!
     }
 
     fun requireContext() = this
+
+    fun onBackPress(doNext: () -> Unit) {
+        onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                doNext.invoke()
+            }
+        })
+    }
 
     override fun onDestroy() {
         super.onDestroy()

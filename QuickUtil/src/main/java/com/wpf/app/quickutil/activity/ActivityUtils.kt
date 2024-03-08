@@ -53,7 +53,7 @@ inline fun <reified T : Activity> Fragment.quickStartActivity(
     quickStartActivity(T::class.java, data)
 }
 
-fun Activity.contentView(): View? {
+fun Activity.contentView(): View {
     return findViewById(android.R.id.content)
 }
 

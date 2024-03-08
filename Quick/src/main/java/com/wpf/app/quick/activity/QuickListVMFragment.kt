@@ -37,7 +37,7 @@ open class QuickListVMFragment<VM : QuickViewModel<out QuickView>> @JvmOverloads
     private val requestData = RequestData()
 
     @CallSuper
-    override fun initView(view: View?) {
+    override fun initView(view: View) {
         mRecyclerView = if (layoutId == 0) {
             view as? QuickRefreshRecyclerView
         } else {
@@ -55,7 +55,7 @@ open class QuickListVMFragment<VM : QuickViewModel<out QuickView>> @JvmOverloads
         super.initView(view)
     }
 
-    override fun getTitle(): String? {
+    override fun getTitle(): String {
         return titleName
     }
 }

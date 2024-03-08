@@ -20,7 +20,7 @@ class ViewPagerBindFragmentTestActivity : QuickActivity(R.layout.activity_test_v
     @BindView(R.id.viewPager)
     val viewPager: ViewPager2? = null
 
-    override fun initView(view: View?) {
+    override fun initView(view: View) {
         viewPager?.setCurrentItem(5, false)
         Toast.makeText(this, "3秒后刷新", Toast.LENGTH_SHORT).show()
         viewPager?.postDelayed({

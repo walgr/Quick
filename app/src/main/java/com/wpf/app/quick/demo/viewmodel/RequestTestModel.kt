@@ -28,9 +28,9 @@ class RequestTestModel : QuickVBModel<ActivityRequestTestBinding>() {
         }
     }.autoRequest { false }
 
-    override fun onBindingCreated(view: ActivityRequestTestBinding?) {
+    override fun onBindingCreated(view: ActivityRequestTestBinding) {
         //手动请求
-        view?.info?.postDelay(1000) {
+        view.info.postDelay(1000) {
             page = 1
             info.manualRequest()
         }

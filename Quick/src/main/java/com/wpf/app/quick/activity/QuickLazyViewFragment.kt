@@ -26,7 +26,7 @@ abstract class QuickLazyViewFragment @JvmOverloads constructor(
                 rootView = inflater.inflate(layoutId, null)
             }
             QuickBind.bind(this)
-            initView(rootView)
+            initView(rootView!!)
         }
         return rootView!!
     }

@@ -25,7 +25,7 @@ class MainReleaseVM: QuickVBModel<FragmentMainReleaseBinding>() {
     @BindSp2View(bindSp = "绑定的SpKey3", defaultValue = "默认值3")
     @BindView(R.id.spTextView3)
     var text3: TextView? = null
-    override fun onBindingCreated(view: FragmentMainReleaseBinding?) {
+    override fun onBindingCreated(view: FragmentMainReleaseBinding) {
         text3?.postDelayed(
             { text3?.text = System.currentTimeMillis().toString() + "" },
             1000

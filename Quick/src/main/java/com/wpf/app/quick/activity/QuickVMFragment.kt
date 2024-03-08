@@ -61,7 +61,7 @@ open class QuickVMFragment<VM : QuickViewModel<out QuickView>> @JvmOverloads con
     private var mViewModel: VM? = null
 
     @CallSuper
-    override fun initView(view: View?) {
+    override fun initView(view: View) {
         initViewModel(this)
     }
 
@@ -92,7 +92,7 @@ open class QuickVMFragment<VM : QuickViewModel<out QuickView>> @JvmOverloads con
         return mViewModel
     }
 
-    override fun getTitle(): String? {
+    override fun getTitle(): String {
         return titleName
     }
 }

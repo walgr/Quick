@@ -15,6 +15,7 @@ import com.wpf.app.quickdialog.listeners.DialogLifecycle
 import com.wpf.app.quickdialog.listeners.DialogSize
 import com.wpf.app.quickdialog.minAndMaxLimit.SizeLimitViewGroup
 import com.wpf.app.quickutil.bind.RunOnContext
+import com.wpf.app.quickutil.helper.InitViewHelper
 
 /**
  * Created by 王朋飞 on 2022/6/16.
@@ -60,7 +61,7 @@ open class QuickDialog : Dialog, DialogSize, DialogLifecycle {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         dealSize()
-        mView = layoutViewInContext?.run(getViewContext()) ?: layoutView ?: LayoutInflater.from(getViewContext()).inflate(layoutId, null)
+        mView = InitViewHelper.init(getViewContext(), layoutId, layoutView, layoutViewInContext)
         if (initDialogAdaptiveHeight()) {
             mView = SizeLimitViewGroup(getViewContext()).apply {
                 addView(mView)

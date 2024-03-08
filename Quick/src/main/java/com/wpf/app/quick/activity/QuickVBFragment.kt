@@ -33,7 +33,7 @@ abstract class QuickVBFragment<VM : QuickVBModel<VB>, VB : ViewDataBinding> @Jvm
             if (value != null) {
                 bind(this, value)
                 setViewBinding()
-                value.onBindingCreated(viewBinding)
+                value.onBindingCreated(viewBinding!!)
             }
         }
 
@@ -45,7 +45,7 @@ abstract class QuickVBFragment<VM : QuickVBModel<VB>, VB : ViewDataBinding> @Jvm
             viewBinding?.lifecycleOwner = this
         }
         viewBinding?.setVariable(BRConstant.viewModel, mViewModel)
-        setBindingVariable(viewBinding)
+        setBindingVariable(viewBinding!!)
         viewBinding?.executePendingBindings()
         mViewModel?.mViewBinding = viewBinding
     }
@@ -54,7 +54,7 @@ abstract class QuickVBFragment<VM : QuickVBModel<VB>, VB : ViewDataBinding> @Jvm
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initViewModel(this)
         super.onViewCreated(view, savedInstanceState)
-        initView(viewBinding)
+        initView(viewBinding!!)
     }
 
     @Deprecated("Deprecated by Android")
@@ -62,7 +62,7 @@ abstract class QuickVBFragment<VM : QuickVBModel<VB>, VB : ViewDataBinding> @Jvm
         super.onActivityCreated(savedInstanceState)
         if (mViewModel == null && getVMFormActivity) {
             initViewModel(requireActivity())
-            initView(viewBinding)
+            initView(viewBinding!!)
         }
     }
 
@@ -110,12 +110,12 @@ abstract class QuickVBFragment<VM : QuickVBModel<VB>, VB : ViewDataBinding> @Jvm
         mViewModel = null
     }
 
-    override fun initView(view: View?) {}
-    open fun initView(view: VB?) {
+    override fun initView(view: View) {}
+    open fun initView(view: VB) {
 
     }
 
-    open fun setBindingVariable(view: VB?) {
+    open fun setBindingVariable(view: VB) {
 
     }
 }

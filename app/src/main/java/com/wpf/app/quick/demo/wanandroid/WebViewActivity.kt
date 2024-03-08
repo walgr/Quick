@@ -5,13 +5,16 @@ import android.view.View
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import androidx.activity.OnBackPressedCallback
-import com.wpf.app.quick.activity.QuickActivity
 import com.wpf.app.quick.annotations.bind.BindView
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quickbind.annotations.AutoGet
+import com.wpf.app.quickutil.helper.matchLayoutParams
+import com.wpf.app.quickutil.helper.toView
+import com.wpf.app.quickwork.activity.QuickTitleActivity
 
-class WebViewActivity : QuickActivity(R.layout.activity_webview) {
+class WebViewActivity : QuickTitleActivity(contentBuilder = {
+    addView(R.layout.activity_webview.toView(context), matchLayoutParams)
+}) {
 
     @AutoGet
     var title: String? = null
@@ -23,22 +26,21 @@ class WebViewActivity : QuickActivity(R.layout.activity_webview) {
     @BindView(R.id.webView)
     val webView: WebView? = null
 
-    override fun initView(view: View?) {
-        supportActionBar?.title = title
+    override fun initView(view: View) {
+        super.initView(view)
+        titleView.setTitle(title)
         webView?.let {
             it.webChromeClient = WebChromeClient()
             it.webViewClient = WebViewClient()
             it.loadUrl(url!!)
         }
 
-        onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                if (webView?.canGoBack() == true) {
-                    webView.goBack()
-                } else {
-                    finish()
-                }
+        onBackPress {
+            if (webView?.canGoBack() == true) {
+                webView.goBack()
+            } else {
+                finish()
             }
-        })
+        }
     }
 }
