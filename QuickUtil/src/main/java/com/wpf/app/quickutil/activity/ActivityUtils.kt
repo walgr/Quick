@@ -56,3 +56,5 @@ inline fun <reified T : Activity> Fragment.quickStartActivity(
 fun Activity.contentView(): View? {
     return findViewById(android.R.id.content)
 }
+
+fun View.activity(): Activity = context as Activity

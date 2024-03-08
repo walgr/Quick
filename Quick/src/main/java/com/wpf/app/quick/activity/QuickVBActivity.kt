@@ -13,6 +13,7 @@ import com.wpf.app.quickbind.QuickBind
 import com.wpf.app.quickrecyclerview.constant.BRConstant
 import com.wpf.app.quickutil.bind.RunOnContext
 import com.wpf.app.quickutil.other.ViewModelEx
+import com.wpf.app.quickutil.other.printLog
 
 /**
  * Created by 王朋飞 on 2022/7/13.
@@ -39,13 +40,7 @@ abstract class QuickVBActivity<VM : QuickVBModel<VB>, VB : ViewDataBinding> @Jvm
 
     private fun setViewBinding() {
         if (viewBinding == null) {
-            if (layoutId != 0) {
-                viewBinding = DataBindingUtil.setContentView(this, layoutId)
-            } else {
-                getView()?.let {
-                    viewBinding = DataBindingUtil.bind(it)
-                }
-            }
+            viewBinding = DataBindingUtil.bind(getView()!!)
             viewBinding?.lifecycleOwner = this
         }
         viewBinding?.setVariable(BRConstant.viewModel, mViewModel)
@@ -101,10 +96,10 @@ abstract class QuickVBActivity<VM : QuickVBModel<VB>, VB : ViewDataBinding> @Jvm
     }
 
     override fun initView(view: View?) {
-        initView(viewBinding)
+        initView(viewBinding!!)
     }
 
-    open fun initView(view: VB?) {
+    open fun initView(view: VB) {
 
     }
 

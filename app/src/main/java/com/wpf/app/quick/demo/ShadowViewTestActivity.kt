@@ -14,7 +14,7 @@ class ShadowViewTestActivity: QuickBindingActivity<ActivityShadowTestBinding>(
     titleName = "同步测试页"
 ) {
     @SuppressLint("SetTextI18n")
-    override fun initView(view: ActivityShadowTestBinding?) {
+    override fun initView(view: ActivityShadowTestBinding) {
         val colorList = arrayOf(
             R.color.black.toColor(requireContext()),
             R.color.colorPrimary.toColor(requireContext()),
@@ -22,7 +22,7 @@ class ShadowViewTestActivity: QuickBindingActivity<ActivityShadowTestBinding>(
         )
         var pos = 0
         TimeDelayHelper.registerTimeDelay("1s", 1) {
-            view?.shadow1?.post {
+            view.shadow1.post {
                 val index = (pos++) % colorList.size
                 view.shadow1.text = (index + 1).toString()
                 val newColor = colorList[index]
@@ -30,7 +30,7 @@ class ShadowViewTestActivity: QuickBindingActivity<ActivityShadowTestBinding>(
                 view.shadow1.visibility
             }
         }
-        view?.shadow6?.setOnCheckedChangeListener { _, isChecked ->
+        view.shadow6.setOnCheckedChangeListener { _, isChecked ->
             view.shadow8.isVisible = isChecked
         }
     }

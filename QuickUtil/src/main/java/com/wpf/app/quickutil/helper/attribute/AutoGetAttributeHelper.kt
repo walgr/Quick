@@ -11,7 +11,9 @@ object AutoGetAttributeHelper {
         @StyleableRes styleableId: IntArray
     ): T {
         val data = T::class.java.getDeclaredConstructor().newInstance()
-        AutoGetAttribute(context, attrs, styleableId, data)
+        if (attrs != null) {
+            AutoGetAttribute(context, attrs, styleableId, data)
+        }
         return data
     }
 }

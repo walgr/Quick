@@ -3,7 +3,7 @@ package com.wpf.app.quickwidget.ratio
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.FrameLayout
-import com.wpf.app.quickutil.helper.attribute.AutoGetAttribute
+import com.wpf.app.quickutil.helper.attribute.AutoGetAttributeHelper
 import com.wpf.app.quickwidget.R
 
 /**
@@ -11,55 +11,45 @@ import com.wpf.app.quickwidget.R
  */
 open class AspectRatioView @JvmOverloads constructor(
     mContext: Context,
-    attributeSet: AttributeSet? = null,
+    attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
 ) : FrameLayout(
-    mContext, attributeSet, defStyleAttr
+    mContext, attrs, defStyleAttr
 ) {
 
-    private lateinit var viewHelper: AspectRatioViewHelper
+    private var attrsData: AspectRatioViewHelper
 
     init {
-        attributeSet?.let {
-            viewHelper = AspectRatioViewHelper(mContext, it)
-            if (viewHelper.ratio == null) {
-                viewHelper.ratio = 1.0f
-            }
-        }
+        attrsData = AutoGetAttributeHelper.init(mContext, attrs, R.styleable.AspectRatioView)
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        val specModeWidth = MeasureSpec.getMode(widthMeasureSpec)
         val specWidth = MeasureSpec.getSize(widthMeasureSpec)
-        val specModeHeight = MeasureSpec.getMode(heightMeasureSpec)
         val specHeight = MeasureSpec.getSize(heightMeasureSpec)
-        if (specModeWidth != MeasureSpec.AT_MOST && specModeWidth != MeasureSpec.UNSPECIFIED && specHeight > specWidth) {
+        if (attrsData.isWidthMain) {
             //以宽度为主
             super.onMeasure(
                 widthMeasureSpec,
                 MeasureSpec.makeMeasureSpec(
-                    (specWidth * viewHelper.ratio!!).toInt(),
-                    specModeHeight
+                    (specWidth * attrsData.ratio).toInt(),
+                    MeasureSpec.EXACTLY
                 )
             )
-        } else if (specModeHeight != MeasureSpec.AT_MOST && specModeHeight != MeasureSpec.UNSPECIFIED && specHeight < specWidth) {
+        } else {
             //以高度为主
             super.onMeasure(
                 MeasureSpec.makeMeasureSpec(
-                    (specHeight * (1 / viewHelper.ratio!!).toInt()),
-                    specModeWidth
+                    (specHeight * (1 / attrsData.ratio).toInt()),
+                    MeasureSpec.EXACTLY
                 ), heightMeasureSpec
             )
-        } else {
-            super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         }
     }
 }
 
-class AspectRatioViewHelper(
-    context: Context,
-    attributeSet: AttributeSet,
-) : AutoGetAttribute(context, attributeSet, R.styleable.AspectRatioView) {
+class AspectRatioViewHelper {
 
-    var ratio: Float? = null
+    var ratio: Float = 1f
+
+    var isWidthMain: Boolean = true
 }

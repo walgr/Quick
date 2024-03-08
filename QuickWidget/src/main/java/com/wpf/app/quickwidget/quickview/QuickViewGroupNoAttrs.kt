@@ -48,7 +48,7 @@ open class QuickViewGroupNoAttrs<T : ViewGroup> @JvmOverloads constructor(
         if (isInEditMode) {
             addToParent = false
         }
-        shadowView = if (forceGenerics) {
+        shadowView = if (forceGenerics || attrSet.groupType == -1) {
             initViewGroupByT(shadowView, context, attrs, defStyleAttr)
         } else {
             initViewGroupByXml(shadowView, attrSet.groupType, context, attrs, defStyleAttr)
@@ -227,7 +227,7 @@ open class QuickViewGroupNoAttrs<T : ViewGroup> @JvmOverloads constructor(
 
     protected class QuickViewGroupAttrSet @JvmOverloads constructor(
         val addToParent: Boolean? = null,
-        val groupType: Int = 0,
+        val groupType: Int = -1,
         val layoutRes: Int = 0,
     )
 }

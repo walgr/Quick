@@ -77,6 +77,7 @@
 
     <declare-styleable name="AspectRatioView">
         <attr name="ratio" format="float" />
+        <attr name="isWidthMain" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="ViewShadow">

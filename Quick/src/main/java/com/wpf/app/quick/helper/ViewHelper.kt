@@ -73,10 +73,10 @@ inline fun <reified VM : QuickViewModel<out QuickView>> View.toVMActivity(
 
 inline fun <reified VM : QuickVBModel<VB>, reified VB : ViewDataBinding> View.toVBActivity(
     titleName: String = "",
-    noinline onActivityInit: ((view: VB?) -> Unit)? = null
+    noinline onActivityInit: ((view: VB) -> Unit)? = null
 ): QuickVBActivity<VM, VB> {
     return object : QuickVBActivity<VM, VB>(layoutView = this@toVBActivity, titleName = titleName) {
-        override fun initView(view: VB?) {
+        override fun initView(view: VB) {
             super.initView(view)
             onActivityInit?.invoke(view)
         }

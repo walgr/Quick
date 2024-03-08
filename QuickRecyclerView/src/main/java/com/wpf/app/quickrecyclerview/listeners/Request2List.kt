@@ -191,6 +191,14 @@ fun <Request : RequestData, Data : QuickItemData, View> requestData2ListWithView
     override var refreshRun: Run? = null
     override var loadMoreRun: Run? = null
 
+    init {
+        if ((callbackF.javaClass.genericInterfaces[0] as ParameterizedType).actualTypeArguments[0] is Class<*>) {
+            requestData =
+                ((callbackF.javaClass.genericInterfaces[0] as ParameterizedType).actualTypeArguments[0] as Class<*>).getDeclaredConstructor()
+                    .newInstance() as Request
+        }
+    }
+
     override fun requestAndCallback(
         view: View,
         requestData: Request,
@@ -212,6 +220,10 @@ fun <Data : QuickItemData> request2List(
     override var refreshRun: Run? = null
     override var loadMoreRun: Run? = null
 
+    init {
+        requestData = RequestData()
+    }
+
     override fun requestAndCallback(requestData: RequestData, callback: RequestCallback<Data>) {
         super.requestAndCallback(requestData, callback)
         callbackF.invoke(requestData, callback)
@@ -228,6 +240,10 @@ fun <Data : QuickItemData, View> request2ListWithView(
     override var loadMoreCallback: RequestCallback<Data>? = null
     override var refreshRun: Run? = null
     override var loadMoreRun: Run? = null
+
+    init {
+        requestData = RequestData()
+    }
 
     override fun requestAndCallback(
         view: View,

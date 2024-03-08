@@ -3,6 +3,7 @@ package com.wpf.app.quick.activity
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import com.wpf.app.quickbind.QuickBind
@@ -11,6 +12,8 @@ import com.wpf.app.quickutil.bind.RunOnContext
 import com.wpf.app.quicknetwork.base.RequestCoroutineScope
 import com.wpf.app.quickutil.activity.contentView
 import com.wpf.app.quickutil.bind.Bind
+import com.wpf.app.quickutil.helper.allChild
+import com.wpf.app.quickutil.other.asTo
 import kotlinx.coroutines.Job
 
 /**
@@ -53,7 +56,7 @@ abstract class QuickActivity @JvmOverloads constructor(
     }
 
     override fun getView(): View? {
-        return window.contentView()
+        return window.contentView()?.asTo<ViewGroup>()?.getChildAt(0)
     }
 
     fun requireContext() = this

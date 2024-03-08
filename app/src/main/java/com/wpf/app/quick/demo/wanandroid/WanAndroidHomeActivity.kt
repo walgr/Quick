@@ -7,10 +7,4 @@ import com.wpf.app.quick.demo.databinding.ActivityWanandroidHomeBinding
 
 @GetClass
 class WanAndroidHomeActivity :
-    QuickBindingActivity<ActivityWanandroidHomeBinding>(R.layout.activity_wanandroid_home) {
-
-    override fun initView(view: ActivityWanandroidHomeBinding?) {
-        super.initView(view)
-//        view?.list?.addItemDecoration(StickyItemDecoration(QuickStickyView()))
-    }
-}
+    QuickBindingActivity<ActivityWanandroidHomeBinding>(R.layout.activity_wanandroid_home)

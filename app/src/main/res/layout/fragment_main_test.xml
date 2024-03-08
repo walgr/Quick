@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.wpf.app.quickwidget.group.QuickLinearLayout
+        <com.wpf.app.quickwidget.group.QuickSpaceLinearLayout
             android:id="@+id/llRoot"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -22,7 +22,7 @@
             android:orientation="vertical"
             app:itemSpace="10dp">
 
-            <com.wpf.app.quickwidget.group.QuickLinearLayout
+            <com.wpf.app.quickwidget.group.QuickSpaceLinearLayout
                 android:id="@+id/ll1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -39,9 +39,9 @@
                     android:layout_height="50dp"
                     android:background="@color/colorPrimary" />
 
-            </com.wpf.app.quickwidget.group.QuickLinearLayout>
+            </com.wpf.app.quickwidget.group.QuickSpaceLinearLayout>
 
-            <com.wpf.app.quickwidget.group.QuickLinearLayout
+            <com.wpf.app.quickwidget.group.QuickSpaceLinearLayout
                 android:id="@+id/ll2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -58,9 +58,9 @@
                     android:layout_height="50dp"
                     android:background="@color/colorPrimary" />
 
-            </com.wpf.app.quickwidget.group.QuickLinearLayout>
+            </com.wpf.app.quickwidget.group.QuickSpaceLinearLayout>
 
-        </com.wpf.app.quickwidget.group.QuickLinearLayout>
+        </com.wpf.app.quickwidget.group.QuickSpaceLinearLayout>
 
         <SeekBar
             android:id="@+id/seekbar"

@@ -15,6 +15,8 @@ import com.wpf.app.quickwidget.tab.TabManager
 import com.wpf.app.quickbind.annotations.BindFragments
 import com.wpf.app.quickbind.viewpager.QuickViewPager
 import com.wpf.app.quickutil.helper.toColor
+import com.wpf.app.quickutil.widget.onPageSelected
+import com.wpf.app.quickwork.widget.QuickTitleView
 import com.wpf.quick.helper.initTabMain
 
 class CodeMainActivity :
@@ -38,20 +40,24 @@ class CodeMainActivity :
         withState = false
     )
     var viewPager: QuickViewPager? = null
-    override fun initView(view: ActivityMainCodeBinding?) {
+    override fun initView(view: ActivityMainCodeBinding) {
         super.initView(view)
         val tabs = arrayOf(
-            Pair(R.drawable.ic_home, "正式场"),
-            Pair(R.drawable.ic_test, "测试场")
+            "正式场" to R.drawable.ic_home,
+            "测试场" to R.drawable.ic_test,
         )
         this.tabs.initTabMain(
-            parent = view?.bottomTabs,
+            parent = view.bottomTabs,
             size = tabs.size,
             repeatClick = false
         ) { curPos: Int, isSelect: Boolean, ivIcon: ImageView, tvName: TextView ->
-            tvName.text = tabs[curPos].second
-            ivIcon.setImageResource(tabs[curPos].first)
+            tvName.text = tabs[curPos].first
+            ivIcon.setImageResource(tabs[curPos].second)
             tvName.setTextColor((if (isSelect) R.color.colorPrimary else R.color.black).toColor(this))
         }.bindViewPager(viewPager)
+
+        viewPager?.onPageSelected {
+            view.titleView.setTitle(tabs[it].first)
+        }
     }
 }

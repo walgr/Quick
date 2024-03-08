@@ -103,10 +103,10 @@ dependencies {
     implementation 'androidx.datastore:datastore-rxjava3:1.0.0'
 
     if (IS_REMOTE.toBoolean()) {
-        implementation deps.quickbind.base
+        implementation deps.quickbind.work
         ksp deps.quickbind.compiler_ksp
     } else {
-        implementation project(":Quick")
+        implementation project(":QuickWork")
         implementation project(":R2Test")
         ksp project(":Quick-compiler-ksp")
     }

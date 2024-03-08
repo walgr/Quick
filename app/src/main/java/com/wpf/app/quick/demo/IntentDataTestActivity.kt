@@ -27,7 +27,7 @@ class IntentDataTestActivity :
     var textGroup: GroupViews? = null
 
     @SuppressLint("SetTextI18n")
-    override fun initView(view: ActivityDataTestBinding?) {
+    override fun initView(view: ActivityDataTestBinding) {
         title?.text = "传输测试页Activity"
         title?.postDelayed({
             textGroup?.goneAll()

@@ -9,7 +9,7 @@ import com.wpf.app.quickutil.helper.anim
 import com.wpf.app.quickutil.helper.attribute.AutoGetAttributeHelper
 import com.wpf.app.quickwidget.R
 
-open class QuickLinearLayout @JvmOverloads constructor(
+open class QuickSpaceLinearLayout @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
@@ -17,7 +17,7 @@ open class QuickLinearLayout @JvmOverloads constructor(
     context, attrs, defStyleAttr
 ) {
 
-    private val attr: QuickLinearLayoutAttr
+    private val attr: SpaceLinearLayoutAttr
 
     init {
         attr = AutoGetAttributeHelper.init(context, attrs, R.styleable.QuickLinearLayout)
@@ -33,13 +33,13 @@ open class QuickLinearLayout @JvmOverloads constructor(
             get(pos).updateLayoutParams<MarginLayoutParams> {
                 var startSpace = 0
                 when (attr.spaceType) {
-                    QuickLinearLayoutAttr.SpaceType.Center.type -> {
+                    SpaceLinearLayoutAttr.SpaceType.Center.type -> {
                         startSpace = attr.itemSpace / 2
                     }
-                    QuickLinearLayoutAttr.SpaceType.Start.type -> {
+                    SpaceLinearLayoutAttr.SpaceType.Start.type -> {
                         startSpace = attr.itemSpace
                     }
-                    QuickLinearLayoutAttr.SpaceType.End.type -> {
+                    SpaceLinearLayoutAttr.SpaceType.End.type -> {
                         startSpace = 0
                     }
                 }
@@ -89,7 +89,7 @@ open class QuickLinearLayout @JvmOverloads constructor(
         setChildMargin(true)
     }
 
-    private class QuickLinearLayoutAttr(
+    private class SpaceLinearLayoutAttr(
         var itemSpace: Int = 0,
         var spaceType: Int = 0
     ) {
