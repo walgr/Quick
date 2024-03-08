@@ -20,7 +20,6 @@ import androidx.core.view.updateLayoutParams
 import com.wpf.app.quickutil.helper.attribute.AutoGetAttributeHelper
 import com.wpf.app.quickutil.helper.dp
 import com.wpf.app.quickutil.helper.toView
-import com.wpf.app.quickutil.other.printLog
 import com.wpf.app.quickwork.R
 import kotlin.math.max
 
@@ -38,7 +37,7 @@ class QuickTitleView @JvmOverloads constructor(
     private var moreGroup: ViewGroup? = null
     private var line: View? = null
 
-    private lateinit var style: QuickTitleStyle
+    private var style: QuickTitleStyle
 
     private var commonClickListener: CommonClickListener? = null
 
