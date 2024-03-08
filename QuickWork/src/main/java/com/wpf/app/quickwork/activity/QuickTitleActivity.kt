@@ -6,6 +6,8 @@ import android.widget.RelativeLayout
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import com.wpf.app.quick.activity.QuickActivity
+import com.wpf.app.quickutil.bind.Bind
+import com.wpf.app.quickutil.bind.QuickBindWrap
 import com.wpf.app.quickutil.bind.RunOnContext
 import com.wpf.app.quickutil.bind.runOnContext
 import com.wpf.app.quickutil.helper.InitViewHelper
@@ -35,7 +37,11 @@ open class QuickTitleActivity @JvmOverloads constructor(
                     titleBuilder?.invoke(this)
                 }, matchWrapLayoutParams)
             }
-            addView(RelativeLayout(context).apply {
+            addView((object : RelativeLayout(context), Bind {
+                override fun getView(): View {
+                    return this
+                }
+            }).apply {
                 id = R.id.contentLayout
                 layoutParams = layoutParams<LinearLayout.LayoutParams>(matchLayoutParams).apply {
                     weight = 1f
@@ -47,6 +53,7 @@ open class QuickTitleActivity @JvmOverloads constructor(
                     )
                 }
                 contentBuilder?.invoke(this)
+                QuickBindWrap.bind(this)
             })
         }
     }, titleName = titleName
