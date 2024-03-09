@@ -11,7 +11,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.wpf.app.quickrecyclerview.QuickAdapter
-import com.wpf.app.quickrecyclerview.ability.QuickContextAbility
+import com.wpf.app.quickrecyclerview.ability.QuickItemAbility
 import com.wpf.app.quickrecyclerview.holder.QuickViewBindingHolder
 import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
 import com.wpf.app.quickrecyclerview.widget.SwipeMenuLayout
@@ -22,14 +22,14 @@ import com.wpf.app.quickutil.helper.wrapMatchMarginLayoutParams
 import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.other.to
 
-fun <T : QuickContextAbility<*>> List<T>.with(others: List<T>): List<T> {
+fun <T : QuickItemAbility<*>> List<T>.with(others: List<T>): List<T> {
     val newList = mutableListOf<T>()
     newList.addAll(this)
     newList.addAll(others)
     return newList
 }
 
-fun <T : QuickContextAbility<*>> List<T>.with(other: T): List<T> {
+fun <T : QuickItemAbility<*>> List<T>.with(other: T): List<T> {
     val newList = mutableListOf<T>()
     newList.addAll(this)
     newList.add(other)
@@ -42,7 +42,7 @@ open class QuickAbilityData(
     isDealBinding: Boolean = false,                                             //是否处理DataBinding
     autoSet: Boolean = false,                                                   //自动映射
     isSuspension: Boolean = false,                                              //View是否悬浮置顶
-    @Transient val abilityList: List<QuickContextAbility<QuickAbilityData>> = mutableListOf(),
+    @Transient private val abilityList: List<QuickItemAbility<QuickAbilityData>> = mutableListOf(),
 ) : QuickBindData(layoutId, layoutViewInContext, isDealBinding, autoSet, isSuspension) {
 
     @CallSuper
@@ -137,7 +137,7 @@ open class QuickAbilityData(
 
 fun <VB : ViewDataBinding> binding(
     func: VB.() -> Unit
-): List<QuickContextAbility<QuickAbilityData>> {
+): List<QuickItemAbility<QuickAbilityData>> {
     return bindWAdapter<VB> {
         func.invoke(this)
     }
@@ -145,7 +145,7 @@ fun <VB : ViewDataBinding> binding(
 
 fun <VB : ViewDataBinding> bindWAdapter(
     func: VB.(adapter: QuickAdapter) -> Unit
-): List<QuickContextAbility<QuickAbilityData>> {
+): List<QuickItemAbility<QuickAbilityData>> {
     return bindWSelfWAdapter<VB, QuickAbilityData> { _, adapter ->
         func.invoke(this, adapter)
     }
@@ -153,7 +153,7 @@ fun <VB : ViewDataBinding> bindWAdapter(
 
 fun <VB : ViewDataBinding, T : QuickAbilityData> bindWSelf(
     func: VB.(self: T) -> Unit
-): List<QuickContextAbility<QuickAbilityData>> {
+): List<QuickItemAbility<QuickAbilityData>> {
     return bindWSelfWAdapter<VB, T> { self, _ ->
         func.invoke(this, self)
     }
@@ -161,9 +161,9 @@ fun <VB : ViewDataBinding, T : QuickAbilityData> bindWSelf(
 
 fun <VB : ViewDataBinding, T : QuickAbilityData> bindWSelfWAdapter(
     func: VB.(self: T, adapter: QuickAdapter) -> Unit
-): List<QuickContextAbility<QuickAbilityData>> {
+): List<QuickItemAbility<QuickAbilityData>> {
     return mutableListOf(
-        object : QuickContextAbility<QuickAbilityData> {
+        object : QuickItemAbility<QuickAbilityData> {
             override fun getPrimeKey() = "binding"
             override fun beforeAdapterCreateHolder(
                 mParent: ViewGroup,
@@ -185,9 +185,9 @@ fun <VB : ViewDataBinding, T : QuickAbilityData> bindWSelfWAdapter(
 fun <T : QuickAbilityData> click(
     @IdRes viewId: Int = 0,
     func: T.(View) -> Unit
-): List<QuickContextAbility<QuickAbilityData>> {
+): List<QuickItemAbility<QuickAbilityData>> {
     return mutableListOf(
-        object : QuickContextAbility<QuickAbilityData> {
+        object : QuickItemAbility<QuickAbilityData> {
             override fun getPrimeKey() = "click"
 
             override fun afterHolderOnCreateHolder(
@@ -211,9 +211,9 @@ fun <T : QuickAbilityData> click(
 fun <T : QuickAbilityData> longClick(
     @IdRes viewId: Int = 0,
     func: T.(View) -> Boolean
-): List<QuickContextAbility<QuickAbilityData>> {
+): List<QuickItemAbility<QuickAbilityData>> {
     return mutableListOf(
-        object : QuickContextAbility<QuickAbilityData> {
+        object : QuickItemAbility<QuickAbilityData> {
             override fun getPrimeKey() = "longClick"
 
             override fun afterHolderOnCreateHolder(
@@ -238,7 +238,7 @@ fun <VB : ViewDataBinding, T : QuickAbilityData> bindSwipeMenu(
     @LayoutRes layoutId: Int,
     canSwipe: T.() -> Boolean = { true },
     func: VB.(self: T, swipeLayout: SwipeMenuLayout) -> Unit
-): List<QuickContextAbility<QuickAbilityData>> {
+): List<QuickItemAbility<QuickAbilityData>> {
     return swipeMenu(layoutId, canSwipe, func = object : (T, View, SwipeMenuLayout) -> Unit {
         override fun invoke(p1: T, swipeView: View, swipeLayout: SwipeMenuLayout) {
             func.invoke(
@@ -257,9 +257,9 @@ fun <T : QuickAbilityData> swipeMenu(
     @LayoutRes layoutId: Int,
     canSwipe: T.() -> Boolean = { true },
     func: T.(swipeView: View, swipeLayout: SwipeMenuLayout) -> Unit
-): List<QuickContextAbility<QuickAbilityData>> {
+): List<QuickItemAbility<QuickAbilityData>> {
     return mutableListOf(
-        object : QuickContextAbility<QuickAbilityData> {
+        object : QuickItemAbility<QuickAbilityData> {
             override fun getPrimeKey() = "swipe"
             override fun beforeAdapterCreateHolder(
                 mParent: ViewGroup,
@@ -312,9 +312,9 @@ fun <T : QuickAbilityData> swipeMenu(
 
 fun <T : QuickAbilityData> swap(
     canSwap: T.() -> Boolean = { true },
-): List<QuickContextAbility<QuickAbilityData>> {
+): List<QuickItemAbility<QuickAbilityData>> {
     return mutableListOf(
-        object : QuickContextAbility<QuickAbilityData> {
+        object : QuickItemAbility<QuickAbilityData> {
             override fun getPrimeKey() = "swap"
 
             override fun beforeHolderOnCreateHolder(
@@ -369,9 +369,9 @@ fun <T : QuickAbilityData> swap(
 
 fun resetViewType(
     reset: (position: Int) -> Int
-): List<QuickContextAbility<QuickAbilityData>> {
+): List<QuickItemAbility<QuickAbilityData>> {
     return mutableListOf(
-        object : QuickContextAbility<QuickAbilityData> {
+        object : QuickItemAbility<QuickAbilityData> {
             override fun getPrimeKey() = "resetViewType"
 
             override fun initViewType(position: Int): Int {

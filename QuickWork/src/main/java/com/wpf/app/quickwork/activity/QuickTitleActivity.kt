@@ -5,7 +5,8 @@ import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
-import com.wpf.app.quick.activity.QuickActivity
+import com.wpf.app.quick.activity.QuickAbilityActivity
+import com.wpf.app.quick.activity.inflate
 import com.wpf.app.quickutil.bind.Bind
 import com.wpf.app.quickutil.bind.QuickBindWrap
 import com.wpf.app.quickutil.bind.RunOnContext
@@ -25,8 +26,8 @@ open class QuickTitleActivity @JvmOverloads constructor(
     titleBuilder: (QuickTitleView.() -> Unit)? = null,
     contentBuilder: (RelativeLayout.() -> Unit)? = null,
     showTitle: Boolean = true,
-) : QuickActivity(
-    layoutViewInContext = runOnContext { context ->
+) : QuickAbilityActivity(
+    inflate(layoutViewInContext = runOnContext { context ->
         LinearLayout(context).apply {
             orientation = LinearLayout.VERTICAL
             layoutParams = matchLayoutParams
@@ -56,7 +57,7 @@ open class QuickTitleActivity @JvmOverloads constructor(
                 QuickBindWrap.bind(this)
             })
         }
-    }, titleName = titleName
+    }), titleName = titleName
 ) {
 
     lateinit var titleView: QuickTitleView

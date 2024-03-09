@@ -16,7 +16,6 @@ import com.wpf.app.quickbind.annotations.BindFragments
 import com.wpf.app.quickbind.viewpager.QuickViewPager
 import com.wpf.app.quickutil.helper.toColor
 import com.wpf.app.quickutil.widget.onPageSelected
-import com.wpf.app.quickwork.widget.QuickTitleView
 import com.wpf.quick.helper.initTabMain
 
 class CodeMainActivity :

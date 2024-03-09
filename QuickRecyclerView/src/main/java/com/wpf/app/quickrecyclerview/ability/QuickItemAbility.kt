@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import com.wpf.app.quickrecyclerview.data.QuickItemData
 import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
 
-interface QuickContextAbility<T> {
+interface QuickItemAbility<T> {
     fun getPrimeKey(): String
 
     fun initViewType(position: Int): Int {
