@@ -3,6 +3,7 @@ package com.wpf.app.quick.activity
 import android.view.View
 import androidx.annotation.LayoutRes
 import com.wpf.app.quickutil.bind.RunOnContext
+import com.wpf.app.quickutil.other.Unique
 import com.wpf.app.quickutil.other.to
 
 open class QuickAbilityActivity(
@@ -30,18 +31,20 @@ open class QuickAbilityActivity(
 
 }
 
-fun <T : QuickActivityAbility> List<T>.with(others: List<T>): List<T> {
-    val newList = mutableListOf<T>()
-    newList.addAll(this)
-    newList.addAll(others)
-    return newList
+fun <T : QuickActivityAbility> MutableList<T>.with(others: List<T>): MutableList<T> {
+    others.filter { it is Unique }.map { it.getPrimeKey() }.forEach { otherPrimeKey ->
+        this.remove(this.find { it.getPrimeKey() == otherPrimeKey })
+    }
+    this.addAll(others)
+    return this
 }
 
-fun <T : QuickActivityAbility> List<T>.with(other: T): List<T> {
-    val newList = mutableListOf<T>()
-    newList.addAll(this)
-    newList.add(other)
-    return newList
+fun <T : QuickActivityAbility> MutableList<T>.with(other: T): MutableList<T> {
+    if (other is Unique) {
+        this.remove(this.find { it.getPrimeKey() == other.getPrimeKey() })
+    }
+    this.add(other)
+    return this
 }
 
 fun inflate(
@@ -78,7 +81,7 @@ interface QuickActivityAbility {
     }
 }
 
-interface QuickInflateViewAbility : QuickActivityAbility {
+interface QuickInflateViewAbility : QuickActivityAbility, Unique {
     override fun getPrimeKey() = "inflateView"
     fun layoutId(): Int = 0
     fun layoutView(): View? = null
