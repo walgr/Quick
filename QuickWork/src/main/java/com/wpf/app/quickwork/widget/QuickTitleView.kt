@@ -21,7 +21,6 @@ import com.wpf.app.quickutil.helper.attribute.AutoGetAttributeHelper
 import com.wpf.app.quickutil.helper.dp
 import com.wpf.app.quickutil.helper.toColor
 import com.wpf.app.quickutil.helper.toView
-import com.wpf.app.quickutil.other.printLog
 import com.wpf.app.quickwork.R
 import kotlin.math.max
 

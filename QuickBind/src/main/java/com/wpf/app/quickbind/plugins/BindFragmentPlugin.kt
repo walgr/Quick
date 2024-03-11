@@ -78,7 +78,7 @@ class BindFragmentPlugin : BindBasePlugin {
                                         val viewContext =
                                             (viewPager as? ViewPagerSize)?.currentContext()
                                                 ?: obj.getView()?.getViewContext()
-                                        if (viewContext is BindViewModel<*>) {
+                                        if (viewContext is BindViewModel<*> && viewContext.getViewModel() != null) {
                                             (baseFragment as Fragment).arguments =
                                                 baseFragment.getInitBundle(viewContext, i)
                                         } else {
@@ -158,7 +158,7 @@ class BindFragmentPlugin : BindBasePlugin {
                                         val viewContext =
                                             (viewPager as? ViewPagerSize)?.currentContext()
                                                 ?: obj.getView()?.getViewContext()
-                                        if (viewContext is BindViewModel<*>) {
+                                        if (viewContext is BindViewModel<*> && viewContext.getViewModel() != null) {
                                             (baseFragment as Fragment).arguments =
                                                 baseFragment.getInitBundle(viewContext, i)
                                         } else {

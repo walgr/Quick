@@ -5,8 +5,12 @@ import android.content.Context
 import android.content.Intent
 import android.os.Parcelable
 import android.view.View
+import android.view.ViewGroup
 import android.view.Window
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
+import com.wpf.app.quickutil.other.asTo
+import com.wpf.app.quickutil.other.forceTo
 import java.io.Serializable
 import java.util.ArrayList
 
@@ -57,4 +61,10 @@ fun Activity.contentView(): View {
     return findViewById(android.R.id.content)
 }
 
+fun Activity.myContentView(): View {
+    return findViewById<ViewGroup>(android.R.id.content)[0]
+}
+
 fun View.activity(): Activity = context as Activity
+
+inline fun <reified T: Activity> View.activityForce(): T = context.forceTo<T>()

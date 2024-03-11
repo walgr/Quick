@@ -2,7 +2,6 @@ package com.wpf.app.quick.activity
 
 import android.os.Bundle
 import android.view.View
-import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
@@ -11,8 +10,9 @@ import com.wpf.app.quickbind.annotations.AutoGet
 import com.wpf.app.quickutil.bind.RunOnContext
 import com.wpf.app.quicknetwork.base.RequestCoroutineScope
 import com.wpf.app.quickutil.activity.contentView
+import com.wpf.app.quickutil.activity.myContentView
 import com.wpf.app.quickutil.bind.Bind
-import com.wpf.app.quickutil.other.asTo
+import com.wpf.app.quickutil.helper.InitViewHelper
 import kotlinx.coroutines.Job
 
 /**
@@ -28,10 +28,17 @@ abstract class QuickActivity @JvmOverloads constructor(
 
     override var jobManager: MutableList<Job> = mutableListOf()
 
+    open fun dealBind() = true
+
+    private var inflateView: View? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        dealContentView()
-        QuickBind.bind(this)
+        inflateView = InitViewHelper.init(this, layoutId, layoutView, layoutViewInContext)
+        dealContentView(inflateView!!)
+        if (dealBind()) {
+            QuickBind.bind(this)
+        }
         initView(getView())
         setTitleName()
     }
@@ -44,18 +51,12 @@ abstract class QuickActivity @JvmOverloads constructor(
         }
     }
 
-    protected open fun dealContentView() {
-        if (layoutViewInContext != null) {
-            setContentView(layoutViewInContext?.run(this))
-        } else if (layoutView != null) {
-            setContentView(layoutView)
-        } else if (layoutId != 0) {
-            setContentView(layoutId)
-        }
+    protected open fun dealContentView(view: View) {
+        setContentView(view)
     }
 
     override fun getView(): View {
-        return contentView().asTo<ViewGroup>()?.getChildAt(0)!!
+        return myContentView()
     }
 
     fun requireContext() = this

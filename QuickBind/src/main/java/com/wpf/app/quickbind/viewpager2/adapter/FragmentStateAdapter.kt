@@ -80,7 +80,7 @@ class FragmentStateAdapter : FragmentStateAdapter, ViewPagerSize2 {
                 val viewContext =
                     (fragmentAdapter as? ViewPagerSize2)?.currentContext()
                         ?: obj.getView()?.getViewContext()
-                if (viewContext is BindViewModel<*>) {
+                if (viewContext is BindViewModel<*> && viewContext.getViewModel() != null) {
                     (baseFragment as Fragment).arguments =
                         baseFragment.getInitBundle(viewContext, position)
                 } else {

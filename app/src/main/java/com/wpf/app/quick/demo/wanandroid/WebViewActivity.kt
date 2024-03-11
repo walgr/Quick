@@ -12,9 +12,7 @@ import com.wpf.app.quickutil.helper.matchLayoutParams
 import com.wpf.app.quickutil.helper.toView
 import com.wpf.app.quickwork.activity.QuickTitleActivity
 
-class WebViewActivity : QuickTitleActivity(contentBuilder = {
-    addView(R.layout.activity_webview.toView(context), matchLayoutParams)
-}) {
+class WebViewActivity : QuickTitleActivity(R.layout.activity_webview) {
 
     @AutoGet
     var title: String? = null

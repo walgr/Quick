@@ -15,7 +15,6 @@ import com.wpf.app.quickutil.activity.activity
 import com.wpf.app.quickutil.helper.dp
 import com.wpf.app.quickutil.helper.toColor
 import com.wpf.app.quickutil.init.QuickInit
-import com.wpf.app.quickutil.other.printLog
 import com.wpf.app.quickwork.widget.QuickTitleView
 
 /**

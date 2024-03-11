@@ -27,11 +27,11 @@ open class QuickListVBFragment<VM : QuickVBModel<VB>, VB : ViewDataBinding> @Jvm
     titleName: String = "",
     getVMFormActivity: Boolean = false,
 ) : QuickVBFragment<VM, VB>(
-    layoutId, layoutView, layoutViewInContext = runOnContext {
+    layoutId, layoutView, layoutViewInContext = if (layoutId == 0 && layoutView == null) runOnContext {
         QuickRefreshRecyclerView(it).apply {
             layoutParams = matchLayoutParams
         }
-    }, titleName = titleName, getVMFormActivity = getVMFormActivity
+    } else null, titleName = titleName, getVMFormActivity = getVMFormActivity
 ) {
     private var mRecyclerView: QuickRecyclerView? = null
     private val requestData = RequestData()

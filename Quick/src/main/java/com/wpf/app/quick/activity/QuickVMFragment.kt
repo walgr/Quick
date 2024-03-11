@@ -73,7 +73,6 @@ open class QuickVMFragment<VM : QuickViewModel<out QuickView>> @JvmOverloads con
                 ViewModelProvider.AndroidViewModelFactory(requireContext().applicationContext as Application)
             )[vmClass]
             (mViewModel as? QuickViewModel<QuickView>)?.let {
-                it.baseView = this
                 QuickBind.bind(this, it)
                 it.onViewCreated(this)
             }

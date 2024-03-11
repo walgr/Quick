@@ -17,6 +17,12 @@ import com.wpf.app.quickwidget.quickview.QuickViewGroupNoAttrs
 /**
  * 挪动位置需要同步修改TabInitProcessor里的包名
  */
+
+
+object TabManagerProvider {
+    fun new() = TabManager()
+}
+
 open class TabManager : GroupManager() {
 
     private var curPos = 0

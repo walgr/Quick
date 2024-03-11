@@ -58,6 +58,7 @@ class RefreshListTestActivity : QuickTitleActivity(R.layout.activity_refresh_lis
     }
 
     override fun initView(view: View) {
+        super.initView(view)
         EmptyHelper.bind(mRecyclerView, emptyView = emptyLayout)
         mSmartRefreshLayout?.setOnRefreshListener { mRecyclerView?.onRefresh() }
         mSmartRefreshLayout?.setOnLoadMoreListener { mRecyclerView?.onLoadMore() }

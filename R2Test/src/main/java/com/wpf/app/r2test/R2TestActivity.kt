@@ -3,17 +3,20 @@ package com.wpf.app.r2test
 import android.annotation.SuppressLint
 import android.view.View
 import android.widget.TextView
+import com.wpf.app.quick.ability.QuickAbilityActivity
 import com.wpf.app.quick.activity.QuickActivity
 import com.wpf.app.quick.annotations.bind.BindData2View
 import com.wpf.app.quick.annotations.bind.BindView
 import com.wpf.app.quick.annotations.bind.GroupView
 import com.wpf.app.quickbind.helper.binddatahelper.Text2TextView
 import com.wpf.app.quickbind.utils.GroupViews
+import com.wpf.app.quickwork.activity.contentWithTitle
 
 /**
  * Created by 王朋飞 on 2022/6/16.
  */
-class R2TestActivity : QuickActivity(R.layout.test_layout, titleName = "测试R2") {
+class R2TestActivity : QuickAbilityActivity
+    (contentWithTitle(R.layout.test_layout, titleName = "测试R2")) {
 
     @JvmField
     @SuppressLint("NonConstantResourceId")
@@ -31,6 +34,7 @@ class R2TestActivity : QuickActivity(R.layout.test_layout, titleName = "测试R2
 
     @SuppressLint("SetTextI18n")
     override fun initView(view: View) {
+        super.initView(view)
         info1?.postDelayed({ mGroupViews?.goneAll() }, 1000)
     }
 }

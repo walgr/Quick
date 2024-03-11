@@ -42,10 +42,10 @@ dependencies {
     implementation deps.androidx.recyclerview
 
     if (IS_REMOTE.toBoolean()) {
-        api deps.quickbind.base
+        api deps.quickbind.work
         ksp deps.quickbind.compiler_ksp
     } else {
-        api project(":Quick")
+        api project(":QuickWork")
         ksp project(":Quick-compiler-ksp")
     }
 }

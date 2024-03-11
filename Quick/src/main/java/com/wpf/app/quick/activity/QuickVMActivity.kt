@@ -41,20 +41,20 @@ abstract class QuickVMActivity<VM : QuickViewModel<out QuickView>> @JvmOverloads
         mViewModel?.onStop()
     }
 
-    @Deprecated("Deprecated by Android")
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        mViewModel?.onActivityResult(requestCode, resultCode, data)
-    }
-
     override fun onDestroy() {
         super.onDestroy()
         mViewModel?.onDestroy()
         mViewModel = null
     }
 
-    override fun dealContentView() {
-        super.dealContentView()
+    @Deprecated("Deprecated by Android")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        mViewModel?.onActivityResult(requestCode, resultCode, data)
+    }
+
+    override fun dealContentView(view: View) {
+        super.dealContentView(view)
         val vmClass: Class<VM>? = ViewModelEx.get0Clazz(this)
         if (vmClass != null) {
             mViewModel = ViewModelProvider(
@@ -62,7 +62,6 @@ abstract class QuickVMActivity<VM : QuickViewModel<out QuickView>> @JvmOverloads
                 ViewModelProvider.AndroidViewModelFactory(application)
             )[vmClass]
             (mViewModel as? QuickViewModel<QuickView>)?.let {
-                it.baseView = this
                 QuickBind.bind(this, it)
                 it.onViewCreated(this)
             }

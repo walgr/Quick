@@ -9,7 +9,7 @@ inline fun <reified T> Any?.asTo(): T? {
     return this
 }
 
-inline fun <reified T> Any.to(): T {
+inline fun <reified T> Any.forceTo(): T {
     return this as T
 }
 

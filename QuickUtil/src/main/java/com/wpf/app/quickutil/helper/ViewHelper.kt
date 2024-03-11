@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.wpf.app.quickutil.data.KV
 import com.wpf.app.quickutil.other.asTo
-import com.wpf.app.quickutil.other.to
+import com.wpf.app.quickutil.other.forceTo
 
 fun <V> ViewGroup.getChild(isViewGroup: (View) -> Boolean): V? {
     for(it in 0 until this.childCount) {
@@ -98,19 +98,19 @@ fun View.getViewContext(): Any? {
 }
 
 fun View.setMarginEnd(margin: Int) {
-    layoutParams.to<MarginLayoutParams>().marginEnd = margin
+    layoutParams.forceTo<MarginLayoutParams>().marginEnd = margin
 }
 
 fun View.setMarginStart(margin: Int) {
-    layoutParams.to<MarginLayoutParams>().marginStart = margin
+    layoutParams.forceTo<MarginLayoutParams>().marginStart = margin
 }
 
 fun View.setTopMargin(margin: Int) {
-    layoutParams.to<MarginLayoutParams>().topMargin = margin
+    layoutParams.forceTo<MarginLayoutParams>().topMargin = margin
 }
 
 fun View.seBottomMargin(margin: Int) {
-    layoutParams.to<MarginLayoutParams>().bottomMargin = margin
+    layoutParams.forceTo<MarginLayoutParams>().bottomMargin = margin
 }
 
 fun View.postDelay(delayMillis: Long, action: Runnable) {

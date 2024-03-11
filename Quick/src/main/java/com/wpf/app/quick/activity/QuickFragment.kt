@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import com.wpf.app.quickbind.QuickBind
@@ -46,17 +47,17 @@ abstract class QuickFragment @JvmOverloads constructor(
         savedInstanceState: Bundle?
     ): View? {
         if (mView == null) {
-            mView = InitViewHelper.init(container?.context!!, layoutId, layoutView, layoutViewInContext)
+            mView = InitViewHelper.init(inflater.context, layoutId, layoutView, layoutViewInContext)
         }
         return mView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewCreated(view)
+        dealContentView(view)
     }
 
-    private fun viewCreated(view: View) {
+    open fun dealContentView(view: View) {
         QuickBind.bind(this)
         initView(view)
     }
@@ -65,10 +66,13 @@ abstract class QuickFragment @JvmOverloads constructor(
         return mView
     }
 
+    @CallSuper
     override fun onDestroy() {
         super.onDestroy()
         cancelJob()
     }
+
+    open fun dealBind() = true
 
     companion object {
         const val TITLE_KEY = "title"

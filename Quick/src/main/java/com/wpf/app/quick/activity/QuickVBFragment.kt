@@ -41,7 +41,7 @@ abstract class QuickVBFragment<VM : QuickVBModel<VB>, VB : ViewDataBinding> @Jvm
 
     private fun setViewBinding() {
         if (viewBinding == null) {
-            viewBinding = DataBindingUtil.bind(requireView())
+            viewBinding = DataBindingUtil.bind(view!!)
             viewBinding?.lifecycleOwner = this
         }
         viewBinding?.setVariable(BRConstant.viewModel, mViewModel)

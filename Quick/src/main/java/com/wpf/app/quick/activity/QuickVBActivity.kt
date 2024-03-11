@@ -9,10 +9,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import com.wpf.app.quick.activity.viewmodel.QuickVBModel
+import com.wpf.app.quick.activity.viewmodel.QuickViewModel
 import com.wpf.app.quickbind.QuickBind
 import com.wpf.app.quickrecyclerview.constant.BRConstant
 import com.wpf.app.quickutil.bind.RunOnContext
 import com.wpf.app.quickutil.other.ViewModelEx
+import com.wpf.app.quickutil.other.forceTo
 
 /**
  * Created by 王朋飞 on 2022/7/13.
@@ -48,8 +50,8 @@ abstract class QuickVBActivity<VM : QuickVBModel<VB>, VB : ViewDataBinding> @Jvm
         mViewModel?.mViewBinding = viewBinding
     }
 
-    override fun dealContentView() {
-        super.dealContentView()
+    override fun dealContentView(view: View) {
+        super.dealContentView(view)
         val viewModelCls: Class<VM>? = ViewModelEx.get0Clazz(this)
         if (viewModelCls != null && this !is QuickBindingActivity && viewModelCls != QuickVBModel::class.java) {
             mViewModel = ViewModelProvider(

@@ -18,13 +18,13 @@ import android.widget.LinearLayout
 import androidx.annotation.IdRes
 import androidx.core.view.children
 import androidx.core.view.drawToBitmap
-import androidx.core.view.get
 import androidx.viewpager.widget.ViewPager
-import com.wpf.app.quickutil.activity.contentView
+import com.wpf.app.quickutil.activity.myContentView
 import com.wpf.app.quickutil.helper.anim
 import com.wpf.app.quickutil.helper.attribute.AutoGetAttributeHelper
 import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.helper.getLocationInWindow
+import com.wpf.app.quickutil.other.forceTo
 import com.wpf.app.quickutil.widget.onPageScrollStateChanged
 import com.wpf.app.quickutil.widget.onPageScrolled
 import com.wpf.app.quickwidget.quickview.QuickViewGroup
@@ -35,8 +35,9 @@ class BottomTabLayout @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
-) : QuickViewGroup<LinearLayout>(context, attrs, defStyleAttr, addToParent = false, forceGenerics = true),
-    GroupManager.OnGroupChangeListener {
+) : QuickViewGroup<LinearLayout>(
+    context, attrs, defStyleAttr, addToParent = false, forceGenerics = true
+), GroupManager.OnGroupChangeListener {
 
     private val viewList: MutableList<View> = mutableListOf()
     private val viewDeque: ArrayDeque<View> = ArrayDeque()
@@ -338,19 +339,14 @@ class BottomTabLayout @JvmOverloads constructor(
             (255 * if (curAnimProcess > 0.5f) curAnimProcess else (1 - curAnimProcess)).toInt()
         viewBitmap[if (curAnimProcess > 0.5f) curView else oldCurView]?.let {
             canvas.drawBitmap(
-                it,
-                curX + it.width / 2 + smallCircleR,
-                smallCircleR - it.width / 2,
-                bitmapPaint
+                it, curX + it.width / 2 + smallCircleR, smallCircleR - it.width / 2, bitmapPaint
             )
         }
     }
 
     private fun dealParentClipChild() {
         if (context is Activity) {
-            (context as Activity).contentView()?.asTo<ViewGroup>()?.get(0)?.let {
-                it.asTo<ViewGroup>()?.clipChildren = false
-            }
+            context.forceTo<Activity>().myContentView().asTo<ViewGroup>()?.clipChildren = false
         } else {
             parent?.asTo<ViewGroup>()?.clipChildren = false
         }
@@ -363,9 +359,7 @@ class BottomTabLayout @JvmOverloads constructor(
         this.post { dealParentClipChild() }
         initChildView()
         AutoGetAttributeHelper.init<BottomTabLayoutAttr>(
-            context,
-            attrs,
-            R.styleable.BottomTabLayout
+            context, attrs, R.styleable.BottomTabLayout
         ).apply {
             this@BottomTabLayout.animViewId = animView ?: 0
         }
