@@ -1,7 +1,6 @@
 package com.wpf.app.quick.demo
 
 import android.app.Application
-import android.graphics.Color
 import android.view.View
 import com.wpf.app.quickrecyclerview.constant.BRConstant
 import com.wpf.app.quick.demo.http.TestApi
