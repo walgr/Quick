@@ -14,7 +14,7 @@
 
 ### 项目功能
 
-1.基础Activity、ViewModelActivity、ViewBindingActivity、Fragment
+1.统一Activity、Fragment（提供能力支持ViewModel, ViewDataBinding）
     
 2.类似ButterKnife的功能注解
     
