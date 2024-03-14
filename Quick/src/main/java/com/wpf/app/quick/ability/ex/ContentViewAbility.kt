@@ -41,7 +41,7 @@ fun LinearLayout.myLayout(
     @LayoutRes layoutId: Int = 0,
     layoutView: View? = null,
     layoutViewInContext: RunOnContext<View>? = null,
-    layoutParams: ViewGroup.LayoutParams = warpContentHeightParams
+    layoutParams: LinearLayout.LayoutParams = warpContentHeightParams
 ) {
     this.forceTo<ViewGroup>().myLayout(layoutId, layoutView, layoutViewInContext, layoutParams)
 }

@@ -13,7 +13,7 @@ fun ViewGroup.title(
 ) {
     if (!showTitle) return
     val titleView = QuickTitleView(context)
-    titleView.id = R.id.titleView
+    titleView.id = R.id.quickTitleView
     titleView.setTitle(titleName)
     addView(titleView, layoutParams)
     builder?.invoke(titleView)

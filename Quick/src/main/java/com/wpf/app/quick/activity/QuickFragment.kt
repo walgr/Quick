@@ -55,11 +55,12 @@ abstract class QuickFragment @JvmOverloads constructor(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         dealContentView(view)
+        QuickBind.bind(this)
+        initView(mView!!)
     }
 
     open fun dealContentView(view: View) {
-        QuickBind.bind(this)
-        initView(view)
+        mView = view
     }
 
     override fun getView(): View? {
@@ -71,8 +72,6 @@ abstract class QuickFragment @JvmOverloads constructor(
         super.onDestroy()
         cancelJob()
     }
-
-    open fun dealBind() = true
 
     companion object {
         const val TITLE_KEY = "title"

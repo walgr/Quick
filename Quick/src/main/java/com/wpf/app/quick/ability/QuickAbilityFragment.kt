@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import com.wpf.app.quick.activity.QuickFragment
 import com.wpf.app.quick.activity.viewmodel.ViewLifecycle
 import com.wpf.app.quickbind.interfaces.BindViewModel
+import com.wpf.app.quickutil.bind.QuickBindWrap
 import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.other.forceTo
 
@@ -30,35 +31,45 @@ open class QuickAbilityFragment(
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        abilityList.find { it is ViewLifecycle }?.forceTo<ViewLifecycle>()
-            ?.onSaveInstanceState(outState)
+        abilityList.forEach {
+            it.onSaveInstanceState(outState)
+        }
     }
 
     override fun onResume() {
         super.onResume()
-        abilityList.find { it is ViewLifecycle }?.forceTo<ViewLifecycle>()?.onResume()
+        abilityList.forEach {
+            it.onResume()
+        }
     }
 
     override fun onPause() {
         super.onPause()
-        abilityList.find { it is ViewLifecycle }?.forceTo<ViewLifecycle>()?.onPause()
+        abilityList.forEach {
+            it.onPause()
+        }
     }
 
     override fun onStop() {
         super.onStop()
-        abilityList.find { it is ViewLifecycle }?.forceTo<ViewLifecycle>()?.onStop()
+        abilityList.forEach {
+            it.onStop()
+        }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        abilityList.find { it is ViewLifecycle }?.forceTo<ViewLifecycle>()?.onDestroy()
+        abilityList.forEach {
+            it.onDestroy()
+        }
     }
 
     @Deprecated("Deprecated by Android")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        abilityList.find { it is ViewLifecycle }?.forceTo<ViewLifecycle>()
-            ?.onActivityResult(requestCode, resultCode, data)
+        abilityList.forEach {
+            it.onActivityResult(requestCode, resultCode, data)
+        }
     }
 
     @CallSuper
@@ -79,9 +90,12 @@ open class QuickAbilityFragment(
         }
     }
 
-    override fun dealBind(): Boolean {
-        return abilityList.find { it is QuickDealBindAbility }?.forceTo<QuickDealBindAbility>()
-            ?.dealBind() ?: true
+    @Deprecated("Deprecated in Java")
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        abilityList.filterIsInstance<QuickFragmentAbility>().forEach {
+            it.setUserVisibleHint(isVisibleToUser)
+        }
     }
 }
 

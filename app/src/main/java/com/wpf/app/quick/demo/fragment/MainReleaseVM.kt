@@ -7,6 +7,7 @@ import android.widget.TextView
 import com.wpf.app.quick.activity.viewmodel.QuickVBModel
 import com.wpf.app.quick.annotations.bind.BindView
 import com.wpf.app.quick.demo.DialogTestActivity
+import com.wpf.app.quick.demo.FragmentTestActivity
 import com.wpf.app.quick.demo.IntentDataTestActivity
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.demo.RecyclerViewTestActivity
@@ -60,6 +61,10 @@ class MainReleaseVM: QuickVBModel<FragmentMainReleaseBinding>() {
 
     fun gotoList(view: View?) {
         view?.context?.quickStartActivity<RecyclerViewTestActivity>()
+    }
+
+    fun gotoFragmentActivity(view: View?) {
+        view?.context?.quickStartActivity<FragmentTestActivity>()
     }
 
     fun gotoData(view: View?) {

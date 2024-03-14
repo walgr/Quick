@@ -8,6 +8,7 @@ import com.wpf.app.quick.activity.QuickView
 import com.wpf.app.quick.activity.viewmodel.ViewLifecycle
 import com.wpf.app.quickbind.interfaces.BindViewModel
 import com.wpf.app.quickutil.bind.RunOnContext
+import com.wpf.app.quickutil.helper.match
 import com.wpf.app.quickutil.other.Unique
 import com.wpf.app.quickutil.other.forceTo
 
@@ -49,20 +50,14 @@ fun setContentView(
 
         override fun beforeDealContentView(owner: ViewModelStoreOwner, view: View): View {
             super.beforeDealContentView(owner, view)
+            view.layoutParams?.width = match
+            view.layoutParams?.height = match
             return contentBuilder?.invoke(owner.forceTo(), view) ?: view
         }
     })
 }
 
-fun dealBind(
-    dealBind: Boolean = true
-): MutableList<QuickActivityAbility> {
-    return mutableListOf(object : QuickDealBindAbility {
-        override fun dealBind() = dealBind
-    })
-}
-
-interface QuickActivityAbility {
+interface QuickActivityAbility: ViewLifecycle {
     fun getPrimeKey(): String
 
     fun dealContentView(owner: ViewModelStoreOwner, view: View) {
@@ -85,12 +80,10 @@ interface QuickInflateViewAbility : QuickActivityAbility, Unique {
     }
 }
 
-interface QuickDealBindAbility : QuickActivityAbility, Unique {
-    override fun getPrimeKey() = "dealBind"
-    fun dealBind(): Boolean = true
+interface QuickVMAbility<VM : ViewModel> : QuickActivityAbility, Unique, BindViewModel<VM> {
+    override fun getPrimeKey() = "viewModel"
 }
 
-interface QuickVMAbility<VM : ViewModel> : QuickActivityAbility, Unique, ViewLifecycle,
-    BindViewModel<VM> {
-    override fun getPrimeKey() = "viewModel"
+interface QuickFragmentAbility: QuickActivityAbility {
+    fun setUserVisibleHint(isVisibleToUser: Boolean)
 }

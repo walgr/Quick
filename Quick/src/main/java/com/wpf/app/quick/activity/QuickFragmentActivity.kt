@@ -13,7 +13,7 @@ open class QuickFragmentActivity(
 ): QuickActivity(
     layoutViewInContext = runOnContext {
         RelativeLayout(it).apply {
-            id = R.id.root
+            id = R.id.quickRoot
             layoutParams = ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT
@@ -23,7 +23,7 @@ open class QuickFragmentActivity(
 ) {
     override fun initView(view: View) {
         supportFragmentManager.commit {
-            add(R.id.root, fragment)
+            add(R.id.quickRoot, fragment)
         }
     }
 }

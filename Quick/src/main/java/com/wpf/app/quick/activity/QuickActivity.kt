@@ -29,17 +29,13 @@ abstract class QuickActivity @JvmOverloads constructor(
 
     override var jobManager: MutableList<Job> = mutableListOf()
 
-    open fun dealBind() = true
-
     private var inflateView: View? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         inflateView = InitViewHelper.init(this, layoutId, layoutView, layoutViewInContext)
         dealContentView(inflateView!!)
-        if (dealBind()) {
-            QuickBind.bind(this)
-        }
+        QuickBind.bind(this)
         initView(inflateView!!)
         setTitleName()
     }

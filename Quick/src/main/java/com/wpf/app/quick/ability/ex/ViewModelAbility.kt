@@ -13,7 +13,7 @@ import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.other.forceTo
 
 inline fun <reified VM : QuickViewModel<out QuickView>> viewModel(
-    noinline vmBuilder: VM.() -> Unit
+    noinline vmBuilder: (VM.() -> Unit)? = null
 ): MutableList<QuickActivityAbility> = mutableListOf(object : QuickVMAbility<VM> {
     private var viewModel: VM? = null
     override fun getViewModel() = viewModel
@@ -25,7 +25,7 @@ inline fun <reified VM : QuickViewModel<out QuickView>> viewModel(
         viewModel = ViewModelProvider(
             owner, ViewModelProvider.AndroidViewModelFactory(activity.application)
         )[viewModelCls]
-        vmBuilder.invoke(viewModel!!)
+        vmBuilder?.invoke(viewModel!!)
         QuickBindWrap.bind(activity, viewModel)
         viewModel.asTo<QuickViewModel<QuickView>>()?.onViewCreated(activity.forceTo())
     }

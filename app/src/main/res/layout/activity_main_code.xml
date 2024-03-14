@@ -15,6 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:elevation="5dp"
+            app:contentGravity="start"
             app:showBackIcon="false"
             app:titleStr="正式场">
 

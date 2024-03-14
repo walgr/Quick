@@ -12,7 +12,6 @@ import com.wpf.app.quick.ability.ex.myLayout
 import com.wpf.app.quick.annotations.bind.BindView
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quickbind.annotations.AutoGet
-import com.wpf.app.quickutil.helper.warpContentHeightParams
 import com.wpf.app.quickwork.ability.title
 import com.wpf.app.quickwork.widget.QuickTitleView
 
@@ -35,7 +34,7 @@ class WebViewActivity : QuickAbilityActivity(
 
     override fun initView(view: View) {
         super.initView(view)
-        view.findViewById<QuickTitleView>(R.id.titleView).setTitle(title)
+        view.findViewById<QuickTitleView>(com.wpf.app.quickwork.R.id.quickTitleView).setTitle(title)
         webView?.let {
             it.webChromeClient = WebChromeClient()
             it.webViewClient = WebViewClient()

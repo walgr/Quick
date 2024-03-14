@@ -30,7 +30,7 @@ class App : Application() {
 
         QuickTitleView.commonStyleBuilder(this) {
             background = R.color.purple_700
-            contentGravity = QuickTitleView.CONTENT_GRAVITY_START
+            contentGravity = QuickTitleView.CONTENT_GRAVITY_CENTER
             showBackIcon = true
             backIcon = com.wpf.app.quickwork.R.drawable.baseline_arrow_back_ios_new_20_white
             titleBold = true

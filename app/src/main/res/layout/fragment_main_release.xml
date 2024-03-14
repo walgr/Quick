@@ -55,6 +55,12 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="@{viewModel::gotoFragmentActivity}"
+                android:text="Fragment测试" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:onClick="@{viewModel::gotoData}"
                 android:text="数据测试" />
 

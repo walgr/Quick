@@ -1,16 +1,20 @@
 package com.wpf.app.quick.demo.fragment
 
 import android.annotation.SuppressLint
+import android.view.View
 import android.widget.TextView
-import com.wpf.app.quick.activity.QuickVBFragment
+import com.wpf.app.quick.ability.QuickAbilityFragment
+import com.wpf.app.quick.ability.ex.contentView
+import com.wpf.app.quick.ability.ex.modelBinding
+import com.wpf.app.quick.ability.with
 import com.wpf.app.quick.annotations.bind.BindView
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.demo.databinding.FragmentMainReleaseBinding
 import com.wpf.app.quickbind.annotations.BindSp2View
+import com.wpf.app.quickutil.helper.postDelay
 
-class MainReleaseFragment : QuickVBFragment<MainReleaseVM, FragmentMainReleaseBinding>(
-    R.layout.fragment_main_release,
-    titleName = "正式场"
+class MainReleaseFragment : QuickAbilityFragment(
+    contentView(R.layout.fragment_main_release).with(modelBinding<MainReleaseVM, FragmentMainReleaseBinding>())
 ) {
 
     @SuppressLint("NonConstantResourceId")
@@ -24,14 +28,9 @@ class MainReleaseFragment : QuickVBFragment<MainReleaseVM, FragmentMainReleaseBi
     var text2: TextView? = null
 
     @SuppressLint("SetTextI18n")
-    override fun initView(view: FragmentMainReleaseBinding) {
-        text1?.postDelayed(
-            { text1?.text = System.currentTimeMillis().toString() + "" },
-            1000
-        )
-        text2?.postDelayed(
-            { text2?.text = System.currentTimeMillis().toString() + "" },
-            1000
-        )
+    override fun initView(view: View) {
+        super.initView(view)
+        text1?.postDelay(1000) { text1?.text = System.currentTimeMillis().toString() + "" }
+        text2?.postDelay(1000) { text2?.text = System.currentTimeMillis().toString() + "" }
     }
 }

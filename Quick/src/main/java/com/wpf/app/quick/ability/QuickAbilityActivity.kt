@@ -30,35 +30,45 @@ open class QuickAbilityActivity(
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        abilityList.find { it is ViewLifecycle }?.forceTo<ViewLifecycle>()
-            ?.onSaveInstanceState(outState)
+        abilityList.forEach {
+            it.onSaveInstanceState(outState)
+        }
     }
 
     override fun onResume() {
         super.onResume()
-        abilityList.find { it is ViewLifecycle }?.forceTo<ViewLifecycle>()?.onResume()
+        abilityList.forEach {
+            it.onResume()
+        }
     }
 
     override fun onPause() {
         super.onPause()
-        abilityList.find { it is ViewLifecycle }?.forceTo<ViewLifecycle>()?.onPause()
+        abilityList.forEach {
+            it.onPause()
+        }
     }
 
     override fun onStop() {
         super.onStop()
-        abilityList.find { it is ViewLifecycle }?.forceTo<ViewLifecycle>()?.onStop()
+        abilityList.forEach {
+            it.onStop()
+        }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        abilityList.find { it is ViewLifecycle }?.forceTo<ViewLifecycle>()?.onDestroy()
+        abilityList.forEach {
+            it.onDestroy()
+        }
     }
 
     @Deprecated("Deprecated by Android")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        abilityList.find { it is ViewLifecycle }?.forceTo<ViewLifecycle>()
-            ?.onActivityResult(requestCode, resultCode, data)
+        abilityList.forEach {
+            it.onActivityResult(requestCode, resultCode, data)
+        }
     }
 
     @CallSuper
@@ -77,11 +87,6 @@ open class QuickAbilityActivity(
         abilityList.forEach {
             it.initView(view)
         }
-    }
-
-    override fun dealBind(): Boolean {
-        return abilityList.find { it is QuickDealBindAbility }?.forceTo<QuickDealBindAbility>()
-            ?.dealBind() ?: true
     }
 }
 
