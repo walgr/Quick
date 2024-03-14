@@ -2,8 +2,11 @@ package com.wpf.app.quick.demo
 
 import android.annotation.SuppressLint
 import android.view.View
+import android.widget.LinearLayout
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
-import com.wpf.app.quick.activity.QuickActivity
+import com.wpf.app.quick.ability.QuickAbilityActivity
+import com.wpf.app.quick.ability.ex.contentView
+import com.wpf.app.quick.ability.ex.myLayout
 import com.wpf.app.quick.annotations.bind.BindData2View
 import com.wpf.app.quick.annotations.bind.BindView
 import com.wpf.app.quick.demo.http.request
@@ -15,12 +18,17 @@ import com.wpf.app.quickwidget.emptyview.EmptyHelper
 import com.wpf.app.quickrecyclerview.helper.Request2RefreshView
 import com.wpf.app.quickrecyclerview.listeners.requestData2List
 import com.wpf.app.quickutil.log.LogUtil
-import com.wpf.app.quickwork.activity.QuickTitleActivity
+import com.wpf.app.quickwork.ability.title
 
 /**
  * Created by 王朋飞 on 2022/7/8.
  */
-class RefreshListTestActivity : QuickTitleActivity(R.layout.activity_refresh_list, titleName = "列表刷新页") {
+class RefreshListTestActivity : QuickAbilityActivity(
+    contentView<LinearLayout> {
+        title("列表刷新页")
+        myLayout(R.layout.activity_refresh_list)
+    }
+) {
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.refreshLayout)
     var mSmartRefreshLayout: SmartRefreshLayout? = null

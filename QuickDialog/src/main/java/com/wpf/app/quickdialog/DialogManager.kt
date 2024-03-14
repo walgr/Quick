@@ -1,6 +1,9 @@
 package com.wpf.app.quickdialog
 
+import android.app.Activity
 import android.app.Dialog
+import com.wpf.app.quickutil.helper.getRealActivity
+import com.wpf.app.quickutil.other.asTo
 
 fun Dialog?.showInManager(
     showWithOther: Boolean = false,
@@ -21,7 +24,7 @@ object DialogManager {
         priority: Int = AUTO_PRIORITY,
         recoverInDismiss: Boolean = true
     ) {
-        if (dialog == null) return
+        if (dialog == null || dialog.getRealActivity()?.isFinishing == true || dialog.getRealActivity()?.isDestroyed == true) return
         val maxPriority = showingDialog.keys.maxOrNull() ?: 0
         val curIsMax: Boolean
         val realPriority = if (priority == AUTO_PRIORITY) {
@@ -35,7 +38,9 @@ object DialogManager {
         val dialogDismissListener = if (dialog is QuickDialog) {
             dialog.listener
         } else null
-        val priorityDialog = PriorityDialog(dialog, realPriority, dialogDismissListener, recoverInDismiss, showWithOther)
+        val priorityDialog = PriorityDialog(
+            dialog, realPriority, dialogDismissListener, recoverInDismiss, showWithOther
+        )
         if (priorityDialogInMap == null) {
             showingDialog[realPriority] = mutableListOf(priorityDialog)
         } else {

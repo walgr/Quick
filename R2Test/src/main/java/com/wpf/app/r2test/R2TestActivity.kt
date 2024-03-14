@@ -2,21 +2,25 @@ package com.wpf.app.r2test
 
 import android.annotation.SuppressLint
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.wpf.app.quick.ability.QuickAbilityActivity
-import com.wpf.app.quick.activity.QuickActivity
+import com.wpf.app.quick.ability.ex.contentView
+import com.wpf.app.quick.ability.ex.myLayout
 import com.wpf.app.quick.annotations.bind.BindData2View
 import com.wpf.app.quick.annotations.bind.BindView
 import com.wpf.app.quick.annotations.bind.GroupView
 import com.wpf.app.quickbind.helper.binddatahelper.Text2TextView
 import com.wpf.app.quickbind.utils.GroupViews
-import com.wpf.app.quickwork.activity.contentWithTitle
+import com.wpf.app.quickwork.ability.title
 
 /**
  * Created by 王朋飞 on 2022/6/16.
  */
-class R2TestActivity : QuickAbilityActivity
-    (contentWithTitle(R.layout.test_layout, titleName = "测试R2")) {
+class R2TestActivity : QuickAbilityActivity(contentView<LinearLayout> {
+    title("测试R2")
+    myLayout(R.layout.test_layout)
+}) {
 
     @JvmField
     @SuppressLint("NonConstantResourceId")

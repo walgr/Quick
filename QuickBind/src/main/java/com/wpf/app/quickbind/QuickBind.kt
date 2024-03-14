@@ -14,6 +14,7 @@ import com.wpf.app.quick.annotations.bind.GroupView
 import com.wpf.app.quickbind.annotations.*
 import com.wpf.app.quickbind.plugins.*
 import com.wpf.app.quickbind.utils.ReflectHelper
+import com.wpf.app.quickutil.activity.contentView
 import com.wpf.app.quickutil.bind.Bind
 import com.wpf.app.quickutil.bind.QuickBindI
 import com.wpf.app.quickutil.bind.plugins.BasePlugin
@@ -69,7 +70,7 @@ object QuickBind: QuickBindI {
 
     override fun bind(activity: Activity, viewModel: ViewModel?) {
         super.bind(activity, viewModel)
-        bindBinder(viewModel ?: activity, activity.window.decorView)
+        bindBinder(viewModel ?: activity, activity.contentView())
         dealInPlugins(activity, viewModel)
     }
 

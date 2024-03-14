@@ -2,6 +2,7 @@ package com.wpf.app.quickutil.helper
 
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
+import android.widget.LinearLayout
 
 const val match = ViewGroup.LayoutParams.MATCH_PARENT
 const val wrap = ViewGroup.LayoutParams.WRAP_CONTENT
@@ -16,6 +17,13 @@ val matchWrapMarginLayoutParams = MarginLayoutParams(match, wrap)
 val wrapMarginLayoutParams = MarginLayoutParams(wrap, wrap)
 val wrapMatchMarginLayoutParams = MarginLayoutParams(wrap, match)
 
+val warpContentHeightParams = LinearLayout.LayoutParams(match, wrap).apply {
+    weight = 1f
+}
+
+val warpContentWidthParams = LinearLayout.LayoutParams(wrap, match).apply {
+    weight = 1f
+}
 inline fun <reified T : ViewGroup.LayoutParams> layoutParams(width: Int, height: Int): T {
     return T::class.java.getConstructor(Int::class.java, Int::class.java).newInstance(width, height) as T
 }

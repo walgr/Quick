@@ -21,7 +21,8 @@ open class QuickAbilityFragment(
     layoutViewInContext = abilityList.find { it is QuickInflateViewAbility }!!
         .forceTo<QuickInflateViewAbility>().layoutViewInContext(),
     titleName = titleName
-), BindViewModel<ViewModel> {
+), BindViewModel<ViewModel>, BindingAbility {
+    internal val extraParameter: LinkedHashMap<String, Any> = linkedMapOf()
 
     override fun getViewModel(): ViewModel? {
         return abilityList.find { it is BindViewModel<*> }?.asTo<BindViewModel<*>>()?.getViewModel()
@@ -62,11 +63,12 @@ open class QuickAbilityFragment(
 
     @CallSuper
     override fun dealContentView(view: View) {
-        abilityList.find { it is QuickInflateViewAbility }?.asTo<QuickInflateViewAbility>()
-            ?.beforeDealContentView(this, view)
-        super.dealContentView(view)
+        val newView: View =
+            abilityList.find { it is QuickInflateViewAbility }!!.forceTo<QuickInflateViewAbility>()
+                .beforeDealContentView(this, view.forceTo())
+        super.dealContentView(newView)
         abilityList.forEach {
-            it.dealContentView(this, view)
+            it.dealContentView(this, newView)
         }
     }
 

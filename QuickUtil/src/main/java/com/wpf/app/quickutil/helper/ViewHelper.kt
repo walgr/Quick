@@ -86,7 +86,7 @@ fun View.getViewContext(): Any? {
         if (viewParent is ViewPager) {
             val fragments = (viewParent.context as AppCompatActivity).supportFragmentManager.fragments
             fragments.forEach {
-                if (it.view?.findViewById<View>(id) != null) {
+                if (it.view?.findViewById<View>(id) == this) {
                     return it
                 }
             }

@@ -2,21 +2,26 @@ package com.wpf.app.quick.demo
 
 import android.annotation.SuppressLint
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.viewpager2.widget.ViewPager2
 import com.wpf.app.quick.ability.QuickAbilityActivity
-import com.wpf.app.quick.activity.QuickActivity
+import com.wpf.app.quick.ability.ex.contentView
+import com.wpf.app.quick.ability.ex.myLayout
 import com.wpf.app.quick.annotations.bind.BindView
 import com.wpf.app.quickbind.annotations.BindFragment2
 import com.wpf.app.quickbind.viewpager2.ViewPager2Helper
-import com.wpf.app.quickwork.activity.contentWithTitle
+import com.wpf.app.quickwork.ability.title
 
 /**
  * Created by 王朋飞 on 2022/8/5.
  *
  */
-class ViewPagerBindFragmentTestActivity : QuickAbilityActivity
-    (contentWithTitle(R.layout.activity_test_viewpager, titleName = "ViewPager刷新测试")) {
+class ViewPagerBindFragmentTestActivity : QuickAbilityActivity(
+    contentView<LinearLayout> {
+        title("ViewPager刷新测试")
+        myLayout(R.layout.activity_test_viewpager)
+    }) {
 
     @SuppressLint("NonConstantResourceId")
     @BindFragment2(fragment = TestFragment::class, defaultSize = 10)

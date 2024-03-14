@@ -23,7 +23,7 @@ abstract class QuickVBModel<T : ViewDataBinding> : ViewModel(), LifecycleObserve
     }
 
     fun getContext(): Context? {
-        return getViewBinding().root.context
+        return mViewBinding?.root?.context
     }
 
     override fun onDestroy() {

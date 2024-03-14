@@ -13,6 +13,7 @@ import com.wpf.app.quickutil.activity.contentView
 import com.wpf.app.quickutil.activity.myContentView
 import com.wpf.app.quickutil.bind.Bind
 import com.wpf.app.quickutil.helper.InitViewHelper
+import com.wpf.app.quickutil.other.printLog
 import kotlinx.coroutines.Job
 
 /**
@@ -39,7 +40,7 @@ abstract class QuickActivity @JvmOverloads constructor(
         if (dealBind()) {
             QuickBind.bind(this)
         }
-        initView(getView())
+        initView(inflateView!!)
         setTitleName()
     }
 
@@ -52,11 +53,12 @@ abstract class QuickActivity @JvmOverloads constructor(
     }
 
     protected open fun dealContentView(view: View) {
-        setContentView(view)
+        this.inflateView = view
+        setContentView(inflateView)
     }
 
     override fun getView(): View {
-        return myContentView()
+        return inflateView!!
     }
 
     fun requireContext() = this
