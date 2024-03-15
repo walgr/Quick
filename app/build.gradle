@@ -40,6 +40,8 @@ android {
     }
     buildTypes {
         debug {
+            debuggable true
+            minifyEnabled false
             kotlin {
                 sourceSets {
                     main.kotlin.srcDirs += 'build/generated/ksp/debug/kotlin'

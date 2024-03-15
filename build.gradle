@@ -32,19 +32,18 @@ buildscript {
                         'runtime'              : 'com.google.android:android:4.1.1.4',
                 ],
                 quickbind     : [
-                        'base'         : "com.wpf.app.quick:Quick:${release}",
-                        'bind'         : "com.wpf.app.quick:QuickBind:${release}",
-                        'annotations'  : "com.wpf.app.quick:Quick-annotations:${release}",
-                        'runtime'      : "com.wpf.app.quick:Quick-runtime:${release}",
-                        'compiler'     : "com.wpf.app.quick:Quick-compiler:${release}",
-                        'util'         : "com.wpf.app.quick:QuickUtil:${release}",
-                        'widget'       : "com.wpf.app.quick:QuickWidget:${release}",
-                        'network'      : "com.wpf.app.quick:QuickNetwork:${release}",
-                        'recyclerview' : "com.wpf.app.quick:QuickRecyclerView:${release}",
-                        'dialog'       : "com.wpf.app.quick:QuickDialog:${release}",
-                        'compiler_ksp' : "com.wpf.app.quick:Quick-compiler-ksp:${release}",
-                        'work'         : "com.wpf.app.quick:QuickWork:${release}",
-                        'plugin'       : "com.wpf.app.quick:Quick-gradle-plugin:0.8.5",
+                        'base'         : "com.github.walgr.Quick:Quick:${release}",
+                        'bind'         : "com.github.walgr.Quick:QuickBind:${release}",
+                        'annotations'  : "com.github.walgr.Quick:Quick-annotations:${release}",
+                        'runtime'      : "com.github.walgr.Quick:Quick-runtime:${release}",
+                        'compiler'     : "com.github.walgr.Quick:Quick-compiler:${release}",
+                        'util'         : "com.github.walgr.Quick:QuickUtil:${release}",
+                        'widget'       : "com.github.walgr.Quick:QuickWidget:${release}",
+                        'network'      : "com.github.walgr.Quick:QuickNetwork:${release}",
+                        'recyclerview' : "com.github.walgr.Quick:QuickRecyclerView:${release}",
+                        'dialog'       : "com.github.walgr.Quick:QuickDialog:${release}",
+                        'compiler_ksp' : "com.github.walgr.Quick:Quick-gradle-ksp-plugin:${release}",
+                        'work'         : "com.github.walgr.Quick:QuickWork:${release}",
                         'pluginJetPack': "com.github.walgr.Quick:Quick-gradle-plugin:0.8.5",
                 ],
                 gradlePlugin  : "com.android.tools.build:gradle:${gradleVersion}",
@@ -72,8 +71,8 @@ buildscript {
     dependencies {
         if (!IS_REMOTE.toBoolean()) {
             classpath deps.quickbind.pluginJetPack
-            classpath("com.android.tools:r8:8.2.33")
         }
+//        classpath("com.android.tools:r8:8.2.33")
     }
 }
 
