@@ -29,13 +29,9 @@ dependencyResolutionManagement {
 
 rootProject.name = "Quick"
 include ':app'
-if (!IS_REMOTE.toBoolean()) {
-    include ':R2Test'
-}
 include ':Quick'
 include ':QuickBind'
 include ':Quick-annotations'
-include ':Quick-gradle-plugin'
 include ':Quick-compiler-ksp'
 include ':QuickUtil'
 include ':QuickNetwork'

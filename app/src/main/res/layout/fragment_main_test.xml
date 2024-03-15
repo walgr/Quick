@@ -65,6 +65,7 @@
         <SeekBar
             android:id="@+id/seekbar"
             android:layout_alignParentBottom="true"
+            android:layout_marginHorizontal="16dp"
             android:layout_marginBottom="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

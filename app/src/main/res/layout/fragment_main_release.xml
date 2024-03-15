@@ -67,12 +67,6 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{viewModel::gotoR2Test}"
-                android:text="R2测试" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:onClick="@{viewModel::gotoRefreshList}"
                 android:text="列表刷新测试" />
 

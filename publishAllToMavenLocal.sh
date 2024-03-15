@@ -1,7 +1,6 @@
 ./gradlew :Quick-annotations:publishToMavenLocal
 ./gradlew :QuickUtil:publishToMavenLocal
 ./gradlew :QuickNetwork:publishToMavenLocal
-./gradlew :Quick-gradle-plugin:publishToMavenLocal
 ./gradlew :Quick-compiler-ksp:publishToMavenLocal
 ./gradlew :QuickBind:publishToMavenLocal
 ./gradlew :QuickRecyclerView:publishToMavenLocal

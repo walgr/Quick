@@ -44,7 +44,6 @@ buildscript {
                         'dialog'       : "com.wpf.app.quick:QuickDialog:${release}",
                         'compiler_ksp' : "com.wpf.app.quick:Quick-gradle-ksp-plugin:${release}",
                         'work'         : "com.wpf.app.quick:QuickWork:${release}",
-                        'pluginJetPack': "com.github.walgr.Quick:Quick-gradle-plugin:0.8.5",
                 ],
                 gradlePlugin  : "com.android.tools.build:gradle:${gradleVersion}",
                 kotlin        : [
@@ -66,13 +65,6 @@ buildscript {
                 refresh_footer: 'io.github.scwang90:refresh-footer-classics:2.0.6',
                 lottie        : 'com.airbnb.android:lottie:6.2.0',
         ]
-    }
-
-    dependencies {
-        if (!IS_REMOTE.toBoolean()) {
-            classpath deps.quickbind.pluginJetPack
-        }
-//        classpath("com.android.tools:r8:8.2.33")
     }
 }
 

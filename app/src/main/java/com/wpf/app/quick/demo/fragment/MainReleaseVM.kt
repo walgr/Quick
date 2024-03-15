@@ -41,12 +41,6 @@ class MainReleaseVM: QuickVBModel<FragmentMainReleaseBinding>() {
         view?.context?.quickStartActivity<DialogTestActivity>()
     }
 
-    fun gotoR2Test(view: View?) {
-        try {
-            view?.context?.quickStartActivity(activityCls = Class.forName("com.wpf.app.r2test.R2TestActivity") as Class<Activity>)
-        } catch (ignore: Exception) { }
-    }
-
     fun gotoGlide(view: View?) {
         view?.context?.quickStartActivity<ViewPagerBindFragmentTestActivity>()
     }
