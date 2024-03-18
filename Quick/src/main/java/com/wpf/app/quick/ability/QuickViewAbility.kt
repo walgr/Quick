@@ -29,11 +29,23 @@ fun <T : QuickActivityAbility> MutableList<T>.with(other: T): MutableList<T> {
     return this
 }
 
+fun setContentViewCommon(
+    @LayoutRes layoutId: Int = 0,
+    layoutView: View? = null,
+    layoutViewInContext: RunOnContext<View>? = null,
+    contentBuilder: (QuickView.(view: View) -> Unit)? = null,
+): MutableList<QuickActivityAbility> {
+    return setContentView(layoutId, layoutView, layoutViewInContext) {
+        contentBuilder?.invoke(this, it)
+        null
+    }
+}
+
 fun setContentView(
     @LayoutRes layoutId: Int = 0,
     layoutView: View? = null,
     layoutViewInContext: RunOnContext<View>? = null,
-    contentBuilder: (QuickView.(view: View) -> View)? = null,
+    contentBuilder: (QuickView.(view: View) -> View?)? = null,
 ): MutableList<QuickActivityAbility> {
     return mutableListOf(object : QuickInflateViewAbility {
         override fun layoutId(): Int {

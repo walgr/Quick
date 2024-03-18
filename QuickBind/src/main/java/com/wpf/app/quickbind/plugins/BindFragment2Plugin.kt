@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import androidx.viewpager2.widget.ViewPager2
 import com.wpf.app.quickbind.annotations.BindFragment2
-import com.wpf.app.quickbind.viewpager2.adapter.FragmentStateAdapter
+import com.wpf.app.quickbind.viewpager2.adapter.Fragment2StateAdapter
 import com.wpf.app.quickutil.bind.Bind
 import java.lang.reflect.Field
 
@@ -30,9 +30,9 @@ class BindFragment2Plugin : BindBasePlugin {
                 }
             }
             if (context is FragmentActivity) {
-                viewPager.adapter = FragmentStateAdapter(context as FragmentActivity, viewModel, bindFragmentAnn)
+                viewPager.adapter = Fragment2StateAdapter(context as FragmentActivity, viewModel, bindFragmentAnn)
             } else if (context is Fragment) {
-                viewPager.adapter = FragmentStateAdapter(context as Fragment, viewModel, bindFragmentAnn)
+                viewPager.adapter = Fragment2StateAdapter(context as Fragment, viewModel, bindFragmentAnn)
             }
         } catch (e: Exception) {
             e.printStackTrace()

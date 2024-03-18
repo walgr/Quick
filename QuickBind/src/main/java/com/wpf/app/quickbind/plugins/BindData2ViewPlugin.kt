@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.wpf.app.quick.annotations.bind.BindD2VHHelper
 import com.wpf.app.quick.annotations.bind.BindData2View
 import com.wpf.app.quickutil.bind.RunOnHolderWithSelf
-import com.wpf.app.quickbind.utils.ReflectHelper
+import com.wpf.app.quickutil.other.GenericEx.canBreakScan
 import java.lang.reflect.Field
 
 /**
@@ -66,7 +66,7 @@ class BindData2ViewPlugin : BindBasePlugin {
         var curCls = cur
         while (parentName != curCls.simpleName) {
             curCls = curCls.superclass as Class<*>
-            if (ReflectHelper.canBreakScan(curCls)) return false
+            if (canBreakScan(curCls)) return false
             if (curCls.simpleName == parentName) {
                 return true
             }

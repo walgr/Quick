@@ -2,4 +2,5 @@
 <resources>
     <item name="quickRoot" type="id"/>
     <item name="quickList" type="id"/>
+    <item name="quickViewPager" type="id"/>
 </resources>

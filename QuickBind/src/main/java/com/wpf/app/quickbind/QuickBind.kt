@@ -13,11 +13,11 @@ import com.wpf.app.quick.annotations.bind.Databinder
 import com.wpf.app.quick.annotations.bind.GroupView
 import com.wpf.app.quickbind.annotations.*
 import com.wpf.app.quickbind.plugins.*
-import com.wpf.app.quickbind.utils.ReflectHelper
 import com.wpf.app.quickutil.activity.contentView
 import com.wpf.app.quickutil.bind.Bind
 import com.wpf.app.quickutil.bind.QuickBindI
 import com.wpf.app.quickutil.bind.plugins.BasePlugin
+import com.wpf.app.quickutil.other.GenericEx.getFieldAndParent
 import java.lang.reflect.Constructor
 import java.lang.reflect.Field
 import java.lang.reflect.InvocationTargetException
@@ -170,7 +170,7 @@ object QuickBind: QuickBindI {
         if (obj == null) return
         try {
             if (viewModel != null) {
-                val viewModelFields: List<Field> = ReflectHelper.getFieldAndParent(viewModel)
+                val viewModelFields: List<Field> = getFieldAndParent(viewModel)
                 for (field in viewModelFields) {
                     val annotations = field.annotations.toMutableList()
                     annotations.sortBy { plugins.keys.indexOf(it.annotationClass) }
@@ -180,7 +180,7 @@ object QuickBind: QuickBindI {
                     annotations.clear()
                 }
             } else {
-                val fields: List<Field> = ReflectHelper.getFieldAndParent(obj)
+                val fields: List<Field> = getFieldAndParent(obj)
                 for (field in fields) {
                     val annotations = field.annotations.toMutableList()
                     annotations.sortBy { plugins.keys.indexOf(it.annotationClass) }

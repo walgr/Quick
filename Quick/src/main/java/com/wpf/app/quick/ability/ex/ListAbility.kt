@@ -8,13 +8,13 @@ import com.wpf.app.quick.R
 import com.wpf.app.quickrecyclerview.QuickRecyclerView
 import com.wpf.app.quickrecyclerview.data.QuickItemData
 import com.wpf.app.quickutil.helper.matchWrapLayoutParams
-import com.wpf.app.quickutil.helper.warpContentHeightParams
+import com.wpf.app.quickutil.helper.wrapContentHeightParams
 import com.wpf.app.quickutil.other.forceTo
 
 fun LinearLayout.list(
     layoutManager: LayoutManager = LinearLayoutManager(context),
     dataList: List<QuickItemData>? = null,
-    layoutParams: LinearLayout.LayoutParams = warpContentHeightParams,
+    layoutParams: LinearLayout.LayoutParams = wrapContentHeightParams,
     builder: (QuickRecyclerView.() -> Unit)? = null
 ) {
     this.forceTo<ViewGroup>().list(layoutManager, dataList, layoutParams, builder)

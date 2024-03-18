@@ -1,6 +1,6 @@
 package com.wpf.app.quickbind.annotations
 
-import com.wpf.app.quickbind.interfaces.BindBaseFragment
+import androidx.fragment.app.Fragment
 import kotlin.reflect.KClass
 
 /**
@@ -11,7 +11,7 @@ import kotlin.reflect.KClass
 @Target(AnnotationTarget.FIELD)
 @Retention(AnnotationRetention.RUNTIME)
 annotation class BindFragments(
-    val fragments: Array<KClass<out BindBaseFragment>>,
+    val fragments: Array<KClass<out Fragment>>,
     val withState: Boolean = true,
     val limit: Int = 0,
 )

@@ -60,9 +60,9 @@ class BindFragmentsPlugin : BindBasePlugin {
 
     private fun getFragment(
         obj: Any,
-        fragmentClsArray: Array<KClass<out BindBaseFragment>>
-    ): List<BindBaseFragment> {
-        val fragments: MutableList<BindBaseFragment> = ArrayList()
+        fragmentClsArray: Array<KClass<out Fragment>>
+    ): List<Fragment> {
+        val fragments: MutableList<Fragment> = ArrayList()
         for ((position, fragmentCls) in fragmentClsArray.withIndex()) {
             try {
                 val baseFragment: Fragment = fragmentCls.java.getDeclaredConstructor().newInstance() as Fragment

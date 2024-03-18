@@ -1,40 +1,27 @@
 package com.wpf.app.quick.demo
 
-import android.annotation.SuppressLint
-import android.view.View
 import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.viewpager2.widget.ViewPager2
 import com.wpf.app.quick.ability.QuickAbilityActivity
 import com.wpf.app.quick.ability.ex.contentView
-import com.wpf.app.quick.ability.ex.myLayout
-import com.wpf.app.quick.annotations.bind.BindView
-import com.wpf.app.quickbind.annotations.BindFragment2
-import com.wpf.app.quickbind.viewpager2.ViewPager2Helper
+import com.wpf.app.quick.ability.ex.viewPager2
+import com.wpf.app.quickbind.viewpager2.ViewPagerHelper
+import com.wpf.app.quickutil.helper.postDelay
+import com.wpf.app.quickutil.other.forceTo
 import com.wpf.app.quickwork.ability.title
 
 /**
  * Created by 王朋飞 on 2022/8/5.
  *
  */
-class ViewPagerBindFragmentTestActivity : QuickAbilityActivity(
-    contentView<LinearLayout> {
-        title("ViewPager刷新测试")
-        myLayout(R.layout.activity_test_viewpager)
-    }) {
-
-    @SuppressLint("NonConstantResourceId")
-    @BindFragment2(fragment = TestFragment::class, defaultSize = 10)
-    @BindView(R.id.viewPager)
-    val viewPager: ViewPager2? = null
-
-    override fun initView(view: View) {
-        super.initView(view)
-        viewPager?.setCurrentItem(5, false)
-        Toast.makeText(this, "3秒后刷新", Toast.LENGTH_SHORT).show()
-        viewPager?.postDelayed({
-            ViewPager2Helper.notifyPagerSize(viewPager, 20)
-            viewPager.setCurrentItem(15, false)
-        }, 3000)
+class ViewPagerBindFragmentTestActivity : QuickAbilityActivity(contentView<LinearLayout> {
+    title("ViewPager刷新测试")
+    viewPager2<TestFragment>(it, defaultSize = 10) {
+        setCurrentItem(5, false)
+        Toast.makeText(it.forceTo(), "3秒后刷新", Toast.LENGTH_SHORT).show()
+        postDelay(3000) {
+            ViewPagerHelper.notifyPagerSize(this, 20)
+            setCurrentItem(15, false)
+        }
     }
-}
+})

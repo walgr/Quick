@@ -15,14 +15,14 @@ import com.wpf.app.quickutil.other.forceTo
 
 inline fun <reified T : Fragment> fragment(
     fragment: T,
-    noinline builder: (FrameLayout.() -> Unit)? = null
+    noinline builder: (T.() -> Unit)? = null
 ): MutableList<QuickActivityAbility> {
     return setContentView(layoutViewInContext = runOnContext {
         val contentView = FrameLayout(it).apply {
             id = R.id.quickRoot
             layoutParams = matchLayoutParams
         }
-        builder?.invoke(contentView)
+
         contentView
     }).with(object : QuickActivityAbility {
         override fun getPrimeKey() = "fragment"
@@ -32,6 +32,7 @@ inline fun <reified T : Fragment> fragment(
             activity.supportFragmentManager.commit {
                 add(R.id.quickRoot, fragment)
             }
+            builder?.invoke(fragment)
         }
     })
 }

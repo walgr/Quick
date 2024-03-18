@@ -31,7 +31,7 @@ class FragmentsStateAdapter : FragmentStateAdapter, ViewPagerSize2 {
     }
 
     private var pageSizeI = -1
-    override fun getPageSize(): Int? {
+    override fun getPageSize(): Int {
         return pageSizeI
     }
 
@@ -39,7 +39,7 @@ class FragmentsStateAdapter : FragmentStateAdapter, ViewPagerSize2 {
         pageSizeI = size
     }
 
-    override fun getAdapter(): FragmentStateAdapter? {
+    override fun getAdapter2(): FragmentStateAdapter {
         return this
     }
 

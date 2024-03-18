@@ -17,11 +17,11 @@ val matchWrapMarginLayoutParams = MarginLayoutParams(match, wrap)
 val wrapMarginLayoutParams = MarginLayoutParams(wrap, wrap)
 val wrapMatchMarginLayoutParams = MarginLayoutParams(wrap, match)
 
-val warpContentHeightParams = LinearLayout.LayoutParams(match, wrap).apply {
+val wrapContentHeightParams = LinearLayout.LayoutParams(match, wrap).apply {
     weight = 1f
 }
 
-val warpContentWidthParams = LinearLayout.LayoutParams(wrap, match).apply {
+val wrapContentWidthParams = LinearLayout.LayoutParams(wrap, match).apply {
     weight = 1f
 }
 inline fun <reified T : ViewGroup.LayoutParams> layoutParams(width: Int, height: Int): T {
