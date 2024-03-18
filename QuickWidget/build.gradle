@@ -37,7 +37,7 @@ dependencies {
     implementation deps.androidx.constraintlayout
     //列表
     implementation deps.androidx.recyclerview
-    implementation("com.google.android.flexbox:flexbox:3.0.0")
+    implementation deps.flexbox
 
     if (IS_REMOTE.toBoolean()) {
         api deps.quickbind.bind

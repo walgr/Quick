@@ -39,6 +39,11 @@ dependencies {
     //列表
     implementation deps.androidx.recyclerview
 
+    //SmartRefreshLayout
+    implementation deps.refresh                      //核心必须依赖
+    implementation deps.refresh_header               //经典刷新头
+    implementation deps.refresh_footer               //经典加载
+
     if (IS_REMOTE.toBoolean()) {
         api deps.quickbind.base
     } else {

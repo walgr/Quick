@@ -64,6 +64,7 @@ buildscript {
                 refresh_header: 'io.github.scwang90:refresh-header-classics:2.0.6',
                 refresh_footer: 'io.github.scwang90:refresh-footer-classics:2.0.6',
                 lottie        : 'com.airbnb.android:lottie:6.2.0',
+                flexbox        : 'com.google.android.flexbox:flexbox:3.0.0',
         ]
     }
 }
