@@ -9,22 +9,19 @@ import com.wpf.app.quickbind.QuickBind
 import com.wpf.app.quickbind.annotations.AutoGet
 import com.wpf.app.quickutil.bind.RunOnContext
 import com.wpf.app.quicknetwork.base.RequestCoroutineScope
-import com.wpf.app.quickutil.activity.contentView
-import com.wpf.app.quickutil.activity.myContentView
 import com.wpf.app.quickutil.bind.Bind
 import com.wpf.app.quickutil.helper.InitViewHelper
-import com.wpf.app.quickutil.other.printLog
 import kotlinx.coroutines.Job
 
 /**
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-abstract class QuickActivity @JvmOverloads constructor(
+abstract class QuickBaseActivity @JvmOverloads constructor(
     @LayoutRes open val layoutId: Int = 0,
     open val layoutView: View? = null,
     open val layoutViewInContext: RunOnContext<View>? = null,
-    @AutoGet(QuickFragment.TITLE_KEY) open val titleName: String = ""
+    @AutoGet(QuickBaseFragment.TITLE_KEY) open val titleName: String = ""
 ) : AppCompatActivity(), QuickView, RequestCoroutineScope, Bind {
 
     override var jobManager: MutableList<Job> = mutableListOf()

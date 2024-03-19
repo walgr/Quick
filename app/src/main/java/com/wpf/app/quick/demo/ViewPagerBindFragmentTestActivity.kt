@@ -2,7 +2,7 @@ package com.wpf.app.quick.demo
 
 import android.widget.LinearLayout
 import android.widget.Toast
-import com.wpf.app.quick.ability.QuickAbilityActivity
+import com.wpf.app.quick.ability.QuickActivity
 import com.wpf.app.quick.ability.ex.contentView
 import com.wpf.app.quick.ability.ex.viewPager2
 import com.wpf.app.quickbind.viewpager2.ViewPagerHelper
@@ -14,7 +14,7 @@ import com.wpf.app.quickwork.ability.title
  * Created by 王朋飞 on 2022/8/5.
  *
  */
-class ViewPagerBindFragmentTestActivity : QuickAbilityActivity(contentView<LinearLayout> {
+class ViewPagerBindFragmentTestActivity : QuickActivity(contentView<LinearLayout> {
     title("ViewPager刷新测试")
     viewPager2<TestFragment>(it, defaultSize = 10) {
         setCurrentItem(5, false)

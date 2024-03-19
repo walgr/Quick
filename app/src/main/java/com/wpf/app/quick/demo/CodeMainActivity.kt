@@ -3,10 +3,10 @@ package com.wpf.app.quick.demo
 import android.annotation.SuppressLint
 import android.widget.ImageView
 import android.widget.TextView
-import com.wpf.app.quick.ability.QuickAbilityActivity
+import com.wpf.app.quick.ability.QuickActivity
 import com.wpf.app.quick.ability.ex.binding
 import com.wpf.app.quick.ability.ex.contentView
-import com.wpf.app.quick.ability.with
+import com.wpf.app.quick.ability.ex.with
 import com.wpf.app.quick.annotations.bind.BindView
 import com.wpf.app.quick.annotations.tab.IdView
 import com.wpf.app.quick.annotations.tab.TabInit
@@ -21,7 +21,7 @@ import com.wpf.app.quickutil.widget.onPageSelected
 import com.wpf.app.quickwidget.tab.TabManagerProvider
 import com.wpf.quick.helper.initTabMain
 
-class CodeMainActivity : QuickAbilityActivity(
+class CodeMainActivity : QuickActivity(
     contentView(R.layout.activity_main_code).with(binding<ActivityMainCodeBinding> {
         val tabs = arrayOf(
             "正式场" to R.drawable.ic_home,

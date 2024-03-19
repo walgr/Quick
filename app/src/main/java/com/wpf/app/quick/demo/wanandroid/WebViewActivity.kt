@@ -6,7 +6,7 @@ import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.LinearLayout
-import com.wpf.app.quick.ability.QuickAbilityActivity
+import com.wpf.app.quick.ability.QuickActivity
 import com.wpf.app.quick.ability.ex.contentView
 import com.wpf.app.quick.ability.ex.myLayout
 import com.wpf.app.quick.annotations.bind.BindView
@@ -15,7 +15,7 @@ import com.wpf.app.quickbind.annotations.AutoGet
 import com.wpf.app.quickwork.ability.title
 import com.wpf.app.quickwork.widget.QuickTitleView
 
-class WebViewActivity : QuickAbilityActivity(
+class WebViewActivity : QuickActivity(
     contentView<LinearLayout> {
         title()
         myLayout(R.layout.activity_webview)

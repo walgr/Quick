@@ -6,9 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.wpf.app.quick.R
-import com.wpf.app.quick.ability.QuickActivityAbility
-import com.wpf.app.quick.ability.setContentView
-import com.wpf.app.quick.ability.with
 import com.wpf.app.quickutil.bind.runOnContext
 import com.wpf.app.quickutil.helper.matchLayoutParams
 import com.wpf.app.quickutil.other.forceTo
@@ -18,12 +15,10 @@ inline fun <reified T : Fragment> fragment(
     noinline builder: (T.() -> Unit)? = null
 ): MutableList<QuickActivityAbility> {
     return setContentView(layoutViewInContext = runOnContext {
-        val contentView = FrameLayout(it).apply {
+        FrameLayout(it).apply {
             id = R.id.quickRoot
             layoutParams = matchLayoutParams
         }
-
-        contentView
     }).with(object : QuickActivityAbility {
         override fun getPrimeKey() = "fragment"
         override fun initView(view: View) {

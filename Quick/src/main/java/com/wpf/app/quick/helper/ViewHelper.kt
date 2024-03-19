@@ -2,12 +2,12 @@ package com.wpf.app.quick.helper
 
 import android.view.View
 import androidx.databinding.ViewDataBinding
-import com.wpf.app.quick.ability.QuickAbilityActivity
-import com.wpf.app.quick.ability.QuickAbilityFragment
+import com.wpf.app.quick.ability.QuickActivity
+import com.wpf.app.quick.ability.QuickFragment
 import com.wpf.app.quick.ability.ex.contentView
 import com.wpf.app.quick.ability.ex.modelBinding
 import com.wpf.app.quick.ability.ex.viewModel
-import com.wpf.app.quick.ability.with
+import com.wpf.app.quick.ability.ex.with
 import com.wpf.app.quick.activity.QuickView
 import com.wpf.app.quick.activity.viewmodel.QuickVBModel
 import com.wpf.app.quick.activity.viewmodel.QuickViewModel
@@ -16,7 +16,7 @@ import com.wpf.app.quickdialog.QuickDialogFragment
 
 fun View.toFragment(
     onFragmentInit: ((view: View) -> Unit)? = null
-) = object : QuickAbilityFragment(
+) = object : QuickFragment(
     contentView(layoutView = this@toFragment)
 ) {
     override fun initView(view: View) {
@@ -27,7 +27,7 @@ fun View.toFragment(
 
 inline fun <reified VM : QuickViewModel<out QuickView>> View.toVMFragment(
     noinline onFragmentInit: ((view: View) -> Unit)? = null
-) = object : QuickAbilityFragment(
+) = object : QuickFragment(
     contentView(layoutView = this@toVMFragment).with(viewModel<VM>())
 ) {
     override fun initView(view: View) {
@@ -39,7 +39,7 @@ inline fun <reified VM : QuickViewModel<out QuickView>> View.toVMFragment(
 
 inline fun <reified VM : QuickVBModel<VB>, reified VB : ViewDataBinding> View.toVBFragment(
     noinline onFragmentInit: ((view: View) -> Unit)? = null
-) = object : QuickAbilityFragment(
+) = object : QuickFragment(
     contentView(layoutView = this@toVBFragment).with(modelBinding<VM, VB>())
 ) {
     override fun initView(view: View) {
@@ -50,7 +50,7 @@ inline fun <reified VM : QuickVBModel<VB>, reified VB : ViewDataBinding> View.to
 
 fun View.toActivity(
     onActivityInit: ((view: View) -> Unit)? = null
-) = object : QuickAbilityActivity(
+) = object : QuickActivity(
     contentView(layoutView = this)
 ) {
     override fun initView(view: View) {
@@ -61,7 +61,7 @@ fun View.toActivity(
 
 inline fun <reified VM : QuickViewModel<out QuickView>> View.toVMActivity(
     noinline onActivityInit: ((view: View) -> Unit)? = null
-) = object : QuickAbilityActivity(
+) = object : QuickActivity(
     contentView(layoutView = this).with(viewModel<VM>())
 ) {
     override fun initView(view: View) {
@@ -72,7 +72,7 @@ inline fun <reified VM : QuickViewModel<out QuickView>> View.toVMActivity(
 
 inline fun <reified VM : QuickVBModel<VB>, reified VB : ViewDataBinding> View.toVBActivity(
     noinline onActivityInit: ((view: VB) -> Unit)? = null
-) = QuickAbilityActivity(
+) = QuickActivity(
     contentView(layoutView = this).with(modelBinding<VM, VB> {
         onActivityInit?.invoke(it)
     })

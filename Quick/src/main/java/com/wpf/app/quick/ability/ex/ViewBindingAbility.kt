@@ -8,8 +8,6 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
-import com.wpf.app.quick.ability.QuickActivityAbility
-import com.wpf.app.quick.ability.QuickVMAbility
 import com.wpf.app.quick.activity.QuickView
 import com.wpf.app.quick.activity.viewmodel.QuickVBModel
 import com.wpf.app.quick.helper.QuickDataBindingUtil

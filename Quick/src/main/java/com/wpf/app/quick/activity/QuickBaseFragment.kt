@@ -22,7 +22,7 @@ import kotlinx.coroutines.Job
  *
  */
 @SuppressLint("ValidFragment")
-abstract class QuickFragment @JvmOverloads constructor(
+abstract class QuickBaseFragment @JvmOverloads constructor(
     @LayoutRes open val layoutId: Int = 0,
     open val layoutView: View? = null,
     open val layoutViewInContext: RunOnContext<View>? = null,

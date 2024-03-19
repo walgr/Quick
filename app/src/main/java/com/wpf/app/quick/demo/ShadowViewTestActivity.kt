@@ -3,11 +3,11 @@ package com.wpf.app.quick.demo
 import android.annotation.SuppressLint
 import android.widget.LinearLayout
 import androidx.core.view.isVisible
-import com.wpf.app.quick.ability.QuickAbilityActivity
+import com.wpf.app.quick.ability.QuickActivity
 import com.wpf.app.quick.ability.ex.binding
 import com.wpf.app.quick.ability.ex.contentView
 import com.wpf.app.quick.ability.ex.myLayout
-import com.wpf.app.quick.ability.with
+import com.wpf.app.quick.ability.ex.with
 import com.wpf.app.quick.annotations.getclass.GetClass
 import com.wpf.app.quick.demo.databinding.ActivityShadowTestBinding
 import com.wpf.app.quickutil.helper.TimeDelayHelper
@@ -16,7 +16,7 @@ import com.wpf.app.quickwork.ability.title
 
 @SuppressLint("SetTextI18n")
 @GetClass
-class ShadowViewTestActivity : QuickAbilityActivity(
+class ShadowViewTestActivity : QuickActivity(
     contentView<LinearLayout> {
         title("同步测试页")
         myLayout(R.layout.activity_shadow_test)

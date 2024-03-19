@@ -3,17 +3,17 @@ package com.wpf.app.quick.demo.fragment
 import android.annotation.SuppressLint
 import android.view.View
 import android.widget.TextView
-import com.wpf.app.quick.ability.QuickAbilityFragment
+import com.wpf.app.quick.ability.QuickFragment
 import com.wpf.app.quick.ability.ex.contentView
 import com.wpf.app.quick.ability.ex.modelBinding
-import com.wpf.app.quick.ability.with
+import com.wpf.app.quick.ability.ex.with
 import com.wpf.app.quick.annotations.bind.BindView
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.demo.databinding.FragmentMainReleaseBinding
 import com.wpf.app.quickbind.annotations.BindSp2View
 import com.wpf.app.quickutil.helper.postDelay
 
-class MainReleaseFragment : QuickAbilityFragment(
+class MainReleaseFragment : QuickFragment(
     contentView(R.layout.fragment_main_release).with(modelBinding<MainReleaseVM, FragmentMainReleaseBinding>())
 ) {
 

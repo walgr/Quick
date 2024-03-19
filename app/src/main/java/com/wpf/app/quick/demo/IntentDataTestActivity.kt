@@ -5,11 +5,11 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
-import com.wpf.app.quick.ability.QuickAbilityActivity
+import com.wpf.app.quick.ability.QuickActivity
 import com.wpf.app.quick.ability.ex.contentView
 import com.wpf.app.quick.ability.ex.modelBinding
 import com.wpf.app.quick.ability.ex.myLayout
-import com.wpf.app.quick.ability.with
+import com.wpf.app.quick.ability.ex.with
 import com.wpf.app.quick.annotations.bind.BindView
 import com.wpf.app.quick.annotations.bind.GroupView
 import com.wpf.app.quick.demo.databinding.ActivityDataTestBinding
@@ -22,7 +22,7 @@ import com.wpf.app.quickwork.ability.title
 /**
  * Created by 王朋飞 on 2022/6/13.
  */
-class IntentDataTestActivity : QuickAbilityActivity(
+class IntentDataTestActivity : QuickActivity(
     contentView<LinearLayout> {
         title("传输测试页")
         myLayout(R.layout.activity_data_test)

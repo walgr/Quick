@@ -5,7 +5,7 @@ import android.app.Activity
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
-import com.wpf.app.quick.ability.QuickAbilityFragment
+import com.wpf.app.quick.ability.QuickFragment
 import com.wpf.app.quick.ability.ex.contentView
 import com.wpf.app.quick.annotations.bind.BindView
 import com.wpf.app.quickbind.annotations.AutoGet
@@ -15,7 +15,7 @@ import com.wpf.app.quickutil.other.printLog
  * Created by 王朋飞 on 2022/8/5.
  *
  */
-class TestFragment : QuickAbilityFragment(
+class TestFragment : QuickFragment(
     contentView(R.layout.fragment_test_viewpager2)
 ) {
     @SuppressLint("StaticFieldLeak", "NonConstantResourceId")

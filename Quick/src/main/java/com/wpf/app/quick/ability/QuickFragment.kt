@@ -5,16 +5,17 @@ import android.os.Bundle
 import android.view.View
 import androidx.annotation.CallSuper
 import androidx.lifecycle.ViewModel
-import com.wpf.app.quick.activity.QuickFragment
-import com.wpf.app.quick.activity.viewmodel.ViewLifecycle
+import com.wpf.app.quick.ability.ex.QuickActivityAbility
+import com.wpf.app.quick.ability.ex.QuickFragmentAbility
+import com.wpf.app.quick.ability.ex.QuickInflateViewAbility
+import com.wpf.app.quick.activity.QuickBaseFragment
 import com.wpf.app.quickbind.interfaces.BindViewModel
-import com.wpf.app.quickutil.bind.QuickBindWrap
 import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.other.forceTo
 
-open class QuickAbilityFragment(
+open class QuickFragment(
     private val abilityList: List<QuickActivityAbility> = mutableListOf(), titleName: String = ""
-) : QuickFragment(
+) : QuickBaseFragment(
     layoutId = abilityList.find { it is QuickInflateViewAbility }!!
         .forceTo<QuickInflateViewAbility>().layoutId(),
     layoutView = abilityList.find { it is QuickInflateViewAbility }!!
@@ -22,7 +23,7 @@ open class QuickAbilityFragment(
     layoutViewInContext = abilityList.find { it is QuickInflateViewAbility }!!
         .forceTo<QuickInflateViewAbility>().layoutViewInContext(),
     titleName = titleName
-), BindViewModel<ViewModel>, BindingAbility {
+), BindViewModel<ViewModel> {
     internal val extraParameter: LinkedHashMap<String, Any> = linkedMapOf()
 
     override fun getViewModel(): ViewModel? {

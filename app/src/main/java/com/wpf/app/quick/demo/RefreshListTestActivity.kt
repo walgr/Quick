@@ -3,23 +3,14 @@ package com.wpf.app.quick.demo
 import android.annotation.SuppressLint
 import android.view.View
 import android.widget.LinearLayout
-import android.widget.RelativeLayout
-import com.scwang.smart.refresh.layout.SmartRefreshLayout
-import com.wpf.app.quick.ability.QuickAbilityActivity
+import com.wpf.app.quick.ability.QuickActivity
 import com.wpf.app.quick.ability.ex.contentView
-import com.wpf.app.quick.ability.ex.myLayout
-import com.wpf.app.quick.annotations.bind.BindData2View
 import com.wpf.app.quick.annotations.bind.BindView
 import com.wpf.app.quick.demo.http.request
 import com.wpf.app.quick.demo.model.ListRequest
 import com.wpf.app.quick.demo.wanandroid.model.Article
 import com.wpf.app.quick.demo.widgets.emptyview.TestEmptyView
-import com.wpf.app.quickrecyclerview.QuickRefreshRecyclerView
-import com.wpf.app.quickwidget.emptyview.EmptyHelper
-import com.wpf.app.quickrecyclerview.helper.Request2RefreshView
 import com.wpf.app.quickrecyclerview.listeners.requestData2List
-import com.wpf.app.quickrecyclerview.listeners.requestData2ListWithView
-import com.wpf.app.quickutil.helper.wrapContentHeightParams
 import com.wpf.app.quickutil.log.LogUtil
 import com.wpf.app.quickutil.other.forceTo
 import com.wpf.app.quickwork.ability.smartRefreshLayout
@@ -28,7 +19,7 @@ import com.wpf.app.quickwork.ability.title
 /**
  * Created by 王朋飞 on 2022/7/8.
  */
-class RefreshListTestActivity : QuickAbilityActivity(
+class RefreshListTestActivity : QuickActivity(
     contentView<LinearLayout> { quickView ->
         title("列表刷新页")
         smartRefreshLayout {

@@ -4,9 +4,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.annotation.LayoutRes
-import com.wpf.app.quick.ability.QuickActivityAbility
-import com.wpf.app.quick.ability.setContentViewCommon
-import com.wpf.app.quick.ability.setContentView
 import com.wpf.app.quick.activity.QuickView
 import com.wpf.app.quickutil.bind.RunOnContext
 import com.wpf.app.quickutil.bind.runOnContext

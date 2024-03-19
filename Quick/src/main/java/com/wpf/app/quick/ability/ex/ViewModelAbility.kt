@@ -4,8 +4,6 @@ import android.app.Activity
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
-import com.wpf.app.quick.ability.QuickActivityAbility
-import com.wpf.app.quick.ability.QuickVMAbility
 import com.wpf.app.quick.activity.QuickView
 import com.wpf.app.quick.activity.viewmodel.QuickViewModel
 import com.wpf.app.quickutil.bind.QuickBindWrap

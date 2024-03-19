@@ -1,4 +1,4 @@
-package com.wpf.app.quick.ability
+package com.wpf.app.quick.ability.ex
 
 import android.view.View
 import androidx.annotation.LayoutRes
@@ -13,7 +13,7 @@ import com.wpf.app.quickutil.other.Unique
 import com.wpf.app.quickutil.other.forceTo
 
 
-fun <T : QuickActivityAbility> MutableList<T>.with(others: List<T>): MutableList<T> {
+fun <T : QuickActivityAbility> MutableList<T>.with(others: MutableList<T>): MutableList<T> {
     others.filter { it is Unique }.map { it.getPrimeKey() }.forEach { otherPrimeKey ->
         this.remove(this.find { it.getPrimeKey() == otherPrimeKey })
     }
@@ -27,6 +27,23 @@ fun <T : QuickActivityAbility> MutableList<T>.with(other: T): MutableList<T> {
     }
     this.add(other)
     return this
+}
+
+fun <T : QuickActivityAbility> T.with(others: MutableList<T>): MutableList<T> {
+    if (this is Unique) {
+        others.remove(others.find { it.getPrimeKey() == this.getPrimeKey() })
+    }
+    others.add(this)
+    return others
+}
+
+fun <T : QuickActivityAbility> T.with(other: T): MutableList<T> {
+    val abilityList = mutableListOf<T>()
+    abilityList.add(this)
+    if (other !is Unique || other.getPrimeKey() != this.getPrimeKey()) {
+        abilityList.add(other)
+    }
+    return abilityList
 }
 
 fun setContentViewCommon(
