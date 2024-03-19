@@ -11,8 +11,8 @@ import androidx.lifecycle.ViewModelStoreOwner
 import com.wpf.app.quick.activity.QuickView
 import com.wpf.app.quick.activity.viewmodel.QuickVBModel
 import com.wpf.app.quick.helper.QuickDataBindingUtil
+import com.wpf.app.quick.helper.getActivity
 import com.wpf.app.quickrecyclerview.constant.BRConstant
-import com.wpf.app.quickutil.activity.activity
 import com.wpf.app.quickutil.bind.QuickBindWrap
 import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.other.forceTo
@@ -38,7 +38,7 @@ inline fun <reified VM : QuickVBModel<VB>, reified VB : ViewDataBinding> modelBi
         val context = owner.forceTo<QuickView>()
         if (viewModelCls != QuickVBModel::class.java) {
             viewModel = ViewModelProvider(
-                owner, ViewModelProvider.AndroidViewModelFactory(view.activity().application)
+                owner, ViewModelProvider.AndroidViewModelFactory(context.getActivity().application)
             )[viewModelCls]
             vmBuilder?.invoke(viewModel!!)
         }

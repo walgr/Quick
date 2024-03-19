@@ -39,6 +39,5 @@ class ShadowViewTestActivity : QuickActivity(
         shadow6.setOnCheckedChangeListener { _, isChecked ->
             shadow8.isVisible = isChecked
         }
-    }
-    )
+    })
 )
