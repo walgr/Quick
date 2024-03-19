@@ -1,11 +1,8 @@
 package com.wpf.app.quick.demo
 
-import android.annotation.SuppressLint
-import android.view.View
 import android.widget.LinearLayout
 import com.wpf.app.quick.ability.QuickActivity
 import com.wpf.app.quick.ability.ex.contentView
-import com.wpf.app.quick.annotations.bind.BindView
 import com.wpf.app.quick.demo.http.request
 import com.wpf.app.quick.demo.model.ListRequest
 import com.wpf.app.quick.demo.wanandroid.model.Article
@@ -13,6 +10,7 @@ import com.wpf.app.quick.demo.widgets.emptyview.TestEmptyView
 import com.wpf.app.quickrecyclerview.listeners.requestData2List
 import com.wpf.app.quickutil.log.LogUtil
 import com.wpf.app.quickutil.other.forceTo
+import com.wpf.app.quickwidget.emptyview.EmptyHelper
 import com.wpf.app.quickwork.ability.smartRefreshLayout
 import com.wpf.app.quickwork.ability.title
 
@@ -22,7 +20,8 @@ import com.wpf.app.quickwork.ability.title
 class RefreshListTestActivity : QuickActivity(
     contentView<LinearLayout> { quickView ->
         title("列表刷新页")
-        smartRefreshLayout {
+        smartRefreshLayout(upperLayerLayoutView = TestEmptyView(context)) {list, upperLayout ->
+            EmptyHelper.bind(list, emptyView = upperLayout?.forceTo())
             requestData2List<ListRequest, Article> { requestData, callback ->
                 request(quickView.forceTo()) {
                     首页文章列表(requestData.page, requestData.pageSize)
@@ -45,16 +44,5 @@ class RefreshListTestActivity : QuickActivity(
                 false
             }
         }
-//        myLayout(R.layout.activity_refresh_list)
     }
-) {
-
-    @SuppressLint("NonConstantResourceId")
-    @BindView(R.id.emptyLayout)
-    var emptyLayout: TestEmptyView? = null
-
-    override fun initView(view: View) {
-        super.initView(view)
-//        EmptyHelper.bind(mRecyclerView, emptyView = emptyLayout)
-    }
-}
+)
