@@ -72,7 +72,7 @@ object RetrofitCreateHelper {
         return service as T
     }
 
-    fun <T> getServiceT(cls: Class<T>): T {
+    inline fun <reified T> getServiceT(cls: Class<T>): T {
         var service: Any? = serviceMap[cls]
         if (service == null) {
             service = createService(cls)

@@ -8,6 +8,7 @@ import android.widget.TextView
 import com.wpf.app.quickbind.annotations.BindD2VHelper
 import com.wpf.app.quickutil.bind.RunOnHolderWithSelf
 import com.wpf.app.quickutil.helper.allChild
+import com.wpf.app.quickutil.other.forceTo
 
 object DataAutoSet2ViewUtils {
 
@@ -46,7 +47,7 @@ object DataAutoSet2ViewUtils {
                 it.isAccessible = true
                 val fieldValue = it.get(data)
                 viewData = if (fieldValue is RunOnHolderWithSelf<*, *>) {
-                    (fieldValue as? RunOnHolderWithSelf<Any, Any>)?.run(view, data)
+                    (fieldValue.forceTo<RunOnHolderWithSelf<Any, Any>>()).run(view, data)
                 } else {
                     fieldValue
                 }

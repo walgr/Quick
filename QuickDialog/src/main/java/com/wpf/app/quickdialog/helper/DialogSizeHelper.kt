@@ -72,27 +72,27 @@ object DialogSizeHelper {
     }
 
     private fun dealDialogHeight(dialog: DialogSize, curHeight: Int): Int {
-        var curHeight = curHeight
-        if (curHeight == WindowManager.LayoutParams.MATCH_PARENT) {
-            curHeight = dialog.initDialogMaxHeight()
-            if (curHeight == WindowManager.LayoutParams.MATCH_PARENT) {
-                curHeight = dialog.initDialogHeight()
+        var curHeightNew = curHeight
+        if (curHeightNew == WindowManager.LayoutParams.MATCH_PARENT) {
+            curHeightNew = dialog.initDialogMaxHeight()
+            if (curHeightNew == WindowManager.LayoutParams.MATCH_PARENT) {
+                curHeightNew = dialog.initDialogHeight()
             }
-            return if (curHeight > 0) {
-                dealDialogHeight(dialog, curHeight)
-            } else curHeight
+            return if (curHeightNew > 0) {
+                dealDialogHeight(dialog, curHeightNew)
+            } else curHeightNew
         }
-        if (curHeight == WindowManager.LayoutParams.WRAP_CONTENT) return curHeight
+        if (curHeightNew == WindowManager.LayoutParams.WRAP_CONTENT) return curHeightNew
         if (dialog.initDialogMaxHeight() == WindowManager.LayoutParams.MATCH_PARENT
             && dialog.initDialogMinHeight() == WindowManager.LayoutParams.WRAP_CONTENT
-        ) return curHeight
+        ) return curHeightNew
         var maxHeight: Int = dialog.initDialogMaxHeight()
         if (maxHeight == WindowManager.LayoutParams.MATCH_PARENT) {
             maxHeight = dialog.getScreenHeight()
         }
-        return if (curHeight > maxHeight) {
+        return if (curHeightNew > maxHeight) {
             maxHeight
-        } else curHeight.coerceAtLeast(dialog.initDialogMinHeight())
+        } else curHeightNew.coerceAtLeast(dialog.initDialogMinHeight())
     }
 
     private fun dealDialogWidth(dialog: DialogSize, curWidth: Int): Int {
@@ -107,6 +107,6 @@ object DialogSizeHelper {
         }
         return if (curWidth > maxWidth) {
             maxWidth
-        } else Math.max(curWidth, dialog.initDialogMinWidth())
+        } else curWidth.coerceAtLeast(dialog.initDialogMinWidth())
     }
 }

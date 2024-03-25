@@ -14,7 +14,7 @@ interface BindBasePlugin : BasePlugin {
 
     fun getSaveId(obj: Any, viewModel: ViewModel?, field: Field, id: Int): Int {
         val dataBinder: Databinder =
-            QuickBind.BINDEDMAP[getRealObj(obj, viewModel).javaClass] ?: return id
+            QuickBind.bindMap[getRealObj(obj, viewModel).javaClass] ?: return id
         val value: Any? = dataBinder.getFieldValue(field.name + "BindViewId")
         return if (value is Int) {
             value
@@ -23,7 +23,7 @@ interface BindBasePlugin : BasePlugin {
 
     fun getSaveIdList(obj: Any, viewModel: ViewModel?, field: Field): ArrayList<Int>? {
         val dataBinder: Databinder =
-            QuickBind.BINDEDMAP[getRealObj(obj, viewModel).javaClass] ?: return null
+            QuickBind.bindMap[getRealObj(obj, viewModel).javaClass] ?: return null
         val value: Any? = dataBinder.getFieldValue(field.name)
         return if (value is ArrayList<*>) {
             value as ArrayList<Int>

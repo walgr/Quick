@@ -8,8 +8,8 @@ import com.wpf.app.quicknetwork.base.BaseResponseIS
 @GenerateNormalCall("TestNormal")
 open class TestResponse<Data> @JvmOverloads constructor(
     var data: Data? = null,
-    var errorCode: String? = null,
-    var errorMsg: String? = null,
+    private var errorCode: String? = null,
+    private var errorMsg: String? = null,
 ): BaseResponseIS<Data> {
     override var codeI: String? = null
         get() = errorCode

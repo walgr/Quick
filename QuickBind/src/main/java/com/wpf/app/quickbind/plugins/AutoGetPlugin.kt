@@ -50,7 +50,7 @@ class AutoGetPlugin : BindBasePlugin {
             val value = bundle.getSerializable(key)
             if (value != null) {
                 if (value.javaClass.isArray) {
-                    if ((value as Array<*>).size != 0 && value[0] is Parcelable) {
+                    if ((value as Array<*>).isNotEmpty() && value[0] is Parcelable) {
                         //TODO 暂不支持Parcelable[]
                     } else {
                         field[objTemp] = value

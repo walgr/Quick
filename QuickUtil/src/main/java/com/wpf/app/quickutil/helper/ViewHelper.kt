@@ -10,7 +10,7 @@ import com.wpf.app.quickutil.data.KV
 import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.other.forceTo
 
-fun <V> ViewGroup.getChild(isViewGroup: (View) -> Boolean): V? {
+fun <V: View> ViewGroup.getChild(isViewGroup: (View) -> Boolean): V? {
     for(it in 0 until this.childCount) {
         val child = this.getChildAt(it)
         if (child is ViewGroup) {

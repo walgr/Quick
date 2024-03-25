@@ -435,12 +435,12 @@ class MultiFunctionView @JvmOverloads constructor(
         checkBox.toggle()
     }
 
-    override fun getLifecycle(): Lifecycle {
-        return mLifecycleRegistry
-    }
+//    override fun getLifecycle(): Lifecycle {
+//        return mLifecycleRegistry
+//    }
 
-//    override val lifecycle: Lifecycle
-//        get() = mLifecycleRegistry
+    override val lifecycle: Lifecycle
+        get() = mLifecycleRegistry
 }
 
 interface CheckView : Checkable {

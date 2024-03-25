@@ -52,35 +52,35 @@ interface QuickContext {
     fun getScreenSize() : Point {
         if (getRealActivity() == null) return Point()
         val size = Point()
-        getRealActivity()!!.getWindowManager().getDefaultDisplay().getSize(size)
+        getRealActivity()!!.windowManager.defaultDisplay.getSize(size)
         return size
     }
 
     fun getScreenRealSize() : Point {
         if (getRealActivity() == null) return Point()
         val size = Point()
-        getRealActivity()!!.getWindowManager().getDefaultDisplay().getRealSize(size)
+        getRealActivity()!!.windowManager.defaultDisplay.getRealSize(size)
         return size
     }
 
     fun getScreenWidth(): Int {
         if (getRealActivity() == null) return 0
         val localDisplayMetrics = DisplayMetrics()
-        getRealActivity()!!.getWindowManager().getDefaultDisplay().getMetrics(localDisplayMetrics)
+        getRealActivity()!!.windowManager.defaultDisplay.getMetrics(localDisplayMetrics)
         return localDisplayMetrics.widthPixels
     }
 
     fun getScreenHeight(): Int {
         if (getRealActivity() == null) return 0
         val localDisplayMetrics = DisplayMetrics()
-        getRealActivity()!!.getWindowManager().getDefaultDisplay().getMetrics(localDisplayMetrics)
+        getRealActivity()!!.windowManager.defaultDisplay.getMetrics(localDisplayMetrics)
         return localDisplayMetrics.heightPixels
     }
 
     fun getScreenRealHeight(): Int {
         if (getRealActivity() == null) return 0
         val localDisplayMetrics = DisplayMetrics()
-        getRealActivity()!!.getWindowManager().getDefaultDisplay().getRealMetrics(localDisplayMetrics)
+        getRealActivity()!!.windowManager.defaultDisplay.getRealMetrics(localDisplayMetrics)
         return localDisplayMetrics.heightPixels
     }
 
@@ -90,7 +90,7 @@ interface QuickContext {
     }
 
     fun getActivityRootViewHeight(defaultHeight: Int): Int {
-        return if (getRealActivity() == null) defaultHeight else getRealActivity()!!.findViewById<View>(16908290).measuredHeight
+        return if (getRealActivity() == null) defaultHeight else getRealActivity()!!.findViewById<View>(android.R.id.content).measuredHeight
     }
 
 }

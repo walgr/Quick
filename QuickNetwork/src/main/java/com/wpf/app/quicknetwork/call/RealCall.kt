@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import com.wpf.app.quicknetwork.base.BaseRequest
 import com.wpf.app.quicknetwork.base.BaseResponseI
 import com.wpf.app.quicknetwork.base.JobRequest
+import com.wpf.app.quickutil.other.asTo
 import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Response
@@ -33,7 +34,7 @@ open class RealCall<SResponse, FResponse>(private val rawCall: Call<SResponse>, 
                     is Throwable -> {
                         try {
                             if (fail is BaseResponseI<*, *>) {
-                                request.funFail.invoke((fail as? BaseResponseI<*, Any>)?.apply {
+                                request.funFail.invoke(fail.asTo<BaseResponseI<*, Any>>()?.apply {
                                     codeI = "-1"
                                     errorI = result.message
                                 } as? FResponse)
@@ -62,13 +63,13 @@ open class RealCall<SResponse, FResponse>(private val rawCall: Call<SResponse>, 
                                                 (fail.dataI!!.javaClass as Type)
                                             )
                                         }
-                                        request.funFail.invoke((fail as? BaseResponseI<Any, Any>)?.apply {
+                                        request.funFail.invoke(fail.asTo<BaseResponseI<Any, Any>>()?.apply {
                                             codeI = body.codeI
                                             errorI = body.errorI
                                             dataI = body.dataI
                                         } as? FResponse)
                                     } else {
-                                        request.funFail.invoke((fail as? BaseResponseI<Any, Any>)?.apply {
+                                        request.funFail.invoke(fail.asTo<BaseResponseI<Any, Any>>()?.apply {
                                             codeI = result.code().toString()
                                             errorI = result.message()
                                             dataI = null
@@ -81,7 +82,7 @@ open class RealCall<SResponse, FResponse>(private val rawCall: Call<SResponse>, 
                         } catch (e: Exception) {
                             try {
                                 if (fail is BaseResponseI<*, *>) {
-                                    request.funFail.invoke((fail as? BaseResponseI<Any, Any>)?.apply {
+                                    request.funFail.invoke(fail.asTo<BaseResponseI<Any, Any>>()?.apply {
                                         codeI = code
                                         errorI = e.message
                                     } as? FResponse)

@@ -131,10 +131,6 @@ abstract class QuickBottomSheetDialog : BottomSheetDialog,
         onDialogOpen()
     }
 
-    fun show(context: Any?) {
-        show()
-    }
-
     override fun dismiss() {
         super.dismiss()
         onDialogClose()

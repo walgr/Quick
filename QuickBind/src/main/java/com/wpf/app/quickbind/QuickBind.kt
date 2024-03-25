@@ -18,6 +18,7 @@ import com.wpf.app.quickutil.bind.Bind
 import com.wpf.app.quickutil.bind.QuickBindI
 import com.wpf.app.quickutil.bind.plugins.BasePlugin
 import com.wpf.app.quickutil.other.GenericEx.getFieldAndParent
+import com.wpf.app.quickutil.other.forceTo
 import java.lang.reflect.Constructor
 import java.lang.reflect.Field
 import java.lang.reflect.InvocationTargetException
@@ -104,12 +105,12 @@ object QuickBind: QuickBindI {
         dealInPlugins(bind, null)
     }
 
-    val BINDEDMAP: MutableMap<Class<*>, Databinder> = LinkedHashMap()
+    val bindMap: MutableMap<Class<*>, Databinder> = LinkedHashMap()
     private fun bindBinder(target: Any, source: View) {
         val targetClass: Class<*> = target.javaClass
         val constructor = findBindingConstructorForClass(targetClass) ?: return
         try {
-            BINDEDMAP[targetClass] = constructor.newInstance(target, source) as Databinder
+            bindMap[targetClass] = constructor.newInstance(target, source) as Databinder
         } catch (e: IllegalAccessException) {
             throw RuntimeException("Unable to invoke $constructor", e)
         } catch (e: InstantiationException) {
@@ -126,13 +127,13 @@ object QuickBind: QuickBindI {
         }
     }
 
-    val BINDINGS: MutableMap<Class<*>, Constructor<Databinder>?> = LinkedHashMap()
+    private val bindingMap: MutableMap<Class<*>, Constructor<Databinder>?> = LinkedHashMap()
 
     @UiThread
     private fun findBindingConstructorForClass(cls: Class<*>): Constructor<Databinder>? {
-        var bindingCtor = BINDINGS[cls]
-        if (bindingCtor != null || BINDINGS.containsKey(cls)) {
-            return bindingCtor
+        var bindingConstructor = bindingMap[cls]
+        if (bindingConstructor != null || bindingMap.containsKey(cls)) {
+            return bindingConstructor
         }
         val clsPackage = cls.getPackage()?.name
         val clsName = cls.name
@@ -142,20 +143,20 @@ object QuickBind: QuickBindI {
         ) {
             return null
         }
-        bindingCtor = try {
+        bindingConstructor = try {
             val bindingClass =
                 cls.classLoader?.loadClass(clsPackage + ".Quick_" + clsSimpleName + "_ViewBinding_Ksp")
             bindingClass?.getConstructor(
                 cls,
                 View::class.java
-            ) as Constructor<Databinder>
+            )?.forceTo<Constructor<Databinder>>()
         } catch (e: ClassNotFoundException) {
             findBindingConstructorForClass(cls.superclass as Class<*>)
         } catch (e: NoSuchMethodException) {
             throw RuntimeException("Unable to find binding constructor for $clsName", e)
         }
-        BINDINGS[cls] = bindingCtor
-        return bindingCtor
+        bindingMap[cls] = bindingConstructor
+        return bindingConstructor
     }
 
     override fun dealInPlugins(obj: Any?, viewModel: ViewModel?) {

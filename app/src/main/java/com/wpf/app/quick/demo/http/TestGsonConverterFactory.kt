@@ -91,7 +91,7 @@ class TestGsonConverterFactory private constructor(private val gson: Gson) : Con
         private val gson: Gson,
         private val adapter: TypeAdapter<T>
     ) : Converter<ResponseBody, T> {
-        private val UTF_8 = StandardCharsets.UTF_8
+        private val utf8 = StandardCharsets.UTF_8
         @Throws(IOException::class)
         override fun convert(value: ResponseBody): T {
             val response = value.string()
@@ -103,35 +103,47 @@ class TestGsonConverterFactory private constructor(private val gson: Gson) : Con
                 //接口成功
             }
             val contentType = value.contentType()
-            val charset = if (contentType != null) contentType.charset(UTF_8) else UTF_8
+            val charset = if (contentType != null) contentType.charset(utf8) else utf8
             val inputStream: InputStream = ByteArrayInputStream(response.toByteArray())
             val reader: Reader = InputStreamReader(inputStream, charset)
             val jsonReader = gson.newJsonReader(reader)
             return try {
-                val t = adapter.read(jsonReader)
-                // 数据解析异常则返回jsonobject对象
-                if (t is JSONObject) {
-                    return JSONObject(response) as T
-                } else if (t is JSONArray) {
-                    return JSONArray(response) as T
-                } else if (t is TestResponse<*>) {
-                    if ((t as TestResponse<*>).data is JSONObject) {
-                        (t as TestResponse<JSONObject?>).data =
-                            JSONObject(Gson().toJson(httpStatus.data))
-                    } else if ((t as TestResponse<*>).data is JSONArray) {
-                        (t as TestResponse<JSONArray?>).data =
-                            JSONArray(Gson().toJson(httpStatus.data))
-                    } else if ((t as TestResponse<*>).data is Map<*, *>) {
-                        (t as TestResponse<Map<*, *>?>).data = httpStatus.data as Map<*, *>?
+                // 数据解析异常则返回JSONObject对象
+                when (val t = adapter.read(jsonReader)) {
+                    is JSONObject -> {
+                        return JSONObject(response) as T
                     }
-                    return t
+
+                    is JSONArray -> {
+                        return JSONArray(response) as T
+                    }
+
+                    is TestResponse<*> -> {
+                        when ((t as TestResponse<*>).data) {
+                            is JSONObject -> {
+                                (t as TestResponse<JSONObject?>).data =
+                                    JSONObject(Gson().toJson(httpStatus.data))
+                            }
+
+                            is JSONArray -> {
+                                (t as TestResponse<JSONArray?>).data =
+                                    JSONArray(Gson().toJson(httpStatus.data))
+                            }
+
+                            is Map<*, *> -> {
+                                (t as TestResponse<Map<*, *>?>).data = httpStatus.data as Map<*, *>?
+                            }
+                        }
+                        return t
+                    }
+
+                    else -> t
                 }
-                t
             } catch (e: Exception) {
-                val exceReponse: TestResponse<*> = TestResponse<Any>()
-                exceReponse.errorCode = "-1"
-                exceReponse.errorMsg = e.message
-                exceReponse as T
+                val exceptionResponse: TestResponse<*> = TestResponse<Any>()
+                exceptionResponse.codeI = "-1"
+                exceptionResponse.errorI = e.message
+                exceptionResponse as T
             } finally {
                 value.close()
             }
