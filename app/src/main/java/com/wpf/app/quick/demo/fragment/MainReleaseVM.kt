@@ -1,7 +1,6 @@
 package com.wpf.app.quick.demo.fragment
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.view.View
 import android.widget.TextView
 import com.wpf.app.quick.activity.viewmodel.QuickVBModel
@@ -11,7 +10,6 @@ import com.wpf.app.quick.demo.FragmentTestActivity
 import com.wpf.app.quick.demo.IntentDataTestActivity
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.demo.RecyclerViewTestActivity
-import com.wpf.app.quick.demo.RefreshListTestActivity
 import com.wpf.app.quick.demo.SelectListTestActivity
 import com.wpf.app.quick.demo.ViewPagerBindFragmentTestActivity
 import com.wpf.app.quick.demo.databinding.FragmentMainReleaseBinding
@@ -43,10 +41,6 @@ class MainReleaseVM: QuickVBModel<FragmentMainReleaseBinding>() {
 
     fun gotoGlide(view: View?) {
         view?.context?.quickStartActivity<ViewPagerBindFragmentTestActivity>()
-    }
-
-    fun gotoRefreshList(view: View?) {
-        view?.context?.quickStartActivity<RefreshListTestActivity>()
     }
 
     fun gotoSelectList(view: View?) {

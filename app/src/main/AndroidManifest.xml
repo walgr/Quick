@@ -30,9 +30,7 @@
 
         <activity android:name=".RecyclerViewTestActivity" />
         <activity android:name=".IntentDataTestActivity" />
-        <activity android:name=".RefreshListTestActivity" />
         <activity android:name=".SelectListTestActivity" />
-        <activity android:name="com.wpf.app.r2test.R2TestActivity"/>
         <activity android:name=".ViewPagerBindFragmentTestActivity"/>
         <activity android:name=".RequestTestActivity"/>
         <activity android:name=".DialogTestActivity"/>

@@ -6,10 +6,8 @@ import android.content.Intent
 import android.os.Parcelable
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
-import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.other.forceTo
 import java.io.Serializable
 import java.util.ArrayList
@@ -27,7 +25,7 @@ fun <T : Activity> Context.quickStartActivity(
         for (key in keys) {
             val value = data[key]
             if (value is ArrayList<*> && value.isNotEmpty() && value[0] is Parcelable) {
-                intent.putParcelableArrayListExtra(key, value as ArrayList<out Parcelable>)
+                intent.putParcelableArrayListExtra(key, value.forceTo())
             } else if (value is Parcelable) {
                 intent.putExtra(key, value)
             } else if (value is Serializable) {

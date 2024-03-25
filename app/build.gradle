@@ -48,9 +48,9 @@ android {
             }
         }
         release {
-            minifyEnabled false
+            minifyEnabled true
             // 移除无用的resource文件
-            shrinkResources false
+            shrinkResources true
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 
@@ -65,12 +65,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
     }
-    kotlin {
-        jvmToolchain(11)
-    }
-    kotlinOptions {
-        jvmTarget = '11'
-    }
+
     namespace 'com.wpf.app.quick.demo'
 }
 
@@ -118,7 +113,6 @@ dependencies {
     implementation deps.gson
 
     implementation deps.glide
-    implementation deps.lottie
     //约束布局
     implementation deps.androidx.constraintlayout
     //SmartRefreshLayout

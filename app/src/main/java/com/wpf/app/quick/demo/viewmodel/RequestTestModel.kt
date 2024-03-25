@@ -13,14 +13,13 @@ import com.wpf.app.quickutil.log.LogUtil
 
 class RequestTestModel : QuickVBModel<ActivityRequestTestBinding>() {
 
-    val requestParams = mutableMapOf("page" to 0, "pageSize" to 10)
     private var page = 0
 
     @SuppressLint("NonConstantResourceId", "StaticFieldLeak")
     @BindData2View(id = R.id.info, helper = Request2View::class)
     val info = request2View { callback ->
         request {
-            首页文章列表(page)
+            homePageList(page)
         }.success {
             callback.backData(it?.data)
         }.fail {

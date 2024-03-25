@@ -2,20 +2,9 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-        <import type="com.wpf.app.quick.demo.http.TestApiClass"/>
-
-        <variable
-            name="viewModel"
-            type="com.wpf.app.quick.demo.viewmodel.RequestTestModel" />
-    </data>
-
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:apiClass="@{TestApiClass.INSTANCE.KClass}"
-        app:methodName="@{TestApiClass.INSTANCE.首页文章列表()}"
-        app:parameters="@{viewModel.requestParams}">
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/info"

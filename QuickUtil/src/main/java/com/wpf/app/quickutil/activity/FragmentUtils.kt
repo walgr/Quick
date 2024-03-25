@@ -3,6 +3,7 @@ package com.wpf.app.quickutil.activity
 import android.os.Bundle
 import android.os.Parcelable
 import androidx.fragment.app.Fragment
+import com.wpf.app.quickutil.other.forceTo
 import java.io.Serializable
 import java.util.ArrayList
 import java.util.HashMap
@@ -17,7 +18,7 @@ object FragmentUtils {
         for (key in keys) {
             val value = data[key]
             if (value is ArrayList<*> && value.isNotEmpty() && value[0] is Parcelable) {
-                bundle.putParcelableArrayList(key, value as ArrayList<out Parcelable>?)
+                bundle.putParcelableArrayList(key, value.forceTo())
             } else if (value is Parcelable) {
                 bundle.putParcelable(key, value)
             } else if (value is Serializable) {
