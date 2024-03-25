@@ -17,7 +17,6 @@ android {
     }
     buildFeatures {
         dataBinding true
-        compose true
     }
 
     signingConfigs {
@@ -49,9 +48,9 @@ android {
             }
         }
         release {
-            minifyEnabled true
+            minifyEnabled false
             // 移除无用的resource文件
-            shrinkResources true
+            shrinkResources false
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 
@@ -61,9 +60,6 @@ android {
                 }
             }
         }
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "$composeCompilerVersion"
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
@@ -79,27 +75,22 @@ android {
 }
 
 dependencies {
-    //Compose
-    implementation "androidx.compose.material:material:${rootProject.composeVersion}"
-    implementation "androidx.compose.ui:ui-tooling-preview:${rootProject.composeVersion}"
-    debugImplementation "androidx.compose.ui:ui-tooling:${rootProject.composeVersion}"
-
     //lifecycle-ktx
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.2'
+    implementation deps.androidx.lifecycleruntimektx
     //lifecycle-ktx
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.2'
+    implementation deps.androidx.lifecyclelivedataktx
     //statusBar
-    implementation 'com.geyifeng.immersionbar:immersionbar:3.2.2'
+//    implementation 'com.geyifeng.immersionbar:immersionbar:3.2.2'
     // kotlin扩展（可选）
-    implementation 'com.geyifeng.immersionbar:immersionbar-ktx:3.2.2'
+//    implementation 'com.geyifeng.immersionbar:immersionbar-ktx:3.2.2'
 
     //Navigation
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.7.5'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.7.5'
+//    implementation 'androidx.navigation:navigation-fragment-ktx:2.7.5'
+//    implementation 'androidx.navigation:navigation-ui-ktx:2.7.5'
     //Sp存储
-    implementation 'androidx.preference:preference-ktx:1.2.1'
-    implementation 'androidx.datastore:datastore:1.0.0'
-    implementation 'androidx.datastore:datastore-rxjava3:1.0.0'
+//    implementation 'androidx.preference:preference-ktx:1.2.1'
+//    implementation 'androidx.datastore:datastore:1.0.0'
+//    implementation 'androidx.datastore:datastore-rxjava3:1.0.0'
 
     if (IS_REMOTE.toBoolean()) {
         implementation deps.quickbind.work
@@ -121,7 +112,6 @@ dependencies {
     implementation deps.androidx.recyclerview
     //viewpager2
     implementation deps.viewpager2
-//    implementation 'jp.wasabeef:recyclerview-animators:4.0.2'
     //retrofit2-okhttp-gson
     implementation deps.retrofit
     implementation deps.okhttp

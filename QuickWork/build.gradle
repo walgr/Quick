@@ -39,6 +39,9 @@ dependencies {
     //列表
     implementation deps.androidx.recyclerview
 
+    //viewpager2
+    implementation deps.viewpager2
+
     //SmartRefreshLayout
     implementation deps.refresh                      //核心必须依赖
     implementation deps.refresh_header               //经典刷新头

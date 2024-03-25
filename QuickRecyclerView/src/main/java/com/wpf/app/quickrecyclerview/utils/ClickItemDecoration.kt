@@ -22,23 +22,23 @@ abstract class ClickItemDecoration : RecyclerView.ItemDecoration() {
             return onTouchEvent(e)
         }
 
-        override fun onScroll(p0: MotionEvent?, p1: MotionEvent, p2: Float, p3: Float): Boolean {
-            return false
-        }
-//
-//        override fun onScroll(e1: MotionEvent, e2: MotionEvent, distanceX: Float, distanceY: Float): Boolean {
+//        override fun onScroll(p0: MotionEvent?, p1: MotionEvent, p2: Float, p3: Float): Boolean {
 //            return false
 //        }
+//
+        override fun onScroll(e1: MotionEvent, e2: MotionEvent, distanceX: Float, distanceY: Float): Boolean {
+            return false
+        }
 
         override fun onLongPress(e: MotionEvent) {}
 
-        override fun onFling(p0: MotionEvent?, p1: MotionEvent, p2: Float, p3: Float): Boolean {
-            return false
-        }
-
-//        override fun onFling(e1: MotionEvent, e2: MotionEvent, velocityX: Float, velocityY: Float): Boolean {
+//        override fun onFling(p0: MotionEvent?, p1: MotionEvent, p2: Float, p3: Float): Boolean {
 //            return false
 //        }
+
+        override fun onFling(e1: MotionEvent, e2: MotionEvent, velocityX: Float, velocityY: Float): Boolean {
+            return false
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")

@@ -8,7 +8,6 @@ android {
     buildFeatures {
         //noinspection DataBindingWithoutKapt
         dataBinding true
-        compose true
     }
     defaultConfig {
         minSdk rootProject.minSdkVersion
@@ -23,19 +22,10 @@ android {
     kotlinOptions {
         jvmTarget = '11'
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "$composeCompilerVersion"
-    }
     namespace 'com.wpf.app.quickrecyclerview'
 }
 
 dependencies {
-    //Compose
-//    compileOnly "androidx.compose.ui:ui:${rootProject.composeVersion}"
-    compileOnly "androidx.compose.foundation:foundation:${rootProject.composeVersion}"
-    compileOnly "androidx.compose.ui:ui-tooling-preview:${rootProject.composeVersion}"
-    debugCompileOnly "androidx.compose.ui:ui-tooling:${rootProject.composeVersion}"
-
     //列表
     compileOnly deps.androidx.recyclerview
 
