@@ -8,9 +8,7 @@ import com.wpf.app.quick.ability.ex.binding
 import com.wpf.app.quick.ability.ex.contentView
 import com.wpf.app.quick.ability.ex.with
 import com.wpf.app.quick.annotations.bind.BindView
-import com.wpf.app.quick.annotations.tab.IdView
 import com.wpf.app.quick.annotations.tab.TabInit
-import com.wpf.app.quick.annotations.tab.view.ViewType
 import com.wpf.app.quick.demo.databinding.ActivityMainCodeBinding
 import com.wpf.app.quick.demo.fragment.MainReleaseFragment
 import com.wpf.app.quick.demo.fragment.MainTestFragment
@@ -42,13 +40,7 @@ class CodeMainActivity : QuickActivity(
 ) {
 
     @SuppressLint("NonConstantResourceId")
-    @TabInit(
-        R.layout.tab_main,
-        funName = "initTabMain",
-        initIdList = [IdView(R.id.ivIcon, ViewType.ImageView), IdView(
-            R.id.tvName, className = "android.widget.TextView"
-        )]
-    )
+    @TabInit(layoutId = R.layout.tab_main, funName = "initTabMain")
     @BindView(R.id.viewPager)
     @BindFragments(
         fragments = [MainReleaseFragment::class, MainTestFragment::class], withState = false

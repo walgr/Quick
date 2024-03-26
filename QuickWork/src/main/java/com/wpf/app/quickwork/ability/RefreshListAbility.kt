@@ -4,7 +4,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
-import androidx.annotation.LayoutRes
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
@@ -20,7 +19,6 @@ import com.wpf.app.quickrecyclerview.listeners.Request2ListWithView
 import com.wpf.app.quickutil.bind.RunOnContext
 import com.wpf.app.quickutil.helper.InitViewHelper
 import com.wpf.app.quickutil.helper.matchLayoutParams
-import com.wpf.app.quickutil.helper.matchWrapLayoutParams
 import com.wpf.app.quickutil.helper.wrapContentHeightParams
 import com.wpf.app.quickutil.other.forceTo
 

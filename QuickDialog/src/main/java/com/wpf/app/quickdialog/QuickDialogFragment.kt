@@ -22,7 +22,7 @@ import com.wpf.app.quickdialog.listeners.DialogSize
 /**
  * Created by 王朋飞 on 2022/6/16.
  */
-abstract class QuickDialogFragment @JvmOverloads constructor(
+open class QuickDialogFragment @JvmOverloads constructor(
     @LayoutRes
     var layoutId: Int = 0,
     var layoutView: View? = null
@@ -69,7 +69,7 @@ abstract class QuickDialogFragment @JvmOverloads constructor(
         onDialogOpen()
     }
 
-    abstract fun initView(view: View)
+    open fun initView(view: View) {}
 
     protected var mScreenWidth = 0
     protected var mScreenHeight = 0
