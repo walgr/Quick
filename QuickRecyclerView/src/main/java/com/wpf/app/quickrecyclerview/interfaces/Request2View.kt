@@ -25,7 +25,7 @@ interface Request2ViewWithView<Data : QuickRequestData, View> {
     var request2List: Request2ViewWithView<Data, View>?
     var view: View?
     var callback: Callback<Data>?
-    var isManual: Boolean
+    var isAuto: Boolean               //是否自动请求
 
     /**
      * 接口请求
@@ -39,16 +39,16 @@ interface Request2ViewWithView<Data : QuickRequestData, View> {
     /**
      * 返回是否手动触发
      */
-    fun isManualFun(manual: (() -> Boolean)?): Boolean {
-        manual?.let {
-            isManual = it()
-            return isManual
+    fun isAutoFun(auto: (() -> Boolean)?): Boolean {
+        auto?.let {
+            isAuto = it()
+            return isAuto
         }
         return false
     }
 
-    fun autoRequest(manual: (() -> Boolean)?): Request2ViewWithView<Data, View> {
-        isManual = !isManualFun(manual)
+    fun autoRequest(auto: (() -> Boolean)?): Request2ViewWithView<Data, View> {
+        isAuto = isAutoFun(auto)
         return this
     }
 
@@ -72,7 +72,7 @@ fun <Data : QuickRequestData> request2View(
     override var request2List: Request2ViewWithView<Data, Any>? = this
     override var view: Any? = null
     override var callback: Callback<Data>? = null
-    override var isManual: Boolean = false
+    override var isAuto: Boolean = false
 
     override fun requestAndCallback(callback: Callback<Data>) {
         super.requestAndCallback(callback)
@@ -86,7 +86,7 @@ fun <Data : QuickRequestData, View> request2ViewWithView(
     override var request2List: Request2ViewWithView<Data, View>? = this
     override var view: View? = null
     override var callback: Callback<Data>? = null
-    override var isManual: Boolean = false
+    override var isAuto: Boolean = false
 
     override fun requestAndCallback(view: View, callback: Callback<Data>) {
         super.requestAndCallback(view, callback)

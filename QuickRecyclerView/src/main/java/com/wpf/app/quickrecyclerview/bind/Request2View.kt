@@ -17,7 +17,7 @@ object Request2View : BindD2VHelper<View, Request2ViewWithView<out QuickRequestD
         val realData = data as Request2ViewWithView<QuickRequestData, View>
         realData.view = view
         realData.callback = callback
-        if (!realData.isManual) {
+        if (realData.isAuto) {
             realData.requestAndCallback(view, callback)
         }
     }

@@ -22,7 +22,7 @@ class TestEmptyView @JvmOverloads constructor(
     mContext: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
-) : BaseEmptyView(mContext, attrs, defStyleAttr, R.layout.empty_layout, curState = Loading) {
+) : BaseEmptyView(mContext, attrs, defStyleAttr, R.layout.empty_layout, curState = NoError) {
 
     private var progress: ProgressBar? = null
     private var errorGroup: ViewGroup? = null
