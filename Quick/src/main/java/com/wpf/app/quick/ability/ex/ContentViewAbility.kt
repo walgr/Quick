@@ -8,7 +8,7 @@ import com.wpf.app.quick.activity.QuickView
 import com.wpf.app.quickutil.bind.RunOnContext
 import com.wpf.app.quickutil.bind.runOnContext
 import com.wpf.app.quickutil.helper.InitViewHelper
-import com.wpf.app.quickutil.helper.matchWrapLayoutParams
+import com.wpf.app.quickutil.helper.matchLayoutParams
 import com.wpf.app.quickutil.helper.wrapContentHeightParams
 import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.other.forceTo
@@ -20,7 +20,7 @@ fun contentView(
     layoutViewInContext: RunOnContext<View>? = null,
     builder: (QuickView.() -> Unit)? = null
 ): MutableList<QuickActivityAbility> {
-    return setContentViewCommon(layoutId, layoutView, layoutViewInContext = layoutViewInContext) {
+    return setContentViewCommon(layoutId, layoutView, layoutViewInContext) {
         builder?.invoke(this)
     }
 }
@@ -54,7 +54,7 @@ fun ViewGroup.myLayout(
     @LayoutRes layoutId: Int = 0,
     layoutView: View? = null,
     layoutViewInContext: RunOnContext<View>? = null,
-    layoutParams: ViewGroup.LayoutParams = matchWrapLayoutParams,
+    layoutParams: ViewGroup.LayoutParams = matchLayoutParams,
     builder: (ViewGroup.() -> Unit)? = null
 ) {
     addView(InitViewHelper.init(context, layoutId, layoutView, layoutViewInContext), layoutParams)

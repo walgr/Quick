@@ -7,17 +7,37 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.wpf.app.quick.R
+import com.wpf.app.quick.ability.QuickFragment
 import com.wpf.app.quickutil.bind.runOnContext
 import com.wpf.app.quickutil.helper.matchLayoutParams
 import com.wpf.app.quickutil.other.forceTo
 
-fun ViewGroup.fragment(callback: ViewGroup.() -> Unit) {
-    callback.invoke(this)
+fun FragmentGroup.viewFragment(callback: ViewGroup.() -> Unit) {
+    val fragmentRootView = FrameLayout(context)
+    callback.invoke(fragmentRootView)
+    addView(fragmentRootView)
 }
 
-inline fun <reified T : Fragment> fragment(
+fun <T: QuickFragment> FragmentGroup.fragment(fragment: T, builder: (T.() -> Unit)? = null) {
+    addFragment(fragment)
+    builder?.invoke(fragment)
+}
+
+inline fun <reified T: QuickFragment> FragmentGroup.fragment(noinline builder: (T.() -> Unit)? = null) {
+    val fragment = T::class.java.getDeclaredConstructor().newInstance()
+    builder?.invoke(fragment)
+    addFragment(fragment)
+}
+
+fun FragmentGroup.classFragment(fragmentClass: Class<*>, builder: (Fragment.() -> Unit)? = null) {
+    val fragment = fragmentClass.getDeclaredConstructor().newInstance() as Fragment
+    builder?.invoke(fragment)
+    addFragment(fragment)
+}
+
+fun <T : Fragment> fragment(
     fragment: T,
-    noinline builder: (T.() -> Unit)? = null
+    builder: (T.() -> Unit)? = null
 ): MutableList<QuickActivityAbility> {
     return setContentView(layoutViewInContext = runOnContext {
         FrameLayout(it).apply {

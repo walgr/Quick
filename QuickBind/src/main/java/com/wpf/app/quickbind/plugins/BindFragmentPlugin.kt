@@ -96,7 +96,7 @@ class BindFragmentPlugin : BindBasePlugin {
 
                         override fun getItemPosition(`object`: Any): Int {
                             return viewPager.asTo<ViewPagerSize>()?.getItemPosition(`object`)
-                                ?: POSITION_NONE
+                                ?: super.getItemPosition(`object`)
                         }
 
                         override fun getPageTitle(position: Int): CharSequence? {
@@ -145,7 +145,7 @@ class BindFragmentPlugin : BindBasePlugin {
 
                         override fun getItemPosition(`object`: Any): Int {
                             return (viewPager as? ViewPagerSize)?.getItemPosition(`object`)
-                                ?: POSITION_NONE
+                                ?: super.getItemPosition(`object`)
                         }
 
                         override fun getPageTitle(position: Int): CharSequence? {

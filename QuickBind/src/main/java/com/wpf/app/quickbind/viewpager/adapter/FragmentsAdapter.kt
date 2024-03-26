@@ -3,6 +3,7 @@ package com.wpf.app.quickbind.viewpager.adapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import androidx.fragment.app.FragmentStatePagerAdapter
 import com.wpf.app.quickbind.viewpager.ViewPagerSize
 
 /**
@@ -36,6 +37,6 @@ class FragmentsAdapter(
 
     override fun getAdapter() = this
     override fun getItemPosition(`object`: Any): Int {
-        return POSITION_NONE
+        return super<FragmentPagerAdapter>.getItemPosition(`object`)
     }
 }

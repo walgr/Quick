@@ -82,7 +82,7 @@ inline fun <reified T : Fragment> ViewGroup.viewPager(
             override fun getAdapter() = this
 
             override fun getItemPosition(`object`: Any): Int {
-                return (viewPager as? ViewPagerSize)?.getItemPosition(`object`) ?: POSITION_NONE
+                return (viewPager as? ViewPagerSize)?.getItemPosition(`object`) ?: super<FragmentStatePagerAdapter>.getItemPosition(`object`)
             }
         }
     } else {
@@ -121,7 +121,7 @@ inline fun <reified T : Fragment> ViewGroup.viewPager(
             override fun getAdapter() = this
 
             override fun getItemPosition(`object`: Any): Int {
-                return (viewPager as? ViewPagerSize)?.getItemPosition(`object`) ?: POSITION_NONE
+                return (viewPager as? ViewPagerSize)?.getItemPosition(`object`) ?: super<FragmentPagerAdapter>.getItemPosition(`object`)
             }
         }
     }
@@ -168,22 +168,6 @@ fun ViewGroup.viewPager(
     return viewPager
 }
 
-fun ViewGroup.viewPager(
-    quickView: QuickView,
-    withState: Boolean = true,
-    limit: Int = 0,
-    layoutParams: ViewGroup.LayoutParams = matchLayoutParams,
-    builder: (ViewGroup.() -> Unit)? = null,
-): ViewPager {
-    val viewGroup = FrameLayout(context)
-    builder?.invoke(viewGroup)
-    val childViews = viewGroup.children.toList()
-    childViews.forEach {
-        it.removeParent()
-    }
-    return viewPagerWithView(quickView, childViews, withState, limit, layoutParams)
-}
-
 fun LinearLayout.viewPagerWithView(
     quickView: QuickView,
     views: List<View>,
@@ -211,4 +195,37 @@ fun ViewGroup.viewPagerWithView(
         contentView.toFragment()
     }
     return viewPager(quickView, contentFragmentList, withState, limit, layoutParams, builder)
+}
+
+fun ViewGroup.viewPager(
+    quickView: QuickView,
+    withState: Boolean = true,
+    limit: Int = 0,
+    layoutParams: ViewGroup.LayoutParams = matchLayoutParams,
+    viewConvert: ((view: View) -> Fragment)? = null,
+    builder: (FragmentGroup.() -> Unit)? = null,
+): ViewPager {
+    val viewGroup = FragmentGroup(context, viewConvert)
+    builder?.invoke(viewGroup)
+    return viewPager(quickView, viewGroup.fragmentList, withState, limit, layoutParams)
+}
+
+
+class FragmentGroup @JvmOverloads constructor(
+    context: Context,
+    private val viewConvert: ((view: View) -> Fragment)? = null,
+) : ViewGroup(context) {
+    internal val fragmentList = mutableListOf<Fragment>()
+    override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
+    }
+
+    override fun addView(child: View?, index: Int, params: LayoutParams?) {
+        child?.let {
+            fragmentList.add(viewConvert?.invoke(it) ?: child.toFragment())
+        }
+    }
+
+    fun addFragment(fragment: Fragment) {
+        fragmentList.add(fragment)
+    }
 }

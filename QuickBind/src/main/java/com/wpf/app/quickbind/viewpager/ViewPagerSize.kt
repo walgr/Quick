@@ -1,6 +1,5 @@
 package com.wpf.app.quickbind.viewpager
 
-import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.PagerAdapter
 
 /**
@@ -16,7 +15,7 @@ interface ViewPagerSize {
     fun getAdapter(): PagerAdapter?
 
     fun getItemPosition(`object`: Any): Int {
-        return FragmentPagerAdapter.POSITION_NONE
+        return PagerAdapter.POSITION_UNCHANGED
     }
 
     fun notifyPagerSize(viewPager: ViewPagerSize?, size: Int) {

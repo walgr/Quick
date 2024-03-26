@@ -37,7 +37,6 @@ class FragmentsStateAdapter(
     override fun getAdapter() = this
 
     override fun getItemPosition(`object`: Any): Int {
-        return POSITION_NONE
+        return super<FragmentStatePagerAdapter>.getItemPosition(`object`)
     }
-
 }

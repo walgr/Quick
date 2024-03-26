@@ -49,12 +49,12 @@ abstract class QuickBaseFragment @JvmOverloads constructor(
         if (mView == null) {
             mView = InitViewHelper.init(inflater.context, layoutId, layoutView, layoutViewInContext)
         }
+        dealContentView(mView!!)
         return mView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        dealContentView(view)
         QuickBind.bind(this)
         initView(mView!!)
     }

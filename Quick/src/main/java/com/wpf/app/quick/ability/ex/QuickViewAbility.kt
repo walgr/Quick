@@ -2,6 +2,7 @@ package com.wpf.app.quick.ability.ex
 
 import android.view.View
 import androidx.annotation.LayoutRes
+import androidx.databinding.DataBindingUtil.setContentView
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelStoreOwner
 import com.wpf.app.quick.activity.QuickView
@@ -9,6 +10,7 @@ import com.wpf.app.quick.activity.viewmodel.ViewLifecycle
 import com.wpf.app.quickbind.interfaces.BindViewModel
 import com.wpf.app.quickutil.bind.RunOnContext
 import com.wpf.app.quickutil.helper.match
+import com.wpf.app.quickutil.helper.matchLayoutParams
 import com.wpf.app.quickutil.other.Unique
 import com.wpf.app.quickutil.other.forceTo
 
@@ -45,6 +47,7 @@ fun <T : QuickActivityAbility> T.with(other: T): MutableList<T> {
     return abilityList
 }
 
+@Deprecated("框架使用,建议使用contentView")
 fun setContentViewCommon(
     @LayoutRes layoutId: Int = 0,
     layoutView: View? = null,
@@ -57,6 +60,7 @@ fun setContentViewCommon(
     }
 }
 
+@Deprecated("框架使用,建议使用contentView")
 fun setContentView(
     @LayoutRes layoutId: Int = 0,
     layoutView: View? = null,
@@ -78,14 +82,18 @@ fun setContentView(
 
         override fun beforeDealContentView(owner: ViewModelStoreOwner, view: View): View {
             super.beforeDealContentView(owner, view)
-            view.layoutParams?.width = match
-            view.layoutParams?.height = match
+            if (view.layoutParams != null) {
+                view.layoutParams?.width = match
+                view.layoutParams?.height = match
+            } else {
+                view.layoutParams = matchLayoutParams
+            }
             return contentBuilder?.invoke(owner.forceTo(), view) ?: view
         }
     })
 }
 
-interface QuickActivityAbility: ViewLifecycle {
+interface QuickActivityAbility : ViewLifecycle {
     fun getPrimeKey(): String
 
     fun dealContentView(owner: ViewModelStoreOwner, view: View) {
@@ -112,6 +120,6 @@ interface QuickVMAbility<VM : ViewModel> : QuickActivityAbility, Unique, BindVie
     override fun getPrimeKey() = "viewModel"
 }
 
-interface QuickFragmentAbility: QuickActivityAbility {
+interface QuickFragmentAbility : QuickActivityAbility {
     fun setUserVisibleHint(isVisibleToUser: Boolean)
 }
