@@ -32,7 +32,7 @@ inline fun <reified T : ViewGroup.LayoutParams> layoutParams(layoutParams: ViewG
     return T::class.java.getConstructor(ViewGroup.LayoutParams::class.java).newInstance(layoutParams) as T
 }
 
-fun <T : ViewGroup.LayoutParams> T.with(width: Int = -1, height: Int = -1): T {
+fun <T : ViewGroup.LayoutParams> T.reset(width: Int = -1, height: Int = -1): T {
     if (width != -1) {
         this.width = width
     }

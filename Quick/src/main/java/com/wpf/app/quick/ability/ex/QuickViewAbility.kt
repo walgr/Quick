@@ -12,7 +12,6 @@ import com.wpf.app.quickutil.helper.match
 import com.wpf.app.quickutil.other.Unique
 import com.wpf.app.quickutil.other.forceTo
 
-
 fun <T : QuickActivityAbility> MutableList<T>.with(others: MutableList<T>): MutableList<T> {
     others.filter { it is Unique }.map { it.getPrimeKey() }.forEach { otherPrimeKey ->
         this.remove(this.find { it.getPrimeKey() == otherPrimeKey })

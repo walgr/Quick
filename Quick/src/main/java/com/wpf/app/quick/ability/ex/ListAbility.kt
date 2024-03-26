@@ -16,8 +16,8 @@ fun LinearLayout.list(
     dataList: List<QuickItemData>? = null,
     layoutParams: LinearLayout.LayoutParams = wrapContentHeightParams,
     builder: (QuickRecyclerView.() -> Unit)? = null
-) {
-    this.forceTo<ViewGroup>().list(layoutManager, dataList, layoutParams, builder)
+): QuickRecyclerView {
+    return this.forceTo<ViewGroup>().list(layoutManager, dataList, layoutParams, builder)
 }
 
 fun ViewGroup.list(
@@ -25,13 +25,15 @@ fun ViewGroup.list(
     dataList: List<QuickItemData>? = null,
     layoutParams: ViewGroup.LayoutParams = matchWrapLayoutParams,
     builder: (QuickRecyclerView.() -> Unit)? = null
-) {
-    addView(QuickRecyclerView(context).apply {
+): QuickRecyclerView {
+    val list = QuickRecyclerView(context).apply {
         id = R.id.quickList
         this.layoutManager = layoutManager
         dataList?.let {
             setData(it.toMutableList())
         }
         builder?.invoke(this)
-    }, layoutParams)
+    }
+    addView(list, layoutParams)
+    return list
 }
