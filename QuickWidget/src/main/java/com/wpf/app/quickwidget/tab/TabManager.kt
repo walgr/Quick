@@ -77,7 +77,7 @@ open class TabManager : GroupManager() {
         size: Int,
         defaultPos: Int = 0,
         repeatClick: Boolean = false,
-        init: ((curPos: Int, isSelect: Boolean, view: View) -> Unit)? = null
+        init: ((curPos: Int, isSelect: Boolean, view: View) -> Unit)? = null,
     ): TabManager {
         this.layoutId = layoutId
         this.parent = parent
@@ -136,15 +136,13 @@ open class TabManager : GroupManager() {
         curPos = defaultPos
         if (isFirstInit) {
             tabLayout?.apply {
-                onTabSelected { tab ->
+                onTabSelected {
                     repeat(tabCount) {
-                        if (tab != null) {
-                            val view: Tab? = getTabAt(it)
-                            newInit?.invoke(it, view == tab, tab.view)
-                            if (view == tab) {
-                                curPos = it
-                                change?.invoke(curPos)
-                            }
+                        val view: Tab? = getTabAt(it)
+                        newInit?.invoke(it, view == this, this.view)
+                        if (view == this) {
+                            curPos = it
+                            change?.invoke(curPos)
                         }
                     }
                 }

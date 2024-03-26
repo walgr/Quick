@@ -10,11 +10,12 @@ fun ViewGroup.title(
     showTitle: Boolean = true,
     layoutParams: ViewGroup.LayoutParams = matchWrapLayoutParams,
     builder: (QuickTitleView.() -> Unit)? = null
-) {
-    if (!showTitle) return
+): QuickTitleView {
     val titleView = QuickTitleView(context)
+    if (!showTitle) return titleView
     titleView.id = R.id.quickTitleView
     titleView.setTitle(titleName)
     addView(titleView, layoutParams)
     builder?.invoke(titleView)
+    return titleView
 }

@@ -1,5 +1,6 @@
 package com.wpf.app.quick.ability.ex
 
+import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
@@ -30,8 +31,8 @@ inline fun <reified T : Fragment> LinearLayout.viewPager(
     limit: Int = 0,
     layoutParams: ViewGroup.LayoutParams = wrapContentHeightParams,
     noinline builder: (QuickViewPager.() -> Unit)? = null,
-) {
-    this.forceTo<ViewGroup>()
+): ViewPager {
+    return this.forceTo<ViewGroup>()
         .viewPager<T>(quickView, withState, defaultSize, limit, layoutParams, builder)
 }
 
@@ -42,7 +43,7 @@ inline fun <reified T : Fragment> ViewGroup.viewPager(
     limit: Int = 0,
     layoutParams: ViewGroup.LayoutParams = matchLayoutParams,
     noinline builder: (QuickViewPager.() -> Unit)? = null,
-) {
+): ViewPager {
     val viewPager = QuickViewPager(context)
     viewPager.id = R.id.quickViewPager
     if (withState) {
@@ -129,6 +130,7 @@ inline fun <reified T : Fragment> ViewGroup.viewPager(
     }
     addView(viewPager, layoutParams)
     builder?.invoke(viewPager)
+    return viewPager
 }
 
 fun LinearLayout.viewPager(
@@ -138,8 +140,8 @@ fun LinearLayout.viewPager(
     limit: Int = 0,
     layoutParams: ViewGroup.LayoutParams = wrapContentHeightParams,
     builder: (QuickViewPager.() -> Unit)? = null,
-) {
-    this.forceTo<ViewGroup>()
+): ViewPager {
+    return this.forceTo<ViewGroup>()
         .viewPager(quickView, fragments, withState, limit, layoutParams, builder)
 }
 
@@ -150,7 +152,7 @@ fun ViewGroup.viewPager(
     limit: Int = 0,
     layoutParams: ViewGroup.LayoutParams = matchLayoutParams,
     builder: (QuickViewPager.() -> Unit)? = null,
-) {
+): ViewPager {
     val viewPager = QuickViewPager(context)
     viewPager.id = R.id.quickViewPager
     if (withState) {
@@ -163,6 +165,7 @@ fun ViewGroup.viewPager(
     }
     addView(viewPager, layoutParams)
     builder?.invoke(viewPager)
+    return viewPager
 }
 
 fun ViewGroup.viewPager(
@@ -170,15 +173,15 @@ fun ViewGroup.viewPager(
     withState: Boolean = true,
     limit: Int = 0,
     layoutParams: ViewGroup.LayoutParams = matchLayoutParams,
-    builder: ViewGroup.() -> Unit,
-) {
+    builder: (ViewGroup.() -> Unit)? = null,
+): ViewPager {
     val viewGroup = FrameLayout(context)
-    builder.invoke(viewGroup)
+    builder?.invoke(viewGroup)
     val childViews = viewGroup.children.toList()
     childViews.forEach {
         it.removeParent()
     }
-    viewPagerWithView(quickView, childViews, withState, limit, layoutParams)
+    return viewPagerWithView(quickView, childViews, withState, limit, layoutParams)
 }
 
 fun LinearLayout.viewPagerWithView(
@@ -188,8 +191,9 @@ fun LinearLayout.viewPagerWithView(
     limit: Int = 0,
     layoutParams: ViewGroup.LayoutParams = wrapContentHeightParams,
     builder: (ViewPager.() -> Unit)? = null,
-) {
-    this.forceTo<ViewGroup>().viewPagerWithView(quickView, views, withState, limit, layoutParams, builder)
+): ViewPager {
+    return this.forceTo<ViewGroup>()
+        .viewPagerWithView(quickView, views, withState, limit, layoutParams, builder)
 }
 
 fun ViewGroup.viewPagerWithView(
@@ -199,12 +203,12 @@ fun ViewGroup.viewPagerWithView(
     limit: Int = 0,
     layoutParams: ViewGroup.LayoutParams = matchLayoutParams,
     builder: (ViewPager.() -> Unit)? = null,
-) {
+): ViewPager {
     val contentFragmentList = views.map {
         val contentView = FrameLayout(context)
         contentView.layoutParams = matchLayoutParams
         contentView.addView(it)
         contentView.toFragment()
     }
-    viewPager(quickView, contentFragmentList, withState, limit, layoutParams, builder)
+    return viewPager(quickView, contentFragmentList, withState, limit, layoutParams, builder)
 }

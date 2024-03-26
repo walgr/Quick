@@ -6,7 +6,7 @@ import com.wpf.app.quickutil.other.forceTo
 import com.wpf.app.quickutil.other.printLog
 import java.util.LinkedList
 
-fun View.printLog() {
+fun View.viewPrintLog() {
     depthFirst(this)
 }
 
