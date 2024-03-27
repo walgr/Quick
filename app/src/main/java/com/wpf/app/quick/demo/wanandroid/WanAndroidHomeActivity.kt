@@ -1,8 +1,8 @@
 package com.wpf.app.quick.demo.wanandroid
 
+import android.annotation.SuppressLint
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.viewpager.widget.ViewPager
 import com.wpf.app.quick.ability.QuickActivity
 import com.wpf.app.quick.ability.ex.contentView
 import com.wpf.app.quick.ability.ex.fragment
@@ -24,7 +24,6 @@ import com.wpf.app.quickwork.ability.title
 
 @GetClass
 class WanAndroidHomeActivity : QuickActivity(contentView<LinearLayout> { quickView ->
-    var viewPager: ViewPager? = null
     title("WanAndroid") {
         textButton("登录", {
 
@@ -32,7 +31,7 @@ class WanAndroidHomeActivity : QuickActivity(contentView<LinearLayout> { quickVi
     }
     val tabNames = arrayOf("推荐", "专题")
     val tabLayout = tabLayout(layoutParams = matchWrapLayoutParams.reset(height = 44.dp()))
-    viewPager = viewPager(quickView) {
+    val viewPager = viewPager(quickView) {
         fragment(RecommendFragment())
         viewFragment {
             myLayout(layoutViewInContext = runOnContext {
@@ -42,11 +41,12 @@ class WanAndroidHomeActivity : QuickActivity(contentView<LinearLayout> { quickVi
             })
         }
     }
-    TabManagerProvider.new().initTabWan(tabLayout, tabNames.size) { curPos: Int, isSelect: Boolean, tvName: TextView ->
+    TabManagerProvider.new().initTabWan(tabLayout, tabNames.size) { curPos: Int, _: Boolean, tvName: TextView ->
         tvName.text = tabNames[curPos]
     }.bindViewPager(viewPager)
 }) {
 
+    @SuppressLint("NonConstantResourceId")
     @TabInit(R.layout.tab_wanandroid, "initTabWan")
     val tab: Any? = null
 }
