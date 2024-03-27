@@ -22,67 +22,65 @@ class TabInitProcessor(environment: SymbolProcessorEnvironment) : IdProcessor(en
         data: Unit,
         packageName: String,
         className: String,
-        propertyName: String?
+        propertyName: String?,
     ) {
         super.visitPropertyDeclaration(property, data, packageName, className, propertyName)
         val tabInitAnn = property.annotations.find {
             it.shortName.getShortName().contains(TabInit::class.simpleName!!)
         }
         if (tabInitAnn?.arguments == null) return
-        val layoutIdName = getAnnotationArgumentIdCode(fileStr, TabInit::class, "layout").first()
+        val packageNameR =
+            "import .*R\\r\\n".toRegex().find(srcFileStr, 0)?.value
+                ?.replace("import ", "")
+                ?.replace(".R", "")?.removeRN() ?: ""
+        val layoutIdName =
+            getAnnotationArgumentIdCode(fileStr, TabInit::class, "layout").firstOrNull() ?: return
+        if (layoutIdName.isEmpty()) return
         val layoutId = tabInitAnn.arguments[0].value as? Int ?: return
         val funName = tabInitAnn.arguments[1].value as? String ?: return
         val idTypeStrList =
             (tabInitAnn.arguments[if (funName.isEmpty()) 1 else 2].value as ArrayList<KSAnnotation>).map { it.arguments.joinToString() }
+        this.packageName = packageName
         outFileName = "TabInitHelper"
+        val idFind = "(?<=id:)(.*?)(?=(\$|,))".toRegex()
+        val viewClasFind = "(?<=viewClass:)(.*?)(?=(\$|,))".toRegex()
+        val classNameFind = "(?<=className:)(.*?)(?=(\$|,))".toRegex()
         val idTypePairList: MutableList<Triple<String, String, String>> = idTypeStrList.map {
-            val id = it.substringAfterAndBeforeNoInclude("id:", ",")
-            if (!it.contains(ViewType.CustomView.name)) {
-                val viewType = ViewType.valueOf(
-                    it.substringAfterAndBeforeNoInclude(
-                        "viewClass:${ViewType::class.java.name}.",
-                        ","
-                    )
-                )
+            val id = idFind.find(it)?.value ?: ""
+            val viewClas = viewClasFind.find(it)?.value ?: ""
+            val itemClassName = classNameFind.find(it)?.value ?: ""
+            if (!viewClas.contains(ViewType.CustomView.name)) {
+                val viewType = ViewType.valueOf(viewClas.split(".").last())
                 Triple(id, viewType.packageName, viewType.className)
             } else {
-                val clsName = it.substringAfterAndBeforeNoInclude("className:", ",")
                 Triple(
                     id,
-                    clsName.replace("." + clsName.split(".").last(), ""),
-                    clsName.split(".").last()
+                    itemClassName.replace("." + itemClassName.split(".").last(), ""),
+                    itemClassName.split(".").last()
                 )
             }
         }.toMutableList()
         if (idTypePairList.isEmpty()) {
-            var layoutFileStr = File(
+            val layoutFileStr = File(
                 mainPath + "/res/layout/".replace(
                     "/",
                     File.separator
                 ) + layoutIdName + ".xml"
-            ).readText().replace("\r", "").replace("\n", "")
-            val idFind = "android:id=\"@+id/"
-            if (layoutFileStr.contains(idFind)) {
-                var findPos = -1
-                do {
-                    if (findPos != -1) {
-                        layoutFileStr = layoutFileStr.substring(findPos + idFind.length)
-                    }
-                    findPos = layoutFileStr.indexOf(idFind, findPos + 1)
-                    val typeIdStr = layoutFileStr.substring(
-                        layoutFileStr.indexOfWithBefore("<", idFind),
-                        layoutFileStr.indexOfWithAfter("\"", idFind)
-                    )
-                    val typeStr = typeIdStr.substringAfterAndBeforeNoInclude("<", idFind).trim()
-                    val idStr = typeIdStr.substringAfterAndBeforeNoInclude(idFind, "\"").trim()
-                    val pkg = if (typeStr.contains(".")) {
-                        typeStr.replace("." + typeStr.split(".").last(), "")
-                    } else ViewType.valueOf(typeStr).packageName
-                    val clsName = if (typeStr.contains(".")) {
-                        typeStr.split(".").last()
-                    } else ViewType.valueOf(typeStr).className
-                    idTypePairList.add(Triple("R.id.${idStr}", pkg, clsName))
-                } while (findPos != -1)
+            ).readText().removeRN()
+            val idListFind = "(?<=android:id=\"@\\+id/)(.*?)(?=\")".toRegex()
+            val idList = idListFind.findAll(layoutFileStr).map {
+                it.value
+            }
+            idList.forEach {
+                val typeStrFind = "(?<=<)(.*?)(?=\\s(.*?)${it})".toRegex()
+                val typeStr = typeStrFind.findAll(layoutFileStr).lastOrNull()?.value ?: ""
+                val pkg = if (typeStr.contains(".")) {
+                    typeStr.replace("." + typeStr.split(".").last(), "")
+                } else ViewType.valueOf(typeStr).packageName
+                val clsName = if (typeStr.contains(".")) {
+                    typeStr.split(".").last()
+                } else ViewType.valueOf(typeStr).className
+                idTypePairList.add(Triple("R.id.$it", pkg, clsName))
             }
         }
         val initTabFunName = "initTab"
@@ -101,16 +99,18 @@ class TabInitProcessor(environment: SymbolProcessorEnvironment) : IdProcessor(en
                 "    return tabManager"
         val args = idTypePairList.map {
             ClassName(
-                packageName,
+                packageNameR.ifEmpty { packageName },
                 "R"
             )
         }.toTypedArray()
         val idNameList = if (code.contains("%T")) idTypePairList.map {
-            it.first.replace(
-                "R.id.",
-                ""
-            )
-        } else getAnnotationArgumentIdCode(fileStr, TabInit::class)
+            it.first.replace("R.id.", "")
+        } else {
+            val initIdListStrFind = "(?<=@TabInit\\().*(?=]\\))".toRegex()
+            val initIdList = initIdListStrFind.find(fileStr)?.value ?: ""
+            val idNameListFind = "(?<=R.id.)(.*?)(?=(\$|,))".toRegex()
+            idNameListFind.findAll(initIdList).map { it.value }.toMutableList()
+        }
         funBuilderMap[funName.ifEmpty { layoutIdName }] =
             FunSpec.builder(funName.ifEmpty { layoutIdName })
                 .receiver(ClassName("com.wpf.app.quickwidget.tab.", "TabManager"))
@@ -153,7 +153,6 @@ class TabInitProcessor(environment: SymbolProcessorEnvironment) : IdProcessor(en
 
     override fun visitEnd() {
         if (outFileName.isNullOrEmpty()) return
-        packageName = "com.wpf.quick.helper"
         if (outFileSpec == null) {
             outFileSpec = FileSpec.builder(packageName, outFileName!!)
         }

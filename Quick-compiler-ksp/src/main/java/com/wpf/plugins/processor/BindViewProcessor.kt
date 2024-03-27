@@ -43,7 +43,6 @@ class BindViewProcessor(environment: SymbolProcessorEnvironment) : IdProcessor(e
                 property.annotations.find {
                     allowClass.map { cls -> cls.simpleName }.contains(it.shortName.asString())
                 }?.shortName?.asString() ?: "",
-                propertyName!!
             ).contains("R2")
         ) return
         outFileName = outFileStartName + className + outFileEndName
@@ -98,7 +97,6 @@ class BindViewProcessor(environment: SymbolProcessorEnvironment) : IdProcessor(e
             getAnnotationCode(
                 fileStr,
                 GroupView::class.simpleName!!,
-                propertyName
             ).substringAfterAndBefore("[", "]")
                 .split(",").forEach {
                     val code = delR(it)

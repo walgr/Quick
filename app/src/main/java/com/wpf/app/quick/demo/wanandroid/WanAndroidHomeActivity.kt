@@ -10,6 +10,7 @@ import com.wpf.app.quick.ability.ex.viewFragment
 import com.wpf.app.quick.ability.ex.myLayout
 import com.wpf.app.quick.ability.ex.viewPager
 import com.wpf.app.quick.annotations.getclass.GetClass
+import com.wpf.app.quick.annotations.tab.TabInit
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.demo.wanandroid.fragment.RecommendFragment
 import com.wpf.app.quickutil.bind.runOnContext
@@ -18,13 +19,19 @@ import com.wpf.app.quickutil.helper.matchWrapLayoutParams
 import com.wpf.app.quickutil.helper.reset
 import com.wpf.app.quickutil.widget.onPageSelected
 import com.wpf.app.quickutil.widget.onTabSelected
+import com.wpf.app.quickwidget.tab.TabManagerProvider
 import com.wpf.app.quickwork.ability.tabLayout
+import com.wpf.app.quickwork.ability.textButton
 import com.wpf.app.quickwork.ability.title
 
 @GetClass
 class WanAndroidHomeActivity : QuickActivity(contentView<LinearLayout> { quickView ->
     var viewPager: ViewPager? = null
-    title("WanAndroid")
+    title("WanAndroid") {
+        textButton("登录", {
+
+        })
+    }
     tabLayout(R.layout.tab_wanandroid, 2,
         matchWrapLayoutParams.reset(height = 44.dp()),
         tabInit = { position, tabView ->
@@ -58,4 +65,8 @@ class WanAndroidHomeActivity : QuickActivity(contentView<LinearLayout> { quickVi
             })
         }
     }
-})
+}) {
+
+    @TabInit(R.layout.tab_wanandroid, "initTabWan")
+    val tab: Any? = null
+}

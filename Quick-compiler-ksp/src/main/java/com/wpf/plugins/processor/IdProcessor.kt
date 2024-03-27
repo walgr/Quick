@@ -5,9 +5,13 @@ import java.io.File
 import kotlin.reflect.KClass
 
 open class IdProcessor(environment: SymbolProcessorEnvironment) : BaseProcessor(environment) {
+
+    protected val srcFileStr by lazy {
+        if (property?.containingFile == null) "" else File(property!!.containingFile!!.filePath).readText()
+    }
     protected val fileStr by lazy {
         if (property?.containingFile == null) "" else File(property!!.containingFile!!.filePath).readText()
-            .replace("\r", "").replace("\n", "").trim()
+            .removeRN().trim()
     }
 
     protected fun getAnnotationArgumentIdCode(
@@ -19,7 +23,6 @@ open class IdProcessor(environment: SymbolProcessorEnvironment) : BaseProcessor(
             getAnnotationCode(
                 fileStr,
                 annotation.simpleName!!,
-                propertyName!!
             ), type
         ).map {
             delR(it)
@@ -31,12 +34,10 @@ open class IdProcessor(environment: SymbolProcessorEnvironment) : BaseProcessor(
      */
     protected fun getAnnotationCode(
         fileStr: String?,
-        annotationName: String?,
-        propertyName: String
+        startStr: String?,
     ): String {
-        if (fileStr.isNullOrEmpty() || annotationName.isNullOrEmpty()) return ""
-        return fileStr.substringAfterAndBefore("@$annotationName", propertyName)
-            .substringAfterAndBeforeLast("(", ")")
+        if (fileStr.isNullOrEmpty() || startStr.isNullOrEmpty()) return ""
+        return fileStr.substringAfterAndBefore("@$startStr(", ")")
     }
 
     /**
@@ -92,5 +93,9 @@ open class IdProcessor(environment: SymbolProcessorEnvironment) : BaseProcessor(
         if (before.isEmpty()) return substringAfter(after).replace(after, "")
         return substringAfter(after).replace(after, "").substringBeforeLast(before)
             .replace(before, "")
+    }
+
+    protected fun String.removeRN(): String {
+        return replace("\r", "").replace("\n", "")
     }
 }

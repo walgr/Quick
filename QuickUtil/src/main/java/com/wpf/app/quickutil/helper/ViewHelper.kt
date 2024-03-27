@@ -55,6 +55,12 @@ fun View?.allChild(): List<View> {
     return childList
 }
 
+fun View.onceClick(interval: Long = 1000L, onClickListener: View.OnClickListener) {
+    onceClick(interval) {
+        onClickListener.onClick(it)
+    }
+}
+
 fun View.onceClick(interval: Long = 1000L, onClickListener: (View) -> Unit) {
     setOnClickListener {
         val viewKey = it.toString()

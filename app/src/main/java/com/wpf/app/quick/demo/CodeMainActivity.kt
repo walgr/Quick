@@ -8,7 +8,9 @@ import com.wpf.app.quick.ability.ex.binding
 import com.wpf.app.quick.ability.ex.contentView
 import com.wpf.app.quick.ability.ex.with
 import com.wpf.app.quick.annotations.bind.BindView
+import com.wpf.app.quick.annotations.tab.IdView
 import com.wpf.app.quick.annotations.tab.TabInit
+import com.wpf.app.quick.annotations.tab.view.ViewType
 import com.wpf.app.quick.demo.databinding.ActivityMainCodeBinding
 import com.wpf.app.quick.demo.fragment.MainReleaseFragment
 import com.wpf.app.quick.demo.fragment.MainTestFragment
@@ -17,7 +19,6 @@ import com.wpf.app.quickbind.viewpager.QuickViewPager
 import com.wpf.app.quickutil.helper.toColor
 import com.wpf.app.quickutil.widget.onPageSelected
 import com.wpf.app.quickwidget.tab.TabManagerProvider
-import com.wpf.quick.helper.initTabMain
 
 class CodeMainActivity : QuickActivity(
     contentView(R.layout.activity_main_code).with(binding<ActivityMainCodeBinding> {

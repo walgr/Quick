@@ -27,6 +27,16 @@ class App : Application() {
         initTestRequest()
         QuickInit.init(this)
 
+        QuickTitleView.childStyleBuilder(this) {
+            titleSize = 15.dp(it)
+            titleColor = R.color.white.toColor(it)
+            titleBold = false
+
+            imgWidth = 24.dp(it)
+            imgHeight = 24.dp(it)
+
+            space = 4.dp(it)
+        }
         QuickTitleView.commonStyleBuilder(this) {
             background = R.color.purple_700
             contentGravity = QuickTitleView.CONTENT_GRAVITY_CENTER

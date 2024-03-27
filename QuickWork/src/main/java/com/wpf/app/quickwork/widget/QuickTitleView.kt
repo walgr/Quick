@@ -1,7 +1,6 @@
 package com.wpf.app.quickwork.widget
 
 import android.content.Context
-import android.graphics.Color
 import android.graphics.Typeface
 import android.util.AttributeSet
 import android.util.TypedValue
@@ -19,8 +18,12 @@ import androidx.core.view.marginEnd
 import androidx.core.view.updateLayoutParams
 import com.wpf.app.quickutil.helper.attribute.AutoGetAttributeHelper
 import com.wpf.app.quickutil.helper.dp
+import com.wpf.app.quickutil.helper.reset
 import com.wpf.app.quickutil.helper.toColor
 import com.wpf.app.quickutil.helper.toView
+import com.wpf.app.quickutil.helper.wrapLayoutParams
+import com.wpf.app.quickutil.widget.bold
+import com.wpf.app.quickwidget.group.QuickSpaceLinearLayout
 import com.wpf.app.quickwork.R
 import kotlin.math.max
 
@@ -35,7 +38,7 @@ class QuickTitleView @JvmOverloads constructor(
     private var ivBack: ImageView? = null
     private var tvTitle: TextView? = null
     private var tvSubTitle: TextView? = null
-    private var moreGroup: ViewGroup? = null
+    private var moreGroup: QuickSpaceLinearLayout? = null
     private var line: View? = null
 
     private var style: QuickTitleStyle
@@ -45,7 +48,12 @@ class QuickTitleView @JvmOverloads constructor(
     init {
         orientation = VERTICAL
         this.style =
-            AutoGetAttributeHelper.init(context, attrs, R.styleable.QuickTitleView, commonStyle?.copy())
+            AutoGetAttributeHelper.init(
+                context,
+                attrs,
+                R.styleable.QuickTitleView,
+                commonStyle?.copy()
+            )
         R.layout.toolbar_layout.toView(context, this, true)
         minimumHeight = 44.dp(context)
         contentLayout = findViewById(R.id.titleContentLayout)
@@ -231,6 +239,9 @@ class QuickTitleView @JvmOverloads constructor(
     }
 
     override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
+        if (moreGroup?.childCount != 0 && childStyle?.space != null) {
+            moreGroup?.setNewItemSpace(childStyle?.space!!)
+        }
         super.onLayout(changed, l, t, r, b)
         if (isInEditMode && style.isAbsoluteCenter == true && titleGroup != null && ivBack != null && moreGroup != null) {
             style.apply {
@@ -270,6 +281,37 @@ class QuickTitleView @JvmOverloads constructor(
         }
     }
 
+    fun dealChildViewCommonStyle(view: View) {
+        childStyle?.run {
+            when (view) {
+                is TextView -> {
+                    titleColor?.let {
+                        view.setTextColor(it)
+                    }
+                    titleBold?.let {
+                        view.bold(it)
+                    }
+                    titleSize?.let {
+                        view.setTextSize(TypedValue.COMPLEX_UNIT_PX, it.toFloat())
+                    }
+                }
+
+                is ImageView -> {
+                    if (imgWidth != null && imgHeight != null) {
+                        layoutParams = (layoutParams ?: wrapLayoutParams).reset(imgWidth!!, imgHeight!!)
+                    } else {
+
+                    }
+                }
+
+                else -> {
+
+                }
+            }
+        }
+
+    }
+
     fun setCommonClickListener(commonClickListener: CommonClickListener) {
         this.commonClickListener = commonClickListener
     }
@@ -286,10 +328,18 @@ class QuickTitleView @JvmOverloads constructor(
 
         private var commonStyle: QuickTitleStyle? = null
         fun commonStyleBuilder(
-            context: Context, builder: QuickTitleStyle.(context: Context) -> Unit
+            context: Context, builder: QuickTitleStyle.(context: Context) -> Unit,
         ) {
             commonStyle = QuickTitleStyle()
             builder.invoke(commonStyle!!, context)
+        }
+
+        internal var childStyle: QuickTitleChildStyle? = null
+        fun childStyleBuilder(
+            context: Context, builder: QuickTitleChildStyle.(context: Context) -> Unit,
+        ) {
+            childStyle = QuickTitleChildStyle()
+            builder.invoke(childStyle!!, context)
         }
     }
 
@@ -311,6 +361,17 @@ class QuickTitleView @JvmOverloads constructor(
     @IntDef(CONTENT_GRAVITY_CENTER, CONTENT_GRAVITY_START, CONTENT_GRAVITY_END)
     @Retention(AnnotationRetention.SOURCE)
     annotation class ContentGravity
+
+    data class QuickTitleChildStyle(
+        @ColorInt var titleColor: Int? = null,
+        var titleBold: Boolean? = null,
+        var titleSize: Int? = null,
+
+        var imgWidth: Int? = null,
+        var imgHeight: Int? = null,
+
+        var space: Int? = null,
+    )
 
     data class QuickTitleStyle(
         @DrawableRes var background: Int? = null,
@@ -337,7 +398,7 @@ class QuickTitleView @JvmOverloads constructor(
         var subTitleSize: Int? = null,
 
         var space: Int? = null,
-        var titleSpace: Int? = null
+        var titleSpace: Int? = null,
     ) {
         fun initDataInXml(context: Context) {
             if (this.background == null) {

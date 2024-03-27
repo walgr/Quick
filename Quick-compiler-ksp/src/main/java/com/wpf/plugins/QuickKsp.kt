@@ -56,11 +56,14 @@ internal class QuickSymbolProcessor(private val environment: SymbolProcessorEnvi
                     }?.second
                     ksAnnotatedList?.add(symbol) ?: symbolMap.add(Pair(file, mutableListOf(symbol)))
                 }
-                val processor = annClassProcessor.second.primaryConstructor!!.call(environment)
-                symbols.forEach { symbol ->
-                    symbol.accept(processor, Unit)
+                symbolMap.forEach {
+                    it.second.forEachIndexed { index, symbol ->
+                        val file = "${symbol.containingFile?.filePath}"
+                        val processor = annClassProcessor.second.primaryConstructor!!.call(environment)
+                        symbol.accept(processor, Unit)
+                        processor.visitEnd()
+                    }
                 }
-                processor.visitEnd()
             } else {
                 val symbols = annClassProcessor.first.flatMap {
                     resolver.getSymbolsWithAnnotation(it.qualifiedName!!)
@@ -96,7 +99,7 @@ internal class QuickSymbolProcessor(private val environment: SymbolProcessorEnvi
         return emptyList()
     }
 
-    private fun log(msg: String) {
+    private fun print(msg: String) {
         environment.logger.warn(msg)
     }
 }

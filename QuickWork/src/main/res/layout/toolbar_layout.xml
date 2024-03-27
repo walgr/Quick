@@ -61,7 +61,7 @@
 
         </LinearLayout>
 
-        <LinearLayout
+        <com.wpf.app.quickwidget.group.QuickSpaceLinearLayout
             android:id="@+id/moreGroup"
             android:orientation="horizontal"
             android:layout_width="wrap_content"
