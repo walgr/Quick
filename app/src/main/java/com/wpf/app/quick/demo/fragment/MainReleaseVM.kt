@@ -17,8 +17,9 @@ import com.wpf.app.quick.demo.model.MyMessage
 import com.wpf.app.quick.demo.wanandroid.WanAndroidHomeActivity
 import com.wpf.app.quickbind.annotations.BindSp2View
 import com.wpf.app.quickutil.activity.quickStartActivity
+import com.wpf.app.quickutil.other.printLog
 
-class MainReleaseVM: QuickVBModel<FragmentMainReleaseBinding>() {
+class MainReleaseVM: QuickVBModel<MainReleaseFragment, FragmentMainReleaseBinding>() {
 
     @SuppressLint("NonConstantResourceId", "StaticFieldLeak")
     @BindSp2View(bindSp = "绑定的SpKey3", defaultValue = "默认值3")
@@ -32,7 +33,9 @@ class MainReleaseVM: QuickVBModel<FragmentMainReleaseBinding>() {
     }
 
     fun gotoWanAndroid(view: View?) {
-        view?.context?.quickStartActivity<WanAndroidHomeActivity>()
+        quickView?.quickStartActivity<WanAndroidHomeActivity>() {
+            it.resultCode.printLog("返回数据成功")
+        }
     }
 
     fun gotoDialog(view: View?) {

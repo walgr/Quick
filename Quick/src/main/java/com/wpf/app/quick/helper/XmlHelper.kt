@@ -7,6 +7,7 @@ import android.widget.CompoundButton
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
+import com.wpf.app.quickrecyclerview.constant.BRConstant.view
 import com.wpf.app.quickwidget.item.CheckView
 import com.wpf.app.quickutil.activity.quickStartActivity
 import kotlin.reflect.KClass

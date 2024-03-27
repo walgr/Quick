@@ -6,6 +6,7 @@ import com.wpf.app.quick.ability.QuickActivity
 import com.wpf.app.quick.ability.QuickFragment
 import com.wpf.app.quick.ability.ex.contentView
 import com.wpf.app.quick.ability.ex.modelBinding
+import com.wpf.app.quick.ability.ex.modelBindingWithSelf
 import com.wpf.app.quick.ability.ex.viewModel
 import com.wpf.app.quick.ability.ex.with
 import com.wpf.app.quick.activity.QuickView
@@ -24,9 +25,9 @@ inline fun <reified VM : QuickViewModel<out QuickView>> View.toVMFragment(
 )
 
 
-inline fun <reified VM : QuickVBModel<VB>, reified VB : ViewDataBinding> View.toVBFragment(
+inline fun <reified VM : QuickVBModel<QuickFragment, VB>, reified VB : ViewDataBinding> View.toVBFragment(
 ) = QuickFragment(
-    contentView(layoutView = this@toVBFragment).with(modelBinding<VM, VB>())
+    contentView(layoutView = this@toVBFragment).with(modelBindingWithSelf<QuickFragment, VM, VB>())
 )
 
 fun View.toActivity(
@@ -51,11 +52,11 @@ inline fun <reified VM : QuickViewModel<out QuickView>> View.toVMActivity(
     }
 }
 
-inline fun <reified VM : QuickVBModel<VB>, reified VB : ViewDataBinding> View.toVBActivity(
-    noinline onActivityInit: ((view: VB) -> Unit)? = null,
+inline fun <reified VM : QuickVBModel<QuickActivity, VB>, reified VB : ViewDataBinding> View.toVBActivity(
+    noinline onActivityInit: (VB.() -> Unit)? = null,
 ) = QuickActivity(
-    contentView(layoutView = this).with(modelBinding<VM, VB> {
-        onActivityInit?.invoke(it)
+    contentView(layoutView = this).with(modelBindingWithSelf<QuickActivity, VM, VB> { _, _ ->
+        onActivityInit?.invoke(this)
     })
 )
 

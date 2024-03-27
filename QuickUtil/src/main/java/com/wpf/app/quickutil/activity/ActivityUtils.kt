@@ -13,6 +13,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import com.wpf.app.quickutil.other.forceTo
@@ -22,12 +23,12 @@ import java.util.ArrayList
 /**
  * Created by 王朋飞 on 2022/6/15.
  */
-fun <T : Activity> Context.quickStartActivity(
+fun <T : Activity> initIntent(
+    context: Context,
     activityCls: Class<T>,
     data: Map<String, Any?>? = null,
-    resultCallback: ActivityResultCallback<ActivityResult>? = null,
-) {
-    val intent = Intent(this, activityCls)
+): Intent {
+    val intent = Intent(context, activityCls)
     if (data != null) {
         val keys = data.keys
         for (key in keys) {
@@ -41,6 +42,15 @@ fun <T : Activity> Context.quickStartActivity(
             }
         }
     }
+    return intent
+}
+
+fun <T : Activity> Context.quickStartActivity(
+    activityCls: Class<T>,
+    data: Map<String, Any?>? = null,
+    resultCallback: ActivityResultCallback<ActivityResult>? = null,
+) {
+    val intent = initIntent(this, activityCls, data)
     if (resultCallback != null) {
         if (this is AppCompatActivity) {
             registerForActivityResult(
@@ -65,7 +75,15 @@ inline fun <reified T : Activity> Fragment.quickStartActivity(
     data: Map<String, Any?>? = null,
     resultCallback: ActivityResultCallback<ActivityResult>? = null,
 ) {
-    activity?.quickStartActivity(activityCls, data, resultCallback)
+    val intent = initIntent(this.requireContext(), activityCls, data)
+    if (resultCallback != null) {
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult(),
+            resultCallback
+        ).launch(intent)
+    } else {
+        startActivity(intent)
+    }
 }
 
 inline fun <reified T : Activity> Fragment.quickStartActivity(

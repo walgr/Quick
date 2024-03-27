@@ -10,10 +10,12 @@ import kotlinx.coroutines.Job
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-abstract class QuickViewModel<T : QuickView> : ViewModel(), LifecycleObserver, ViewLifecycle, RequestCoroutineScope {
+open class QuickViewModel<T : QuickView> : ViewModel(), LifecycleObserver, ViewLifecycle, RequestCoroutineScope {
     override var jobManager: MutableList<Job> = mutableListOf()
+    var quickView: T? = null
+    open fun onViewCreated(baseView: T) {
 
-    abstract fun onViewCreated(baseView: T)
+    }
 
     override fun onDestroy() {
         super.onDestroy()

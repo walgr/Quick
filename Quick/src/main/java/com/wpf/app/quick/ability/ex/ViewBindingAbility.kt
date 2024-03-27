@@ -18,15 +18,33 @@ import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.other.forceTo
 
 inline fun <reified VB : ViewDataBinding> binding(
-    noinline vbBuilder: (VB.() -> Unit)? = null
-): MutableList<QuickActivityAbility> = modelBinding<QuickVBModel<VB>, VB>(
+    noinline vbBuilder: (VB.() -> Unit)? = null,
+): MutableList<QuickActivityAbility> = modelBinding<QuickVBModel<QuickView, VB>, VB>(
     vbBuilder = vbBuilder
 )
 
-inline fun <reified VM : QuickVBModel<VB>, reified VB : ViewDataBinding> modelBinding(
+inline fun <reified Self : QuickView, reified VB : ViewDataBinding> bindingAndSelf(
+    noinline vbBuilder: (VB.(self: Self) -> Unit)? = null,
+): MutableList<QuickActivityAbility> = modelBindingWithSelf<Self, QuickVBModel<Self, VB>, VB>(
+    vbBuilder = {
+        vbBuilder?.invoke(this, it)
+    }
+)
+
+inline fun <reified VM : QuickVBModel<out QuickView, VB>, reified VB : ViewDataBinding> modelBinding(
     noinline vmBuilder: (VM.() -> Unit)? = null,
     noinline vbBuilder: (VB.() -> Unit)? = null,
-    noinline mbBuilder: (VM.(vb: VB) -> Unit)? = null
+    noinline mbBuilder: (VB.(vm: VM) -> Unit)? = null,
+): MutableList<QuickActivityAbility> {
+    return modelBindingWithSelf<QuickView, VM, VB>({ vmBuilder?.invoke(this) },
+        { vbBuilder?.invoke(this) },
+        { _, vm -> mbBuilder?.invoke(this, vm) })
+}
+
+inline fun <reified Self : QuickView, reified VM : QuickVBModel<out Self, VB>, reified VB : ViewDataBinding> modelBindingWithSelf(
+    noinline vmBuilder: (VM.(self: Self) -> Unit)? = null,
+    noinline vbBuilder: (VB.(self: Self) -> Unit)? = null,
+    noinline mbBuilder: (VB.(self: Self, vm: VM) -> Unit)? = null,
 ): MutableList<QuickActivityAbility> = mutableListOf(object : QuickVMAbility<VM> {
     private var viewModel: VM? = null
     private var viewBinding: VB? = null
@@ -40,7 +58,7 @@ inline fun <reified VM : QuickVBModel<VB>, reified VB : ViewDataBinding> modelBi
             viewModel = ViewModelProvider(
                 owner, ViewModelProvider.AndroidViewModelFactory(context.getActivity().application)
             )[viewModelCls]
-            vmBuilder?.invoke(viewModel!!)
+            vmBuilder?.invoke(viewModel!!, context.forceTo())
         }
         if (viewBinding == null && VB::class.java != ViewDataBinding::class.java) {
             viewBinding = DataBindingUtil.bind(view.findBinding()!!)
@@ -49,8 +67,9 @@ inline fun <reified VM : QuickVBModel<VB>, reified VB : ViewDataBinding> modelBi
         viewBinding?.setVariable(BRConstant.viewModel, viewModel)
         viewBinding?.executePendingBindings()
         viewBinding?.let {
-            viewModel?.mViewBinding = it
-            vbBuilder?.invoke(it)
+            viewModel?.forceTo<QuickVBModel<Self, VB>>()?.quickView = context.forceTo()
+            viewModel?.setViewBinding(it)
+            vbBuilder?.invoke(it, context.forceTo())
         }
         if (context is Activity) {
             QuickBindWrap.bind(context.forceTo<Activity>(), viewModel)
@@ -58,7 +77,9 @@ inline fun <reified VM : QuickVBModel<VB>, reified VB : ViewDataBinding> modelBi
             QuickBindWrap.bind(context.forceTo<Fragment>(), viewModel)
         }
         viewModel.asTo<VM>()?.onBindingCreated(viewBinding!!)
-        mbBuilder?.invoke(viewModel!!, viewBinding!!)
+        if (viewBinding != null && viewModel != null) {
+            mbBuilder?.invoke(viewBinding!!, context.forceTo(), viewModel!!)
+        }
     }
 
     private fun View.findBinding(): View? {
