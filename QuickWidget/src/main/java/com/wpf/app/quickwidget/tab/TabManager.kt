@@ -12,13 +12,12 @@ import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.widget.onPageSelected
 import com.wpf.app.quickutil.widget.onTabSelected
 import com.wpf.app.quickutil.helper.onceClick
+import com.wpf.app.quickutil.widget.selectTab
 import com.wpf.app.quickwidget.quickview.QuickViewGroupNoAttrs
 
 /**
  * 挪动位置需要同步修改TabInitProcessor里的包名
  */
-
-
 object TabManagerProvider {
     fun new() = TabManager()
 }
@@ -57,6 +56,7 @@ open class TabManager : GroupManager() {
                 posChange(it)
             }
         }
+
         return this
     }
 
@@ -87,25 +87,24 @@ open class TabManager : GroupManager() {
         this.init = init
         if (parent == null) return this
         var onGroupChangeListener: OnGroupChangeListener? = null
+        val tabLayout = getTabLayout(parent)
         if (isFirstInit) {
             oldParentCount = getChildCount(parent)
             if (parent is OnGroupChangeListener) {
                 onGroupChangeListener = parent
             }
-            if (parent is BottomTabLayout) {
-                parent.asTo<BottomTabLayout>()?.bindViewPager(viewPager)
-            }
             newInit = object : ((Int, Boolean, View) -> Unit) {
                 override fun invoke(p1: Int, p2: Boolean, p3: View) {
-                    init?.invoke(p1, p2, p3)
+                    this@TabManager.init?.invoke(p1, p2, p3)
                     if (p2) {
+                        tabLayout?.selectTab(p1)
                         onGroupChangeListener?.onChange(p3)
                     }
                 }
             }
             invokeChangeInInit = false
         }
-        val tabLayout = getTabLayout(parent)
+
         repeat(size) { pos ->
             val realPos = pos + oldParentCount
             val tabView =
@@ -136,11 +135,11 @@ open class TabManager : GroupManager() {
         curPos = defaultPos
         if (isFirstInit) {
             tabLayout?.apply {
-                onTabSelected {
+                onTabSelected { selectPos ->
                     repeat(tabCount) {
                         val view: Tab? = getTabAt(it)
-                        newInit?.invoke(it, view == this, this.view)
-                        if (view == this) {
+                        newInit?.invoke(it, selectPos == it, view!!.view)
+                        if (selectPos == it) {
                             curPos = it
                             change?.invoke(curPos)
                         }

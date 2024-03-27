@@ -20,3 +20,7 @@ fun TabLayout.onTabSelected(onTabSelected: TabLayout.Tab.(position: Int) -> Unit
 
     })
 }
+
+fun TabLayout.selectTab(pos: Int) {
+    selectTab(getTabAt(pos))
+}

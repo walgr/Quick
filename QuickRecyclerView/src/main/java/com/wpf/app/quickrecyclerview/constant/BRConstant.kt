@@ -2,7 +2,7 @@ package com.wpf.app.quickrecyclerview.constant
 
 /**
  * Created by 王朋飞 on 2022/7/13.
- *
+ * 不能混淆此类
  */
 object BRConstant {
     var activity = 0

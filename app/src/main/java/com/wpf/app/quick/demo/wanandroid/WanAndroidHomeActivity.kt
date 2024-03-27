@@ -17,8 +17,6 @@ import com.wpf.app.quickutil.bind.runOnContext
 import com.wpf.app.quickutil.helper.dp
 import com.wpf.app.quickutil.helper.matchWrapLayoutParams
 import com.wpf.app.quickutil.helper.reset
-import com.wpf.app.quickutil.widget.onPageSelected
-import com.wpf.app.quickutil.widget.onTabSelected
 import com.wpf.app.quickwidget.tab.TabManagerProvider
 import com.wpf.app.quickwork.ability.tabLayout
 import com.wpf.app.quickwork.ability.textButton
@@ -32,29 +30,8 @@ class WanAndroidHomeActivity : QuickActivity(contentView<LinearLayout> { quickVi
 
         })
     }
-    tabLayout(R.layout.tab_wanandroid, 2,
-        matchWrapLayoutParams.reset(height = 44.dp()),
-        tabInit = { position, tabView ->
-            val tab = tabView.findViewById<TextView>(R.id.tvName)
-            when (position) {
-                0 -> {
-                    tab.text = "推荐"
-                }
-
-                1 -> {
-                    tab.text = "专题"
-                }
-            }
-        }) {
-        onTabSelected {
-            viewPager?.setCurrentItem(it)
-        }
-        post {
-            viewPager?.onPageSelected {
-                selectTab(getTabAt(it))
-            }
-        }
-    }
+    val tabNames = arrayOf("推荐", "专题")
+    val tabLayout = tabLayout(layoutParams = matchWrapLayoutParams.reset(height = 44.dp()))
     viewPager = viewPager(quickView) {
         fragment(RecommendFragment())
         viewFragment {
@@ -65,6 +42,9 @@ class WanAndroidHomeActivity : QuickActivity(contentView<LinearLayout> { quickVi
             })
         }
     }
+    TabManagerProvider.new().initTabWan(tabLayout, tabNames.size) { curPos: Int, isSelect: Boolean, tvName: TextView ->
+        tvName.text = tabNames[curPos]
+    }.bindViewPager(viewPager)
 }) {
 
     @TabInit(R.layout.tab_wanandroid, "initTabWan")
