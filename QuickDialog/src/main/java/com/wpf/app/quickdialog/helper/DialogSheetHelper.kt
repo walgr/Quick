@@ -34,12 +34,12 @@ object DialogSheetHelper {
         bottomSheet.background = ColorDrawable(Color.TRANSPARENT)
         val behavior: BottomSheetBehavior<View> = BottomSheetBehavior.from(bottomSheet)
         if (dialog.initPeekHeight() != DialogSize.NO_SET) {
-            behavior.setPeekHeight(dialog.initPeekHeight())
+            behavior.peekHeight = dialog.initPeekHeight()
         }
         if (dialog.initSheetState() != DialogSize.NO_SET) {
-            behavior.setState(dialog.initSheetState())
+            behavior.state = dialog.initSheetState()
         }
-        behavior.setHideable(dialog.hideAble())
+        behavior.isHideable = dialog.hideAble()
         return behavior
     }
 }
