@@ -6,6 +6,13 @@ import android.content.Intent
 import android.os.Parcelable
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.ActivityResultCaller
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContract
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import com.wpf.app.quickutil.other.forceTo
@@ -17,7 +24,8 @@ import java.util.ArrayList
  */
 fun <T : Activity> Context.quickStartActivity(
     activityCls: Class<T>,
-    data: Map<String, Any?>? = null
+    data: Map<String, Any?>? = null,
+    resultCallback: ActivityResultCallback<ActivityResult>? = null,
 ) {
     val intent = Intent(this, activityCls)
     if (data != null) {
@@ -33,26 +41,38 @@ fun <T : Activity> Context.quickStartActivity(
             }
         }
     }
-    startActivity(intent)
+    if (resultCallback != null) {
+        if (this is AppCompatActivity) {
+            registerForActivityResult(
+                ActivityResultContracts.StartActivityForResult(),
+                resultCallback
+            ).launch(intent)
+        }
+    } else {
+        startActivity(intent)
+    }
 }
 
 inline fun <reified T : Activity> Context.quickStartActivity(
-    data: Map<String, Any?>? = null
+    data: Map<String, Any?>? = null,
+    resultCallback: ActivityResultCallback<ActivityResult>? = null,
 ) {
-    quickStartActivity(T::class.java, data)
+    quickStartActivity(T::class.java, data, resultCallback)
 }
 
 inline fun <reified T : Activity> Fragment.quickStartActivity(
     activityCls: Class<T>,
-    data: Map<String, Any?>? = null
+    data: Map<String, Any?>? = null,
+    resultCallback: ActivityResultCallback<ActivityResult>? = null,
 ) {
-    activity?.quickStartActivity(activityCls, data)
+    activity?.quickStartActivity(activityCls, data, resultCallback)
 }
 
 inline fun <reified T : Activity> Fragment.quickStartActivity(
-    data: Map<String, Any?>? = null
+    data: Map<String, Any?>? = null,
+    resultCallback: ActivityResultCallback<ActivityResult>? = null,
 ) {
-    quickStartActivity(T::class.java, data)
+    quickStartActivity(T::class.java, data, resultCallback)
 }
 
 fun Activity.contentView(): View {
@@ -65,4 +85,4 @@ fun Activity.myContentView(): View {
 
 fun View.activity(): Activity = context as Activity
 
-inline fun <reified T: Activity> View.activityForce(): T = context.forceTo<T>()
+inline fun <reified T : Activity> View.activityForce(): T = context.forceTo<T>()
