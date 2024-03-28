@@ -76,9 +76,7 @@ inline fun <reified T : Fragment> ViewGroup.viewPager(
     addView(viewPager, layoutParams)
     builder?.invoke(viewPager)
     if (isLoop) {
-//        viewPager.post {
         viewPager.setCurrentItem(defaultPos, false)
-//        }
     }
     return viewPager
 }
