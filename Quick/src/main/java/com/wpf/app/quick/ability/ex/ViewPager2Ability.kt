@@ -20,6 +20,8 @@ import com.wpf.app.quickutil.helper.matchLayoutParams
 import com.wpf.app.quickutil.helper.removeParent
 import com.wpf.app.quickutil.helper.wrapContentHeightParams
 import com.wpf.app.quickutil.other.forceTo
+import com.wpf.app.quickutil.other.printLog
+import kotlin.math.abs
 
 fun LinearLayout.viewPager2(
     quickView: QuickView,
@@ -58,35 +60,43 @@ inline fun <reified T : Fragment> LinearLayout.viewPager2(
     quickView: QuickView,
     defaultSize: Int = 1,
     limit: Int = 0,
+    isLoop: Boolean = false,
     layoutParams: ViewGroup.LayoutParams = wrapContentHeightParams,
     noinline builder: (ViewPager2.() -> Unit)? = null,
 ): ViewPager2 {
     return this.forceTo<ViewGroup>()
-        .viewPager2<T>(quickView, defaultSize, limit, layoutParams, builder)
+        .viewPager2<T>(quickView, defaultSize, limit, isLoop, layoutParams, builder)
 }
 
 inline fun <reified T : Fragment> ViewGroup.viewPager2(
     quickView: QuickView,
     defaultSize: Int = 1,
     limit: Int = 0,
+    isLoop: Boolean = false,
     layoutParams: ViewGroup.LayoutParams = matchLayoutParams,
     noinline builder: (ViewPager2.() -> Unit)? = null,
 ): ViewPager2 {
     val viewPager2 = ViewPager2(context)
     viewPager2.id = R.id.quickViewPager
+    val defaultPos = if (isLoop) Int.MAX_VALUE / 2 else 0
     viewPager2.adapter =
         Fragments2StateAdapter(quickView.getFragmentManager(), quickView.getLifecycle()) {
+            val realPos =
+                if (isLoop) (abs(defaultSize + (it - defaultPos) % defaultSize) % defaultSize) else it
             getFragment(
-                quickView, T::class.java.getDeclaredConstructor().newInstance().forceTo(), it
+                quickView, T::class.java.getDeclaredConstructor().newInstance().forceTo(), realPos
             ).forceTo()
         }.apply {
-            setPageSize(defaultSize)
+            setPageSize(if (isLoop) Int.MAX_VALUE else defaultSize)
         }
     if (limit != 0) {
         viewPager2.offscreenPageLimit = limit
     }
     addView(viewPager2, layoutParams)
     builder?.invoke(viewPager2)
+    if (isLoop) {
+        viewPager2.setCurrentItem(defaultPos, false)
+    }
     return viewPager2
 }
 

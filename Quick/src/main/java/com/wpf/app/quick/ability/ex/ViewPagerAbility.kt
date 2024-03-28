@@ -19,17 +19,20 @@ import com.wpf.app.quickbind.viewpager.adapter.FragmentsStateAdapter
 import com.wpf.app.quickutil.helper.matchLayoutParams
 import com.wpf.app.quickutil.helper.wrapContentHeightParams
 import com.wpf.app.quickutil.other.forceTo
+import com.wpf.app.quickutil.other.printLog
+import kotlin.math.abs
 
 inline fun <reified T : Fragment> LinearLayout.viewPager(
     quickView: QuickView,
     withState: Boolean = true,
     defaultSize: Int = -1,
     limit: Int = 0,
+    isLoop: Boolean = false,
     layoutParams: ViewGroup.LayoutParams = wrapContentHeightParams,
     noinline builder: (QuickViewPager.() -> Unit)? = null,
 ): ViewPager {
     return this.forceTo<ViewGroup>()
-        .viewPager<T>(quickView, withState, defaultSize, limit, layoutParams, builder)
+        .viewPager<T>(quickView, withState, defaultSize, limit, isLoop, layoutParams, builder)
 }
 
 inline fun <reified T : Fragment> ViewGroup.viewPager(
@@ -37,24 +40,34 @@ inline fun <reified T : Fragment> ViewGroup.viewPager(
     withState: Boolean = true,
     defaultSize: Int = 1,
     limit: Int = 0,
+    isLoop: Boolean = false,
     layoutParams: ViewGroup.LayoutParams = matchLayoutParams,
     noinline builder: (QuickViewPager.() -> Unit)? = null,
 ): ViewPager {
     val viewPager = QuickViewPager(context)
     viewPager.id = R.id.quickViewPager
-    val baseFragment =
-        T::class.java.getDeclaredConstructor().newInstance().forceTo<BindBaseFragment>()
-    if (withState) {
+    val defaultPos = if (isLoop) Int.MAX_VALUE / 2 else 0
+    if (withState && !isLoop) {
         viewPager.adapter = FragmentsStateAdapter(quickView.getFragmentManager()) {
-            getFragment(quickView, baseFragment, it).forceTo()
+            getFragment(
+                quickView,
+                T::class.java.getDeclaredConstructor().newInstance().forceTo(),
+                it
+            ).forceTo()
         }.apply {
             setPageSize(defaultSize)
         }
     } else {
         viewPager.adapter = FragmentsAdapter(quickView.getFragmentManager()) {
-            getFragment(quickView, baseFragment, it).forceTo()
+            val realPos =
+                if (isLoop) (abs(defaultSize + (it - defaultPos) % defaultSize) % defaultSize) else it
+            getFragment(
+                quickView,
+                T::class.java.getDeclaredConstructor().newInstance().forceTo(),
+                realPos
+            ).forceTo()
         }.apply {
-            setPageSize(defaultSize)
+            setPageSize(if (isLoop) Int.MAX_VALUE else defaultSize)
         }
     }
     if (limit != 0) {
@@ -62,6 +75,11 @@ inline fun <reified T : Fragment> ViewGroup.viewPager(
     }
     addView(viewPager, layoutParams)
     builder?.invoke(viewPager)
+    if (isLoop) {
+//        viewPager.post {
+        viewPager.setCurrentItem(defaultPos, false)
+//        }
+    }
     return viewPager
 }
 
