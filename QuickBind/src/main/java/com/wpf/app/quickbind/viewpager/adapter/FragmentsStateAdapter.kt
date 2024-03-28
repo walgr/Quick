@@ -33,12 +33,13 @@ open class FragmentsStateAdapter(
 
     override fun getAdapter() = this
 
-    private var itemPosition = PagerAdapter.POSITION_UNCHANGED
-
-    override fun setItemPosition(itemPosition: Int) {
-        this.itemPosition = itemPosition
+    private var itemPositionChange: ((`object`: Any) -> Int)? = {
+        PagerAdapter.POSITION_UNCHANGED
+    }
+    override fun registerItemPositionChange(change: (`object`: Any) -> Int) {
+        this.itemPositionChange = change
     }
     override fun getItemPosition(`object`: Any): Int {
-        return itemPosition
+        return itemPositionChange?.invoke(`object`) ?: super.getItemPosition(`object`)
     }
 }

@@ -1,32 +1,30 @@
 package com.wpf.app.quick.ability.ex
 
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.wpf.app.quick.R
 import com.wpf.app.quickrecyclerview.QuickRecyclerView
+import com.wpf.app.quickrecyclerview.QuickRefreshRecyclerView
 import com.wpf.app.quickrecyclerview.data.QuickItemData
-import com.wpf.app.quickutil.helper.matchWrapLayoutParams
-import com.wpf.app.quickutil.helper.wrapContentHeightParams
 import com.wpf.app.quickutil.other.forceTo
 
-fun LinearLayout.list(
+fun ViewGroup.refreshList(
+    layoutParams: ViewGroup.LayoutParams = smartLayoutParams(),
     layoutManager: LayoutManager = LinearLayoutManager(context),
     dataList: List<QuickItemData>? = null,
-    layoutParams: LinearLayout.LayoutParams = wrapContentHeightParams,
     builder: (QuickRecyclerView.() -> Unit)? = null
-): QuickRecyclerView {
-    return this.forceTo<ViewGroup>().list(layoutManager, dataList, layoutParams, builder)
+): QuickRefreshRecyclerView {
+    return list(layoutParams, layoutManager, dataList, builder).forceTo()
 }
 
 fun ViewGroup.list(
+    layoutParams: ViewGroup.LayoutParams = smartLayoutParams(),
     layoutManager: LayoutManager = LinearLayoutManager(context),
     dataList: List<QuickItemData>? = null,
-    layoutParams: ViewGroup.LayoutParams = matchWrapLayoutParams,
     builder: (QuickRecyclerView.() -> Unit)? = null
 ): QuickRecyclerView {
-    val list = QuickRecyclerView(context).apply {
+    val list = QuickRefreshRecyclerView(context).apply {
         id = R.id.quickList
         this.layoutManager = layoutManager
         dataList?.let {

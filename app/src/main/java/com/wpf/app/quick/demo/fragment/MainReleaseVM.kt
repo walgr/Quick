@@ -42,7 +42,7 @@ class MainReleaseVM: QuickVBModel<MainReleaseFragment, FragmentMainReleaseBindin
         view?.context?.quickStartActivity<DialogTestActivity>()
     }
 
-    fun gotoGlide(view: View?) {
+    fun gotoViewPagerNotifySize(view: View?) {
         view?.context?.quickStartActivity<ViewPagerNotifySizeTestActivity>()
     }
 

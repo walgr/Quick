@@ -2,7 +2,6 @@ package com.wpf.app.quick.ability.ex
 
 import android.view.View
 import androidx.annotation.LayoutRes
-import androidx.databinding.DataBindingUtil.setContentView
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelStoreOwner
 import com.wpf.app.quick.activity.QuickView

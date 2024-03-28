@@ -17,30 +17,6 @@ import com.wpf.app.quickutil.bind.QuickBindWrap
 import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.other.forceTo
 
-inline fun <reified VB : ViewDataBinding> binding(
-    noinline vbBuilder: (VB.() -> Unit)? = null,
-): MutableList<QuickActivityAbility> = modelBinding<QuickVBModel<QuickView, VB>, VB>(
-    vbBuilder = vbBuilder
-)
-
-inline fun <reified Self : QuickView, reified VB : ViewDataBinding> bindingAndSelf(
-    noinline vbBuilder: (VB.(self: Self) -> Unit)? = null,
-): MutableList<QuickActivityAbility> = modelBindingWithSelf<Self, QuickVBModel<Self, VB>, VB>(
-    vbBuilder = {
-        vbBuilder?.invoke(this, it)
-    }
-)
-
-inline fun <reified VM : QuickVBModel<out QuickView, VB>, reified VB : ViewDataBinding> modelBinding(
-    noinline vmBuilder: (VM.() -> Unit)? = null,
-    noinline vbBuilder: (VB.() -> Unit)? = null,
-    noinline mbBuilder: (VB.(vm: VM) -> Unit)? = null,
-): MutableList<QuickActivityAbility> {
-    return modelBindingWithSelf<QuickView, VM, VB>({ vmBuilder?.invoke(this) },
-        { vbBuilder?.invoke(this) },
-        { _, vm -> mbBuilder?.invoke(this, vm) })
-}
-
 inline fun <reified Self : QuickView, reified VM : QuickVBModel<out Self, VB>, reified VB : ViewDataBinding> modelBindingWithSelf(
     noinline vmBuilder: (VM.(self: Self) -> Unit)? = null,
     noinline vbBuilder: (VB.(self: Self) -> Unit)? = null,
@@ -98,3 +74,26 @@ inline fun <reified Self : QuickView, reified VM : QuickVBModel<out Self, VB>, r
 
     override fun getViewModel() = viewModel
 })
+
+inline fun <reified VM : QuickVBModel<out QuickView, VB>, reified VB : ViewDataBinding> modelBinding(
+    noinline vmBuilder: (VM.() -> Unit)? = null,
+    noinline vbBuilder: (VB.() -> Unit)? = null,
+    noinline mbBuilder: (VB.(vm: VM) -> Unit)? = null,
+): MutableList<QuickActivityAbility> {
+    return modelBindingWithSelf<QuickView, VM, VB>({ vmBuilder?.invoke(this) },
+        { vbBuilder?.invoke(this) },
+        { _, vm -> mbBuilder?.invoke(this, vm) })
+}
+
+inline fun <reified Self : QuickView, reified VB : ViewDataBinding> bindingAndSelf(
+    noinline vbBuilder: (VB.(self: Self) -> Unit)? = null,
+): MutableList<QuickActivityAbility> =
+    modelBindingWithSelf<Self, QuickVBModel<Self, VB>, VB>(vbBuilder = {
+        vbBuilder?.invoke(this, it)
+    })
+
+inline fun <reified VB : ViewDataBinding> binding(
+    noinline vbBuilder: (VB.() -> Unit)? = null,
+): MutableList<QuickActivityAbility> = modelBinding<QuickVBModel<QuickView, VB>, VB>(
+    vbBuilder = vbBuilder
+)

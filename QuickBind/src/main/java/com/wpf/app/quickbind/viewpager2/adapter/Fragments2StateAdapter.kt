@@ -3,7 +3,6 @@ package com.wpf.app.quickbind.viewpager2.adapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
-import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.wpf.app.quickbind.viewpager2.ViewPagerSize2
 
@@ -30,13 +29,12 @@ open class Fragments2StateAdapter(
         pageSizeI = size
     }
 
-    private var itemPosition = PagerAdapter.POSITION_UNCHANGED
-    override fun setItemPosition(itemPosition: Int) {
-        this.itemPosition = itemPosition
+    private var change: ((position: Int) -> Long)? = null
+    override fun registerItemIdChange(change: (position: Int) -> Long) {
+        this.change = change
     }
-
-    override fun getItemPosition(`object`: Any): Int {
-        return itemPosition
+    override fun getItemId(position: Int): Long {
+        return change?.invoke(position) ?: super.getItemId(position)
     }
 
     override fun getAdapter2(): FragmentStateAdapter {

@@ -34,7 +34,11 @@ class TestFragment : QuickFragment(
 
     override fun getInitBundle(activity: Activity?, position: Int): Bundle {
         return Bundle().apply {
-            putInt("pos", position)
+            if (activity is ViewPagerNotifyDataTestActivity) {
+                putInt("pos", activity.fragmentData[position])
+            } else {
+                putInt("pos", position)
+            }
         }
     }
 }

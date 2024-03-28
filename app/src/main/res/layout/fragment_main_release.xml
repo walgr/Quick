@@ -10,6 +10,8 @@
 
         <import type="com.wpf.app.quick.demo.ShadowViewTestActivityClass" />
 
+        <import type="com.wpf.app.quick.demo.ViewPagerNotifyDataTestActivityClass" />
+
         <variable
             name="viewModel"
             type="com.wpf.app.quick.demo.fragment.MainReleaseVM" />
@@ -42,9 +44,16 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{viewModel::gotoGlide}"
-                android:text="ViewPager测试"
+                android:onClick="@{viewModel::gotoViewPagerNotifySize}"
+                android:text="ViewPager测试刷新数量"
                 android:textAllCaps="false" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ViewPager测试刷新数据"
+                android:textAllCaps="false"
+                app:clickGoto="@{ViewPagerNotifyDataTestActivityClass.INSTANCE.KClass}"/>
 
             <Button
                 android:layout_width="wrap_content"

@@ -11,11 +11,11 @@ import com.wpf.app.quickrecyclerview.listeners.requestData2List
 import com.wpf.app.quickutil.log.LogUtil
 import com.wpf.app.quickutil.other.forceTo
 import com.wpf.app.quickwidget.emptyview.EmptyHelper
-import com.wpf.app.quickwork.ability.smartRefreshLayout
+import com.wpf.app.quickwork.ability.smartRefreshList
 
 class RecommendFragment: QuickFragment(
     contentView<FrameLayout> {quickView ->
-        smartRefreshLayout(upperLayerLayoutView = TestEmptyView(context), autoRefresh = true) { list, upperLayout ->
+        smartRefreshList(upperLayerLayoutView = TestEmptyView(context), autoRefresh = true) { list, upperLayout ->
             EmptyHelper.bind(list, emptyView = upperLayout?.forceTo())
             requestData2List<ListRequest, Article> { requestData, callback ->
                 request(quickView.forceTo()) {
@@ -33,8 +33,7 @@ class RecommendFragment: QuickFragment(
                 false
             }.loadMoreFinish { hasMore ->
                 LogUtil.e("上拉加载请求结束")
-                finishLoadMore()
-                setEnableLoadMore(hasMore)
+                finishLoadMore().setEnableLoadMore(hasMore)
                 false
             }
         }

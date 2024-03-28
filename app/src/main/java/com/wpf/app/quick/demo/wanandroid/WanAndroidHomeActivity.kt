@@ -40,7 +40,7 @@ class WanAndroidHomeActivity : QuickActivity(contentView<LinearLayout> { quickVi
     }
     val tabNames = arrayOf("推荐", "专题")
     val tabLayout = tabLayout(layoutParams = matchWrapLayoutParams.reset(height = 44.dp()))
-    val viewPager = viewPager(quickView) {
+    val viewPager = viewPager(quickView = quickView) {
         fragment(RecommendFragment())
         viewFragment {
             myLayout(layoutViewInContext = runOnContext {
@@ -50,9 +50,10 @@ class WanAndroidHomeActivity : QuickActivity(contentView<LinearLayout> { quickVi
             })
         }
     }
-    TabManagerProvider.new().initTabWan(tabLayout, tabNames.size) { curPos: Int, _: Boolean, tvName: TextView ->
-        tvName.text = tabNames[curPos]
-    }.bindViewPager(viewPager)
+    TabManagerProvider.new()
+        .initTabWan(tabLayout, tabNames.size) { curPos: Int, _: Boolean, tvName: TextView ->
+            tvName.text = tabNames[curPos]
+        }.bindViewPager(viewPager)
 }) {
 
     @SuppressLint("NonConstantResourceId")

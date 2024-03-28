@@ -3,10 +3,8 @@ package com.wpf.app.quick.ability.ex
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import android.widget.LinearLayout
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
-import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.wpf.app.quick.R
 import com.wpf.app.quick.activity.QuickView
@@ -14,30 +12,17 @@ import com.wpf.app.quick.helper.getFragmentManager
 import com.wpf.app.quick.helper.getLifecycle
 import com.wpf.app.quick.helper.toFragment
 import com.wpf.app.quickbind.utils.getFragment
-import com.wpf.app.quickbind.viewpager2.ViewPagerSize2
 import com.wpf.app.quickbind.viewpager2.adapter.Fragments2StateAdapter
 import com.wpf.app.quickutil.helper.matchLayoutParams
 import com.wpf.app.quickutil.helper.removeParent
-import com.wpf.app.quickutil.helper.wrapContentHeightParams
 import com.wpf.app.quickutil.other.forceTo
-import com.wpf.app.quickutil.other.printLog
 import kotlin.math.abs
 
-fun LinearLayout.viewPager2(
-    quickView: QuickView,
-    fragments: List<Fragment>,
-    limit: Int = 0,
-    layoutParams: ViewGroup.LayoutParams = wrapContentHeightParams,
-    builder: (ViewPager2.() -> Unit)? = null,
-): ViewPager2 {
-    return this.forceTo<ViewGroup>().viewPager2(quickView, fragments, limit, layoutParams, builder)
-}
-
 fun ViewGroup.viewPager2(
+    layoutParams: ViewGroup.LayoutParams = smartLayoutParams(),
     quickView: QuickView,
     fragments: List<Fragment>,
     limit: Int = 0,
-    layoutParams: ViewGroup.LayoutParams = matchLayoutParams,
     builder: (ViewPager2.() -> Unit)? = null,
 ): ViewPager2 {
     val viewPager2 = ViewPager2(context)
@@ -56,24 +41,12 @@ fun ViewGroup.viewPager2(
     return viewPager2
 }
 
-inline fun <reified T : Fragment> LinearLayout.viewPager2(
-    quickView: QuickView,
-    defaultSize: Int = 1,
-    limit: Int = 0,
-    isLoop: Boolean = false,
-    layoutParams: ViewGroup.LayoutParams = wrapContentHeightParams,
-    noinline builder: (ViewPager2.() -> Unit)? = null,
-): ViewPager2 {
-    return this.forceTo<ViewGroup>()
-        .viewPager2<T>(quickView, defaultSize, limit, isLoop, layoutParams, builder)
-}
-
 inline fun <reified T : Fragment> ViewGroup.viewPager2(
+    layoutParams: ViewGroup.LayoutParams = smartLayoutParams(),
     quickView: QuickView,
     defaultSize: Int = 1,
     limit: Int = 0,
     isLoop: Boolean = false,
-    layoutParams: ViewGroup.LayoutParams = matchLayoutParams,
     noinline builder: (ViewPager2.() -> Unit)? = null,
 ): ViewPager2 {
     val viewPager2 = ViewPager2(context)
@@ -88,6 +61,11 @@ inline fun <reified T : Fragment> ViewGroup.viewPager2(
             ).forceTo()
         }.apply {
             setPageSize(if (isLoop) Int.MAX_VALUE else defaultSize)
+            if (isLoop) {
+                registerItemIdChange {
+                    System.currentTimeMillis() % Int.MAX_VALUE
+                }
+            }
         }
     if (limit != 0) {
         viewPager2.offscreenPageLimit = limit
@@ -100,37 +78,11 @@ inline fun <reified T : Fragment> ViewGroup.viewPager2(
     return viewPager2
 }
 
-fun ViewGroup.viewPager2(
-    quickView: QuickView,
-    limit: Int = 0,
-    layoutParams: ViewGroup.LayoutParams = matchLayoutParams,
-    builder: ViewGroup.() -> Unit,
-): ViewPager2 {
-    val viewGroup = FrameLayout(context)
-    builder.invoke(viewGroup)
-    val childViews = viewGroup.children.toList()
-    childViews.forEach {
-        it.removeParent()
-    }
-    return viewPager2WithView(quickView, childViews, limit, layoutParams)
-}
-
-fun LinearLayout.viewPager2WithView(
-    quickView: QuickView,
-    views: List<View>,
-    limit: Int = 0,
-    layoutParams: ViewGroup.LayoutParams = wrapContentHeightParams,
-    builder: (ViewPager2.() -> Unit)? = null,
-): ViewPager2 {
-    return this.forceTo<ViewGroup>()
-        .viewPager2WithView(quickView, views, limit, layoutParams, builder)
-}
-
 fun ViewGroup.viewPager2WithView(
+    layoutParams: ViewGroup.LayoutParams = smartLayoutParams(),
     quickView: QuickView,
     views: List<View>,
     limit: Int = 0,
-    layoutParams: ViewGroup.LayoutParams = matchLayoutParams,
     builder: (ViewPager2.() -> Unit)? = null,
 ): ViewPager2 {
     val contentFragmentList = views.map {
@@ -139,5 +91,20 @@ fun ViewGroup.viewPager2WithView(
         contentView.addView(it)
         contentView.toFragment()
     }
-    return viewPager2(quickView, contentFragmentList, limit, layoutParams, builder)
+    return viewPager2(layoutParams, quickView, contentFragmentList, limit, builder)
+}
+
+fun ViewGroup.viewPager2(
+    layoutParams: ViewGroup.LayoutParams = smartLayoutParams(),
+    quickView: QuickView,
+    limit: Int = 0,
+    builder: ViewGroup.() -> Unit,
+): ViewPager2 {
+    val viewGroup = FrameLayout(context)
+    builder.invoke(viewGroup)
+    val childViews = viewGroup.children.toList()
+    childViews.forEach {
+        it.removeParent()
+    }
+    return viewPager2WithView(layoutParams, quickView, childViews, limit)
 }
