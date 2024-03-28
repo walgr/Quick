@@ -14,14 +14,15 @@ import com.wpf.app.quickwork.ability.title
  * Created by 王朋飞 on 2022/8/5.
  *
  */
-class ViewPagerBindFragmentTestActivity : QuickActivity(contentView<LinearLayout> {
-    title("ViewPager刷新测试")
-    viewPager2<TestFragment>(it, defaultSize = 10) {
-        setCurrentItem(5, false)
-        Toast.makeText(it.forceTo(), "3秒后刷新", Toast.LENGTH_SHORT).show()
-        postDelay(3000) {
-            ViewPagerHelper.notifyPagerSize(this, 20)
-            setCurrentItem(15, false)
+class ViewPagerTestActivity : QuickActivity(
+    contentView<LinearLayout> {
+        title("ViewPager刷新测试")
+        viewPager2<TestFragment>(it, defaultSize = 10) {
+            setCurrentItem(5, false)
+            Toast.makeText(it.forceTo(), "3秒后刷新", Toast.LENGTH_SHORT).show()
+            postDelay(3000) {
+                ViewPagerHelper.notifyPagerSize(this, 20)
+                setCurrentItem(15, false)
+            }
         }
-    }
-})
+    })

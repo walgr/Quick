@@ -3,26 +3,23 @@ package com.wpf.app.quickbind.viewpager.adapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.viewpager.widget.PagerAdapter
 import com.wpf.app.quickbind.viewpager.ViewPagerSize
 
 /**
  * Created by 王朋飞 on 2022/7/12.
  *
  */
-class FragmentsStateAdapter(
-    fm: FragmentManager, private val fragments: List<Fragment>,
+open class FragmentsStateAdapter(
+    fm: FragmentManager, private val getFragment: (position: Int) -> Fragment,
 ) : FragmentStatePagerAdapter(fm), ViewPagerSize {
 
     override fun getItem(i: Int): Fragment {
-        return fragments[i]
+        return getFragment.invoke(i)
     }
 
     override fun getCount(): Int {
-        return if (getPageSize() != -1) {
-            getPageSize()
-        } else {
-            fragments.size
-        }
+        return getPageSize()
     }
 
     private var pageSizeI = -1
@@ -36,7 +33,12 @@ class FragmentsStateAdapter(
 
     override fun getAdapter() = this
 
+    private var itemPosition = PagerAdapter.POSITION_UNCHANGED
+
+    override fun setItemPosition(itemPosition: Int) {
+        this.itemPosition = itemPosition
+    }
     override fun getItemPosition(`object`: Any): Int {
-        return super<FragmentStatePagerAdapter>.getItemPosition(`object`)
+        return itemPosition
     }
 }

@@ -41,16 +41,19 @@ class BindFragmentsPlugin : BindBasePlugin {
                     fragmentManager = obj.childFragmentManager
                 }
                 if (fragmentManager == null) return
+                val fragments = getFragments(obj, bindFragmentsAnn.fragments)
                 if (bindFragmentsAnn.withState) {
-                    viewPager.adapter = FragmentsStateAdapter(
-                        fragmentManager,
-                        getFragment(obj, bindFragmentsAnn.fragments)
-                    )
+                    viewPager.adapter = FragmentsStateAdapter(fragmentManager) {
+                        return@FragmentsStateAdapter fragments[it]
+                    }.apply {
+                        setPageSize(fragments.size)
+                    }
                 } else {
-                    viewPager.adapter = FragmentsAdapter(
-                        fragmentManager,
-                        getFragment(obj, bindFragmentsAnn.fragments)
-                    )
+                    viewPager.adapter = FragmentsAdapter(fragmentManager) {
+                        return@FragmentsAdapter fragments[it]
+                    }.apply {
+                        setPageSize(fragments.size)
+                    }
                 }
             }
         } catch (e: Exception) {
@@ -58,7 +61,7 @@ class BindFragmentsPlugin : BindBasePlugin {
         }
     }
 
-    private fun getFragment(
+    private fun getFragments(
         obj: Any,
         fragmentClsArray: Array<KClass<out Fragment>>
     ): List<Fragment> {

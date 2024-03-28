@@ -5,22 +5,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.LinearLayout
-import androidx.core.view.children
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentPagerAdapter
-import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.wpf.app.quick.R
 import com.wpf.app.quick.activity.QuickView
 import com.wpf.app.quick.helper.getFragmentManager
 import com.wpf.app.quick.helper.toFragment
+import com.wpf.app.quickbind.interfaces.BindBaseFragment
 import com.wpf.app.quickbind.utils.getFragment
 import com.wpf.app.quickbind.viewpager.QuickViewPager
-import com.wpf.app.quickbind.viewpager.ViewPagerSize
 import com.wpf.app.quickbind.viewpager.adapter.FragmentsAdapter
 import com.wpf.app.quickbind.viewpager.adapter.FragmentsStateAdapter
 import com.wpf.app.quickutil.helper.matchLayoutParams
-import com.wpf.app.quickutil.helper.removeParent
 import com.wpf.app.quickutil.helper.wrapContentHeightParams
 import com.wpf.app.quickutil.other.forceTo
 
@@ -46,83 +42,19 @@ inline fun <reified T : Fragment> ViewGroup.viewPager(
 ): ViewPager {
     val viewPager = QuickViewPager(context)
     viewPager.id = R.id.quickViewPager
+    val baseFragment =
+        T::class.java.getDeclaredConstructor().newInstance().forceTo<BindBaseFragment>()
     if (withState) {
-        viewPager.adapter = object : FragmentStatePagerAdapter(
-            quickView.getFragmentManager(), BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
-        ), ViewPagerSize {
-            override fun getItem(i: Int): Fragment {
-                try {
-                    val fragment = getFragment(
-                        quickView, T::class.java.getDeclaredConstructor().newInstance().forceTo(), i
-                    )
-                    return fragment as Fragment
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
-                return null!!
-            }
-
-            override fun getCount(): Int {
-                return if (getPageSize() != -1) {
-                    getPageSize()
-                } else {
-                    defaultSize
-                }
-            }
-
-            private var pageSizeI = -1
-            override fun getPageSize(): Int {
-                return pageSizeI
-            }
-
-            override fun setPageSize(size: Int) {
-                pageSizeI = size
-            }
-
-            override fun getAdapter() = this
-
-            override fun getItemPosition(`object`: Any): Int {
-                return (viewPager as? ViewPagerSize)?.getItemPosition(`object`) ?: super<FragmentStatePagerAdapter>.getItemPosition(`object`)
-            }
+        viewPager.adapter = FragmentsStateAdapter(quickView.getFragmentManager()) {
+            getFragment(quickView, baseFragment, it) as Fragment
+        }.apply {
+            setPageSize(defaultSize)
         }
     } else {
-        viewPager.adapter = object : FragmentPagerAdapter(
-            quickView.getFragmentManager(), BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
-        ), ViewPagerSize {
-            override fun getItem(i: Int): Fragment {
-                try {
-                    val fragment = getFragment(
-                        quickView, T::class.java.getDeclaredConstructor().newInstance().forceTo(), i
-                    )
-                    return fragment as Fragment
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
-                return null!!
-            }
-
-            override fun getCount(): Int {
-                return if (getPageSize() != -1) {
-                    getPageSize()
-                } else {
-                    defaultSize
-                }
-            }
-
-            private var pageSizeI = -1
-            override fun getPageSize(): Int {
-                return pageSizeI
-            }
-
-            override fun setPageSize(size: Int) {
-                pageSizeI = size
-            }
-
-            override fun getAdapter() = this
-
-            override fun getItemPosition(`object`: Any): Int {
-                return (viewPager as? ViewPagerSize)?.getItemPosition(`object`) ?: super<FragmentPagerAdapter>.getItemPosition(`object`)
-            }
+        viewPager.adapter = FragmentsAdapter(quickView.getFragmentManager()) {
+            getFragment(quickView, baseFragment, it) as Fragment
+        }.apply {
+            setPageSize(defaultSize)
         }
     }
     if (limit != 0) {
@@ -156,9 +88,17 @@ fun ViewGroup.viewPager(
     val viewPager = QuickViewPager(context)
     viewPager.id = R.id.quickViewPager
     if (withState) {
-        viewPager.adapter = FragmentsStateAdapter(quickView.getFragmentManager(), fragments)
+        viewPager.adapter = FragmentsStateAdapter(quickView.getFragmentManager()) {
+            return@FragmentsStateAdapter fragments[it]
+        }.apply {
+            setPageSize(fragments.size)
+        }
     } else {
-        viewPager.adapter = FragmentsAdapter(quickView.getFragmentManager(), fragments)
+        viewPager.adapter = FragmentsAdapter(quickView.getFragmentManager()) {
+            return@FragmentsAdapter fragments[it]
+        }.apply {
+            setPageSize(fragments.size)
+        }
     }
     if (limit != 0) {
         viewPager.offscreenPageLimit = limit

@@ -11,7 +11,7 @@ import com.wpf.app.quick.demo.IntentDataTestActivity
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.demo.RecyclerViewTestActivity
 import com.wpf.app.quick.demo.SelectListTestActivity
-import com.wpf.app.quick.demo.ViewPagerBindFragmentTestActivity
+import com.wpf.app.quick.demo.ViewPagerTestActivity
 import com.wpf.app.quick.demo.databinding.FragmentMainReleaseBinding
 import com.wpf.app.quick.demo.model.MyMessage
 import com.wpf.app.quick.demo.wanandroid.WanAndroidHomeActivity
@@ -43,7 +43,7 @@ class MainReleaseVM: QuickVBModel<MainReleaseFragment, FragmentMainReleaseBindin
     }
 
     fun gotoGlide(view: View?) {
-        view?.context?.quickStartActivity<ViewPagerBindFragmentTestActivity>()
+        view?.context?.quickStartActivity<ViewPagerTestActivity>()
     }
 
     fun gotoSelectList(view: View?) {

@@ -14,6 +14,10 @@ interface ViewPagerSize {
 
     fun getAdapter(): PagerAdapter?
 
+    fun setItemPosition(itemPosition: Int) {
+
+    }
+
     fun getItemPosition(`object`: Any): Int {
         return PagerAdapter.POSITION_UNCHANGED
     }
