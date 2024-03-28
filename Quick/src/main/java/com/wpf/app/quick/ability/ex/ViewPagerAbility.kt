@@ -46,13 +46,13 @@ inline fun <reified T : Fragment> ViewGroup.viewPager(
         T::class.java.getDeclaredConstructor().newInstance().forceTo<BindBaseFragment>()
     if (withState) {
         viewPager.adapter = FragmentsStateAdapter(quickView.getFragmentManager()) {
-            getFragment(quickView, baseFragment, it) as Fragment
+            getFragment(quickView, baseFragment, it).forceTo()
         }.apply {
             setPageSize(defaultSize)
         }
     } else {
         viewPager.adapter = FragmentsAdapter(quickView.getFragmentManager()) {
-            getFragment(quickView, baseFragment, it) as Fragment
+            getFragment(quickView, baseFragment, it).forceTo()
         }.apply {
             setPageSize(defaultSize)
         }
@@ -89,13 +89,13 @@ fun ViewGroup.viewPager(
     viewPager.id = R.id.quickViewPager
     if (withState) {
         viewPager.adapter = FragmentsStateAdapter(quickView.getFragmentManager()) {
-            return@FragmentsStateAdapter fragments[it]
+            fragments[it]
         }.apply {
             setPageSize(fragments.size)
         }
     } else {
         viewPager.adapter = FragmentsAdapter(quickView.getFragmentManager()) {
-            return@FragmentsAdapter fragments[it]
+            fragments[it]
         }.apply {
             setPageSize(fragments.size)
         }

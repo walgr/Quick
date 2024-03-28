@@ -6,8 +6,6 @@ import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 import com.wpf.app.quickbind.viewpager.ViewPagerSize
-import com.wpf.app.quickbind.viewpager2.adapter.Fragment2StateAdapter
-import com.wpf.app.quickutil.other.forceTo
 
 object ViewPagerHelper {
 

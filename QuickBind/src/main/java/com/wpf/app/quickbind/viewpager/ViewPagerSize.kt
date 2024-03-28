@@ -28,8 +28,4 @@ interface ViewPagerSize {
         setPageSize(size)
         fragmentsAdapter.notifyDataSetChanged()
     }
-    
-    fun currentContext(): Any? {
-        return null
-    }
 }

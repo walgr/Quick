@@ -15,6 +15,7 @@ import com.wpf.app.quick.helper.getLifecycle
 import com.wpf.app.quick.helper.toFragment
 import com.wpf.app.quickbind.utils.getFragment
 import com.wpf.app.quickbind.viewpager2.ViewPagerSize2
+import com.wpf.app.quickbind.viewpager2.adapter.Fragments2StateAdapter
 import com.wpf.app.quickutil.helper.matchLayoutParams
 import com.wpf.app.quickutil.helper.removeParent
 import com.wpf.app.quickutil.helper.wrapContentHeightParams
@@ -40,32 +41,10 @@ fun ViewGroup.viewPager2(
     val viewPager2 = ViewPager2(context)
     viewPager2.id = R.id.quickViewPager
     viewPager2.adapter =
-        object : FragmentStateAdapter(quickView.getFragmentManager(), quickView.getLifecycle()),
-            ViewPagerSize2 {
-            override fun createFragment(position: Int): Fragment {
-                return fragments[position]
-            }
-
-            override fun getItemCount(): Int {
-                return if (getPageSize() != -1) {
-                    getPageSize()
-                } else {
-                    fragments.size
-                }
-            }
-
-            private var pageSizeI = -1
-            override fun getPageSize(): Int {
-                return pageSizeI
-            }
-
-            override fun setPageSize(size: Int) {
-                pageSizeI = size
-            }
-
-            override fun getAdapter2(): FragmentStateAdapter {
-                return this
-            }
+        Fragments2StateAdapter(quickView.getFragmentManager(), quickView.getLifecycle()) {
+            fragments[it]
+        }.apply {
+            setPageSize(fragments.size)
         }
     if (limit != 0) {
         viewPager2.offscreenPageLimit = limit
@@ -82,7 +61,8 @@ inline fun <reified T : Fragment> LinearLayout.viewPager2(
     layoutParams: ViewGroup.LayoutParams = wrapContentHeightParams,
     noinline builder: (ViewPager2.() -> Unit)? = null,
 ): ViewPager2 {
-    return this.forceTo<ViewGroup>().viewPager2<T>(quickView, defaultSize, limit, layoutParams, builder)
+    return this.forceTo<ViewGroup>()
+        .viewPager2<T>(quickView, defaultSize, limit, layoutParams, builder)
 }
 
 inline fun <reified T : Fragment> ViewGroup.viewPager2(
@@ -94,42 +74,14 @@ inline fun <reified T : Fragment> ViewGroup.viewPager2(
 ): ViewPager2 {
     val viewPager2 = ViewPager2(context)
     viewPager2.id = R.id.quickViewPager
-    viewPager2.adapter = object : FragmentStateAdapter(
-        quickView.getFragmentManager(), quickView.getLifecycle()
-    ), ViewPagerSize2 {
-        override fun createFragment(i: Int): Fragment {
-            try {
-                val fragment = getFragment(
-                    quickView, T::class.java.getDeclaredConstructor().newInstance().forceTo(), i
-                )
-                return fragment as Fragment
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-            return null!!
+    viewPager2.adapter =
+        Fragments2StateAdapter(quickView.getFragmentManager(), quickView.getLifecycle()) {
+            getFragment(
+                quickView, T::class.java.getDeclaredConstructor().newInstance().forceTo(), it
+            ).forceTo()
+        }.apply {
+            setPageSize(defaultSize)
         }
-
-        override fun getItemCount(): Int {
-            return if (getPageSize() != -1) {
-                getPageSize()
-            } else {
-                defaultSize
-            }
-        }
-
-        private var pageSizeI = -1
-        override fun getPageSize(): Int {
-            return pageSizeI
-        }
-
-        override fun setPageSize(size: Int) {
-            pageSizeI = size
-        }
-
-        override fun getAdapter2(): FragmentStateAdapter {
-            return this
-        }
-    }
     if (limit != 0) {
         viewPager2.offscreenPageLimit = limit
     }
@@ -160,7 +112,8 @@ fun LinearLayout.viewPager2WithView(
     layoutParams: ViewGroup.LayoutParams = wrapContentHeightParams,
     builder: (ViewPager2.() -> Unit)? = null,
 ): ViewPager2 {
-    return this.forceTo<ViewGroup>().viewPager2WithView(quickView, views, limit, layoutParams, builder)
+    return this.forceTo<ViewGroup>()
+        .viewPager2WithView(quickView, views, limit, layoutParams, builder)
 }
 
 fun ViewGroup.viewPager2WithView(

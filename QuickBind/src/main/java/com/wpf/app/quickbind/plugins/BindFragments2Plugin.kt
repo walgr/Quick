@@ -1,13 +1,18 @@
 package com.wpf.app.quickbind.plugins
 
 import android.app.Activity
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
 import androidx.viewpager2.widget.ViewPager2
 import com.wpf.app.quickbind.annotations.BindFragments2
 import com.wpf.app.quickbind.interfaces.BindBaseFragment
-import com.wpf.app.quickbind.viewpager2.adapter.FragmentsStateAdapter
+import com.wpf.app.quickbind.viewpager.adapter.FragmentsStateAdapter
+import com.wpf.app.quickbind.viewpager2.adapter.Fragments2StateAdapter
+import com.wpf.app.quickutil.bind.Bind
+import com.wpf.app.quickutil.other.forceTo
 import java.lang.reflect.Field
 import kotlin.reflect.KClass
 
@@ -32,10 +37,22 @@ class BindFragments2Plugin : BindBasePlugin {
                 if (bindFragmentsAnn.limit > 0) {
                     viewPager.offscreenPageLimit = bindFragmentsAnn.limit
                 }
-                if (obj is FragmentActivity) {
-                    viewPager.adapter = FragmentsStateAdapter(obj, getFragment(obj, bindFragmentsAnn.fragments))
-                } else if (obj is Fragment) {
-                    viewPager.adapter = FragmentsStateAdapter(obj, getFragment(obj, bindFragmentsAnn.fragments))
+                var context = obj
+                if (obj is Bind && obj !is AppCompatActivity) {
+                    obj.getView()?.let {
+                        context = it.context
+                    }
+                }
+                val fragmentManager = if (context is FragmentActivity) {
+                    context.forceTo<FragmentActivity>().supportFragmentManager
+                } else {
+                    context.forceTo<Fragment>().childFragmentManager
+                }
+                val lifecycleOwner = context.forceTo<LifecycleOwner>().lifecycle
+                viewPager.adapter = Fragments2StateAdapter(fragmentManager, lifecycleOwner) {
+                    bindFragmentsAnn.fragments[it].forceTo()
+                }.apply {
+                    setPageSize(bindFragmentsAnn.fragments.size)
                 }
             }
         } catch (e: Exception) {
