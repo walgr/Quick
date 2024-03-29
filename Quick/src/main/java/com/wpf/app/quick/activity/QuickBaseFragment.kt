@@ -1,12 +1,20 @@
 package com.wpf.app.quick.activity
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.ActivityResultRegistry
+import androidx.activity.result.contract.ActivityResultContract
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
+import androidx.core.app.ActivityOptionsCompat
 import androidx.fragment.app.Fragment
 import com.wpf.app.quickbind.QuickBind
 import com.wpf.app.quickbind.annotations.AutoGet
@@ -26,7 +34,7 @@ abstract class QuickBaseFragment @JvmOverloads constructor(
     @LayoutRes open val layoutId: Int = 0,
     open val layoutView: View? = null,
     open val layoutViewInContext: RunOnContext<View>? = null,
-    @AutoGet(TITLE_KEY) val titleName: String = ""
+    @AutoGet(TITLE_KEY) val titleName: String = "",
 ) : Fragment(), BindBaseFragment, QuickView, RequestCoroutineScope, Bind {
 
     override var jobManager: MutableList<Job> = mutableListOf()
@@ -41,10 +49,34 @@ abstract class QuickBaseFragment @JvmOverloads constructor(
 
     abstract fun initView(view: View)
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        registerForActivityResult()
+    }
+
+    var launcher: ActivityResultLauncher<Intent>? = null
+
+    private var resultRegister: ActivityResultRegistry? = null
+    private var resultCallback: ActivityResultCallback<ActivityResult>? = null
+    open fun registerForActivityResult(
+//        resultRegister: ActivityResultRegistry? = null,
+        resultCallback: ActivityResultCallback<ActivityResult>,
+    ) {
+//        this.resultRegister = resultRegister
+        this.resultCallback = resultCallback
+    }
+
+    private fun registerForActivityResult() {
+        launcher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()) { result ->
+            resultCallback?.onActivityResult(result)
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         if (mView == null) {
             mView = InitViewHelper.init(inflater.context, layoutId, layoutView, layoutViewInContext)
@@ -71,6 +103,8 @@ abstract class QuickBaseFragment @JvmOverloads constructor(
     override fun onDestroy() {
         super.onDestroy()
         cancelJob()
+        mView = null
+        launcher = null
     }
 
     companion object {

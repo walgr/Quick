@@ -6,14 +6,6 @@ import android.content.Intent
 import android.os.Parcelable
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.ActivityResultCallback
-import androidx.activity.result.ActivityResultCaller
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContract
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import com.wpf.app.quickutil.other.forceTo
@@ -45,52 +37,30 @@ fun <T : Activity> initIntent(
     return intent
 }
 
-fun <T : Activity> Context.quickStartActivity(
+fun <T : Activity> Context.startActivity(
     activityCls: Class<T>,
     data: Map<String, Any?>? = null,
-    resultCallback: ActivityResultCallback<ActivityResult>? = null,
 ) {
-    val intent = initIntent(this, activityCls, data)
-    if (resultCallback != null) {
-        if (this is AppCompatActivity) {
-            registerForActivityResult(
-                ActivityResultContracts.StartActivityForResult(),
-                resultCallback
-            ).launch(intent)
-        }
-    } else {
-        startActivity(intent)
-    }
+    startActivity(initIntent(this, activityCls, data))
 }
 
-inline fun <reified T : Activity> Context.quickStartActivity(
+inline fun <reified T : Activity> Context.startActivity(
     data: Map<String, Any?>? = null,
-    resultCallback: ActivityResultCallback<ActivityResult>? = null,
 ) {
-    quickStartActivity(T::class.java, data, resultCallback)
+    startActivity(T::class.java, data)
 }
 
-inline fun <reified T : Activity> Fragment.quickStartActivity(
+inline fun <reified T : Activity> Fragment.startActivity(
     activityCls: Class<T>,
     data: Map<String, Any?>? = null,
-    resultCallback: ActivityResultCallback<ActivityResult>? = null,
 ) {
-    val intent = initIntent(this.requireContext(), activityCls, data)
-    if (resultCallback != null) {
-        registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult(),
-            resultCallback
-        ).launch(intent)
-    } else {
-        startActivity(intent)
-    }
+    startActivity(initIntent(this.requireContext(), activityCls, data))
 }
 
-inline fun <reified T : Activity> Fragment.quickStartActivity(
+inline fun <reified T : Activity> Fragment.startActivity(
     data: Map<String, Any?>? = null,
-    resultCallback: ActivityResultCallback<ActivityResult>? = null,
 ) {
-    quickStartActivity(T::class.java, data, resultCallback)
+    startActivity(T::class.java, data)
 }
 
 fun Activity.contentView(): View {

@@ -3,7 +3,7 @@ package com.wpf.app.quick.demo.wanandroid.model
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.demo.wanandroid.WebViewActivity
 import com.wpf.app.quickrecyclerview.data.QuickClickData
-import com.wpf.app.quickutil.activity.quickStartActivity
+import com.wpf.app.quick.helper.quickStartActivity
 
 open class Article : QuickClickData(R.layout.holder_refresh_item, autoSet = true) {
     val id: String? = null

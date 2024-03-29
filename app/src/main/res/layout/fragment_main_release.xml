@@ -4,8 +4,6 @@
 
     <data>
 
-        <import type="com.wpf.app.quick.demo.wanandroid.WanAndroidHomeActivityClass" />
-
         <import type="com.wpf.app.quick.demo.RequestTestActivityClass" />
 
         <import type="com.wpf.app.quick.demo.ShadowViewTestActivityClass" />
@@ -32,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:text="WanAndroid"
                 android:textAllCaps="false"
-                app:clickGoto="@{WanAndroidHomeActivityClass.INSTANCE.KClass}" />
+                android:onClick="@{viewModel::gotoWanAndroid}" />
 
             <Button
                 android:layout_width="wrap_content"

@@ -16,7 +16,7 @@ import com.wpf.app.quick.demo.databinding.FragmentMainReleaseBinding
 import com.wpf.app.quick.demo.model.MyMessage
 import com.wpf.app.quick.demo.wanandroid.WanAndroidHomeActivity
 import com.wpf.app.quickbind.annotations.BindSp2View
-import com.wpf.app.quickutil.activity.quickStartActivity
+import com.wpf.app.quick.helper.quickStartActivity
 import com.wpf.app.quickutil.other.printLog
 
 class MainReleaseVM: QuickVBModel<MainReleaseFragment, FragmentMainReleaseBinding>() {
@@ -25,6 +25,7 @@ class MainReleaseVM: QuickVBModel<MainReleaseFragment, FragmentMainReleaseBindin
     @BindSp2View(bindSp = "绑定的SpKey3", defaultValue = "默认值3")
     @BindView(R.id.spTextView3)
     var text3: TextView? = null
+    @SuppressLint("SetTextI18n")
     override fun onBindingCreated(view: FragmentMainReleaseBinding) {
         text3?.postDelayed(
             { text3?.text = System.currentTimeMillis().toString() + "" },
@@ -33,7 +34,7 @@ class MainReleaseVM: QuickVBModel<MainReleaseFragment, FragmentMainReleaseBindin
     }
 
     fun gotoWanAndroid(view: View?) {
-        quickView?.quickStartActivity<WanAndroidHomeActivity>() {
+        view?.context?.quickStartActivity<WanAndroidHomeActivity> {
             it.resultCode.printLog("返回数据成功")
         }
     }
