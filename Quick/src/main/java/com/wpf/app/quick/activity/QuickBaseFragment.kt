@@ -1,6 +1,5 @@
 package com.wpf.app.quick.activity
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,11 +9,9 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.ActivityResultRegistry
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
-import androidx.core.app.ActivityOptionsCompat
 import androidx.fragment.app.Fragment
 import com.wpf.app.quickbind.QuickBind
 import com.wpf.app.quickbind.annotations.AutoGet
@@ -29,7 +26,6 @@ import kotlinx.coroutines.Job
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-@SuppressLint("ValidFragment")
 abstract class QuickBaseFragment @JvmOverloads constructor(
     @LayoutRes open val layoutId: Int = 0,
     open val layoutView: View? = null,
@@ -55,14 +51,11 @@ abstract class QuickBaseFragment @JvmOverloads constructor(
     }
 
     var launcher: ActivityResultLauncher<Intent>? = null
-
     private var resultRegister: ActivityResultRegistry? = null
     private var resultCallback: ActivityResultCallback<ActivityResult>? = null
     open fun registerForActivityResult(
-//        resultRegister: ActivityResultRegistry? = null,
         resultCallback: ActivityResultCallback<ActivityResult>,
     ) {
-//        this.resultRegister = resultRegister
         this.resultCallback = resultCallback
     }
 
