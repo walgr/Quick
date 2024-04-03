@@ -4,8 +4,13 @@ import android.annotation.SuppressLint
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.viewpager.widget.ViewPager
+import com.google.android.material.appbar.AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL
+import com.google.android.material.appbar.AppBarLayout.LayoutParams.ScrollFlags
+import com.google.android.material.tabs.TabLayout
 import com.wpf.app.quick.ability.QuickActivity
 import com.wpf.app.quick.ability.ex.contentView
+import com.wpf.app.quick.ability.ex.coordinator
 import com.wpf.app.quick.ability.ex.fragment
 import com.wpf.app.quick.ability.ex.viewFragment
 import com.wpf.app.quick.ability.ex.myLayout
@@ -27,29 +32,43 @@ import com.wpf.app.quickwork.widget.QuickTitleView
 
 @GetClass
 class WanAndroidHomeActivity : QuickActivity(contentView<LinearLayout> { quickView ->
-    title("WanAndroid") {
-        textButton("登录", {
+    var tabLayout: TabLayout? = null
+    var viewPager: ViewPager? = null
+    coordinator(
+        followSlideLayout = {
+            title("WanAndroid") {
+                textButton("登录", {
 
-        })
-        setCommonClickListener(object : QuickTitleView.CommonClickListener {
-            override fun onBackClick(view: View) {
-                super.onBackClick(view)
-                quickView.getActivity().setResult(RESULT_OK)
+                })
+                setCommonClickListener(object : QuickTitleView.CommonClickListener {
+                    override fun onBackClick(view: View) {
+                        super.onBackClick(view)
+                        quickView.getActivity().setResult(RESULT_OK)
+                    }
+                })
             }
-        })
+        },
+        scrollFlags = SCROLL_FLAG_SCROLL,
+        topSuspendLayout = {
+            tabLayout(layoutParams = matchWrapLayoutParams.reset(height = 44.dp()))
+        },
+        bottomScrollLayout = {
+            viewPager(quickView = quickView) {
+                fragment(RecommendFragment())
+                viewFragment {
+                    myLayout(layoutViewInContext = runOnContext {
+                        TextView(it).apply {
+                            text = "测试"
+                        }
+                    })
+                }
+            }
+        }
+    ) { _, topSuspendLayout, bottomScrollLayout ->
+        tabLayout = topSuspendLayout
+        viewPager = bottomScrollLayout
     }
     val tabNames = arrayOf("推荐", "专题")
-    val tabLayout = tabLayout(layoutParams = matchWrapLayoutParams.reset(height = 44.dp()))
-    val viewPager = viewPager(quickView = quickView) {
-        fragment(RecommendFragment())
-        viewFragment {
-            myLayout(layoutViewInContext = runOnContext {
-                TextView(it).apply {
-                    text = "测试"
-                }
-            })
-        }
-    }
     TabManagerProvider.new()
         .initTabWan(tabLayout, tabNames.size) { curPos: Int, _: Boolean, tvName: TextView ->
             tvName.text = tabNames[curPos]

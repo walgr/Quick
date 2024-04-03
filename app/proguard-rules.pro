@@ -89,6 +89,7 @@
 # androidx 混淆
 -keep class com.google.android.material.** {*;}
 -keep class androidx.** {*;}
+-keep class android.** {*;}
 -keep public class * extends androidx.**
 -keep interface androidx.** {*;}
 -dontwarn com.google.android.material.**
