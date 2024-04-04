@@ -22,10 +22,8 @@ fun <F: View, T: View, B: View>ViewGroup.coordinator(
 ): CoordinatorLayout {
     val parentLayout = CoordinatorLayout(context)
     val appBarLayout = AppBarLayout(context)
-    appBarLayout.elevation = 0f
     parentLayout.addView(appBarLayout, matchWrapLayoutParams)
     var followSlideLayoutView: F? = null
-    var topSuspendLayoutView: T? = null
     followSlideLayout?.invoke(appBarLayout)?.let {
         it.wishLayoutParams<AppBarLayout.LayoutParams>().scrollFlags = scrollFlags!!
         followSlideLayoutView = it
@@ -33,6 +31,7 @@ fun <F: View, T: View, B: View>ViewGroup.coordinator(
             appBarLayout.addView(it, matchWrapLayoutParams)
         }
     }
+    var topSuspendLayoutView: T? = null
     topSuspendLayout?.invoke(appBarLayout)?.let {
         topSuspendLayoutView = it
         if (it.parent() != appBarLayout) {
