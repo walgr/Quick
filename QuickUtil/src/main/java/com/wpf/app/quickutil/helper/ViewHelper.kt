@@ -124,3 +124,7 @@ fun View.postDelay(delayMillis: Long, action: Runnable) {
 }
 
 fun View.parent() = parent as? ViewGroup
+
+inline fun <reified T: ViewGroup.LayoutParams> View.wishLayoutParams(width: Int = match, height: Int = wrap): T {
+    return this.layoutParams?.forceTo<T>() ?: layoutParams<T>(width, height)
+}

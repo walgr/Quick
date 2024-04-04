@@ -1,10 +1,14 @@
 package com.wpf.app.quick.demo.wanandroid
 
 import android.annotation.SuppressLint
+import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.widget.NestedScrollView
 import androidx.viewpager.widget.ViewPager
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.AppBarLayout.LayoutParams.SCROLL_FLAG_EXIT_UNTIL_COLLAPSED
 import com.google.android.material.appbar.AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL
 import com.google.android.material.appbar.AppBarLayout.LayoutParams.ScrollFlags
 import com.google.android.material.tabs.TabLayout
@@ -22,8 +26,13 @@ import com.wpf.app.quick.demo.wanandroid.fragment.RecommendFragment
 import com.wpf.app.quick.helper.getActivity
 import com.wpf.app.quickutil.bind.runOnContext
 import com.wpf.app.quickutil.helper.dp
+import com.wpf.app.quickutil.helper.dpF
+import com.wpf.app.quickutil.helper.layoutParams
+import com.wpf.app.quickutil.helper.match
+import com.wpf.app.quickutil.helper.matchLayoutParams
 import com.wpf.app.quickutil.helper.matchWrapLayoutParams
 import com.wpf.app.quickutil.helper.reset
+import com.wpf.app.quickutil.helper.toColor
 import com.wpf.app.quickwidget.tab.TabManagerProvider
 import com.wpf.app.quickwork.ability.tabLayout
 import com.wpf.app.quickwork.ability.textButton
@@ -34,21 +43,29 @@ import com.wpf.app.quickwork.widget.QuickTitleView
 class WanAndroidHomeActivity : QuickActivity(contentView<LinearLayout> { quickView ->
     var tabLayout: TabLayout? = null
     var viewPager: ViewPager? = null
+    title {
+        textButton("登录", {
+
+        })
+        setCommonClickListener(object : QuickTitleView.CommonClickListener {
+            override fun onBackClick(view: View) {
+                super.onBackClick(view)
+                quickView.getActivity().setResult(RESULT_OK)
+            }
+        })
+    }
     coordinator(
         followSlideLayout = {
-            title("WanAndroid") {
-                textButton("登录", {
-
-                })
-                setCommonClickListener(object : QuickTitleView.CommonClickListener {
-                    override fun onBackClick(view: View) {
-                        super.onBackClick(view)
-                        quickView.getActivity().setResult(RESULT_OK)
-                    }
-                })
+            TextView(context).apply {
+                layoutParams = layoutParams<AppBarLayout.LayoutParams>(width = match, height = 100.dp())
+                text = "Wan Android"
+                textSize = 24.dpF()
+                gravity = Gravity.CENTER
+                setTextColor(R.color.white.toColor())
+                setPadding(32.dp(), 16.dp(), 32.dp(), 32.dp())
             }
         },
-        scrollFlags = SCROLL_FLAG_SCROLL,
+        scrollFlags = SCROLL_FLAG_SCROLL or SCROLL_FLAG_EXIT_UNTIL_COLLAPSED,
         topSuspendLayout = {
             tabLayout(layoutParams = matchWrapLayoutParams.reset(height = 44.dp()))
         },
@@ -57,8 +74,10 @@ class WanAndroidHomeActivity : QuickActivity(contentView<LinearLayout> { quickVi
                 fragment(RecommendFragment())
                 viewFragment {
                     myLayout(layoutViewInContext = runOnContext {
-                        TextView(it).apply {
-                            text = "测试"
+                        NestedScrollView(it).apply {
+                            addView(TextView(it).apply {
+                                text = "测试"
+                            })
                         }
                     })
                 }
