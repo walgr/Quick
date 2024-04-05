@@ -22,6 +22,7 @@ import com.wpf.app.quickutil.helper.reset
 import com.wpf.app.quickutil.helper.toColor
 import com.wpf.app.quickutil.helper.toView
 import com.wpf.app.quickutil.helper.wrapLayoutParams
+import com.wpf.app.quickutil.other.printLog
 import com.wpf.app.quickutil.widget.bold
 import com.wpf.app.quickwidget.group.QuickSpaceLinearLayout
 import com.wpf.app.quickwork.R
@@ -42,6 +43,7 @@ class QuickTitleView @JvmOverloads constructor(
     private var line: View? = null
 
     private var style: QuickTitleStyle
+    private var childStyle: QuickTitleChildStyle? = null
 
     private var commonClickListener: CommonClickListener? = null
 
@@ -70,6 +72,7 @@ class QuickTitleView @JvmOverloads constructor(
                 setBackgroundResource(it)
             }
         }
+        this.childStyle = commonChildStyle?.copy()
         setStyle(this.style)
         if (QuickTitleView.commonClickListener != null || commonClickListener != null) {
             ivBack?.setOnClickListener {
@@ -134,6 +137,13 @@ class QuickTitleView @JvmOverloads constructor(
                 setContentGravity(it)
             }
             moreGroup?.updateLayoutParams<MarginLayoutParams> { marginEnd = space ?: 0 }
+        }
+    }
+
+    override fun onFinishInflate() {
+        super.onFinishInflate()
+        if (moreGroup?.childCount != 0 && commonChildStyle?.space != null) {
+            moreGroup?.setNewItemSpace(commonChildStyle?.space!!)
         }
     }
 
@@ -239,9 +249,6 @@ class QuickTitleView @JvmOverloads constructor(
     }
 
     override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
-        if (moreGroup?.childCount != 0 && childStyle?.space != null) {
-            moreGroup?.setNewItemSpace(childStyle?.space!!)
-        }
         super.onLayout(changed, l, t, r, b)
         if (isInEditMode && style.isAbsoluteCenter == true && titleGroup != null && ivBack != null && moreGroup != null) {
             style.apply {
@@ -282,7 +289,7 @@ class QuickTitleView @JvmOverloads constructor(
     }
 
     fun dealChildViewCommonStyle(view: View) {
-        childStyle?.run {
+        commonChildStyle?.run {
             when (view) {
                 is TextView -> {
                     titleColor?.let {
@@ -334,12 +341,12 @@ class QuickTitleView @JvmOverloads constructor(
             builder.invoke(commonStyle!!, context)
         }
 
-        internal var childStyle: QuickTitleChildStyle? = null
+        internal var commonChildStyle: QuickTitleChildStyle? = null
         fun childStyleBuilder(
             context: Context, builder: QuickTitleChildStyle.(context: Context) -> Unit,
         ) {
-            childStyle = QuickTitleChildStyle()
-            builder.invoke(childStyle!!, context)
+            commonChildStyle = QuickTitleChildStyle()
+            builder.invoke(commonChildStyle!!, context)
         }
     }
 
