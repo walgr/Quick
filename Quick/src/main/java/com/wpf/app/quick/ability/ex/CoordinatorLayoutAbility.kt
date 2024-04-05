@@ -9,14 +9,15 @@ import com.google.android.material.appbar.AppBarLayout
 import com.wpf.app.quickutil.helper.matchLayoutParams
 import com.wpf.app.quickutil.helper.matchWrapLayoutParams
 import com.wpf.app.quickutil.helper.parent
+import com.wpf.app.quickutil.helper.removeParent
 import com.wpf.app.quickutil.helper.wishLayoutParams
 
 fun <F: View, T: View, B: View>ViewGroup.coordinator(
     layoutParams: ViewGroup.LayoutParams = smartLayoutParams(),
-    followSlideLayout: (ViewGroup.() -> F)? = null,
+    followSlideLayout: (AppBarLayout.() -> F)? = null,
     scrollFlags: Int? = null,
-    topSuspendLayout: (ViewGroup.() -> T)? = null,
-    bottomScrollLayout: ViewGroup.() -> B,
+    topSuspendLayout: (AppBarLayout.() -> T)? = null,
+    bottomScrollLayout: CoordinatorLayout.() -> B,
     behavior: Behavior<*> = AppBarLayout.ScrollingViewBehavior(),
     builder: (CoordinatorLayout.(followSlideLayout: F?, topSuspendLayout: T?, bottomScrollLayout: B) -> Unit)? = null
 ): CoordinatorLayout {
@@ -33,6 +34,7 @@ fun <F: View, T: View, B: View>ViewGroup.coordinator(
     }
     var topSuspendLayoutView: T? = null
     topSuspendLayout?.invoke(appBarLayout)?.let {
+        it.wishLayoutParams<AppBarLayout.LayoutParams>().scrollFlags = 0
         topSuspendLayoutView = it
         if (it.parent() != appBarLayout) {
             appBarLayout.addView(it, matchWrapLayoutParams)

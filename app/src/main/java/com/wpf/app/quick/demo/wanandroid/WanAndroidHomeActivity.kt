@@ -33,6 +33,9 @@ import com.wpf.app.quickutil.helper.matchLayoutParams
 import com.wpf.app.quickutil.helper.matchWrapLayoutParams
 import com.wpf.app.quickutil.helper.reset
 import com.wpf.app.quickutil.helper.toColor
+import com.wpf.app.quickutil.helper.wishLayoutParams
+import com.wpf.app.quickutil.other.asTo
+import com.wpf.app.quickutil.other.printLog
 import com.wpf.app.quickwidget.tab.TabManagerProvider
 import com.wpf.app.quickwork.ability.tabLayout
 import com.wpf.app.quickwork.ability.textButton
@@ -65,7 +68,7 @@ class WanAndroidHomeActivity : QuickActivity(contentView<LinearLayout> { quickVi
                 setPadding(32.dp(), 16.dp(), 32.dp(), 32.dp())
             }
         },
-        scrollFlags = SCROLL_FLAG_SCROLL or SCROLL_FLAG_EXIT_UNTIL_COLLAPSED,
+        scrollFlags = 0,
         topSuspendLayout = {
             tabLayout(layoutParams = matchWrapLayoutParams.reset(height = 44.dp()))
         },
