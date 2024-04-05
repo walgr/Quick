@@ -68,7 +68,7 @@ class WanAndroidHomeActivity : QuickActivity(contentView<LinearLayout> { quickVi
                 setPadding(32.dp(), 16.dp(), 32.dp(), 32.dp())
             }
         },
-        scrollFlags = 0,
+        scrollFlags = SCROLL_FLAG_SCROLL,
         topSuspendLayout = {
             tabLayout(layoutParams = matchWrapLayoutParams.reset(height = 44.dp()))
         },
