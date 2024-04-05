@@ -42,7 +42,7 @@ fun <T : Fragment> fragment(
     return setContentView(layoutViewInContext = runOnContext {
         FrameLayout(it).apply {
             id = R.id.quickRoot
-            layoutParams = matchLayoutParams
+            layoutParams = matchLayoutParams()
         }
     }).with(object : QuickActivityAbility {
         override fun getPrimeKey() = "fragment"

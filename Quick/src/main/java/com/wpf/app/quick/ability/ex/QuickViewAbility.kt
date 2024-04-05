@@ -85,7 +85,7 @@ fun setContentView(
                 view.layoutParams?.width = match
                 view.layoutParams?.height = match
             } else {
-                view.layoutParams = matchLayoutParams
+                view.layoutParams = matchLayoutParams()
             }
             return contentBuilder?.invoke(owner.forceTo(), view) ?: view
         }

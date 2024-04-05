@@ -7,21 +7,21 @@ import android.widget.LinearLayout
 const val match = ViewGroup.LayoutParams.MATCH_PARENT
 const val wrap = ViewGroup.LayoutParams.WRAP_CONTENT
 
-val matchLayoutParams = ViewGroup.LayoutParams(match, match)
-val matchWrapLayoutParams = ViewGroup.LayoutParams(match, wrap)
-val wrapLayoutParams = ViewGroup.LayoutParams(wrap, wrap)
-val wrapMatchLayoutParams = ViewGroup.LayoutParams(wrap, match)
+fun matchLayoutParams() = ViewGroup.LayoutParams(match, match)
+fun matchWrapLayoutParams() = ViewGroup.LayoutParams(match, wrap)
+fun wrapLayoutParams() = ViewGroup.LayoutParams(wrap, wrap)
+fun wrapMatchLayoutParams() = ViewGroup.LayoutParams(wrap, match)
 
-val matchMarginLayoutParams = MarginLayoutParams(match, match)
-val matchWrapMarginLayoutParams = MarginLayoutParams(match, wrap)
-val wrapMarginLayoutParams = MarginLayoutParams(wrap, wrap)
-val wrapMatchMarginLayoutParams = MarginLayoutParams(wrap, match)
+fun matchMarginLayoutParams() = MarginLayoutParams(match, match)
+fun matchWrapMarginLayoutParams() = MarginLayoutParams(match, wrap)
+fun wrapMarginLayoutParams() = MarginLayoutParams(wrap, wrap)
+fun wrapMatchMarginLayoutParams() = MarginLayoutParams(wrap, match)
 
-val wrapContentHeightParams = LinearLayout.LayoutParams(match, wrap).apply {
+fun wrapContentHeightParams() = LinearLayout.LayoutParams(match, wrap).apply {
     weight = 1f
 }
 
-val wrapContentWidthParams = LinearLayout.LayoutParams(wrap, match).apply {
+fun wrapContentWidthParams() = LinearLayout.LayoutParams(wrap, match).apply {
     weight = 1f
 }
 inline fun <reified T : ViewGroup.LayoutParams> layoutParams(width: Int, height: Int): T {

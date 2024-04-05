@@ -97,7 +97,7 @@ internal interface QuickViewGroupI<T : ViewGroup> {
                 attrs,
                 defStyleAttr
             ) else t.newInstance(context, attrs)).apply {
-                layoutParams = matchLayoutParams
+                layoutParams = matchLayoutParams()
             }
             return tInstance as T
         }

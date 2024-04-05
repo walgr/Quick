@@ -27,15 +27,9 @@ import com.wpf.app.quick.helper.getActivity
 import com.wpf.app.quickutil.bind.runOnContext
 import com.wpf.app.quickutil.helper.dp
 import com.wpf.app.quickutil.helper.dpF
-import com.wpf.app.quickutil.helper.layoutParams
-import com.wpf.app.quickutil.helper.match
-import com.wpf.app.quickutil.helper.matchLayoutParams
 import com.wpf.app.quickutil.helper.matchWrapLayoutParams
 import com.wpf.app.quickutil.helper.reset
 import com.wpf.app.quickutil.helper.toColor
-import com.wpf.app.quickutil.helper.wishLayoutParams
-import com.wpf.app.quickutil.other.asTo
-import com.wpf.app.quickutil.other.printLog
 import com.wpf.app.quickwidget.tab.TabManagerProvider
 import com.wpf.app.quickwork.ability.tabLayout
 import com.wpf.app.quickwork.ability.textButton
@@ -60,7 +54,7 @@ class WanAndroidHomeActivity : QuickActivity(contentView<LinearLayout> { quickVi
     coordinator(
         followSlideLayout = {
             TextView(context).apply {
-                layoutParams = layoutParams<AppBarLayout.LayoutParams>(width = match, height = 100.dp())
+                layoutParams = matchWrapLayoutParams()
                 text = "Wan Android"
                 textSize = 24.dpF()
                 gravity = Gravity.CENTER
@@ -70,7 +64,7 @@ class WanAndroidHomeActivity : QuickActivity(contentView<LinearLayout> { quickVi
         },
         scrollFlags = SCROLL_FLAG_SCROLL,
         topSuspendLayout = {
-            tabLayout(layoutParams = matchWrapLayoutParams.reset(height = 44.dp()))
+            tabLayout(layoutParams = matchWrapLayoutParams().reset(height = 44.dp()))
         },
         bottomScrollLayout = {
             viewPager(quickView = quickView) {

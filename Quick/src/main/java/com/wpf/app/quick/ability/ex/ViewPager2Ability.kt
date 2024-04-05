@@ -87,7 +87,7 @@ fun ViewGroup.viewPager2WithView(
 ): ViewPager2 {
     val contentFragmentList = views.map {
         val contentView = FrameLayout(context)
-        contentView.layoutParams = matchLayoutParams
+        contentView.layoutParams = matchLayoutParams()
         contentView.addView(it)
         contentView.toFragment()
     }

@@ -298,7 +298,7 @@ class QuickTitleView @JvmOverloads constructor(
 
                 is ImageView -> {
                     if (imgWidth != null && imgHeight != null) {
-                        layoutParams = (layoutParams ?: wrapLayoutParams).reset(imgWidth!!, imgHeight!!)
+                        layoutParams = (layoutParams ?: wrapLayoutParams()).reset(imgWidth!!, imgHeight!!)
                     } else {
 
                     }

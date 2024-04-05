@@ -11,9 +11,6 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.scwang.smart.refresh.layout.api.RefreshFooter
 import com.scwang.smart.refresh.layout.api.RefreshHeader
 import com.scwang.smart.refresh.layout.api.RefreshLayout
-import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener
-import com.scwang.smart.refresh.layout.listener.OnRefreshListener
-import com.wpf.app.quick.ability.ex.refreshList
 import com.wpf.app.quick.ability.ex.smartLayoutParams
 import com.wpf.app.quickbind.helper.binddatahelper.BindData2ViewHelper
 import com.wpf.app.quickrecyclerview.QuickRefreshRecyclerView
@@ -46,7 +43,7 @@ fun <T : View> ViewGroup.smartRefreshLayout(
     val contentView = contentBuilder.invoke(smartRefreshLayout)
     if (contentView.parent() != this) {
         contentView.removeParent()
-        smartRefreshLayout.addView(contentView, matchLayoutParams)
+        smartRefreshLayout.addView(contentView, matchLayoutParams())
     }
     smartRefreshLayout.setRefreshFooter(footer.forceTo())
     smartRefreshLayout.setOnRefreshListener {
@@ -99,8 +96,8 @@ fun ViewGroup.smartRefreshList(
         contentBuilder = {
             if (upperLayout != null) {
                 RelativeLayout(context).apply {
-                    addView(list, matchLayoutParams)
-                    addView(upperLayout, matchLayoutParams)
+                    addView(list, matchLayoutParams())
+                    addView(upperLayout, matchLayoutParams())
                 }
             } else {
                 list

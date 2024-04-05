@@ -282,7 +282,7 @@ fun <T : QuickAbilityData> swipeMenu(
                         val swipeView = layoutId.toView(parent.context)
                         SwipeMenuLayout(parent.context).apply {
                             addView(itemView)
-                            addView(swipeView, wrapMatchMarginLayoutParams)
+                            addView(swipeView, wrapMatchMarginLayoutParams())
                             layoutParams = itemView.layoutParams
                         }
                     }

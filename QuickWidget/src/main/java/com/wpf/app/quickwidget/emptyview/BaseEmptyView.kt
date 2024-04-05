@@ -24,7 +24,7 @@ abstract class BaseEmptyView @JvmOverloads constructor(
     private var emptyView: View? = null
     protected fun init() {
         emptyView = layoutView?.run(context, this) ?: View.inflate(context, layoutId, null)
-        addView(emptyView, matchLayoutParams)
+        addView(emptyView, matchLayoutParams())
         initView(emptyView!!)
     }
 

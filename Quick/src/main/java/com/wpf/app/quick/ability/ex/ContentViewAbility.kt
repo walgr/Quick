@@ -16,12 +16,12 @@ import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.other.forceTo
 import com.wpf.app.quickwidget.quickview.QuickViewGroup
 
-fun View.smartLayoutParams(layoutParams: LayoutParams = matchLayoutParams): LayoutParams {
+fun View.smartLayoutParams(layoutParams: LayoutParams = matchLayoutParams()): LayoutParams {
     return if (this is LinearLayout) {
         if (this.orientation == LinearLayout.VERTICAL) {
-            wrapContentHeightParams
+            wrapContentHeightParams()
         } else {
-            wrapContentWidthParams
+            wrapContentWidthParams()
         }
     } else layoutParams
 }
