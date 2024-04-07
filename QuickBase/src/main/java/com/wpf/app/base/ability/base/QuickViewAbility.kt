@@ -1,6 +1,7 @@
 package com.wpf.app.base.ability.base
 
 import android.view.View
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelStoreOwner
 
 interface QuickViewAbility: QuickAbility {
@@ -8,7 +9,7 @@ interface QuickViewAbility: QuickAbility {
     /**
      * 生成页面
      */
-    fun generateContentView(owner: ViewModelStoreOwner, view: View): View {
+    fun generateContentView(owner: LifecycleOwner, view: View): View {
         return view
     }
 

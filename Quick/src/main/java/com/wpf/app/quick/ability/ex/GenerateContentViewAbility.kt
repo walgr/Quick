@@ -2,12 +2,10 @@ package com.wpf.app.quick.ability.ex
 
 import android.view.View
 import androidx.annotation.LayoutRes
-import androidx.lifecycle.ViewModelStoreOwner
+import androidx.lifecycle.LifecycleOwner
 import com.wpf.app.base.QuickView
 import com.wpf.app.base.ability.base.QuickAbility
-import com.wpf.app.base.ability.base.QuickViewAbility
 import com.wpf.app.quick.ability.ex.base.QuickInflateViewAbility
-import com.wpf.app.quick.ability.ex.base.QuickLifecycleAbility
 import com.wpf.app.quickutil.helper.match
 import com.wpf.app.quickutil.helper.matchLayoutParams
 import com.wpf.app.quickutil.other.forceTo
@@ -47,7 +45,7 @@ fun generateContentView(
             return layoutViewInContext
         }
 
-        override fun generateContentView(owner: ViewModelStoreOwner, view: View): View {
+        override fun generateContentView(owner: LifecycleOwner, view: View): View {
             if (view.layoutParams != null) {
                 view.layoutParams?.width = match
                 view.layoutParams?.height = match

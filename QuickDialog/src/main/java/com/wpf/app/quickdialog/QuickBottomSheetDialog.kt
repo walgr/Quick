@@ -9,42 +9,25 @@ import android.view.View
 import androidx.annotation.LayoutRes
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.wpf.app.quickbind.QuickBind
 import com.wpf.app.quickdialog.helper.DialogSheetHelper
 import com.wpf.app.quickdialog.helper.DialogSizeHelper
 import com.wpf.app.quickdialog.listeners.DialogLifecycle
 import com.wpf.app.quickdialog.listeners.DialogSize
 import com.wpf.app.quickdialog.listeners.SheetInit
+import com.wpf.app.quickutil.helper.InitViewHelper
+import com.wpf.app.quickutil.run.RunOnContext
 
 /**
  * Created by 王朋飞 on 2022/6/21.
  */
-abstract class QuickBottomSheetDialog : BottomSheetDialog,
-    DialogSize, DialogLifecycle, SheetInit {
-
-    @LayoutRes
-    var layoutId: Int = 0
-    var layoutView: View? = null
-
-    constructor(
-        mContext: Context,
-        themeId: Int = 0,
-        @LayoutRes layoutId: Int = 0,
-        layoutView: View? = null
-    ) : super(mContext, themeId) {
-        this.layoutId = layoutId
-        this.layoutView = layoutView
-    }
-
-    constructor(
-        mContext: Context,
-        cancelable: Boolean = false,
-        cancelListener: DialogInterface.OnCancelListener? = null,
-        @LayoutRes layoutId: Int = 0,
-        layoutView: View? = null
-    ) : super(mContext, cancelable, cancelListener) {
-        this.layoutId = layoutId
-        this.layoutView = layoutView
-    }
+open class QuickBottomSheetDialog(
+    context: Context,
+    themeId: Int = 0,
+    @LayoutRes private val layoutId: Int = 0,
+    private val layoutView: View? = null,
+    private val layoutViewInContext: RunOnContext<View>? = null,
+) : BottomSheetDialog(context, themeId), DialogSize, DialogLifecycle, SheetInit {
 
     protected var mView: View? = null
     override fun getView(): View? {
@@ -62,11 +45,7 @@ abstract class QuickBottomSheetDialog : BottomSheetDialog,
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         dealSize()
-        mView = if (layoutView != null) {
-            layoutView
-        } else {
-            View.inflate(getViewContext(), layoutId, null)
-        }
+        mView = generateContentView(InitViewHelper.init(context, layoutId, layoutView, layoutViewInContext))
         setContentView(mView!!)
         val window = window
         if (window != null) {
@@ -76,10 +55,17 @@ abstract class QuickBottomSheetDialog : BottomSheetDialog,
             window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             window.decorView.setPadding(0, 0, 0, 0)
         }
-        initView(mView)
+        QuickBind.bind(this)
+        initView(mView!!)
     }
 
-    abstract fun initView(view: View?)
+    open fun generateContentView(view: View): View {
+        return view
+    }
+
+    fun initView(view: View) {
+
+    }
 
     protected var mScreenWidth = 0
     protected var mScreenHeight = 0
@@ -134,6 +120,13 @@ abstract class QuickBottomSheetDialog : BottomSheetDialog,
     override fun dismiss() {
         super.dismiss()
         onDialogClose()
+        listener?.onDismiss(this)
+    }
+
+    var listener: DialogInterface.OnDismissListener? = null
+    override fun setOnDismissListener(listener: DialogInterface.OnDismissListener?) {
+        super.setOnDismissListener(listener)
+        this.listener = listener
     }
 
     override fun getViewContext(): Context {

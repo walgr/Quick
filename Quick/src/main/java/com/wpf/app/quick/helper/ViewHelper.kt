@@ -61,7 +61,7 @@ inline fun <reified VM : QuickVBModel<QuickActivity, VB>, reified VB : ViewDataB
 
 fun View.toDialog(onDialogInit: ((view: View?) -> Unit)? = null): QuickBaseDialog {
     return object : QuickBaseDialog(this.context, layoutView = this) {
-        override fun initView(view: View?) {
+        override fun initView(view: View) {
             onDialogInit?.invoke(view)
         }
     }

@@ -78,7 +78,7 @@ abstract class QuickBaseActivity @JvmOverloads constructor(
         }
     }
 
-    protected open fun generateContentView(view: View): View {
+    open fun generateContentView(view: View): View {
         return view
     }
 

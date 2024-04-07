@@ -6,6 +6,8 @@ import android.os.Bundle
 interface ViewLifecycle {
     fun onCreate() {}
 
+    fun onStart() {}
+
     fun onResume() {}
 
     fun onPause() {}

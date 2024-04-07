@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
+import androidx.appcompat.app.AppCompatDialog
 import com.wpf.app.quickbind.QuickBind
 import com.wpf.app.quickdialog.helper.DialogSizeHelper
 import com.wpf.app.quickdialog.listeners.DialogLifecycle
@@ -19,37 +20,13 @@ import com.wpf.app.quickutil.helper.InitViewHelper
 /**
  * Created by 王朋飞 on 2022/6/16.
  */
-open class QuickBaseDialog : Dialog, DialogSize, DialogLifecycle {
-
-    @LayoutRes
-    var layoutId: Int = 0
-    var layoutView: View? = null
-    var layoutViewInContext: RunOnContext<View>? = null
-
-    constructor(
-        mContext: Context,
-        themeId: Int = 0,
-        @LayoutRes layoutId: Int = 0,
-        layoutView: View? = null,
-        layoutViewInContext: RunOnContext<View>? = null,
-    ) : super(mContext, themeId) {
-        this.layoutId = layoutId
-        this.layoutView = layoutView
-        this.layoutViewInContext = layoutViewInContext
-    }
-
-    constructor(
-        mContext: Context,
-        cancelable: Boolean = false,
-        cancelListener: DialogInterface.OnCancelListener? = null,
-        @LayoutRes layoutId: Int = 0,
-        layoutView: View? = null,
-        layoutViewInContext: RunOnContext<View>? = null,
-    ) : super(mContext, cancelable, cancelListener) {
-        this.layoutId = layoutId
-        this.layoutView = layoutView
-        this.layoutViewInContext = layoutViewInContext
-    }
+open class QuickBaseDialog(
+    context: Context,
+    themeId: Int = 0,
+    @LayoutRes private val layoutId: Int = 0,
+    private val layoutView: View? = null,
+    private val layoutViewInContext: RunOnContext<View>? = null,
+) : AppCompatDialog(context, themeId), DialogSize, DialogLifecycle {
 
     public override fun onStart() {
         super.onStart()
@@ -60,7 +37,7 @@ open class QuickBaseDialog : Dialog, DialogSize, DialogLifecycle {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         dealSize()
-        mView = InitViewHelper.init(getViewContext(), layoutId, layoutView, layoutViewInContext)
+        mView = generateContentView(InitViewHelper.init(getViewContext(), layoutId, layoutView, layoutViewInContext))
         if (initDialogAdaptiveHeight()) {
             mView = SizeLimitViewGroup(getViewContext()).apply {
                 addView(mView)
@@ -75,7 +52,7 @@ open class QuickBaseDialog : Dialog, DialogSize, DialogLifecycle {
             window!!.decorView.setPadding(0, 0, 0, 0)
         }
         QuickBind.bind(this)
-        initView(mView)
+        initView(mView!!)
     }
 
     private var mScreenWidth = 0
@@ -91,7 +68,11 @@ open class QuickBaseDialog : Dialog, DialogSize, DialogLifecycle {
         return mView
     }
 
-    open fun initView(view: View?) {
+    open fun generateContentView(view: View): View {
+        return view
+    }
+
+    open fun initView(view: View) {
 
     }
 
@@ -139,6 +120,7 @@ open class QuickBaseDialog : Dialog, DialogSize, DialogLifecycle {
     override fun dismiss() {
         super.dismiss()
         onDialogClose()
+        listener?.onDismiss(this)
     }
 
     var listener: DialogInterface.OnDismissListener? = null
