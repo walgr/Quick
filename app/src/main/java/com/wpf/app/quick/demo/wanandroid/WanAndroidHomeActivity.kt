@@ -11,11 +11,11 @@ import com.google.android.material.appbar.AppBarLayout.LayoutParams.SCROLL_FLAG_
 import com.google.android.material.tabs.TabLayout
 import com.wpf.app.quick.ability.QuickActivity
 import com.wpf.app.quick.ability.ex.contentView
-import com.wpf.app.quick.ability.ex.coordinator
-import com.wpf.app.quick.ability.ex.fragment
-import com.wpf.app.quick.ability.ex.viewFragment
-import com.wpf.app.quick.ability.ex.myLayout
-import com.wpf.app.quick.ability.ex.viewPager
+import com.wpf.app.quick.ability.helper.coordinator
+import com.wpf.app.quick.ability.helper.fragment
+import com.wpf.app.quick.ability.helper.myLayout
+import com.wpf.app.quick.ability.helper.viewFragment
+import com.wpf.app.quick.ability.helper.viewPager
 import com.wpf.app.quick.annotations.getclass.GetClass
 import com.wpf.app.quick.annotations.tab.TabInit
 import com.wpf.app.quick.demo.R

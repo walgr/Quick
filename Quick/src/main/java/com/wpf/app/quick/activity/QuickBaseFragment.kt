@@ -13,12 +13,12 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
+import com.wpf.app.base.QuickView
 import com.wpf.app.quickbind.QuickBind
 import com.wpf.app.quickbind.annotations.AutoGet
 import com.wpf.app.quickbind.interfaces.BindBaseFragment
 import com.wpf.app.quickutil.run.RunOnContext
 import com.wpf.app.quicknetwork.base.RequestCoroutineScope
-import com.wpf.app.base.bind.Bind
 import com.wpf.app.quickutil.helper.InitViewHelper
 import kotlinx.coroutines.Job
 
@@ -35,7 +35,7 @@ abstract class QuickBaseFragment @JvmOverloads constructor(
 
     override var jobManager: MutableList<Job> = mutableListOf()
 
-    private var mView: View? = null
+    private var curView: View? = null
 
     init {
         val bundle = Bundle()
@@ -71,32 +71,31 @@ abstract class QuickBaseFragment @JvmOverloads constructor(
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        if (mView == null) {
-            mView = InitViewHelper.init(inflater.context, layoutId, layoutView, layoutViewInContext)
+        if (curView == null) {
+            curView = generateContentView(InitViewHelper.init(inflater.context, layoutId, layoutView, layoutViewInContext))
         }
-        dealContentView(mView!!)
-        return mView
+        return curView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         QuickBind.bind(this)
-        initView(mView!!)
+        initView(curView!!)
     }
 
-    open fun dealContentView(view: View) {
-        mView = view
+    open fun generateContentView(view: View): View {
+        return view
     }
 
     override fun getView(): View? {
-        return mView
+        return curView
     }
 
     @CallSuper
     override fun onDestroy() {
         super.onDestroy()
         cancelJob()
-        mView = null
+        curView = null
         launcher = null
     }
 

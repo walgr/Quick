@@ -31,7 +31,7 @@ android {
 
 dependencies {
 
-    implementation deps.kotlin_reflect
+//    implementation deps.kotlin_reflect
     implementation deps.gson
 
     implementation deps.androidx.appcompat

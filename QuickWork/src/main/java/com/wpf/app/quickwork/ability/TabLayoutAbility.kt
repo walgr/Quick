@@ -4,8 +4,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams
 import com.google.android.material.tabs.TabLayout
-import com.wpf.app.quick.ability.ex.smartLayoutParams
 import com.wpf.app.quickutil.helper.toView
+import com.wpf.app.quickutil.widget.smartLayoutParams
 
 fun ViewGroup.tabLayout(
     tabLayoutRes: Int = 0,

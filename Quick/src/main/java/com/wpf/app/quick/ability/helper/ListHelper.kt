@@ -1,4 +1,4 @@
-package com.wpf.app.quick.ability.ex
+package com.wpf.app.quick.ability.helper
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -8,6 +8,7 @@ import com.wpf.app.quickrecyclerview.QuickRecyclerView
 import com.wpf.app.quickrecyclerview.QuickRefreshRecyclerView
 import com.wpf.app.quickrecyclerview.data.QuickItemData
 import com.wpf.app.quickutil.other.forceTo
+import com.wpf.app.quickutil.widget.smartLayoutParams
 
 fun ViewGroup.refreshList(
     layoutParams: ViewGroup.LayoutParams = smartLayoutParams(),

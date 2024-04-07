@@ -11,7 +11,6 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.scwang.smart.refresh.layout.api.RefreshFooter
 import com.scwang.smart.refresh.layout.api.RefreshHeader
 import com.scwang.smart.refresh.layout.api.RefreshLayout
-import com.wpf.app.quick.ability.ex.smartLayoutParams
 import com.wpf.app.quickbind.helper.binddatahelper.BindData2ViewHelper
 import com.wpf.app.quickrecyclerview.QuickRefreshRecyclerView
 import com.wpf.app.quickrecyclerview.data.QuickItemData
@@ -25,6 +24,7 @@ import com.wpf.app.quickutil.helper.matchLayoutParams
 import com.wpf.app.quickutil.helper.parent
 import com.wpf.app.quickutil.helper.removeParent
 import com.wpf.app.quickutil.other.forceTo
+import com.wpf.app.quickutil.widget.smartLayoutParams
 
 fun <T : View> ViewGroup.smartRefreshLayout(
     layoutParams: ViewGroup.LayoutParams = smartLayoutParams(),

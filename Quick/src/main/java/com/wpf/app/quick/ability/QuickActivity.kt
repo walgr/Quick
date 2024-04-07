@@ -5,61 +5,85 @@ import android.os.Bundle
 import android.view.View
 import androidx.annotation.CallSuper
 import androidx.lifecycle.ViewModel
-import com.wpf.app.quick.ability.ex.QuickActivityAbility
-import com.wpf.app.quick.ability.ex.QuickInflateViewAbility
+import com.wpf.app.base.ability.base.QuickAbility
+import com.wpf.app.base.ability.base.QuickViewAbility
+import com.wpf.app.quick.ability.ex.base.QuickInflateViewAbility
+import com.wpf.app.quick.ability.ex.base.QuickLifecycleAbility
 import com.wpf.app.quick.activity.QuickBaseActivity
 import com.wpf.app.quickbind.interfaces.BindViewModel
+import com.wpf.app.quickutil.helper.InitViewHelper
 import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.other.forceTo
+import com.wpf.app.quickutil.run.runOnContext
 
 open class QuickActivity(
-    private val abilityList: List<QuickActivityAbility> = mutableListOf(), titleName: String = ""
+    private val abilityList: List<QuickAbility> = mutableListOf(), titleName: String = "",
 ) : QuickBaseActivity(
-    layoutId = abilityList.find { it is QuickInflateViewAbility }!!
-        .forceTo<QuickInflateViewAbility>().layoutId(),
-    layoutView = abilityList.find { it is QuickInflateViewAbility }!!
-        .forceTo<QuickInflateViewAbility>().layoutView(),
-    layoutViewInContext = abilityList.find { it is QuickInflateViewAbility }!!
-        .forceTo<QuickInflateViewAbility>().layoutViewInContext(),
-    titleName = titleName
+        layoutViewInContext = runOnContext {
+        val inflateAbility = abilityList.first { ability -> ability is QuickInflateViewAbility }
+            .forceTo<QuickInflateViewAbility>()
+        InitViewHelper.init(
+            it,
+            inflateAbility.layoutId(),
+            inflateAbility.layoutView(),
+            inflateAbility.layoutViewInContext()
+        )
+    }, titleName = titleName
 ), BindViewModel<ViewModel> {
     internal val extraParameter: LinkedHashMap<String, Any> = linkedMapOf()
 
-    override fun getViewModel(): ViewModel? {
-        return abilityList.find { it is BindViewModel<*> }?.asTo<BindViewModel<*>>()?.getViewModel()
+    @CallSuper
+    override fun generateContentView(view: View): View {
+        val inflateViewAbility =
+            abilityList.first { it is QuickInflateViewAbility }.forceTo<QuickInflateViewAbility>()
+        return inflateViewAbility.generateContentView(this, view.forceTo<View>())
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        abilityList.forEach {
-            it.onSaveInstanceState(outState)
+    @CallSuper
+    override fun initView(view: View) {
+        abilityList.filterIsInstance<QuickViewAbility>().forEach {
+            it.afterGenerateContentView(this, view)
+        }
+        abilityList.filterIsInstance<QuickViewAbility>().forEach {
+            it.initView(view)
+        }
+    }
+
+    override fun getViewModel(): ViewModel? {
+        return abilityList.firstOrNull { it is BindViewModel<*> }?.asTo<BindViewModel<*>>()?.getViewModel()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
+            it.onCreate()
         }
     }
 
     override fun onResume() {
         super.onResume()
-        abilityList.forEach {
+        abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
             it.onResume()
         }
     }
 
     override fun onPause() {
         super.onPause()
-        abilityList.forEach {
+        abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
             it.onPause()
         }
     }
 
     override fun onStop() {
         super.onStop()
-        abilityList.forEach {
+        abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
             it.onStop()
         }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        abilityList.forEach {
+        abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
             it.onDestroy()
         }
     }
@@ -67,26 +91,15 @@ open class QuickActivity(
     @Deprecated("Deprecated by Android")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        abilityList.forEach {
+        abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
             it.onActivityResult(requestCode, resultCode, data)
         }
     }
 
-    @CallSuper
-    override fun dealContentView(view: View) {
-        val newView: View =
-            abilityList.find { it is QuickInflateViewAbility }!!.forceTo<QuickInflateViewAbility>()
-                .beforeDealContentView(this, view.forceTo())
-        super.dealContentView(newView)
-        abilityList.forEach {
-            it.dealContentView(this, newView)
-        }
-    }
-
-    @CallSuper
-    override fun initView(view: View) {
-        abilityList.forEach {
-            it.initView(view)
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
+            it.onSaveInstanceState(outState)
         }
     }
 }

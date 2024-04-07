@@ -1,4 +1,4 @@
-package com.wpf.app.quick.ability.ex
+package com.wpf.app.quick.ability.helper
 
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +8,8 @@ import com.google.android.material.appbar.AppBarLayout
 import com.wpf.app.quickutil.helper.matchLayoutParams
 import com.wpf.app.quickutil.helper.matchWrapLayoutParams
 import com.wpf.app.quickutil.helper.parent
-import com.wpf.app.quickutil.helper.wishLayoutParams
+import com.wpf.app.quickutil.widget.smartLayoutParams
+import com.wpf.app.quickutil.widget.wishLayoutParams
 
 fun <F : View, T : View, B : View> ViewGroup.coordinator(
     layoutParams: ViewGroup.LayoutParams = smartLayoutParams(),

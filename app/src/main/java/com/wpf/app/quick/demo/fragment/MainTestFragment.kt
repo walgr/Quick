@@ -3,7 +3,7 @@ package com.wpf.app.quick.demo.fragment
 import com.wpf.app.quick.ability.QuickFragment
 import com.wpf.app.quick.ability.ex.binding
 import com.wpf.app.quick.ability.ex.contentView
-import com.wpf.app.quick.ability.ex.with
+import com.wpf.app.base.ability.base.with
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.demo.databinding.FragmentMainTestBinding
 import com.wpf.app.quickutil.helper.dp

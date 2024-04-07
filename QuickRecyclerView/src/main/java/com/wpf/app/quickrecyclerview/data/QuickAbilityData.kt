@@ -19,7 +19,7 @@ import com.wpf.app.quickutil.run.RunOnContextWithSelf
 import com.wpf.app.quickutil.run.runOnContextWithSelf
 import com.wpf.app.quickutil.helper.toView
 import com.wpf.app.quickutil.helper.wrapMatchMarginLayoutParams
-import com.wpf.app.quickutil.other.Unique
+import com.wpf.app.base.ability.base.Unique
 import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.other.forceTo
 

@@ -8,12 +8,14 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
-import com.wpf.app.quick.activity.QuickView
+import com.wpf.app.base.ability.base.QuickViewAbility
+import com.wpf.app.base.QuickView
+import com.wpf.app.base.ability.base.QuickAbility
+import com.wpf.app.quick.ability.ex.base.QuickVMAbility
 import com.wpf.app.quick.activity.viewmodel.QuickVBModel
 import com.wpf.app.quick.helper.QuickDataBindingUtil
 import com.wpf.app.quick.helper.getActivity
 import com.wpf.app.quickrecyclerview.constant.BRConstant
-import com.wpf.app.base.bind.QuickBindWrap
 import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.other.forceTo
 
@@ -21,13 +23,12 @@ inline fun <reified Self : QuickView, reified VM : QuickVBModel<out Self, VB>, r
     noinline vmBuilder: (VM.(self: Self) -> Unit)? = null,
     noinline vbBuilder: (VB.(self: Self) -> Unit)? = null,
     noinline mbBuilder: (VB.(self: Self, vm: VM) -> Unit)? = null,
-): MutableList<QuickActivityAbility> = mutableListOf(object : QuickVMAbility<VM> {
+): MutableList<QuickAbility> = mutableListOf(object : QuickVMAbility<VM> {
     private var viewModel: VM? = null
     private var viewBinding: VB? = null
 
-    override fun dealContentView(owner: ViewModelStoreOwner, view: View) {
-        super.dealContentView(owner, view)
-
+    override fun afterGenerateContentView(owner: ViewModelStoreOwner, view: View) {
+        super.afterGenerateContentView(owner, view)
         val viewModelCls = VM::class.java
         val context = owner.forceTo<QuickView>()
         if (viewModelCls != QuickVBModel::class.java) {
@@ -79,7 +80,7 @@ inline fun <reified VM : QuickVBModel<out QuickView, VB>, reified VB : ViewDataB
     noinline vmBuilder: (VM.() -> Unit)? = null,
     noinline vbBuilder: (VB.() -> Unit)? = null,
     noinline mbBuilder: (VB.(vm: VM) -> Unit)? = null,
-): MutableList<QuickActivityAbility> {
+): MutableList<QuickAbility> {
     return modelBindingWithSelf<QuickView, VM, VB>({ vmBuilder?.invoke(this) },
         { vbBuilder?.invoke(this) },
         { _, vm -> mbBuilder?.invoke(this, vm) })
@@ -87,13 +88,13 @@ inline fun <reified VM : QuickVBModel<out QuickView, VB>, reified VB : ViewDataB
 
 inline fun <reified Self : QuickView, reified VB : ViewDataBinding> bindingAndSelf(
     noinline vbBuilder: (VB.(self: Self) -> Unit)? = null,
-): MutableList<QuickActivityAbility> =
+): MutableList<QuickAbility> =
     modelBindingWithSelf<Self, QuickVBModel<Self, VB>, VB>(vbBuilder = {
         vbBuilder?.invoke(this, it)
     })
 
 inline fun <reified VB : ViewDataBinding> binding(
     noinline vbBuilder: (VB.() -> Unit)? = null,
-): MutableList<QuickActivityAbility> = modelBinding<QuickVBModel<QuickView, VB>, VB>(
+): MutableList<QuickAbility> = modelBinding<QuickVBModel<QuickView, VB>, VB>(
     vbBuilder = vbBuilder
 )

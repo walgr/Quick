@@ -6,11 +6,9 @@ import android.widget.TextView
 import com.wpf.app.quick.ability.QuickActivity
 import com.wpf.app.quick.ability.ex.binding
 import com.wpf.app.quick.ability.ex.contentView
-import com.wpf.app.quick.ability.ex.with
+import com.wpf.app.base.ability.base.with
 import com.wpf.app.quick.annotations.bind.BindView
-import com.wpf.app.quick.annotations.tab.IdView
 import com.wpf.app.quick.annotations.tab.TabInit
-import com.wpf.app.quick.annotations.tab.view.ViewType
 import com.wpf.app.quick.demo.databinding.ActivityMainCodeBinding
 import com.wpf.app.quick.demo.fragment.MainReleaseFragment
 import com.wpf.app.quick.demo.fragment.MainTestFragment

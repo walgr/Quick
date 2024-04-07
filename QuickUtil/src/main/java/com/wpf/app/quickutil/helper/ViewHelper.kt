@@ -4,6 +4,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
 import android.view.ViewParent
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.wpf.app.quickutil.data.KV
@@ -124,7 +125,3 @@ fun View.postDelay(delayMillis: Long, action: Runnable) {
 }
 
 fun View.parent() = parent as? ViewGroup
-
-inline fun <reified T: ViewGroup.LayoutParams> View.wishLayoutParams(width: Int = match, height: Int = wrap): T {
-    return this.layoutParams?.forceTo<T>() ?: layoutParams<T>(width, height)
-}

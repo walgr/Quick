@@ -8,8 +8,8 @@ import android.widget.Toast
 import com.wpf.app.quick.ability.QuickActivity
 import com.wpf.app.quick.ability.ex.contentView
 import com.wpf.app.quick.ability.ex.modelBinding
-import com.wpf.app.quick.ability.ex.myLayout
-import com.wpf.app.quick.ability.ex.with
+import com.wpf.app.quick.ability.helper.myLayout
+import com.wpf.app.base.ability.base.with
 import com.wpf.app.quick.annotations.bind.BindView
 import com.wpf.app.quick.annotations.bind.GroupView
 import com.wpf.app.quick.demo.databinding.ActivityDataTestBinding

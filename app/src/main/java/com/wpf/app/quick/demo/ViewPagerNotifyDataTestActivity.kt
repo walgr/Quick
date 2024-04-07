@@ -1,13 +1,10 @@
 package com.wpf.app.quick.demo
 
 import android.widget.LinearLayout
-import android.widget.Toast
 import com.wpf.app.quick.ability.QuickActivity
 import com.wpf.app.quick.ability.ex.contentViewWithSelf
-import com.wpf.app.quick.ability.ex.viewPager
+import com.wpf.app.quick.ability.helper.viewPager
 import com.wpf.app.quick.annotations.getclass.GetClass
-import com.wpf.app.quickbind.viewpager2.ViewPagerHelper
-import com.wpf.app.quickutil.helper.postDelay
 import com.wpf.app.quickwork.ability.smartRefreshLayout
 import com.wpf.app.quickwork.ability.title
 import kotlin.random.Random

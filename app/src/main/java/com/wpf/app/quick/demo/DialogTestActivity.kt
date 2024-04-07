@@ -5,7 +5,7 @@ import android.widget.LinearLayout
 import com.google.android.material.button.MaterialButton
 import com.wpf.app.quick.ability.QuickActivity
 import com.wpf.app.quick.ability.ex.contentView
-import com.wpf.app.quick.ability.ex.myLayout
+import com.wpf.app.quick.ability.helper.myLayout
 import com.wpf.app.quick.demo.dialog.Test2Dialog
 import com.wpf.app.quick.demo.dialog.Test3Dialog
 import com.wpf.app.quick.demo.dialog.TestDialog

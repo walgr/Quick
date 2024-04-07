@@ -1,4 +1,4 @@
-package com.wpf.app.quick.ability.ex
+package com.wpf.app.quick.ability.helper
 
 import android.view.View
 import android.view.ViewGroup
@@ -7,7 +7,7 @@ import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.wpf.app.quick.R
-import com.wpf.app.quick.activity.QuickView
+import com.wpf.app.base.QuickView
 import com.wpf.app.quick.helper.getFragmentManager
 import com.wpf.app.quick.helper.getLifecycle
 import com.wpf.app.quick.helper.toFragment
@@ -16,6 +16,7 @@ import com.wpf.app.quickbind.viewpager2.adapter.Fragments2StateAdapter
 import com.wpf.app.quickutil.helper.matchLayoutParams
 import com.wpf.app.quickutil.helper.removeParent
 import com.wpf.app.quickutil.other.forceTo
+import com.wpf.app.quickutil.widget.smartLayoutParams
 import kotlin.math.abs
 
 fun ViewGroup.viewPager2(

@@ -1,9 +1,10 @@
-package com.wpf.app.quick.activity.viewmodel
+package com.wpf.app.base
 
 import android.content.Intent
 import android.os.Bundle
 
 interface ViewLifecycle {
+    fun onCreate() {}
 
     fun onResume() {}
 

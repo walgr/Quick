@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
-import com.wpf.app.quick.activity.QuickView
+import com.wpf.app.base.QuickView
 import com.wpf.app.quickutil.other.forceTo
 
 fun QuickView.getActivity(): Activity {

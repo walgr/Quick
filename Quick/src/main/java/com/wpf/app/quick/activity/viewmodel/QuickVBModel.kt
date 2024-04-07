@@ -2,11 +2,7 @@ package com.wpf.app.quick.activity.viewmodel
 
 import android.content.Context
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.ViewModel
-import androidx.viewbinding.ViewBinding
-import com.wpf.app.quick.activity.QuickView
-import com.wpf.app.quicknetwork.base.RequestCoroutineScope
+import com.wpf.app.base.QuickView
 import kotlinx.coroutines.Job
 
 /**

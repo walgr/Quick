@@ -4,8 +4,8 @@ import android.widget.LinearLayout
 import com.wpf.app.quick.ability.QuickActivity
 import com.wpf.app.quick.ability.ex.contentView
 import com.wpf.app.quick.ability.ex.modelBinding
-import com.wpf.app.quick.ability.ex.myLayout
-import com.wpf.app.quick.ability.ex.with
+import com.wpf.app.quick.ability.helper.myLayout
+import com.wpf.app.base.ability.base.with
 import com.wpf.app.quick.annotations.getclass.GetClass
 import com.wpf.app.quick.demo.databinding.ActivityRequestTestBinding
 import com.wpf.app.quick.demo.viewmodel.RequestTestModel

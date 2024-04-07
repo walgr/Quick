@@ -11,11 +11,12 @@ import androidx.activity.result.ActivityResultRegistry
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
+import com.wpf.app.base.QuickView
 import com.wpf.app.quickbind.QuickBind
 import com.wpf.app.quickbind.annotations.AutoGet
 import com.wpf.app.quickutil.run.RunOnContext
 import com.wpf.app.quicknetwork.base.RequestCoroutineScope
-import com.wpf.app.base.bind.Bind
+import com.wpf.app.quickutil.activity.contentView
 import com.wpf.app.quickutil.helper.InitViewHelper
 import kotlinx.coroutines.Job
 
@@ -32,14 +33,21 @@ abstract class QuickBaseActivity @JvmOverloads constructor(
 
     override var jobManager: MutableList<Job> = mutableListOf()
 
-    private var inflateView: View? = null
+    private var curView: View? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        inflateView = InitViewHelper.init(this, layoutId, layoutView, layoutViewInContext)
-        dealContentView(inflateView!!)
+        curView = generateContentView(
+            InitViewHelper.init(
+                this,
+                layoutId,
+                layoutView,
+                layoutViewInContext
+            )
+        )
+        setContentView(curView)
         QuickBind.bind(this)
-        initView(inflateView!!)
+        initView(curView!!)
         setTitleName()
         registerForActivityResult()
     }
@@ -51,15 +59,14 @@ abstract class QuickBaseActivity @JvmOverloads constructor(
     private var resultRegister: ActivityResultRegistry? = null
     private var resultCallback: ActivityResultCallback<ActivityResult>? = null
     open fun registerForActivityResult(
-//        resultRegister: ActivityResultRegistry? = null,
         resultCallback: ActivityResultCallback<ActivityResult>,
     ) {
-//        this.resultRegister = resultRegister
         this.resultCallback = resultCallback
     }
 
     private fun registerForActivityResult() {
-        launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()
+        launcher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
         ) { result ->
             resultCallback?.onActivityResult(result)
         }
@@ -71,13 +78,12 @@ abstract class QuickBaseActivity @JvmOverloads constructor(
         }
     }
 
-    protected open fun dealContentView(view: View) {
-        this.inflateView = view
-        setContentView(inflateView)
+    protected open fun generateContentView(view: View): View {
+        return view
     }
 
     override fun getView(): View {
-        return inflateView!!
+        return curView!!
     }
 
     fun requireContext() = this
@@ -93,7 +99,7 @@ abstract class QuickBaseActivity @JvmOverloads constructor(
     override fun onDestroy() {
         super.onDestroy()
         cancelJob()
-        inflateView = null
+        curView = null
         launcher = null
     }
 }
