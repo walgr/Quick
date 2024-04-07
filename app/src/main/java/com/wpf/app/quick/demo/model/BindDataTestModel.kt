@@ -13,7 +13,7 @@ import com.wpf.app.quickrecyclerview.data.bindWSelf
 import com.wpf.app.quickrecyclerview.data.click
 import com.wpf.app.quickrecyclerview.data.swap
 import com.wpf.app.quickrecyclerview.data.with
-import com.wpf.app.quickutil.bind.runOnHolder
+import com.wpf.app.quickutil.run.runOnHolder
 import com.wpf.app.quickutil.helper.onceClick
 import com.wpf.app.quickutil.init.ToastHelper
 import com.wpf.app.quickutil.other.printLog

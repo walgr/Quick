@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import com.wpf.app.quickwidget.selectview.QuickSelectAdapter
 import com.wpf.app.quickrecyclerview.data.QuickBindData
 import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
-import com.wpf.app.quickutil.bind.RunItemClickWithSelf
-import com.wpf.app.quickutil.bind.RunOnContextWithSelf
+import com.wpf.app.quickutil.run.RunItemClickWithSelf
+import com.wpf.app.quickutil.run.RunOnContextWithSelf
 import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.widget.scrollToPositionAndOffset
 import java.io.Serializable

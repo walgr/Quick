@@ -7,12 +7,12 @@ import androidx.annotation.CallSuper
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.wpf.app.quickbind.QuickBind
-import com.wpf.app.quickutil.bind.RunOnContextWithSelf
+import com.wpf.app.quickutil.run.RunOnContextWithSelf
 import com.wpf.app.quickbind.utils.DataAutoSet2ViewUtils
 import com.wpf.app.quickrecyclerview.QuickAdapter
 import com.wpf.app.quickrecyclerview.holder.QuickViewBindingHolder
 import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
-import com.wpf.app.quickutil.bind.Bind
+import com.wpf.app.base.bind.Bind
 import com.wpf.app.quickutil.other.asTo
 import java.io.Serializable
 
@@ -30,7 +30,7 @@ open class QuickBindData @JvmOverloads constructor(
     layoutId = layoutId,
     layoutViewInViewGroup = layoutViewInContext,
     isSuspension = isSuspension
-), Bind, Serializable {
+), com.wpf.app.base.bind.Bind, Serializable {
 
     @Transient
     private var mViewHolder: QuickViewHolder<QuickBindData>? = null

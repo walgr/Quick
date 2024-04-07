@@ -1,11 +1,10 @@
 package com.wpf.app.quickutil.data
 
-import com.wpf.app.quickutil.bind.QuickBindWrap
 import com.wpf.app.quickutil.init.SpManager
 
 fun Int.setToSp(
     key: String,
-    fileName: String = QuickBindWrap.getBindSpFileName(),
+    fileName: String = "QuickViewSpBindFile",
 ) {
     SpManager.getSharedPreference(fileName)?.edit()?.apply {
         putInt(key, this@setToSp)
@@ -15,7 +14,7 @@ fun Int.setToSp(
 
 fun Long.setToSp(
     key: String,
-    fileName: String = QuickBindWrap.getBindSpFileName(),
+    fileName: String = "QuickViewSpBindFile",
 ) {
     SpManager.getSharedPreference(fileName)?.edit()?.apply {
         putLong(key, this@setToSp)
@@ -25,7 +24,7 @@ fun Long.setToSp(
 
 fun Boolean.setToSp(
     key: String,
-    fileName: String = QuickBindWrap.getBindSpFileName(),
+    fileName: String = "QuickViewSpBindFile",
 ) {
     SpManager.getSharedPreference(fileName)?.edit()?.apply {
         putBoolean(key, this@setToSp)
@@ -35,7 +34,7 @@ fun Boolean.setToSp(
 
 fun Float.setToSp(
     key: String,
-    fileName: String = QuickBindWrap.getBindSpFileName(),
+    fileName: String = "QuickViewSpBindFile",
 ) {
     SpManager.getSharedPreference(fileName)?.edit()?.apply {
         putFloat(key, this@setToSp)
@@ -46,7 +45,7 @@ fun Float.setToSp(
 
 fun String.setToSp(
     key: String,
-    fileName: String = QuickBindWrap.getBindSpFileName(),
+    fileName: String = "QuickViewSpBindFile",
 ) {
     SpManager.getSharedPreference(fileName)?.edit()?.apply {
         putString(key, this@setToSp)
@@ -56,7 +55,7 @@ fun String.setToSp(
 
 inline fun <reified T : Any> String.putSpValue(
     value: T?,
-    fileName: String = QuickBindWrap.getBindSpFileName(),
+    fileName: String = "QuickViewSpBindFile",
 ) {
     SpManager.getSharedPreference(fileName)?.edit()?.apply {
         when (T::class.java) {
@@ -86,7 +85,7 @@ inline fun <reified T : Any> String.putSpValue(
 
 inline fun <reified T : Any> String.getSpValue(
     defaultValue: T? = null,
-    fileName: String = QuickBindWrap.getBindSpFileName(),
+    fileName: String = "QuickViewSpBindFile",
 ): T? {
     val sp = SpManager.getSharedPreference(fileName) ?: return null
     return when (T::class.java) {

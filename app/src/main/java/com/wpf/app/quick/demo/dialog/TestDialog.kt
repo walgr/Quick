@@ -5,7 +5,7 @@ import android.view.Gravity
 import com.wpf.app.quick.annotations.bind.BindData2View
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.demo.model.MyMessage
-import com.wpf.app.quickdialog.QuickDialog
+import com.wpf.app.quickdialog.QuickBaseDialog
 import com.wpf.app.quickrecyclerview.helper.List2RecyclerView
 
 /**
@@ -13,7 +13,7 @@ import com.wpf.app.quickrecyclerview.helper.List2RecyclerView
  */
 class TestDialog(
     mContext: Context,
-) : QuickDialog(mContext, layoutId = R.layout.dialog_test) {
+) : QuickBaseDialog(mContext, layoutId = R.layout.dialog_test) {
 
     @BindData2View(id = R.id.list, helper = List2RecyclerView::class)
     val listData = arrayListOf(

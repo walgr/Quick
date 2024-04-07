@@ -5,14 +5,13 @@ import androidx.databinding.ViewDataBinding
 import com.wpf.app.quick.ability.QuickActivity
 import com.wpf.app.quick.ability.QuickFragment
 import com.wpf.app.quick.ability.ex.contentView
-import com.wpf.app.quick.ability.ex.modelBinding
 import com.wpf.app.quick.ability.ex.modelBindingWithSelf
 import com.wpf.app.quick.ability.ex.viewModel
 import com.wpf.app.quick.ability.ex.with
 import com.wpf.app.quick.activity.QuickView
 import com.wpf.app.quick.activity.viewmodel.QuickVBModel
 import com.wpf.app.quick.activity.viewmodel.QuickViewModel
-import com.wpf.app.quickdialog.QuickDialog
+import com.wpf.app.quickdialog.QuickBaseDialog
 import com.wpf.app.quickdialog.QuickDialogFragment
 
 fun View.toFragment() = QuickFragment(
@@ -60,8 +59,8 @@ inline fun <reified VM : QuickVBModel<QuickActivity, VB>, reified VB : ViewDataB
     })
 )
 
-fun View.toDialog(onDialogInit: ((view: View?) -> Unit)? = null): QuickDialog {
-    return object : QuickDialog(this.context, layoutView = this) {
+fun View.toDialog(onDialogInit: ((view: View?) -> Unit)? = null): QuickBaseDialog {
+    return object : QuickBaseDialog(this.context, layoutView = this) {
         override fun initView(view: View?) {
             onDialogInit?.invoke(view)
         }

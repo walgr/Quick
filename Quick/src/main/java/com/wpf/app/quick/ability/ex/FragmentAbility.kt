@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.wpf.app.quick.R
 import com.wpf.app.quick.ability.QuickFragment
-import com.wpf.app.quickutil.bind.runOnContext
+import com.wpf.app.quickutil.run.runOnContext
 import com.wpf.app.quickutil.helper.matchLayoutParams
 import com.wpf.app.quickutil.other.forceTo
 

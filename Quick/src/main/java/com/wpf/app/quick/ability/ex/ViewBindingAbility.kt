@@ -13,7 +13,7 @@ import com.wpf.app.quick.activity.viewmodel.QuickVBModel
 import com.wpf.app.quick.helper.QuickDataBindingUtil
 import com.wpf.app.quick.helper.getActivity
 import com.wpf.app.quickrecyclerview.constant.BRConstant
-import com.wpf.app.quickutil.bind.QuickBindWrap
+import com.wpf.app.base.bind.QuickBindWrap
 import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.other.forceTo
 
@@ -48,9 +48,9 @@ inline fun <reified Self : QuickView, reified VM : QuickVBModel<out Self, VB>, r
             vbBuilder?.invoke(it, context.forceTo())
         }
         if (context is Activity) {
-            QuickBindWrap.bind(context.forceTo<Activity>(), viewModel)
+            com.wpf.app.base.bind.QuickBindWrap.bind(context.forceTo<Activity>(), viewModel)
         } else if (context is Fragment) {
-            QuickBindWrap.bind(context.forceTo<Fragment>(), viewModel)
+            com.wpf.app.base.bind.QuickBindWrap.bind(context.forceTo<Fragment>(), viewModel)
         }
         viewModel.asTo<VM>()?.onBindingCreated(viewBinding!!)
         if (viewBinding != null && viewModel != null) {

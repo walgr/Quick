@@ -1,11 +1,11 @@
-package com.wpf.app.quickutil.bind
+package com.wpf.app.base.bind
 
 import android.app.Activity
 import android.app.Dialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
-import com.wpf.app.quickutil.bind.plugins.BasePlugin
+import com.wpf.app.base.bind.plugins.BasePlugin
 import kotlin.reflect.KClass
 
 object QuickBindWrap: QuickBindI {

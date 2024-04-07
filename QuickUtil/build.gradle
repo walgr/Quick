@@ -23,15 +23,15 @@ android {
 
 dependencies {
     //约束布局
-    compileOnly deps.androidx.constraintlayout
+    implementation deps.androidx.constraintlayout
 
-    compileOnly deps.androidx.fragmentktx
+    implementation deps.androidx.fragmentktx
     //viewModel
-    compileOnly deps.androidx.lifecycleviewmodelktx
-    compileOnly deps.androidx.annotation
+    implementation deps.androidx.lifecycleviewmodelktx
+    implementation deps.androidx.annotation
     //列表
-    compileOnly deps.androidx.recyclerview
-    compileOnly deps.androidx.material
+    implementation deps.androidx.recyclerview
+    implementation deps.androidx.material
 }
 
 apply from: rootProject.file('gradle-mvn-push-aar.gradle')

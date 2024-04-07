@@ -6,7 +6,7 @@ import com.wpf.app.quick.demo.R
 import com.wpf.app.quickbind.helper.binddatahelper.Text2TextView
 import com.wpf.app.quickwidget.selectview.data.QuickChildSelectData
 import com.wpf.app.quickwidget.selectview.data.QuickParentSelectData
-import com.wpf.app.quickutil.bind.itemClickWithSelf
+import com.wpf.app.quickutil.run.itemClickWithSelf
 
 /**
  * Created by 王朋飞 on 2022/9/16.

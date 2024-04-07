@@ -4,7 +4,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import com.wpf.app.quickwidget.selectview.QuickSelectAdapter
-import com.wpf.app.quickutil.bind.RunOnContextWithSelf
+import com.wpf.app.quickutil.run.RunOnContextWithSelf
 import com.wpf.app.quickrecyclerview.QuickAdapter
 import com.wpf.app.quickrecyclerview.data.QuickBindData
 import com.wpf.app.quickrecyclerview.data.QuickClickData

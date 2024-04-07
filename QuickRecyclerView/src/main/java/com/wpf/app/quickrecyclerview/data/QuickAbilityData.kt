@@ -15,8 +15,8 @@ import com.wpf.app.quickrecyclerview.ability.QuickItemAbility
 import com.wpf.app.quickrecyclerview.holder.QuickViewBindingHolder
 import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
 import com.wpf.app.quickrecyclerview.widget.SwipeMenuLayout
-import com.wpf.app.quickutil.bind.RunOnContextWithSelf
-import com.wpf.app.quickutil.bind.runOnContextWithSelf
+import com.wpf.app.quickutil.run.RunOnContextWithSelf
+import com.wpf.app.quickutil.run.runOnContextWithSelf
 import com.wpf.app.quickutil.helper.toView
 import com.wpf.app.quickutil.helper.wrapMatchMarginLayoutParams
 import com.wpf.app.quickutil.other.Unique

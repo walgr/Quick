@@ -1,11 +1,11 @@
 package com.wpf.app.quickbind.utils
 
-import com.wpf.app.quickutil.bind.Bind
-import com.wpf.app.quickutil.bind.QuickBindWrap
+import com.wpf.app.base.bind.Bind
+import com.wpf.app.base.bind.QuickBindWrap
 
-interface FindViews: Bind {
+interface FindViews: com.wpf.app.base.bind.Bind {
 
     fun findViews() {
-        QuickBindWrap.bind(this)
+        com.wpf.app.base.bind.QuickBindWrap.bind(this)
     }
 }

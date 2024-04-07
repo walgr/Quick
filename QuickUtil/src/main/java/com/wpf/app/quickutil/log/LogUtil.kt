@@ -7,13 +7,13 @@ import android.util.Log
  *
  */
 object LogUtil {
-    internal const val tag = "Quick"
+    internal const val TAG = "Quick"
 
     fun e(msg: String) {
-        Log.e(tag, msg)
+        Log.e(TAG, msg)
     }
 
     fun e(tag: String, msg: String) {
-        Log.e(tag, msg)
+        Log.e(tag.ifEmpty { TAG }, msg)
     }
 }

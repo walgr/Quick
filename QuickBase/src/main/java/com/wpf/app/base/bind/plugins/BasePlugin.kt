@@ -1,4 +1,4 @@
-package com.wpf.app.quickutil.bind.plugins
+package com.wpf.app.base.bind.plugins
 
 import android.app.Activity
 import android.app.Dialog
@@ -7,8 +7,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
-import com.wpf.app.quickutil.activity.contentView
-import com.wpf.app.quickutil.bind.Bind
+import com.wpf.app.base.bind.Bind
 import java.lang.reflect.Field
 
 /**
@@ -47,7 +46,7 @@ interface BasePlugin {
     fun getRootView(obj: Any): View? {
         var rootView: View? = null
         if (obj is Activity) {
-            rootView = obj.contentView()
+            rootView = obj.findViewById(android.R.id.content)
         }
         if (obj is Fragment) {
             rootView = obj.view

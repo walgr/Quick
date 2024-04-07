@@ -31,7 +31,8 @@ buildscript {
                         'constraintlayout'     : 'androidx.constraintlayout:constraintlayout:2.1.4',
                 ],
                 quickbind      : [
-                        'base'        : "com.wpf.app.quick:Quick:${release}",
+                        'quick'        : "com.wpf.app.quick:Quick:${release}",
+                        'base'        : "com.wpf.app.quick:QuickBase:${release}",
                         'bind'        : "com.wpf.app.quick:QuickBind:${release}",
                         'annotations' : "com.wpf.app.quick:Quick-annotations:${release}",
                         'runtime'     : "com.wpf.app.quick:Quick-runtime:${release}",

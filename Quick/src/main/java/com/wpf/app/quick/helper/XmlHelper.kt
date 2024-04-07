@@ -18,7 +18,7 @@ import kotlin.reflect.KClass
 @BindingAdapter("clickGoto")
 fun <T : Activity> gotoActivity(view: View, gotoClass: KClass<T>) {
     view.setOnClickListener {
-        view.context.quickStartActivity(gotoClass.java)
+        view.context.startActivity(gotoClass.java)
     }
 }
 

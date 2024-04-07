@@ -6,8 +6,8 @@ import android.view.ViewGroup.LayoutParams
 import android.widget.LinearLayout
 import androidx.annotation.LayoutRes
 import com.wpf.app.quick.activity.QuickView
-import com.wpf.app.quickutil.bind.RunOnContext
-import com.wpf.app.quickutil.bind.runOnContext
+import com.wpf.app.quickutil.run.RunOnContext
+import com.wpf.app.quickutil.run.runOnContext
 import com.wpf.app.quickutil.helper.InitViewHelper
 import com.wpf.app.quickutil.helper.matchLayoutParams
 import com.wpf.app.quickutil.helper.wrapContentHeightParams

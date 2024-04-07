@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.annotation.LayoutRes
 import com.wpf.app.quickbind.QuickBind
-import com.wpf.app.quickutil.bind.RunOnContext
+import com.wpf.app.quickutil.run.RunOnContext
 import com.wpf.app.quickwidget.quickview.QuickItemView
 
 /**

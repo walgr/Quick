@@ -1,4 +1,4 @@
-package com.wpf.app.quickutil.bind
+package com.wpf.app.base.bind
 
 import android.os.Bundle
 import android.view.View

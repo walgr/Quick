@@ -1,9 +1,7 @@
 package com.wpf.app.quickdialog
 
-import android.app.Activity
 import android.app.Dialog
 import com.wpf.app.quickutil.helper.getRealActivity
-import com.wpf.app.quickutil.other.asTo
 
 fun Dialog?.showInManager(
     showWithOther: Boolean = false,
@@ -35,7 +33,7 @@ object DialogManager {
             priority
         }
         val priorityDialogInMap = showingDialog[realPriority]
-        val dialogDismissListener = if (dialog is QuickDialog) {
+        val dialogDismissListener = if (dialog is QuickBaseDialog) {
             dialog.listener
         } else null
         val priorityDialog = PriorityDialog(

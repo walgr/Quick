@@ -8,16 +8,14 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.ActivityResultRegistry
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityOptionsCompat
 import com.wpf.app.quickbind.QuickBind
 import com.wpf.app.quickbind.annotations.AutoGet
-import com.wpf.app.quickutil.bind.RunOnContext
+import com.wpf.app.quickutil.run.RunOnContext
 import com.wpf.app.quicknetwork.base.RequestCoroutineScope
-import com.wpf.app.quickutil.bind.Bind
+import com.wpf.app.base.bind.Bind
 import com.wpf.app.quickutil.helper.InitViewHelper
 import kotlinx.coroutines.Job
 
@@ -30,7 +28,7 @@ abstract class QuickBaseActivity @JvmOverloads constructor(
     open val layoutView: View? = null,
     open val layoutViewInContext: RunOnContext<View>? = null,
     @AutoGet(QuickBaseFragment.TITLE_KEY) open val titleName: String = "",
-) : AppCompatActivity(), QuickView, RequestCoroutineScope, Bind {
+) : AppCompatActivity(), QuickView, RequestCoroutineScope, com.wpf.app.base.bind.Bind {
 
     override var jobManager: MutableList<Job> = mutableListOf()
 

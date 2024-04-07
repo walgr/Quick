@@ -4,12 +4,12 @@ import android.view.View
 import com.wpf.app.quickbind.annotations.BindD2VHelper
 import com.wpf.app.quickrecyclerview.data.QuickRequestData
 import com.wpf.app.quickrecyclerview.interfaces.Request2ViewWithView
-import com.wpf.app.quickutil.callback.Callback
+import com.wpf.app.base.callback.Callback
 
 object Request2View : BindD2VHelper<View, Request2ViewWithView<out QuickRequestData, out View>> {
 
     override fun initView(view: View, data: Request2ViewWithView<out QuickRequestData, out View>) {
-        val callback = object : Callback<QuickRequestData> {
+        val callback = object : com.wpf.app.base.callback.Callback<QuickRequestData> {
             override fun backData(data: QuickRequestData?) {
                 data?.onCreateView(view)
             }

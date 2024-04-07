@@ -6,7 +6,7 @@ import android.util.AttributeSet
 import android.widget.TextView
 import androidx.core.content.edit
 import androidx.core.widget.doAfterTextChanged
-import com.wpf.app.quickutil.bind.QuickBindWrap
+import com.wpf.app.base.bind.QuickBindWrap
 import com.wpf.app.quickutil.helper.attribute.AutoGetAttribute
 import com.wpf.app.quickwidget.R
 import com.wpf.app.quickwidget.quickview.Only1Child
@@ -26,7 +26,7 @@ class LoadSp2Text @JvmOverloads constructor(
         SpViewAttribute(context, attributeSet!!)
 
     private val sharedPreference = context.getSharedPreferences(
-        if (TextUtils.isEmpty(attributeHelper.fileName)) QuickBindWrap.getBindSpFileName() else attributeHelper.fileName,
+        if (TextUtils.isEmpty(attributeHelper.fileName)) com.wpf.app.base.bind.QuickBindWrap.getBindSpFileName() else attributeHelper.fileName,
         Context.MODE_PRIVATE
     )
     private val spData: String? =

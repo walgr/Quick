@@ -21,7 +21,7 @@ import com.wpf.app.quick.annotations.tab.TabInit
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.demo.wanandroid.fragment.RecommendFragment
 import com.wpf.app.quick.helper.getActivity
-import com.wpf.app.quickutil.bind.runOnContext
+import com.wpf.app.quickutil.run.runOnContext
 import com.wpf.app.quickutil.helper.dp
 import com.wpf.app.quickutil.helper.dpF
 import com.wpf.app.quickutil.helper.matchWrapLayoutParams
@@ -38,7 +38,7 @@ class WanAndroidHomeActivity : QuickActivity(contentView<LinearLayout> { quickVi
     var tabLayout: TabLayout? = null
     var viewPager: ViewPager? = null
     title {
-        textButton("登录", {
+        textButton("登录", clickListener = {
 
         })
         setCommonClickListener(object : QuickTitleView.CommonClickListener {

@@ -6,7 +6,6 @@ import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import androidx.annotation.LayoutRes
 import com.wpf.app.quickbind.QuickBind
@@ -14,13 +13,13 @@ import com.wpf.app.quickdialog.helper.DialogSizeHelper
 import com.wpf.app.quickdialog.listeners.DialogLifecycle
 import com.wpf.app.quickdialog.listeners.DialogSize
 import com.wpf.app.quickdialog.minAndMaxLimit.SizeLimitViewGroup
-import com.wpf.app.quickutil.bind.RunOnContext
+import com.wpf.app.quickutil.run.RunOnContext
 import com.wpf.app.quickutil.helper.InitViewHelper
 
 /**
  * Created by 王朋飞 on 2022/6/16.
  */
-open class QuickDialog : Dialog, DialogSize, DialogLifecycle {
+open class QuickBaseDialog : Dialog, DialogSize, DialogLifecycle {
 
     @LayoutRes
     var layoutId: Int = 0

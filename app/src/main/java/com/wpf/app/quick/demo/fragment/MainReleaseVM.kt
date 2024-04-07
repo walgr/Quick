@@ -16,7 +16,7 @@ import com.wpf.app.quick.demo.databinding.FragmentMainReleaseBinding
 import com.wpf.app.quick.demo.model.MyMessage
 import com.wpf.app.quick.demo.wanandroid.WanAndroidHomeActivity
 import com.wpf.app.quickbind.annotations.BindSp2View
-import com.wpf.app.quick.helper.quickStartActivity
+import com.wpf.app.quick.helper.startActivity
 import com.wpf.app.quickutil.other.printLog
 
 class MainReleaseVM: QuickVBModel<MainReleaseFragment, FragmentMainReleaseBinding>() {
@@ -34,33 +34,33 @@ class MainReleaseVM: QuickVBModel<MainReleaseFragment, FragmentMainReleaseBindin
     }
 
     fun gotoWanAndroid(view: View?) {
-        view?.context?.quickStartActivity<WanAndroidHomeActivity> {
+        view?.context?.startActivity<WanAndroidHomeActivity> {
             it.resultCode.printLog("返回数据成功")
         }
     }
 
     fun gotoDialog(view: View?) {
-        view?.context?.quickStartActivity<DialogTestActivity>()
+        view?.context?.startActivity<DialogTestActivity>()
     }
 
     fun gotoViewPagerNotifySize(view: View?) {
-        view?.context?.quickStartActivity<ViewPagerNotifySizeTestActivity>()
+        view?.context?.startActivity<ViewPagerNotifySizeTestActivity>()
     }
 
     fun gotoSelectList(view: View?) {
-        view?.context?.quickStartActivity<SelectListTestActivity>()
+        view?.context?.startActivity<SelectListTestActivity>()
     }
 
     fun gotoList(view: View?) {
-        view?.context?.quickStartActivity<RecyclerViewTestActivity>()
+        view?.context?.startActivity<RecyclerViewTestActivity>()
     }
 
     fun gotoFragmentActivity(view: View?) {
-        view?.context?.quickStartActivity<FragmentTestActivity>()
+        view?.context?.startActivity<FragmentTestActivity>()
     }
 
     fun gotoData(view: View?) {
-        view?.context?.quickStartActivity<IntentDataTestActivity>(object : HashMap<String, Any?>() {
+        view?.context?.startActivity<IntentDataTestActivity>(object : HashMap<String, Any?>() {
             init {
                 put("activityTitle", "数据测试页")
                 put("intD", 2)

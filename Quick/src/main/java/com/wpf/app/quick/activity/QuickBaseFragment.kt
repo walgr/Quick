@@ -16,9 +16,9 @@ import androidx.fragment.app.Fragment
 import com.wpf.app.quickbind.QuickBind
 import com.wpf.app.quickbind.annotations.AutoGet
 import com.wpf.app.quickbind.interfaces.BindBaseFragment
-import com.wpf.app.quickutil.bind.RunOnContext
+import com.wpf.app.quickutil.run.RunOnContext
 import com.wpf.app.quicknetwork.base.RequestCoroutineScope
-import com.wpf.app.quickutil.bind.Bind
+import com.wpf.app.base.bind.Bind
 import com.wpf.app.quickutil.helper.InitViewHelper
 import kotlinx.coroutines.Job
 
@@ -31,7 +31,7 @@ abstract class QuickBaseFragment @JvmOverloads constructor(
     open val layoutView: View? = null,
     open val layoutViewInContext: RunOnContext<View>? = null,
     @AutoGet(TITLE_KEY) val titleName: String = "",
-) : Fragment(), BindBaseFragment, QuickView, RequestCoroutineScope, Bind {
+) : Fragment(), BindBaseFragment, QuickView, RequestCoroutineScope, com.wpf.app.base.bind.Bind {
 
     override var jobManager: MutableList<Job> = mutableListOf()
 

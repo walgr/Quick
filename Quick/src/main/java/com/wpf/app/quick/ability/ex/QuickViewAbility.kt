@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModelStoreOwner
 import com.wpf.app.quick.activity.QuickView
 import com.wpf.app.quick.activity.viewmodel.ViewLifecycle
 import com.wpf.app.quickbind.interfaces.BindViewModel
-import com.wpf.app.quickutil.bind.RunOnContext
+import com.wpf.app.quickutil.run.RunOnContext
 import com.wpf.app.quickutil.helper.match
 import com.wpf.app.quickutil.helper.matchLayoutParams
 import com.wpf.app.quickutil.other.Unique

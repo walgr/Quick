@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
-import com.wpf.app.quickutil.bind.Bind
+import com.wpf.app.base.bind.Bind
 import kotlin.math.abs
 
 /**
@@ -19,7 +19,8 @@ open class QuickItemGroup<T : ViewGroup> @JvmOverloads constructor(
     addToParent: Boolean = true,
     @LayoutRes private var layoutId: Int = 0,
     open var viewType: Int = 0,
-) : QuickViewGroup<T>(mContext, attrs, defStyleAttr, addToParent = addToParent), Bind {
+) : QuickViewGroup<T>(mContext, attrs, defStyleAttr, addToParent = addToParent),
+    com.wpf.app.base.bind.Bind {
 
     private var mView: View? = null
     var position: Int = -1

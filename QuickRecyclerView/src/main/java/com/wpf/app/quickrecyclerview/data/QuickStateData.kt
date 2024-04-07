@@ -2,7 +2,7 @@ package com.wpf.app.quickrecyclerview.data
 
 import android.view.View
 import android.view.ViewGroup
-import com.wpf.app.quickutil.bind.RunOnContextWithSelf
+import com.wpf.app.quickutil.run.RunOnContextWithSelf
 import java.io.Serializable
 
 /**

@@ -3,14 +3,14 @@ package com.wpf.app.quickrecyclerview.data
 import android.view.View
 import com.wpf.app.quickbind.QuickBind
 import com.wpf.app.quickbind.utils.DataAutoSet2ViewUtils
-import com.wpf.app.quickutil.bind.Bind
+import com.wpf.app.base.bind.Bind
 
 /**
  * 可以网络请求的数据Item
  */
 open class QuickRequestData @JvmOverloads constructor(
     open val autoSet: Boolean = true,
-) : QuickSuspensionData(), Bind {
+) : QuickSuspensionData(), com.wpf.app.base.bind.Bind {
 
     @Transient
     private var mView: View? = null

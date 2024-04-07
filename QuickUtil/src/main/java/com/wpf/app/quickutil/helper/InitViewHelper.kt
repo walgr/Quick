@@ -3,8 +3,7 @@ package com.wpf.app.quickutil.helper
 import android.content.Context
 import android.view.View
 import androidx.annotation.LayoutRes
-import com.wpf.app.quickutil.bind.RunOnContext
-import com.wpf.app.quickutil.helper.toView
+import com.wpf.app.quickutil.run.RunOnContext
 
 object InitViewHelper {
     fun init(

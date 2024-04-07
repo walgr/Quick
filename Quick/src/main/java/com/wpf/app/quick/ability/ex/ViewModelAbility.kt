@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
 import com.wpf.app.quick.activity.QuickView
 import com.wpf.app.quick.activity.viewmodel.QuickViewModel
-import com.wpf.app.quickutil.bind.QuickBindWrap
+import com.wpf.app.base.bind.QuickBindWrap
 import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.other.forceTo
 
@@ -24,7 +24,7 @@ inline fun <reified VM : QuickViewModel<out QuickView>> viewModel(
             owner, ViewModelProvider.AndroidViewModelFactory(activity.application)
         )[viewModelCls]
         vmBuilder?.invoke(viewModel!!)
-        QuickBindWrap.bind(activity, viewModel)
+        com.wpf.app.base.bind.QuickBindWrap.bind(activity, viewModel)
         viewModel.asTo<QuickViewModel<QuickView>>()?.onViewCreated(activity.forceTo())
     }
 })

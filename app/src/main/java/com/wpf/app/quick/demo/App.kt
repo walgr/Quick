@@ -10,7 +10,7 @@ import com.wpf.app.quick.demo.http.TestNormalCallAdapterFactory
 import com.wpf.app.quicknetwork.helper.OkHttpCreateHelper
 import com.wpf.app.quicknetwork.helper.RetrofitCreateHelper
 import com.wpf.app.quicknetwork.interceptor.LogInterceptor
-import com.wpf.app.quick.helper.activity
+import com.wpf.app.quickutil.activity.activity
 import com.wpf.app.quickutil.helper.dp
 import com.wpf.app.quickutil.helper.toColor
 import com.wpf.app.quickutil.init.QuickInit

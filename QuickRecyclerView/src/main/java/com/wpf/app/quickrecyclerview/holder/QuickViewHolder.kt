@@ -10,7 +10,7 @@ import com.wpf.app.quickrecyclerview.data.QuickBindData
 import com.wpf.app.quickrecyclerview.data.QuickItemData
 import com.wpf.app.quickrecyclerview.listeners.QuickAdapterListener
 import com.wpf.app.quickbind.QuickBind
-import com.wpf.app.quickutil.bind.RunOnContextWithSelf
+import com.wpf.app.quickutil.run.RunOnContextWithSelf
 import com.wpf.app.quickutil.helper.toView
 
 /**

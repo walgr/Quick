@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.Checkable
 import android.widget.TextView
 import com.wpf.app.quickbind.annotations.BindD2VHelper
-import com.wpf.app.quickutil.bind.RunOnHolderWithSelf
+import com.wpf.app.quickutil.run.RunOnHolderWithSelf
 import com.wpf.app.quickutil.helper.allChild
 import com.wpf.app.quickutil.other.forceTo
 

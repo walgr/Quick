@@ -10,7 +10,7 @@ import com.wpf.app.quickbind.interfaces.BindBaseFragment
 import com.wpf.app.quickbind.utils.getFragment
 import com.wpf.app.quickbind.viewpager.adapter.FragmentsAdapter
 import com.wpf.app.quickbind.viewpager.adapter.FragmentsStateAdapter
-import com.wpf.app.quickutil.bind.Bind
+import com.wpf.app.base.bind.Bind
 import com.wpf.app.quickutil.other.forceTo
 import java.lang.reflect.Field
 
@@ -37,7 +37,7 @@ class BindFragmentPlugin : BindBasePlugin {
                 }
                 var fragmentManager: FragmentManager? = null
                 var context = obj
-                if (obj is Bind) {
+                if (obj is com.wpf.app.base.bind.Bind) {
                     obj.getView()?.let {
                         context = it.context
                     }

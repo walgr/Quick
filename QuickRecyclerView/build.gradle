@@ -5,12 +5,12 @@ plugins {
 
 android {
     compileSdk rootProject.compileSdkVersion
+    defaultConfig {
+        minSdk rootProject.minSdkVersion
+    }
     buildFeatures {
         //noinspection DataBindingWithoutKapt
         dataBinding true
-    }
-    defaultConfig {
-        minSdk rootProject.minSdkVersion
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -36,10 +36,12 @@ dependencies {
     implementation deps.kotlin.stdLibJdk8
 
     if (IS_REMOTE.toBoolean()) {
+        api deps.quickbind.base
         api deps.quickbind.util
         api deps.quickbind.bind
         api deps.quickbind.network
     } else {
+        api project(":QuickBase")
         api project(":QuickUtil")
         api project(":QuickBind")
         api project(":QuickNetwork")

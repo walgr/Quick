@@ -42,7 +42,7 @@ dependencies {
     implementation deps.refresh_footer               //经典加载
 
     if (IS_REMOTE.toBoolean()) {
-        api deps.quickbind.base
+        api deps.quickbind.quick
     } else {
         api project(":Quick")
     }

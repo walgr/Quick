@@ -3,14 +3,14 @@ package com.wpf.app.quickbind.plugins
 import androidx.lifecycle.ViewModel
 import com.wpf.app.quick.annotations.bind.Databinder
 import com.wpf.app.quickbind.QuickBind
-import com.wpf.app.quickutil.bind.plugins.BasePlugin
+import com.wpf.app.base.bind.plugins.BasePlugin
 import java.lang.reflect.Field
 
 /**
  * Created by 王朋飞 on 2022/7/12.
  *
  */
-interface BindBasePlugin : BasePlugin {
+interface BindBasePlugin : com.wpf.app.base.bind.plugins.BasePlugin {
 
     fun getSaveId(obj: Any, viewModel: ViewModel?, field: Field, id: Int): Int {
         val dataBinder: Databinder =

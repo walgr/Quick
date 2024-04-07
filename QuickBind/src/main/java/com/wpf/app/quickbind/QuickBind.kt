@@ -14,9 +14,9 @@ import com.wpf.app.quick.annotations.bind.GroupView
 import com.wpf.app.quickbind.annotations.*
 import com.wpf.app.quickbind.plugins.*
 import com.wpf.app.quickutil.activity.contentView
-import com.wpf.app.quickutil.bind.Bind
-import com.wpf.app.quickutil.bind.QuickBindI
-import com.wpf.app.quickutil.bind.plugins.BasePlugin
+import com.wpf.app.base.bind.Bind
+import com.wpf.app.base.bind.QuickBindI
+import com.wpf.app.base.bind.plugins.BasePlugin
 import com.wpf.app.quickutil.other.GenericEx.getFieldAndParent
 import com.wpf.app.quickutil.other.forceTo
 import java.lang.reflect.Constructor

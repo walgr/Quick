@@ -3,8 +3,8 @@ package com.wpf.app.quickrecyclerview.utils
 import com.wpf.app.quickbind.helper.binddatahelper.BindData2ViewHelper
 import com.wpf.app.quickbind.helper.binddatahelper.ItemClick
 import com.wpf.app.quickrecyclerview.data.QuickBindData
-import com.wpf.app.quickutil.bind.RunItemClick
-import com.wpf.app.quickutil.bind.RunItemClickWithSelf
+import com.wpf.app.quickutil.run.RunItemClick
+import com.wpf.app.quickutil.run.RunItemClickWithSelf
 import com.wpf.app.quickrecyclerview.QuickAdapter
 import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
 import java.io.Serializable
