@@ -18,7 +18,7 @@ fun <T : Fragment> fragment(
     builder: (T.() -> Unit)? = null
 ): MutableList<QuickAbility> {
     return generateContentView(layoutViewInContext = runOnContext {
-        FrameLayout(it).apply {
+        FrameLayout(this).apply {
             id = R.id.quickRoot
             layoutParams = matchLayoutParams()
         }

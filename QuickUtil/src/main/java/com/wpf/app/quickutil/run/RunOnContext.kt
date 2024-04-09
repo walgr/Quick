@@ -7,7 +7,7 @@ import android.view.View
  * Created by 王朋飞 on 2022/7/12.
  *
  */
-interface RunOnContext<Return> : RunOnHolder<Return> {
+interface RunOnContext<Return> : RunOnView<Return> {
     fun run(context: Context): Return
 
     override fun run(view: View): Return {
@@ -15,7 +15,7 @@ interface RunOnContext<Return> : RunOnHolder<Return> {
     }
 }
 
-fun <Return> runOnContext(primeKey: String = "", run: (Context) -> Return) =
+fun <Return> runOnContext(primeKey: String = "", run: Context.() -> Return) =
     object : RunOnContext<Return> {
         override fun primeKey(): String {
             return primeKey

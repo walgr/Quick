@@ -8,16 +8,16 @@ import android.webkit.WebViewClient
 import android.widget.LinearLayout
 import com.wpf.app.quick.ability.QuickActivity
 import com.wpf.app.quick.ability.ex.contentView
+import com.wpf.app.quick.ability.ex.contentViewWithSelf
 import com.wpf.app.quick.ability.helper.myLayout
 import com.wpf.app.quick.annotations.bind.BindView
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quickbind.annotations.AutoGet
 import com.wpf.app.quickwork.ability.title
-import com.wpf.app.quickwork.widget.QuickTitleView
 
 class WebViewActivity : QuickActivity(
-    contentView<LinearLayout> {
-        title()
+    contentViewWithSelf<WebViewActivity, LinearLayout> { self ->
+        title(titleName = self.title ?: "")
         myLayout(R.layout.activity_webview)
     }
 ) {
@@ -34,7 +34,6 @@ class WebViewActivity : QuickActivity(
 
     override fun initView(view: View) {
         super.initView(view)
-        view.findViewById<QuickTitleView>(com.wpf.app.quickwork.R.id.quickTitleView).setTitle(title)
         webView?.let {
             it.webChromeClient = WebChromeClient()
             it.webViewClient = WebViewClient()

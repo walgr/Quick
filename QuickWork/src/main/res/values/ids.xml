@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="quickTitleView" type="id"/>
-    <item name="quickContentLayout" type="id"/>
+
 </resources>

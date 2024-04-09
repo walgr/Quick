@@ -15,6 +15,7 @@ import com.wpf.app.quickbind.annotations.*
 import com.wpf.app.quickbind.plugins.*
 import com.wpf.app.quickutil.activity.contentView
 import com.wpf.app.base.bind.Bind
+import com.wpf.app.base.bind.NoBind
 import com.wpf.app.base.bind.QuickBindI
 import com.wpf.app.base.bind.plugins.BasePlugin
 import com.wpf.app.quickutil.other.GenericEx.getFieldAndParent
@@ -66,22 +67,26 @@ object QuickBind: QuickBindI {
 
     override fun bind(activity: Activity) {
         super.bind(activity)
+        if (activity is NoBind) return
         bind(activity, null)
     }
 
     override fun bind(activity: Activity, viewModel: ViewModel?) {
         super.bind(activity, viewModel)
+        if (activity is NoBind) return
         bindBinder(viewModel ?: activity, activity.contentView())
         dealInPlugins(activity, viewModel)
     }
 
     override fun bind(fragment: Fragment) {
         super.bind(fragment)
+        if (fragment is NoBind) return
         bind(fragment, null)
     }
 
     override fun bind(fragment: Fragment, viewModel: ViewModel?) {
         super.bind(fragment, viewModel)
+        if (fragment is NoBind) return
         fragment.view?.let {
             bindBinder(viewModel ?: fragment, it)
         }
@@ -89,11 +94,13 @@ object QuickBind: QuickBindI {
     }
 
     override fun bind(viewHolder: RecyclerView.ViewHolder) {
+        if (viewHolder is NoBind) return
         bindBinder(viewHolder, viewHolder.itemView)
         dealInPlugins(viewHolder, null)
     }
 
     override fun bind(dialog: Dialog) {
+        if (dialog is NoBind) return
         bindBinder(dialog, dialog.window!!.decorView)
         dealInPlugins(dialog, null)
     }

@@ -24,7 +24,7 @@ open class QuickFragment(
         val inflateAbility = abilityList.first { ability -> ability is QuickInflateViewAbility }
             .forceTo<QuickInflateViewAbility>()
         InitViewHelper.init(
-            it,
+            this,
             inflateAbility.layoutId(),
             inflateAbility.layoutView(),
             inflateAbility.layoutViewInContext()
@@ -50,7 +50,7 @@ open class QuickFragment(
             it.afterGenerateContentView(this, view)
         }
         abilityList.filterIsInstance<QuickViewAbility>().forEach {
-            it.initView(view)
+            it.initView(this, view)
         }
     }
 

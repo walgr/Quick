@@ -18,8 +18,8 @@ import com.wpf.app.quickwork.ability.title
 class DialogTestActivity : QuickActivity(
     contentView<LinearLayout> {
         title("弹窗测试")
-        myLayout(layoutViewInContext = runOnContext { context ->
-            LinearLayout(context).apply {
+        myLayout(layoutViewInContext = runOnContext {
+            LinearLayout(this).apply {
                 setPadding(16.dp(), 0, 16.dp(), 0)
                 gravity = Gravity.CENTER
                 addView(MaterialButton(context).apply {

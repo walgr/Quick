@@ -107,10 +107,10 @@
             <com.wpf.app.quickwidget.item.MultiFunctionView
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                app:title="写实"
-                app:titleColor="@color/purple_500"
-                app:titleHint="123"
-                app:titleHintColor="#000000" />
+                app:topTitle="写实"
+                app:topTitleColor="@color/purple_500"
+                app:topTitleHint="123"
+                app:topTitleHintColor="#000000" />
 
             <LinearLayout
                 android:id="@+id/testBindSpLL"

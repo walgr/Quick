@@ -7,7 +7,7 @@ import android.view.View
  * Created by 王朋飞 on 2022/7/12.
  *
  */
-interface RunOnContextWithSelf<Self, Return> : RunOnHolderWithSelf<Self, Return> {
+interface RunOnContextWithSelf<Self, Return> : RunOnViewWithSelf<Self, Return> {
     fun run(context: Context, self: Self): Return
 
     override fun run(view: View, self: Self): Return {

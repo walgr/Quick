@@ -1,6 +1,7 @@
 package com.wpf.app.base.ability.base
 
 import android.view.View
+import androidx.annotation.CallSuper
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelStoreOwner
 
@@ -20,6 +21,11 @@ interface QuickViewAbility: QuickAbility {
     /**
      * 设置页面
      */
+    @CallSuper
+    fun initView(owner: LifecycleOwner, view: View) {
+        initView(view)
+    }
+
     fun initView(view: View) {
 
     }

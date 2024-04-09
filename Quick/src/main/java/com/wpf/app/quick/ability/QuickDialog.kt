@@ -12,14 +12,14 @@ import com.wpf.app.quickutil.helper.InitViewHelper
 import com.wpf.app.quickutil.other.forceTo
 import com.wpf.app.quickutil.run.runOnContext
 
-class QuickDialog(
+open class QuickDialog(
     context: Context,
     private val abilityList: List<QuickAbility> = mutableListOf(),
 ) : QuickBaseDialog(context = context.forceTo(), layoutViewInContext = runOnContext {
     val inflateAbility = abilityList.first { ability -> ability is QuickInflateViewAbility }
         .forceTo<QuickInflateViewAbility>()
     InitViewHelper.init(
-        it,
+        this,
         inflateAbility.layoutId(),
         inflateAbility.layoutView(),
         inflateAbility.layoutViewInContext()
@@ -38,7 +38,7 @@ class QuickDialog(
     override fun initView(view: View) {
         super.initView(view)
         abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
-            it.initView(view)
+            it.initView(this, view)
         }
     }
 

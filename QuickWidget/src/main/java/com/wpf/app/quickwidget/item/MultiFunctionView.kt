@@ -22,7 +22,7 @@ import com.wpf.app.quickwidget.R
  * 多功能
  *                          Title
  * CheckBox   LeftImageview            RightImage
- *                          SubTitle
+ *                          BottomTitle
  */
 class MultiFunctionView @JvmOverloads constructor(
     context: Context,
@@ -65,16 +65,16 @@ class MultiFunctionView @JvmOverloads constructor(
 
     private lateinit var checkBox: CheckBox
     private lateinit var leftImage: ImageView
-    private lateinit var title: TextView
-    private lateinit var subTitle: TextView
+    private lateinit var topTitle: TextView
+    private lateinit var bottomTitle: TextView
     private lateinit var rightImage: ImageView
 
     private fun initView() {
         View.inflate(context, R.layout.multi_function_layout, this)
         checkBox = findViewById(R.id.checkbox)
         leftImage = findViewById(R.id.leftImage)
-        title = findViewById(R.id.title)
-        subTitle = findViewById(R.id.subTitle)
+        topTitle = findViewById(R.id.topTitle)
+        bottomTitle = findViewById(R.id.bottomTitle)
         rightImage = findViewById(R.id.rightImage)
         setClick()
     }
@@ -91,8 +91,8 @@ class MultiFunctionView @JvmOverloads constructor(
     private fun loadViewAttribute() {
         loadCheckBoxAttribute()
         loadLeftImageAttribute()
-        loadTitleAttribute()
-        loadSubTitleAttribute()
+        loadTopTitleAttribute()
+        loadBottomTitleAttribute()
         loadRightImageAttribute()
     }
 
@@ -140,56 +140,56 @@ class MultiFunctionView @JvmOverloads constructor(
         }
     }
 
-    private fun loadTitleAttribute() {
-        setTitle(attributeHelper.title ?: "")
-        attributeHelper.titleHint?.let {
-            setTitleHint(it)
+    private fun loadTopTitleAttribute() {
+        setTopTitle(attributeHelper.topTitle ?: "")
+        attributeHelper.topTitleHint?.let {
+            setTopTitleHint(it)
         }
-        attributeHelper.titleBackground?.let {
-            setTitleBackground(it)
+        attributeHelper.topTitleBackground?.let {
+            setTopTitleBackground(it)
         }
-        attributeHelper.titleColor?.let {
-            setTitleColor(it)
+        attributeHelper.topTitleColor?.let {
+            setTopTitleColor(it)
         }
-        attributeHelper.titleHintColor?.let {
-            setTitleHintColor(it)
+        attributeHelper.topTitleHintColor?.let {
+            setTopTitleHintColor(it)
         }
-        attributeHelper.titleSize?.let {
-            setTitleSize(it.toFloat())
+        attributeHelper.topTitleSize?.let {
+            setTopTitleSize(it.toFloat())
         }
-        attributeHelper.titleMaxLine?.let {
-            setTitleMaxLine(it)
+        attributeHelper.topTitleMaxLine?.let {
+            setTopTitleMaxLine(it)
         }
-        attributeHelper.titleWpfStyle?.let {
-            setTitleStyle(TypefaceConvert.getAndroidTypeface(it))
+        attributeHelper.topTitleWpfStyle?.let {
+            setTopTitleStyle(TypefaceConvert.getAndroidTypeface(it))
         }
     }
 
-    private fun loadSubTitleAttribute() {
-        setSubTitle(attributeHelper.subTitle ?: "")
-        attributeHelper.subTitleHint?.let {
-            setSubTitleHint(it)
+    private fun loadBottomTitleAttribute() {
+        setBottomTitle(attributeHelper.bottomTitle ?: "")
+        attributeHelper.bottomTitleHint?.let {
+            setBottomTitleHint(it)
         }
-        attributeHelper.subTitleBackground?.let {
-            setSubTitleBackground(it)
+        attributeHelper.bottomTitleBackground?.let {
+            setBottomTitleBackground(it)
         }
-        attributeHelper.subTitleColor?.let {
-            setSubTitleColor(it)
+        attributeHelper.bottomTitleColor?.let {
+            setBottomTitleColor(it)
         }
-        attributeHelper.subTitleHintColor?.let {
-            setSubTitleHintColor(it)
+        attributeHelper.bottomTitleHintColor?.let {
+            setBottomTitleHintColor(it)
         }
-        attributeHelper.subTitleSize?.let {
-            setSubTitleSize(it.toFloat())
+        attributeHelper.bottomTitleSize?.let {
+            setBottomTitleSize(it.toFloat())
         }
-        attributeHelper.subTitleMaxLine?.let {
-            setSubTitleMaxLine(it)
+        attributeHelper.bottomTitleMaxLine?.let {
+            setBottomTitleMaxLine(it)
         }
-        attributeHelper.subTitleWpfStyle?.let {
-            setSubTitleStyle(TypefaceConvert.getAndroidTypeface(it))
+        attributeHelper.bottomTitleWpfStyle?.let {
+            setBottomTitleStyle(TypefaceConvert.getAndroidTypeface(it))
         }
-        attributeHelper.subTitleMarginTop?.let {
-            setSubTitleMarginTop(it)
+        attributeHelper.bottomTitleMarginTop?.let {
+            setBottomTitleMarginTop(it)
         }
     }
 
@@ -223,12 +223,12 @@ class MultiFunctionView @JvmOverloads constructor(
         return leftImage
     }
 
-    fun getTitle(): TextView {
-        return title
+    fun getTopTitle(): TextView {
+        return topTitle
     }
 
-    fun getSubTitle(): TextView {
-        return subTitle
+    fun getBottomTitle(): TextView {
+        return bottomTitle
     }
 
     fun getRightImage(): ImageView {
@@ -303,86 +303,86 @@ class MultiFunctionView @JvmOverloads constructor(
         (leftImage.layoutParams as? MarginLayoutParams)?.rightMargin = margin
     }
 
-    fun showTitle(show: Boolean) {
-        title.visibility = if (show) View.VISIBLE else View.GONE
+    fun showTopTitle(show: Boolean) {
+        topTitle.visibility = if (show) View.VISIBLE else View.GONE
     }
 
-    fun setTitleBackground(@DrawableRes res: Int) {
-        title.setBackgroundResource(res)
+    fun setTopTitleBackground(@DrawableRes res: Int) {
+        topTitle.setBackgroundResource(res)
     }
 
-    fun setTitle(titleStr: CharSequence) {
-        title.text = titleStr
-        showTitle(titleStr.isNotEmpty())
+    fun setTopTitle(titleStr: CharSequence) {
+        topTitle.text = titleStr
+        showTopTitle(titleStr.isNotEmpty())
     }
 
-    fun setTitleHint(titleHintStr: CharSequence) {
-        title.hint = titleHintStr
-        showTitle(titleHintStr.isNotEmpty())
+    fun setTopTitleHint(titleHintStr: CharSequence) {
+        topTitle.hint = titleHintStr
+        showTopTitle(titleHintStr.isNotEmpty())
     }
 
-    fun setTitleColor(color: Int) {
-        title.setTextColor(attributeHelper.getColorInt(context, color))
+    fun setTopTitleColor(color: Int) {
+        topTitle.setTextColor(attributeHelper.getColorInt(context, color))
     }
 
-    fun setTitleHintColor(color: Int) {
-        title.setHintTextColor(attributeHelper.getColorInt(context, color))
+    fun setTopTitleHintColor(color: Int) {
+        topTitle.setHintTextColor(attributeHelper.getColorInt(context, color))
     }
 
-    fun setTitleSize(size: Float) {
-        title.setTextSize(TypedValue.COMPLEX_UNIT_PX, size)
+    fun setTopTitleSize(size: Float) {
+        topTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, size)
     }
 
-    fun setTitleMaxLine(max: Int) {
-        title.maxLines = max
-        title.ellipsize = TextUtils.TruncateAt.END
+    fun setTopTitleMaxLine(max: Int) {
+        topTitle.maxLines = max
+        topTitle.ellipsize = TextUtils.TruncateAt.END
     }
 
-    fun setTitleStyle(style: Typeface) {
-        title.typeface = style
+    fun setTopTitleStyle(style: Typeface) {
+        topTitle.typeface = style
     }
 
-    fun showSubTitle(show: Boolean) {
-        subTitle.visibility = if (show) View.VISIBLE else View.GONE
+    fun showBottomTitle(show: Boolean) {
+        bottomTitle.visibility = if (show) View.VISIBLE else View.GONE
     }
 
-    fun setSubTitleBackground(@DrawableRes res: Int) {
-        subTitle.setBackgroundResource(res)
+    fun setBottomTitleBackground(@DrawableRes res: Int) {
+        bottomTitle.setBackgroundResource(res)
     }
 
-    fun setSubTitle(subTitleStr: CharSequence) {
-        subTitle.text = subTitleStr
-        showSubTitle(subTitleStr.isNotEmpty())
+    fun setBottomTitle(bottomTitleStr: CharSequence) {
+        bottomTitle.text = bottomTitleStr
+        showBottomTitle(bottomTitleStr.isNotEmpty())
     }
 
-    fun setSubTitleHint(subTitleHintStr: CharSequence) {
-        subTitle.hint = subTitleHintStr
-        showSubTitle(subTitleHintStr.isNotEmpty())
+    fun setBottomTitleHint(bottomTitleHintStr: CharSequence) {
+        bottomTitle.hint = bottomTitleHintStr
+        showBottomTitle(bottomTitleHintStr.isNotEmpty())
     }
 
-    fun setSubTitleColor(color: Int) {
-        subTitle.setTextColor(attributeHelper.getColorInt(context, color))
+    fun setBottomTitleColor(color: Int) {
+        bottomTitle.setTextColor(attributeHelper.getColorInt(context, color))
     }
 
-    fun setSubTitleHintColor(color: Int) {
-        subTitle.setHintTextColor(attributeHelper.getColorInt(context, color))
+    fun setBottomTitleHintColor(color: Int) {
+        bottomTitle.setHintTextColor(attributeHelper.getColorInt(context, color))
     }
 
-    fun setSubTitleSize(size: Float) {
-        subTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, size)
+    fun setBottomTitleSize(size: Float) {
+        bottomTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, size)
     }
 
-    fun setSubTitleMaxLine(max: Int) {
-        subTitle.maxLines = max
-        subTitle.ellipsize = TextUtils.TruncateAt.END
+    fun setBottomTitleMaxLine(max: Int) {
+        bottomTitle.maxLines = max
+        bottomTitle.ellipsize = TextUtils.TruncateAt.END
     }
 
-    fun setSubTitleStyle(style: Typeface) {
-        subTitle.typeface = style
+    fun setBottomTitleStyle(style: Typeface) {
+        bottomTitle.typeface = style
     }
 
-    fun setSubTitleMarginTop(margin: Int) {
-        (subTitle.layoutParams as? MarginLayoutParams)?.topMargin = margin
+    fun setBottomTitleMarginTop(margin: Int) {
+        (bottomTitle.layoutParams as? MarginLayoutParams)?.topMargin = margin
     }
 
     fun showRightImage(show: Boolean) {
@@ -469,30 +469,30 @@ class MultiFunctionAttribute(
     var checkboxLeftMarge: Int? = 0
     var checkboxRightMarge: Int? = 0
 
-    var title: String? = null
-    var titleHint: String? = null
+    var topTitle: String? = null
+    var topTitleHint: String? = null
     @DrawableRes
-    var titleBackground: Int? = null
-    var titleSize: Int? = null
+    var topTitleBackground: Int? = null
+    var topTitleSize: Int? = null
     @ColorRes
-    var titleColor: Int? = null
+    var topTitleColor: Int? = null
     @ColorRes
-    var titleHintColor: Int? = null
-    var titleWpfStyle: Int? = null
-    var titleMaxLine: Int? = null
+    var topTitleHintColor: Int? = null
+    var topTitleWpfStyle: Int? = null
+    var topTitleMaxLine: Int? = null
 
-    var subTitle: String? = null
-    var subTitleHint: String? = null
+    var bottomTitle: String? = null
+    var bottomTitleHint: String? = null
     @DrawableRes
-    var subTitleBackground: Int? = null
-    var subTitleSize: Int? = null
+    var bottomTitleBackground: Int? = null
+    var bottomTitleSize: Int? = null
     @ColorRes
-    var subTitleColor: Int? = null
+    var bottomTitleColor: Int? = null
     @ColorRes
-    var subTitleHintColor: Int? = null
-    var subTitleWpfStyle: Int? = null
-    var subTitleMarginTop: Int? = null
-    var subTitleMaxLine: Int? = null
+    var bottomTitleHintColor: Int? = null
+    var bottomTitleWpfStyle: Int? = null
+    var bottomTitleMarginTop: Int? = null
+    var bottomTitleMaxLine: Int? = null
 
     var showLeftImage: Boolean? = null
     @DrawableRes

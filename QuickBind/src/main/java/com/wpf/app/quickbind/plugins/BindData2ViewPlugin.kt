@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 import com.wpf.app.quick.annotations.bind.BindD2VHHelper
 import com.wpf.app.quick.annotations.bind.BindData2View
-import com.wpf.app.quickutil.run.RunOnHolderWithSelf
+import com.wpf.app.quickutil.run.RunOnViewWithSelf
 import com.wpf.app.quickutil.other.GenericEx.canBreakScan
 import java.lang.reflect.Field
 
@@ -49,9 +49,9 @@ class BindData2ViewPlugin : BindBasePlugin {
             } catch (ignore: Exception) {
                 bindBaseHelper = helper.getDeclaredConstructor().newInstance()
             }
-            if (value is RunOnHolderWithSelf<*, *>) {
+            if (value is RunOnViewWithSelf<*, *>) {
                 bindBaseHelper?.initView(viewParent as? RecyclerView.ViewHolder,
-                    findView, (value as RunOnHolderWithSelf<Any, Any>).run(findView, obj))
+                    findView, (value as RunOnViewWithSelf<Any, Any>).run(findView, obj))
             } else {
                 bindBaseHelper?.initView(viewParent as? RecyclerView.ViewHolder, findView, value)
             }

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.Checkable
 import android.widget.TextView
 import com.wpf.app.quickbind.annotations.BindD2VHelper
-import com.wpf.app.quickutil.run.RunOnHolderWithSelf
+import com.wpf.app.quickutil.run.RunOnViewWithSelf
 import com.wpf.app.quickutil.helper.allChild
 import com.wpf.app.quickutil.other.forceTo
 
@@ -46,8 +46,8 @@ object DataAutoSet2ViewUtils {
             data.javaClass.getDeclaredField(viewIdName).let {
                 it.isAccessible = true
                 val fieldValue = it.get(data)
-                viewData = if (fieldValue is RunOnHolderWithSelf<*, *>) {
-                    (fieldValue.forceTo<RunOnHolderWithSelf<Any, Any>>()).run(view, data)
+                viewData = if (fieldValue is RunOnViewWithSelf<*, *>) {
+                    (fieldValue.forceTo<RunOnViewWithSelf<Any, Any>>()).run(view, data)
                 } else {
                     fieldValue
                 }

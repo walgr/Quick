@@ -7,10 +7,9 @@ import android.widget.TextView
 import androidx.annotation.DrawableRes
 import com.wpf.app.quickutil.helper.matchWrapLayoutParams
 import com.wpf.app.quickutil.helper.onceClick
-import com.wpf.app.quickwork.R
-import com.wpf.app.quickwork.widget.QuickTitleView
+import com.wpf.app.quickwork.widget.QuickThemeTitle
 
-fun QuickTitleView.textButton(
+fun QuickThemeTitle.textButton(
     text: CharSequence,
     clickListener: OnClickListener? = null,
     init: (TextView.() -> Unit)? = null,
@@ -27,7 +26,7 @@ fun QuickTitleView.textButton(
     return textView
 }
 
-fun QuickTitleView.imgButton(
+fun QuickThemeTitle.imgButton(
     @DrawableRes img: Int,
     clickListener: OnClickListener? = null,
     init: (ImageView.() -> Unit)? = null,
@@ -46,11 +45,15 @@ fun ViewGroup.title(
     titleName: String = "",
     showTitle: Boolean = true,
     layoutParams: ViewGroup.LayoutParams = matchWrapLayoutParams(),
-    builder: (QuickTitleView.() -> Unit)? = null,
-): QuickTitleView {
-    val titleView = QuickTitleView(context)
+    theme: QuickThemeTitle.QuickTitleTheme? = null,
+    builder: (QuickThemeTitle.() -> Unit)? = null,
+): QuickThemeTitle {
+    val titleView = QuickThemeTitle(context, theme = theme ?: QuickThemeTitle.commonTheme?.copy())
     if (!showTitle) return titleView
-    titleView.id = R.id.quickTitleView
+    titleView.id = com.wpf.app.quickwidget.R.id.quickTitleView
+    theme?.let {
+        titleView.setTheme(it)
+    }
     titleView.setTitle(titleName)
     addView(titleView, layoutParams)
     builder?.invoke(titleView)

@@ -13,7 +13,7 @@ import com.wpf.app.quickbind.helper.binddatahelper.Select2CheckBox
 import com.wpf.app.quickbind.helper.binddatahelper.Text2TextView
 import com.wpf.app.quickwidget.quickview.bind.QuickSelectGroup
 import com.wpf.app.quickutil.run.itemClick
-import com.wpf.app.quickutil.run.runOnHolder
+import com.wpf.app.quickutil.run.runOnView
 
 /**
  * Created by 王朋飞 on 2022/7/8.
@@ -30,7 +30,7 @@ class SelectItemGroup @JvmOverloads constructor(
 
     @SuppressLint("NonConstantResourceId")
     @BindData2View(id = R.id.title, helper = Text2TextView::class)
-    var title = runOnHolder { "Data2View$position" }
+    var title = runOnView { "Data2View$position" }
 
     @BindData2View(helper = ItemClick::class)
     private val itemClick = itemClick {

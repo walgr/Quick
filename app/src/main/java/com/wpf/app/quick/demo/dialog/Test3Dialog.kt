@@ -6,15 +6,14 @@ import android.view.View
 import android.widget.TextView
 import com.wpf.app.quickdialog.QuickBaseDialog
 import com.wpf.app.quickutil.run.runOnContext
+import com.wpf.app.quickwork.ability.text
 
 class Test3Dialog(
     context: Context
 ): QuickBaseDialog(
     context,
     layoutViewInContext = runOnContext {
-        TextView(context).apply {
-            text = "Test3Dialog"
-        }
+        text(text = "Test3Dialog")
     }
 ) {
     override fun initDialogGravity(): Int {

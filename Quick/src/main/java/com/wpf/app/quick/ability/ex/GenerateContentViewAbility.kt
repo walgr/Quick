@@ -17,12 +17,13 @@ fun generateContentViewCommon(
     @LayoutRes layoutId: Int = 0,
     layoutView: View? = null,
     layoutViewInContext: RunOnContext<View>? = null,
-    contentBuilder: (QuickView.(view: View) -> Unit)? = null,
+    generateContentView: (QuickView.(view: View) -> View?)? = null,
+    builder: (QuickView.(view: View) -> Unit)? = null,
 ): MutableList<QuickAbility> {
-    return generateContentView(layoutId, layoutView, layoutViewInContext) {
-        contentBuilder?.invoke(this, it)
+    return generateContentView(layoutId, layoutView, layoutViewInContext, generateContentView = {
+        generateContentView?.invoke(this, it)
         null
-    }
+    }, builder)
 }
 
 @Deprecated("框架使用,建议使用contentView")
@@ -30,7 +31,8 @@ fun generateContentView(
     @LayoutRes layoutId: Int = 0,
     layoutView: View? = null,
     layoutViewInContext: RunOnContext<View>? = null,
-    contentBuilder: (QuickView.(view: View) -> View?)? = null,
+    generateContentView: (QuickView.(view: View) -> View?)? = null,
+    builder: (QuickView.(view: View) -> Unit)? = null,
 ): MutableList<QuickAbility> {
     return mutableListOf(object : QuickInflateViewAbility {
         override fun layoutId(): Int {
@@ -52,7 +54,12 @@ fun generateContentView(
             } else {
                 view.layoutParams = matchLayoutParams()
             }
-            return contentBuilder?.invoke(owner.forceTo(), view) ?: view
+            return generateContentView?.invoke(owner.forceTo(), view) ?: view
+        }
+
+        override fun initView(owner: LifecycleOwner, view: View) {
+            super.initView(owner, view)
+            builder?.invoke(owner.forceTo(), view)
         }
     })
 }

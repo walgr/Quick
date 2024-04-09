@@ -14,7 +14,7 @@ import com.wpf.app.quickwidget.emptyview.EmptyHelper
 import com.wpf.app.quickwork.ability.smartRefreshList
 
 class RecommendFragment: QuickFragment(
-    contentView<FrameLayout> {quickView ->
+    contentView<FrameLayout> { quickView ->
         smartRefreshList(upperLayerLayoutView = TestEmptyView(context), autoRefresh = true) { list, upperLayout ->
             EmptyHelper.bind(list, emptyView = upperLayout?.forceTo())
             requestData2List<ListRequest, Article> { requestData, callback ->

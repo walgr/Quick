@@ -7,7 +7,7 @@ import com.wpf.app.quickbind.helper.binddatahelper.Select2CheckBox
 import com.wpf.app.quickbind.helper.binddatahelper.Text2TextView
 import com.wpf.app.quickwidget.selectview.data.QuickChildSelectData
 import com.wpf.app.quickwidget.selectview.data.QuickParentSelectData
-import com.wpf.app.quickutil.run.runOnHolder
+import com.wpf.app.quickutil.run.runOnView
 import com.wpf.app.quickutil.log.LogUtil
 
 /**
@@ -18,7 +18,7 @@ class ParentSelectItem : QuickParentSelectData(layoutId = R.layout.holder_select
     @Transient
     @SuppressLint("NonConstantResourceId")
     @BindData2View(id = R.id.title, helper = Text2TextView::class)
-    var title = runOnHolder { "" + name + id + getParentName() + "(${getChildSelectSize()})" }
+    var title = runOnView { "" + name + id + getParentName() + "(${getChildSelectSize()})" }
 
     override fun onSelectChildChange(selectList: List<QuickChildSelectData>?) {
         super.onSelectChildChange(selectList)
@@ -87,5 +87,5 @@ open class SelectItem : QuickChildSelectData(layoutId = R.layout.holder_select_i
     @Transient
     @SuppressLint("NonConstantResourceId")
     @BindData2View(id = R.id.title, helper = Text2TextView::class)
-    var title = runOnHolder { name + id + "属于:父" + parent?.id }
+    var title = runOnView { name + id + "属于:父" + this@SelectItem.parent?.id }
 }

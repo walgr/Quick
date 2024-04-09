@@ -12,9 +12,12 @@ import com.wpf.app.quicknetwork.helper.RetrofitCreateHelper
 import com.wpf.app.quicknetwork.interceptor.LogInterceptor
 import com.wpf.app.quickutil.activity.activity
 import com.wpf.app.quickutil.helper.dp
+import com.wpf.app.quickutil.helper.dpF
 import com.wpf.app.quickutil.helper.toColor
 import com.wpf.app.quickutil.init.QuickInit
-import com.wpf.app.quickwork.widget.QuickTitleView
+import com.wpf.app.quickwidget.title.QuickTitleView
+import com.wpf.app.quickwork.widget.QuickThemeTextView
+import com.wpf.app.quickwork.widget.QuickThemeTitle
 
 /**
  * Created by 王朋飞 on 2022/6/13.
@@ -27,8 +30,13 @@ class App : Application() {
         initTestRequest()
         QuickInit.init(this)
 
-        QuickTitleView.childStyleBuilder(this) {
-            titleSize = 15.dp(it)
+        QuickThemeTextView.setCommonTheme(this) {
+            textSize = 14.dpF(it)
+            textColor = R.color.black.toColor(it)
+            hintTextColor = R.color.grey.toColor(it)
+        }
+        QuickThemeTitle.childThemeBuilder(this) {
+            titleSize = 16.dpF(it)
             titleColor = R.color.white.toColor(it)
             titleBold = false
 
@@ -37,16 +45,16 @@ class App : Application() {
 
             space = 4.dp(it)
         }
-        QuickTitleView.commonStyleBuilder(this) {
+        QuickThemeTitle.commonThemeBuilder(this) {
             background = R.color.purple_700
             contentGravity = QuickTitleView.CONTENT_GRAVITY_CENTER
             showBackIcon = true
-            backIcon = com.wpf.app.quickwork.R.drawable.baseline_arrow_back_ios_new_20_white
+            backIcon = com.wpf.app.quickwidget.R.drawable.baseline_arrow_back_ios_new_20_white
             titleBold = true
-            titleSize = 20.dp(it)
+            titleSize = 20.dpF(it)
             titleColor = R.color.white.toColor(it)
             subTitleBold = false
-            subTitleSize = 14.dp(it)
+            subTitleSize = 14.dpF(it)
             subTitleColor = R.color.white.toColor(it)
             showBackIcon = true
             showLine = false

@@ -23,31 +23,31 @@
         </attr>
         <attr name="leftImageLeftMargin" format="dimension" />
         <attr name="leftImageRightMargin" format="dimension" />
-        <attr name="title" format="string" />
-        <attr name="titleHint" format="string" />
-        <attr name="titleBackground" format="reference" />
-        <attr name="titleSize" format="dimension" />
-        <attr name="titleColor" format="color" />
-        <attr name="titleHintColor" format="color" />
-        <attr name="titleMaxLine" format="integer" />
-        <attr name="titleWpfStyle" format="enum">
+        <attr name="topTitle" format="string" />
+        <attr name="topTitleHint" format="string" />
+        <attr name="topTitleBackground" format="reference" />
+        <attr name="topTitleSize" format="dimension" />
+        <attr name="topTitleColor" format="color|reference" />
+        <attr name="topTitleHintColor" format="color|reference" />
+        <attr name="topTitleMaxLine" format="integer" />
+        <attr name="topTitleWpfStyle" format="enum">
             <enum name="normal" value="0" />
             <enum name="bold" value="1" />
             <enum name="italic" value="2" />
         </attr>
-        <attr name="subTitle" format="string" />
-        <attr name="subTitleHint" format="string" />
-        <attr name="subTitleBackground" format="reference" />
-        <attr name="subTitleSize" format="dimension" />
-        <attr name="subTitleColor" format="color" />
-        <attr name="subTitleHintColor" format="color" />
-        <attr name="subTitleMaxLine" format="integer" />
-        <attr name="subTitleWpfStyle" format="enum">
+        <attr name="bottomTitle" format="string" />
+        <attr name="bottomTitleHint" format="string" />
+        <attr name="bottomTitleBackground" format="reference" />
+        <attr name="bottomTitleSize" format="dimension" />
+        <attr name="bottomTitleColor" format="color|reference" />
+        <attr name="bottomTitleHintColor" format="color|reference" />
+        <attr name="bottomTitleMaxLine" format="integer" />
+        <attr name="bottomTitleWpfStyle" format="enum">
             <enum name="normal" value="0" />
             <enum name="bold" value="1" />
             <enum name="italic" value="2" />
         </attr>
-        <attr name="subTitleMarginTop" format="dimension" />
+        <attr name="bottomTitleMarginTop" format="dimension" />
         <attr name="showRightImage" format="boolean" />
         <attr name="rightImageBackground" format="reference" />
         <attr name="rightImageSrc" format="reference" />
@@ -420,5 +420,28 @@
             effective only when the flexWrap attribute is "wrap" or "wrap_reverse".
         -->
         <attr name="maxLine" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="QuickTitleView">
+        <attr name="isLinearLayout" format="boolean" />
+        <attr name="isAbsoluteCenter" format="boolean" />
+        <attr name="showBackIcon" format="boolean" />
+        <attr name="contentGravity" format="enum">
+            <enum name="center" value="0"/>
+            <enum name="start" value="1"/>
+            <enum name="end" value="2"/>
+        </attr>
+        <attr name="backIcon" format="reference" />
+        <attr name="titleStr" format="string" />
+        <attr name="titleColor" format="color|reference" />
+        <attr name="titleBold" format="boolean" />
+        <attr name="titleSize" format="dimension" />
+        <attr name="titleSpace" format="dimension" />
+        <attr name="subTitleStr" format="string" />
+        <attr name="subTitleColor" format="color|reference" />
+        <attr name="subTitleBold" format="boolean" />
+        <attr name="subTitleSize" format="dimension" />
+        <attr name="showLine" format="boolean" />
+        <attr name="space" format="dimension" />
     </declare-styleable>
 </resources>
