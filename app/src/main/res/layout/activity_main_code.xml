@@ -2,19 +2,19 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.wpf.app.quickwidget.quickview.QuickViewGroup
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipChildren="false"
         android:background="#F7F7F7"
+        android:clipChildren="false"
         android:orientation="vertical"
         app:groupType="LinearLayout">
 
         <com.wpf.app.quickwork.widget.QuickThemeTitle
             android:id="@+id/titleView"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:elevation="5dp"
+            android:layout_height="wrap_content"
+            android:elevation="0dp"
             app:contentGravity="start"
             app:showBackIcon="false"
             app:titleStr="正式场">
@@ -22,22 +22,20 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:includeFontPadding="false"
+                android:src="@drawable/baseline_more_vert_24_white"
                 android:text="关于App"
                 android:textColor="@color/white"
                 android:textSize="16sp"
-                android:includeFontPadding="false"
-                android:src="@drawable/baseline_more_vert_24_white"
                 android:visibility="visible" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="关于App"
+                android:src="@drawable/baseline_more_vert_24_white"
                 android:textColor="@color/white"
                 android:textSize="16sp"
-                android:src="@drawable/baseline_more_vert_24_white"
                 android:visibility="visible" />
 
         </com.wpf.app.quickwork.widget.QuickThemeTitle>
@@ -58,6 +56,6 @@
 
         </com.wpf.app.quickwidget.tab.BottomTabLayout>
 
-    </com.wpf.app.quickwidget.quickview.QuickViewGroup>
+    </LinearLayout>
 
 </layout>

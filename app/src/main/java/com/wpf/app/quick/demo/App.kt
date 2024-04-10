@@ -2,7 +2,6 @@ package com.wpf.app.quick.demo
 
 import android.app.Application
 import android.view.View
-import com.wpf.app.quickrecyclerview.constant.BRConstant
 import com.wpf.app.quick.demo.http.TestApi
 import com.wpf.app.quick.demo.http.TestCommonCallAdapterFactory
 import com.wpf.app.quick.demo.http.TestGsonConverterFactory
@@ -10,14 +9,18 @@ import com.wpf.app.quick.demo.http.TestNormalCallAdapterFactory
 import com.wpf.app.quicknetwork.helper.OkHttpCreateHelper
 import com.wpf.app.quicknetwork.helper.RetrofitCreateHelper
 import com.wpf.app.quicknetwork.interceptor.LogInterceptor
+import com.wpf.app.quickrecyclerview.constant.BRConstant
 import com.wpf.app.quickutil.activity.activity
 import com.wpf.app.quickutil.helper.dp
 import com.wpf.app.quickutil.helper.dpF
 import com.wpf.app.quickutil.helper.toColor
+import com.wpf.app.quickutil.helper.toDrawable
 import com.wpf.app.quickutil.init.QuickInit
+import com.wpf.app.quickwidget.title.QuickTitleAttrs
 import com.wpf.app.quickwidget.title.QuickTitleView
-import com.wpf.app.quickwork.widget.QuickThemeTitle
+import com.wpf.app.quickwork.widget.theme.QuickTextTheme
 import com.wpf.app.quickwork.widget.theme.QuickTextThemeBase
+import com.wpf.app.quickwork.widget.theme.QuickTitleThemeBase
 
 /**
  * Created by 王朋飞 on 2022/6/13.
@@ -30,36 +33,27 @@ class App : Application() {
         initTestRequest()
         QuickInit.init(this)
 
-        QuickTextThemeBase.setCommonTheme(this) {
-            textSize = 14.dpF(it)
-            textColor = R.color.black.toColor(it)
-            hintTextColor = R.color.grey.toColor(it)
+        QuickTextThemeBase.commonTheme = QuickTextTheme().apply {
+            textSize = 14.dpF()
+            textColor = R.color.black.toColor()
+            hintTextColor = R.color.grey.toColor()
         }
-        QuickThemeTitle.childThemeBuilder(this) {
-            titleSize = 16.dpF(it)
-            titleColor = R.color.white.toColor(it)
-            titleBold = false
-
-            imgWidth = 24.dp(it)
-            imgHeight = 24.dp(it)
-
-            space = 4.dp(it)
-        }
-        QuickThemeTitle.commonThemeBuilder(this) {
-            background = R.color.purple_700
+        QuickTitleThemeBase.commonTheme = QuickTitleAttrs().apply {
+            height = 56.dp()
+            background = R.color.purple_700.toDrawable()
             contentGravity = QuickTitleView.CONTENT_GRAVITY_CENTER
             showBackIcon = true
             backIcon = com.wpf.app.quickwidget.R.drawable.baseline_arrow_back_ios_new_20_white
             titleBold = true
-            titleSize = 20.dpF(it)
-            titleColor = R.color.white.toColor(it)
+            titleSize = 20.dpF()
+            titleColor = R.color.white.toColor()
             subTitleBold = false
-            subTitleSize = 14.dpF(it)
-            subTitleColor = R.color.white.toColor(it)
+            subTitleSize = 14.dpF()
+            subTitleColor = R.color.white.toColor()
             showBackIcon = true
             showLine = false
             isLinearLayout = true
-            space = 16.dp(it)
+            space = 16.dp()
         }
         QuickTitleView.setCommonClickListener(object : QuickTitleView.CommonClickListener {
             override fun onBackClick(view: View) {

@@ -2,8 +2,8 @@ package com.wpf.app.quickutil.helper.attribute
 
 import android.content.Context
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
-import android.view.View
 import androidx.annotation.ColorInt
 import androidx.annotation.StyleableRes
 import androidx.core.content.ContextCompat
@@ -25,9 +25,6 @@ open class AutoGetAttribute(
 ) : AttributeHelper(context, attributeSet, styleableId) {
 
     private val fieldMap = mutableMapOf<String, Field>()
-    private val testView: View by lazy {
-        View(context)
-    }
 
     init {
         getAllClassField()
@@ -67,25 +64,25 @@ open class AutoGetAttribute(
                             val res = attributeSet.getAttributeResourceValue(i, 0)
                             //获取layout
                             field.set(saveData ?: this, res)
-                            if (!testView.isInEditMode) {
-                                try {
-                                    //获取color
-                                    val colorInt = ContextCompat.getColor(context, res)
-                                    if (colorInt != 0) {
-                                        field.set(saveData ?: this, colorInt)
-                                    }
-                                } catch (ignore: Exception) {
-                                    try {
-                                        //获取drawable
-                                        val drawable = ContextCompat.getDrawable(context, res)
-                                        if (drawable != null) {
-                                            field.set(saveData ?: this, drawable)
-                                        }
-                                    } catch (ignore: Exception) {
-
-                                    }
-                                }
-                            }
+//                            if (!testView.isInEditMode) {
+//                                try {
+//                                    //获取color
+//                                    val colorInt = ContextCompat.getColor(context, res)
+//                                    if (colorInt != 0) {
+//                                        field.set(saveData ?: this, colorInt)
+//                                    }
+//                                } catch (ignore: Exception) {
+//                                    try {
+//                                        //获取drawable
+//                                        val drawable = ContextCompat.getDrawable(context, res)
+//                                        if (drawable != null) {
+//                                            field.set(saveData ?: this, drawable)
+//                                        }
+//                                    } catch (ignore: Exception) {
+//
+//                                    }
+//                                }
+//                            }
                         } else if (attributeValue.startsWith("#")) {
                             //获取资源id
                             field.set(saveData ?: this, Color.parseColor(attributeValue))
@@ -111,6 +108,22 @@ open class AutoGetAttribute(
                         if (attributeValue.startsWith("#")) {
                             //获取资源id
                             field.set(saveData ?: this, Color.parseColor(attributeValue))
+                        } else if (attributeValue.startsWith("@")) {
+                            val res = attributeSet.getAttributeResourceValue(i, 0)
+                            val colorInt = ContextCompat.getColor(context, res)
+                            if (colorInt != 0) {
+                                field.set(saveData ?: this, colorInt)
+                            }
+                        }
+                    }
+
+                    Drawable::class.java -> {
+                        val attributeValue = attributeSet.getAttributeValue(i)
+                        if (attributeValue.startsWith("@")) {
+                            val res = attributeSet.getAttributeResourceValue(i, 0)
+                            ContextCompat.getDrawable(context, res)?.let {
+                                field.set(saveData ?: this, it)
+                            }
                         }
                     }
                 }

@@ -2,6 +2,7 @@ package com.wpf.app.quickwidget.group
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.View
 import android.widget.LinearLayout
 import androidx.core.view.get
 import androidx.core.view.updateLayoutParams
@@ -17,18 +18,29 @@ open class QuickSpaceLinearLayout @JvmOverloads constructor(
     context, attrs, defStyleAttr
 ) {
 
-    private val attr: SpaceLinearLayoutAttr
-
-    init {
-        attr = AutoGetAttributeHelper.init(context, attrs, R.styleable.QuickLinearLayout)
-    }
+    private val attr: SpaceLinearLayoutAttr = AutoGetAttributeHelper.init(context, attrs, R.styleable.QuickLinearLayout)
 
     override fun onFinishInflate() {
         super.onFinishInflate()
         setChildMargin()
     }
 
-    private fun setChildMargin(forceSet: Boolean = false) {
+    override fun onViewAdded(child: View?) {
+        super.onViewAdded(child)
+        setChildMargin(false)
+    }
+
+    override fun onViewRemoved(child: View?) {
+        super.onViewRemoved(child)
+        setChildMargin(false)
+    }
+
+    private var curChildCount = 0
+    private var curItemSpace = 0
+    fun setChildMargin(forceSet: Boolean = false) {
+        if (curChildCount == childCount && curItemSpace == attr.itemSpace) return
+        curChildCount = childCount
+        curItemSpace = attr.itemSpace
         repeat(childCount) { pos ->
             get(pos).updateLayoutParams<MarginLayoutParams> {
                 var startSpace = 0
@@ -42,6 +54,12 @@ open class QuickSpaceLinearLayout @JvmOverloads constructor(
                     SpaceLinearLayoutAttr.SpaceType.End.type -> {
                         startSpace = 0
                     }
+                }
+                if (forceSet) {
+                    this.marginStart = 0
+                    this.marginEnd = 0
+                    this.topMargin = 0
+                    this.bottomMargin = 0
                 }
                 if (orientation == HORIZONTAL) {
                     if (pos > 0) {
@@ -70,6 +88,8 @@ open class QuickSpaceLinearLayout @JvmOverloads constructor(
             }
         }
     }
+
+    fun getCurrentSpace() = attr.itemSpace
 
     fun setNewItemSpace(itemSpace: Int) {
         attr.itemSpace = itemSpace

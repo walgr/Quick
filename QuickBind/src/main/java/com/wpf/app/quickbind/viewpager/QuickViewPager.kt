@@ -14,11 +14,11 @@ import com.wpf.app.quickutil.helper.attribute.AutoGetAttributeHelper
 open class QuickViewPager @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-    var canScroll: Boolean = true,
+    private var canScroll: Boolean = true,
 ) : ViewPager(context, attrs) {
 
     init {
-        AutoGetAttributeHelper.init(context, attrs, R.styleable.QuickViewPager, QuickViewPagerAttr())?.apply {
+        AutoGetAttributeHelper.init(context, attrs, R.styleable.QuickViewPager, QuickViewPagerAttr()).apply {
             this@QuickViewPager.canScroll = this.canScroll
         }
     }

@@ -1,61 +1,41 @@
 package com.wpf.app.quickwork.ability
 
-import android.view.View.OnClickListener
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.annotation.DrawableRes
+import android.view.ViewGroup.LayoutParams
+import com.wpf.app.base.NO_SET
 import com.wpf.app.quickutil.helper.matchWrapLayoutParams
-import com.wpf.app.quickutil.helper.onceClick
+import com.wpf.app.quickutil.helper.reset
+import com.wpf.app.quickwidget.group.QuickSpaceLinearLayout
+import com.wpf.app.quickwidget.title.QuickTitleAttrs
+import com.wpf.app.quickwidget.title.QuickTitleThemeI
 import com.wpf.app.quickwork.widget.QuickThemeTitle
+import com.wpf.app.quickwork.widget.theme.QuickTitleThemeBase
 
-fun QuickThemeTitle.textButton(
-    text: CharSequence,
-    clickListener: OnClickListener? = null,
-    init: (TextView.() -> Unit)? = null,
-): TextView {
-    val textView = TextView(context).apply {
-        this.text = text
-        dealChildViewCommonStyle(this)
-        init?.invoke(this)
-        clickListener?.let {
-            onceClick(onClickListener = it)
-        }
+fun QuickThemeTitle.moreGroup(
+    newSpace: Int = 0,
+    builder: QuickSpaceLinearLayout.() -> Unit
+): QuickSpaceLinearLayout {
+    val moreGroup = getMoreGroup()!!
+    if (newSpace != moreGroup.getCurrentSpace()) {
+        moreGroup.setNewItemSpace(newSpace)
     }
-    addView(textView)
-    return textView
-}
-
-fun QuickThemeTitle.imgButton(
-    @DrawableRes img: Int,
-    clickListener: OnClickListener? = null,
-    init: (ImageView.() -> Unit)? = null,
-) {
-    addView(ImageView(context).apply {
-        setImageResource(img)
-        dealChildViewCommonStyle(this)
-        init?.invoke(this)
-        clickListener?.let {
-            onceClick(onClickListener = it)
-        }
-    })
+    builder(moreGroup)
+    return moreGroup
 }
 
 fun ViewGroup.title(
     titleName: String = "",
-    showTitle: Boolean = true,
-    layoutParams: ViewGroup.LayoutParams = matchWrapLayoutParams(),
-    theme: QuickThemeTitle.QuickTitleTheme? = null,
+    height: Int? = null,
+    layoutParams: LayoutParams = matchWrapLayoutParams().reset(height = height ?: NO_SET),
+    theme: QuickTitleThemeI? = null,
     builder: (QuickThemeTitle.() -> Unit)? = null,
 ): QuickThemeTitle {
-    val titleView = QuickThemeTitle(context, theme = theme ?: QuickThemeTitle.commonTheme?.copy())
-    if (!showTitle) return titleView
+    val titleView = QuickThemeTitle(context, theme = (theme ?: QuickTitleThemeBase.commonTheme ?: QuickTitleAttrs()).apply {
+        this.height = height ?: this.height
+    })
     titleView.id = com.wpf.app.quickwidget.R.id.quickTitleView
-    theme?.let {
-        titleView.setTheme(it)
-    }
     titleView.setTitle(titleName)
-    addView(titleView, layoutParams)
     builder?.invoke(titleView)
+    addView(titleView, layoutParams)
     return titleView
 }

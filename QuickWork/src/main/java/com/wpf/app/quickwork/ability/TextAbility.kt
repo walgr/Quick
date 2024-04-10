@@ -4,19 +4,37 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.text.TextUtils
 import android.view.View
+import android.view.View.OnClickListener
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.annotation.ColorInt
+import com.wpf.app.quickutil.helper.parent
 import com.wpf.app.quickutil.helper.wrapLayoutParams
 import com.wpf.app.quickutil.other.context
-import com.wpf.app.quickutil.widget.smartLayoutParams
 import com.wpf.app.quickwork.widget.QuickThemeTextView
+import com.wpf.app.quickwork.widget.theme.QuickTextTheme
 import com.wpf.app.quickwork.widget.theme.QuickTextThemeBase
 
+fun Any.textButton(
+    textView: QuickThemeTextView,
+    clickListener: OnClickListener? = null,
+    init: (TextView.() -> Unit)? = null,
+): QuickThemeTextView {
+    textView.setOnClickListener(clickListener)
+    init?.invoke(textView)
+    if (this is ViewGroup) {
+        if (textView.parent() == null) {
+            this.addView(textView)
+        }
+    }
+    return textView
+}
+
 fun Any.text(
-    layoutParams: ViewGroup.LayoutParams = if (this is ViewGroup) smartLayoutParams(wrapLayoutParams()) else wrapLayoutParams(),
+    layoutParams: ViewGroup.LayoutParams = wrapLayoutParams(),
     background: Drawable? = null,
     text: String,
-    theme: QuickTextThemeBase.QuickTextTheme? = null,
+    theme: QuickTextTheme? = null,
     @ColorInt textColor: Int? = null,
     @ColorInt hintTextColor: Int? = null,
     textSize: Float? = null,                  //单位px
@@ -30,12 +48,12 @@ fun Any.text(
     maxWidth: Int? = null,
     includeFontPadding: Boolean? = null,
     textGravity: Int? = null,
-    onClick: View.OnClickListener? = null,
+    onClick: OnClickListener? = null,
     onLongClick: View.OnLongClickListener? = null,
     builder: (QuickThemeTextView.() -> Unit)? = null
 ): QuickThemeTextView {
     val mContext: Context = context()!!
-    val textView = QuickThemeTextView(mContext, theme = (theme ?: QuickTextThemeBase.commonTheme?.copy())?.apply {
+    val textView = QuickThemeTextView(mContext, theme = (theme ?: QuickTextThemeBase.commonTheme?: QuickTextTheme()).apply {
         this.background = background ?: this.background
         this.textColor = textColor ?: this.textColor
         this.hintTextColor = hintTextColor ?: this.hintTextColor

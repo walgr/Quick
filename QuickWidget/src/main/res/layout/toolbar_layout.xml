@@ -13,16 +13,25 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/ivBack"
-            android:layout_width="0dp"
+        <com.wpf.app.quickwidget.ratio.AspectRatioView
+            android:id="@+id/backLayout"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:scaleType="centerInside"
-            app:layout_constraintDimensionRatio="H, 1:1"
+            app:ratio="1"
+            app:isWidthMain="false"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <ImageView
+                android:id="@+id/ivBack"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerInside"
+                />
+
+        </com.wpf.app.quickwidget.ratio.AspectRatioView>
 
         <LinearLayout
             android:id="@+id/titleGroup"
@@ -31,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constrainedWidth="true"
-            tools:layout_constraintStart_toEndOf="@+id/ivBack"
+            tools:layout_constraintStart_toEndOf="@+id/backLayout"
             tools:layout_constraintEnd_toStartOf="@+id/moreGroup"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent">

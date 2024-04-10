@@ -5,18 +5,19 @@ import android.util.AttributeSet
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatTextView
 import com.wpf.app.quickwork.widget.theme.QuickTextThemeBase
+import com.wpf.app.quickwork.widget.theme.QuickTextThemeI
 
 open class QuickThemeTextView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
-    theme: QuickTextThemeBase.QuickTextTheme? = null
+    theme: QuickTextThemeI? = null
 ) : AppCompatTextView(context, attrs, defStyleAttr), QuickTextThemeBase {
 
-    override var curTheme: QuickTextThemeBase.QuickTextTheme? = null
+    override var curTheme: QuickTextThemeI? = null
     override var textView: TextView = this
 
     init {
-        initTheme(context, attrs, theme)
+        super.initTheme(context, attrs, theme)
     }
 }

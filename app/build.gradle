@@ -95,7 +95,7 @@ dependencies {
         ksp deps.quickbind.compiler_ksp
     } else {
         implementation project(":QuickWork")
-        ksp project(":Quick-compiler-ksp")
+        ksp deps.quickbind.compiler_ksp_jitpack
     }
     //ktx核心
     implementation deps.androidx.annotation

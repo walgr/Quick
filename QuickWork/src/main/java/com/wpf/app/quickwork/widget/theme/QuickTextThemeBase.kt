@@ -16,17 +16,20 @@ import com.wpf.app.quickwork.R
 interface QuickTextThemeBase {
     val textView: TextView
 
-    var curTheme: QuickTextTheme?
+    var curTheme: QuickTextThemeI?
 
-    fun initTheme(context: Context, attrs: AttributeSet? = null, theme: QuickTextTheme? = null) {
+    fun initTheme(context: Context, attrs: AttributeSet? = null, theme: QuickTextThemeI? = null) {
         curTheme = AutoGetAttributeHelper.init(
-            context, attrs, R.styleable.QuickTextTheme, theme ?: commonTheme
+            context,
+            attrs,
+            R.styleable.QuickTextTheme,
+            (theme ?: commonTheme ?: QuickTextTheme())
         )
         curTheme?.initDataByXml(context)
-        setTextStyle(curTheme!!)
+        setStyle(curTheme!!)
     }
 
-    fun setTextStyle(style: QuickTextTheme) {
+    fun setStyle(style: QuickTextThemeI) {
         textView.apply {
             style.apply {
                 background?.let {
@@ -86,40 +89,67 @@ interface QuickTextThemeBase {
     }
 
     companion object {
-        var commonTheme: QuickTextTheme? = null
-
-        fun setCommonTheme(context: Context, builder: QuickTextTheme.(context: Context) -> Unit) {
-            commonTheme = QuickTextTheme()
-            builder.invoke(commonTheme!!, context)
-        }
-    }
-
-    data class QuickTextTheme(
-        var background: Drawable? = null,
-        @ColorInt var textColor: Int? = null,
-        @ColorInt var hintTextColor: Int? = null,
-        var textSize: Float? = null,
-        var textGravity: Int? = null,
-        var isBold: Boolean? = null,
-        var isSingleLine: Boolean? = null,
-        var maxLines: Int? = null,
-        var lines: Int? = null,
-        var ems: Int? = null,
-        var maxEms: Int? = null,
-        var maxWidth: Int? = null,
-        var includeFontPadding: Boolean? = null,
-        var ellipsize: TextUtils.TruncateAt? = null
-    ) {
-        fun initDataByXml(context: Context) {
-            if (textColor == null) {
-                textColor = android.R.color.white.toColor(context)
-            }
-            if (hintTextColor == null) {
-                hintTextColor = android.R.color.darker_gray.toColor(context)
-            }
-            if (textSize == null) {
-                textSize = 14.dpF()
-            }
-        }
+        var commonTheme: QuickTextThemeI? = null
+            get() = field?.copy()
     }
 }
+
+
+interface QuickTextThemeI {
+    var background: Drawable?
+    var textColor: Int?
+    var hintTextColor: Int?
+    var textSize: Float?
+    var textGravity: Int?
+    var isBold: Boolean?
+    var isSingleLine: Boolean?
+    var maxLines: Int?
+    var lines: Int?
+    var ems: Int?
+    var maxEms: Int?
+    var maxWidth: Int?
+    var includeFontPadding: Boolean?
+    var ellipsize: TextUtils.TruncateAt?
+
+    fun initDataByXml(context: Context) {
+        textColor = textColor ?: android.R.color.white.toColor(context)
+        hintTextColor = hintTextColor ?: android.R.color.darker_gray.toColor(context)
+        textSize = textSize ?: 14.dpF()
+    }
+
+    fun copy(): QuickTextThemeI {
+        return QuickTextTheme(
+            background,
+            textColor,
+            hintTextColor,
+            textSize,
+            textGravity,
+            isBold,
+            isSingleLine,
+            maxLines,
+            lines,
+            ems,
+            maxEms,
+            maxWidth,
+            includeFontPadding,
+            ellipsize
+        )
+    }
+}
+
+open class QuickTextTheme(
+    override var background: Drawable? = null,
+    @ColorInt override var textColor: Int? = null,
+    @ColorInt override var hintTextColor: Int? = null,
+    override var textSize: Float? = null,
+    override var textGravity: Int? = null,
+    override var isBold: Boolean? = null,
+    override var isSingleLine: Boolean? = null,
+    override var maxLines: Int? = null,
+    override var lines: Int? = null,
+    override var ems: Int? = null,
+    override var maxEms: Int? = null,
+    override var maxWidth: Int? = null,
+    override var includeFontPadding: Boolean? = null,
+    override var ellipsize: TextUtils.TruncateAt? = null,
+) : QuickTextThemeI
