@@ -6,13 +6,12 @@ import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-import com.wpf.app.quickbind.QuickBind
+import com.wpf.app.base.bind.QuickBindWrap
 import com.wpf.app.quickutil.run.RunOnContextWithSelf
 import com.wpf.app.quickbind.utils.DataAutoSet2ViewUtils
 import com.wpf.app.quickrecyclerview.QuickAdapter
 import com.wpf.app.quickrecyclerview.holder.QuickViewBindingHolder
 import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
-import com.wpf.app.base.bind.Bind
 import com.wpf.app.quickutil.other.asTo
 import java.io.Serializable
 
@@ -47,7 +46,7 @@ open class QuickBindData @JvmOverloads constructor(
     @CallSuper
     open fun onCreateViewHolder(itemView: View) {
         this.mView = itemView
-        QuickBind.bind(this)
+        QuickBindWrap.bind(this)
     }
 
     open fun getContext(): Context? {
@@ -66,7 +65,7 @@ open class QuickBindData @JvmOverloads constructor(
         if (isFirstLoad) {
             onCreateViewHolder(itemView = viewHolder.itemView)
         } else {
-            QuickBind.dealInPlugins(this, null, QuickBind.bindDataPlugin)
+            QuickBindWrap.dealInPlugins(this, null, QuickBindWrap.getBindPlugin())
         }
         if (autoSet) {
             mView?.let {

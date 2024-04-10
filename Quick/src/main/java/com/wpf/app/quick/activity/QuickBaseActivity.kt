@@ -12,11 +12,11 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import com.wpf.app.base.QuickView
-import com.wpf.app.quickbind.QuickBind
+import com.wpf.app.base.bind.Bind
+import com.wpf.app.base.bind.QuickBindWrap
 import com.wpf.app.quickbind.annotations.AutoGet
 import com.wpf.app.quickutil.run.RunOnContext
 import com.wpf.app.quicknetwork.base.RequestCoroutineScope
-import com.wpf.app.quickutil.activity.contentView
 import com.wpf.app.quickutil.helper.InitViewHelper
 import kotlinx.coroutines.Job
 
@@ -24,12 +24,12 @@ import kotlinx.coroutines.Job
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-abstract class QuickBaseActivity @JvmOverloads constructor(
+open class QuickBaseActivity @JvmOverloads constructor(
     @LayoutRes open val layoutId: Int = 0,
     open val layoutView: View? = null,
     open val layoutViewInContext: RunOnContext<View>? = null,
     @AutoGet(QuickBaseFragment.TITLE_KEY) open val titleName: String = "",
-) : AppCompatActivity(), QuickView, RequestCoroutineScope, com.wpf.app.base.bind.Bind {
+) : AppCompatActivity(), QuickView, RequestCoroutineScope, Bind {
 
     override var jobManager: MutableList<Job> = mutableListOf()
 
@@ -46,13 +46,15 @@ abstract class QuickBaseActivity @JvmOverloads constructor(
             )
         )
         setContentView(curView)
-        QuickBind.bind(this)
+        QuickBindWrap.bind(this)
         initView(curView!!)
         setTitleName()
         registerForActivityResult()
     }
 
-    abstract fun initView(view: View)
+    open fun initView(view: View) {
+
+    }
 
     var launcher: ActivityResultLauncher<Intent>? = null
 

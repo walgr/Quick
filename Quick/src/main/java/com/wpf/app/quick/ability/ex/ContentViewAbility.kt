@@ -6,6 +6,7 @@ import android.widget.LinearLayout
 import androidx.annotation.LayoutRes
 import com.wpf.app.base.QuickView
 import com.wpf.app.base.ability.base.QuickAbility
+import com.wpf.app.base.bind.QuickBindWrap
 import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.other.forceTo
 import com.wpf.app.quickutil.run.RunOnContext
@@ -37,8 +38,8 @@ inline fun <reified Self : QuickView, reified T : ViewGroup> contentViewWithSelf
     }, generateContentView = {
         val childView: T = it.forceTo<QuickViewGroup<T>>().shadowView!!.forceTo()
         childView.asTo<LinearLayout>()?.orientation = LinearLayout.VERTICAL
+        QuickBindWrap.bind(this)
+        builder?.invoke(childView, this.forceTo())
         return@generateContentView childView
-    }) { view ->
-        builder?.invoke(view.forceTo(), this.forceTo())
-    }
+    })
 }

@@ -4,26 +4,25 @@ import android.view.View
 import android.view.ViewGroup
 import com.wpf.app.quickutil.helper.matchWrapLayoutParams
 import com.wpf.app.quickwidget.R
-import com.wpf.app.quickwidget.title.QuickTitleView.Companion.setCommonClickListener
 
 fun QuickTitleView.backClick(click: View.() -> Unit) {
-    commonClick(onBackClick = click)
+    initClick(onBackClick = click)
 }
 
 fun QuickTitleView.titleClick(click: View.() -> Unit) {
-    commonClick(onTitleClick = click)
+    initClick(onTitleClick = click)
 }
 
 fun QuickTitleView.subTitleClick(click: View.() -> Unit) {
-    commonClick(onSubTitleClick = click)
+    initClick(onSubTitleClick = click)
 }
 
-fun QuickTitleView.commonClick(
+fun QuickTitleView.initClick(
     onBackClick: (View.() -> Unit)? = null,
     onTitleClick: (View.() -> Unit)? = null,
     onSubTitleClick: (View.() -> Unit)? = null,
 ) {
-    setCommonClickListener(object : QuickTitleView.CommonClickListener {
+    clickListener = object : QuickTitleView.CommonClickListener {
         override fun onBackClick(view: View) {
             super.onBackClick(view)
             onBackClick?.invoke(view)
@@ -38,7 +37,7 @@ fun QuickTitleView.commonClick(
             super.onSubTitleClick(view)
             onSubTitleClick?.invoke(view)
         }
-    })
+    }
 }
 
 fun ViewGroup.title(

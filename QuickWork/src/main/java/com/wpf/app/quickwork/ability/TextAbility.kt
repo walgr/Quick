@@ -10,12 +10,13 @@ import com.wpf.app.quickutil.helper.wrapLayoutParams
 import com.wpf.app.quickutil.other.context
 import com.wpf.app.quickutil.widget.smartLayoutParams
 import com.wpf.app.quickwork.widget.QuickThemeTextView
+import com.wpf.app.quickwork.widget.theme.QuickTextThemeBase
 
 fun Any.text(
     layoutParams: ViewGroup.LayoutParams = if (this is ViewGroup) smartLayoutParams(wrapLayoutParams()) else wrapLayoutParams(),
     background: Drawable? = null,
     text: String,
-    theme: QuickThemeTextView.QuickTextTheme? = null,
+    theme: QuickTextThemeBase.QuickTextTheme? = null,
     @ColorInt textColor: Int? = null,
     @ColorInt hintTextColor: Int? = null,
     textSize: Float? = null,                  //单位px
@@ -34,7 +35,7 @@ fun Any.text(
     builder: (QuickThemeTextView.() -> Unit)? = null
 ): QuickThemeTextView {
     val mContext: Context = context()!!
-    val textView = QuickThemeTextView(mContext, theme = (theme ?: QuickThemeTextView.commonTheme?.copy())?.apply {
+    val textView = QuickThemeTextView(mContext, theme = (theme ?: QuickTextThemeBase.commonTheme?.copy())?.apply {
         this.background = background ?: this.background
         this.textColor = textColor ?: this.textColor
         this.hintTextColor = hintTextColor ?: this.hintTextColor

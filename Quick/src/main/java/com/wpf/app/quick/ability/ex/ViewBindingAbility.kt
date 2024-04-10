@@ -11,11 +11,13 @@ import androidx.lifecycle.ViewModelStoreOwner
 import com.wpf.app.base.ability.base.QuickViewAbility
 import com.wpf.app.base.QuickView
 import com.wpf.app.base.ability.base.QuickAbility
+import com.wpf.app.base.bind.QuickBindWrap
 import com.wpf.app.quick.ability.ex.base.QuickVMAbility
 import com.wpf.app.quick.activity.viewmodel.QuickVBModel
 import com.wpf.app.quick.helper.QuickDataBindingUtil
 import com.wpf.app.quick.helper.getActivity
 import com.wpf.app.quickrecyclerview.constant.BRConstant
+import com.wpf.app.quickutil.helper.parent
 import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.other.forceTo
 
@@ -49,9 +51,9 @@ inline fun <reified Self : QuickView, reified VM : QuickVBModel<out Self, VB>, r
             vbBuilder?.invoke(it, context.forceTo())
         }
         if (context is Activity) {
-            com.wpf.app.base.bind.QuickBindWrap.bind(context.forceTo<Activity>(), viewModel)
+            QuickBindWrap.bind(context.forceTo<Activity>(), viewModel)
         } else if (context is Fragment) {
-            com.wpf.app.base.bind.QuickBindWrap.bind(context.forceTo<Fragment>(), viewModel)
+            QuickBindWrap.bind(context.forceTo<Fragment>(), viewModel)
         }
         viewModel.asTo<VM>()?.onBindingCreated(viewBinding!!)
         if (viewBinding != null && viewModel != null) {

@@ -22,10 +22,10 @@ open class QuickThemeTitle @JvmOverloads constructor(
     theme: QuickTitleTheme? = null,
 ) : QuickTitleView(context, attrs, defStyleAttr) {
 
-    private var curTheme: QuickTitleTheme = AutoGetAttributeHelper.init(
+    protected var curTheme: QuickTitleTheme = AutoGetAttributeHelper.init(
         context, attrs, R.styleable.QuickTitleView, theme ?: commonTheme?.copy()
     )
-    private var childTheme: QuickTitleChildTheme? = null
+    protected var childTheme: QuickTitleChildTheme? = null
 
     init {
         this.curTheme.initDataInXml(context)
@@ -45,7 +45,7 @@ open class QuickThemeTitle @JvmOverloads constructor(
         }
     }
 
-    fun setTheme(style: QuickTitleTheme) {
+    open fun setTheme(style: QuickTitleTheme) {
         style.apply {
             showBackIcon?.let {
                 showBack(it)
@@ -99,7 +99,7 @@ open class QuickThemeTitle @JvmOverloads constructor(
         }
     }
 
-    fun dealChildViewCommonStyle(view: View) {
+    open fun dealChildViewCommonStyle(view: View) {
         commonChildTheme?.run {
             when (view) {
                 is TextView -> {

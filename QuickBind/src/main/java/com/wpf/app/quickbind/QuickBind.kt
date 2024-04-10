@@ -17,6 +17,8 @@ import com.wpf.app.quickutil.activity.contentView
 import com.wpf.app.base.bind.Bind
 import com.wpf.app.base.bind.NoBind
 import com.wpf.app.base.bind.QuickBindI
+import com.wpf.app.base.bind.QuickBindWrap
+import com.wpf.app.base.bind.QuickBindWrap.bindHistory
 import com.wpf.app.base.bind.plugins.BasePlugin
 import com.wpf.app.quickutil.other.GenericEx.getFieldAndParent
 import com.wpf.app.quickutil.other.forceTo
@@ -33,7 +35,7 @@ object QuickBind: QuickBindI {
     private var bindSpFileName = "QuickViewSpBindFile"
 
     private val plugins: LinkedHashMap<KClass<out Annotation>, BasePlugin> = LinkedHashMap()
-    val bindDataPlugin = mutableMapOf<KClass<out Annotation>, BasePlugin>(Pair(BindData2View::class, BindData2ViewPlugin()))
+    private val bindDataPlugin = mutableMapOf<KClass<out Annotation>, BasePlugin>(Pair(BindData2View::class, BindData2ViewPlugin()))
 
     override fun getRegisterPlugins(): MutableMap<KClass<out Annotation>, BasePlugin> {
         return plugins
@@ -68,12 +70,14 @@ object QuickBind: QuickBindI {
     override fun bind(activity: Activity) {
         super.bind(activity)
         if (activity is NoBind) return
+        if (bindHistory.find { it.get() == activity } != null) return
         bind(activity, null)
     }
 
     override fun bind(activity: Activity, viewModel: ViewModel?) {
         super.bind(activity, viewModel)
         if (activity is NoBind) return
+        if (bindHistory.find { it.get() == activity } != null) return
         bindBinder(viewModel ?: activity, activity.contentView())
         dealInPlugins(activity, viewModel)
     }
@@ -81,12 +85,14 @@ object QuickBind: QuickBindI {
     override fun bind(fragment: Fragment) {
         super.bind(fragment)
         if (fragment is NoBind) return
+        if (bindHistory.find { it.get() == fragment } != null) return
         bind(fragment, null)
     }
 
     override fun bind(fragment: Fragment, viewModel: ViewModel?) {
         super.bind(fragment, viewModel)
         if (fragment is NoBind) return
+        if (bindHistory.find { it.get() == fragment } != null) return
         fragment.view?.let {
             bindBinder(viewModel ?: fragment, it)
         }
@@ -95,17 +101,20 @@ object QuickBind: QuickBindI {
 
     override fun bind(viewHolder: RecyclerView.ViewHolder) {
         if (viewHolder is NoBind) return
+        if (bindHistory.find { it.get() == viewHolder } != null) return
         bindBinder(viewHolder, viewHolder.itemView)
         dealInPlugins(viewHolder, null)
     }
 
     override fun bind(dialog: Dialog) {
         if (dialog is NoBind) return
+        if (bindHistory.find { it.get() == dialog } != null) return
         bindBinder(dialog, dialog.window!!.decorView)
         dealInPlugins(dialog, null)
     }
 
     override fun <T : Bind> bind(bind: T) {
+        if (bindHistory.find { it.get() == bind } != null) return
         bind.getView()?.let {
             bindBinder(bind, it)
         }

@@ -16,8 +16,8 @@ import com.wpf.app.quickutil.helper.dpF
 import com.wpf.app.quickutil.helper.toColor
 import com.wpf.app.quickutil.init.QuickInit
 import com.wpf.app.quickwidget.title.QuickTitleView
-import com.wpf.app.quickwork.widget.QuickThemeTextView
 import com.wpf.app.quickwork.widget.QuickThemeTitle
+import com.wpf.app.quickwork.widget.theme.QuickTextThemeBase
 
 /**
  * Created by 王朋飞 on 2022/6/13.
@@ -30,7 +30,7 @@ class App : Application() {
         initTestRequest()
         QuickInit.init(this)
 
-        QuickThemeTextView.setCommonTheme(this) {
+        QuickTextThemeBase.setCommonTheme(this) {
             textSize = 14.dpF(it)
             textColor = R.color.black.toColor(it)
             hintTextColor = R.color.grey.toColor(it)

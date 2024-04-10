@@ -1,9 +1,8 @@
 package com.wpf.app.quickrecyclerview.data
 
 import android.view.View
-import com.wpf.app.quickbind.QuickBind
+import com.wpf.app.base.bind.QuickBindWrap
 import com.wpf.app.quickbind.utils.DataAutoSet2ViewUtils
-import com.wpf.app.base.bind.Bind
 
 /**
  * 可以网络请求的数据Item
@@ -17,7 +16,7 @@ open class QuickRequestData @JvmOverloads constructor(
 
     open fun onCreateView(view: View) {
         mView = view
-        QuickBind.bind(this)
+        QuickBindWrap.bind(this)
         if (autoSet) {
             DataAutoSet2ViewUtils.autoSet(this, view)
         }

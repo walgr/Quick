@@ -6,7 +6,7 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.TextView
 import androidx.lifecycle.ViewModel
-import com.wpf.app.quickbind.QuickBind
+import com.wpf.app.base.bind.QuickBindWrap
 import com.wpf.app.quickbind.annotations.BindSp2View
 import java.lang.reflect.Field
 
@@ -28,7 +28,7 @@ class BindSp2ViewPlugin : BindBasePlugin {
         if (findView is TextView) {
             setTextViewValue(
                 findView,
-                QuickBind.getBindSpFileName(),
+                QuickBindWrap.getBindSpFileName(),
                 findViewA.bindSp,
                 findViewA.setSp,
                 findViewA.getSp,

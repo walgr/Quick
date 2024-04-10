@@ -37,7 +37,7 @@ class BindFragmentPlugin : BindBasePlugin {
                 }
                 var fragmentManager: FragmentManager? = null
                 var context = obj
-                if (obj is com.wpf.app.base.bind.Bind) {
+                if (obj is Bind) {
                     obj.getView()?.let {
                         context = it.context
                     }

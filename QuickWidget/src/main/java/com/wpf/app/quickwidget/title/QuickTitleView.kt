@@ -52,7 +52,7 @@ open class QuickTitleView @JvmOverloads constructor(
 
         if (commonClickListener != null || clickListener != null) {
             ivBack?.setOnClickListener {
-                QuickTitleView.commonClickListener?.onBackClick(it)
+                commonClickListener?.onBackClick(it)
                     ?: clickListener?.onBackClick(it)
             }
 

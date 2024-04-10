@@ -4,7 +4,7 @@ import android.content.Context
 import android.text.TextUtils
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
-import com.wpf.app.quickbind.QuickBind
+import com.wpf.app.base.bind.QuickBindWrap
 import com.wpf.app.quickbind.annotations.LoadSp
 import java.lang.reflect.Field
 
@@ -22,7 +22,7 @@ class LoadSpPlugin : BindBasePlugin {
         try {
             val loadSpAnn: LoadSp = field.getAnnotation(LoadSp::class.java) ?: return
             val context = getContext(obj) ?: return
-            var fileName = QuickBind.getBindSpFileName()
+            var fileName = QuickBindWrap.getBindSpFileName()
             if (!TextUtils.isEmpty(loadSpAnn.fileName)) {
                 fileName = loadSpAnn.fileName
             }

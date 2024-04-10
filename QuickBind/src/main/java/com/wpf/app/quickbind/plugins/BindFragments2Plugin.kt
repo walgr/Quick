@@ -37,7 +37,7 @@ class BindFragments2Plugin : BindBasePlugin {
                     viewPager.offscreenPageLimit = bindFragmentsAnn.limit
                 }
                 var context = obj
-                if (obj is com.wpf.app.base.bind.Bind && obj !is AppCompatActivity) {
+                if (obj is Bind && obj !is AppCompatActivity) {
                     obj.getView()?.let {
                         context = it.context
                     }

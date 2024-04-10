@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import androidx.annotation.LayoutRes
-import com.wpf.app.quickbind.QuickBind
+import com.wpf.app.base.bind.QuickBindWrap
 import com.wpf.app.quickutil.run.RunOnContext
 import com.wpf.app.quickwidget.quickview.QuickItemView
 
@@ -22,7 +22,7 @@ open class QuickBindView @JvmOverloads constructor(
 ) : QuickItemView(mContext, attributeSet, defStyleAttr, layoutId, layoutView) {
 
     override fun onCreateViewHolder() {
-        QuickBind.bind(this)
+        QuickBindWrap.bind(this)
     }
 
     override fun onBindViewHolder(position: Int) {

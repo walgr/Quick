@@ -9,7 +9,7 @@ import com.wpf.app.quickrecyclerview.QuickAdapter
 import com.wpf.app.quickrecyclerview.data.QuickBindData
 import com.wpf.app.quickrecyclerview.data.QuickItemData
 import com.wpf.app.quickrecyclerview.listeners.QuickAdapterListener
-import com.wpf.app.quickbind.QuickBind
+import com.wpf.app.base.bind.QuickBindWrap
 import com.wpf.app.quickutil.run.RunOnContextWithSelf
 import com.wpf.app.quickutil.helper.toView
 
@@ -40,7 +40,7 @@ open class QuickViewHolder<T : QuickItemData> @JvmOverloads constructor(
     @CallSuper
     open fun onCreateViewHolder(itemView: View) {
         if (dealBindView) {
-            QuickBind.bind(this)
+            QuickBindWrap.bind(this)
         }
         if (autoClick) {
             itemView.setOnClickListener { v: View ->

@@ -6,11 +6,11 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
 import androidx.viewpager2.widget.ViewPager2
+import com.wpf.app.base.bind.Bind
 import com.wpf.app.quickbind.annotations.BindFragment2
 import com.wpf.app.quickbind.interfaces.BindBaseFragment
 import com.wpf.app.quickbind.utils.getFragment
 import com.wpf.app.quickbind.viewpager2.adapter.Fragments2StateAdapter
-import com.wpf.app.base.bind.Bind
 import com.wpf.app.quickutil.other.forceTo
 import java.lang.reflect.Field
 
@@ -28,7 +28,7 @@ class BindFragment2Plugin : BindBasePlugin {
                 viewPager.offscreenPageLimit = bindFragmentAnn.limit
             }
             var context = obj
-            if (obj is com.wpf.app.base.bind.Bind && obj !is AppCompatActivity) {
+            if (obj is Bind && obj !is AppCompatActivity) {
                 obj.getView()?.let {
                     context = it.context
                 }

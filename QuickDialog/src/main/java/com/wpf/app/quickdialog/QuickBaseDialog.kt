@@ -1,6 +1,5 @@
 package com.wpf.app.quickdialog
 
-import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.graphics.Color
@@ -10,7 +9,7 @@ import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatDialog
 import com.wpf.app.base.QuickView
-import com.wpf.app.quickbind.QuickBind
+import com.wpf.app.base.bind.QuickBindWrap
 import com.wpf.app.quickdialog.helper.DialogSizeHelper
 import com.wpf.app.quickdialog.listeners.DialogLifecycle
 import com.wpf.app.quickdialog.listeners.DialogSize
@@ -52,7 +51,7 @@ open class QuickBaseDialog(
             window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             window!!.decorView.setPadding(0, 0, 0, 0)
         }
-        QuickBind.bind(this)
+        QuickBindWrap.bind(this)
         initView(mView!!)
     }
 

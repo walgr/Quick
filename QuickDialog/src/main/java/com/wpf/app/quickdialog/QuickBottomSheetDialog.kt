@@ -9,7 +9,7 @@ import android.view.View
 import androidx.annotation.LayoutRes
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.wpf.app.quickbind.QuickBind
+import com.wpf.app.base.bind.QuickBindWrap
 import com.wpf.app.quickdialog.helper.DialogSheetHelper
 import com.wpf.app.quickdialog.helper.DialogSizeHelper
 import com.wpf.app.quickdialog.listeners.DialogLifecycle
@@ -55,7 +55,7 @@ open class QuickBottomSheetDialog(
             window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             window.decorView.setPadding(0, 0, 0, 0)
         }
-        QuickBind.bind(this)
+        QuickBindWrap.bind(this)
         initView(mView!!)
     }
 
