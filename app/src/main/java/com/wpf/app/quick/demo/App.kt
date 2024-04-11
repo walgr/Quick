@@ -31,10 +31,10 @@ import com.wpf.app.quickwork.widget.theme.QuickTitleThemeBase
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
+        QuickInit.init(this)
         //配置全局ViewBinding
         BRConstant.initByBR(BR::class.java)
         initTestRequest()
-        QuickInit.init(this)
 
         QuickTextThemeBase.defaultTheme = QuickTextTheme().apply {
             textSize = 14.dpF()

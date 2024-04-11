@@ -26,10 +26,10 @@ interface QuickTextThemeBase {
             (theme ?: defaultTheme ?: QuickTextTheme())
         )
         curTheme?.initDataByXml(context)
-        setStyle(curTheme!!)
+        setTheme(curTheme!!)
     }
 
-    fun setStyle(style: QuickTextThemeI) {
+    fun setTheme(style: QuickTextThemeI) {
         textView.apply {
             style.apply {
                 background?.let {
