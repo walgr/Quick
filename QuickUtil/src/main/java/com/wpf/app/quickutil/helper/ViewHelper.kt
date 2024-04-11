@@ -1,10 +1,11 @@
 package com.wpf.app.quickutil.helper
 
 import android.view.View
+import android.view.View.OnClickListener
+import android.view.View.OnLongClickListener
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
 import android.view.ViewParent
-import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.wpf.app.quickutil.data.KV
@@ -125,3 +126,11 @@ fun View.postDelay(delayMillis: Long, action: Runnable) {
 }
 
 fun View.parent() = parent as? ViewGroup
+
+fun View.onClick(clickListener: OnClickListener?) {
+    setOnClickListener(clickListener)
+}
+
+fun View.onLongClick(longClickListener: OnLongClickListener?) {
+    setOnLongClickListener(longClickListener)
+}

@@ -28,12 +28,11 @@ import com.wpf.app.quickutil.helper.toColor
 import com.wpf.app.quickutil.run.runOnContext
 import com.wpf.app.quickwidget.tab.TabManagerProvider
 import com.wpf.app.quickwidget.title.backClick
-import com.wpf.app.quickwork.ability.dialog
-import com.wpf.app.quickwork.ability.moreGroup
-import com.wpf.app.quickwork.ability.tabLayout
-import com.wpf.app.quickwork.ability.text
-import com.wpf.app.quickwork.ability.textButton
-import com.wpf.app.quickwork.ability.title
+import com.wpf.app.quickwork.ability.helper.dialog
+import com.wpf.app.quickwork.ability.helper.moreGroup
+import com.wpf.app.quickwork.ability.helper.tabLayout
+import com.wpf.app.quickwork.ability.helper.text
+import com.wpf.app.quickwork.ability.helper.title
 
 @GetClass
 class WanAndroidHomeActivity : QuickActivity(contentView<LinearLayout> { quickView ->
@@ -41,15 +40,13 @@ class WanAndroidHomeActivity : QuickActivity(contentView<LinearLayout> { quickVi
     var viewPager: ViewPager? = null
     title {
         moreGroup(8.dp()) {
-            textButton(text(
-                text = "登录", textColor = R.color.white.toColor(), textSize = 16.dpF()
-            ), clickListener = {
+            text(text = "登录", textColor = R.color.white.toColor(), textSize = 16.dpF()) {
                 dialog(layoutViewInContext = runOnContext {
                     text(
                         text = "弹窗", textColor = R.color.white.toColor(), textSize = 24.dpF()
                     )
                 }).show()
-            })
+            }
         }
         backClick {
             quickView.getActivity().apply {

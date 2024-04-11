@@ -1,14 +1,11 @@
-package com.wpf.app.quickwork.ability
+package com.wpf.app.quickwork.ability.helper
 
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.text.TextUtils
-import android.view.View
-import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.ColorInt
-import com.wpf.app.quickutil.helper.parent
 import com.wpf.app.quickutil.helper.wrapLayoutParams
 import com.wpf.app.quickutil.other.context
 import com.wpf.app.quickwidget.shadow.ShadowTextView
@@ -16,21 +13,6 @@ import com.wpf.app.quickwork.widget.QuickThemeTextView
 import com.wpf.app.quickwork.widget.theme.QuickTextTheme
 import com.wpf.app.quickwork.widget.theme.QuickTextThemeBase
 import com.wpf.app.quickwork.widget.theme.QuickTextThemeI
-
-fun Any.textButton(
-    textView: QuickThemeTextView,
-    clickListener: OnClickListener? = null,
-    init: (TextView.() -> Unit)? = null,
-): QuickThemeTextView {
-    textView.setOnClickListener(clickListener)
-    init?.invoke(textView)
-    if (this is ViewGroup) {
-        if (textView.parent() == null) {
-            this.addView(textView)
-        }
-    }
-    return textView
-}
 
 fun TextView.setTheme(
     theme: QuickTextThemeI
@@ -59,8 +41,6 @@ fun Any.shadowText(
     maxWidth: Int? = null,
     includeFontPadding: Boolean? = null,
     textGravity: Int? = null,
-    onClick: OnClickListener? = null,
-    onLongClick: View.OnLongClickListener? = null,
     builder: (ShadowTextView.() -> Unit)? = null
 ): ShadowTextView {
     val mContext: Context = context()!!
@@ -83,8 +63,6 @@ fun Any.shadowText(
     val textView = ShadowTextView(mContext)
     textView.text = text
     textView.setTheme(curTheme)
-    textView.setOnClickListener(onClick)
-    textView.setOnLongClickListener(onLongClick)
     builder?.invoke(textView)
     if (this is ViewGroup) {
         addView(textView, layoutParams)
@@ -110,8 +88,6 @@ fun Any.text(
     maxWidth: Int? = null,
     includeFontPadding: Boolean? = null,
     textGravity: Int? = null,
-    onClick: OnClickListener? = null,
-    onLongClick: View.OnLongClickListener? = null,
     builder: (QuickThemeTextView.() -> Unit)? = null
 ): QuickThemeTextView {
     val mContext: Context = context()!!
@@ -132,8 +108,6 @@ fun Any.text(
         this.textGravity = textGravity ?: this.textGravity
     })
     textView.text = text
-    textView.setOnClickListener(onClick)
-    textView.setOnLongClickListener(onLongClick)
     builder?.invoke(textView)
     if (this is ViewGroup) {
         addView(textView, layoutParams)

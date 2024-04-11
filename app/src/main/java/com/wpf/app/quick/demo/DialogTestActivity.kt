@@ -10,10 +10,10 @@ import com.wpf.app.quick.demo.dialog.Test2Dialog
 import com.wpf.app.quick.demo.dialog.Test3Dialog
 import com.wpf.app.quick.demo.dialog.TestDialog
 import com.wpf.app.quickdialog.showInManager
-import com.wpf.app.quickutil.run.runOnContext
 import com.wpf.app.quickutil.helper.dp
 import com.wpf.app.quickutil.helper.onceClick
-import com.wpf.app.quickwork.ability.title
+import com.wpf.app.quickutil.run.runOnContext
+import com.wpf.app.quickwidget.title.title
 
 class DialogTestActivity : QuickActivity(
     contentView<LinearLayout> {
