@@ -17,7 +17,7 @@ interface QuickTitleThemeBase {
 
     fun initTitleTheme(context: Context, attrs: AttributeSet?, theme: QuickTitleThemeI?) {
         curTheme = AutoGetAttributeHelper.init(
-            context, attrs, R.styleable.QuickTitleView, (theme ?: commonTheme ?: QuickTitleAttrs())
+            context, attrs, R.styleable.QuickTitleView, (theme ?: defaultTheme ?: QuickTitleAttrs())
         )
         curTheme?.initDataByXml(context)
         this.setTheme(curTheme!!)
@@ -33,7 +33,7 @@ interface QuickTitleThemeBase {
     }
 
     companion object {
-        var commonTheme: QuickTitleThemeI? = null
+        var defaultTheme: QuickTitleThemeI? = null
             get() = field?.copy()
     }
 }

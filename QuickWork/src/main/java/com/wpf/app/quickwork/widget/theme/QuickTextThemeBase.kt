@@ -23,7 +23,7 @@ interface QuickTextThemeBase {
             context,
             attrs,
             R.styleable.QuickTheme,
-            (theme ?: commonTheme ?: QuickTextTheme())
+            (theme ?: defaultTheme ?: QuickTextTheme())
         )
         curTheme?.initDataByXml(context)
         setStyle(curTheme!!)
@@ -89,7 +89,7 @@ interface QuickTextThemeBase {
     }
 
     companion object {
-        var commonTheme: QuickTextThemeI? = null
+        var defaultTheme: QuickTextThemeI? = null
             get() = field?.copy()
     }
 }

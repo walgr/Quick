@@ -5,12 +5,12 @@ import android.content.Context
 interface QuickDialogThemeBase {
     var curTheme: QuickDialogThemeI?
     fun initDialogTheme(context: Context, theme: QuickDialogThemeI? = null) {
-        curTheme = theme ?: commonTheme ?: QuickDialogTheme()
+        curTheme = theme ?: defaultTheme ?: QuickDialogTheme()
         curTheme?.initDataInXml(context)
     }
 
     companion object {
-        var commonTheme: QuickDialogThemeI? = null
+        var defaultTheme: QuickDialogThemeI? = null
             get() = field?.copy()
     }
 }

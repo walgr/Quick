@@ -53,7 +53,7 @@ fun Any.text(
     builder: (QuickThemeTextView.() -> Unit)? = null
 ): QuickThemeTextView {
     val mContext: Context = context()!!
-    val textView = QuickThemeTextView(mContext, theme = (theme ?: QuickTextThemeBase.commonTheme?: QuickTextTheme()).apply {
+    val textView = QuickThemeTextView(mContext, theme = (theme ?: QuickTextThemeBase.defaultTheme?: QuickTextTheme()).apply {
         this.background = background ?: this.background
         this.textColor = textColor ?: this.textColor
         this.hintTextColor = hintTextColor ?: this.hintTextColor

@@ -30,7 +30,7 @@ fun ViewGroup.title(
     theme: QuickTitleThemeI? = null,
     builder: (QuickThemeTitle.() -> Unit)? = null,
 ): QuickThemeTitle {
-    val titleView = QuickThemeTitle(context, theme = (theme ?: QuickTitleThemeBase.commonTheme ?: QuickTitleAttrs()).apply {
+    val titleView = QuickThemeTitle(context, theme = (theme ?: QuickTitleThemeBase.defaultTheme ?: QuickTitleAttrs()).apply {
         this.height = height ?: this.height
     })
     titleView.id = com.wpf.app.quickwidget.R.id.quickTitleView

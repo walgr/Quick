@@ -36,12 +36,12 @@ class App : Application() {
         initTestRequest()
         QuickInit.init(this)
 
-        QuickTextThemeBase.commonTheme = QuickTextTheme().apply {
+        QuickTextThemeBase.defaultTheme = QuickTextTheme().apply {
             textSize = 14.dpF()
             textColor = R.color.black.toColor()
             hintTextColor = R.color.grey.toColor()
         }
-        QuickTitleThemeBase.commonTheme = QuickTitleAttrs().apply {
+        QuickTitleThemeBase.defaultTheme = QuickTitleAttrs().apply {
             height = 48.dp()
             background = R.color.purple_700.toDrawable()
             contentGravity = QuickTitleView.CONTENT_GRAVITY_CENTER
@@ -58,7 +58,7 @@ class App : Application() {
             isLinearLayout = true
             space = 16.dp()
         }
-        QuickDialogThemeBase.commonTheme = QuickDialogTheme().apply {
+        QuickDialogThemeBase.defaultTheme = QuickDialogTheme().apply {
             gravity = Gravity.BOTTOM
             animRes = R.anim.anim_bottom_top
             minHeight = 200.dp()
