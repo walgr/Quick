@@ -39,7 +39,7 @@ class App : Application() {
             hintTextColor = R.color.grey.toColor()
         }
         QuickTitleThemeBase.commonTheme = QuickTitleAttrs().apply {
-            height = 56.dp()
+            height = 48.dp()
             background = R.color.purple_700.toDrawable()
             contentGravity = QuickTitleView.CONTENT_GRAVITY_CENTER
             showBackIcon = true

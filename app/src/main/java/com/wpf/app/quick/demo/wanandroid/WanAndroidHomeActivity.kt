@@ -39,7 +39,7 @@ import com.wpf.app.quickwork.ability.title
 class WanAndroidHomeActivity : QuickActivity(contentView<LinearLayout> { quickView ->
     var tabLayout: TabLayout? = null
     var viewPager: ViewPager? = null
-    title(height = 44.dp()) {
+    title {
         moreGroup(8.dp()) {
             textButton(text(
                 text = "登录", textColor = R.color.white.toColor(), textSize = 16.dpF()

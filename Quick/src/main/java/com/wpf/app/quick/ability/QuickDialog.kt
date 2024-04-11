@@ -14,8 +14,9 @@ import com.wpf.app.quickutil.run.runOnContext
 
 open class QuickDialog(
     context: Context,
+    themeId: Int = 0,
     private val abilityList: List<QuickAbility> = mutableListOf(),
-) : QuickBaseDialog(context = context.forceTo(), layoutViewInContext = runOnContext {
+) : QuickBaseDialog(context = context, themeId = themeId, layoutViewInContext = runOnContext {
     val inflateAbility = abilityList.first { ability -> ability is QuickInflateViewAbility }
         .forceTo<QuickInflateViewAbility>()
     InitViewHelper.init(
