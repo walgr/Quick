@@ -13,11 +13,10 @@ import com.wpf.app.quick.annotations.bind.Databinder
 import com.wpf.app.quick.annotations.bind.GroupView
 import com.wpf.app.quickbind.annotations.*
 import com.wpf.app.quickbind.plugins.*
-import com.wpf.app.quickutil.activity.contentView
+import com.wpf.app.quickutil.helper.contentView
 import com.wpf.app.base.bind.Bind
 import com.wpf.app.base.bind.NoBind
 import com.wpf.app.base.bind.QuickBindI
-import com.wpf.app.base.bind.QuickBindWrap
 import com.wpf.app.base.bind.QuickBindWrap.bindHistory
 import com.wpf.app.base.bind.plugins.BasePlugin
 import com.wpf.app.quickutil.other.GenericEx.getFieldAndParent

@@ -1,4 +1,4 @@
-package com.wpf.app.quick.ability.helper
+package com.wpf.app.quickwork.ability
 
 import android.content.Context
 import android.view.View
@@ -8,6 +8,8 @@ import com.wpf.app.quick.ability.QuickDialog
 import com.wpf.app.quick.ability.ex.contentView
 import com.wpf.app.quickutil.other.context
 import com.wpf.app.quickutil.run.RunOnContext
+import com.wpf.app.quickwork.widget.QuickThemeDialog
+import com.wpf.app.quickwork.widget.theme.QuickDialogThemeI
 
 fun Any.dialog(
     themeId: Int = 0,
@@ -29,12 +31,14 @@ fun Any.dialog(
     alpha: Float? = null,
     widthAdaptive: Boolean? = null,
     heightAdaptive: Boolean? = null,
+    theme: QuickDialogThemeI? = null,
     builder: (QuickDialog.() -> Unit)? = null,
-): QuickDialog {
+): QuickThemeDialog {
     val mContext: Context = context()!!
-    val dialog = object : QuickDialog(
+    val dialog = object : QuickThemeDialog(
         mContext,
         themeId = themeId,
+        theme = theme,
         abilityList = contentView(layoutId, layoutView, layoutViewInContext)
     ) {
 

@@ -11,7 +11,6 @@ import com.google.android.material.tabs.TabLayout
 import com.wpf.app.quick.ability.QuickActivity
 import com.wpf.app.quick.ability.ex.contentView
 import com.wpf.app.quick.ability.helper.coordinator
-import com.wpf.app.quick.ability.helper.dialog
 import com.wpf.app.quick.ability.helper.fragment
 import com.wpf.app.quick.ability.helper.myLayout
 import com.wpf.app.quick.ability.helper.viewFragment
@@ -29,6 +28,7 @@ import com.wpf.app.quickutil.helper.toColor
 import com.wpf.app.quickutil.run.runOnContext
 import com.wpf.app.quickwidget.tab.TabManagerProvider
 import com.wpf.app.quickwidget.title.backClick
+import com.wpf.app.quickwork.ability.dialog
 import com.wpf.app.quickwork.ability.moreGroup
 import com.wpf.app.quickwork.ability.tabLayout
 import com.wpf.app.quickwork.ability.text

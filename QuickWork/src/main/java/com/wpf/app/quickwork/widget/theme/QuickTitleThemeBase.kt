@@ -15,11 +15,11 @@ interface QuickTitleThemeBase {
     val moreGroupLayout: ViewGroup?
     var curTheme: QuickTitleThemeI?
 
-    fun initTheme(context: Context, attrs: AttributeSet?, theme: QuickTitleThemeI?) {
+    fun initTitleTheme(context: Context, attrs: AttributeSet?, theme: QuickTitleThemeI?) {
         curTheme = AutoGetAttributeHelper.init(
             context, attrs, R.styleable.QuickTitleView, (theme ?: commonTheme ?: QuickTitleAttrs())
         )
-        curTheme?.initDataInXml(context)
+        curTheme?.initDataByXml(context)
         this.setTheme(curTheme!!)
         if (titleView.background == null) {
             this.curTheme!!.background?.let {

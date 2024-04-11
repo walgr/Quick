@@ -91,7 +91,7 @@ open class QuickTitleView @JvmOverloads constructor(
 
     open fun setAttrsToView(attrs: QuickTitleAttrs) {
         attrs.apply {
-            initDataInXml(context)
+            initDataByXml(context)
             if (layoutParams == null || layoutParams?.height == ViewGroup.LayoutParams.WRAP_CONTENT || layoutParams?.height == ViewGroup.LayoutParams.MATCH_PARENT) {
                 height?.let {
                     post {
@@ -365,7 +365,7 @@ interface QuickTitleThemeI {
     var space: Int?
     var titleSpace: Int?
 
-    fun initDataInXml(context: Context) {
+    fun initDataByXml(context: Context) {
         height = height ?: 44.dp(context)
         background = background ?: android.R.color.darker_gray.toDrawable(context)
         contentGravity = contentGravity ?: QuickTitleView.CONTENT_GRAVITY_START

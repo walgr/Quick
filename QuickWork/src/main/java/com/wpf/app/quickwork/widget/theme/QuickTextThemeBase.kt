@@ -18,11 +18,11 @@ interface QuickTextThemeBase {
 
     var curTheme: QuickTextThemeI?
 
-    fun initTheme(context: Context, attrs: AttributeSet? = null, theme: QuickTextThemeI? = null) {
+    fun initTextTheme(context: Context, attrs: AttributeSet? = null, theme: QuickTextThemeI? = null) {
         curTheme = AutoGetAttributeHelper.init(
             context,
             attrs,
-            R.styleable.QuickTextTheme,
+            R.styleable.QuickTheme,
             (theme ?: commonTheme ?: QuickTextTheme())
         )
         curTheme?.initDataByXml(context)

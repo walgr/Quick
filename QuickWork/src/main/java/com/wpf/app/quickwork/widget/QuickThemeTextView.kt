@@ -18,6 +18,6 @@ open class QuickThemeTextView @JvmOverloads constructor(
     override var textView: TextView = this
 
     init {
-        super.initTheme(context, attrs, theme)
+        super.initTextTheme(context, attrs, theme)
     }
 }

@@ -8,7 +8,6 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
-import com.wpf.app.base.ability.base.QuickViewAbility
 import com.wpf.app.base.QuickView
 import com.wpf.app.base.ability.base.QuickAbility
 import com.wpf.app.base.bind.QuickBindWrap
@@ -17,7 +16,6 @@ import com.wpf.app.quick.activity.viewmodel.QuickVBModel
 import com.wpf.app.quick.helper.QuickDataBindingUtil
 import com.wpf.app.quick.helper.getActivity
 import com.wpf.app.quickrecyclerview.constant.BRConstant
-import com.wpf.app.quickutil.helper.parent
 import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.other.forceTo
 

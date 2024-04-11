@@ -1,4 +1,4 @@
-package com.wpf.app.quickutil.activity
+package com.wpf.app.quickutil.helper
 
 import android.os.Bundle
 import android.os.Parcelable

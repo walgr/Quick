@@ -19,7 +19,7 @@ import androidx.annotation.IdRes
 import androidx.core.view.children
 import androidx.core.view.drawToBitmap
 import androidx.viewpager.widget.ViewPager
-import com.wpf.app.quickutil.activity.myContentView
+import com.wpf.app.quickutil.helper.myContentView
 import com.wpf.app.quickutil.helper.anim
 import com.wpf.app.quickutil.helper.attribute.AutoGetAttributeHelper
 import com.wpf.app.quickutil.other.asTo

@@ -1,6 +1,7 @@
 package com.wpf.app.quick.demo
 
 import android.app.Application
+import android.view.Gravity
 import android.view.View
 import com.wpf.app.quick.demo.http.TestApi
 import com.wpf.app.quick.demo.http.TestCommonCallAdapterFactory
@@ -10,7 +11,7 @@ import com.wpf.app.quicknetwork.helper.OkHttpCreateHelper
 import com.wpf.app.quicknetwork.helper.RetrofitCreateHelper
 import com.wpf.app.quicknetwork.interceptor.LogInterceptor
 import com.wpf.app.quickrecyclerview.constant.BRConstant
-import com.wpf.app.quickutil.activity.activity
+import com.wpf.app.quickutil.helper.activity
 import com.wpf.app.quickutil.helper.dp
 import com.wpf.app.quickutil.helper.dpF
 import com.wpf.app.quickutil.helper.toColor
@@ -18,6 +19,8 @@ import com.wpf.app.quickutil.helper.toDrawable
 import com.wpf.app.quickutil.init.QuickInit
 import com.wpf.app.quickwidget.title.QuickTitleAttrs
 import com.wpf.app.quickwidget.title.QuickTitleView
+import com.wpf.app.quickwork.widget.theme.QuickDialogTheme
+import com.wpf.app.quickwork.widget.theme.QuickDialogThemeBase
 import com.wpf.app.quickwork.widget.theme.QuickTextTheme
 import com.wpf.app.quickwork.widget.theme.QuickTextThemeBase
 import com.wpf.app.quickwork.widget.theme.QuickTitleThemeBase
@@ -54,6 +57,11 @@ class App : Application() {
             showLine = false
             isLinearLayout = true
             space = 16.dp()
+        }
+        QuickDialogThemeBase.commonTheme = QuickDialogTheme().apply {
+            gravity = Gravity.BOTTOM
+            animRes = R.anim.anim_bottom_top
+            minHeight = 200.dp()
         }
         QuickTitleView.setCommonClickListener(object : QuickTitleView.CommonClickListener {
             override fun onBackClick(view: View) {

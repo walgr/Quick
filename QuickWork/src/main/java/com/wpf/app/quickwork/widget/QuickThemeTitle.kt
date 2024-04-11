@@ -19,7 +19,7 @@ open class QuickThemeTitle @JvmOverloads constructor(
     override var curTheme: QuickTitleThemeI? = null
 
     init {
-        super.initTheme(context, attrs, theme)
+        super.initTitleTheme(context, attrs, theme)
     }
 
     override fun initAttrsInXml(attrs: AttributeSet?) {
