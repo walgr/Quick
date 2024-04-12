@@ -20,25 +20,30 @@ open class QuickRecyclerView @JvmOverloads constructor(
 ) : RecyclerView(mContext, attrs, defStyleAttr), DataAdapter {
 
     protected var mQuickAdapter: QuickAdapter = QuickAdapter()
-    private val attr: QuickRecyclerViewAttr
+    private val attr: QuickRecyclerViewAttr by lazy {
+        AutoGetAttributeHelper.init(context, attrs, R.styleable.QuickRecyclerView)
+    }
 
     init {
-        attr = AutoGetAttributeHelper.init(context, attrs, R.styleable.QuickRecyclerView)
         this.initView()
+        dealAttrs()
     }
 
     open fun initView() {
         if (layoutManager == null) {
             layoutManager = LinearLayoutManager(context)
         }
-        if (attr.space != null) {
-            setSpace(attr.space, attr.spaceType, attr.includeFirst, attr.includeLast)
-        }
         mQuickAdapter.setRecyclerView(this)
         adapter = mQuickAdapter
     }
 
-    fun setSpace(space: Int, spaceType: Int = SpaceType.Center.type, includeFirst: Boolean = false, includeLast: Boolean = false) {
+    private fun dealAttrs() {
+        if (attr.space != null) {
+            setSpace(attr.space!!, attr.spaceType, attr.includeFirst, attr.includeLast)
+        }
+    }
+
+    open fun setSpace(space: Int, spaceType: Int = SpaceType.Center.type, includeFirst: Boolean = false, includeLast: Boolean = false) {
         addItemDecoration(SpaceItemDecoration(space, spaceType, includeFirst, includeLast))
     }
 
@@ -46,10 +51,9 @@ open class QuickRecyclerView @JvmOverloads constructor(
         return mQuickAdapter
     }
 
-    internal class QuickRecyclerViewAttr @JvmOverloads constructor(
+    open class QuickRecyclerViewAttr @JvmOverloads constructor(
         val space: Int? = null,
         val spaceType: Int = SpaceType.Center.type,
-        val color: Int? = null,
         val includeFirst: Boolean = false,
         val includeLast: Boolean = false,
     )

@@ -3,7 +3,6 @@
     <declare-styleable name="QuickRecyclerView">
         <attr name="space" format="dimension" />
         <attr name="spaceType" />
-        <attr name="color" format="color|reference" />
         <attr name="includeFirst" format="boolean" />
         <attr name="includeLast" format="boolean" />
     </declare-styleable>
