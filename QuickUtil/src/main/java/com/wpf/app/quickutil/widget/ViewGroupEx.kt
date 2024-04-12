@@ -9,10 +9,10 @@ import com.wpf.app.quickutil.helper.matchLayoutParams
 import com.wpf.app.quickutil.helper.wrap
 import com.wpf.app.quickutil.helper.wrapContentHeightParams
 import com.wpf.app.quickutil.helper.wrapContentWidthParams
-import com.wpf.app.quickutil.other.forceTo
+import com.wpf.app.quickutil.other.asTo
 
 inline fun <reified T: ViewGroup.LayoutParams> View.wishLayoutParams(width: Int = match, height: Int = wrap): T {
-    return this.layoutParams?.forceTo<T>() ?: layoutParams<T>(width, height)
+    return this.layoutParams?.asTo<T>() ?: layoutParams<T>(width, height)
 }
 
 fun ViewGroup.smartLayoutParams(layoutParams: ViewGroup.LayoutParams = matchLayoutParams()): ViewGroup.LayoutParams {

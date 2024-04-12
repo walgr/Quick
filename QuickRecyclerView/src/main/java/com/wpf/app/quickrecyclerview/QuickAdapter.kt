@@ -37,7 +37,7 @@ open class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>()
             if (findData is QuickBindData) {
                 findData.setAdapter(this)
                 findData.beforeAdapterCreateHolder(viewGroup)
-                if (findData.isDealBinding) {
+                if (findData is QuickAbilityData && findData.isDealBinding) {
                     holder = QuickViewBindingHolder<QuickItemData, ViewDataBinding>(
                         viewGroup,
                         findData.layoutId,

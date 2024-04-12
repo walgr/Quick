@@ -17,14 +17,13 @@ interface RunOnContextWithSelf<Self, Return> : RunOnViewWithSelf<Self, Return> {
 
 inline fun <Self, Return> runOnContextWithSelf(
     primeKey: String = "",
-    crossinline run: (Context, Self) -> Return
-) =
-    object : RunOnContextWithSelf<Self, Return> {
-        override fun primeKey(): String {
-            return primeKey
-        }
-
-        override fun run(context: Context, self: Self): Return {
-            return run(context, self)
-        }
+    crossinline run: Self.(Context) -> Return,
+) = object : RunOnContextWithSelf<Self, Return> {
+    override fun primeKey(): String {
+        return primeKey
     }
+
+    override fun run(context: Context, self: Self): Return {
+        return run(self, context)
+    }
+}

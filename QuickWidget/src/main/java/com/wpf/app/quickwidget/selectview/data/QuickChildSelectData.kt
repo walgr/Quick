@@ -2,9 +2,9 @@ package com.wpf.app.quickwidget.selectview.data
 
 import android.view.View
 import android.view.ViewGroup
+import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.run.RunItemClickWithSelf
 import com.wpf.app.quickutil.run.RunOnContextWithSelf
-import com.wpf.app.quickutil.other.asTo
 import java.io.Serializable
 
 /**
@@ -28,7 +28,6 @@ open class QuickChildSelectData(
     maxLimitListener: MaxLimitListener? = null,    //超出反馈
     layoutId: Int = 0,
     layoutViewInContext: RunOnContextWithSelf<ViewGroup, View>? = null,
-    isDealBinding: Boolean = false,                                 //是否处理DataBinding
     autoSet: Boolean = false,                                        //自动映射
 ) : QuickMultiSelectData(
     canCancel = canCancel,
@@ -42,7 +41,6 @@ open class QuickChildSelectData(
     defaultSelect = defaultSelect,
     layoutId = layoutId,
     layoutViewInContext = layoutViewInContext,
-    isDealBinding = isDealBinding,
     autoSet = autoSet,
     isSuspension = isSuspension
 ), Serializable {

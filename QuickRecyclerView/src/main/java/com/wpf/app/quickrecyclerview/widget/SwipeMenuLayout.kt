@@ -52,7 +52,7 @@ import kotlin.math.abs
  * Created by zhangxutong .
  * Date: 16/04/24
  */
-class SwipeMenuLayout @JvmOverloads constructor(
+open class SwipeMenuLayout @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
@@ -205,8 +205,16 @@ class SwipeMenuLayout @JvmOverloads constructor(
         }
     }
 
+    public override fun generateLayoutParams(p: LayoutParams?): LayoutParams {
+        return MarginLayoutParams(p)
+    }
+
     override fun generateLayoutParams(attrs: AttributeSet): LayoutParams {
         return MarginLayoutParams(context, attrs)
+    }
+
+    override fun generateDefaultLayoutParams(): LayoutParams {
+        return MarginLayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
     }
 
     /**

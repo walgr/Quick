@@ -5,7 +5,7 @@ import androidx.annotation.LayoutRes
 import androidx.lifecycle.LifecycleOwner
 import com.wpf.app.base.QuickView
 import com.wpf.app.base.ability.base.QuickAbility
-import com.wpf.app.quick.ability.ex.base.QuickInflateViewAbility
+import com.wpf.app.base.ability.base.QuickInflateViewAbility
 import com.wpf.app.quickutil.helper.match
 import com.wpf.app.quickutil.helper.matchLayoutParams
 import com.wpf.app.quickutil.other.forceTo

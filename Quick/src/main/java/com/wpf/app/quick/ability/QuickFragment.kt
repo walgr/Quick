@@ -6,10 +6,10 @@ import android.view.View
 import androidx.annotation.CallSuper
 import androidx.lifecycle.ViewModel
 import com.wpf.app.base.ability.base.QuickAbility
+import com.wpf.app.base.ability.base.QuickInflateViewAbility
 import com.wpf.app.base.ability.base.QuickViewAbility
 import com.wpf.app.quick.ability.ex.base.QuickFragmentAbility
-import com.wpf.app.quick.ability.ex.base.QuickInflateViewAbility
-import com.wpf.app.quick.ability.ex.base.QuickLifecycleAbility
+import com.wpf.app.base.ability.base.QuickLifecycleAbility
 import com.wpf.app.quick.activity.QuickBaseFragment
 import com.wpf.app.quickbind.interfaces.BindViewModel
 import com.wpf.app.quickutil.helper.InitViewHelper

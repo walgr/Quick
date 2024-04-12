@@ -32,10 +32,14 @@ open class QuickRecyclerView @JvmOverloads constructor(
             layoutManager = LinearLayoutManager(context)
         }
         if (attr.space != null) {
-            addItemDecoration(SpaceItemDecoration(attr.space, attr.spaceType, attr.includeFirst, attr.includeLast))
+            setSpace(attr.space, attr.spaceType, attr.includeFirst, attr.includeLast)
         }
         mQuickAdapter.setRecyclerView(this)
         adapter = mQuickAdapter
+    }
+
+    fun setSpace(space: Int, spaceType: Int = SpaceType.Center.type, includeFirst: Boolean = false, includeLast: Boolean = false) {
+        addItemDecoration(SpaceItemDecoration(space, spaceType, includeFirst, includeLast))
     }
 
     override fun getQuickAdapter(): QuickAdapter {

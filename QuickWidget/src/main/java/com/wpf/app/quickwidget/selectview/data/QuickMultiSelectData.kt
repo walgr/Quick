@@ -27,7 +27,6 @@ open class QuickMultiSelectData(
     defaultSelect: Boolean = false,                                 //是否默认选中，true清空后会再次选中
     layoutId: Int = 0,
     layoutViewInContext: RunOnContextWithSelf<ViewGroup, View>? = null,
-    isDealBinding: Boolean = false,                                 //是否处理DataBinding
     autoSet: Boolean = false,                                        //自动映射
     isSuspension: Boolean = false,                                  //View是否悬浮置顶
 ) : QuickSelectData(
@@ -37,7 +36,6 @@ open class QuickMultiSelectData(
     isSelect = isSelect,
     layoutId = layoutId,
     layoutViewInContext = layoutViewInContext,
-    isDealBinding = isDealBinding,
     autoSet = autoSet,
     isSuspension = isSuspension,
 ), Serializable

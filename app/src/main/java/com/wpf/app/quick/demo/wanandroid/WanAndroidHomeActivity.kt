@@ -23,11 +23,12 @@ import com.wpf.app.quick.helper.getActivity
 import com.wpf.app.quickutil.helper.dp
 import com.wpf.app.quickutil.helper.dpF
 import com.wpf.app.quickutil.helper.matchWrapLayoutParams
+import com.wpf.app.quickutil.helper.onClick
 import com.wpf.app.quickutil.helper.reset
 import com.wpf.app.quickutil.helper.toColor
 import com.wpf.app.quickutil.run.runOnContext
 import com.wpf.app.quickwidget.tab.TabManagerProvider
-import com.wpf.app.quickwidget.title.backClick
+import com.wpf.app.quickwidget.title.ability.backClick
 import com.wpf.app.quickwork.ability.helper.dialog
 import com.wpf.app.quickwork.ability.helper.moreGroup
 import com.wpf.app.quickwork.ability.helper.tabLayout
@@ -41,11 +42,13 @@ class WanAndroidHomeActivity : QuickActivity(contentView<LinearLayout> { quickVi
     title {
         moreGroup(8.dp()) {
             text(text = "登录", textColor = R.color.white.toColor(), textSize = 16.dpF()) {
-                dialog(layoutViewInContext = runOnContext {
-                    text(
-                        text = "弹窗", textColor = R.color.white.toColor(), textSize = 24.dpF()
-                    )
-                }).show()
+                onClick {
+                    dialog(layoutViewInContext = runOnContext {
+                        text(
+                            text = "弹窗", textColor = R.color.white.toColor(), textSize = 24.dpF()
+                        )
+                    }).show()
+                }
             }
         }
         backClick {

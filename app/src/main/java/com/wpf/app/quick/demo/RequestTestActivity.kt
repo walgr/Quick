@@ -9,7 +9,7 @@ import com.wpf.app.base.ability.base.with
 import com.wpf.app.quick.annotations.getclass.GetClass
 import com.wpf.app.quick.demo.databinding.ActivityRequestTestBinding
 import com.wpf.app.quick.demo.viewmodel.RequestTestModel
-import com.wpf.app.quickwork.ability.title
+import com.wpf.app.quickwork.ability.helper.title
 
 @GetClass
 class RequestTestActivity : QuickActivity(

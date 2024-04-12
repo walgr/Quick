@@ -3,13 +3,13 @@ package com.wpf.app.quickwidget.selectview.data
 import android.annotation.SuppressLint
 import android.view.View
 import android.view.ViewGroup
-import com.wpf.app.quickwidget.selectview.QuickSelectAdapter
 import com.wpf.app.quickrecyclerview.data.QuickBindData
 import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
+import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.run.RunItemClickWithSelf
 import com.wpf.app.quickutil.run.RunOnContextWithSelf
-import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.widget.scrollToPositionAndOffset
+import com.wpf.app.quickwidget.selectview.QuickSelectAdapter
 import java.io.Serializable
 
 /**
@@ -33,7 +33,6 @@ open class QuickParentSelectData(
     maxLimitListener: MaxLimitListener? = null, //超出反馈
     layoutId: Int = 0,
     layoutViewInContext: RunOnContextWithSelf<ViewGroup, View>? = null,
-    isDealBinding: Boolean = false,                                 //是否处理DataBinding
     autoSet: Boolean = false,                                        //自动映射
 ) : QuickChildSelectData(
     parent = parent,
@@ -50,7 +49,6 @@ open class QuickParentSelectData(
     maxLimitListener = maxLimitListener,
     layoutId = layoutId,
     layoutViewInContext = layoutViewInContext,
-    isDealBinding = isDealBinding,
     autoSet = autoSet,
     isSuspension = isSuspension
 ), Serializable {

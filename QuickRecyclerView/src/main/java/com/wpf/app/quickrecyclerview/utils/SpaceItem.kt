@@ -4,10 +4,10 @@ import android.view.View
 import com.wpf.app.quickbind.helper.binddatahelper.BindData2ViewHelper
 import com.wpf.app.quickbind.helper.binddatahelper.Height2View
 import com.wpf.app.quickbind.helper.binddatahelper.Width2View
-import com.wpf.app.quickutil.run.runOnContextWithSelf
 import com.wpf.app.quickrecyclerview.QuickAdapter
 import com.wpf.app.quickrecyclerview.data.QuickBindData
 import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
+import com.wpf.app.quickutil.run.runOnContextWithSelf
 import java.io.Serializable
 
 /**
@@ -17,7 +17,7 @@ import java.io.Serializable
 open class SpaceItem(
     open val space: Int,
     open val isVertical: Boolean = true
-) : QuickBindData(layoutViewInContext = runOnContextWithSelf { context, _ ->
+) : QuickBindData(layoutViewInContext = runOnContextWithSelf { context ->
     View(context)
 }), Serializable {
 

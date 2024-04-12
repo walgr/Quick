@@ -1,17 +1,13 @@
-package com.wpf.app.quickrecyclerview.ability
+package com.wpf.app.quickrecyclerview.ability.base
 
 import android.content.Context
 import android.view.View
 import android.view.ViewGroup
+import com.wpf.app.base.ability.base.QuickAbility
 import com.wpf.app.quickrecyclerview.data.QuickItemData
 import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
 
-interface QuickItemAbility<T> {
-    fun getPrimeKey(): String
-
-    fun initViewType(position: Int): Int {
-        return 0
-    }
+interface QuickItemAbility<T>: QuickAbility {
 
     /**
      * 在QuickAdapter的onCreateViewHolder初始化Holder之前调用

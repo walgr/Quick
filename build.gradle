@@ -67,6 +67,7 @@ buildscript {
                 flexbox        : 'com.google.android.flexbox:flexbox:3.0.0',
                 immersionbar   : 'com.geyifeng.immersionbar:immersionbar:3.2.2',
                 immersionbarktx: 'com.geyifeng.immersionbar:immersionbar-ktx:3.2.2',
+                shapeofview: 'io.github.florent37:shapeofview:1.4.7',
         ]
     }
 }

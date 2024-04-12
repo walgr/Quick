@@ -25,6 +25,7 @@ dependencies {
     //约束布局
     implementation deps.androidx.constraintlayout
 
+    implementation deps.androidx.activityktx
     implementation deps.androidx.fragmentktx
     //viewModel
     implementation deps.androidx.lifecycleviewmodelktx

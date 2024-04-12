@@ -3,12 +3,12 @@ package com.wpf.app.quickwidget.selectview.data
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.CallSuper
-import com.wpf.app.quickwidget.selectview.QuickSelectAdapter
-import com.wpf.app.quickutil.run.RunOnContextWithSelf
 import com.wpf.app.quickrecyclerview.QuickAdapter
 import com.wpf.app.quickrecyclerview.data.QuickBindData
 import com.wpf.app.quickrecyclerview.data.QuickClickData
 import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
+import com.wpf.app.quickutil.run.RunOnContextWithSelf
+import com.wpf.app.quickwidget.selectview.QuickSelectAdapter
 import java.io.Serializable
 
 /**
@@ -22,13 +22,11 @@ open class QuickSelectData(
     open var isSelect: Boolean = defaultSelect,
     layoutId: Int = 0,
     layoutViewInContext: RunOnContextWithSelf<ViewGroup, View>? = null,
-    isDealBinding: Boolean = false,                                 //是否处理DataBinding
     autoSet: Boolean = false,                                        //自动映射
     isSuspension: Boolean = false,                                  //View是否悬浮置顶
 ) : QuickClickData(
     layoutId = layoutId,
     layoutViewInContext = layoutViewInContext,
-    isDealBinding = isDealBinding,
     autoSet = autoSet,
     isSuspension = isSuspension,
 ),

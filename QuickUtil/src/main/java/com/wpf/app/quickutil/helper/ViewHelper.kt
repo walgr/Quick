@@ -127,10 +127,10 @@ fun View.postDelay(delayMillis: Long, action: Runnable) {
 
 fun View.parent() = parent as? ViewGroup
 
-fun View.onClick(clickListener: OnClickListener?) {
+fun View.onClick(clickListener: OnClickListener) {
     setOnClickListener(clickListener)
 }
 
-fun View.onLongClick(longClickListener: OnLongClickListener?) {
+fun View.onLongClick(longClickListener: OnLongClickListener) {
     setOnLongClickListener(longClickListener)
 }

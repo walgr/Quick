@@ -12,13 +12,11 @@ abstract class QuickStateData @JvmOverloads constructor(
     @Transient open var selected: Boolean = false,
     layoutId: Int = 0,
     layoutViewInContext: RunOnContextWithSelf<ViewGroup, View>? = null,
-    isDealBinding: Boolean = false,      //是否处理DataBinding
     autoSet: Boolean = false,             //自动映射
     isSuspension: Boolean = false,
 ) : QuickClickData(
     layoutId = layoutId,
     layoutViewInContext = layoutViewInContext,
-    isDealBinding = isDealBinding,
     autoSet = autoSet,
     isSuspension = isSuspension
 ), Serializable {

@@ -43,6 +43,8 @@ dependencies {
     implementation deps.androidx.constraintlayout
     //列表
     implementation deps.androidx.recyclerview
+    //shapeView
+    api deps.shapeofview
 
     if (IS_REMOTE.toBoolean()) {
         api deps.quickbind.bind

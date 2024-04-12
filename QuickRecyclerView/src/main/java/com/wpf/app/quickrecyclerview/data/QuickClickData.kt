@@ -14,13 +14,11 @@ import java.io.Serializable
 abstract class QuickClickData @JvmOverloads constructor(
     layoutId: Int = 0,
     layoutViewInContext: RunOnContextWithSelf<ViewGroup, View>? = null,
-    isDealBinding: Boolean = false,      //是否处理DataBinding
     autoSet: Boolean = false,             //自动映射
     isSuspension: Boolean = false,
 ) : QuickBindData(
     layoutId = layoutId,
     layoutViewInContext = layoutViewInContext,
-    isDealBinding = isDealBinding,
     autoSet = autoSet,
     isSuspension = isSuspension
 ), Serializable {

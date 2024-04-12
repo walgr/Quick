@@ -5,18 +5,18 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import com.wpf.app.base.ability.base.with
 import com.wpf.app.quick.ability.QuickActivity
 import com.wpf.app.quick.ability.ex.contentView
 import com.wpf.app.quick.ability.ex.modelBinding
 import com.wpf.app.quick.ability.helper.myLayout
-import com.wpf.app.base.ability.base.with
 import com.wpf.app.quick.annotations.bind.BindView
 import com.wpf.app.quick.annotations.bind.GroupView
 import com.wpf.app.quick.demo.databinding.ActivityDataTestBinding
 import com.wpf.app.quick.demo.viewmodel.IntentDataTestModel
 import com.wpf.app.quickbind.utils.GroupViews
 import com.wpf.app.quickutil.helper.postDelay
-import com.wpf.app.quickwork.ability.title
+import com.wpf.app.quickwork.ability.helper.title
 
 
 /**

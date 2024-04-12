@@ -2,11 +2,9 @@ package com.wpf.app.quick.demo.dialog
 
 import android.content.Context
 import android.view.Gravity
-import android.view.View
-import android.widget.TextView
 import com.wpf.app.quickdialog.QuickBaseDialog
 import com.wpf.app.quickutil.run.runOnContext
-import com.wpf.app.quickwork.ability.text
+import com.wpf.app.quickwork.ability.helper.text
 
 class Test3Dialog(
     context: Context

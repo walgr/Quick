@@ -1,9 +1,10 @@
-package com.wpf.app.quickwidget.title
+package com.wpf.app.quickwidget.title.ability
 
 import android.view.View
 import android.view.ViewGroup
 import com.wpf.app.quickutil.helper.matchWrapLayoutParams
 import com.wpf.app.quickwidget.R
+import com.wpf.app.quickwidget.title.QuickTitleView
 
 fun QuickTitleView.backClick(click: View.() -> Unit) {
     initClick(onBackClick = click)

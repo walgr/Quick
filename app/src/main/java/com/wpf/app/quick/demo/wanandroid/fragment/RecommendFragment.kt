@@ -11,7 +11,7 @@ import com.wpf.app.quickrecyclerview.listeners.requestData2List
 import com.wpf.app.quickutil.log.LogUtil
 import com.wpf.app.quickutil.other.forceTo
 import com.wpf.app.quickwidget.emptyview.EmptyHelper
-import com.wpf.app.quickwork.ability.smartRefreshList
+import com.wpf.app.quickwork.ability.helper.smartRefreshList
 
 class RecommendFragment: QuickFragment(
     contentView<FrameLayout> { quickView ->

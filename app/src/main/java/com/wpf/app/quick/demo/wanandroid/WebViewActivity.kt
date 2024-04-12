@@ -7,13 +7,12 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.LinearLayout
 import com.wpf.app.quick.ability.QuickActivity
-import com.wpf.app.quick.ability.ex.contentView
 import com.wpf.app.quick.ability.ex.contentViewWithSelf
 import com.wpf.app.quick.ability.helper.myLayout
 import com.wpf.app.quick.annotations.bind.BindView
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quickbind.annotations.AutoGet
-import com.wpf.app.quickwork.ability.title
+import com.wpf.app.quickwork.ability.helper.title
 
 class WebViewActivity : QuickActivity(
     contentViewWithSelf<WebViewActivity, LinearLayout> { self ->

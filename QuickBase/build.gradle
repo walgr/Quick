@@ -30,4 +30,10 @@ dependencies {
     implementation deps.androidx.fragmentktx
     implementation deps.androidx.annotation
     implementation deps.androidx.recyclerview
+
+    if (IS_REMOTE.toBoolean()) {
+        api deps.quickbind.util
+    } else {
+        api project(":QuickUtil")
+    }
 }

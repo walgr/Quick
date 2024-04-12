@@ -5,8 +5,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.annotation.CallSuper
 import com.wpf.app.base.ability.base.QuickAbility
-import com.wpf.app.quick.ability.ex.base.QuickInflateViewAbility
-import com.wpf.app.quick.ability.ex.base.QuickLifecycleAbility
+import com.wpf.app.base.ability.base.QuickInflateViewAbility
+import com.wpf.app.base.ability.base.QuickLifecycleAbility
 import com.wpf.app.quickdialog.QuickBaseDialog
 import com.wpf.app.quickutil.helper.InitViewHelper
 import com.wpf.app.quickutil.other.forceTo

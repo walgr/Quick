@@ -3,16 +3,16 @@ package com.wpf.app.quick.demo
 import android.annotation.SuppressLint
 import android.widget.LinearLayout
 import androidx.core.view.isVisible
+import com.wpf.app.base.ability.base.with
 import com.wpf.app.quick.ability.QuickActivity
 import com.wpf.app.quick.ability.ex.binding
 import com.wpf.app.quick.ability.ex.contentView
 import com.wpf.app.quick.ability.helper.myLayout
-import com.wpf.app.base.ability.base.with
 import com.wpf.app.quick.annotations.getclass.GetClass
 import com.wpf.app.quick.demo.databinding.ActivityShadowTestBinding
 import com.wpf.app.quickutil.helper.TimeDelayHelper
 import com.wpf.app.quickutil.helper.toColor
-import com.wpf.app.quickwork.ability.title
+import com.wpf.app.quickwork.ability.helper.title
 
 @SuppressLint("SetTextI18n")
 @GetClass

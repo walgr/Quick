@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.Gravity
 import com.wpf.app.quick.ability.ex.contentView
 import com.wpf.app.quickutil.run.runOnContext
-import com.wpf.app.quickwork.ability.text
+import com.wpf.app.quickwork.ability.helper.text
 import com.wpf.app.quickwork.widget.QuickThemeDialog
 
 class Test2Dialog(

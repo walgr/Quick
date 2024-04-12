@@ -7,7 +7,7 @@ import com.wpf.app.quick.ability.ex.contentViewWithSelf
 import com.wpf.app.quick.ability.helper.viewPager
 import com.wpf.app.quickbind.viewpager2.ViewPagerHelper
 import com.wpf.app.quickutil.helper.postDelay
-import com.wpf.app.quickwork.ability.title
+import com.wpf.app.quickwork.ability.helper.title
 import kotlin.random.Random
 
 /**
