@@ -75,8 +75,8 @@ open class QuickBaseDialogFragment @JvmOverloads constructor(
         val dialog = Dialog(getRealContext()!!, themeId)
         val window = dialog.window
         if (window != null) {
-            if (initDialogAnim() != DialogSize.NO_SET) {
-                window.attributes.windowAnimations = initDialogAnim()
+            if (initDialogAnimStyle() != DialogSize.NO_SET) {
+                window.setWindowAnimations(initDialogAnimStyle())
             }
             window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             window.decorView.setPadding(0, 0, 0, 0)
@@ -103,9 +103,6 @@ open class QuickBaseDialogFragment @JvmOverloads constructor(
         if (initDialogAdaptiveHeight()) {
             mView = SizeLimitViewGroup(getViewContext()).apply {
                 addView(mView)
-            }
-            if (initDialogAnim() != DialogSize.NO_SET) {
-                mView?.startAnimation(initDialogAnim().toAnim())
             }
         }
         return mView

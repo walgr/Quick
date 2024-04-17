@@ -61,8 +61,8 @@ fun Any.dialog(
             return gravity ?: super.initDialogGravity()
         }
 
-        override fun initDialogAnim(): Int {
-            return animRes ?: super.initDialogAnim()
+        override fun initDialogAnimStyle(): Int {
+            return animRes ?: super.initDialogAnimStyle()
         }
 
         override fun initDialogWidth(): Int {

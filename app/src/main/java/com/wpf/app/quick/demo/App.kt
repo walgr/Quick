@@ -60,7 +60,7 @@ class App : Application() {
         }
         QuickDialogThemeBase.defaultTheme = QuickDialogTheme().apply {
             gravity = Gravity.BOTTOM
-            animRes = R.anim.anim_bottom_top
+            animStyleRes = R.style.DialogBottomTopAnim
             minHeight = 200.dp()
         }
         QuickTitleView.setCommonClickListener(object : QuickTitleView.CommonClickListener {

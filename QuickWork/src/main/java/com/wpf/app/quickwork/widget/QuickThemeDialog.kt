@@ -42,8 +42,8 @@ open class QuickThemeDialog @JvmOverloads constructor(
         return curTheme?.gravity ?: super.initDialogGravity()
     }
 
-    override fun initDialogAnim(): Int {
-        return curTheme?.animRes ?: super.initDialogAnim()
+    override fun initDialogAnimStyle(): Int {
+        return curTheme?.animStyleRes ?: super.initDialogAnimStyle()
     }
 
     override fun initDialogWidth(): Int {

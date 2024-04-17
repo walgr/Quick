@@ -22,7 +22,7 @@ interface QuickDialogThemeI {
     var widthAdaptive: Boolean?
     var alpha: Float?
     var gravity: Int?
-    var animRes: Int?
+    var animStyleRes: Int?
     var width: Int?
     var height: Int?
     var widthPercent: Float?
@@ -44,7 +44,7 @@ interface QuickDialogThemeI {
             widthAdaptive,
             alpha,
             gravity,
-            animRes,
+            animStyleRes,
             width,
             height,
             widthPercent,
@@ -64,7 +64,7 @@ open class QuickDialogTheme(
     override var widthAdaptive: Boolean? = null,
     override var alpha: Float? = null,
     override var gravity: Int? = null,
-    override var animRes: Int? = null,
+    override var animStyleRes: Int? = null,
     override var width: Int? = null,
     override var height: Int? = null,
     override var widthPercent: Float? = null,

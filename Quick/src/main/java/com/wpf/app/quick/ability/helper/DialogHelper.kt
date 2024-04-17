@@ -79,8 +79,8 @@ open class QuickBottomSheetDialogFragmentTemp(
         return gravity ?: Gravity.BOTTOM
     }
 
-    override fun initDialogAnim(): Int {
-        return animRes ?: super.initDialogAnim()
+    override fun initDialogAnimStyle(): Int {
+        return animRes ?: super.initDialogAnimStyle()
     }
 
     override fun initDialogWidth(): Int {
@@ -250,8 +250,8 @@ fun Any.bottomSheetDialog(
             return Gravity.BOTTOM
         }
 
-        override fun initDialogAnim(): Int {
-            return animRes ?: super.initDialogAnim()
+        override fun initDialogAnimStyle(): Int {
+            return animRes ?: super.initDialogAnimStyle()
         }
 
         override fun initDialogWidth(): Int {
@@ -338,8 +338,8 @@ open class QuickDialogFragmentTemp(
         return gravity ?: super.initDialogGravity()
     }
 
-    override fun initDialogAnim(): Int {
-        return animRes ?: super.initDialogAnim()
+    override fun initDialogAnimStyle(): Int {
+        return animRes ?: super.initDialogAnimStyle()
     }
 
     override fun initDialogWidth(): Int {
@@ -474,8 +474,8 @@ fun Any.dialog(
             return gravity ?: super.initDialogGravity()
         }
 
-        override fun initDialogAnim(): Int {
-            return animRes ?: super.initDialogAnim()
+        override fun initDialogAnimStyle(): Int {
+            return animRes ?: super.initDialogAnimStyle()
         }
 
         override fun initDialogWidth(): Int {

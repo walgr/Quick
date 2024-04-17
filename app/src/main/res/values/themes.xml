@@ -21,4 +21,9 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
+    <style name="DialogBottomTopAnim">
+        <item name="android:windowEnterAnimation">@anim/anim_bottom_top</item>
+        <item name="android:windowExitAnimation">@anim/anim_top_bottom</item>
+    </style>
+
 </resources>

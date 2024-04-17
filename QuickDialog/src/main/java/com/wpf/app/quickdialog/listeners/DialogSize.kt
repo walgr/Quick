@@ -4,7 +4,7 @@ import android.view.Gravity
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
-import androidx.annotation.AnimRes
+import androidx.annotation.StyleRes
 
 /**
  * Created by 王朋飞 on 2022/6/17.
@@ -72,8 +72,8 @@ interface DialogSize : QuickContext {
         return Gravity.CENTER
     }
 
-    @AnimRes
-    fun initDialogAnim(): Int {
+    @StyleRes
+    fun initDialogAnimStyle(): Int {
         return NO_SET
     }
 

@@ -66,15 +66,12 @@ open class QuickBaseBottomSheetDialog(
             mView = SizeLimitViewGroup(getViewContext()).apply {
                 addView(mView)
             }
-            if (initDialogAnim() != DialogSize.NO_SET) {
-                mView?.startAnimation(initDialogAnim().toAnim())
-            }
         }
         setContentView(mView!!)
         val window = window
         if (window != null) {
-            if (initDialogAnim() != DialogSize.NO_SET) {
-                window.attributes.windowAnimations = initDialogAnim()
+            if (initDialogAnimStyle() != DialogSize.NO_SET) {
+                window.setWindowAnimations(initDialogAnimStyle())
             }
             window.decorView.setPadding(0, 0, 0, 0)
             window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))

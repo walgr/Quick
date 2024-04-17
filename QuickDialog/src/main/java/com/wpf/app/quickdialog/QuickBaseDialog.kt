@@ -18,7 +18,6 @@ import com.wpf.app.quickdialog.listeners.DialogLifecycle
 import com.wpf.app.quickdialog.listeners.DialogSize
 import com.wpf.app.quickdialog.minAndMaxLimit.SizeLimitViewGroup
 import com.wpf.app.quickutil.helper.InitViewHelper
-import com.wpf.app.quickutil.helper.toAnim
 import com.wpf.app.quickutil.run.RunOnContext
 
 /**
@@ -41,14 +40,11 @@ open class QuickBaseDialog(
             mView = SizeLimitViewGroup(getViewContext()).apply {
                 addView(mView)
             }
-            if (initDialogAnim() != DialogSize.NO_SET) {
-                mView?.startAnimation(initDialogAnim().toAnim())
-            }
         }
         setContentView(mView!!)
         if (window != null) {
-            if (initDialogAnim() != DialogSize.NO_SET) {
-                window!!.attributes.windowAnimations = initDialogAnim()
+            if (initDialogAnimStyle() != DialogSize.NO_SET) {
+                window!!.setWindowAnimations(initDialogAnimStyle())
             }
             window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             window!!.decorView.setPadding(0, 0, 0, 0)

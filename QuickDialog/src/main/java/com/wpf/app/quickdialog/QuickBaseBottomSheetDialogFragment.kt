@@ -76,8 +76,8 @@ open class QuickBaseBottomSheetDialogFragment @JvmOverloads constructor(
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)
-        if (initDialogAnim() != DialogSize.NO_SET) {
-            getWindow()?.attributes?.windowAnimations = initDialogAnim()
+        if (initDialogAnimStyle() != DialogSize.NO_SET) {
+            getWindow()?.setWindowAnimations(initDialogAnimStyle())
         }
         getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         getWindow()?.decorView?.setPadding(0, 0, 0, 0)
@@ -106,9 +106,6 @@ open class QuickBaseBottomSheetDialogFragment @JvmOverloads constructor(
         if (initDialogAdaptiveHeight()) {
             mView = SizeLimitViewGroup(getViewContext()).apply {
                 addView(mView)
-            }
-            if (initDialogAnim() != DialogSize.NO_SET) {
-                mView?.startAnimation(initDialogAnim().toAnim())
             }
         }
         return mView
