@@ -5,6 +5,9 @@ import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import androidx.annotation.AnimRes
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.LayoutRes
@@ -28,6 +31,13 @@ fun @receiver:ColorRes Int.toColor(context: Context? = QuickInit.getContext()): 
         throw RuntimeException("context is null")
     }
     return ContextCompat.getColor(context, this)
+}
+
+fun @receiver:AnimRes Int.toAnim(context: Context? = QuickInit.getContext()): Animation {
+    if (context == null) {
+        throw RuntimeException("context is null")
+    }
+    return AnimationUtils.loadAnimation(context, this)
 }
 
 fun @receiver:LayoutRes Int.toView(

@@ -28,7 +28,7 @@ open class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>()
 
     override fun onCreateViewHolder(
         viewGroup: ViewGroup,
-        viewType: Int
+        viewType: Int,
     ): QuickViewHolder<QuickItemData> {
         mDataList?.find {
             it.viewType == viewType
@@ -41,12 +41,18 @@ open class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>()
                     holder = QuickViewBindingHolder<QuickItemData, ViewDataBinding>(
                         viewGroup,
                         findData.layoutId,
+                        findData.layoutView,
                         findData.layoutViewInViewGroup
                     )
                 }
             }
             if (holder == null && findData is QuickViewData) {
-                holder = QuickViewHolder(viewGroup, findData.layoutId, findData.layoutViewInViewGroup)
+                holder = QuickViewHolder(
+                    viewGroup,
+                    findData.layoutId,
+                    findData.layoutView,
+                    findData.layoutViewInViewGroup
+                )
             }
             holder?.mQuickAdapter = this
             holder?.let {
@@ -71,7 +77,7 @@ open class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>()
     override fun getItemViewType(position: Int): Int {
         mDataList?.get(position)?.let {
             if (it is QuickAbilityData) {
-                it.viewType =  it.initViewType(position)
+                it.viewType = it.initViewType(position)
             }
             return it.viewType
         }

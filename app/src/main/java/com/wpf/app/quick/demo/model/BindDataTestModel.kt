@@ -18,6 +18,7 @@ import com.wpf.app.quickrecyclerview.ability.click
 import com.wpf.app.quickrecyclerview.ability.swap
 import com.wpf.app.quickrecyclerview.data.QuickAbilityData
 import com.wpf.app.quickutil.helper.dpF
+import com.wpf.app.quickutil.helper.matchWrapLayoutParams
 import com.wpf.app.quickutil.helper.onceClick
 import com.wpf.app.quickutil.helper.toDrawable
 import com.wpf.app.quickutil.init.ToastHelper
@@ -30,7 +31,7 @@ import com.wpf.app.quickutil.run.runOnView
 class BindDataTestModel(private val index: Int = 0) : QuickAbilityData(
     abilityList = contentView<FrameLayout> {
         roundRect(background = R.color.white.toDrawable(), radius = 8.dpF()) {
-            myLayout(R.layout.holder_image)
+            myLayout(R.layout.holder_image, layoutParams = matchWrapLayoutParams())
         }
     }.with(bindWSelf<HolderImageBinding, BindDataTestModel> {
         tvTitle.text.printLog("当前View-", "index:${it.index}")

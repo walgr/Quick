@@ -1,6 +1,7 @@
 package com.wpf.app.quickrecyclerview.data
 
 import android.view.View
+import com.wpf.app.base.bind.Bind
 import com.wpf.app.base.bind.QuickBindWrap
 import com.wpf.app.quickbind.utils.DataAutoSet2ViewUtils
 
@@ -9,7 +10,7 @@ import com.wpf.app.quickbind.utils.DataAutoSet2ViewUtils
  */
 open class QuickRequestData @JvmOverloads constructor(
     open val autoSet: Boolean = true,
-) : QuickSuspensionData(), com.wpf.app.base.bind.Bind {
+) : QuickSuspensionData(), Bind {
 
     @Transient
     private var mView: View? = null

@@ -9,17 +9,18 @@ import com.wpf.app.base.ability.base.QuickAbility
 import com.wpf.app.base.ability.base.QuickInflateViewAbility
 import com.wpf.app.base.ability.base.QuickLifecycleAbility
 import com.wpf.app.base.ability.base.QuickViewAbility
-import com.wpf.app.quick.activity.QuickBaseActivity
+import com.wpf.app.quick.ability.ex.base.QuickFragmentAbility
 import com.wpf.app.quickbind.interfaces.BindViewModel
+import com.wpf.app.quickdialog.QuickBaseDialogFragment
 import com.wpf.app.quickutil.helper.InitViewHelper
 import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.other.forceTo
 import com.wpf.app.quickutil.run.runOnContext
 
-open class QuickActivity(
+open class QuickDialogFragment(
     private val abilityList: List<QuickAbility> = mutableListOf()
-) : QuickBaseActivity(
-        layoutViewInContext = runOnContext {
+) : QuickBaseDialogFragment(
+    layoutViewInContext = runOnContext {
         val inflateAbility = abilityList.first { ability -> ability is QuickInflateViewAbility }
             .forceTo<QuickInflateViewAbility>()
         InitViewHelper.init(
@@ -31,6 +32,11 @@ open class QuickActivity(
     }
 ), BindViewModel<ViewModel> {
     internal val extraParameter: LinkedHashMap<String, Any> = linkedMapOf()
+
+    override fun getViewModel(): ViewModel? {
+        return abilityList.find { it is BindViewModel<*> }?.asTo<BindViewModel<*>>()?.getViewModel()
+    }
+
 
     @CallSuper
     override fun generateContentView(view: View): View {
@@ -49,14 +55,10 @@ open class QuickActivity(
         }
     }
 
-    override fun getViewModel(): ViewModel? {
-        return abilityList.firstOrNull { it is BindViewModel<*> }?.asTo<BindViewModel<*>>()?.getViewModel()
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
-            it.onCreate()
+            it.onResume()
         }
     }
 
@@ -88,6 +90,13 @@ open class QuickActivity(
         }
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
+            it.onSaveInstanceState(outState)
+        }
+    }
+
     @Deprecated("Deprecated by Android")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -96,11 +105,11 @@ open class QuickActivity(
         }
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
-            it.onSaveInstanceState(outState)
+    @Deprecated("Deprecated in Java")
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        abilityList.filterIsInstance<QuickFragmentAbility>().forEach {
+            it.setUserVisibleHint(isVisibleToUser)
         }
     }
 }
-

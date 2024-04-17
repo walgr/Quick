@@ -7,6 +7,7 @@ import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.demo.model.MyMessage
 import com.wpf.app.quickdialog.QuickBaseDialog
 import com.wpf.app.quickrecyclerview.helper.List2RecyclerView
+import com.wpf.app.quickutil.helper.wrap
 
 /**
  * 自适应高度Dialog
@@ -39,7 +40,11 @@ class TestDialog(
     }
 
     override fun initDialogMinHeight(): Int {
-        return (getScreenHeight() * 0.3f).toInt()
+        return wrap
+    }
+
+    override fun initDialogAnim(): Int {
+        return R.anim.anim_bottom_top
     }
 
     override fun initDialogMaxHeight(): Int {

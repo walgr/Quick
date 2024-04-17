@@ -33,8 +33,9 @@ fun <V: View> ViewGroup.getChild(isViewGroup: (View) -> Boolean): V? {
     return null
 }
 
-fun View.removeParent() {
+fun View.removeParent(): View {
     this.parent.asTo<ViewGroup>()?.removeView(this)
+    return this
 }
 
 fun <T : View>T.addToParent(parent: ViewParent): T {
@@ -127,10 +128,12 @@ fun View.postDelay(delayMillis: Long, action: Runnable) {
 
 fun View.parent() = parent as? ViewGroup
 
-fun View.onClick(clickListener: OnClickListener) {
+fun View.onClick(clickListener: OnClickListener): View {
     setOnClickListener(clickListener)
+    return this
 }
 
-fun View.onLongClick(longClickListener: OnLongClickListener) {
+fun View.onLongClick(longClickListener: OnLongClickListener): View {
     setOnLongClickListener(longClickListener)
+    return this
 }

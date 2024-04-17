@@ -27,6 +27,6 @@ class Test3Dialog(
     }
 
     override fun initDialogAdaptiveHeight(): Boolean {
-        return true
+        return false
     }
 }

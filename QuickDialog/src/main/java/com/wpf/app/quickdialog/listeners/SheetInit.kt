@@ -1,7 +1,6 @@
 package com.wpf.app.quickdialog.listeners
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.wpf.app.quickdialog.listeners.DialogSize
 
 /**
  * Created by 王朋飞 on 2022/6/21.
@@ -12,11 +11,15 @@ interface SheetInit {
     }
 
     fun hideAble(): Boolean {
-        return false
+        return true
     }
 
     fun initPeekHeight(): Int {
         return DialogSize.NO_SET
+    }
+
+    fun skipCollapsed(): Boolean {
+        return false
     }
 
     /**

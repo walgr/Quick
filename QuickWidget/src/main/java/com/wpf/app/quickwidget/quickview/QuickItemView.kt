@@ -21,7 +21,7 @@ abstract class QuickItemView @JvmOverloads constructor(
     @LayoutRes private val layoutId: Int = 0,
     private val layoutView: RunOnContext<View>? = null,
     open var viewType: Int = 0,
-) : View(mContext, attributeSet, defStyleAttr), com.wpf.app.base.bind.Bind {
+) : View(mContext, attributeSet, defStyleAttr), Bind {
 
     init {
         init()

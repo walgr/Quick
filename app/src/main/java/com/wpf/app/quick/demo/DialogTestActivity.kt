@@ -25,12 +25,12 @@ class DialogTestActivity : QuickActivity(
                 addView(MaterialButton(context).apply {
                     text = "弹窗"
                     onceClick {
-                        Test3Dialog(context).showInManager(showWithOther = true)
+                        TestDialog(context).showInManager(showWithOther = true)
                         it.postDelayed({
-                            Test2Dialog(context).showInManager(recoverInDismiss = false)
+                            Test3Dialog(context).showInManager(recoverInDismiss = false)
                         }, 1000)
                         it.postDelayed({
-                            TestDialog(context).showInManager()
+                            Test2Dialog(context).showInManager()
                         }, 2000)
                     }
                 })

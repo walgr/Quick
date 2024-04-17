@@ -1,4 +1,4 @@
-package com.wpf.app.quickwidget.quickview
+package com.wpf.app.quickutil.widget
 
 import android.content.Context
 import android.graphics.drawable.Drawable
@@ -13,9 +13,9 @@ import android.widget.RelativeLayout
 import androidx.annotation.CallSuper
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.tabs.TabLayout
+import com.wpf.app.quickutil.R
 import com.wpf.app.quickutil.helper.attribute.AutoGetAttributeHelper
 import com.wpf.app.quickutil.other.asTo
-import com.wpf.app.quickwidget.R
 
 /**
  * Created by 王朋飞 on 2022/8/31.

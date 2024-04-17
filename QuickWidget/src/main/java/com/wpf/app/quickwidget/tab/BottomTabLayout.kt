@@ -27,7 +27,7 @@ import com.wpf.app.quickutil.helper.getLocationInWindow
 import com.wpf.app.quickutil.other.forceTo
 import com.wpf.app.quickutil.widget.onPageScrollStateChanged
 import com.wpf.app.quickutil.widget.onPageScrolled
-import com.wpf.app.quickwidget.quickview.QuickViewGroup
+import com.wpf.app.quickutil.widget.QuickViewGroup
 import com.wpf.app.quickwidget.R
 import kotlin.math.max
 

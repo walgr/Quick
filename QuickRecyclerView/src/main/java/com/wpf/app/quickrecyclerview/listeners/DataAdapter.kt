@@ -2,7 +2,6 @@ package com.wpf.app.quickrecyclerview.listeners
 
 import com.wpf.app.quickrecyclerview.QuickAdapter
 import com.wpf.app.quickrecyclerview.data.QuickItemData
-import com.wpf.app.quickutil.log.LogUtil
 
 /**
  * Created by 王朋飞 on 2022/7/18.
@@ -66,7 +65,6 @@ interface DataAdapter {
 
     //item拖动交换位置
     fun onMove(sourcePosition: Int, targetPosition: Int) {
-        LogUtil.e("交换:${sourcePosition}-${targetPosition}")
         val sourceItem = getData()?.getOrNull(sourcePosition) ?: return
         getData()?.removeAt(sourcePosition)
         addData(targetPosition, sourceItem)

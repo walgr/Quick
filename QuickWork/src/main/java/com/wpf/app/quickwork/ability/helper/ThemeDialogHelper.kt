@@ -12,12 +12,11 @@ import com.wpf.app.quickwork.widget.QuickThemeDialog
 import com.wpf.app.quickwork.widget.theme.QuickDialogThemeI
 
 fun Any.dialog(
-    themeId: Int = 0,
+    @StyleRes themeId: Int = 0,
     @LayoutRes layoutId: Int = 0,
     layoutView: View? = null,
     layoutViewInContext: RunOnContext<View>? = null,
     canBackgroundClick: Boolean? = null,
-    @StyleRes dialogStyle: Int? = null,
     width: Int? = null,
     height: Int? = null,
     widthPercent: Float? = null,
@@ -44,10 +43,6 @@ fun Any.dialog(
 
         override fun canDialogBackgroundClick(): Boolean {
             return canBackgroundClick ?: super.canDialogBackgroundClick()
-        }
-
-        override fun initDialogStyle(): Int {
-            return dialogStyle ?: super.initDialogStyle()
         }
 
         override fun initDialogAdaptiveHeight(): Boolean {

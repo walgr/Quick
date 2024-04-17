@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="QuickViewGroup">
+        <attr name="addToParent" format="boolean" />
+        <attr name="groupType" format="enum">
+            <enum name="LinearLayout" value="0" />
+            <enum name="RelativeLayout" value="1" />
+            <enum name="FrameLayout" value="2" />
+            <enum name="ConstraintLayout" value="3" />
+            <enum name="RadioGroup" value="4" />
+            <enum name="TabLayout" value="5" />
+        </attr>
+        <attr name="layoutRes" format="reference" />
+
+        <attr name="android:clipChildren" />
+
+        <attr name="android:orientation" />
+        <attr name="android:gravity" />
+        <attr name="android:baselineAligned" />
+        <attr name="android:baselineAlignedChildIndex" />
+        <attr name="android:weightSum" />
+        <attr name="android:measureWithLargestChild" />
+        <attr name="android:divider" />
+        <attr name="android:showDividers" />
+        <attr name="android:dividerPadding" />
+
+        <!--RadioGroup-->
+        <attr name="android:checkedButton" />
+
+        <!--TabLayout-->
+        <attr name="tabIndicatorColor" />
+        <attr name="tabIndicatorHeight" />
+        <attr name="tabContentStart" />
+        <attr name="tabBackground" />
+        <attr name="tabIndicator" />
+        <attr name="tabIndicatorGravity" />
+        <attr name="tabIndicatorAnimationDuration" />
+        <attr name="tabIndicatorFullWidth" />
+        <attr name="tabIndicatorAnimationMode" />
+        <attr name="tabMode" />
+        <attr name="tabGravity" />
+        <attr name="tabInlineLabel" />
+        <attr name="tabMinWidth" />
+        <attr name="tabMaxWidth" />
+        <attr name="tabTextAppearance" />
+        <attr name="tabTextColor" />
+        <attr name="tabSelectedTextColor" />
+        <attr name="tabSelectedTextAppearance" />
+        <attr name="tabPaddingStart" />
+        <attr name="tabPaddingTop" />
+        <attr name="tabPaddingEnd" />
+        <attr name="tabPaddingBottom" />
+        <attr name="tabPadding" />
+        <attr name="tabIconTint" />
+        <attr name="tabIconTintMode" />
+        <attr name="tabRippleColor" />
+        <attr name="tabUnboundedRipple" />
+    </declare-styleable>
+    <declare-styleable name="QuickViewGroup_Layout">
+        <!--LinearLayout-->
+        <attr name="android:layout_weight" />
+        <!--FrameLayout-->
+        <attr name="android:layout_gravity" />
+
+        <!--RelativeLayout-->
+        <!-- Positions the right edge of this view to the left of the given anchor view ID.
+             Accommodates right margin of this view and left margin of anchor view. -->
+        <attr name="android:layout_toLeftOf" />
+        <!-- Positions the left edge of this view to the right of the given anchor view ID.
+            Accommodates left margin of this view and right margin of anchor view. -->
+        <attr name="android:layout_toRightOf" />
+        <!-- Positions the bottom edge of this view above the given anchor view ID.
+            Accommodates bottom margin of this view and top margin of anchor view. -->
+        <attr name="android:layout_above" />
+        <!-- Positions the top edge of this view below the given anchor view ID.
+            Accommodates top margin of this view and bottom margin of anchor view. -->
+        <attr name="android:layout_below" />
+        <!-- Positions the baseline of this view on the baseline of the given anchor view ID. -->
+        <attr name="android:layout_alignBaseline" />
+        <!-- Makes the left edge of this view match the left edge of the given anchor view ID.
+            Accommodates left margin. -->
+        <attr name="android:layout_alignLeft" />
+        <!-- Makes the top edge of this view match the top edge of the given anchor view ID.
+            Accommodates top margin. -->
+        <attr name="android:layout_alignTop" />
+        <!-- Makes the right edge of this view match the right edge of the given anchor view ID.
+            Accommodates right margin. -->
+        <attr name="android:layout_alignRight" />
+        <!-- Makes the bottom edge of this view match the bottom edge of the given anchor view ID.
+            Accommodates bottom margin. -->
+        <attr name="android:layout_alignBottom" />
+        <!-- If true, makes the left edge of this view match the left edge of the parent.
+            Accommodates left margin. -->
+        <attr name="android:layout_alignParentLeft" />
+        <!-- If true, makes the top edge of this view match the top edge of the parent.
+            Accommodates top margin. -->
+        <attr name="android:layout_alignParentTop" />
+        <!-- If true, makes the right edge of this view match the right edge of the parent.
+            Accommodates right margin. -->
+        <attr name="android:layout_alignParentRight" />
+        <!-- If true, makes the bottom edge of this view match the bottom edge of the parent.
+            Accommodates bottom margin. -->
+        <attr name="android:layout_alignParentBottom" />
+        <!-- If true, centers this child horizontally and vertically within its parent. -->
+        <attr name="android:layout_centerInParent" />
+        <!-- If true, centers this child horizontally within its parent. -->
+        <attr name="android:layout_centerHorizontal" />
+        <!-- If true, centers this child vertically within its parent. -->
+        <attr name="android:layout_centerVertical" />
+        <!-- If set to true, the parent will be used as the anchor when the anchor cannot be
+             be found for layout_toLeftOf, layout_toRightOf, etc. -->
+        <attr name="android:layout_alignWithParentIfMissing" />
+        <!-- Positions the end edge of this view to the start of the given anchor view ID.
+             Accommodates end margin of this view and start margin of anchor view. -->
+        <attr name="android:layout_toStartOf" />
+        <!-- Positions the start edge of this view to the end of the given anchor view ID.
+             Accommodates start margin of this view and end margin of anchor view. -->
+        <attr name="android:layout_toEndOf" />
+        <!-- Makes the start edge of this view match the start edge of the given anchor view ID.
+            Accommodates start margin. -->
+        <attr name="android:layout_alignStart" />
+        <!-- Makes the end edge of this view match the end edge of the given anchor view ID.
+            Accommodates end margin. -->
+        <attr name="android:layout_alignEnd" />
+        <!-- If true, makes the start edge of this view match the start edge of the parent.
+            Accommodates start margin. -->
+        <attr name="android:layout_alignParentStart" />
+        <!-- If true, makes the end edge of this view match the end edge of the parent.
+            Accommodates end margin. -->
+        <attr name="android:layout_alignParentEnd" />
+
+        <!--ConstraintLayout-->
+        <attr name="android:orientation" />
+        <attr name="android:minWidth" />
+        <attr name="android:minHeight" />
+        <attr name="android:maxWidth" />
+        <attr name="android:maxHeight" />
+        <attr name="android:visibility" />
+        <attr name="android:elevation" />
+
+        <attr name="layout_optimizationLevel" />
+        <attr name="layoutDescription" />
+
+        <attr name="constraintSet" />
+        <attr name="barrierDirection" />
+        <attr name="barrierAllowsGoneWidgets" />
+        <attr name="barrierMargin" />
+        <attr name="constraint_referenced_ids" />
+        <attr name="constraint_referenced_tags" />
+        <attr name="chainUseRtl" />
+
+        <attr name="flow_horizontalStyle" />
+        <attr name="flow_verticalStyle" />
+        <attr name="flow_wrapMode" />
+        <attr name="flow_maxElementsWrap" />
+        <attr name="flow_horizontalGap" />
+        <attr name="flow_verticalGap" />
+        <attr name="android:padding" />
+        <attr name="android:paddingTop" />
+        <attr name="android:paddingBottom" />
+        <attr name="android:paddingLeft" />
+        <attr name="android:paddingRight" />
+        <attr name="android:paddingStart" />
+        <attr name="android:paddingEnd" />
+        <attr name="flow_verticalAlign" />
+        <attr name="flow_horizontalAlign" />
+        <attr name="flow_verticalBias" />
+        <attr name="flow_horizontalBias" />
+        <!--        <attr name="flow_horizontalSeparator" />-->
+        <!--        <attr name="flow_verticalSeparator" />-->
+
+        <attr name="flow_firstHorizontalStyle" />
+        <attr name="flow_firstVerticalStyle" />
+        <attr name="flow_firstHorizontalBias" />
+        <attr name="flow_firstVerticalBias" />
+
+        <attr name="flow_lastHorizontalStyle" />
+        <attr name="flow_lastVerticalStyle" />
+        <attr name="flow_lastHorizontalBias" />
+        <attr name="flow_lastVerticalBias" />
+
+        <attr name="circularflow_radiusInDP" />
+        <attr name="circularflow_angles" />
+        <attr name="circularflow_viewCenter" />
+        <attr name="circularflow_defaultRadius" />
+        <attr name="circularflow_defaultAngle" />
+
+
+        <attr name="layout_constraintCircle" />
+        <attr name="layout_constraintCircleRadius" />
+        <attr name="layout_constraintCircleAngle" />
+
+        <attr name="layout_constraintGuide_begin" />
+        <attr name="layout_constraintGuide_end" />
+        <attr name="layout_constraintGuide_percent" />
+        <attr name="guidelineUseRtl" />
+        <attr name="layout_constraintLeft_toLeftOf" />
+        <attr name="layout_constraintLeft_toRightOf" />
+        <attr name="layout_constraintRight_toLeftOf" />
+        <attr name="layout_constraintRight_toRightOf" />
+        <attr name="layout_constraintTop_toTopOf" />
+        <attr name="layout_constraintTop_toBottomOf" />
+        <attr name="layout_constraintBottom_toTopOf" />
+        <attr name="layout_constraintBottom_toBottomOf" />
+        <attr name="layout_constraintBaseline_toBaselineOf" />
+        <attr name="layout_constraintBaseline_toTopOf" />
+        <attr name="layout_constraintBaseline_toBottomOf" />
+        <attr name="layout_constraintStart_toEndOf" />
+        <attr name="layout_constraintStart_toStartOf" />
+        <attr name="layout_constraintEnd_toStartOf" />
+        <attr name="layout_constraintEnd_toEndOf" />
+        <attr name="layout_goneMarginLeft" />
+        <attr name="layout_goneMarginTop" />
+        <attr name="layout_goneMarginRight" />
+        <attr name="layout_goneMarginBottom" />
+        <attr name="layout_goneMarginStart" />
+        <attr name="layout_goneMarginEnd" />
+        <attr name="layout_goneMarginBaseline" />
+        <attr name="layout_marginBaseline" />
+        <attr name="layout_constraintWidth" />
+        <attr name="layout_constraintHeight" />
+        <attr name="android:layout_width" />
+        <attr name="android:layout_height" />
+        <attr name="android:layout_margin" />
+        <attr name="android:layout_marginHorizontal" />
+        <attr name="android:layout_marginVertical" />
+        <attr name="android:layout_marginLeft" />
+        <attr name="android:layout_marginRight" />
+        <attr name="android:layout_marginTop" />
+        <attr name="android:layout_marginBottom" />
+        <attr name="android:layout_marginStart" />
+        <attr name="android:layout_marginEnd" />
+        <attr name="layout_constrainedWidth" />
+        <attr name="layout_constrainedHeight" />
+        <attr name="layout_constraintHorizontal_bias" />
+        <attr name="layout_constraintVertical_bias" />
+        <attr name="layout_constraintWidth_default" />
+        <attr name="layout_constraintHeight_default" />
+        <attr name="layout_constraintWidth_min" />
+        <attr name="layout_constraintWidth_max" />
+        <attr name="layout_constraintWidth_percent" />
+        <attr name="layout_constraintHeight_min" />
+        <attr name="layout_constraintHeight_max" />
+        <attr name="layout_constraintHeight_percent" />
+        <attr name="layout_constraintLeft_creator" />
+        <attr name="layout_constraintTop_creator" />
+        <attr name="layout_constraintRight_creator" />
+        <attr name="layout_constraintBottom_creator" />
+        <attr name="layout_constraintBaseline_creator" />
+        <attr name="layout_constraintDimensionRatio" />
+        <attr name="layout_constraintHorizontal_weight" />
+        <attr name="layout_constraintVertical_weight" />
+        <attr name="layout_constraintHorizontal_chainStyle" />
+        <attr name="layout_constraintVertical_chainStyle" />
+        <attr name="layout_editor_absoluteX" />
+        <attr name="layout_editor_absoluteY" />
+        <attr name="layout_constraintTag" />
+        <attr name="layout_wrapBehaviorInParent" />
+    </declare-styleable>
+</resources>

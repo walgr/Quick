@@ -1,5 +1,6 @@
 package com.wpf.app.quickdialog
 
+import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.graphics.Color
@@ -7,31 +8,29 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
+import androidx.annotation.StyleRes
 import androidx.appcompat.app.AppCompatDialog
+import com.wpf.app.base.NO_SET
 import com.wpf.app.base.QuickView
 import com.wpf.app.base.bind.QuickBindWrap
 import com.wpf.app.quickdialog.helper.DialogSizeHelper
 import com.wpf.app.quickdialog.listeners.DialogLifecycle
 import com.wpf.app.quickdialog.listeners.DialogSize
 import com.wpf.app.quickdialog.minAndMaxLimit.SizeLimitViewGroup
-import com.wpf.app.quickutil.run.RunOnContext
 import com.wpf.app.quickutil.helper.InitViewHelper
+import com.wpf.app.quickutil.helper.toAnim
+import com.wpf.app.quickutil.run.RunOnContext
 
 /**
  * Created by 王朋飞 on 2022/6/16.
  */
 open class QuickBaseDialog(
     context: Context,
-    themeId: Int = 0,
+    @StyleRes themeId: Int = 0,
     @LayoutRes private val layoutId: Int = 0,
-    private val layoutView: View? = null,
-    private val layoutViewInContext: RunOnContext<View>? = null,
-) : AppCompatDialog(context, themeId), QuickView, DialogSize, DialogLifecycle {
-
-    public override fun onStart() {
-        super.onStart()
-        DialogSizeHelper.dealSize(this, initDialogWidth(), initDialogHeight())
-    }
+    private var layoutView: View? = null,
+    private var layoutViewInContext: RunOnContext<View>? = null,
+) : AppCompatDialog(context, themeId), DialogSize, DialogLifecycle, QuickView {
 
     private var mView: View? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,17 +41,25 @@ open class QuickBaseDialog(
             mView = SizeLimitViewGroup(getViewContext()).apply {
                 addView(mView)
             }
+            if (initDialogAnim() != DialogSize.NO_SET) {
+                mView?.startAnimation(initDialogAnim().toAnim())
+            }
         }
         setContentView(mView!!)
         if (window != null) {
             if (initDialogAnim() != DialogSize.NO_SET) {
-                window!!.setWindowAnimations(initDialogAnim())
+                window!!.attributes.windowAnimations = initDialogAnim()
             }
             window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             window!!.decorView.setPadding(0, 0, 0, 0)
         }
         QuickBindWrap.bind(this)
         initView(mView!!)
+    }
+
+    public override fun onStart() {
+        super.onStart()
+        DialogSizeHelper.dealSize(this, initDialogWidth(), initDialogHeight())
     }
 
     private var mScreenWidth = 0
@@ -88,38 +95,37 @@ open class QuickBaseDialog(
     }
 
     /**
-     * 重新设置高度
+     * 重新设置大小
      */
-    fun newHeight(newHeight: Int) {
-        this.mNewHeight = newHeight
+    fun newSize(newWidth: Int = NO_SET, newHeight: Int = NO_SET) {
+        if (mNewWidth != DialogSize.NO_SET) {
+            this.mNewWidth = newWidth
+        }
+        if (mNewHeight != DialogSize.NO_SET) {
+            this.mNewHeight = newHeight
+        }
         DialogSizeHelper.dealSize(
             this,
             if (mNewWidth == DialogSize.NO_SET) initDialogWidth() else mNewWidth,
-            newHeight
-        )
-    }
-
-    /**
-     * 重新设置宽度
-     */
-    fun newWidth(newWidth: Int) {
-        this.mNewWidth = newWidth
-        DialogSizeHelper.dealSize(
-            this,
-            newWidth,
             if (mNewHeight == DialogSize.NO_SET) initDialogHeight() else mNewHeight
         )
     }
 
+    override fun getLifecycleDialog(): Dialog {
+        return this
+    }
+    override var funcPrepare: (() -> Unit)? = null
+    override var funcShow: (Dialog.() -> Unit)? = null
+    override var funcDismiss: (Dialog.() -> Unit)? = null
     override fun show() {
         onDialogPrepare()
         super.show()
-        onDialogOpen()
+        onDialogShow()
     }
 
     override fun dismiss() {
         super.dismiss()
-        onDialogClose()
+        onDialogDismiss()
         listener?.onDismiss(this)
     }
 

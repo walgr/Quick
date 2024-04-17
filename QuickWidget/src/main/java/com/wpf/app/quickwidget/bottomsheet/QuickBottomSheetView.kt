@@ -81,7 +81,8 @@ open class QuickBottomSheetView(
         return DialogSize.NO_SET
     }
 
-    protected var mBehavior: BottomSheetBehavior<View>? = null
+    private var mBehavior: BottomSheetBehavior<View>? = null
+    fun getBehavior() = mBehavior
     open fun initBottomSheet() {
         mBehavior = if (canScroll()) {
             BottomSheetBehavior()
@@ -96,10 +97,6 @@ open class QuickBottomSheetView(
         mBehavior?.isHideable = hideAble()
         mBehavior?.state = initSheetState()
         mBehavior?.peekHeight = initPeekHeight()
-    }
-
-    fun getBehavior(): BottomSheetBehavior<View>? {
-        return mBehavior
     }
 
     override fun getViewContext(): Context {

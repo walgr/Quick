@@ -12,6 +12,6 @@ object InitViewHelper {
         layoutView: View? = null,
         layoutViewInContext: RunOnContext<View>? = null,
     ): View {
-        return layoutViewInContext?.run(context) ?: (layoutView ?: layoutId.toView(context))
+        return layoutViewInContext?.run(context) ?: layoutView ?: layoutId.toView(context)
     }
 }

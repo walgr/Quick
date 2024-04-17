@@ -1,59 +1,83 @@
 package com.wpf.app.quickdialog
 
+import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
+import androidx.annotation.StyleRes
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.wpf.app.base.NO_SET
+import com.wpf.app.base.QuickView
 import com.wpf.app.base.bind.QuickBindWrap
 import com.wpf.app.quickdialog.helper.DialogSheetHelper
 import com.wpf.app.quickdialog.helper.DialogSizeHelper
 import com.wpf.app.quickdialog.listeners.DialogLifecycle
 import com.wpf.app.quickdialog.listeners.DialogSize
 import com.wpf.app.quickdialog.listeners.SheetInit
+import com.wpf.app.quickdialog.minAndMaxLimit.SizeLimitViewGroup
 import com.wpf.app.quickutil.helper.InitViewHelper
+import com.wpf.app.quickutil.helper.toAnim
 import com.wpf.app.quickutil.run.RunOnContext
 
 /**
  * Created by 王朋飞 on 2022/6/21.
  */
-open class QuickBottomSheetDialog(
+open class QuickBaseBottomSheetDialog(
     context: Context,
-    themeId: Int = 0,
+    @StyleRes val themeId: Int = 0,
     @LayoutRes private val layoutId: Int = 0,
     private val layoutView: View? = null,
-    private val layoutViewInContext: RunOnContext<View>? = null,
-) : BottomSheetDialog(context, themeId), DialogSize, DialogLifecycle, SheetInit {
+    private var layoutViewInContext: RunOnContext<View>? = null,
+) : BottomSheetDialog(context, true, null), SheetInit, DialogSize, DialogLifecycle, QuickView {
 
-    protected var mView: View? = null
+    private var mView: View? = null
     override fun getView(): View? {
         return mView
     }
 
-    protected var mBehavior: BottomSheetBehavior<View>? = null
+    private var mBehavior: BottomSheetBehavior<View>? = null
 
+    @CallSuper
     override fun onStart() {
         super.onStart()
         mBehavior = DialogSheetHelper.dealSheet(this)
         DialogSizeHelper.dealSize(this, initDialogWidth(), initDialogHeight())
     }
 
+    @CallSuper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         dealSize()
-        mView = generateContentView(InitViewHelper.init(context, layoutId, layoutView, layoutViewInContext))
+        mView = generateContentView(
+            InitViewHelper.init(
+                context,
+                layoutId,
+                layoutView,
+                layoutViewInContext
+            )
+        )
+        if (initDialogAdaptiveHeight()) {
+            mView = SizeLimitViewGroup(getViewContext()).apply {
+                addView(mView)
+            }
+            if (initDialogAnim() != DialogSize.NO_SET) {
+                mView?.startAnimation(initDialogAnim().toAnim())
+            }
+        }
         setContentView(mView!!)
         val window = window
         if (window != null) {
             if (initDialogAnim() != DialogSize.NO_SET) {
-                window.setWindowAnimations(initDialogAnim())
+                window.attributes.windowAnimations = initDialogAnim()
             }
-            window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             window.decorView.setPadding(0, 0, 0, 0)
+            window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         }
         QuickBindWrap.bind(this)
         initView(mView!!)
@@ -63,9 +87,7 @@ open class QuickBottomSheetDialog(
         return view
     }
 
-    fun initView(view: View) {
-
-    }
+    open fun initView(view: View) {}
 
     protected var mScreenWidth = 0
     protected var mScreenHeight = 0
@@ -88,38 +110,41 @@ open class QuickBottomSheetDialog(
     }
 
     /**
-     * 重新设置高度
+     * 重新设置大小
      */
-    fun newHeight(newHeight: Int) {
-        this.mNewHeight = newHeight
+    fun newSize(newWidth: Int = NO_SET, newHeight: Int = NO_SET) {
+        if (mNewWidth != DialogSize.NO_SET) {
+            this.mNewWidth = newWidth
+        }
+        if (mNewHeight != DialogSize.NO_SET) {
+            this.mNewHeight = newHeight
+        }
         DialogSizeHelper.dealSize(
             this,
             if (mNewWidth == DialogSize.NO_SET) initDialogWidth() else mNewWidth,
-            newHeight
-        )
-    }
-
-    /**
-     * 重新设置宽度
-     */
-    fun newWidth(newWidth: Int) {
-        this.mNewWidth = newWidth
-        DialogSizeHelper.dealSize(
-            this,
-            newWidth,
             if (mNewHeight == DialogSize.NO_SET) initDialogHeight() else mNewHeight
         )
     }
 
+    override fun getLifecycleDialog(): Dialog {
+        return this
+    }
+    override var funcPrepare: (() -> Unit)? = null
+    override var funcShow: (Dialog.() -> Unit)? = null
+    override var funcDismiss: (Dialog.() -> Unit)? = null
     override fun show() {
         onDialogPrepare()
         super.show()
-        onDialogOpen()
+        onDialogShow()
+    }
+
+    open fun show(any: Any) {
+        show()
     }
 
     override fun dismiss() {
         super.dismiss()
-        onDialogClose()
+        onDialogDismiss()
         listener?.onDismiss(this)
     }
 

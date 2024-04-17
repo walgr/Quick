@@ -1,14 +1,15 @@
 package com.wpf.app.quickwork.widget
 
 import android.content.Context
+import androidx.annotation.StyleRes
 import com.wpf.app.base.ability.base.QuickAbility
 import com.wpf.app.quick.ability.QuickDialog
 import com.wpf.app.quickwork.widget.theme.QuickDialogThemeBase
 import com.wpf.app.quickwork.widget.theme.QuickDialogThemeI
 
-open class QuickThemeDialog(
+open class QuickThemeDialog @JvmOverloads constructor(
     context: Context,
-    themeId: Int = 0,
+    @StyleRes themeId: Int = 0,
     theme: QuickDialogThemeI? = null,
     abilityList: List<QuickAbility> = mutableListOf(),
 ) : QuickDialog(
@@ -23,10 +24,6 @@ open class QuickThemeDialog(
 
     override fun canDialogBackgroundClick(): Boolean {
         return curTheme?.canBackgroundClick ?: super.canDialogBackgroundClick()
-    }
-
-    override fun initDialogStyle(): Int {
-        return curTheme?.dialogStyle ?: super.initDialogStyle()
     }
 
     override fun initDialogAdaptiveHeight(): Boolean {

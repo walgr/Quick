@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import com.wpf.app.base.bind.Bind
-import com.wpf.app.base.bind.QuickBindWrap
 import com.wpf.app.quickwidget.quickview.QuickItemGroup
 
 /**
@@ -26,7 +25,7 @@ open class QuickBindGroup<T : ViewGroup> @JvmOverloads constructor(
     defStyleAttr,
     addToParent = addToParent,
     layoutId = layoutId
-), com.wpf.app.base.bind.Bind {
+), Bind {
 
     private var isLoadFirst = true
     override fun onCreateViewHolder() {

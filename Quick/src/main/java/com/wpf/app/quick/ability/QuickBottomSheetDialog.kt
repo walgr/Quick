@@ -8,16 +8,16 @@ import androidx.annotation.StyleRes
 import com.wpf.app.base.ability.base.QuickAbility
 import com.wpf.app.base.ability.base.QuickInflateViewAbility
 import com.wpf.app.base.ability.base.QuickLifecycleAbility
-import com.wpf.app.quickdialog.QuickBaseDialog
+import com.wpf.app.quickdialog.QuickBaseBottomSheetDialog
 import com.wpf.app.quickutil.helper.InitViewHelper
 import com.wpf.app.quickutil.other.forceTo
 import com.wpf.app.quickutil.run.runOnContext
 
-open class QuickDialog(
+open class QuickBottomSheetDialog(
     context: Context,
     @StyleRes themeId: Int = 0,
     private val abilityList: List<QuickAbility> = mutableListOf(),
-) : QuickBaseDialog(context = context, themeId = themeId, layoutViewInContext = runOnContext {
+) : QuickBaseBottomSheetDialog(context = context, themeId = themeId, layoutViewInContext = runOnContext {
     val inflateAbility = abilityList.first { ability -> ability is QuickInflateViewAbility }
         .forceTo<QuickInflateViewAbility>()
     InitViewHelper.init(
@@ -33,7 +33,7 @@ open class QuickDialog(
     override fun generateContentView(view: View): View {
         val inflateViewAbility =
             abilityList.first { it is QuickInflateViewAbility }.forceTo<QuickInflateViewAbility>()
-        return inflateViewAbility.generateContentView(this, view.forceTo<View>())
+        return inflateViewAbility.generateContentView(this, view)
     }
 
     @CallSuper

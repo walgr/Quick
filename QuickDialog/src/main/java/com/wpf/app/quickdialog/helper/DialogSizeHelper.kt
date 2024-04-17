@@ -15,6 +15,12 @@ object DialogSizeHelper {
         if (dialog.getWindow() == null) return
         val window: Window = dialog.getWindow()!!
         val windowParams: WindowManager.LayoutParams = window.attributes
+        windowParams.gravity = dialog.initDialogGravity()
+        windowParams.dimAmount = dialog.initDialogAlpha()
+        if (dialog.canDialogBackgroundClick()) {
+            //背景点击透传
+            windowParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+        }
         if (dialog.getNewWidth() != DialogSize.NO_SET || dialog.getNewHeight() != DialogSize.NO_SET) {
             if (dialog.getNewWidth() != DialogSize.NO_SET) {
                 windowParams.width = dealDialogWidth(
@@ -29,16 +35,12 @@ object DialogSizeHelper {
                 )
             }
         } else {
-            windowParams.gravity = dialog.initDialogGravity()
-            windowParams.dimAmount = dialog.initDialogAlpha()
-            if (dialog.canDialogBackgroundClick()) {
-                //背景点击透传
-                windowParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
-            }
             if ((dialog.initDialogAdaptiveWidth() || dialog.initDialogWidth() == WindowManager.LayoutParams.WRAP_CONTENT) && dialog.getView() != null && dialog.initDialogWidthPercent() == DialogSize.NO_SET.toFloat()) {
                 dialog.getView()!!.post {
                     windowParams.width = dealDialogWidth(dialog, dialog.getView()!!.width)
-                    window.attributes = windowParams
+                    if (!dialog.initDialogAdaptiveHeight()) {
+                        window.attributes = windowParams
+                    }
                 }
             } else {
                 windowParams.width = dealDialogWidth(
@@ -52,7 +54,9 @@ object DialogSizeHelper {
                     minAndMaxLimit?.maxHeight = dialog.initDialogMaxHeight()
                     minAndMaxLimit?.getFirstChild()?.post {
                         windowParams.height = dealDialogHeight(dialog, minAndMaxLimit.getFirstChild()!!.height)
-                        window.attributes = windowParams
+                        if (!dialog.initDialogAdaptiveHeight()) {
+                            window.attributes = windowParams
+                        }
                     }
                 } else {
                     dialog.getView()!!.post {
@@ -60,7 +64,6 @@ object DialogSizeHelper {
                         window.attributes = windowParams
                     }
                 }
-
             } else {
                 windowParams.height = dealDialogHeight(
                     dialog,

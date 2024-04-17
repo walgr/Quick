@@ -37,6 +37,7 @@
         <activity android:name=".DialogTestActivity"/>
         <activity android:name=".ShadowViewTestActivity"/>
         <activity android:name=".FragmentTestActivity"/>
+        <activity android:name=".BottomSheetDialogTestActivity"/>
         <activity android:name=".wanandroid.WanAndroidHomeActivity"/>
         <activity android:name=".wanandroid.WebViewActivity"/>
     </application>

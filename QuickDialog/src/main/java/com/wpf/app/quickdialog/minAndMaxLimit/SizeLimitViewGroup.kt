@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
 
-class SizeLimitViewGroup @JvmOverloads constructor(
+open class SizeLimitViewGroup @JvmOverloads constructor(
     mContext: Context,
     attributeSet: AttributeSet? = null,
     defStyleAttr: Int = 0,

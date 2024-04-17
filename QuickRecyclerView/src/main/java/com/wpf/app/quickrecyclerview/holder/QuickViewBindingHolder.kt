@@ -6,22 +6,30 @@ import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import com.wpf.app.quickutil.run.RunOnContextWithSelf
 import com.wpf.app.quickrecyclerview.QuickAdapter
 import com.wpf.app.quickrecyclerview.constant.BRConstant
 import com.wpf.app.quickrecyclerview.data.QuickItemData
+import com.wpf.app.quickutil.run.RunOnContextWithSelf
 
 /**
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-open class QuickViewBindingHolder<T: QuickItemData, VB : ViewDataBinding> @JvmOverloads constructor(
+open class QuickViewBindingHolder<T : QuickItemData, VB : ViewDataBinding> @JvmOverloads constructor(
     mParent: ViewGroup,
     @LayoutRes layoutId: Int = 0,
+    layoutView: View? = null,
     layoutViewInContext: RunOnContextWithSelf<ViewGroup, View>? = null,
     dealBindView: Boolean = false,
     autoClick: Boolean = false,
-) : QuickViewHolder<T>(mParent, layoutId, layoutViewInContext, dealBindView, autoClick) {
+) : QuickViewHolder<T>(
+    mParent,
+    layoutId,
+    layoutView,
+    layoutViewInContext,
+    dealBindView,
+    autoClick
+) {
 
     internal var mViewBinding: VB? = null
 

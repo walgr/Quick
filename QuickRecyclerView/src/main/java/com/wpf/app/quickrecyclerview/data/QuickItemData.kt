@@ -6,8 +6,9 @@ import java.io.Serializable
  * Created by 王朋飞 on 2022/7/13.
  * 基类Item
  */
-open class QuickItemData: Serializable {
+open class QuickItemData(
     var viewType: Int = 0
+): Serializable {
     init {
         this.initViewType()
     }
@@ -16,17 +17,5 @@ open class QuickItemData: Serializable {
         if (viewType == 0) {
             viewType = javaClass.name.hashCode()
         }
-    }
-}
-
-fun QuickItemData?.and(other: QuickItemData) : List<QuickItemData>? {
-    if (this == null) return null
-    return arrayListOf(this, other)
-}
-
-fun QuickItemData?.and(otherList: List<QuickItemData>) : List<QuickItemData>? {
-    if (this == null) return null
-    return arrayListOf(this).apply {
-        addAll(otherList)
     }
 }

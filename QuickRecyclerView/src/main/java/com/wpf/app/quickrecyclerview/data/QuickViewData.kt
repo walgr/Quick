@@ -7,8 +7,9 @@ import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
 import com.wpf.app.quickutil.run.RunOnContextWithSelf
 
 open class QuickViewData @JvmOverloads constructor(
-    @LayoutRes open val layoutId: Int = 0,
-    @Transient open var layoutViewInViewGroup: RunOnContextWithSelf<ViewGroup, View>? = null,
+    @LayoutRes val layoutId: Int = 0,
+    @Transient var layoutView: View? = null,
+    @Transient var layoutViewInViewGroup: RunOnContextWithSelf<ViewGroup, View>? = null,
     isSuspension: Boolean = false       //View是否悬浮置顶
 ) : QuickSuspensionData(isSuspension = isSuspension) {
     open fun beforeAdapterCreateHolder(mParent: ViewGroup) {

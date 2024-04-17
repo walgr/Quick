@@ -13,7 +13,7 @@ import com.wpf.app.quickutil.widget.onPageSelected
 import com.wpf.app.quickutil.widget.onTabSelected
 import com.wpf.app.quickutil.helper.onceClick
 import com.wpf.app.quickutil.widget.selectTab
-import com.wpf.app.quickwidget.quickview.QuickViewGroupNoAttrs
+import com.wpf.app.quickutil.widget.QuickViewGroupNoAttrs
 
 /**
  * 挪动位置需要同步修改TabInitProcessor里的包名

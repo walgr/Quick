@@ -2,17 +2,17 @@ package com.wpf.app.quick.helper
 
 import android.view.View
 import androidx.databinding.ViewDataBinding
+import com.wpf.app.base.QuickView
+import com.wpf.app.base.ability.base.with
 import com.wpf.app.quick.ability.QuickActivity
 import com.wpf.app.quick.ability.QuickFragment
 import com.wpf.app.quick.ability.ex.contentView
 import com.wpf.app.quick.ability.ex.modelBindingWithSelf
 import com.wpf.app.quick.ability.ex.viewModel
-import com.wpf.app.base.ability.base.with
-import com.wpf.app.base.QuickView
 import com.wpf.app.quick.activity.viewmodel.QuickVBModel
 import com.wpf.app.quick.activity.viewmodel.QuickViewModel
 import com.wpf.app.quickdialog.QuickBaseDialog
-import com.wpf.app.quickdialog.QuickDialogFragment
+import com.wpf.app.quickdialog.QuickBaseDialogFragment
 
 fun View.toFragment() = QuickFragment(
     contentView(layoutView = this@toFragment)
@@ -67,6 +67,6 @@ fun View.toDialog(onDialogInit: ((view: View?) -> Unit)? = null): QuickBaseDialo
     }
 }
 
-fun View.toDialogFragment(): QuickDialogFragment {
-    return QuickDialogFragment(layoutView = this)
+fun View.toDialogFragment(): QuickBaseDialogFragment {
+    return QuickBaseDialogFragment(layoutView = this)
 }
