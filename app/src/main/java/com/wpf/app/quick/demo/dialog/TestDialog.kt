@@ -38,9 +38,9 @@ class TestDialog(
         return Gravity.BOTTOM
     }
 
-//    override fun initDialogAnimStyle(): Int {
-//        return R.style.DialogBottomTopAnim
-//    }
+    override fun initDialogAnimStyle(): Int {
+        return R.style.DialogBottomTopAnim
+    }
 
     override fun initDialogAdaptiveHeight(): Boolean {
         return true
