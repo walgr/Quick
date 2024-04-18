@@ -17,7 +17,7 @@ import java.io.Serializable
 open class SpaceItem(
     open val space: Int,
     open val isVertical: Boolean = true
-) : QuickBindData(layoutViewInContext = runOnContextWithSelf { context ->
+) : QuickBindData(layoutViewCreate = runOnContextWithSelf { context ->
     View(context)
 }), Serializable {
 

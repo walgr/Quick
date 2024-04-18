@@ -20,14 +20,14 @@ import com.wpf.app.quickutil.run.runOnContext
 open class QuickDialogFragment(
     private val abilityList: List<QuickAbility> = mutableListOf()
 ) : QuickBaseDialogFragment(
-    layoutViewInContext = runOnContext {
+    layoutViewCreate = {
         val inflateAbility = abilityList.first { ability -> ability is QuickInflateViewAbility }
             .forceTo<QuickInflateViewAbility>()
         InitViewHelper.init(
             this,
             inflateAbility.layoutId(),
             inflateAbility.layoutView(),
-            inflateAbility.layoutViewInContext()
+            inflateAbility.layoutViewCreate()
         )
     }
 ), BindViewModel<ViewModel> {

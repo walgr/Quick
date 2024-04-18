@@ -11,7 +11,7 @@ class Test3Dialog(
     context: Context
 ): QuickBaseDialog(
     context,
-    layoutViewInContext = runOnContext {
+    layoutViewCreate = {
         text(text = "Test3Dialog")
     }
 ) {

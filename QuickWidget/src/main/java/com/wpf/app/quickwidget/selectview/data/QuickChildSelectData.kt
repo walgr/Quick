@@ -27,7 +27,7 @@ open class QuickChildSelectData(
     maxLimit: Int = 5,                             //多选最多数量
     maxLimitListener: MaxLimitListener? = null,    //超出反馈
     layoutId: Int = 0,
-    layoutViewInContext: RunOnContextWithSelf<ViewGroup, View>? = null,
+    layoutViewCreate: RunOnContextWithSelf<ViewGroup, View>? = null,
     autoSet: Boolean = false,                                        //自动映射
 ) : QuickMultiSelectData(
     canCancel = canCancel,
@@ -40,7 +40,7 @@ open class QuickChildSelectData(
     isSelect = isSelect,
     defaultSelect = defaultSelect,
     layoutId = layoutId,
-    layoutViewInContext = layoutViewInContext,
+    layoutViewCreate = layoutViewCreate,
     autoSet = autoSet,
     isSuspension = isSuspension
 ), Serializable {

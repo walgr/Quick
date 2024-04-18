@@ -9,7 +9,6 @@ import com.wpf.app.base.ability.base.QuickAbility
 import com.wpf.app.base.ability.base.QuickViewAbility
 import com.wpf.app.base.ability.base.with
 import com.wpf.app.quick.R
-import com.wpf.app.quickutil.run.runOnContext
 import com.wpf.app.quickutil.helper.matchLayoutParams
 import com.wpf.app.quickutil.other.forceTo
 
@@ -17,7 +16,7 @@ fun <T : Fragment> fragment(
     fragment: T,
     builder: (T.() -> Unit)? = null
 ): MutableList<QuickAbility> {
-    return generateContentView(layoutViewInContext = runOnContext {
+    return generateContentView(layoutViewCreate = {
         FrameLayout(this).apply {
             id = R.id.quickRoot
             layoutParams = matchLayoutParams()

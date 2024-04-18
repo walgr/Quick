@@ -1,5 +1,6 @@
 package com.wpf.app.quick.activity
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -19,7 +20,6 @@ import com.wpf.app.base.bind.QuickBindWrap
 import com.wpf.app.quickbind.interfaces.BindBaseFragment
 import com.wpf.app.quicknetwork.base.RequestCoroutineScope
 import com.wpf.app.quickutil.helper.InitViewHelper
-import com.wpf.app.quickutil.run.RunOnContext
 import kotlinx.coroutines.Job
 
 /**
@@ -29,7 +29,7 @@ import kotlinx.coroutines.Job
 open class QuickBaseFragment @JvmOverloads constructor(
     @LayoutRes open val layoutId: Int = 0,
     open val layoutView: View? = null,
-    open val layoutViewInContext: RunOnContext<View>? = null,
+    open val layoutViewCreate: (Context.() -> View)? = null,
 ) : Fragment(), BindBaseFragment, RequestCoroutineScope, QuickView, Bind {
 
     override var jobManager: MutableList<Job> = mutableListOf()
@@ -63,7 +63,7 @@ open class QuickBaseFragment @JvmOverloads constructor(
         savedInstanceState: Bundle?,
     ): View? {
         if (mView == null) {
-            mView = generateContentView(InitViewHelper.init(inflater.context, layoutId, layoutView, layoutViewInContext))
+            mView = generateContentView(InitViewHelper.init(inflater.context, layoutId, layoutView, layoutViewCreate))
         }
         return mView
     }

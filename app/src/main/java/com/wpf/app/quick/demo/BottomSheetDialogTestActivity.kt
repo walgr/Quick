@@ -17,7 +17,6 @@ import com.wpf.app.quickutil.helper.matchWrapLayoutParams
 import com.wpf.app.quickutil.helper.onClick
 import com.wpf.app.quickutil.helper.reset
 import com.wpf.app.quickutil.helper.toColor
-import com.wpf.app.quickutil.run.runOnContext
 import com.wpf.app.quickwork.ability.helper.text
 import com.wpf.app.quickwork.ability.helper.title
 
@@ -30,7 +29,7 @@ class BottomSheetDialogTestActivity : QuickActivity(
                 text = "弹窗"
             }.onClick {
                 bottomSheetDialog(
-                    layoutViewInContext = runOnContext {
+                    layoutViewCreate = {
                         myLayout<LinearLayout>(
                             layoutParams = matchWrapLayoutParams().reset(height = 100.dp()),
                         ) {

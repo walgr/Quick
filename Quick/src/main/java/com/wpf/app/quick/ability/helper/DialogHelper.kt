@@ -13,12 +13,11 @@ import com.wpf.app.quick.ability.QuickDialog
 import com.wpf.app.quick.ability.QuickDialogFragment
 import com.wpf.app.quick.ability.ex.contentView
 import com.wpf.app.quickutil.other.context
-import com.wpf.app.quickutil.run.RunOnContext
 
 open class QuickBottomSheetDialogFragmentTemp(
     @LayoutRes layoutId: Int = 0,
     layoutView: View? = null,
-    layoutViewInContext: RunOnContext<View>? = null,
+    layoutViewCreate: (Context.() -> View)? = null,
     private val canBackgroundClick: Boolean? = null,
     private val width: Int? = null,
     private val height: Int? = null,
@@ -39,7 +38,7 @@ open class QuickBottomSheetDialogFragmentTemp(
     private val defaultSheetState: Int? = null,
 ) : QuickBottomSheetDialogFragment(
     abilityList = contentView(
-        layoutId, layoutView, layoutViewInContext
+        layoutId, layoutView, layoutViewCreate
     )
 ) {
 
@@ -119,7 +118,7 @@ open class QuickBottomSheetDialogFragmentTemp(
 fun Any.bottomSheetDialogFragment(
     @LayoutRes layoutId: Int = 0,
     layoutView: View? = null,
-    layoutViewInContext: RunOnContext<View>? = null,
+    layoutViewCreate: (Context.() -> View)? = null,
     canBackgroundClick: Boolean? = null,
     width: Int? = null,
     height: Int? = null,
@@ -147,7 +146,7 @@ fun Any.bottomSheetDialogFragment(
     val dialog = QuickBottomSheetDialogFragmentTemp(
         layoutId,
         layoutView,
-        layoutViewInContext,
+        layoutViewCreate,
         canBackgroundClick,
         width,
         height,
@@ -183,7 +182,7 @@ fun Any.bottomSheetDialog(
     @StyleRes themeId: Int = 0,
     @LayoutRes layoutId: Int = 0,
     layoutView: View? = null,
-    layoutViewInContext: RunOnContext<View>? = null,
+    layoutViewCreate: (Context.() -> View)? = null,
     canBackgroundClick: Boolean? = null,
     width: Int? = null,
     height: Int? = null,
@@ -211,7 +210,7 @@ fun Any.bottomSheetDialog(
     val dialog = object : QuickBottomSheetDialog(
         mContext,
         themeId = themeId,
-        abilityList = contentView(layoutId, layoutView, layoutViewInContext)
+        abilityList = contentView(layoutId, layoutView, layoutViewCreate)
     ) {
 
         override fun initSheetState(): Int {
@@ -302,7 +301,7 @@ fun Any.bottomSheetDialog(
 open class QuickDialogFragmentTemp(
     @LayoutRes layoutId: Int = 0,
     layoutView: View? = null,
-    layoutViewInContext: RunOnContext<View>? = null,
+    layoutViewCreate: (Context.() -> View)? = null,
     private val canBackgroundClick: Boolean? = null,
     private val width: Int? = null,
     private val height: Int? = null,
@@ -317,7 +316,7 @@ open class QuickDialogFragmentTemp(
     private val alpha: Float? = null,
     private val widthAdaptive: Boolean? = null,
     private val heightAdaptive: Boolean? = null,
-) : QuickDialogFragment(abilityList = contentView(layoutId, layoutView, layoutViewInContext)) {
+) : QuickDialogFragment(abilityList = contentView(layoutId, layoutView, layoutViewCreate)) {
     override fun canDialogBackgroundClick(): Boolean {
         return canBackgroundClick ?: super.canDialogBackgroundClick()
     }
@@ -378,7 +377,7 @@ open class QuickDialogFragmentTemp(
 fun Any.dialogFragment(
     @LayoutRes layoutId: Int = 0,
     layoutView: View? = null,
-    layoutViewInContext: RunOnContext<View>? = null,
+    layoutViewCreate: (Context.() -> View)? = null,
     canBackgroundClick: Boolean? = null,
     width: Int? = null,
     height: Int? = null,
@@ -400,7 +399,7 @@ fun Any.dialogFragment(
     val dialog = QuickDialogFragmentTemp(
         layoutId,
         layoutView,
-        layoutViewInContext,
+        layoutViewCreate,
         canBackgroundClick,
         width,
         height,
@@ -428,7 +427,7 @@ fun Any.dialog(
     @StyleRes themeId: Int = 0,
     @LayoutRes layoutId: Int = 0,
     layoutView: View? = null,
-    layoutViewInContext: RunOnContext<View>? = null,
+    layoutViewCreate: (Context.() -> View)? = null,
     canBackgroundClick: Boolean? = null,
     width: Int? = null,
     height: Int? = null,
@@ -451,7 +450,7 @@ fun Any.dialog(
     val dialog = object : QuickDialog(
         mContext,
         themeId = themeId,
-        abilityList = contentView(layoutId, layoutView, layoutViewInContext)
+        abilityList = contentView(layoutId, layoutView, layoutViewCreate)
     ) {
 
         override fun canDialogBackgroundClick(): Boolean {

@@ -17,14 +17,14 @@ open class QuickDialog(
     context: Context,
     @StyleRes themeId: Int = 0,
     private val abilityList: List<QuickAbility> = mutableListOf(),
-) : QuickBaseDialog(context = context, themeId = themeId, layoutViewInContext = runOnContext {
+) : QuickBaseDialog(context = context, themeId = themeId, layoutViewCreate = {
     val inflateAbility = abilityList.first { ability -> ability is QuickInflateViewAbility }
         .forceTo<QuickInflateViewAbility>()
     InitViewHelper.init(
         this,
         inflateAbility.layoutId(),
         inflateAbility.layoutView(),
-        inflateAbility.layoutViewInContext()
+        inflateAbility.layoutViewCreate()
     )
 }) {
     internal val extraParameter: LinkedHashMap<String, Any> = linkedMapOf()

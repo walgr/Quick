@@ -46,7 +46,7 @@ open class QuickBaseBottomSheetDialogFragment @JvmOverloads constructor(
     @StyleRes val themeId: Int = R.style.TranslateBottomSheetDialogTheme,
     @LayoutRes open val layoutId: Int = 0,
     var layoutView: View? = null,
-    var layoutViewInContext: RunOnContext<View>? = null,
+    var layoutViewCreate: (Context.() -> View)? = null,
 ) : BottomSheetDialogFragment(), BindBaseFragment, RequestCoroutineScope, DialogSize,
     DialogLifecycle, SheetInit, Bind, QuickView {
 
@@ -99,7 +99,7 @@ open class QuickBaseBottomSheetDialogFragment @JvmOverloads constructor(
                     inflater.context,
                     layoutId,
                     layoutView,
-                    layoutViewInContext
+                    layoutViewCreate
                 )
             )
         }

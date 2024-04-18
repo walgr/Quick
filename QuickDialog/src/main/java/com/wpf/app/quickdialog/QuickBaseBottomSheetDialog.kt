@@ -22,8 +22,6 @@ import com.wpf.app.quickdialog.listeners.DialogSize
 import com.wpf.app.quickdialog.listeners.SheetInit
 import com.wpf.app.quickdialog.minAndMaxLimit.SizeLimitViewGroup
 import com.wpf.app.quickutil.helper.InitViewHelper
-import com.wpf.app.quickutil.helper.toAnim
-import com.wpf.app.quickutil.run.RunOnContext
 
 /**
  * Created by 王朋飞 on 2022/6/21.
@@ -33,7 +31,7 @@ open class QuickBaseBottomSheetDialog(
     @StyleRes val themeId: Int = 0,
     @LayoutRes private val layoutId: Int = 0,
     private val layoutView: View? = null,
-    private var layoutViewInContext: RunOnContext<View>? = null,
+    private var layoutViewCreate: (Context.() -> View)? = null,
 ) : BottomSheetDialog(context, true, null), SheetInit, DialogSize, DialogLifecycle, QuickView {
 
     private var mView: View? = null
@@ -59,7 +57,7 @@ open class QuickBaseBottomSheetDialog(
                 context,
                 layoutId,
                 layoutView,
-                layoutViewInContext
+                layoutViewCreate
             )
         )
         if (initDialogAdaptiveHeight()) {

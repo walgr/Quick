@@ -22,11 +22,11 @@ open class QuickViewHolder<T : QuickItemData> @JvmOverloads constructor(
     mParent: ViewGroup,
     @LayoutRes layoutId: Int = 0,
     layoutView: View? = null,
-    layoutViewInContext: RunOnContextWithSelf<ViewGroup, View>? = null,
+    layoutViewCreate: RunOnContextWithSelf<ViewGroup, View>? = null,
     open var dealBindView: Boolean = false,
     open var autoClick: Boolean = false,
 ) : RecyclerView.ViewHolder(
-    layoutViewInContext?.run(mParent.context, mParent) ?: layoutView?.removeParent() ?: layoutId.toView(
+    layoutViewCreate?.run(mParent.context, mParent) ?: layoutView?.removeParent() ?: layoutId.toView(
         mParent.context,
         mParent,
     )

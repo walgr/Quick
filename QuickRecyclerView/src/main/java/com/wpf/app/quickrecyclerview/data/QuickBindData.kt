@@ -19,12 +19,12 @@ import java.io.Serializable
  */
 open class QuickBindData @JvmOverloads constructor(
     layoutId: Int = 0,
-    layoutViewInContext: RunOnContextWithSelf<ViewGroup, View>? = null,
+    layoutViewCreate: RunOnContextWithSelf<ViewGroup, View>? = null,
     open var autoSet: Boolean = false,              //自动映射
     isSuspension: Boolean = false                   //View是否悬浮置顶
 ) : QuickViewData(
     layoutId = layoutId,
-    layoutViewInViewGroup = layoutViewInContext,
+    layoutViewInViewGroup = layoutViewCreate,
     isSuspension = isSuspension
 ), Bind, Serializable {
 

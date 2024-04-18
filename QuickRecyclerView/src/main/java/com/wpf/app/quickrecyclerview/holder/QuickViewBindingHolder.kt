@@ -19,14 +19,14 @@ open class QuickViewBindingHolder<T : QuickItemData, VB : ViewDataBinding> @JvmO
     mParent: ViewGroup,
     @LayoutRes layoutId: Int = 0,
     layoutView: View? = null,
-    layoutViewInContext: RunOnContextWithSelf<ViewGroup, View>? = null,
+    layoutViewCreate: RunOnContextWithSelf<ViewGroup, View>? = null,
     dealBindView: Boolean = false,
     autoClick: Boolean = false,
 ) : QuickViewHolder<T>(
     mParent,
     layoutId,
     layoutView,
-    layoutViewInContext,
+    layoutViewCreate,
     dealBindView,
     autoClick
 ) {

@@ -11,20 +11,19 @@ import com.wpf.app.base.ability.base.QuickLifecycleAbility
 import com.wpf.app.quickdialog.QuickBaseBottomSheetDialog
 import com.wpf.app.quickutil.helper.InitViewHelper
 import com.wpf.app.quickutil.other.forceTo
-import com.wpf.app.quickutil.run.runOnContext
 
 open class QuickBottomSheetDialog(
     context: Context,
     @StyleRes themeId: Int = 0,
     private val abilityList: List<QuickAbility> = mutableListOf(),
-) : QuickBaseBottomSheetDialog(context = context, themeId = themeId, layoutViewInContext = runOnContext {
+) : QuickBaseBottomSheetDialog(context = context, themeId = themeId, layoutViewCreate = {
     val inflateAbility = abilityList.first { ability -> ability is QuickInflateViewAbility }
         .forceTo<QuickInflateViewAbility>()
     InitViewHelper.init(
         this,
         inflateAbility.layoutId(),
         inflateAbility.layoutView(),
-        inflateAbility.layoutViewInContext()
+        inflateAbility.layoutViewCreate()
     )
 }) {
     internal val extraParameter: LinkedHashMap<String, Any> = linkedMapOf()

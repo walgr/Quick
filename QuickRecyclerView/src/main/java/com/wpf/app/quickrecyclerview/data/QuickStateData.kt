@@ -11,12 +11,12 @@ import java.io.Serializable
 abstract class QuickStateData @JvmOverloads constructor(
     @Transient open var selected: Boolean = false,
     layoutId: Int = 0,
-    layoutViewInContext: RunOnContextWithSelf<ViewGroup, View>? = null,
+    layoutViewCreate: RunOnContextWithSelf<ViewGroup, View>? = null,
     autoSet: Boolean = false,             //自动映射
     isSuspension: Boolean = false,
 ) : QuickClickData(
     layoutId = layoutId,
-    layoutViewInContext = layoutViewInContext,
+    layoutViewCreate = layoutViewCreate,
     autoSet = autoSet,
     isSuspension = isSuspension
 ), Serializable {

@@ -1,5 +1,6 @@
 package com.wpf.app.quick.activity
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -14,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.wpf.app.base.QuickView
 import com.wpf.app.base.bind.Bind
 import com.wpf.app.base.bind.QuickBindWrap
-import com.wpf.app.quickutil.run.RunOnContext
 import com.wpf.app.quicknetwork.base.RequestCoroutineScope
 import com.wpf.app.quickutil.helper.InitViewHelper
 import kotlinx.coroutines.Job
@@ -26,7 +26,7 @@ import kotlinx.coroutines.Job
 open class QuickBaseActivity @JvmOverloads constructor(
     @LayoutRes open val layoutId: Int = 0,
     open val layoutView: View? = null,
-    open val layoutViewInContext: RunOnContext<View>? = null,
+    open val layoutViewCreate: (Context.() -> View)? = null,
 ) : AppCompatActivity(), QuickView, RequestCoroutineScope, Bind {
 
     override var jobManager: MutableList<Job> = mutableListOf()
@@ -40,7 +40,7 @@ open class QuickBaseActivity @JvmOverloads constructor(
                 this,
                 layoutId,
                 layoutView,
-                layoutViewInContext
+                layoutViewCreate
             )
         )
         setContentView(mView)

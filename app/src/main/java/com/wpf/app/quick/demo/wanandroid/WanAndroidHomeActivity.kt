@@ -43,7 +43,7 @@ class WanAndroidHomeActivity : QuickActivity(contentView<LinearLayout> { quickVi
         moreGroup(8.dp()) {
             text(text = "登录", textColor = R.color.white.toColor(), textSize = 16.dpF()) {
                 onClick {
-                    dialog(layoutViewInContext = runOnContext {
+                    dialog(layoutViewCreate = {
                         text(
                             text = "弹窗", textColor = R.color.white.toColor(), textSize = 24.dpF()
                         )
@@ -74,7 +74,7 @@ class WanAndroidHomeActivity : QuickActivity(contentView<LinearLayout> { quickVi
         viewPager(quickView = quickView) {
             fragment(RecommendFragment())
             viewFragment {
-                myLayout(layoutViewInContext = runOnContext {
+                myLayout(layoutViewCreate = {
                     NestedScrollView(this).apply {
                         text(text = "测试")
                     }

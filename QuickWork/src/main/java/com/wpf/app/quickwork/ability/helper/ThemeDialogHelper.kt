@@ -15,7 +15,7 @@ fun Any.dialog(
     @StyleRes themeId: Int = 0,
     @LayoutRes layoutId: Int = 0,
     layoutView: View? = null,
-    layoutViewInContext: RunOnContext<View>? = null,
+    layoutViewCreate: (Context.() -> View)? = null,
     canBackgroundClick: Boolean? = null,
     width: Int? = null,
     height: Int? = null,
@@ -38,7 +38,7 @@ fun Any.dialog(
         mContext,
         themeId = themeId,
         theme = theme,
-        abilityList = contentView(layoutId, layoutView, layoutViewInContext)
+        abilityList = contentView(layoutId, layoutView, layoutViewCreate)
     ) {
 
         override fun canDialogBackgroundClick(): Boolean {

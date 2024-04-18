@@ -21,12 +21,12 @@ open class QuickSelectData(
     open var defaultSelect: Boolean = false,                        //是否默认选中，true 清空后会再次选中
     open var isSelect: Boolean = defaultSelect,
     layoutId: Int = 0,
-    layoutViewInContext: RunOnContextWithSelf<ViewGroup, View>? = null,
+    layoutViewCreate: RunOnContextWithSelf<ViewGroup, View>? = null,
     autoSet: Boolean = false,                                        //自动映射
     isSuspension: Boolean = false,                                  //View是否悬浮置顶
 ) : QuickClickData(
     layoutId = layoutId,
-    layoutViewInContext = layoutViewInContext,
+    layoutViewCreate = layoutViewCreate,
     autoSet = autoSet,
     isSuspension = isSuspension,
 ),

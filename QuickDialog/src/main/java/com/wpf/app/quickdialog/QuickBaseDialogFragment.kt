@@ -43,7 +43,7 @@ open class QuickBaseDialogFragment @JvmOverloads constructor(
     @StyleRes val themeId: Int = 0,
     @LayoutRes var layoutId: Int = 0,
     var layoutView: View? = null,
-    var layoutViewInContext: RunOnContext<View>? = null,
+    var layoutViewCreate: (Context.() -> View)? = null,
 ) : DialogFragment(), BindBaseFragment, RequestCoroutineScope, DialogSize, DialogLifecycle, Bind,
     QuickView {
 
@@ -96,7 +96,7 @@ open class QuickBaseDialogFragment @JvmOverloads constructor(
                     inflater.context,
                     layoutId,
                     layoutView,
-                    layoutViewInContext
+                    layoutViewCreate
                 )
             )
         }

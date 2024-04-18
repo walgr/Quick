@@ -1,5 +1,6 @@
 package com.wpf.app.quick.ability.helper
 
+import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
@@ -8,7 +9,6 @@ import com.wpf.app.quickutil.helper.matchLayoutParams
 import com.wpf.app.quickutil.helper.matchWrapLayoutParams
 import com.wpf.app.quickutil.helper.removeParent
 import com.wpf.app.quickutil.other.context
-import com.wpf.app.quickutil.run.RunOnContext
 import com.wpf.app.quickutil.widget.QuickViewGroup
 import com.wpf.app.quickutil.widget.smartLayoutParams
 
@@ -38,12 +38,12 @@ inline fun <reified T : ViewGroup> Any.myLayout(
 fun Any.myLayout(
     @LayoutRes layoutId: Int = 0,
     layoutView: View? = null,
-    layoutViewInContext: RunOnContext<View>? = null,
+    layoutViewCreate: (Context.() -> View)? = null,
     layoutParams: ViewGroup.LayoutParams = if (this is ViewGroup) smartLayoutParams() else matchLayoutParams(),
     builder: (View.() -> Unit)? = null,
 ): View {
     val mContext = context()!!
-    val view = InitViewHelper.init(mContext, layoutId, layoutView, layoutViewInContext)
+    val view = InitViewHelper.init(mContext, layoutId, layoutView, layoutViewCreate)
     if (this is ViewGroup) {
         addView(view, layoutParams)
         builder?.invoke(this)

@@ -1,5 +1,6 @@
 package com.wpf.app.quickwork.ability.helper
 
+import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
@@ -18,7 +19,6 @@ import com.wpf.app.quickrecyclerview.data.RequestData
 import com.wpf.app.quickrecyclerview.helper.Request2RefreshView
 import com.wpf.app.quickrecyclerview.listeners.RefreshView
 import com.wpf.app.quickrecyclerview.listeners.Request2ListWithView
-import com.wpf.app.quickutil.run.RunOnContext
 import com.wpf.app.quickutil.helper.InitViewHelper
 import com.wpf.app.quickutil.helper.matchLayoutParams
 import com.wpf.app.quickutil.helper.parent
@@ -74,15 +74,15 @@ fun ViewGroup.smartRefreshList(
     enableLoadMore: Boolean = true,
     upperLayerLayoutId: Int = 0,
     upperLayerLayoutView: View? = null,
-    upperLayerLayoutViewInContext: RunOnContext<View>? = null,
+    upperLayerLayoutViewCreate: (Context.() -> View)? = null,
     builder: SmartRefreshLayout.(list: QuickRefreshRecyclerView, upperLayout: View?) -> Request2ListWithView<out RequestData, out QuickItemData, out RefreshView>,
 ): SmartRefreshLayout {
     val list = QuickRefreshRecyclerView(context)
     list.layoutManager = layoutManager
     val upperLayout: View? =
-        if (upperLayerLayoutId != 0 || upperLayerLayoutView != null || upperLayerLayoutViewInContext != null) {
+        if (upperLayerLayoutId != 0 || upperLayerLayoutView != null || upperLayerLayoutViewCreate != null) {
             InitViewHelper.init(
-                context, upperLayerLayoutId, upperLayerLayoutView, upperLayerLayoutViewInContext
+                context, upperLayerLayoutId, upperLayerLayoutView, upperLayerLayoutViewCreate
             )
         } else null
     return smartRefreshLayout(layoutParams,

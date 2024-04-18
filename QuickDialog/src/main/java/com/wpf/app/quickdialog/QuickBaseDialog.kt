@@ -28,14 +28,14 @@ open class QuickBaseDialog(
     @StyleRes themeId: Int = 0,
     @LayoutRes private val layoutId: Int = 0,
     private var layoutView: View? = null,
-    private var layoutViewInContext: RunOnContext<View>? = null,
+    private var layoutViewCreate: (Context.() -> View)? = null,
 ) : AppCompatDialog(context, themeId), DialogSize, DialogLifecycle, QuickView {
 
     private var mView: View? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         dealSize()
-        mView = generateContentView(InitViewHelper.init(getViewContext(), layoutId, layoutView, layoutViewInContext))
+        mView = generateContentView(InitViewHelper.init(getViewContext(), layoutId, layoutView, layoutViewCreate))
         if (initDialogAdaptiveHeight()) {
             mView = SizeLimitViewGroup(getViewContext()).apply {
                 addView(mView)

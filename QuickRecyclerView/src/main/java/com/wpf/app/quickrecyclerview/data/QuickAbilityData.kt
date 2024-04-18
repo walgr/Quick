@@ -23,13 +23,13 @@ open class QuickAbilityData(
     autoSet: Boolean = false,                                                   //自动映射
     isSuspension: Boolean = false,                                              //View是否悬浮置顶
     private val abilityList: List<QuickAbility> = mutableListOf(),
-) : QuickBindData(layoutViewInContext = runOnContextWithSelf { context ->
+) : QuickBindData(layoutViewCreate = runOnContextWithSelf { context ->
     val inflateAbility = abilityList.first { it is QuickInflateViewAbility }.forceTo<QuickInflateViewAbility>()
     var view = InitViewHelper.init(
         context,
         inflateAbility.layoutId(),
         inflateAbility.layoutView(),
-        inflateAbility.layoutViewInContext()
+        inflateAbility.layoutViewCreate()
     )
     view = inflateAbility.generateContentView(this.activity().forceTo(), view)
     inflateAbility.afterGenerateContentView(this.activity().forceTo(), view)
