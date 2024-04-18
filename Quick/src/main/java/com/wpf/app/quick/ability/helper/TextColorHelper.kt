@@ -5,7 +5,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
-import com.wpf.app.quick.ability.scope.TextViewScope
+import com.wpf.app.base.ability.scope.TextViewScope
 
 fun <T : TextView> T.textColor(
     @ColorRes colorRes: Int? = null,

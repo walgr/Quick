@@ -9,7 +9,7 @@ import android.util.TypedValue
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import com.wpf.app.quickutil.helper.attribute.AutoGetAttributeHelper
-import com.wpf.app.quickutil.helper.dpF
+import com.wpf.app.quickutil.helper.dp
 import com.wpf.app.quickutil.helper.toColor
 import com.wpf.app.quickwork.R
 
@@ -114,7 +114,7 @@ interface QuickTextThemeI {
     fun initDataByXml(context: Context) {
         textColor = textColor ?: android.R.color.white.toColor(context)
         hintTextColor = hintTextColor ?: android.R.color.darker_gray.toColor(context)
-        textSize = textSize ?: 14.dpF()
+        textSize = textSize ?: 14f.dp
     }
 
     fun copy(): QuickTextThemeI {

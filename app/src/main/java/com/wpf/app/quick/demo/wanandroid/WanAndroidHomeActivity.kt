@@ -21,12 +21,10 @@ import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.demo.wanandroid.fragment.RecommendFragment
 import com.wpf.app.quick.helper.getActivity
 import com.wpf.app.quickutil.helper.dp
-import com.wpf.app.quickutil.helper.dpF
 import com.wpf.app.quickutil.helper.matchWrapLayoutParams
 import com.wpf.app.quickutil.helper.onClick
 import com.wpf.app.quickutil.helper.reset
 import com.wpf.app.quickutil.helper.toColor
-import com.wpf.app.quickutil.run.runOnContext
 import com.wpf.app.quickwidget.tab.TabManagerProvider
 import com.wpf.app.quickwidget.title.ability.backClick
 import com.wpf.app.quickwork.ability.helper.dialog
@@ -40,12 +38,12 @@ class WanAndroidHomeActivity : QuickActivity(contentView<LinearLayout> { quickVi
     var tabLayout: TabLayout? = null
     var viewPager: ViewPager? = null
     title {
-        moreGroup(8.dp()) {
-            text(text = "登录", textColor = R.color.white.toColor(), textSize = 16.dpF()) {
+        moreGroup(8.dp) {
+            text(text = "登录", textColor = R.color.white.toColor(), textSize = 16f.dp) {
                 onClick {
                     dialog(layoutViewCreate = {
                         text(
-                            text = "弹窗", textColor = R.color.white.toColor(), textSize = 24.dpF()
+                            text = "弹窗", textColor = R.color.white.toColor(), textSize = 24f.dp
                         )
                     }).show()
                 }
@@ -63,13 +61,13 @@ class WanAndroidHomeActivity : QuickActivity(contentView<LinearLayout> { quickVi
             layoutParams = matchWrapLayoutParams(),
             text = "Wan Android",
             textColor = R.color.white.toColor(),
-            textSize = 24.dpF(),
+            textSize = 24f.dp,
             textGravity = Gravity.CENTER
         ) {
-            setPadding(32.dp(), 16.dp(), 32.dp(), 16.dp())
+            setPadding(32.dp, 16.dp, 32.dp, 16.dp)
         }
     }, scrollFlags = SCROLL_FLAG_SCROLL, topSuspendLayout = {
-        tabLayout(layoutParams = matchWrapLayoutParams().reset(height = 44.dp()))
+        tabLayout(layoutParams = matchWrapLayoutParams().reset(height = 44.dp))
     }, bottomScrollLayout = {
         viewPager(quickView = quickView) {
             fragment(RecommendFragment())

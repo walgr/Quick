@@ -43,14 +43,23 @@ fun <T : View>T.addToParent(parent: ViewParent): T {
     return this
 }
 
-fun View?.allChild(): List<View> {
+fun ViewGroup.children(): List<View> {
+    val childList = mutableListOf<View>()
+    repeat(childCount) {
+        val child = getChildAt(it)
+        childList.add(child)
+    }
+    return childList
+}
+
+fun View?.allViewChild(): List<View> {
     if (this == null) return listOf()
     if (this !is ViewGroup) return listOf()
     val childList = mutableListOf<View>()
     repeat(childCount) {
         val child = getChildAt(it)
         childList.addAll(if (child is ViewGroup) {
-            child.allChild()
+            child.allViewChild()
         } else {
             listOf(child)
         })
@@ -58,7 +67,7 @@ fun View?.allChild(): List<View> {
     return childList
 }
 
-fun View.onceClick(interval: Long = 1000L, onClickListener: View.OnClickListener) {
+fun View.onceClick(interval: Long = 1000L, onClickListener: OnClickListener) {
     onceClick(interval) {
         onClickListener.onClick(it)
     }

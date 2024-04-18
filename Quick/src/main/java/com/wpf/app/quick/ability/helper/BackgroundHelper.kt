@@ -10,31 +10,33 @@ import androidx.annotation.DrawableRes
 import androidx.appcompat.graphics.drawable.StateListDrawableCompat
 import com.wpf.app.base.NO_SET
 import com.wpf.app.base.NO_SET_F
-import com.wpf.app.quick.ability.scope.ViewScope
+import com.wpf.app.base.ability.scope.ViewScope
 import com.wpf.app.quickutil.helper.toColor
 import com.wpf.app.quickutil.other.forceTo
 
+interface BackgroundScope: ViewScope
+
 fun <T : View> T.background(
     drawable: Drawable? = null,
-    builder: (ViewScope.() -> Unit)? = null,
+    builder: (BackgroundScope.() -> Unit)? = null,
 ): T {
     drawable?.let {
         background = it
     }
-    builder?.invoke(object : ViewScope {
+    builder?.invoke(object : BackgroundScope {
         override val view: View = this@background
     })
     return this
 }
 
-fun ViewScope.backgroundRes(
+fun BackgroundScope.backgroundRes(
     @DrawableRes drawableRes: Int,
 ): View {
     view.setBackgroundResource(drawableRes)
     return view
 }
 
-fun ViewScope.background(
+fun BackgroundScope.background(
     shape: Int = GradientDrawable.RECTANGLE,
     @ColorInt color: Int = android.R.color.white.toColor(),
     colorStateList: ColorStateList? = null,
@@ -87,7 +89,7 @@ fun ViewScope.background(
     return view
 }
 
-fun ViewScope.rect(
+fun BackgroundScope.rect(
     @ColorInt color: Int = android.R.color.white.toColor(),
     colorStateList: ColorStateList? = null,
     orientation: Orientation = Orientation.LEFT_RIGHT,
@@ -120,7 +122,7 @@ fun ViewScope.rect(
     )
 }
 
-fun ViewScope.oval(
+fun BackgroundScope.oval(
     @ColorInt color: Int = android.R.color.white.toColor(),
     colorStateList: ColorStateList? = null,
     orientation: Orientation = Orientation.LEFT_RIGHT,
@@ -153,7 +155,7 @@ fun ViewScope.oval(
     )
 }
 
-fun ViewScope.state(
+fun BackgroundScope.state(
     defaultDrawable: Drawable,
     selectedDrawable: Drawable? = null,
     checkedDrawable: Drawable? = null,

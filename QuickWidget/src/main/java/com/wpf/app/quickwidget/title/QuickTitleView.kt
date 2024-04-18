@@ -20,7 +20,7 @@ import androidx.core.view.updateLayoutParams
 import com.wpf.app.quickutil.helper.attribute.AutoGetAttributeHelper
 import com.wpf.app.quickutil.helper.copy
 import com.wpf.app.quickutil.helper.dp
-import com.wpf.app.quickutil.helper.dpF
+import com.wpf.app.quickutil.helper.sp
 import com.wpf.app.quickutil.helper.toColor
 import com.wpf.app.quickutil.helper.toDrawable
 import com.wpf.app.quickutil.helper.toView
@@ -49,7 +49,7 @@ open class QuickTitleView @JvmOverloads constructor(
     init {
         orientation = VERTICAL
         R.layout.toolbar_layout.toView(context, this, true)
-        minimumHeight = 44.dp(context)
+        minimumHeight = 44.dp
         contentLayout = findViewById(R.id.titleContentLayout)
         titleGroup = findViewById(R.id.titleGroup)
         backLayout = findViewById(R.id.backLayout)
@@ -366,7 +366,7 @@ interface QuickTitleThemeI {
     var titleSpace: Int?
 
     fun initDataByXml(context: Context) {
-        height = height ?: 44.dp(context)
+        height = height ?: 44.dp
         background = background ?: android.R.color.darker_gray.toDrawable(context)
         contentGravity = contentGravity ?: QuickTitleView.CONTENT_GRAVITY_START
         isLinearLayout = isLinearLayout ?: true
@@ -376,12 +376,12 @@ interface QuickTitleThemeI {
         titleStr = titleStr ?: ""
         titleColor = titleColor ?: android.R.color.white.toColor(context)
         titleBold = titleBold ?: true
-        titleSize = titleSize ?: 18.dpF(context)
+        titleSize = titleSize ?: 18f.sp
         subTitleStr = subTitleStr ?: ""
         subTitleColor = subTitleColor ?: android.R.color.white.toColor(context)
         subTitleBold = subTitleBold ?: false
-        subTitleSize = subTitleSize ?: 14.dpF(context)
-        space = space ?: 16.dp(context)
+        subTitleSize = subTitleSize ?: 14f.sp
+        space = space ?: 16.dp
         titleSpace = titleSpace ?: 0
         isAbsoluteCenter = isAbsoluteCenter ?: true
     }

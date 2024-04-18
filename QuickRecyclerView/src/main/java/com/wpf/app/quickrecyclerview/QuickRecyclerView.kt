@@ -2,16 +2,22 @@ package com.wpf.app.quickrecyclerview
 
 import android.content.Context
 import android.util.AttributeSet
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.wpf.app.quickrecyclerview.data.QuickFooterData
+import com.wpf.app.quickrecyclerview.data.QuickHeaderData
+import com.wpf.app.quickrecyclerview.helper.toFooterViewData
+import com.wpf.app.quickrecyclerview.helper.toHeaderViewData
 import com.wpf.app.quickrecyclerview.helper.toViewData
 import com.wpf.app.quickrecyclerview.listeners.DataAdapter
 import com.wpf.app.quickrecyclerview.utils.SpaceItemDecoration
 import com.wpf.app.quickrecyclerview.utils.SpaceType
 import com.wpf.app.quickrecyclerview.widget.QuickFooterShadow
 import com.wpf.app.quickrecyclerview.widget.QuickHeaderShadow
-import com.wpf.app.quickutil.helper.allChild
 import com.wpf.app.quickutil.helper.attribute.AutoGetAttributeHelper
+import com.wpf.app.quickutil.helper.children
+import com.wpf.app.quickutil.other.asTo
 
 /**
  * Created by 王朋飞 on 2022/7/13.
@@ -36,6 +42,31 @@ open class QuickRecyclerView @JvmOverloads constructor(
     open fun initView() {
         if (layoutManager == null) {
             layoutManager = LinearLayoutManager(context)
+        }
+
+        if (layoutManager is GridLayoutManager) {
+            layoutManager?.asTo<GridLayoutManager>()?.apply {
+                spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                    override fun getSpanSize(position: Int): Int {
+                        val itemData = getData(position)
+                        var isMatch = true
+                        var isHeaderOrFooter = false
+                        if (itemData is QuickHeaderData) {
+                            isHeaderOrFooter = true
+                            isMatch = itemData.isMatch
+                        }
+                        if (itemData is QuickFooterData) {
+                            isHeaderOrFooter = true
+                            isMatch = itemData.isMatch
+                        }
+                        return if (isHeaderOrFooter && isMatch) {
+                            spanCount
+                        } else {
+                            1
+                        }
+                    }
+                }
+            }
         }
         mQuickAdapter.setRecyclerView(this)
         adapter = mQuickAdapter
@@ -67,19 +98,20 @@ open class QuickRecyclerView @JvmOverloads constructor(
 
     override fun onFinishInflate() {
         super.onFinishInflate()
-        val allChild = allChild()
+        val allChild = children()
         allChild.forEach {
             when (it) {
                 is QuickHeaderShadow -> {
-                    it.shadowView?.let { realView ->
-                        getQuickAdapter().addData(realView.toViewData(isSuspension = it.isSuspension))
-                    }
+                    getQuickAdapter().headerViews.add(
+                        it.toHeaderViewData(
+                            isSuspension = it.isSuspension,
+                            isMatch = it.isMatch
+                        )
+                    )
                 }
 
                 is QuickFooterShadow -> {
-                    it.shadowView?.let { realView ->
-                        getQuickAdapter().addData(realView.toViewData())
-                    }
+                    getQuickAdapter().footerViews.add(it.toFooterViewData(isMatch = it.isMatch))
                 }
 
                 else -> {

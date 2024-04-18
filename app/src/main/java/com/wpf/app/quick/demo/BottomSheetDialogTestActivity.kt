@@ -12,7 +12,6 @@ import com.wpf.app.quick.ability.helper.myLayout
 import com.wpf.app.quick.ability.helper.rect
 import com.wpf.app.quick.annotations.getclass.GetClass
 import com.wpf.app.quickutil.helper.dp
-import com.wpf.app.quickutil.helper.dpF
 import com.wpf.app.quickutil.helper.matchWrapLayoutParams
 import com.wpf.app.quickutil.helper.onClick
 import com.wpf.app.quickutil.helper.reset
@@ -31,13 +30,13 @@ class BottomSheetDialogTestActivity : QuickActivity(
                 bottomSheetDialog(
                     layoutViewCreate = {
                         myLayout<LinearLayout>(
-                            layoutParams = matchWrapLayoutParams().reset(height = 100.dp()),
+                            layoutParams = matchWrapLayoutParams().reset(height = 100.dp),
                         ) {
                             text(text = "弹窗")
                         }.gravity(Gravity.CENTER).background {
                             rect(
-                                topLeftRadius = 16.dpF(),
-                                topRightRadius = 16.dpF(),
+                                topLeftRadius = 16f.dp,
+                                topRightRadius = 16f.dp,
                                 color = R.color.white.toColor()
                             )
                         }

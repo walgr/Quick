@@ -29,11 +29,28 @@
             android:padding="16dp">
 
             <com.wpf.app.quickrecyclerview.QuickRecyclerView
+                android:id="@+id/list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:space="4dp"
                 app:spanCount="2">
+
+                <com.wpf.app.quickrecyclerview.widget.QuickHeaderShadow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:isSuspension="true">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:textColor="@color/white"
+                        android:background="@color/purple_500"
+                        android:textSize="32sp"
+                        android:gravity="center"
+                        android:text="欢迎"/>
+
+                </com.wpf.app.quickrecyclerview.widget.QuickHeaderShadow>
 
                 <Button
                     android:layout_width="wrap_content"

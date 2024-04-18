@@ -13,7 +13,7 @@ import com.wpf.app.quicknetwork.interceptor.LogInterceptor
 import com.wpf.app.quickrecyclerview.constant.BRConstant
 import com.wpf.app.quickutil.helper.activity
 import com.wpf.app.quickutil.helper.dp
-import com.wpf.app.quickutil.helper.dpF
+import com.wpf.app.quickutil.helper.sp
 import com.wpf.app.quickutil.helper.toColor
 import com.wpf.app.quickutil.helper.toDrawable
 import com.wpf.app.quickutil.init.QuickInit
@@ -37,31 +37,31 @@ class App : Application() {
         initTestRequest()
 
         QuickTextThemeBase.defaultTheme = QuickTextTheme().apply {
-            textSize = 14.dpF()
+            textSize = 14f.sp
             textColor = R.color.black.toColor()
             hintTextColor = R.color.grey.toColor()
         }
         QuickTitleThemeBase.defaultTheme = QuickTitleAttrs().apply {
-            height = 48.dp()
+            height = 48.dp
             background = R.color.purple_700.toDrawable()
             contentGravity = QuickTitleView.CONTENT_GRAVITY_CENTER
             showBackIcon = true
             backIcon = com.wpf.app.quickwidget.R.drawable.baseline_arrow_back_ios_new_20_white
             titleBold = true
-            titleSize = 20.dpF()
+            titleSize = 20f.dp
             titleColor = R.color.white.toColor()
             subTitleBold = false
-            subTitleSize = 14.dpF()
+            subTitleSize = 14f.dp
             subTitleColor = R.color.white.toColor()
             showBackIcon = true
             showLine = false
             isLinearLayout = true
-            space = 16.dp()
+            space = 16.dp
         }
         QuickDialogThemeBase.defaultTheme = QuickDialogTheme().apply {
             gravity = Gravity.BOTTOM
             animStyleRes = R.style.DialogBottomTopAnim
-            minHeight = 200.dp()
+            minHeight = 200.dp
         }
         QuickTitleView.setCommonClickListener(object : QuickTitleView.CommonClickListener {
             override fun onBackClick(view: View) {

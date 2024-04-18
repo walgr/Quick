@@ -11,10 +11,6 @@ interface StickyView {
      */
     fun isStickyView(recyclerView: RecyclerView, curView: View?): Boolean
 
-    /**
-     * 得到上一个吸附View
-     */
-//    fun getLastStickyView(adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>?, curViewPos: Int): Int
 
     fun getAllStickyList(adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>?) : List<Int>
 

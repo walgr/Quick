@@ -20,7 +20,7 @@ class DialogTestActivity : QuickActivity(
         title("弹窗测试")
         myLayout(layoutViewCreate = {
             LinearLayout(this).apply {
-                setPadding(16.dp(), 0, 16.dp(), 0)
+                setPadding(16.dp, 0, 16.dp, 0)
                 gravity = Gravity.CENTER
                 addView(MaterialButton(context).apply {
                     text = "弹窗"

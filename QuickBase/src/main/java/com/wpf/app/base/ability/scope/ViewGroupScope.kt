@@ -1,4 +1,4 @@
-package com.wpf.app.quick.ability.scope
+package com.wpf.app.base.ability.scope
 
 import android.view.ViewGroup
 

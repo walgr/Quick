@@ -5,27 +5,27 @@ import android.util.AttributeSet
 import android.widget.FrameLayout
 import com.wpf.app.quickrecyclerview.R
 import com.wpf.app.quickutil.helper.attribute.AutoGetAttributeHelper
-import com.wpf.app.quickutil.widget.QuickViewGroup
 
 class QuickHeaderShadow @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
     var isSuspension: Boolean = false,
-) : QuickViewGroup<FrameLayout>(
+    var isMatch: Boolean = true,
+) : FrameLayout(
     context,
     attrs,
-    defStyleAttr,
-    addToParent = false,
-    forceGenerics = true
+    defStyleAttr
 ) {
     init {
         AutoGetAttributeHelper.init(context, attrs, R.styleable.QuickHeaderShadow, HeaderShadowAttrs()).apply {
             this@QuickHeaderShadow.isSuspension = this.isSuspension
+            this@QuickHeaderShadow.isMatch = this.isMatch
         }
     }
 
-    class HeaderShadowAttrs(
-        val isSuspension: Boolean = false
+    inner class HeaderShadowAttrs(
+        val isSuspension: Boolean = false,
+        val isMatch: Boolean = true
     )
 }

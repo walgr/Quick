@@ -4,8 +4,9 @@ import android.annotation.SuppressLint
 import android.widget.FrameLayout
 import com.wpf.app.base.ability.base.with
 import com.wpf.app.quick.ability.ex.contentView
+import com.wpf.app.quick.ability.helper.background
 import com.wpf.app.quick.ability.helper.myLayout
-import com.wpf.app.quick.ability.helper.roundRect
+import com.wpf.app.quick.ability.helper.rect
 import com.wpf.app.quick.annotations.bind.BindData2View
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.demo.databinding.DragItemBinding
@@ -17,10 +18,9 @@ import com.wpf.app.quickrecyclerview.ability.bindWSelf
 import com.wpf.app.quickrecyclerview.ability.click
 import com.wpf.app.quickrecyclerview.ability.swap
 import com.wpf.app.quickrecyclerview.data.QuickAbilityData
-import com.wpf.app.quickutil.helper.dpF
+import com.wpf.app.quickutil.helper.dp
 import com.wpf.app.quickutil.helper.matchWrapLayoutParams
 import com.wpf.app.quickutil.helper.onceClick
-import com.wpf.app.quickutil.helper.toDrawable
 import com.wpf.app.quickutil.init.ToastHelper
 import com.wpf.app.quickutil.other.printLog
 import com.wpf.app.quickutil.run.runOnView
@@ -30,8 +30,8 @@ import com.wpf.app.quickutil.run.runOnView
  */
 class BindDataTestModel(private val index: Int = 0) : QuickAbilityData(
     abilityList = contentView<FrameLayout> {
-        roundRect(background = R.color.white.toDrawable(), radius = 8.dpF()) {
-            myLayout(R.layout.holder_image, layoutParams = matchWrapLayoutParams())
+        myLayout(R.layout.holder_image, layoutParams = matchWrapLayoutParams()).background {
+            rect(radius = 8f.dp)
         }
     }.with(bindWSelf<HolderImageBinding, BindDataTestModel> {
         tvTitle.text.printLog("当前View-", "index:${it.index}")

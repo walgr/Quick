@@ -89,6 +89,10 @@ interface DataAdapter {
         return getQuickAdapter().mDataList
     }
 
+    fun getData(pos: Int): QuickItemData? {
+        return getQuickAdapter().mDataList?.getOrNull(pos)
+    }
+
     fun setData(newData: MutableList<QuickItemData>) {
         getQuickAdapter().mDataList = newData
     }

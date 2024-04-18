@@ -4,7 +4,7 @@ import android.graphics.drawable.Drawable
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams
 import androidx.annotation.ColorInt
-import com.wpf.app.quickutil.helper.dpF
+import com.wpf.app.quickutil.helper.dp
 import com.wpf.app.quickutil.widget.smartLayoutParams
 import io.github.florent37.shapeofview.shapes.ArcView
 import io.github.florent37.shapeofview.shapes.ArcView.ArcPosition
@@ -126,9 +126,9 @@ fun ViewGroup.triangle(
 
 fun ViewGroup.bubble(
     layoutParams: LayoutParams = smartLayoutParams(),
-    arrowWidth: Float = 10.dpF(),
-    arrowHeight: Float = 10.dpF(),
-    borderRadius: Float = 10.dpF(),
+    arrowWidth: Float = 10f.dp,
+    arrowHeight: Float = 10f.dp,
+    borderRadius: Float = 10f.dp,
     positionPer: Float = 0.5f,
     position: Int = BubbleView.POSITION_BOTTOM,
     builder: (BubbleView.() -> Unit)? = null,

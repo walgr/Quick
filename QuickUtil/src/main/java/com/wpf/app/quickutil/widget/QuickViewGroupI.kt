@@ -10,7 +10,7 @@ import android.widget.RadioGroup
 import android.widget.RelativeLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.tabs.TabLayout
-import com.wpf.app.quickutil.helper.allChild
+import com.wpf.app.quickutil.helper.children
 import com.wpf.app.quickutil.helper.matchLayoutParams
 import com.wpf.app.quickutil.other.GenericEx
 import java.lang.reflect.Constructor
@@ -105,7 +105,7 @@ internal interface QuickViewGroupI<T : ViewGroup> {
     }
 
     fun addChildToT(shadowView: ViewGroup?, curView: ViewGroup) {
-        curView.allChild().forEach {
+        curView.children().forEach {
             shadowView?.addView(it)
         }
     }

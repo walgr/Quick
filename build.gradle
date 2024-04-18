@@ -7,7 +7,6 @@ buildscript {
         compileSdkVersion = 33
         minSdkVersion = 21
         targetSdkVersion = 33
-        androidTools = '33.0.3'
         kotlin = "1.9.22"
         ksp = "1.9.22-1.0.17"
 

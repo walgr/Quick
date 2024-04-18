@@ -48,11 +48,11 @@ class QuickStickyView : StickyView {
         if (view == null) return null
         val viewPos = recyclerView.getChildAdapterPosition(view)
         val quickAdapter = recyclerView.adapter as? QuickAdapter
-        return quickAdapter?.mDataList?.getOrNull(viewPos) as? QuickSuspensionData
+        return quickAdapter?.getDataByViewType(quickAdapter.getItemViewType(viewPos)) as? QuickSuspensionData
     }
 
     private fun getViewData(adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>?, viewPos: Int): QuickSuspensionData? {
         val quickAdapter = adapter as? QuickAdapter
-        return quickAdapter?.mDataList?.getOrNull(viewPos) as? QuickSuspensionData
+        return quickAdapter?.getDataByViewType(quickAdapter.getItemViewType(viewPos)) as? QuickSuspensionData
     }
 }

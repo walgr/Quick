@@ -6,9 +6,13 @@
         <attr name="includeFirst" format="boolean" />
         <attr name="includeLast" format="boolean" />
     </declare-styleable>
-
+    <attr name="isMatch" format="boolean" />
     <declare-styleable name="QuickHeaderShadow">
-        <attr name="isSuspension" format="boolean"/>
+        <attr name="isSuspension" format="boolean" />
+        <attr name="isMatch" />
+    </declare-styleable>
+    <declare-styleable name="QuickFooterShadow">
+        <attr name="isMatch" />
     </declare-styleable>
 
     <attr name="spaceType" format="enum">
@@ -18,8 +22,8 @@
     </attr>
 
     <declare-styleable name="SwipeMenuLayout">
-        <attr name="swipeEnable" format="boolean"/>
-        <attr name="ios" format="boolean"/>
-        <attr name="leftSwipe" format="boolean"/>
+        <attr name="swipeEnable" format="boolean" />
+        <attr name="ios" format="boolean" />
+        <attr name="leftSwipe" format="boolean" />
     </declare-styleable>
 </resources>

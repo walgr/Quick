@@ -5,6 +5,8 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.wpf.app.quickrecyclerview.data.QuickAbilityData
 import com.wpf.app.quickrecyclerview.data.QuickBindData
+import com.wpf.app.quickrecyclerview.data.QuickFooterData
+import com.wpf.app.quickrecyclerview.data.QuickHeaderData
 import com.wpf.app.quickrecyclerview.data.QuickItemData
 import com.wpf.app.quickrecyclerview.data.QuickViewData
 import com.wpf.app.quickrecyclerview.holder.QuickViewBindingHolder
@@ -18,21 +20,27 @@ import com.wpf.app.quickutil.other.asTo
  *
  */
 open class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>(), DataAdapter {
+    private var mRecyclerView: RecyclerView? = null
+    private var mQuickAdapterListener: QuickAdapterListener<QuickItemData>? = null
 
     var mDataList: MutableList<QuickItemData>? = null
-
-    private var mQuickAdapterListener: QuickAdapterListener<QuickItemData>? = null
-    private var mRecyclerView: RecyclerView? = null
+    val headerViews = mutableListOf<QuickHeaderData>()
+    val footerViews = mutableListOf<QuickFooterData>()
 
     internal val extraParameter: LinkedHashMap<String, Any> = linkedMapOf()
+
+    fun getDataByViewType(viewType: Int): QuickItemData? {
+        return (mDataList?.find {
+            it.viewType == viewType
+        } ?: headerViews.find { it.viewType == viewType }
+        ?: footerViews.find { it.viewType == viewType })
+    }
 
     override fun onCreateViewHolder(
         viewGroup: ViewGroup,
         viewType: Int,
     ): QuickViewHolder<QuickItemData> {
-        mDataList?.find {
-            it.viewType == viewType
-        }?.let { findData ->
+        getDataByViewType(viewType)?.let { findData ->
             var holder: QuickViewHolder<QuickItemData>? = null
             if (findData is QuickBindData) {
                 findData.setAdapter(this)
@@ -71,21 +79,35 @@ open class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>()
 
     override fun onBindViewHolder(viewHolder: QuickViewHolder<QuickItemData>, position: Int) {
         viewHolder.itemPosition = position
-        viewHolder.onBindViewHolder(this, mDataList!![position], position)
+        val realData: QuickItemData? =
+            if (headerViews.isNotEmpty() && position < headerViews.size) {
+                headerViews[position]
+            } else if (position < headerViews.size + (mDataList?.size ?: 0)) {
+                mDataList?.get(position - headerViews.size)
+            } else {
+                footerViews[position - (headerViews.size + (mDataList?.size ?: 0))]
+            }
+        viewHolder.onBindViewHolder(this, realData, position)
     }
 
     override fun getItemViewType(position: Int): Int {
-        mDataList?.get(position)?.let {
-            if (it is QuickAbilityData) {
-                it.viewType = it.initViewType(position)
+        if (headerViews.isNotEmpty() && position < headerViews.size) {
+            return headerViews[position].viewType
+        } else if (position < headerViews.size + (mDataList?.size ?: 0)) {
+            mDataList?.get(position - headerViews.size)?.let {
+                if (it is QuickAbilityData) {
+                    it.viewType = it.initViewType(position)
+                }
+                return it.viewType
             }
-            return it.viewType
+        } else if (position < headerViews.size + (mDataList?.size ?: 0) + footerViews.size) {
+            return footerViews[position - (headerViews.size + (mDataList?.size ?: 0))].viewType
         }
-        return mDataList?.get(position)?.viewType ?: super.getItemViewType(position)
+        return super.getItemViewType(position)
     }
 
     override fun getItemCount(): Int {
-        return mDataList?.size ?: 0
+        return headerViews.size + (mDataList?.size ?: 0) + footerViews.size
     }
 
     fun getQuickAdapterListener(): QuickAdapterListener<QuickItemData>? {
