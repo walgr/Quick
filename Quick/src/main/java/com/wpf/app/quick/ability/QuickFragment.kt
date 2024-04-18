@@ -104,7 +104,7 @@ open class QuickFragment(
         }
     }
 
-    @Deprecated("Deprecated in Java")
+    @Deprecated("Deprecated in Android")
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
         abilityList.filterIsInstance<QuickFragmentAbility>().forEach {

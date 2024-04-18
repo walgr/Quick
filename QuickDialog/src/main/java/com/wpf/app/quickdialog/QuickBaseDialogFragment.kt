@@ -32,8 +32,6 @@ import com.wpf.app.quickdialog.listeners.DialogSize
 import com.wpf.app.quickdialog.minAndMaxLimit.SizeLimitViewGroup
 import com.wpf.app.quicknetwork.base.RequestCoroutineScope
 import com.wpf.app.quickutil.helper.InitViewHelper
-import com.wpf.app.quickutil.helper.toAnim
-import com.wpf.app.quickutil.run.RunOnContext
 import kotlinx.coroutines.Job
 
 /**

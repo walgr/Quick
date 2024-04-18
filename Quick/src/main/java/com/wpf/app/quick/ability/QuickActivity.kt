@@ -14,7 +14,6 @@ import com.wpf.app.quickbind.interfaces.BindViewModel
 import com.wpf.app.quickutil.helper.InitViewHelper
 import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.other.forceTo
-import com.wpf.app.quickutil.run.runOnContext
 
 open class QuickActivity(
     private val abilityList: List<QuickAbility> = mutableListOf()
@@ -49,10 +48,12 @@ open class QuickActivity(
         }
     }
 
+    @CallSuper
     override fun getViewModel(): ViewModel? {
         return abilityList.firstOrNull { it is BindViewModel<*> }?.asTo<BindViewModel<*>>()?.getViewModel()
     }
 
+    @CallSuper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
@@ -60,6 +61,7 @@ open class QuickActivity(
         }
     }
 
+    @CallSuper
     override fun onResume() {
         super.onResume()
         abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
@@ -67,6 +69,7 @@ open class QuickActivity(
         }
     }
 
+    @CallSuper
     override fun onPause() {
         super.onPause()
         abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
@@ -74,6 +77,7 @@ open class QuickActivity(
         }
     }
 
+    @CallSuper
     override fun onStop() {
         super.onStop()
         abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
@@ -81,6 +85,7 @@ open class QuickActivity(
         }
     }
 
+    @CallSuper
     override fun onDestroy() {
         super.onDestroy()
         abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
@@ -88,6 +93,7 @@ open class QuickActivity(
         }
     }
 
+    @CallSuper
     @Deprecated("Deprecated by Android")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -96,6 +102,7 @@ open class QuickActivity(
         }
     }
 
+    @CallSuper
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {

@@ -15,7 +15,6 @@ import com.wpf.app.quickdialog.QuickBaseDialogFragment
 import com.wpf.app.quickutil.helper.InitViewHelper
 import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.other.forceTo
-import com.wpf.app.quickutil.run.runOnContext
 
 open class QuickDialogFragment(
     private val abilityList: List<QuickAbility> = mutableListOf()
@@ -55,6 +54,7 @@ open class QuickDialogFragment(
         }
     }
 
+    @CallSuper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
@@ -62,6 +62,7 @@ open class QuickDialogFragment(
         }
     }
 
+    @CallSuper
     override fun onResume() {
         super.onResume()
         abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
@@ -69,6 +70,7 @@ open class QuickDialogFragment(
         }
     }
 
+    @CallSuper
     override fun onPause() {
         super.onPause()
         abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
@@ -76,6 +78,7 @@ open class QuickDialogFragment(
         }
     }
 
+    @CallSuper
     override fun onStop() {
         super.onStop()
         abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
@@ -83,6 +86,7 @@ open class QuickDialogFragment(
         }
     }
 
+    @CallSuper
     override fun onDestroy() {
         super.onDestroy()
         abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
@@ -90,6 +94,7 @@ open class QuickDialogFragment(
         }
     }
 
+    @CallSuper
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
@@ -97,6 +102,7 @@ open class QuickDialogFragment(
         }
     }
 
+    @CallSuper
     @Deprecated("Deprecated by Android")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -105,7 +111,8 @@ open class QuickDialogFragment(
         }
     }
 
-    @Deprecated("Deprecated in Java")
+    @CallSuper
+    @Deprecated("Deprecated in Android")
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
         abilityList.filterIsInstance<QuickFragmentAbility>().forEach {
