@@ -176,7 +176,8 @@ open class QuickBaseDialogFragment @JvmOverloads constructor(
     override var funcPrepare: (() -> Unit)? = null
     override var funcShow: (Dialog.() -> Unit)? = null
     override var funcDismiss: (Dialog.() -> Unit)? = null
-    fun show(context: Any) {
+
+    open fun show(context: Any): QuickBaseDialogFragment {
         onDialogPrepare()
         if (context is AppCompatActivity) {
             show(
@@ -189,6 +190,7 @@ open class QuickBaseDialogFragment @JvmOverloads constructor(
                 javaClass.name + System.currentTimeMillis()
             )
         }
+        return this
     }
 
     override fun dismiss() {

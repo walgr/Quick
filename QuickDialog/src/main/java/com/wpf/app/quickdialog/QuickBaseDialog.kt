@@ -18,7 +18,6 @@ import com.wpf.app.quickdialog.listeners.DialogLifecycle
 import com.wpf.app.quickdialog.listeners.DialogSize
 import com.wpf.app.quickdialog.minAndMaxLimit.SizeLimitViewGroup
 import com.wpf.app.quickutil.helper.InitViewHelper
-import com.wpf.app.quickutil.run.RunOnContext
 
 /**
  * Created by 王朋飞 on 2022/6/16.
@@ -113,10 +112,16 @@ open class QuickBaseDialog(
     override var funcPrepare: (() -> Unit)? = null
     override var funcShow: (Dialog.() -> Unit)? = null
     override var funcDismiss: (Dialog.() -> Unit)? = null
+
     override fun show() {
         onDialogPrepare()
         super.show()
         onDialogShow()
+    }
+
+    open fun show(any: Any): QuickBaseDialog {
+        show()
+        return this
     }
 
     override fun dismiss() {

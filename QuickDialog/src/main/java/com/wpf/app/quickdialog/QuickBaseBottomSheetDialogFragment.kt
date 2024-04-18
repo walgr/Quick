@@ -35,8 +35,6 @@ import com.wpf.app.quickdialog.listeners.SheetInit
 import com.wpf.app.quickdialog.minAndMaxLimit.SizeLimitViewGroup
 import com.wpf.app.quicknetwork.base.RequestCoroutineScope
 import com.wpf.app.quickutil.helper.InitViewHelper
-import com.wpf.app.quickutil.helper.toAnim
-import com.wpf.app.quickutil.run.RunOnContext
 import kotlinx.coroutines.Job
 
 /**
@@ -184,7 +182,8 @@ open class QuickBaseBottomSheetDialogFragment @JvmOverloads constructor(
     override var funcPrepare: (() -> Unit)? = null
     override var funcShow: (Dialog.() -> Unit)? = null
     override var funcDismiss: (Dialog.() -> Unit)? = null
-    fun show(context: Any) {
+
+    open fun show(context: Any): QuickBaseBottomSheetDialogFragment {
         onDialogPrepare()
         if (context is AppCompatActivity) {
             show(
@@ -197,6 +196,7 @@ open class QuickBaseBottomSheetDialogFragment @JvmOverloads constructor(
                 javaClass.name + System.currentTimeMillis()
             )
         }
+        return this
     }
 
     override fun dismiss() {

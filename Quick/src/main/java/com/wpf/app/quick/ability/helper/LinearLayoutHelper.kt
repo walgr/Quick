@@ -4,11 +4,13 @@ import android.view.View
 import android.widget.LinearLayout
 import com.wpf.app.quickutil.widget.wishLayoutParams
 
-inline fun <reified T : View> T.gravity(gravity: Int): T {
+fun <T : View> T.gravity(gravity: Int): T {
     if (this is LinearLayout) {
         this.gravity = gravity
         return this
     }
-    wishLayoutParams<LinearLayout.LayoutParams>().gravity = gravity
+    if (this.parent is LinearLayout) {
+        wishLayoutParams<LinearLayout.LayoutParams>().gravity = gravity
+    }
     return this
 }

@@ -7,35 +7,40 @@ import android.graphics.drawable.GradientDrawable.Orientation
 import android.view.View
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
+import androidx.appcompat.graphics.drawable.StateListDrawableCompat
 import com.wpf.app.base.NO_SET
 import com.wpf.app.base.NO_SET_F
+import com.wpf.app.quick.ability.scope.ViewScope
 import com.wpf.app.quickutil.helper.toColor
 import com.wpf.app.quickutil.other.forceTo
 
-class ViewBackgroundScope(
-    val view: View,
-)
-
-fun View.background(drawable: Drawable? = null, builder: (ViewBackgroundScope.() -> Unit)? = null): View {
+fun <T : View> T.background(
+    drawable: Drawable? = null,
+    builder: (ViewScope.() -> Unit)? = null,
+): T {
     drawable?.let {
         background = it
     }
-    builder?.invoke(ViewBackgroundScope(this))
+    builder?.invoke(object : ViewScope {
+        override val view: View = this@background
+    })
     return this
 }
 
-fun ViewBackgroundScope.backgroundRes(
+fun ViewScope.backgroundRes(
     @DrawableRes drawableRes: Int,
 ): View {
     view.setBackgroundResource(drawableRes)
     return view
 }
 
-fun ViewBackgroundScope.background(
+fun ViewScope.background(
     shape: Int = GradientDrawable.RECTANGLE,
     @ColorInt color: Int = android.R.color.white.toColor(),
     colorStateList: ColorStateList? = null,
     orientation: Orientation = Orientation.LEFT_RIGHT,
+    centerX: Float = 0.5f,
+    centerY: Float = 0.5f,
     @ColorInt gradientColors: IntArray? = null,
     radius: Float = NO_SET_F,
     topLeftRadius: Float = NO_SET_F,
@@ -54,6 +59,7 @@ fun ViewBackgroundScope.background(
 
         gradientColors?.let {
             setOrientation(orientation)
+            this.setGradientCenter(centerX, centerY)
             colors = it
         }
 
@@ -81,10 +87,12 @@ fun ViewBackgroundScope.background(
     return view
 }
 
-fun ViewBackgroundScope.rect(
+fun ViewScope.rect(
     @ColorInt color: Int = android.R.color.white.toColor(),
     colorStateList: ColorStateList? = null,
     orientation: Orientation = Orientation.LEFT_RIGHT,
+    centerX: Float = 0.5f,
+    centerY: Float = 0.5f,
     @ColorInt gradientColors: IntArray? = null,
     radius: Float = NO_SET_F,
     topLeftRadius: Float = NO_SET_F,
@@ -99,6 +107,8 @@ fun ViewBackgroundScope.rect(
         color = color,
         colorStateList = colorStateList,
         orientation = orientation,
+        centerX = centerX,
+        centerY = centerY,
         gradientColors = gradientColors,
         radius = radius,
         topLeftRadius = topLeftRadius,
@@ -110,10 +120,12 @@ fun ViewBackgroundScope.rect(
     )
 }
 
-fun ViewBackgroundScope.oval(
+fun ViewScope.oval(
     @ColorInt color: Int = android.R.color.white.toColor(),
     colorStateList: ColorStateList? = null,
     orientation: Orientation = Orientation.LEFT_RIGHT,
+    centerX: Float = 0.5f,
+    centerY: Float = 0.5f,
     @ColorInt gradientColors: IntArray? = null,
     radius: Float = NO_SET_F,
     topLeftRadius: Float = NO_SET_F,
@@ -128,6 +140,8 @@ fun ViewBackgroundScope.oval(
         color = color,
         colorStateList = colorStateList,
         orientation = orientation,
+        centerX = centerX,
+        centerY = centerY,
         gradientColors = gradientColors,
         radius = radius,
         topLeftRadius = topLeftRadius,
@@ -137,4 +151,26 @@ fun ViewBackgroundScope.oval(
         borderColor = borderColor,
         borderWidth = borderWidth,
     )
+}
+
+fun ViewScope.state(
+    defaultDrawable: Drawable,
+    selectedDrawable: Drawable? = null,
+    checkedDrawable: Drawable? = null,
+    enabledDrawable: Drawable? = null,
+): View {
+    val stateDrawable = StateListDrawableCompat().apply {
+        addState(intArrayOf(), defaultDrawable)
+        selectedDrawable?.let {
+            addState(intArrayOf(android.R.attr.state_selected), it)
+        }
+        checkedDrawable?.let {
+            addState(intArrayOf(android.R.attr.state_checkable), it)
+        }
+        enabledDrawable?.let {
+            addState(intArrayOf(android.R.attr.state_enabled), it)
+        }
+    }
+    view.background = stateDrawable
+    return view
 }

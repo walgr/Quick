@@ -133,8 +133,9 @@ open class QuickBaseBottomSheetDialog(
         onDialogShow()
     }
 
-    open fun show(any: Any) {
+    open fun show(any: Any): QuickBaseBottomSheetDialog {
         show()
+        return this
     }
 
     override fun dismiss() {
