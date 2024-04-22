@@ -15,7 +15,7 @@ import com.wpf.app.quickbind.annotations.AutoGet
 import com.wpf.app.quickwork.ability.helper.title
 
 class WebViewActivity : QuickActivity(
-    contentViewWithSelf<WebViewActivity, LinearLayout> { self ->
+    contentViewWithSelf<WebViewActivity, LinearLayout> {
         title(titleName = self.title ?: "")
         myLayout(R.layout.activity_webview)
     }

@@ -7,17 +7,19 @@ import androidx.annotation.LayoutRes
 import androidx.annotation.StyleRes
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
+import com.wpf.app.base.ability.scope.ContextScope
+import com.wpf.app.base.ability.scope.DialogScope
+import com.wpf.app.base.ability.scope.createDialogScope
 import com.wpf.app.quick.ability.QuickBottomSheetDialog
 import com.wpf.app.quick.ability.QuickBottomSheetDialogFragment
 import com.wpf.app.quick.ability.QuickDialog
 import com.wpf.app.quick.ability.QuickDialogFragment
 import com.wpf.app.quick.ability.ex.contentView
-import com.wpf.app.quickutil.other.context
 
 open class QuickBottomSheetDialogFragmentTemp(
     @LayoutRes layoutId: Int = 0,
     layoutView: View? = null,
-    layoutViewCreate: (Context.() -> View)? = null,
+    layoutViewCreate: (ContextScope.() -> View)? = null,
     private val canBackgroundClick: Boolean? = null,
     private val width: Int? = null,
     private val height: Int? = null,
@@ -115,10 +117,10 @@ open class QuickBottomSheetDialogFragmentTemp(
     }
 }
 
-fun Any.bottomSheetDialogFragment(
+fun ContextScope.bottomSheetDialogFragment(
     @LayoutRes layoutId: Int = 0,
     layoutView: View? = null,
-    layoutViewCreate: (Context.() -> View)? = null,
+    layoutViewCreate: (ContextScope.() -> View)? = null,
     canBackgroundClick: Boolean? = null,
     width: Int? = null,
     height: Int? = null,
@@ -178,11 +180,11 @@ fun Any.bottomSheetDialogFragment(
     return dialog
 }
 
-fun Any.bottomSheetDialog(
+fun ContextScope.bottomSheetDialog(
     @StyleRes themeId: Int = 0,
     @LayoutRes layoutId: Int = 0,
     layoutView: View? = null,
-    layoutViewCreate: (Context.() -> View)? = null,
+    layoutViewCreate: (ContextScope.() -> View)? = null,
     canBackgroundClick: Boolean? = null,
     width: Int? = null,
     height: Int? = null,
@@ -204,9 +206,9 @@ fun Any.bottomSheetDialog(
     callback: BottomSheetCallback? = null,
     cancelable: Boolean = true,
     cancelableTouchOutside: Boolean = true,
-    builder: (QuickBottomSheetDialog.() -> Unit)? = null,
+    builder: (DialogScope<QuickBottomSheetDialog>.() -> Unit)? = null,
 ): QuickBottomSheetDialog {
-    val mContext: Context = context()!!
+    val mContext: Context = context
     val dialog = object : QuickBottomSheetDialog(
         mContext,
         themeId = themeId,
@@ -293,7 +295,7 @@ fun Any.bottomSheetDialog(
             dialog.behavior.addBottomSheetCallback(it)
         }
     }
-    builder?.invoke(dialog)
+    builder?.invoke(createDialogScope(dialog))
     return dialog
 }
 
@@ -301,7 +303,7 @@ fun Any.bottomSheetDialog(
 open class QuickDialogFragmentTemp(
     @LayoutRes layoutId: Int = 0,
     layoutView: View? = null,
-    layoutViewCreate: (Context.() -> View)? = null,
+    layoutViewCreate: (ContextScope.() -> View)? = null,
     private val canBackgroundClick: Boolean? = null,
     private val width: Int? = null,
     private val height: Int? = null,
@@ -374,10 +376,10 @@ open class QuickDialogFragmentTemp(
     }
 }
 
-fun Any.dialogFragment(
+fun ContextScope.dialogFragment(
     @LayoutRes layoutId: Int = 0,
     layoutView: View? = null,
-    layoutViewCreate: (Context.() -> View)? = null,
+    layoutViewCreate: (ContextScope.() -> View)? = null,
     canBackgroundClick: Boolean? = null,
     width: Int? = null,
     height: Int? = null,
@@ -423,11 +425,11 @@ fun Any.dialogFragment(
     return dialog
 }
 
-fun Any.dialog(
+fun ContextScope.dialog(
     @StyleRes themeId: Int = 0,
     @LayoutRes layoutId: Int = 0,
     layoutView: View? = null,
-    layoutViewCreate: (Context.() -> View)? = null,
+    layoutViewCreate: (ContextScope.() -> View)? = null,
     canBackgroundClick: Boolean? = null,
     width: Int? = null,
     height: Int? = null,
@@ -444,9 +446,9 @@ fun Any.dialog(
     heightAdaptive: Boolean? = null,
     cancelable: Boolean = true,
     cancelableTouchOutside: Boolean = true,
-    builder: (QuickDialog.() -> Unit)? = null,
+    builder: (DialogScope<QuickDialog>.() -> Unit)? = null,
 ): QuickDialog {
-    val mContext: Context = context()!!
+    val mContext: Context = context
     val dialog = object : QuickDialog(
         mContext,
         themeId = themeId,
@@ -513,6 +515,6 @@ fun Any.dialog(
         setCancelable(cancelable)
         setCanceledOnTouchOutside(cancelableTouchOutside)
     }
-    builder?.invoke(dialog)
+    builder?.invoke(createDialogScope(dialog))
     return dialog
 }

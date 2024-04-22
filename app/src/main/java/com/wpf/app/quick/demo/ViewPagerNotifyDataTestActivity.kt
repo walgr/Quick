@@ -15,10 +15,10 @@ import kotlin.random.Random
  */
 @GetClass
 class ViewPagerNotifyDataTestActivity : QuickActivity(
-    contentViewWithSelf<ViewPagerNotifyDataTestActivity, LinearLayout> { self ->
+    contentViewWithSelf<ViewPagerNotifyDataTestActivity, LinearLayout> {
         title("ViewPager刷新测试")
         smartRefreshLayout(autoRefresh = false, enableLoadMore = false, refreshListener = { viewPager ->
-            self.fragmentData = mutableListOf<Int>().apply {
+            this@contentViewWithSelf.self.fragmentData = mutableListOf<Int>().apply {
                 val start = Random.nextInt(10) * 10
                 repeat(10) {
                     add((start + it))
@@ -28,8 +28,8 @@ class ViewPagerNotifyDataTestActivity : QuickActivity(
             finishRefresh()
         }, contentBuilder = {
             viewPager<TestFragment>(
-                quickView = self,
-                defaultSize = self.fragmentData.size,
+                quickView = this@contentViewWithSelf.self,
+                defaultSize = this@contentViewWithSelf.self.fragmentData.size,
                 isLoop = true
             )
         })

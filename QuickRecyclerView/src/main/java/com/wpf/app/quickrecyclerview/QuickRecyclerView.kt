@@ -48,7 +48,7 @@ open class QuickRecyclerView @JvmOverloads constructor(
             layoutManager?.asTo<GridLayoutManager>()?.apply {
                 spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                     override fun getSpanSize(position: Int): Int {
-                        val itemData = getData(position)
+                        val itemData = getDataWithHeaderFooter(position)
                         var isMatch = true
                         var isHeaderOrFooter = false
                         if (itemData is QuickHeaderData) {

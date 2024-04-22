@@ -18,7 +18,7 @@ class Test2Dialog(
 ) : QuickThemeDialog(
     context,
     abilityList = contentView(layoutViewCreate = {
-        myLayout<LinearLayout>(layoutParams = matchLayoutParams()) {
+            myLayout<LinearLayout>(layoutParams = matchLayoutParams()) {
             text(text = "Test2Dialog").gravity(Gravity.CENTER)
         }.background {
             rect(topLeftRadius = 12f.dp, topRightRadius = 12f.dp)

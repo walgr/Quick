@@ -2,6 +2,7 @@ package com.wpf.app.quickwidget.title.ability
 
 import android.view.View
 import android.view.ViewGroup
+import com.wpf.app.base.ability.scope.ViewGroupScope
 import com.wpf.app.quickutil.helper.matchWrapLayoutParams
 import com.wpf.app.quickwidget.R
 import com.wpf.app.quickwidget.title.QuickTitleView
@@ -41,7 +42,7 @@ fun QuickTitleView.initClick(
     }
 }
 
-fun ViewGroup.title(
+fun ViewGroupScope<out ViewGroup>.title(
     titleName: String = "",
     showTitle: Boolean = true,
     layoutParams: ViewGroup.LayoutParams = matchWrapLayoutParams(),

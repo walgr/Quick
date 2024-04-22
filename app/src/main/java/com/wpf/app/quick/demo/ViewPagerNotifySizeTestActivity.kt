@@ -15,7 +15,7 @@ import kotlin.random.Random
  *
  */
 class ViewPagerNotifySizeTestActivity : QuickActivity(
-    contentViewWithSelf<ViewPagerNotifySizeTestActivity, LinearLayout> { self ->
+    contentViewWithSelf<ViewPagerNotifySizeTestActivity, LinearLayout> {
         title("ViewPager刷新测试")
         viewPager<TestFragment>(
             quickView = self,

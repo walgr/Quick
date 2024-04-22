@@ -4,18 +4,17 @@ import android.content.Context
 import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.annotation.StyleRes
+import com.wpf.app.base.ability.scope.ContextScope
 import com.wpf.app.quick.ability.QuickDialog
 import com.wpf.app.quick.ability.ex.contentView
-import com.wpf.app.quickutil.other.context
-import com.wpf.app.quickutil.run.RunOnContext
 import com.wpf.app.quickwork.widget.QuickThemeDialog
 import com.wpf.app.quickwork.widget.theme.QuickDialogThemeI
 
-fun Any.dialog(
+fun ContextScope.dialog(
     @StyleRes themeId: Int = 0,
     @LayoutRes layoutId: Int = 0,
     layoutView: View? = null,
-    layoutViewCreate: (Context.() -> View)? = null,
+    layoutViewCreate: (ContextScope.() -> View)? = null,
     canBackgroundClick: Boolean? = null,
     width: Int? = null,
     height: Int? = null,
@@ -33,7 +32,7 @@ fun Any.dialog(
     theme: QuickDialogThemeI? = null,
     builder: (QuickDialog.() -> Unit)? = null,
 ): QuickThemeDialog {
-    val mContext: Context = context()!!
+    val mContext: Context = context
     val dialog = object : QuickThemeDialog(
         mContext,
         themeId = themeId,

@@ -5,7 +5,13 @@ import android.view.View
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
-import com.wpf.app.base.ability.scope.TextViewScope
+import com.wpf.app.base.ability.scope.ViewScope
+
+interface TextViewScope: ViewScope<TextView>
+
+fun createTextViewScope(view: TextView) = object : TextViewScope {
+    override val view: TextView = view
+}
 
 fun <T : TextView> T.textColor(
     @ColorRes colorRes: Int? = null,
@@ -14,9 +20,7 @@ fun <T : TextView> T.textColor(
     colorRes?.let {
         setTextColor(it)
     }
-    builder?.invoke(object : TextViewScope {
-        override val view: View = this@textColor
-    })
+    builder?.invoke(createTextViewScope(this))
     return this
 }
 
@@ -26,7 +30,7 @@ fun TextViewScope.state(
     @ColorInt checkedColor: Int? = null,
     @ColorInt enabledColor: Int? = null,
 ): View {
-    val stateColor = ColorStateList(
+    view.setTextColor(ColorStateList(
         mutableListOf(intArrayOf()).apply {
             if (selectedColor != null) {
                 add(intArrayOf(android.R.attr.state_selected))
@@ -49,6 +53,6 @@ fun TextViewScope.state(
                 add(enabledColor)
             }
         }.toIntArray()
-    )
+    ))
     return view
 }

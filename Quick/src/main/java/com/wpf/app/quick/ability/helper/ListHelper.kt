@@ -3,15 +3,15 @@ package com.wpf.app.quick.ability.helper
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
+import com.wpf.app.base.ability.scope.ViewGroupScope
 import com.wpf.app.quick.R
 import com.wpf.app.quickrecyclerview.QuickRecyclerView
 import com.wpf.app.quickrecyclerview.QuickRefreshRecyclerView
 import com.wpf.app.quickrecyclerview.data.QuickItemData
 import com.wpf.app.quickrecyclerview.utils.SpaceType
 import com.wpf.app.quickutil.other.forceTo
-import com.wpf.app.quickutil.widget.smartLayoutParams
 
-fun ViewGroup.list(
+fun ViewGroupScope<out ViewGroup>.list(
     layoutParams: ViewGroup.LayoutParams = smartLayoutParams(),
     layoutManager: LayoutManager = LinearLayoutManager(context),
     space: Int? = null,
@@ -36,7 +36,7 @@ fun ViewGroup.list(
     return list
 }
 
-fun ViewGroup.refreshList(
+fun ViewGroupScope<out ViewGroup>.refreshList(
     layoutParams: ViewGroup.LayoutParams = smartLayoutParams(),
     layoutManager: LayoutManager = LinearLayoutManager(context),
     space: Int? = null,

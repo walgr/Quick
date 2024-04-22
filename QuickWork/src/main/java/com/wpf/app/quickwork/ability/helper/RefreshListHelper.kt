@@ -12,6 +12,8 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.scwang.smart.refresh.layout.api.RefreshFooter
 import com.scwang.smart.refresh.layout.api.RefreshHeader
 import com.scwang.smart.refresh.layout.api.RefreshLayout
+import com.wpf.app.base.ability.scope.ViewGroupScope
+import com.wpf.app.quick.ability.helper.smartLayoutParams
 import com.wpf.app.quickbind.helper.binddatahelper.BindData2ViewHelper
 import com.wpf.app.quickrecyclerview.QuickRefreshRecyclerView
 import com.wpf.app.quickrecyclerview.data.QuickItemData
@@ -24,19 +26,18 @@ import com.wpf.app.quickutil.helper.matchLayoutParams
 import com.wpf.app.quickutil.helper.parent
 import com.wpf.app.quickutil.helper.removeParent
 import com.wpf.app.quickutil.other.forceTo
-import com.wpf.app.quickutil.widget.smartLayoutParams
 
-fun <T : View> ViewGroup.smartRefreshLayout(
+fun <V : View> ViewGroupScope<out ViewGroup>.smartRefreshLayout(
     layoutParams: ViewGroup.LayoutParams = smartLayoutParams(),
     header: RefreshHeader = ClassicsHeader(context),
     footer: RefreshFooter = ClassicsFooter(context),
     autoRefresh: Boolean = true,
     enableRefresh: Boolean = true,
     enableLoadMore: Boolean = true,
-    refreshListener: (RefreshLayout.(contentView: T) -> Unit)? = null,
-    loadMoreListener: (RefreshLayout.(contentView: T) -> Unit)? = null,
-    contentBuilder: SmartRefreshLayout.() -> T,
-    builder: (SmartRefreshLayout.(contentView: T) -> Unit)? = null,
+    refreshListener: (RefreshLayout.(contentView: V) -> Unit)? = null,
+    loadMoreListener: (RefreshLayout.(contentView: V) -> Unit)? = null,
+    contentBuilder: SmartRefreshLayout.() -> V,
+    builder: (SmartRefreshLayout.(contentView: V) -> Unit)? = null,
 ): SmartRefreshLayout {
     val smartRefreshLayout = SmartRefreshLayout(context)
     smartRefreshLayout.setRefreshHeader(header.forceTo())
@@ -64,7 +65,7 @@ fun <T : View> ViewGroup.smartRefreshLayout(
     return smartRefreshLayout
 }
 
-fun ViewGroup.smartRefreshList(
+fun ViewGroupScope<out ViewGroup>.smartRefreshList(
     layoutParams: ViewGroup.LayoutParams = smartLayoutParams(),
     layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(context),
     header: RefreshHeader = ClassicsHeader(context),

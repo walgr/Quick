@@ -14,13 +14,14 @@ import com.wpf.app.quick.ability.helper.coordinator
 import com.wpf.app.quick.ability.helper.fragment
 import com.wpf.app.quick.ability.helper.myLayout
 import com.wpf.app.quick.ability.helper.viewFragment
-import com.wpf.app.quick.ability.helper.viewPager
+import com.wpf.app.quick.ability.helper.viewPagerBuilder
 import com.wpf.app.quick.annotations.getclass.GetClass
 import com.wpf.app.quick.annotations.tab.TabInit
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.demo.wanandroid.fragment.RecommendFragment
 import com.wpf.app.quick.helper.getActivity
 import com.wpf.app.quickutil.helper.dp
+import com.wpf.app.quickutil.helper.matchLayoutParams
 import com.wpf.app.quickutil.helper.matchWrapLayoutParams
 import com.wpf.app.quickutil.helper.onClick
 import com.wpf.app.quickutil.helper.reset
@@ -34,7 +35,7 @@ import com.wpf.app.quickwork.ability.helper.text
 import com.wpf.app.quickwork.ability.helper.title
 
 @GetClass
-class WanAndroidHomeActivity : QuickActivity(contentView<LinearLayout> { quickView ->
+class WanAndroidHomeActivity : QuickActivity(contentView<LinearLayout> {
     var tabLayout: TabLayout? = null
     var viewPager: ViewPager? = null
     title {
@@ -50,7 +51,7 @@ class WanAndroidHomeActivity : QuickActivity(contentView<LinearLayout> { quickVi
             }
         }
         backClick {
-            quickView.getActivity().apply {
+            this@contentView.self.getActivity().apply {
                 setResult(RESULT_OK)
                 finish()
             }
@@ -69,14 +70,12 @@ class WanAndroidHomeActivity : QuickActivity(contentView<LinearLayout> { quickVi
     }, scrollFlags = SCROLL_FLAG_SCROLL, topSuspendLayout = {
         tabLayout(layoutParams = matchWrapLayoutParams().reset(height = 44.dp))
     }, bottomScrollLayout = {
-        viewPager(quickView = quickView) {
+        viewPagerBuilder(quickView = this@contentView.self) {
             fragment(RecommendFragment())
             viewFragment {
-                myLayout(layoutViewCreate = {
-                    NestedScrollView(this).apply {
-                        text(text = "测试")
-                    }
-                })
+                myLayout<NestedScrollView>(layoutParams = matchLayoutParams()) {
+                    text(text = "测试")
+                }
             }
         }
     }) { _, topSuspendLayout, bottomScrollLayout ->

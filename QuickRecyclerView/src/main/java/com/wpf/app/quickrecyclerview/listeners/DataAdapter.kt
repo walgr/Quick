@@ -89,8 +89,21 @@ interface DataAdapter {
         return getQuickAdapter().mDataList
     }
 
-    fun getData(pos: Int): QuickItemData? {
-        return getQuickAdapter().mDataList?.getOrNull(pos)
+
+    fun getData(position: Int): QuickItemData? {
+        return getQuickAdapter().mDataList?.getOrNull(position)
+    }
+
+    fun getDataWithHeaderFooter(position: Int): QuickItemData? {
+        val realData: QuickItemData? =
+            if (getQuickAdapter().headerViews.isNotEmpty() && position < getQuickAdapter().headerViews.size) {
+                getQuickAdapter().headerViews[position]
+            } else if (position < getQuickAdapter().headerViews.size + (getQuickAdapter().mDataList?.size ?: 0)) {
+                getQuickAdapter().mDataList?.getOrNull(position - getQuickAdapter().headerViews.size)
+            } else {
+                getQuickAdapter().footerViews[position - (getQuickAdapter().headerViews.size + (getQuickAdapter().mDataList?.size ?: 0))]
+            }
+        return realData
     }
 
     fun setData(newData: MutableList<QuickItemData>) {

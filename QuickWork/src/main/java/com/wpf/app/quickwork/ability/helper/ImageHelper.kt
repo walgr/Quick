@@ -5,10 +5,11 @@ import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
+import com.wpf.app.base.ability.scope.ViewGroupScope
 import com.wpf.app.quickutil.helper.onceClick
 import com.wpf.app.quickutil.helper.wrapLayoutParams
 
-fun ViewGroup.imgButton(
+fun ViewGroupScope<out ViewGroup>.imgButton(
     layoutParams: LayoutParams = wrapLayoutParams(),
     @DrawableRes img: Int,
     clickListener: OnClickListener? = null,

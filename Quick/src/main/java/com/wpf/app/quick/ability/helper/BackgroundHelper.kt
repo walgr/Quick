@@ -14,7 +14,11 @@ import com.wpf.app.base.ability.scope.ViewScope
 import com.wpf.app.quickutil.helper.toColor
 import com.wpf.app.quickutil.other.forceTo
 
-interface BackgroundScope: ViewScope
+interface BackgroundScope: ViewScope<View>
+
+fun createBackgroundScope(view: View) = object : BackgroundScope {
+    override val view: View = view
+}
 
 fun <T : View> T.background(
     drawable: Drawable? = null,
@@ -23,9 +27,7 @@ fun <T : View> T.background(
     drawable?.let {
         background = it
     }
-    builder?.invoke(object : BackgroundScope {
-        override val view: View = this@background
-    })
+    builder?.invoke(createBackgroundScope(this))
     return this
 }
 

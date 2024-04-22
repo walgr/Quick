@@ -12,6 +12,7 @@ import com.wpf.app.quick.ability.helper.myLayout
 import com.wpf.app.quick.ability.helper.rect
 import com.wpf.app.quick.annotations.getclass.GetClass
 import com.wpf.app.quickutil.helper.dp
+import com.wpf.app.quickutil.helper.matchLayoutParams
 import com.wpf.app.quickutil.helper.matchWrapLayoutParams
 import com.wpf.app.quickutil.helper.onClick
 import com.wpf.app.quickutil.helper.reset
@@ -21,9 +22,9 @@ import com.wpf.app.quickwork.ability.helper.title
 
 @GetClass
 class BottomSheetDialogTestActivity : QuickActivity(
-    contentView<LinearLayout> { quickView ->
+    contentView<LinearLayout> {
         title("BottomSheet测试")
-        myLayout<LinearLayout> {
+        myLayout<LinearLayout>(layoutParams = matchLayoutParams()) {
             addView(MaterialButton(context).apply {
                 text = "弹窗"
             }.onClick {
@@ -43,7 +44,7 @@ class BottomSheetDialogTestActivity : QuickActivity(
                     },
                     skipCollapsed = true,
                     heightAdaptive = true
-                ).show(quickView)
+                ).show(self)
             })
         }.gravity(Gravity.CENTER)
     }

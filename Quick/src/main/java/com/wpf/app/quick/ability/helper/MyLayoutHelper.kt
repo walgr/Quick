@@ -1,54 +1,62 @@
 package com.wpf.app.quick.ability.helper
 
-import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
+import com.wpf.app.base.ability.helper.addView
+import com.wpf.app.base.ability.scope.ContextScope
+import com.wpf.app.base.ability.scope.ViewGroupScope
+import com.wpf.app.base.ability.scope.createViewGroupScope
+import com.wpf.app.quick.ability.ex.viewCreateConvert
+import com.wpf.app.quickbind.utils.context
 import com.wpf.app.quickutil.helper.InitViewHelper
 import com.wpf.app.quickutil.helper.matchLayoutParams
 import com.wpf.app.quickutil.helper.matchWrapLayoutParams
 import com.wpf.app.quickutil.helper.removeParent
-import com.wpf.app.quickutil.other.context
+import com.wpf.app.quickutil.other.forceTo
 import com.wpf.app.quickutil.widget.QuickViewGroup
-import com.wpf.app.quickutil.widget.smartLayoutParams
 
 inline fun <reified T : ViewGroup> Any.myLayout(
-    layoutParams: ViewGroup.LayoutParams = if (this is ViewGroup) smartLayoutParams(
-        matchWrapLayoutParams()
-    ) else matchWrapLayoutParams(),
-    noinline builder: (T.() -> Unit)? = null,
+    layoutParams: ViewGroup.LayoutParams = matchWrapLayoutParams(),
+    noinline builder: (ViewGroupScope<T>.() -> Unit)? = null,
 ): T {
     val mContext = context()!!
     val view = object : QuickViewGroup<T>(
         context = mContext,
         addToParent = true,
         forceGenerics = true
-    ) {}.shadowView
-    view?.layoutParams = layoutParams
-    if (this is ViewGroup) {
-        view?.let {
-            view.removeParent()
-            this.addView(view, layoutParams)
-        }
+    ) {}.shadowView ?: return null!!
+    view.layoutParams = layoutParams
+    builder?.invoke(createViewGroupScope(view.forceTo()))
+    view.let {
+        view.removeParent()
+        addView(view, layoutParams)
     }
-    builder?.invoke(view as T)
-    return view as T
+    return view.forceTo()
 }
 
 fun Any.myLayout(
     @LayoutRes layoutId: Int = 0,
     layoutView: View? = null,
-    layoutViewCreate: (Context.() -> View)? = null,
-    layoutParams: ViewGroup.LayoutParams = if (this is ViewGroup) smartLayoutParams() else matchLayoutParams(),
+    layoutViewCreate: (ContextScope.() -> View)? = null,
+    layoutParams: ViewGroup.LayoutParams = matchLayoutParams(),
     builder: (View.() -> Unit)? = null,
 ): View {
     val mContext = context()!!
-    val view = InitViewHelper.init(mContext, layoutId, layoutView, layoutViewCreate)
-    if (this is ViewGroup) {
-        addView(view, layoutParams)
-        builder?.invoke(this)
-    } else {
-        builder?.invoke(view)
+    val view = InitViewHelper.init(mContext, layoutId, layoutView, viewCreateConvert(layoutViewCreate))
+    when (this) {
+        is ViewGroupScope<out ViewGroup> -> {
+            builder?.invoke(this.view)
+        }
+
+        is ViewGroup -> {
+            builder?.invoke(this)
+        }
+
+        else -> {
+            builder?.invoke(view)
+        }
     }
+    addView(view, layoutParams)
     return view
 }

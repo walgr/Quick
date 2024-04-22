@@ -6,8 +6,9 @@ import android.widget.FrameLayout
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
-import com.wpf.app.quick.R
 import com.wpf.app.base.QuickView
+import com.wpf.app.base.ability.scope.ViewGroupScope
+import com.wpf.app.quick.R
 import com.wpf.app.quick.helper.getFragmentManager
 import com.wpf.app.quick.helper.getLifecycle
 import com.wpf.app.quick.helper.toFragment
@@ -16,10 +17,9 @@ import com.wpf.app.quickbind.viewpager2.adapter.Fragments2StateAdapter
 import com.wpf.app.quickutil.helper.matchLayoutParams
 import com.wpf.app.quickutil.helper.removeParent
 import com.wpf.app.quickutil.other.forceTo
-import com.wpf.app.quickutil.widget.smartLayoutParams
 import kotlin.math.abs
 
-fun ViewGroup.viewPager2(
+fun ViewGroupScope<out ViewGroup>.viewPager2(
     layoutParams: ViewGroup.LayoutParams = smartLayoutParams(),
     quickView: QuickView,
     fragments: List<Fragment>,
@@ -42,7 +42,7 @@ fun ViewGroup.viewPager2(
     return viewPager2
 }
 
-inline fun <reified T : Fragment> ViewGroup.viewPager2(
+inline fun <reified F : Fragment> ViewGroupScope<out ViewGroup>.viewPager2(
     layoutParams: ViewGroup.LayoutParams = smartLayoutParams(),
     quickView: QuickView,
     defaultSize: Int = 1,
@@ -58,7 +58,9 @@ inline fun <reified T : Fragment> ViewGroup.viewPager2(
             val realPos =
                 if (isLoop) (abs(defaultSize + (it - defaultPos) % defaultSize) % defaultSize) else it
             getFragment(
-                quickView, T::class.java.getDeclaredConstructor().newInstance().forceTo(), realPos
+                quickView,
+                F::class.java.getDeclaredConstructor().newInstance().forceTo(),
+                realPos
             ).forceTo()
         }.apply {
             setPageSize(if (isLoop) Int.MAX_VALUE else defaultSize)
@@ -79,7 +81,7 @@ inline fun <reified T : Fragment> ViewGroup.viewPager2(
     return viewPager2
 }
 
-fun ViewGroup.viewPager2WithView(
+fun ViewGroupScope<out ViewGroup>.viewPager2WithView(
     layoutParams: ViewGroup.LayoutParams = smartLayoutParams(),
     quickView: QuickView,
     views: List<View>,
@@ -95,7 +97,7 @@ fun ViewGroup.viewPager2WithView(
     return viewPager2(layoutParams, quickView, contentFragmentList, limit, builder)
 }
 
-fun ViewGroup.viewPager2(
+fun ViewGroupScope<out ViewGroup>.viewPager2(
     layoutParams: ViewGroup.LayoutParams = smartLayoutParams(),
     quickView: QuickView,
     limit: Int = 0,
