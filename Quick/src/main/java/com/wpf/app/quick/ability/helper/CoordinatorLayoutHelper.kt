@@ -21,7 +21,7 @@ fun <Follow : View, Top : View, Bottom : View> ViewGroupScope<out ViewGroup>.coo
     topSuspendLayout: (ViewGroupScope<AppBarLayout>.() -> Top)? = null,
     bottomScrollLayout: ViewGroupScope<CoordinatorLayout>.() -> Bottom,
     behavior: Behavior<*> = AppBarLayout.ScrollingViewBehavior(),
-    builder: (ViewGroupScope<CoordinatorLayout>.(followSlideLayout: Follow?, topSuspendLayout: Top?, bottomScrollLayout: Bottom) -> Unit)? = null,
+    builder: (CoordinatorLayout.(followSlideLayout: Follow?, topSuspendLayout: Top?, bottomScrollLayout: Bottom) -> Unit)? = null,
 ): CoordinatorLayout {
     val parentLayout = CoordinatorLayout(context)
     val parentLayoutScope = createViewGroupScope(parentLayout)
@@ -57,7 +57,7 @@ fun <Follow : View, Top : View, Bottom : View> ViewGroupScope<out ViewGroup>.coo
         it.wishLayoutParams<CoordinatorLayout.LayoutParams>().behavior = behavior
     }
     builder?.invoke(
-        parentLayoutScope,
+        parentLayout,
         followSlideLayoutView,
         topSuspendLayoutView,
         bottomScrollLayoutView
