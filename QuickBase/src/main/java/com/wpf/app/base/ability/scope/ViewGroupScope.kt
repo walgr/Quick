@@ -7,7 +7,7 @@ import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.InvocationKind
 import kotlin.contracts.contract
 
-interface ViewGroupScope<T: ViewGroup>: ViewScope<T> {
+interface ViewGroupScope<T : ViewGroup> : ViewScope<T> {
 
     fun addView(child: View) {
         this.view.addView(child)
@@ -18,8 +18,12 @@ interface ViewGroupScope<T: ViewGroup>: ViewScope<T> {
     }
 }
 
+fun <T : ViewGroup, R> T.withViewGroupScope(block: ViewGroupScope<T>.() -> R) : R {
+    return block(createViewGroupScope(this))
+}
+
 @OptIn(ExperimentalContracts::class)
-inline fun <T: ViewGroup> ViewGroupScope<T>.withViewGroup(block: T.() -> Unit) {
+inline fun <T : ViewGroup> ViewGroupScope<T>.viewGroupApply(block: T.() -> Unit) {
     contract {
         callsInPlace(block, InvocationKind.EXACTLY_ONCE)
     }
@@ -27,6 +31,6 @@ inline fun <T: ViewGroup> ViewGroupScope<T>.withViewGroup(block: T.() -> Unit) {
 }
 
 
-fun <T: ViewGroup> createViewGroupScope(viewGroup: T) = object : ViewGroupScope<T> {
+fun <T : ViewGroup> createViewGroupScope(viewGroup: T) = object : ViewGroupScope<T> {
     override val view: T = viewGroup
 }

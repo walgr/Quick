@@ -6,7 +6,9 @@ import androidx.annotation.LayoutRes
 import com.wpf.app.base.ability.helper.addView
 import com.wpf.app.base.ability.scope.ContextScope
 import com.wpf.app.base.ability.scope.ViewGroupScope
+import com.wpf.app.base.ability.scope.ViewScope
 import com.wpf.app.base.ability.scope.createViewGroupScope
+import com.wpf.app.base.ability.scope.createViewScope
 import com.wpf.app.quick.ability.ex.viewCreateConvert
 import com.wpf.app.quickbind.utils.context
 import com.wpf.app.quickutil.helper.InitViewHelper
@@ -40,21 +42,21 @@ fun Any.myLayout(
     layoutView: View? = null,
     layoutViewCreate: (ContextScope.() -> View)? = null,
     layoutParams: ViewGroup.LayoutParams = matchLayoutParams(),
-    builder: (View.() -> Unit)? = null,
+    builder: (ViewScope<View>.() -> Unit)? = null,
 ): View {
     val mContext = context()!!
     val view = InitViewHelper.init(mContext, layoutId, layoutView, viewCreateConvert(layoutViewCreate))
     when (this) {
         is ViewGroupScope<out ViewGroup> -> {
-            builder?.invoke(this.view)
+            builder?.invoke(createViewScope(this.view))
         }
 
         is ViewGroup -> {
-            builder?.invoke(this)
+            builder?.invoke(createViewScope(this))
         }
 
         else -> {
-            builder?.invoke(view)
+            builder?.invoke(createViewScope(view))
         }
     }
     addView(view, layoutParams)

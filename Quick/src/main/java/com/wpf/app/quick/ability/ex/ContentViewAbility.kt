@@ -25,8 +25,6 @@ fun <Self : QuickView, T : ViewGroup> createContentViewScope(context: Self, view
         override val self: Self = context
     }
 
-
-
 fun contentView(
     @LayoutRes layoutId: Int = 0,
     layoutView: View? = null,

@@ -47,7 +47,7 @@ inline fun <reified F : Fragment> ViewGroupScope<out ViewGroup>.viewPager(
     limit: Int = 0,
     isLoop: Boolean = false,
     noinline builder: (QuickViewPager.() -> Unit)? = null,
-): ViewPager {
+): QuickViewPager {
     val viewPager = QuickViewPager(context)
     viewPager.id = R.id.quickViewPager
     val defaultPos = if (isLoop) Int.MAX_VALUE / 2 else 0
@@ -101,7 +101,7 @@ fun ViewGroupScope<out ViewGroup>.viewPager(
     withState: Boolean = true,
     limit: Int = 0,
     builder: (QuickViewPager.() -> Unit)? = null,
-): ViewPager {
+): QuickViewPager {
     val viewPager = QuickViewPager(context)
     viewPager.id = R.id.quickViewPager
     if (withState) {
@@ -131,8 +131,8 @@ fun ViewGroupScope<out ViewGroup>.viewPagerWithView(
     views: List<View>,
     withState: Boolean = true,
     limit: Int = 0,
-    builder: (ViewPager.() -> Unit)? = null,
-): ViewPager {
+    builder: (QuickViewPager.() -> Unit)? = null,
+): QuickViewPager {
     val contentFragmentList = views.map {
         val contentView = FrameLayout(context)
         contentView.layoutParams = matchLayoutParams()

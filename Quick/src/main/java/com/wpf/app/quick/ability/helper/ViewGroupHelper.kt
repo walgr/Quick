@@ -4,10 +4,10 @@ import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams
 import android.widget.Space
 import com.wpf.app.base.ability.scope.ViewGroupScope
-import com.wpf.app.base.ability.scope.withViewGroup
+import com.wpf.app.base.ability.scope.viewGroupApply
 
 fun ViewGroupScope<out ViewGroup>.space(space: Int, isHeight: Boolean = true) {
-    withViewGroup {
+    viewGroupApply {
         addView(
             Space(context),
             if (isHeight) LayoutParams.WRAP_CONTENT else space,

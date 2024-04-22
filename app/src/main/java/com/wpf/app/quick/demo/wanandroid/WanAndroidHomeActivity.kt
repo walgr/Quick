@@ -8,6 +8,7 @@ import androidx.core.widget.NestedScrollView
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.appbar.AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL
 import com.google.android.material.tabs.TabLayout
+import com.wpf.app.base.ability.scope.withViewGroupScope
 import com.wpf.app.quick.ability.QuickActivity
 import com.wpf.app.quick.ability.ex.contentView
 import com.wpf.app.quick.ability.helper.coordinator
@@ -40,13 +41,15 @@ class WanAndroidHomeActivity : QuickActivity(contentView<LinearLayout> {
     var viewPager: ViewPager? = null
     title {
         moreGroup(8.dp) {
-            text(text = "登录", textColor = R.color.white.toColor(), textSize = 16f.dp) {
-                onClick {
-                    dialog(layoutViewCreate = {
-                        text(
-                            text = "弹窗", textColor = R.color.white.toColor(), textSize = 24f.dp
-                        )
-                    }).show()
+            withViewGroupScope {
+                text(text = "登录", textColor = R.color.white.toColor(), textSize = 16f.dp) {
+                    onClick {
+                        dialog(layoutViewCreate = {
+                            text(
+                                text = "弹窗", textColor = R.color.white.toColor(), textSize = 24f.dp
+                            )
+                        }).show()
+                    }
                 }
             }
         }
@@ -58,23 +61,29 @@ class WanAndroidHomeActivity : QuickActivity(contentView<LinearLayout> {
         }
     }
     coordinator(followSlideLayout = {
-        text(
-            layoutParams = matchWrapLayoutParams(),
-            text = "Wan Android",
-            textColor = R.color.white.toColor(),
-            textSize = 24f.dp,
-            textGravity = Gravity.CENTER
-        ) {
-            setPadding(32.dp, 16.dp, 32.dp, 16.dp)
+        withViewGroupScope {
+            text(
+                layoutParams = matchWrapLayoutParams(),
+                text = "Wan Android",
+                textColor = R.color.white.toColor(),
+                textSize = 24f.dp,
+                textGravity = Gravity.CENTER
+            ) {
+                setPadding(32.dp, 16.dp, 32.dp, 16.dp)
+            }
         }
     }, scrollFlags = SCROLL_FLAG_SCROLL, topSuspendLayout = {
-        tabLayout(layoutParams = matchWrapLayoutParams().reset(height = 44.dp))
+        withViewGroupScope {
+            tabLayout(layoutParams = matchWrapLayoutParams().reset(height = 44.dp))
+        }
     }, bottomScrollLayout = {
-        viewPagerBuilder(quickView = this@contentView.self) {
-            fragment(RecommendFragment())
-            viewFragment {
-                myLayout<NestedScrollView>(layoutParams = matchLayoutParams()) {
-                    text(text = "测试")
+        withViewGroupScope {
+            viewPagerBuilder(quickView = this@contentView.self) {
+                fragment(RecommendFragment())
+                viewFragment {
+                    myLayout<NestedScrollView>(layoutParams = matchLayoutParams()) {
+                        text(text = "测试")
+                    }
                 }
             }
         }
