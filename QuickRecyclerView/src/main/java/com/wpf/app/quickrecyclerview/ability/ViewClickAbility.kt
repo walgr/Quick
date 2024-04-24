@@ -24,11 +24,15 @@ fun <T : QuickAbilityData> click(
                 super.afterHolderOnCreateHolder(holder, selfOnlyBase)
                 if (viewId == 0) {
                     holder.itemView.setOnClickListener {
-                        func.invoke(selfOnlyBase.getViewRealData(holder) as T, it)
+                        selfOnlyBase.getViewRealData(holder)?.let { data ->
+                            func.invoke(data as T, it)
+                        }
                     }
                 } else {
                     holder.itemView.findViewById<View>(viewId).setOnClickListener {
-                        func.invoke(selfOnlyBase.getViewRealData(holder) as T, it)
+                        selfOnlyBase.getViewRealData(holder)?.let { data ->
+                            func.invoke(data as T, it)
+                        }
                     }
                 }
             }
@@ -50,11 +54,15 @@ fun <T : QuickAbilityData> longClick(
                 super.afterHolderOnCreateHolder(holder, selfOnlyBase)
                 if (viewId == 0) {
                     holder.itemView.setOnLongClickListener {
-                        func.invoke(selfOnlyBase.getViewRealData(holder) as T, it)
+                        selfOnlyBase.getViewRealData(holder)?.let { data ->
+                            func.invoke(data as T, it)
+                        } ?: false
                     }
                 } else {
                     holder.itemView.findViewById<View>(viewId).setOnLongClickListener {
-                        func.invoke(selfOnlyBase.getViewRealData(holder) as T, it)
+                        selfOnlyBase.getViewRealData(holder)?.let { data ->
+                            func.invoke(data as T, it)
+                        } ?: false
                     }
                 }
             }

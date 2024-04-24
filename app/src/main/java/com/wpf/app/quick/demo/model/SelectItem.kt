@@ -1,14 +1,14 @@
 package com.wpf.app.quick.demo.model
 
 import android.annotation.SuppressLint
-import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.annotations.bind.BindData2View
+import com.wpf.app.quick.demo.R
 import com.wpf.app.quickbind.helper.binddatahelper.Select2CheckBox
 import com.wpf.app.quickbind.helper.binddatahelper.Text2TextView
+import com.wpf.app.quickutil.log.LogUtil
+import com.wpf.app.quickutil.run.runOnView
 import com.wpf.app.quickwidget.selectview.data.QuickChildSelectData
 import com.wpf.app.quickwidget.selectview.data.QuickParentSelectData
-import com.wpf.app.quickutil.run.runOnView
-import com.wpf.app.quickutil.log.LogUtil
 
 /**
  * Created by 王朋飞 on 2022/7/8.
@@ -54,6 +54,7 @@ class ParentTitleSelectItem(
     private var isShowChild = true
     override fun onClick() {
         super.onClick()
+        //TODO bug：展开数据有bug
         val positionStart = getViewPos() + 1
         if (isShowChild) {
             LogUtil.e("收缩${title}")

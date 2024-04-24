@@ -83,7 +83,7 @@ open class QuickParentSelectData(
                 }
             }
             if (findPos >= 0) {
-                getRecyclerView()?.scrollToPositionAndOffset(findPos)
+                childAdapter.getRecyclerView()?.scrollToPositionAndOffset(findPos)
             }
         }
     }

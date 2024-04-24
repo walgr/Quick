@@ -1,10 +1,10 @@
 package com.wpf.app.quickwidget.selectview.listeners
 
+import com.wpf.app.quickrecyclerview.listeners.DataAdapter
 import com.wpf.app.quickwidget.selectview.QuickSelectAdapter
 import com.wpf.app.quickwidget.selectview.data.QuickChildSelectData
 import com.wpf.app.quickwidget.selectview.data.QuickParentSelectData
 import com.wpf.app.quickwidget.selectview.data.QuickSelectData
-import com.wpf.app.quickrecyclerview.listeners.DataAdapter
 
 
 /**
@@ -41,12 +41,12 @@ interface DataSelectOnAdapter : DataAdapter, SetSelectChange {
         if (curItemSelect) {
             childSelectData.isSelect = !childSelectData.canCancel
             if (!childSelectData.isSelect) {
-                changePos.add(getData()?.indexOf(childSelectData) ?: -1)
+                changePos.add(indexOf(childSelectData))
             }
         } else {
             if (getItemSelectSize() < childSelectData.maxLimit) {
                 childSelectData.isSelect = true
-                changePos.add(getData()?.indexOf(childSelectData) ?: -1)
+                changePos.add(indexOf(childSelectData))
             } else {
                 childSelectData.maxLimitListener?.beyondLimit(childSelectData.maxLimit)
             }
@@ -66,12 +66,12 @@ interface DataSelectOnAdapter : DataAdapter, SetSelectChange {
         val changePos = arrayListOf<Int>()
         asChildSelectData()?.forEach {
             if (it.isSelect != it.defaultSelect) {
-                changePos.add(getData()?.indexOf(it) ?: -1)
+                changePos.add(indexOf(it))
             }
             it.isSelect = it.defaultSelect
             it.childList?.forEach { child ->
                 if (child.isSelect != child.defaultSelect) {
-                    changePos.add(getData()?.indexOf(child) ?: -1)
+                    changePos.add(indexOf(child))
                 }
                 child.isSelect = child.defaultSelect
             }
@@ -93,12 +93,12 @@ interface DataSelectOnAdapter : DataAdapter, SetSelectChange {
         }?.let {
             val changePos = arrayListOf<Int>()
             if (it.isSelect != it.defaultSelect) {
-                changePos.add(getData()?.indexOf(it) ?: -1)
+                changePos.add(indexOf(it))
             }
             it.isSelect = it.defaultSelect
             it.childList?.forEach { child ->
                 if (child.isSelect != child.defaultSelect) {
-                    changePos.add(getData()?.indexOf(child) ?: -1)
+                    changePos.add(indexOf(child))
                 }
                 child.isSelect = child.defaultSelect
             }
@@ -128,7 +128,7 @@ interface DataSelectOnAdapter : DataAdapter, SetSelectChange {
         asParentSelectData()?.filter {
             it == childSelectData.parent
         }?.forEach {
-            changePos.add(getData()?.indexOf(it) ?: -1)
+            changePos.add(indexOf(it))
             it.isSelect = true
         }
         if (dealChange) {

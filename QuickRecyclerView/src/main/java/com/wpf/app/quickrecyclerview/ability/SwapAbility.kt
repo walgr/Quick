@@ -36,8 +36,10 @@ fun <T : QuickAbilityData> swap(
                             recyclerView.adapter.asTo<QuickAdapter>() ?: return makeMovementFlags(0, 0)
                         val firstData = adapter.getData()?.first { it is QuickAbilityData }
                             ?.asTo<QuickAbilityData>() ?: return makeMovementFlags(0, 0)
-                        val dragFlags =
-                            if (canSwap.invoke(firstData.getViewRealData(viewHolder) as T)) (ItemTouchHelper.UP or ItemTouchHelper.DOWN) else 0
+                        var dragFlags = 0
+                        firstData.getViewRealData(viewHolder)?.let {
+                            dragFlags = if (canSwap.invoke(it as T)) (ItemTouchHelper.UP or ItemTouchHelper.DOWN) else 0
+                        }
                         return makeMovementFlags(dragFlags, 0)
                     }
 

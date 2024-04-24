@@ -23,7 +23,7 @@ open class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>()
     private var mRecyclerView: RecyclerView? = null
     private var mQuickAdapterListener: QuickAdapterListener<QuickItemData>? = null
 
-    var mDataList: MutableList<QuickItemData>? = null
+    internal var mDataList: MutableList<QuickItemData>? = null
     val headerViews = mutableListOf<QuickHeaderData>()
     val footerViews = mutableListOf<QuickFooterData>()
 
@@ -91,6 +91,7 @@ open class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>()
     }
 
     override fun getItemViewType(position: Int): Int {
+        if (position < 0) return -1
         if (headerViews.isNotEmpty() && position < headerViews.size) {
             return headerViews[position].viewType
         } else if (position < headerViews.size + (mDataList?.size ?: 0)) {

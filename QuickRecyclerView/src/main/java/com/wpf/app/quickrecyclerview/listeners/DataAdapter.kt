@@ -65,9 +65,10 @@ interface DataAdapter {
 
     //item拖动交换位置
     fun onMove(sourcePosition: Int, targetPosition: Int) {
-        val sourceItem = getData()?.getOrNull(sourcePosition) ?: return
-        getData()?.removeAt(sourcePosition)
-        addData(targetPosition, sourceItem)
+        val sourceItem = getData(sourcePosition) ?: return
+        val headerSize = getQuickAdapter().headerViews.size
+        getData()?.removeAt(sourcePosition - headerSize)
+        addData(targetPosition - headerSize, sourceItem)
         getQuickAdapter().notifyItemMoved(sourcePosition, targetPosition)
     }
 
@@ -89,9 +90,12 @@ interface DataAdapter {
         return getQuickAdapter().mDataList
     }
 
-
     fun getData(position: Int): QuickItemData? {
-        return getQuickAdapter().mDataList?.getOrNull(position)
+        return getDataWithHeaderFooter(position)
+    }
+
+    fun indexOf(itemData: QuickItemData): Int {
+        return getQuickAdapter().headerViews.size + (getQuickAdapter().mDataList?.indexOf(itemData) ?: 0)
     }
 
     fun getDataWithHeaderFooter(position: Int): QuickItemData? {

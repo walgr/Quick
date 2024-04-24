@@ -90,7 +90,7 @@ open class QuickAbilityData(
     }
 
     internal fun getViewRealData(viewHolder: RecyclerView.ViewHolder): QuickAbilityData? {
-        return getAdapter()?.getData()?.get(viewHolder.bindingAdapterPosition) as? QuickAbilityData
+        return getAdapter()?.getData(viewHolder.bindingAdapterPosition) as? QuickAbilityData
     }
 
     fun <VB : ViewDataBinding> getViewBinding(): VB? {

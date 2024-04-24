@@ -27,15 +27,6 @@ class QuickStickyView : StickyView {
         return result
     }
 
-//    override fun getLastStickyView(adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>?, curViewPos: Int): Int {
-//        (0 until curViewPos).reversed().forEach { i ->
-//            if (getViewData(adapter, i)?.isSuspension == true) {
-//                return i
-//            }
-//        }
-//        return -1
-//    }
-
     override fun getStickViewType(recyclerView: RecyclerView, view: View?): Int {
         val viewData = getViewData(recyclerView, view)
         if (viewData is QuickItemData) {
@@ -46,9 +37,7 @@ class QuickStickyView : StickyView {
 
     private fun getViewData(recyclerView: RecyclerView, view: View?): QuickSuspensionData? {
         if (view == null) return null
-        val viewPos = recyclerView.getChildAdapterPosition(view)
-        val quickAdapter = recyclerView.adapter as? QuickAdapter
-        return quickAdapter?.getDataByViewType(quickAdapter.getItemViewType(viewPos)) as? QuickSuspensionData
+        return getViewData(adapter = recyclerView.adapter, recyclerView.getChildAdapterPosition(view))
     }
 
     private fun getViewData(adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>?, viewPos: Int): QuickSuspensionData? {
