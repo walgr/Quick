@@ -54,7 +54,6 @@ class ParentTitleSelectItem(
     private var isShowChild = true
     override fun onClick() {
         super.onClick()
-        //TODO bug：展开数据有bug
         val positionStart = getViewPos() + 1
         if (isShowChild) {
             LogUtil.e("收缩${title}")
