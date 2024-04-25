@@ -2,10 +2,11 @@ package com.wpf.app.quickrecyclerview.utils
 
 import android.graphics.Rect
 import android.view.View
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.wpf.app.quickrecyclerview.QuickAdapter
 
 class SpaceItemDecoration(
     private val space: Int = 0,
@@ -21,7 +22,15 @@ class SpaceItemDecoration(
     ) {
         super.getItemOffsets(outRect, view, parent, state)
         if (parent.adapter == null) return
-        val pos = parent.getChildAdapterPosition(view)
+        var pos = parent.getChildAdapterPosition(view)
+        var headerSize = 0
+        if (parent.adapter is QuickAdapter) {
+            headerSize = (parent.adapter as QuickAdapter).headerViews.size
+            if (pos < headerSize) {
+                return
+            }
+            pos -= headerSize
+        }
         val layoutManager = parent.layoutManager
         var startSpace = 0
         when (spaceType) {
@@ -37,7 +46,7 @@ class SpaceItemDecoration(
                 startSpace = 0
             }
         }
-        val allCount = parent.adapter!!.itemCount
+        val allCount = parent.adapter!!.itemCount - headerSize
         if (layoutManager is GridLayoutManager || layoutManager is StaggeredGridLayoutManager) {
             startSpace = space / 2          //保证同级view大小一致只能是Center
             val span = when (layoutManager) {
@@ -51,8 +60,8 @@ class SpaceItemDecoration(
                 else -> RecyclerView.VERTICAL
             }
             val allRows = (allCount + 1) / span
-            val posMod = pos % span
-            val posDiv = pos / span
+            val posMod = pos % span     //列数
+            val posDiv = pos / span     //行数
             if (orientation == RecyclerView.VERTICAL) {
                 if (posMod in 1 until span) {
                     outRect.left = startSpace

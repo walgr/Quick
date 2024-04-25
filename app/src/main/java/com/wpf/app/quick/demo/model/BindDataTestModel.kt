@@ -2,6 +2,7 @@ package com.wpf.app.quick.demo.model
 
 import android.annotation.SuppressLint
 import android.widget.FrameLayout
+import androidx.recyclerview.widget.ItemTouchHelper
 import com.wpf.app.base.ability.base.with
 import com.wpf.app.quick.ability.ex.contentView
 import com.wpf.app.quick.ability.helper.background
@@ -48,7 +49,10 @@ class BindDataTestModel(private val index: Int = 0) : QuickAbilityData(
             swipeLayout.smoothClose()
             ToastHelper.show("删除完成：${self.index}")
         }
-    }).with(swap<BindDataTestModel> { this.index != 3 })
+    }).with(swap<BindDataTestModel> {
+        if (this.index != 3) ItemTouchHelper.UP or ItemTouchHelper.DOWN or ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
+        else 0
+    })
 ) {
     @SuppressLint("NonConstantResourceId")
     @BindData2View(id = R.id.img, helper = Url2ImageView::class)

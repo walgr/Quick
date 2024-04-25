@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 
 class StickyItemDecoration(
-    private val mStickyView: StickyView
+    private val mStickyView: StickyView,
 ) : ClickItemDecoration() {
     /**
      * 吸附的itemView
@@ -91,14 +91,18 @@ class StickyItemDecoration(
                 getStickyViewHolder(parent, view)
                 cacheStickyViewPosition()
                 if (view.top <= 0) {
-                    bindDataForStickyView(mLayoutManager!!.findFirstVisibleItemPosition(), parent.measuredWidth)
+                    bindDataForStickyView(
+                        mLayoutManager!!.findFirstVisibleItemPosition(),
+                        parent.measuredWidth
+                    )
                 } else {
                     if (mStickyPositionList.size > 0) {
                         if (mStickyPositionList.size == 1) {
                             bindDataForStickyView(mStickyPositionList[0], parent.measuredWidth)
                         } else {
                             val currentPosition = getStickyViewPositionOfRecyclerView(m)
-                            val indexOfCurrentPosition = mStickyPositionList.lastIndexOf(currentPosition)
+                            val indexOfCurrentPosition =
+                                mStickyPositionList.lastIndexOf(currentPosition)
                             if (indexOfCurrentPosition >= 1) bindDataForStickyView(
                                 mStickyPositionList[indexOfCurrentPosition - 1],
                                 parent.measuredWidth
@@ -123,7 +127,10 @@ class StickyItemDecoration(
         if (!mCurrentUIFindStickView) {
             mStickyItemViewMarginTop = 0F
             if (mLayoutManager!!.findFirstVisibleItemPosition() + parent.childCount == parent.adapter!!.itemCount && mStickyPositionList.size > 0) {
-                bindDataForStickyView(mStickyPositionList[mStickyPositionList.size - 1], parent.measuredWidth)
+                bindDataForStickyView(
+                    mStickyPositionList[mStickyPositionList.size - 1],
+                    parent.measuredWidth
+                )
             }
             drawStickyItemView(c)
         }
@@ -169,7 +176,8 @@ class StickyItemDecoration(
         mBindDataPosition = position
         mAdapter?.onBindViewHolder(mViewHolder!!, mBindDataPosition)
         measureLayoutStickyItemView(width)
-        mStickyItemViewHeight = (mViewHolder!!.itemView.bottom - mViewHolder!!.itemView.top).toFloat()
+        mStickyItemViewHeight =
+            (mViewHolder!!.itemView.bottom - mViewHolder!!.itemView.top).toFloat()
     }
 //
 //    /**
@@ -215,7 +223,10 @@ class StickyItemDecoration(
     private fun getStickyViewHolder(recyclerView: RecyclerView, view: View) {
         if (mAdapter != null) return
         mAdapter = recyclerView.adapter
-        mViewHolder = mAdapter?.onCreateViewHolder(recyclerView, mStickyView.getStickViewType(recyclerView, view))
+        mViewHolder = mAdapter?.onCreateViewHolder(
+            recyclerView,
+            mStickyView.getStickViewType(recyclerView, view)
+        )
         mStickyItemView = mViewHolder?.itemView
     }
 
@@ -234,7 +245,12 @@ class StickyItemDecoration(
             View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
         }
         mStickyItemView?.measure(widthSpec, heightSpec)
-        mStickyItemView?.layout(0, 0, mStickyItemView?.measuredWidth ?: 0, mStickyItemView?.measuredHeight ?: 0)
+        mStickyItemView?.layout(
+            0,
+            0,
+            mStickyItemView?.measuredWidth ?: 0,
+            mStickyItemView?.measuredHeight ?: 0
+        )
     }
 
     /**

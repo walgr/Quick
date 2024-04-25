@@ -12,7 +12,7 @@ import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
 import com.wpf.app.quickutil.other.asTo
 
 fun <T : QuickAbilityData> swap(
-    canSwap: T.() -> Boolean = { true },
+    canSwap: T.() -> Int = { 0 },
 ): MutableList<QuickAbility> {
     return mutableListOf(
         object : QuickItemAbility<QuickAbilityData>, Unique {
@@ -34,11 +34,11 @@ fun <T : QuickAbilityData> swap(
                     ): Int {
                         val adapter =
                             recyclerView.adapter.asTo<QuickAdapter>() ?: return makeMovementFlags(0, 0)
-                        val firstData = adapter.getData()?.first { it is QuickAbilityData }
-                            ?.asTo<QuickAbilityData>() ?: return makeMovementFlags(0, 0)
                         var dragFlags = 0
-                        firstData.getViewRealData(viewHolder)?.let {
-                            dragFlags = if (canSwap.invoke(it as T)) (ItemTouchHelper.UP or ItemTouchHelper.DOWN) else 0
+                        adapter.getData()?.first { it is QuickAbilityData }?.asTo<QuickAbilityData>()?.let {
+                            it.getViewRealData(viewHolder)?.let {
+                                dragFlags = canSwap.invoke(it as T)
+                            }
                         }
                         return makeMovementFlags(dragFlags, 0)
                     }

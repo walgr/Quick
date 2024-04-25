@@ -65,11 +65,14 @@ interface DataAdapter {
 
     //item拖动交换位置
     fun onMove(sourcePosition: Int, targetPosition: Int) {
-        val sourceItem = getData(sourcePosition) ?: return
         val headerSize = getQuickAdapter().headerViews.size
+        if (sourcePosition < headerSize || targetPosition < headerSize) return
+        val sourceItem = getData(sourcePosition) ?: return
         getData()?.removeAt(sourcePosition - headerSize)
         addData(targetPosition - headerSize, sourceItem)
         getQuickAdapter().notifyItemMoved(sourcePosition, targetPosition)
+        getQuickAdapter().notifyItemChanged(sourcePosition)
+        getQuickAdapter().notifyItemChanged(targetPosition)
     }
 
     /**

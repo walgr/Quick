@@ -27,7 +27,8 @@
             app:spaceType="center"
             app:includeFirst="true"
             app:includeLast="true"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" >
+            app:spanCount="2"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager" >
 
             <com.wpf.app.quickrecyclerview.widget.QuickHeaderShadow
                 android:layout_width="match_parent"
@@ -41,6 +42,8 @@
                     android:background="@color/purple_500"
                     android:textSize="32sp"
                     android:gravity="center"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:text="欢迎"/>
 
             </com.wpf.app.quickrecyclerview.widget.QuickHeaderShadow>
