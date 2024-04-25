@@ -15,8 +15,10 @@ import com.wpf.app.quick.demo.ViewPagerNotifySizeTestActivity
 import com.wpf.app.quick.demo.databinding.FragmentMainReleaseBinding
 import com.wpf.app.quick.demo.model.MyMessage
 import com.wpf.app.quick.demo.wanandroid.WanAndroidHomeActivity
-import com.wpf.app.quickbind.annotations.BindSp2View
 import com.wpf.app.quick.helper.startActivity
+import com.wpf.app.quickbind.annotations.BindSp2View
+import com.wpf.app.quickrecyclerview.utils.QuickStickyView
+import com.wpf.app.quickrecyclerview.utils.StickyItemDecoration
 import com.wpf.app.quickutil.other.printLog
 
 class MainReleaseVM: QuickVBModel<MainReleaseFragment, FragmentMainReleaseBinding>() {
@@ -31,6 +33,7 @@ class MainReleaseVM: QuickVBModel<MainReleaseFragment, FragmentMainReleaseBindin
             { text3?.text = System.currentTimeMillis().toString() + "" },
             1000
         )
+        view.list.addItemDecoration(StickyItemDecoration(QuickStickyView()))
     }
 
     fun gotoWanAndroid(view: View?) {

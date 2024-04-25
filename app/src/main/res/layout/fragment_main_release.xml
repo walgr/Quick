@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -18,167 +17,190 @@
             type="com.wpf.app.quick.demo.fragment.MainReleaseVM" />
     </data>
 
-    <androidx.core.widget.NestedScrollView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="16dp">
 
-        <LinearLayout
+        <com.wpf.app.quickrecyclerview.QuickRecyclerView
+            android:id="@+id/list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="16dp">
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:space="4dp"
+            app:spanCount="2">
 
-            <com.wpf.app.quickrecyclerview.QuickRecyclerView
-                android:id="@+id/list"
+            <com.wpf.app.quickrecyclerview.widget.QuickHeaderShadow
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:space="4dp"
-                app:spanCount="2">
+                app:isSuspension="true">
 
-                <com.wpf.app.quickrecyclerview.widget.QuickHeaderShadow
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:background="@color/purple_500"
+                    android:gravity="center"
+                    android:text="欢迎"
+                    android:textColor="@color/white"
+                    android:textSize="32sp" />
+
+            </com.wpf.app.quickrecyclerview.widget.QuickHeaderShadow>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{viewModel::gotoWanAndroid}"
+                android:text="WanAndroid"
+                android:textAllCaps="false" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{viewModel::gotoDialog}"
+                android:text="弹窗测试"
+                android:textAllCaps="false" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{viewModel::gotoViewPagerNotifySize}"
+                android:text="刷新数量测试"
+                android:textAllCaps="false" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="刷新数据测试"
+                android:textAllCaps="false"
+                app:clickGoto="@{ViewPagerNotifyDataTestActivityClass.INSTANCE.KClass}" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{viewModel::gotoList}"
+                android:text="列表测试" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{viewModel::gotoFragmentActivity}"
+                android:text="Fragment测试" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{viewModel::gotoData}"
+                android:text="数据测试" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{viewModel::gotoSelectList}"
+                android:text="选择列表测试" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="接口请求测试"
+                android:textAllCaps="false"
+                app:clickGoto="@{RequestTestActivityClass.INSTANCE.KClass}" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="View同步测试"
+                android:textAllCaps="false"
+                app:clickGoto="@{ShadowViewTestActivityClass.INSTANCE.KClass}" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BottomSheet测试"
+                android:textAllCaps="false"
+                app:clickGoto="@{BottomSheetDialogTestActivityClass.INSTANCE.KClass}" />
+
+            <com.wpf.app.quickrecyclerview.widget.QuickFooterShadow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:isSuspension="true">
+                    android:orientation="vertical">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:padding="2.5dp"
+                        android:src="@color/black"
+                        app:shapeAppearance="@style/CircleImageStyle"
+                        app:strokeColor="@color/colorPrimary"
+                        app:strokeWidth="5dp" />
+
+                    <com.wpf.app.quick.demo.model.SelectItemView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <com.wpf.app.quickwidget.item.MultiFunctionView
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        app:topTitle="写实"
+                        app:topTitleColor="@color/purple_500"
+                        app:topTitleHint="123"
+                        app:topTitleHintColor="#000000" />
+
+
+                </LinearLayout>
+
+            </com.wpf.app.quickrecyclerview.widget.QuickFooterShadow>
+
+            <com.wpf.app.quickrecyclerview.widget.QuickFooterShadow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/testBindSpLL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:textColor="@color/white"
-                        android:background="@color/purple_500"
-                        android:textSize="32sp"
-                        android:gravity="center"
-                        android:text="欢迎"/>
+                        android:id="@+id/spTextView1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="4dp"
+                        android:text="测试绑定1" />
 
-                </com.wpf.app.quickrecyclerview.widget.QuickHeaderShadow>
+                    <TextView
+                        android:id="@+id/spTextView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="测试绑定2" />
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="@{viewModel::gotoWanAndroid}"
-                    android:text="WanAndroid"
-                    android:textAllCaps="false" />
+                    <TextView
+                        android:id="@+id/spTextView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="4dp"
+                        android:text="测试绑定3" />
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="@{viewModel::gotoDialog}"
-                    android:text="弹窗测试"
-                    android:textAllCaps="false" />
+                </LinearLayout>
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="@{viewModel::gotoViewPagerNotifySize}"
-                    android:text="刷新数量测试"
-                    android:textAllCaps="false" />
+            </com.wpf.app.quickrecyclerview.widget.QuickFooterShadow>
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="刷新数据测试"
-                    android:textAllCaps="false"
-                    app:clickGoto="@{ViewPagerNotifyDataTestActivityClass.INSTANCE.KClass}" />
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="@{viewModel::gotoList}"
-                    android:text="列表测试" />
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="@{viewModel::gotoFragmentActivity}"
-                    android:text="Fragment测试" />
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="@{viewModel::gotoData}"
-                    android:text="数据测试" />
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="@{viewModel::gotoSelectList}"
-                    android:text="选择列表测试" />
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="接口请求测试"
-                    android:textAllCaps="false"
-                    app:clickGoto="@{RequestTestActivityClass.INSTANCE.KClass}" />
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="View同步测试"
-                    android:textAllCaps="false"
-                    app:clickGoto="@{ShadowViewTestActivityClass.INSTANCE.KClass}" />
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="BottomSheet测试"
-                    android:textAllCaps="false"
-                    app:clickGoto="@{BottomSheetDialogTestActivityClass.INSTANCE.KClass}"/>
-
-            </com.wpf.app.quickrecyclerview.QuickRecyclerView>
-
-            <com.google.android.material.imageview.ShapeableImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:padding="2.5dp"
-                android:src="@color/black"
-                app:shapeAppearance="@style/CircleImageStyle"
-                app:strokeColor="@color/colorPrimary"
-                app:strokeWidth="5dp" />
-
-            <com.wpf.app.quick.demo.model.SelectItemView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <com.wpf.app.quickwidget.item.MultiFunctionView
+            <com.wpf.app.quickrecyclerview.widget.QuickFooterShadow
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                app:topTitle="写实"
-                app:topTitleColor="@color/purple_500"
-                app:topTitleHint="123"
-                app:topTitleHintColor="#000000" />
+                android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:id="@+id/testBindSpLL"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"/>
 
-                <TextView
-                    android:id="@+id/spTextView1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="4dp"
-                    android:text="测试绑定1" />
+            </com.wpf.app.quickrecyclerview.widget.QuickFooterShadow>
 
-                <TextView
-                    android:id="@+id/spTextView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="测试绑定2" />
+        </com.wpf.app.quickrecyclerview.QuickRecyclerView>
 
-                <TextView
-                    android:id="@+id/spTextView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="4dp"
-                    android:text="测试绑定3" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </androidx.core.widget.NestedScrollView>
+    </FrameLayout>
 
 </layout>
