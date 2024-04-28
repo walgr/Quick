@@ -89,7 +89,7 @@ open class QuickBindData @JvmOverloads constructor(
     }
 
     open fun getViewPos(): Int {
-        return getViewHolder()?.itemPosition?: 0
+        return getViewHolder()?.bindingAdapterPosition?: 0
     }
 
     override fun getView(): View? {

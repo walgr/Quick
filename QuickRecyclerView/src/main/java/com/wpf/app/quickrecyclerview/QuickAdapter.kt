@@ -78,7 +78,6 @@ open class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>()
     }
 
     override fun onBindViewHolder(viewHolder: QuickViewHolder<QuickItemData>, position: Int) {
-        viewHolder.itemPosition = position
         val realData: QuickItemData? =
             if (headerViews.isNotEmpty() && position < headerViews.size) {
                 headerViews[position]

@@ -33,7 +33,6 @@ open class QuickViewHolder<T : QuickItemData> @JvmOverloads constructor(
 ) {
 
     var mQuickAdapter: QuickAdapter? = null
-    var itemPosition: Int = -1
 
     fun getQuickAdapter(): QuickAdapter? {
         return mQuickAdapter

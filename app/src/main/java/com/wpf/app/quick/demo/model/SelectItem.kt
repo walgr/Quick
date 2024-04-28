@@ -23,8 +23,8 @@ class ParentSelectItem : QuickParentSelectData(layoutId = R.layout.holder_select
     override fun onSelectChildChange(selectList: List<QuickChildSelectData>?) {
         super.onSelectChildChange(selectList)
         title.run(getView()!!.findViewById(R.id.title))
-        getViewHolder()?.itemPosition?.let {
-            getAdapter()?.notifyItemChanged(getViewHolder()?.itemPosition!!)
+        getViewHolder()?.bindingAdapterPosition?.let {
+            getAdapter()?.notifyItemChanged(it)
         }
     }
 

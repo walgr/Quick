@@ -69,7 +69,7 @@ abstract class ClickItemDecoration : RecyclerView.ItemDecoration() {
     private fun onTouchEvent(e: MotionEvent): Boolean {
         val stickyView = getStickyItem()
         stickyView?.let {
-            if (e.y > (it.top - getStickyItemMarginTop()) && e.y < (it.bottom - getStickyItemMarginTop()) && e.x > it.left && e.x < it.right) {
+            if (e.y > (0 - getStickyItemMarginTop()) && e.y < (it.height - getStickyItemMarginTop()) && e.x > it.left && e.x < it.right) {
                 return if (onTouchEvent(it, e))
                     true
                 else {
