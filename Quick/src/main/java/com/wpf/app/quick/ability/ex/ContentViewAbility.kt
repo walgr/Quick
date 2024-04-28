@@ -1,5 +1,6 @@
 package com.wpf.app.quick.ability.ex
 
+import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams
@@ -14,7 +15,6 @@ import com.wpf.app.base.bind.QuickBindWrap
 import com.wpf.app.quickutil.helper.matchLayoutParams
 import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.other.forceTo
-import com.wpf.app.quickutil.widget.QuickViewGroup
 
 interface ContentViewScope<Self : QuickView, T : ViewGroup> : ViewGroupScope<T>,
     QuickViewScope<Self>
@@ -48,7 +48,7 @@ inline fun <reified Self : QuickView, reified T : ViewGroup> contentViewWithSelf
     noinline builder: (ContentViewScope<Self, T>.() -> Unit)? = null,
 ): MutableList<QuickAbility> {
     return generateContentView(layoutViewCreate = {
-        object : QuickViewGroup<T>(this.context, addToParent = true, forceGenerics = true) {}.shadowView!!
+        T::class.java.getConstructor(Context::class.java).newInstance(this.context)
     }, generateContentView = {
         val childView: T = it.forceTo()
         childView.layoutParams = layoutParams

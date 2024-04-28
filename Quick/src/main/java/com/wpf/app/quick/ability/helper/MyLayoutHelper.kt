@@ -1,5 +1,6 @@
 package com.wpf.app.quick.ability.helper
 
+import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
@@ -16,18 +17,13 @@ import com.wpf.app.quickutil.helper.matchLayoutParams
 import com.wpf.app.quickutil.helper.matchWrapLayoutParams
 import com.wpf.app.quickutil.helper.removeParent
 import com.wpf.app.quickutil.other.forceTo
-import com.wpf.app.quickutil.widget.QuickViewGroup
 
 inline fun <reified T : ViewGroup> Any.myLayout(
     layoutParams: ViewGroup.LayoutParams = matchWrapLayoutParams(),
     noinline builder: (ViewGroupScope<T>.() -> Unit)? = null,
 ): T {
     val mContext = context()!!
-    val view = object : QuickViewGroup<T>(
-        context = mContext,
-        addToParent = true,
-        forceGenerics = true
-    ) {}.shadowView ?: return null!!
+    val view = T::class.java.getConstructor(Context::class.java).newInstance(mContext)
     view.layoutParams = layoutParams
     builder?.invoke(createViewGroupScope(view.forceTo()))
     view.let {
