@@ -19,8 +19,7 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp">
+        android:layout_height="match_parent">
 
         <com.wpf.app.quickrecyclerview.QuickRecyclerView
             android:id="@+id/list"
@@ -49,78 +48,86 @@
 
             </com.wpf.app.quickrecyclerview.widget.QuickHeaderShadow>
 
-            <Button
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="@{viewModel::gotoWanAndroid}"
-                android:text="WanAndroid"
-                android:textAllCaps="false" />
+                android:layout_marginHorizontal="16dp">
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="@{viewModel::gotoDialog}"
-                android:text="弹窗测试"
-                android:textAllCaps="false" />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{viewModel::gotoWanAndroid}"
+                    android:text="WanAndroid"
+                    android:textAllCaps="false" />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="@{viewModel::gotoViewPagerNotifySize}"
-                android:text="刷新数量测试"
-                android:textAllCaps="false" />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{viewModel::gotoDialog}"
+                    android:text="弹窗测试"
+                    android:textAllCaps="false" />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="刷新数据测试"
-                android:textAllCaps="false"
-                app:clickGoto="@{ViewPagerNotifyDataTestActivityClass.INSTANCE.KClass}" />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{viewModel::gotoViewPagerNotifySize}"
+                    android:text="刷新数量测试"
+                    android:textAllCaps="false" />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="@{viewModel::gotoList}"
-                android:text="列表测试" />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="刷新数据测试"
+                    android:textAllCaps="false"
+                    app:clickGoto="@{ViewPagerNotifyDataTestActivityClass.INSTANCE.KClass}" />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="@{viewModel::gotoFragmentActivity}"
-                android:text="Fragment测试" />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{viewModel::gotoList}"
+                    android:text="列表测试" />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="@{viewModel::gotoData}"
-                android:text="数据测试" />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{viewModel::gotoFragmentActivity}"
+                    android:text="Fragment测试" />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="@{viewModel::gotoSelectList}"
-                android:text="选择列表测试" />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{viewModel::gotoData}"
+                    android:text="数据测试" />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="接口请求测试"
-                android:textAllCaps="false"
-                app:clickGoto="@{RequestTestActivityClass.INSTANCE.KClass}" />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{viewModel::gotoSelectList}"
+                    android:text="选择列表测试" />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="View同步测试"
-                android:textAllCaps="false"
-                app:clickGoto="@{ShadowViewTestActivityClass.INSTANCE.KClass}" />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="接口请求测试"
+                    android:textAllCaps="false"
+                    app:clickGoto="@{RequestTestActivityClass.INSTANCE.KClass}" />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="BottomSheet测试"
-                android:textAllCaps="false"
-                app:clickGoto="@{BottomSheetDialogTestActivityClass.INSTANCE.KClass}" />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="View同步测试"
+                    android:textAllCaps="false"
+                    app:clickGoto="@{ShadowViewTestActivityClass.INSTANCE.KClass}" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="BottomSheet测试"
+                    android:textAllCaps="false"
+                    app:clickGoto="@{BottomSheetDialogTestActivityClass.INSTANCE.KClass}" />
+
+            </LinearLayout>
 
             <com.wpf.app.quickrecyclerview.widget.QuickFooterShadow
                 android:layout_width="match_parent"
