@@ -13,6 +13,10 @@ inline fun <reified T> Any.forceTo(): T {
     return this as T
 }
 
+fun <T: Any> T?.nullDefault(default: T) : T {
+    return this ?: default
+}
+
 fun Any.printLog(before: String = "", after: String = "", tag: String = LogUtil.TAG) {
     LogUtil.e(tag, before + (if (this is Number) BigDecimal(this.toString()) else this) + after)
 }

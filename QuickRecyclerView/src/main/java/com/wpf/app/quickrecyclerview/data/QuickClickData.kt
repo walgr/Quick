@@ -25,7 +25,7 @@ abstract class QuickClickData @JvmOverloads constructor(
 
     @Transient
     @BindData2View(helper = ItemClick::class)
-    private val itemClick = itemClick {
+    var itemClick = itemClick {
         onClick()
     }
 

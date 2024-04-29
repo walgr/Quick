@@ -26,7 +26,8 @@ open class QuickViewHolder<T : QuickItemData> @JvmOverloads constructor(
     open var dealBindView: Boolean = false,
     open var autoClick: Boolean = false,
 ) : RecyclerView.ViewHolder(
-    layoutViewCreate?.run(mParent.context, mParent) ?: layoutView?.removeParent() ?: layoutId.toView(
+    layoutViewCreate?.run(mParent.context, mParent) ?: layoutView?.removeParent()
+    ?: layoutId.toView(
         mParent.context,
         mParent,
     )
@@ -52,12 +53,27 @@ open class QuickViewHolder<T : QuickItemData> @JvmOverloads constructor(
         }
     }
 
+    private var cloneData: QuickBindData? = null
+    private var cloneDataPos: Int = -1
+
     @CallSuper
     open fun onBindViewHolder(adapter: QuickAdapter, data: T?, position: Int) {
         if (data is QuickBindData) {
-            data.onBindViewHolder(
-                adapter, (this as QuickViewHolder<QuickBindData>), position
-            )
+            if (data.isSuspension && layoutPosition == -1) {
+                //悬浮复制一份数据填充view
+                if (cloneData == null || cloneDataPos != position) {
+                    cloneData = data.clone<QuickBindData>()
+                    cloneDataPos = position
+                }
+                cloneData!!.onBindViewHolder(
+                    adapter, (this as QuickViewHolder<QuickBindData>), position
+                )
+            } else {
+                data.onBindViewHolder(
+                    adapter, (this as QuickViewHolder<QuickBindData>), position
+                )
+            }
+
         }
     }
 

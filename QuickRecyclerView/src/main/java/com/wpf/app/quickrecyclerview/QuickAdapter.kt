@@ -14,6 +14,7 @@ import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
 import com.wpf.app.quickrecyclerview.listeners.DataAdapter
 import com.wpf.app.quickrecyclerview.listeners.QuickAdapterListener
 import com.wpf.app.quickutil.other.asTo
+import com.wpf.app.quickutil.other.nullDefault
 
 /**
  * Created by 王朋飞 on 2022/7/13.
@@ -81,10 +82,10 @@ open class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>()
         val realData: QuickItemData? =
             if (headerViews.isNotEmpty() && position < headerViews.size) {
                 headerViews[position]
-            } else if (position < headerViews.size + (mDataList?.size ?: 0)) {
+            } else if (position < headerViews.size + mDataList?.size.nullDefault(0)) {
                 mDataList?.get(position - headerViews.size)
             } else {
-                footerViews[position - (headerViews.size + (mDataList?.size ?: 0))]
+                footerViews[position - (headerViews.size + mDataList?.size.nullDefault(0))]
             }
         viewHolder.onBindViewHolder(this, realData, position)
     }
@@ -93,21 +94,21 @@ open class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>()
         if (position < 0) return -1
         if (headerViews.isNotEmpty() && position < headerViews.size) {
             return headerViews[position].viewType
-        } else if (position < headerViews.size + (mDataList?.size ?: 0)) {
+        } else if (position < headerViews.size + mDataList?.size.nullDefault(0)) {
             mDataList?.get(position - headerViews.size)?.let {
                 if (it is QuickAbilityData) {
                     it.viewType = it.initViewType(position)
                 }
                 return it.viewType
             }
-        } else if (position < headerViews.size + (mDataList?.size ?: 0) + footerViews.size) {
-            return footerViews[position - (headerViews.size + (mDataList?.size ?: 0))].viewType
+        } else if (position < headerViews.size + mDataList?.size.nullDefault(0) + footerViews.size) {
+            return footerViews[position - (headerViews.size + mDataList?.size.nullDefault(0))].viewType
         }
         return super.getItemViewType(position)
     }
 
     override fun getItemCount(): Int {
-        return headerViews.size + (mDataList?.size ?: 0) + footerViews.size
+        return headerViews.size + mDataList?.size.nullDefault(0) + footerViews.size
     }
 
     fun getQuickAdapterListener(): QuickAdapterListener<QuickItemData>? {

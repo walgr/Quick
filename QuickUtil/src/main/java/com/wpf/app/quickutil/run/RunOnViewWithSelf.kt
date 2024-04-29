@@ -1,12 +1,13 @@
 package com.wpf.app.quickutil.run
 
 import android.view.View
+import java.io.Serializable
 
 /**
  * Created by 王朋飞 on 2022/7/12.
  *
  */
-interface RunOnViewWithSelf<Self, Return> {
+interface RunOnViewWithSelf<Self, Return>: Serializable {
     fun run(view: View, self: Self): Return
 
     fun primeKey(): String {

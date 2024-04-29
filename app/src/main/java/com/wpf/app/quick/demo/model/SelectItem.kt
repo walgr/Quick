@@ -5,7 +5,10 @@ import com.wpf.app.quick.annotations.bind.BindData2View
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quickbind.helper.binddatahelper.Select2CheckBox
 import com.wpf.app.quickbind.helper.binddatahelper.Text2TextView
+import com.wpf.app.quickrecyclerview.data.QuickClickData
+import com.wpf.app.quickrecyclerview.data.QuickItemData
 import com.wpf.app.quickutil.log.LogUtil
+import com.wpf.app.quickutil.other.forceTo
 import com.wpf.app.quickutil.run.runOnView
 import com.wpf.app.quickwidget.selectview.data.QuickChildSelectData
 import com.wpf.app.quickwidget.selectview.data.QuickParentSelectData
@@ -50,6 +53,12 @@ class ParentTitleSelectItem(
     @BindData2View(id = R.id.title, helper = Text2TextView::class)
     val title: String? = null
 ) : QuickParentSelectData(isSuspension = true, layoutId = R.layout.holder_select_parent_title_item) {
+
+    override fun <T : QuickItemData> clone(): T {
+        val newData = super.clone<ParentTitleSelectItem>()
+        newData.forceTo<QuickClickData>().itemClick = this@ParentTitleSelectItem.itemClick
+        return newData as T
+    }
 
     private var isShowChild = true
     override fun onClick() {

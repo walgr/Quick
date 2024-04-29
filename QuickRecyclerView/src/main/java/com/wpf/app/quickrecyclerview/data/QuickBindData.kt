@@ -21,7 +21,7 @@ open class QuickBindData @JvmOverloads constructor(
     layoutId: Int = 0,
     layoutViewCreate: RunOnContextWithSelf<ViewGroup, View>? = null,
     open var autoSet: Boolean = false,              //自动映射
-    isSuspension: Boolean = false                   //View是否悬浮置顶
+    isSuspension: Boolean = false,                   //View是否悬浮置顶
 ) : QuickViewData(
     layoutId = layoutId,
     layoutViewInViewGroup = layoutViewCreate,
@@ -54,7 +54,7 @@ open class QuickBindData @JvmOverloads constructor(
     open fun onBindViewHolder(
         adapter: QuickAdapter,
         viewHolder: QuickViewHolder<QuickBindData>,
-        position: Int
+        position: Int,
     ) {
         mAdapter = adapter
         mViewHolder = viewHolder
@@ -89,7 +89,7 @@ open class QuickBindData @JvmOverloads constructor(
     }
 
     open fun getViewPos(): Int {
-        return getViewHolder()?.bindingAdapterPosition?: 0
+        return getViewHolder()?.bindingAdapterPosition ?: 0
     }
 
     override fun getView(): View? {

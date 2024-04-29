@@ -29,8 +29,7 @@ open class QuickSelectData(
     layoutViewCreate = layoutViewCreate,
     autoSet = autoSet,
     isSuspension = isSuspension,
-),
-    Serializable {
+), Serializable {
 
     override fun onClick() {
 
@@ -40,7 +39,7 @@ open class QuickSelectData(
     override fun onBindViewHolder(
         adapter: QuickAdapter,
         viewHolder: QuickViewHolder<QuickBindData>,
-        position: Int
+        position: Int,
     ) {
         super.onBindViewHolder(adapter as QuickSelectAdapter, viewHolder, position)
         onBindViewHolder(adapter, viewHolder, position)
@@ -49,7 +48,7 @@ open class QuickSelectData(
     open fun onBindViewHolder(
         adapter: QuickSelectAdapter,
         viewHolder: QuickViewHolder<QuickBindData>,
-        position: Int
+        position: Int,
     ) {
 
     }

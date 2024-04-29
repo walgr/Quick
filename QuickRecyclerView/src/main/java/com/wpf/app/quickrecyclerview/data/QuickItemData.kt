@@ -1,5 +1,9 @@
 package com.wpf.app.quickrecyclerview.data
 
+import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
+import java.io.ObjectInputStream
+import java.io.ObjectOutputStream
 import java.io.Serializable
 
 /**
@@ -7,8 +11,8 @@ import java.io.Serializable
  * 基类Item
  */
 open class QuickItemData(
-    var viewType: Int = 0
-): Serializable {
+    var viewType: Int = 0,
+) : Serializable {
     init {
         this.initViewType()
     }
@@ -18,4 +22,15 @@ open class QuickItemData(
             viewType = javaClass.name.hashCode()
         }
     }
+
+    open fun <T : QuickItemData> clone(): T {
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        ObjectOutputStream(byteArrayOutputStream).apply {
+            writeObject(this@QuickItemData)
+            ObjectInputStream(ByteArrayInputStream(byteArrayOutputStream.toByteArray())).apply {
+                return this.readObject() as T
+            }
+        }
+    }
 }
+

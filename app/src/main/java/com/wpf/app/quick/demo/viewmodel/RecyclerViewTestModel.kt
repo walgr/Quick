@@ -5,7 +5,7 @@ import com.wpf.app.quick.demo.databinding.ActivityRecyclerviewTestBinding
 import com.wpf.app.quick.demo.model.BindDataTestModel
 import com.wpf.app.quick.activity.viewmodel.QuickVBModel
 import com.wpf.app.quick.demo.RecyclerViewTestActivity
-import com.wpf.app.quickrecyclerview.utils.QuickStickyView
+import com.wpf.app.quickrecyclerview.utils.QuickStickyHelper
 import com.wpf.app.quickrecyclerview.utils.StickyItemDecoration
 
 /**
@@ -14,7 +14,7 @@ import com.wpf.app.quickrecyclerview.utils.StickyItemDecoration
 class RecyclerViewTestModel : QuickVBModel<RecyclerViewTestActivity, ActivityRecyclerviewTestBinding>() {
 
     override fun onBindingCreated(view: ActivityRecyclerviewTestBinding) {
-        view.list.addItemDecoration(StickyItemDecoration(QuickStickyView()))
+        view.list.addItemDecoration(StickyItemDecoration(QuickStickyHelper()))
     }
 
     fun clean(view: View?) {

@@ -103,7 +103,7 @@ open class QuickRecyclerView @JvmOverloads constructor(
             when (it) {
                 is QuickHeaderShadow -> {
                     getQuickAdapter().headerViews.add(
-                        it.getChildAt(0).toHeaderViewData(
+                        it.toHeaderViewData(
                             isSuspension = it.isSuspension,
                             isMatch = it.isMatch
                         )
@@ -111,7 +111,7 @@ open class QuickRecyclerView @JvmOverloads constructor(
                 }
 
                 is QuickFooterShadow -> {
-                    getQuickAdapter().footerViews.add(it.getChildAt(0).toFooterViewData(isMatch = it.isMatch))
+                    getQuickAdapter().footerViews.add(it.toFooterViewData(isMatch = it.isMatch))
                 }
 
                 else -> {

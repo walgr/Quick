@@ -18,6 +18,7 @@ class QuickHeaderShadow @JvmOverloads constructor(
     defStyleAttr
 ) {
     init {
+        isClickable = true
         AutoGetAttributeHelper.init(context, attrs, R.styleable.QuickHeaderShadow, HeaderShadowAttrs()).apply {
             this@QuickHeaderShadow.isSuspension = this.isSuspension
             this@QuickHeaderShadow.isMatch = this.isMatch

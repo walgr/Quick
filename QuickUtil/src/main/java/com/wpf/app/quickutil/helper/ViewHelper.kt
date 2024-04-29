@@ -52,21 +52,6 @@ fun ViewGroup.children(): List<View> {
     return childList
 }
 
-fun View?.allViewChild(): List<View> {
-    if (this == null) return listOf()
-    if (this !is ViewGroup) return listOf()
-    val childList = mutableListOf<View>()
-    repeat(childCount) {
-        val child = getChildAt(it)
-        childList.addAll(if (child is ViewGroup) {
-            child.allViewChild()
-        } else {
-            listOf(child)
-        })
-    }
-    return childList
-}
-
 fun View.onceClick(interval: Long = 1000L, onClickListener: OnClickListener) {
     onceClick(interval) {
         onClickListener.onClick(it)

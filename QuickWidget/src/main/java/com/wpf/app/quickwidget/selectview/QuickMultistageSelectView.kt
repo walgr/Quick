@@ -11,7 +11,7 @@ import com.wpf.app.quickwidget.selectview.listeners.SetSelectChange
 import com.wpf.app.quickwidget.selectview.data.QuickChildSelectData
 import com.wpf.app.quickwidget.selectview.data.QuickParentSelectData
 import com.wpf.app.quickwidget.selectview.helper.ParentChildDataHelper
-import com.wpf.app.quickrecyclerview.utils.QuickStickyView
+import com.wpf.app.quickrecyclerview.utils.QuickStickyHelper
 import com.wpf.app.quickwidget.selectview.listeners.OnSelectCallback
 import com.wpf.app.quickwidget.selectview.listeners.OnSelectOnChange
 import com.wpf.app.quickrecyclerview.utils.StickyItemDecoration
@@ -132,7 +132,7 @@ open class QuickMultistageSelectView @JvmOverloads constructor(
             val hasSuspension = allChildList.find { it.isSuspension } != null
             selectViewList[1].setNewData(allChildList)
             if (hasSuspension) {
-                selectViewList[1].addItemDecoration(StickyItemDecoration(QuickStickyView()))
+                selectViewList[1].addItemDecoration(StickyItemDecoration(QuickStickyHelper()))
             }
         } else {
             selectViewList[1].setNewData(dataList[0].childList)

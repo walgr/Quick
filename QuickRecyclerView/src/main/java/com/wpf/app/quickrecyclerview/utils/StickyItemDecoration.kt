@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.wpf.app.quickutil.other.nullDefault
 
 
 class StickyItemDecoration(
-    private val mStickyView: StickyView,
+    private val mStickyHelper: StickyHelper,
 ) : ClickItemDecoration() {
+
     /**
      * 吸附的itemView
      */
@@ -22,39 +24,9 @@ class StickyItemDecoration(
     private var mStickyItemViewMarginTop = 0F
 
     /**
-     * 吸附itemView 高度
-     */
-    private var mStickyItemViewHeight = 0F
-
-    /**
-     * 滚动过程中当前的UI是否可以找到吸附的view
-     */
-    private var mCurrentUIFindStickView = false
-
-    /**
-     * adapter
-     */
-    private var mAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>? = null
-
-    /**
-     * viewHolder
-     */
-    private var mViewHolder: RecyclerView.ViewHolder? = null
-
-    /**
-     * position list
-     */
-    private val mStickyPositionList: MutableList<Int> = ArrayList()
-
-    /**
      * layout manager
      */
     private var mLayoutManager: LinearLayoutManager? = null
-
-    /**
-     * 绑定数据的position
-     */
-    private var mBindDataPosition = -1
 
     /**
      * paint
@@ -73,164 +45,110 @@ class StickyItemDecoration(
         mPaint?.isAntiAlias = true
     }
 
+    private var firstLoad = false
+    private var allStickyPosList = mutableListOf<Int>()
+    private var stickyItemViewPos = -2
     override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         super.onDrawOver(c, parent, state)
         if (parent.adapter!!.itemCount <= 0 || parent.layoutManager !is LinearLayoutManager) return
-        mLayoutManager = parent.layoutManager as? LinearLayoutManager
-        mCurrentUIFindStickView = false
-        clearStickyPositionList()
-        var m = 0
-        val size = parent.childCount
-        while (m < size) {
-            val view: View = parent.getChildAt(m)
-            /**
-             * 如果是吸附的view
-             */
-            if (mStickyView.isStickyView(parent, view)) {
-                mCurrentUIFindStickView = true
-                getStickyViewHolder(parent, view)
-                cacheStickyViewPosition()
-                if (view.top <= 0) {
-                    bindDataForStickyView(
-                        mLayoutManager!!.findFirstVisibleItemPosition(),
-                        parent.measuredWidth
-                    )
-                } else {
-                    if (mStickyPositionList.size > 0) {
-                        if (mStickyPositionList.size == 1) {
-                            bindDataForStickyView(mStickyPositionList[0], parent.measuredWidth)
-                        } else {
-                            val currentPosition = getStickyViewPositionOfRecyclerView(m)
-                            val indexOfCurrentPosition =
-                                mStickyPositionList.lastIndexOf(currentPosition)
-                            if (indexOfCurrentPosition >= 1) bindDataForStickyView(
-                                mStickyPositionList[indexOfCurrentPosition - 1],
-                                parent.measuredWidth
-                            )
-                        }
-                    }
+        if (mLayoutManager == null) {
+            mLayoutManager = parent.layoutManager as? LinearLayoutManager
+        }
+        if (mLayoutManager == null || parent.adapter == null) return
+        if (!firstLoad) {
+            parent.adapter!!.registerAdapterDataObserver(object :
+                RecyclerView.AdapterDataObserver() {
+                override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
+                    super.onItemRangeRemoved(positionStart, itemCount)
+                    allStickyPosList = mStickyHelper.getAllStickyList(parent.adapter!!)
                 }
-                if (view.top > 0 && view.top <= mStickyItemViewHeight) {
-                    mStickyItemViewMarginTop = mStickyItemViewHeight - view.top
-                } else {
-                    mStickyItemViewMarginTop = 0F
-                    val nextStickyView: View? = getNextStickyView(parent)
-                    if (nextStickyView != null && nextStickyView.top <= mStickyItemViewHeight) {
-                        mStickyItemViewMarginTop = mStickyItemViewHeight - nextStickyView.top
-                    }
+
+                override fun onItemRangeChanged(positionStart: Int, itemCount: Int, payload: Any?) {
+                    super.onItemRangeChanged(positionStart, itemCount, payload)
+                    allStickyPosList = mStickyHelper.getAllStickyList(parent.adapter!!)
                 }
-                drawStickyItemView(c)
-                break
+
+                override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                    super.onItemRangeInserted(positionStart, itemCount)
+                    allStickyPosList = mStickyHelper.getAllStickyList(parent.adapter!!)
+                }
+
+                override fun onItemRangeMoved(fromPosition: Int, toPosition: Int, itemCount: Int) {
+                    super.onItemRangeMoved(fromPosition, toPosition, itemCount)
+                    allStickyPosList = mStickyHelper.getAllStickyList(parent.adapter!!)
+                }
+
+                override fun onChanged() {
+                    super.onChanged()
+                    allStickyPosList = mStickyHelper.getAllStickyList(parent.adapter!!)
+                }
+            })
+            allStickyPosList = mStickyHelper.getAllStickyList(parent.adapter!!)
+            firstLoad = true
+        }
+        val firstViewPos = mLayoutManager!!.findFirstVisibleItemPosition()
+        var stickyItemViewPos = -1
+        if (allStickyPosList.size == 1) {
+
+            stickyItemViewPos = allStickyPosList[0]
+        } else {
+            allStickyPosList.forEachIndexed { index, i ->
+                val nextData = allStickyPosList.getOrNull(index + 1).nullDefault(-1)
+                if (firstViewPos in (i)..<nextData) {
+                    stickyItemViewPos = i
+                }
             }
-            m++
         }
-        if (!mCurrentUIFindStickView) {
-            mStickyItemViewMarginTop = 0F
-            if (mLayoutManager!!.findFirstVisibleItemPosition() + parent.childCount == parent.adapter!!.itemCount && mStickyPositionList.size > 0) {
-                bindDataForStickyView(
-                    mStickyPositionList[mStickyPositionList.size - 1],
-                    parent.measuredWidth
-                )
+        if (stickyItemViewPos == -1) return
+        if (this.stickyItemViewPos != stickyItemViewPos) {
+            mStickyItemView = getItemViewByPosition(parent, stickyItemViewPos)
+            this.stickyItemViewPos = stickyItemViewPos
+        }
+        mStickyItemViewMarginTop = 0F
+        val nextStickyItemViewPos =
+            allStickyPosList.getOrNull(allStickyPosList.indexOf(stickyItemViewPos) + 1)
+                .nullDefault(-1)
+        if (nextStickyItemViewPos != -1) {
+            val nextStickyItemViewTop =
+                mLayoutManager!!.findViewByPosition(nextStickyItemViewPos)?.top.nullDefault(-1)
+            if (nextStickyItemViewTop <= mStickyItemView?.height.nullDefault(0)) {
+                mStickyItemViewMarginTop =
+                    mStickyItemView?.height.nullDefault(0) - nextStickyItemViewTop.toFloat()
             }
-            drawStickyItemView(c)
         }
+        drawStickyItemView(c)
     }
 
-    /**
-     * 清空吸附position集合
-     */
-    private fun clearStickyPositionList() {
-        if (mLayoutManager!!.findFirstVisibleItemPosition() == 0) {
-            mStickyPositionList.clear()
+    private fun getItemViewByPosition(recyclerView: RecyclerView, position: Int): View {
+        recyclerView.adapter!!.apply {
+            val viewHolder = onCreateViewHolder(recyclerView, this.getItemViewType(position))
+            val itemView = viewHolder.itemView
+            onBindViewHolder(viewHolder, position)
+            measureLayoutStickyItemView(itemView, recyclerView.width)
+            return itemView
         }
-    }
-
-    /**
-     * 得到下一个吸附View
-     * @param parent
-     * @return
-     */
-    private fun getNextStickyView(parent: RecyclerView): View? {
-        var num = 0
-        var nextStickyView: View? = null
-        var m = 0
-        val size = parent.childCount
-        while (m < size) {
-            val view: View = parent.getChildAt(m)
-            if (mStickyView.isStickyView(parent, view)) {
-                nextStickyView = view
-                num++
-            }
-            if (num == 2) break
-            m++
-        }
-        return if (num >= 2) nextStickyView else null
-    }
-
-    /**
-     * 给StickyView绑定数据
-     * @param position
-     */
-    private fun bindDataForStickyView(position: Int, width: Int) {
-        if (mBindDataPosition == position || mViewHolder == null) return
-        mBindDataPosition = position
-        mAdapter?.onBindViewHolder(mViewHolder!!, mBindDataPosition)
-        measureLayoutStickyItemView(width)
-        mStickyItemViewHeight =
-            (mViewHolder!!.itemView.bottom - mViewHolder!!.itemView.top).toFloat()
-    }
-
-    /**
-     * 缓存所有可吸附的view position
-     */
-    private fun cacheStickyViewPosition() {
-        mStickyPositionList.clear()
-        mStickyPositionList.addAll(mStickyView.getAllStickyList(mAdapter))
-    }
-
-    /**
-     * 得到吸附view在RecyclerView中 的position
-     * @param m
-     * @return
-     */
-    private fun getStickyViewPositionOfRecyclerView(m: Int): Int {
-        return (mLayoutManager?.findFirstVisibleItemPosition() ?: 0) + m
-    }
-
-    /**
-     * 得到吸附viewHolder
-     * @param recyclerView
-     */
-    private fun getStickyViewHolder(recyclerView: RecyclerView, view: View) {
-        if (mAdapter != null) return
-        mAdapter = recyclerView.adapter
-        mViewHolder = mAdapter?.onCreateViewHolder(
-            recyclerView,
-            mStickyView.getStickViewType(recyclerView, view)
-        )
-        mStickyItemView = mViewHolder?.itemView
     }
 
     /**
      * 计算布局吸附的itemView
      * @param parentWidth
      */
-    private fun measureLayoutStickyItemView(parentWidth: Int) {
-        if (mStickyItemView == null || !mStickyItemView!!.isLayoutRequested) return
+    private fun measureLayoutStickyItemView(stickyView: View, parentWidth: Int) {
+        if (!stickyView.isLayoutRequested) return
         val widthSpec: Int = View.MeasureSpec.makeMeasureSpec(parentWidth, View.MeasureSpec.EXACTLY)
         val heightSpec: Int
-        val layoutParams: ViewGroup.LayoutParams? = mStickyItemView?.layoutParams
+        val layoutParams: ViewGroup.LayoutParams? = stickyView.layoutParams
         heightSpec = if (layoutParams != null && layoutParams.height > 0) {
             View.MeasureSpec.makeMeasureSpec(layoutParams.height, View.MeasureSpec.EXACTLY)
         } else {
             View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
         }
-        mStickyItemView?.measure(widthSpec, heightSpec)
-        mStickyItemView?.layout(
+        stickyView.measure(widthSpec, heightSpec)
+        stickyView.layout(
             0,
             0,
-            mStickyItemView?.measuredWidth ?: 0,
-            mStickyItemView?.measuredHeight ?: 0
+            stickyView.measuredWidth,
+            stickyView.measuredHeight
         )
     }
 
