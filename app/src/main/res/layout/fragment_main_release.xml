@@ -136,6 +136,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
                     android:orientation="vertical">
 
                     <com.google.android.material.imageview.ShapeableImageView
@@ -170,6 +171,7 @@
 
                 <LinearLayout
                     android:id="@+id/testBindSpLL"
+                    android:layout_marginHorizontal="16dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
