@@ -5,10 +5,14 @@ import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams
 import com.wpf.app.base.ability.scope.ViewGroupScope
 
-fun Any.addView(child: View, layoutParams: LayoutParams) {
+fun Any.addView(child: View, layoutParams: LayoutParams? = null) {
     if (this is ViewGroupScope<out ViewGroup>) {
         addView(child, layoutParams)
     } else if (this is ViewGroup) {
-        addView(child, layoutParams)
+        if (layoutParams == null) {
+            addView(child)
+        } else {
+            addView(child, layoutParams)
+        }
     }
 }

@@ -6,10 +6,12 @@ import androidx.fragment.app.Fragment
 import com.wpf.app.base.ability.scope.ViewGroupScope
 import com.wpf.app.base.ability.scope.createViewGroupScope
 import com.wpf.app.quick.ability.QuickFragment
+import com.wpf.app.quickutil.helper.matchLayoutParams
 
 
 fun FragmentGroup.viewFragment(callback: ViewGroupScope<ViewGroup>.() -> Unit) {
     val fragmentRootView = FrameLayout(context)
+    fragmentRootView.layoutParams = matchLayoutParams()
     callback.invoke(createViewGroupScope(fragmentRootView))
     addView(fragmentRootView)
 }

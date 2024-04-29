@@ -62,6 +62,9 @@ open class QuickViewGroupNoAttrs<T : ViewGroup> @JvmOverloads constructor(
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         shadowView?.let {
+            if (addToParent && !isInEditMode) {
+                addT(addToParent, shadowView, this)
+            }
             it.measure(widthMeasureSpec, heightMeasureSpec)
             val viewMeasureWidth = it.measuredWidth
             val viewMeasureHeight = it.measuredHeight
@@ -71,9 +74,6 @@ open class QuickViewGroupNoAttrs<T : ViewGroup> @JvmOverloads constructor(
                 MeasureSpec.makeMeasureSpec(viewMeasureWidth, specModeWidth),
                 MeasureSpec.makeMeasureSpec(viewMeasureHeight, specModeHeight)
             )
-            if (addToParent && !isInEditMode) {
-                addT(addToParent, shadowView, this)
-            }
         } ?: let {
             super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         }

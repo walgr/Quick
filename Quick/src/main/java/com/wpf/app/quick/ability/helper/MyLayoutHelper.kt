@@ -25,10 +25,10 @@ inline fun <reified T : ViewGroup> Any.myLayout(
     val mContext = context()!!
     val view = T::class.java.getConstructor(Context::class.java).newInstance(mContext)
     view.layoutParams = layoutParams
-    builder?.invoke(createViewGroupScope(view.forceTo()))
+    builder?.invoke(createViewGroupScope(view))
     view.let {
         view.removeParent()
-        addView(view, layoutParams)
+        addView(view)
     }
     return view.forceTo()
 }

@@ -6,8 +6,8 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
-import com.wpf.app.quickutil.run.RunOnContext
 import com.wpf.app.base.bind.Bind
+import com.wpf.app.quickutil.run.RunOnContext
 import kotlin.math.abs
 
 /**
@@ -55,7 +55,7 @@ abstract class QuickItemView @JvmOverloads constructor(
         position = parentGroup.indexOfChild(this)
         parentGroup.removeView(this)
         getView()?.setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom)
-        parentGroup.addView(mView, position, layoutParams)
+        parentGroup.addView(mView, position)
         onCreateViewHolder()
         onBindViewHolder(position)
     }
@@ -74,6 +74,7 @@ abstract class QuickItemView @JvmOverloads constructor(
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        addToParent()
         getView()?.measure(widthMeasureSpec, heightMeasureSpec)
         val specModeWidth = MeasureSpec.getMode(widthMeasureSpec)
         val specModeHeight = MeasureSpec.getMode(heightMeasureSpec)
@@ -83,7 +84,6 @@ abstract class QuickItemView @JvmOverloads constructor(
             MeasureSpec.makeMeasureSpec(viewMeasureWidth, specModeWidth),
             MeasureSpec.makeMeasureSpec(viewMeasureHeight, specModeHeight)
         )
-        addToParent()
     }
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {

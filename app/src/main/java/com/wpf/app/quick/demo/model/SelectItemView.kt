@@ -4,15 +4,15 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.Toast
-import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.annotations.bind.BindData2View
+import com.wpf.app.quick.demo.R
 import com.wpf.app.quickbind.helper.binddatahelper.BindData2ViewHelper
 import com.wpf.app.quickbind.helper.binddatahelper.ItemClick
 import com.wpf.app.quickbind.helper.binddatahelper.Select2CheckBox
 import com.wpf.app.quickbind.helper.binddatahelper.Text2TextView
-import com.wpf.app.quickwidget.quickview.bind.QuickSelectView
 import com.wpf.app.quickutil.run.itemClick
 import com.wpf.app.quickutil.run.runOnContext
+import com.wpf.app.quickwidget.quickview.bind.QuickSelectView
 
 /**
  * Created by 王朋飞 on 2022/7/8.
@@ -30,7 +30,6 @@ class SelectItemView @JvmOverloads constructor(
     @SuppressLint("NonConstantResourceId")
     @BindData2View(id = R.id.title, helper = Text2TextView::class)
     var title = runOnContext { "Data2View$position" }
-
 
     @BindData2View(helper = ItemClick::class)
     private val itemClick = itemClick {

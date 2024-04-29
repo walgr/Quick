@@ -1,30 +1,33 @@
 package com.wpf.app.quick.helper
 
+import android.annotation.SuppressLint
 import android.view.View
 import androidx.databinding.DataBinderMapper
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.DataBindingUtil.getBinding
 import androidx.databinding.ViewDataBinding
 
+@SuppressLint("RestrictedApi")
 object QuickDataBindingUtil {
     private val sMapper: DataBinderMapper by lazy {
-        DataBindingUtil::class.java.getDeclaredField("sMapper").apply { isAccessible = true }.get(null) as DataBinderMapper
+        DataBindingUtil::class.java.getDeclaredField("sMapper").apply { isAccessible = true }
+            .get(null) as DataBinderMapper
     }
 
     fun <T : ViewDataBinding> bind(root: View): T? {
         val binding = getBinding<T>(root)
-        if (binding != null) {
-            return binding
+        return if (binding != null) {
+            binding
         } else {
             val tagObj = root.tag
             if (tagObj !is String) {
-                return null
+                null
             } else {
                 val layoutId = sMapper.getLayoutId(tagObj)
                 if (layoutId == 0) {
-                    return null
+                    null
                 } else {
-                    return sMapper.getDataBinder(null, root, layoutId) as T
+                    sMapper.getDataBinder(null, root, layoutId) as T
                 }
             }
         }

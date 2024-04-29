@@ -9,12 +9,12 @@ import kotlin.contracts.contract
 
 interface ViewGroupScope<T : ViewGroup> : ViewScope<T> {
 
-    fun addView(child: View) {
-        this.view.addView(child)
-    }
-
-    fun addView(child: View, layoutParams: LayoutParams) {
-        this.view.addView(child, layoutParams)
+    fun addView(child: View, layoutParams: LayoutParams? = null) {
+        if (layoutParams == null) {
+            this.view.addView(child)
+        } else {
+            this.view.addView(child, layoutParams)
+        }
     }
 }
 

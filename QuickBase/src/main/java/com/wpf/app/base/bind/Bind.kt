@@ -1,6 +1,5 @@
 package com.wpf.app.base.bind
 
-import android.os.Bundle
 import android.view.View
 
 /**
@@ -9,8 +8,4 @@ import android.view.View
  */
 interface Bind {
     fun getView(): View?
-
-    fun bindData(position: Int): Bundle? {
-        return null
-    }
 }

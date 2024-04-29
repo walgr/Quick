@@ -8,11 +8,13 @@ import androidx.core.widget.NestedScrollView
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.appbar.AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL
 import com.google.android.material.tabs.TabLayout
+import com.wpf.app.base.ability.scope.viewGroupApply
 import com.wpf.app.base.ability.scope.withViewGroupScope
 import com.wpf.app.quick.ability.QuickActivity
 import com.wpf.app.quick.ability.ex.contentView
 import com.wpf.app.quick.ability.helper.coordinator
 import com.wpf.app.quick.ability.helper.fragment
+import com.wpf.app.quick.ability.helper.gravity
 import com.wpf.app.quick.ability.helper.myLayout
 import com.wpf.app.quick.ability.helper.viewFragment
 import com.wpf.app.quick.ability.helper.viewPagerBuilder
@@ -46,7 +48,9 @@ class WanAndroidHomeActivity : QuickActivity(contentView<LinearLayout> {
                     onClick {
                         dialog(layoutViewCreate = {
                             text(
-                                text = "弹窗", textColor = R.color.white.toColor(), textSize = 24f.dp
+                                text = "弹窗",
+                                textColor = R.color.white.toColor(),
+                                textSize = 24f.dp
                             )
                         }).show()
                     }
@@ -82,7 +86,12 @@ class WanAndroidHomeActivity : QuickActivity(contentView<LinearLayout> {
                 fragment(RecommendFragment())
                 viewFragment {
                     myLayout<NestedScrollView>(layoutParams = matchLayoutParams()) {
-                        text(text = "测试")
+                        viewGroupApply {
+                            isFillViewport = true
+                        }
+                        myLayout<LinearLayout>(layoutParams = matchLayoutParams()) {
+                            text(text = "测试", textSize = 24f.dp)
+                        }.gravity(Gravity.CENTER)
                     }
                 }
             }
