@@ -44,6 +44,9 @@ buildscript {
                         'work'                : "com.wpf.app.quick:QuickWork:${release}",
                         'compiler_ksp'        : "com.wpf.app.quick:Quick-gradle-ksp-plugin:${release}",
                         'compiler_ksp_jitpack': "com.github.walgr.Quick:Quick-gradle-ksp-plugin:0.9.10",
+                        'plugin'              : "com.wpf.app.quick:com.wpf.app.quickplugin.gradle.plugin:1.0.0",
+                        'transform'           : "com.wpf.app.plugin:quick-transform.gradle.plugin:1.0.0",
+                        'transform_jitpack'   : "com.github.walgr.Quick:quick.transform:1.0.0",
                 ],
                 kotlin         : [
                         'stdLib'               : "org.jetbrains.kotlin:kotlin-stdlib:${kotlin}",
@@ -66,7 +69,7 @@ buildscript {
                 flexbox        : 'com.google.android.flexbox:flexbox:3.0.0',
                 immersionbar   : 'com.geyifeng.immersionbar:immersionbar:3.2.2',
                 immersionbarktx: 'com.geyifeng.immersionbar:immersionbar-ktx:3.2.2',
-                shapeofview: 'io.github.florent37:shapeofview:1.4.7',
+                shapeofview    : 'io.github.florent37:shapeofview:1.4.7',
         ]
     }
 }
@@ -75,6 +78,7 @@ plugins {
     id 'com.android.application' version "${gradleVersion}" apply false
     id 'com.android.library' version "${gradleVersion}" apply false
     id 'org.jetbrains.kotlin.android' version "${kotlin}" apply false
+    id 'org.jetbrains.kotlin.jvm' version "${kotlin}" apply false
 }
 
 allprojects {

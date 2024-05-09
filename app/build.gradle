@@ -2,7 +2,8 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
-    id("com.google.devtools.ksp") version "$ksp"
+    id 'com.google.devtools.ksp' version "$ksp"
+    id 'quick-transform' version "1.0.0"
 }
 
 android {
@@ -64,9 +65,6 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = '1.8'
     }
 
     namespace 'com.wpf.app.quick.demo'

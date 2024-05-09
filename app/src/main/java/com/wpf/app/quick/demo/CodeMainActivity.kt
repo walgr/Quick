@@ -3,12 +3,13 @@ package com.wpf.app.quick.demo
 import android.annotation.SuppressLint
 import android.widget.ImageView
 import android.widget.TextView
+import com.wpf.app.base.ability.base.with
 import com.wpf.app.quick.ability.QuickActivity
 import com.wpf.app.quick.ability.ex.binding
 import com.wpf.app.quick.ability.ex.contentView
-import com.wpf.app.base.ability.base.with
 import com.wpf.app.quick.annotations.bind.BindView
 import com.wpf.app.quick.annotations.tab.TabInit
+import com.wpf.app.quick.annotations.transform.QuickTransform
 import com.wpf.app.quick.demo.databinding.ActivityMainCodeBinding
 import com.wpf.app.quick.demo.fragment.MainReleaseFragment
 import com.wpf.app.quick.demo.fragment.MainTestFragment
@@ -18,6 +19,7 @@ import com.wpf.app.quickutil.helper.toColor
 import com.wpf.app.quickutil.widget.onPageSelected
 import com.wpf.app.quickwidget.tab.TabManagerProvider
 
+@QuickTransform
 class CodeMainActivity : QuickActivity(
     contentView(R.layout.activity_main_code).with(binding<ActivityMainCodeBinding> {
         val tabs = arrayOf(

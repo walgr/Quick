@@ -2,6 +2,7 @@ package com.wpf.app.quickutil.helper
 
 import android.os.Handler
 import android.os.Looper
+import com.wpf.app.quickutil.other.asTo
 
 typealias DoLastRun<T> = MutableSet<T>.() -> Unit
 class DoLast<T> {
@@ -12,7 +13,7 @@ class DoLast<T> {
 
     private val mHandle: Handler = Handler(Looper.getMainLooper()) {
         if (it.what == 0x01) {
-            (it.obj as RunnableTask<T>).apply {
+            it.obj.asTo<RunnableTask<T>>()?.apply {
                 runnable.invoke(noDoList)
                 noDoList.clear()
             }
