@@ -8,7 +8,7 @@ import org.objectweb.asm.Opcodes
 class QuickClassVisitor(
     private val classContext: ClassContext,
     nextClassVisitor: ClassVisitor,
-): ClassVisitor(Opcodes.ASM7, nextClassVisitor) {
+): ClassVisitor(Opcodes.ASM8, nextClassVisitor) {
 
     init {
         println("正在处理：${classContext.currentClassData.className}")
