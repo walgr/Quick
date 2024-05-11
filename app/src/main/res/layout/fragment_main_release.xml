@@ -3,15 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
-        <import type="com.wpf.app.quick.demo.RequestTestActivityClass" />
-
-        <import type="com.wpf.app.quick.demo.ShadowViewTestActivityClass" />
-
-        <import type="com.wpf.app.quick.demo.ViewPagerNotifyDataTestActivityClass" />
-
-        <import type="com.wpf.app.quick.demo.BottomSheetDialogTestActivityClass" />
-
         <variable
             name="viewModel"
             type="com.wpf.app.quick.demo.fragment.MainReleaseVM" />
@@ -80,6 +71,7 @@
                     android:layout_height="wrap_content"
                     android:text="刷新数据测试"
                     android:textAllCaps="false"
+                    android:onClick="@{viewModel::gotoViewPagerNotifySize}"
                     app:clickGoto="@{ViewPagerNotifyDataTestActivityClass.INSTANCE.KClass}" />
 
                 <Button

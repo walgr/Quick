@@ -11,6 +11,7 @@ import com.wpf.app.quick.demo.IntentDataTestActivity
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.demo.RecyclerViewTestActivity
 import com.wpf.app.quick.demo.SelectListTestActivity
+import com.wpf.app.quick.demo.ViewPagerNotifyDataTestActivity
 import com.wpf.app.quick.demo.ViewPagerNotifySizeTestActivity
 import com.wpf.app.quick.demo.databinding.FragmentMainReleaseBinding
 import com.wpf.app.quick.demo.model.MyMessage
@@ -48,6 +49,10 @@ class MainReleaseVM: QuickVBModel<MainReleaseFragment, FragmentMainReleaseBindin
 
     fun gotoViewPagerNotifySize(view: View?) {
         view?.context?.startActivity<ViewPagerNotifySizeTestActivity>()
+    }
+
+    fun gotoViewPagerNotifyData(view: View?) {
+        view?.context?.startActivity<ViewPagerNotifyDataTestActivity>()
     }
 
     fun gotoSelectList(view: View?) {

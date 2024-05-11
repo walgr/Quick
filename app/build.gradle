@@ -2,7 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
-    id 'com.google.devtools.ksp' version "$ksp"
+//    id 'com.google.devtools.ksp' version "$ksp"
 //    id 'quick-transform' version "1.0.0"
 }
 
@@ -93,10 +93,10 @@ dependencies {
 
     if (IS_REMOTE.toBoolean()) {
         implementation deps.quickbind.work
-        ksp deps.quickbind.compiler_ksp
+//        ksp deps.quickbind.compiler_ksp
     } else {
         implementation project(":QuickWork")
-        ksp deps.quickbind.compiler_ksp_jitpack
+//        ksp deps.quickbind.compiler_ksp_jitpack
     }
     //ktx核心
     implementation deps.androidx.annotation
