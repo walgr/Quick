@@ -12,7 +12,8 @@ java {
 dependencies {
     implementation gradleApi()
     implementation "com.android.tools.build:gradle:${gradleVersion}"
-
+    implementation "org.ow2.asm:asm:9.1"
+    implementation "org.ow2.asm:asm-commons:9.1"
     implementation deps.quickbind.annotations
 }
 
