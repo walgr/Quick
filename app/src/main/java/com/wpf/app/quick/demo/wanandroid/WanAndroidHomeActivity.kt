@@ -2,6 +2,7 @@ package com.wpf.app.quick.demo.wanandroid
 
 import android.annotation.SuppressLint
 import android.view.Gravity
+import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.widget.NestedScrollView
@@ -11,6 +12,7 @@ import com.google.android.material.tabs.TabLayout
 import com.wpf.app.base.ability.scope.viewGroupApply
 import com.wpf.app.base.ability.scope.withViewGroupScope
 import com.wpf.app.quick.ability.QuickActivity
+import com.wpf.app.quick.ability.QuickView
 import com.wpf.app.quick.ability.ex.contentView
 import com.wpf.app.quick.ability.helper.coordinator
 import com.wpf.app.quick.ability.helper.fragment
@@ -24,8 +26,9 @@ import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.demo.wanandroid.fragment.RecommendFragment
 import com.wpf.app.quick.helper.getActivity
 import com.wpf.app.quickutil.helper.dp
-import com.wpf.app.quickutil.helper.matchLayoutParams
-import com.wpf.app.quickutil.helper.matchWrapLayoutParams
+import com.wpf.app.quickutil.helper.layoutParams
+import com.wpf.app.quickutil.helper.matchMarginLayoutParams
+import com.wpf.app.quickutil.helper.matchWrapMarginLayoutParams
 import com.wpf.app.quickutil.helper.onClick
 import com.wpf.app.quickutil.helper.reset
 import com.wpf.app.quickutil.helper.toColor
@@ -66,30 +69,34 @@ class WanAndroidHomeActivity : QuickActivity(contentView<LinearLayout> {
     }
     coordinator(followSlideLayout = {
         withViewGroupScope {
-            text(
-                layoutParams = matchWrapLayoutParams(),
-                text = "Wan Android",
-                textColor = R.color.white.toColor(),
-                textSize = 24f.dp,
-                textGravity = Gravity.CENTER
-            ) {
-                setPadding(32.dp, 16.dp, 32.dp, 16.dp)
-            }
+            QuickView(context, abilityList = contentView<FrameLayout>(layoutParams = layoutParams<FrameLayout.LayoutParams>(
+                matchWrapMarginLayoutParams()
+            )) {
+                text(
+                    layoutParams = layoutParams<FrameLayout.LayoutParams>(matchMarginLayoutParams()),
+                    text = "Wan Android",
+                    textColor = R.color.white.toColor(),
+                    textSize = 24f.dp,
+                    textGravity = Gravity.CENTER
+                ) {
+                    setPadding(32.dp, 16.dp, 32.dp, 16.dp)
+                }
+            })
         }
     }, scrollFlags = SCROLL_FLAG_SCROLL, topSuspendLayout = {
         withViewGroupScope {
-            tabLayout(layoutParams = matchWrapLayoutParams().reset(height = 44.dp))
+            tabLayout(layoutParams = matchWrapMarginLayoutParams().reset(height = 44.dp))
         }
     }, bottomScrollLayout = {
         withViewGroupScope {
             viewPagerBuilder(quickView = this@contentView.self) {
                 fragment(RecommendFragment())
                 viewFragment {
-                    myLayout<NestedScrollView>(layoutParams = matchLayoutParams()) {
+                    myLayout<NestedScrollView>(layoutParams = matchMarginLayoutParams()) {
                         viewGroupApply {
                             isFillViewport = true
                         }
-                        myLayout<LinearLayout>(layoutParams = matchLayoutParams()) {
+                        myLayout<LinearLayout>(layoutParams = matchMarginLayoutParams()) {
                             text(text = "测试", textSize = 24f.dp)
                         }.gravity(Gravity.CENTER)
                     }

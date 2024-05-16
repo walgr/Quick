@@ -28,7 +28,6 @@ class GenerateNormalCallProcessor(private val environment: SymbolProcessorEnviro
         className: String
     ) {
         super.visitClassDeclaration(classDeclaration, data, packageName, className)
-        println(classDeclaration)
         val generateNormalCallAnn = classDeclaration.annotations.find {
             it.shortName.getShortName() == GenerateNormalCall::class.simpleName
         } ?: return
@@ -161,12 +160,13 @@ class GenerateNormalCallProcessor(private val environment: SymbolProcessorEnviro
                                         "   val fResponseType = getParameterUpperBound(1, returnType)\n" +
                                         "   val sResponseClz = getRawType(sResponseType)\n" +
                                         "   val fResponseClz = getRawType(fResponseType)\n" +
-                                        "   val baseResponseF = TestResponse(fResponseClz.getDeclaredConstructor().newInstance())\n" +
+                                        "   val baseResponseF = %T(fResponseClz.getDeclaredConstructor().newInstance())\n" +
                                         "   return %T(sResponseType, sResponseClz, baseResponseF)\n" +
                                         "}\n" +
                                         "return null",
                                 normalCall,
                                 ParameterizedType::class,
+                                responseClass,
                                 normalCallAdapter
                             )
                         )

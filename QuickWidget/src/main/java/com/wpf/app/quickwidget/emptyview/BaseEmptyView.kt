@@ -5,8 +5,8 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import com.wpf.app.quickutil.helper.matchMarginLayoutParams
 import com.wpf.app.quickutil.run.RunOnContextWithSelf
-import com.wpf.app.quickutil.helper.matchLayoutParams
 
 abstract class BaseEmptyView @JvmOverloads constructor(
     mContext: Context,
@@ -24,7 +24,7 @@ abstract class BaseEmptyView @JvmOverloads constructor(
     private var emptyView: View? = null
     protected fun init() {
         emptyView = layoutView?.run(context, this) ?: View.inflate(context, layoutId, null)
-        addView(emptyView, matchLayoutParams())
+        addView(emptyView, matchMarginLayoutParams())
         initView(emptyView!!)
     }
 

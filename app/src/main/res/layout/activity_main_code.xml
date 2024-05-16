@@ -10,7 +10,7 @@
         android:orientation="vertical"
         app:groupType="LinearLayout">
 
-        <com.wpf.app.quickwork.widget.QuickThemeTitle
+        <com.wpf.app.quickwork.widget.theme.QuickThemeTitle
             android:id="@+id/titleView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
                 android:textSize="16sp"
                 android:visibility="visible" />
 
-        </com.wpf.app.quickwork.widget.QuickThemeTitle>
+        </com.wpf.app.quickwork.widget.theme.QuickThemeTitle>
 
         <com.wpf.app.quickbind.viewpager.QuickViewPager
             android:id="@+id/viewPager"

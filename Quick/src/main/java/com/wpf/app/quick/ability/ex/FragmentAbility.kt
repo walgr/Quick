@@ -9,7 +9,7 @@ import com.wpf.app.base.ability.base.QuickAbility
 import com.wpf.app.base.ability.base.QuickViewAbility
 import com.wpf.app.base.ability.base.with
 import com.wpf.app.quick.R
-import com.wpf.app.quickutil.helper.matchLayoutParams
+import com.wpf.app.quickutil.helper.matchMarginLayoutParams
 import com.wpf.app.quickutil.other.forceTo
 
 fun <T : Fragment> fragment(
@@ -19,7 +19,7 @@ fun <T : Fragment> fragment(
     return generateContentView(layoutViewCreate = {
         FrameLayout(this.context).apply {
             id = R.id.quickRoot
-            layoutParams = matchLayoutParams()
+            layoutParams = matchMarginLayoutParams()
         }
     }).with(object : QuickViewAbility {
         override fun getPrimeKey() = "fragment"

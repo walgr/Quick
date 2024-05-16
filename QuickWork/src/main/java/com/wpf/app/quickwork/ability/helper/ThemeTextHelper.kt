@@ -9,12 +9,12 @@ import androidx.annotation.ColorInt
 import com.wpf.app.base.ability.helper.addView
 import com.wpf.app.base.ability.scope.ContextScope
 import com.wpf.app.base.ability.scope.ViewGroupScope
-import com.wpf.app.quickutil.helper.wrapLayoutParams
+import com.wpf.app.quickutil.helper.wrapMarginLayoutParams
 import com.wpf.app.quickwidget.shadow.ShadowTextView
-import com.wpf.app.quickwork.widget.QuickThemeTextView
 import com.wpf.app.quickwork.widget.theme.QuickTextTheme
 import com.wpf.app.quickwork.widget.theme.QuickTextThemeBase
 import com.wpf.app.quickwork.widget.theme.QuickTextThemeI
+import com.wpf.app.quickwork.widget.theme.QuickThemeTextView
 
 fun TextView.setTheme(
     theme: QuickTextThemeI,
@@ -26,10 +26,10 @@ fun TextView.setTheme(
 }
 
 fun ViewGroupScope<out ViewGroup>.shadowText(
-    layoutParams: ViewGroup.LayoutParams = wrapLayoutParams(),
+    layoutParams: ViewGroup.LayoutParams = wrapMarginLayoutParams(),
     background: Drawable? = null,
-    text: String,
-    theme: QuickTextTheme? = null,
+    text: CharSequence,
+    theme: QuickTextThemeI? = null,
     @ColorInt textColor: Int? = null,
     @ColorInt hintTextColor: Int? = null,
     textSize: Float? = null,                  //单位px
@@ -72,10 +72,10 @@ fun ViewGroupScope<out ViewGroup>.shadowText(
 
 
 fun ContextScope.text(
-    layoutParams: ViewGroup.LayoutParams = wrapLayoutParams(),
+    layoutParams: ViewGroup.LayoutParams = wrapMarginLayoutParams(),
     background: Drawable? = null,
-    text: String,
-    theme: QuickTextTheme? = null,
+    text: CharSequence,
+    theme: QuickTextThemeI? = null,
     @ColorInt textColor: Int? = null,
     @ColorInt hintTextColor: Int? = null,
     textSize: Float? = null,                  //单位px

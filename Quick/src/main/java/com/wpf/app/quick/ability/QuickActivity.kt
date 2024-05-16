@@ -16,7 +16,7 @@ import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.other.forceTo
 
 open class QuickActivity(
-    private val abilityList: List<QuickAbility> = mutableListOf()
+    private val abilityList: MutableList<QuickAbility> = mutableListOf()
 ) : QuickBaseActivity(
         layoutViewCreate = {
         val inflateAbility = abilityList.first { ability -> ability is QuickInflateViewAbility }
@@ -29,7 +29,17 @@ open class QuickActivity(
         )
     }
 ), BindViewModel<ViewModel> {
-    internal val extraParameter: LinkedHashMap<String, Any> = linkedMapOf()
+    val extraParameter: LinkedHashMap<String, Any> = linkedMapOf()
+
+    companion object {
+        var commonAbility: List<QuickAbility>? = null
+    }
+
+    init {
+        commonAbility?.let {
+            abilityList.addAll(0, it)
+        }
+    }
 
     @CallSuper
     override fun generateContentView(view: View): View {

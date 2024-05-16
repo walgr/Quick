@@ -11,7 +11,7 @@ import android.widget.RelativeLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.tabs.TabLayout
 import com.wpf.app.quickutil.helper.children
-import com.wpf.app.quickutil.helper.matchLayoutParams
+import com.wpf.app.quickutil.helper.matchMarginLayoutParams
 import com.wpf.app.quickutil.other.GenericEx
 import java.lang.reflect.Constructor
 
@@ -97,7 +97,7 @@ internal interface QuickViewGroupI<T : ViewGroup> {
                 attrs,
                 defStyleAttr
             ) else t.newInstance(context, attrs)).apply {
-                layoutParams = matchLayoutParams()
+                layoutParams = matchMarginLayoutParams()
             }
             return tInstance as T
         }

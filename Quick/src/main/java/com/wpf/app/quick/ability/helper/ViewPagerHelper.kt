@@ -16,7 +16,7 @@ import com.wpf.app.quickbind.utils.getFragment
 import com.wpf.app.quickbind.viewpager.QuickViewPager
 import com.wpf.app.quickbind.viewpager.adapter.FragmentsAdapter
 import com.wpf.app.quickbind.viewpager.adapter.FragmentsStateAdapter
-import com.wpf.app.quickutil.helper.matchLayoutParams
+import com.wpf.app.quickutil.helper.matchMarginLayoutParams
 import com.wpf.app.quickutil.other.forceTo
 import kotlin.math.abs
 
@@ -135,7 +135,7 @@ fun ViewGroupScope<out ViewGroup>.viewPagerWithView(
 ): QuickViewPager {
     val contentFragmentList = views.map {
         val contentView = FrameLayout(context)
-        contentView.layoutParams = matchLayoutParams()
+        contentView.layoutParams = matchMarginLayoutParams()
         contentView.addView(it)
         contentView.toFragment()
     }

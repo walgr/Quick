@@ -3,6 +3,7 @@ package com.wpf.app.quickdialog.listeners
 import android.app.Activity
 import android.content.Context
 import android.graphics.Point
+import android.os.Build
 import android.util.DisplayMetrics
 import android.view.ContextThemeWrapper
 import android.view.View
@@ -52,7 +53,11 @@ interface QuickContext {
     fun getScreenSize() : Point {
         if (getRealActivity() == null) return Point()
         val size = Point()
-        getRealActivity()!!.windowManager.defaultDisplay.getSize(size)
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
+            getRealActivity()!!.windowManager.defaultDisplay.getSize(
+                size
+            )
+        }
         return size
     }
 

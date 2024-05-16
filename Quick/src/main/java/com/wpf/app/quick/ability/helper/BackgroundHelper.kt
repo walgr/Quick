@@ -14,7 +14,7 @@ import com.wpf.app.base.ability.scope.ViewScope
 import com.wpf.app.quickutil.helper.toColor
 import com.wpf.app.quickutil.other.forceTo
 
-interface BackgroundScope: ViewScope<View>
+interface BackgroundScope : ViewScope<View>
 
 fun createBackgroundScope(view: View) = object : BackgroundScope {
     override val view: View = view
@@ -38,7 +38,7 @@ fun BackgroundScope.backgroundRes(
     return view
 }
 
-fun BackgroundScope.background(
+fun createDrawable(
     shape: Int = GradientDrawable.RECTANGLE,
     @ColorInt color: Int = android.R.color.white.toColor(),
     colorStateList: ColorStateList? = null,
@@ -52,9 +52,9 @@ fun BackgroundScope.background(
     bottomRightRadius: Float = NO_SET_F,
     bottomLeftRadius: Float = NO_SET_F,
     @ColorInt borderColor: Int = NO_SET,
-    borderWidth: Int = 0,        //单位px
-): View {
-    view.background = GradientDrawable().mutate().forceTo<GradientDrawable>().apply {
+    borderWidth: Int = 0,               //单位px
+): Drawable {
+    return GradientDrawable().mutate().forceTo<GradientDrawable>().apply {
         this.shape = shape
 
         colorStateList?.let {
@@ -88,6 +88,40 @@ fun BackgroundScope.background(
             }
         }
     }
+}
+
+fun BackgroundScope.background(
+    shape: Int = GradientDrawable.RECTANGLE,
+    @ColorInt color: Int = android.R.color.white.toColor(),
+    colorStateList: ColorStateList? = null,
+    orientation: Orientation = Orientation.LEFT_RIGHT,
+    centerX: Float = 0.5f,
+    centerY: Float = 0.5f,
+    @ColorInt gradientColors: IntArray? = null,
+    radius: Float = NO_SET_F,
+    topLeftRadius: Float = NO_SET_F,
+    topRightRadius: Float = NO_SET_F,
+    bottomRightRadius: Float = NO_SET_F,
+    bottomLeftRadius: Float = NO_SET_F,
+    @ColorInt borderColor: Int = NO_SET,
+    borderWidth: Int = 0,        //单位px
+): View {
+    view.background = createDrawable(
+        shape,
+        color,
+        colorStateList,
+        orientation,
+        centerX,
+        centerY,
+        gradientColors,
+        radius,
+        topLeftRadius,
+        topRightRadius,
+        bottomRightRadius,
+        bottomLeftRadius,
+        borderColor,
+        borderWidth
+    )
     return view
 }
 

@@ -44,7 +44,7 @@ open class QuickItemGroup<T : ViewGroup> @JvmOverloads constructor(
     }
 
     private fun initLayoutIdByXml() {
-        layoutId = attrSet.layoutRes
+
     }
 
     open fun onCreateViewHolder() {

@@ -6,7 +6,6 @@ import android.widget.LinearLayout
 
 const val match = ViewGroup.LayoutParams.MATCH_PARENT
 const val wrap = ViewGroup.LayoutParams.WRAP_CONTENT
-
 fun matchLayoutParams() = ViewGroup.LayoutParams(match, match)
 fun matchWrapLayoutParams() = ViewGroup.LayoutParams(match, wrap)
 fun wrapLayoutParams() = ViewGroup.LayoutParams(wrap, wrap)
@@ -32,11 +31,12 @@ inline fun <reified T : ViewGroup.LayoutParams> layoutParams(layoutParams: ViewG
     return T::class.java.getConstructor(ViewGroup.LayoutParams::class.java).newInstance(layoutParams) as T
 }
 
-fun <T : ViewGroup.LayoutParams> T.reset(width: Int = -1, height: Int = -1): T {
-    if (width != -1) {
+
+fun <T : ViewGroup.LayoutParams> T.reset(width: Int? = null, height: Int? = null): T {
+    if (width != null) {
         this.width = width
     }
-    if (height != -1) {
+    if (height != null) {
         this.height = height
     }
     return this

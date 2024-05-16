@@ -41,6 +41,10 @@ dependencies {
     implementation deps.refresh_header               //经典刷新头
     implementation deps.refresh_footer               //经典加载
 
+    implementation deps.glide
+
+    implementation deps.kotlin.kotlinxcoroutinescore
+
     if (IS_REMOTE.toBoolean()) {
         api deps.quickbind.quick
     } else {

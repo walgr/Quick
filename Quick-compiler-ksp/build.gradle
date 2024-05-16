@@ -7,9 +7,6 @@ java {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
 }
-//kotlin {
-//    jvmToolchain(11)
-//}
 
 dependencies {
     implementation deps.ksp
@@ -18,9 +15,9 @@ dependencies {
     implementation deps.kotlin_reflect
 
     if (IS_REMOTE.toBoolean())
-        implementation deps.quickbind.annotations
+        api deps.quickbind.annotations
     else
-        implementation project(":Quick-annotations")
+        api project(":Quick-annotations")
 }
 
 apply from: rootProject.file('gradle-mvn-push-jar.gradle')

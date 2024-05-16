@@ -17,7 +17,7 @@ import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.other.forceTo
 
 open class QuickDialogFragment(
-    private val abilityList: List<QuickAbility> = mutableListOf()
+    private val abilityList: MutableList<QuickAbility> = mutableListOf()
 ) : QuickBaseDialogFragment(
     layoutViewCreate = {
         val inflateAbility = abilityList.first { ability -> ability is QuickInflateViewAbility }
@@ -30,7 +30,17 @@ open class QuickDialogFragment(
         )
     }
 ), BindViewModel<ViewModel> {
-    internal val extraParameter: LinkedHashMap<String, Any> = linkedMapOf()
+    val extraParameter: LinkedHashMap<String, Any> = linkedMapOf()
+
+    companion object {
+        var commonAbility: List<QuickAbility>? = null
+    }
+
+    init {
+        commonAbility?.let {
+            abilityList.addAll(0, it)
+        }
+    }
 
     override fun getViewModel(): ViewModel? {
         return abilityList.find { it is BindViewModel<*> }?.asTo<BindViewModel<*>>()?.getViewModel()

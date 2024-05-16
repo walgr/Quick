@@ -15,7 +15,7 @@ import com.wpf.app.quickutil.other.forceTo
 open class QuickBottomSheetDialog(
     context: Context,
     @StyleRes themeId: Int = 0,
-    private val abilityList: List<QuickAbility> = mutableListOf(),
+    private val abilityList: MutableList<QuickAbility> = mutableListOf(),
 ) : QuickBaseBottomSheetDialog(context = context, themeId = themeId, layoutViewCreate = {
     val inflateAbility = abilityList.first { ability -> ability is QuickInflateViewAbility }
         .forceTo<QuickInflateViewAbility>()
@@ -26,7 +26,17 @@ open class QuickBottomSheetDialog(
         inflateAbility.layoutViewCreate()
     )
 }) {
-    internal val extraParameter: LinkedHashMap<String, Any> = linkedMapOf()
+    val extraParameter: LinkedHashMap<String, Any> = linkedMapOf()
+
+    companion object {
+        var commonAbility: List<QuickAbility>? = null
+    }
+
+    init {
+        commonAbility?.let {
+            abilityList.addAll(0, it)
+        }
+    }
 
     @CallSuper
     override fun generateContentView(view: View): View {

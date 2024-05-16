@@ -20,7 +20,7 @@ import com.wpf.app.quickrecyclerview.ability.click
 import com.wpf.app.quickrecyclerview.ability.swap
 import com.wpf.app.quickrecyclerview.data.QuickAbilityData
 import com.wpf.app.quickutil.helper.dp
-import com.wpf.app.quickutil.helper.matchWrapLayoutParams
+import com.wpf.app.quickutil.helper.matchWrapMarginLayoutParams
 import com.wpf.app.quickutil.helper.onceClick
 import com.wpf.app.quickutil.init.ToastHelper
 import com.wpf.app.quickutil.other.printLog
@@ -31,7 +31,7 @@ import com.wpf.app.quickutil.run.runOnView
  */
 class BindDataTestModel(private val index: Int = 0) : QuickAbilityData(
     abilityList = contentView<FrameLayout> {
-        myLayout(R.layout.holder_image, layoutParams = matchWrapLayoutParams()).background {
+        myLayout(R.layout.holder_image, layoutParams = matchWrapMarginLayoutParams()).background {
             rect(radius = 8f.dp)
         }
     }.with(bindWSelf<HolderImageBinding, BindDataTestModel> {

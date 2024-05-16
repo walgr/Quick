@@ -3,7 +3,6 @@ package com.wpf.app.base.ability.base
 import android.view.View
 import androidx.annotation.CallSuper
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.ViewModelStoreOwner
 
 interface QuickViewAbility: QuickAbility {
 
@@ -14,7 +13,8 @@ interface QuickViewAbility: QuickAbility {
         return view
     }
 
-    fun afterGenerateContentView(owner: ViewModelStoreOwner, view: View) {
+
+    fun afterGenerateContentView(owner: LifecycleOwner, view: View) {
 
     }
 

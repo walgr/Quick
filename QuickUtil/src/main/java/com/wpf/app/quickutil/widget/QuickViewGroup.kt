@@ -2,7 +2,6 @@ package com.wpf.app.quickutil.widget
 
 import android.content.Context
 import android.util.AttributeSet
-import android.view.View
 import android.view.ViewGroup
 
 /**
@@ -14,6 +13,5 @@ open class QuickViewGroup<T : ViewGroup> @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
     addToParent: Boolean = false,
-    childView: Array<View>? = null,
     forceGenerics: Boolean = false          //强制泛型初始化
-) : QuickViewGroupNoAttrs<T>(context, attrs, defStyleAttr, addToParent, childView, forceGenerics)
+) : QuickViewGroupNoAttrs<T>(context, attrs, defStyleAttr, addToParent, forceGenerics)

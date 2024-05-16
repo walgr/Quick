@@ -23,7 +23,7 @@ import com.wpf.app.quickrecyclerview.helper.Request2RefreshView
 import com.wpf.app.quickrecyclerview.listeners.RefreshView
 import com.wpf.app.quickrecyclerview.listeners.Request2ListWithView
 import com.wpf.app.quickutil.helper.InitViewHelper
-import com.wpf.app.quickutil.helper.matchLayoutParams
+import com.wpf.app.quickutil.helper.matchMarginLayoutParams
 import com.wpf.app.quickutil.helper.parent
 import com.wpf.app.quickutil.helper.removeParent
 import com.wpf.app.quickutil.other.forceTo
@@ -45,7 +45,7 @@ fun <V : View> ViewGroupScope<out ViewGroup>.smartRefreshLayout(
     val contentView = contentBuilder.invoke(smartRefreshLayout)
     if (contentView.parent() != this) {
         contentView.removeParent()
-        smartRefreshLayout.addView(contentView, matchLayoutParams())
+        smartRefreshLayout.addView(contentView, matchMarginLayoutParams())
     }
     smartRefreshLayout.setRefreshFooter(footer.forceTo())
     smartRefreshLayout.setOnRefreshListener {
@@ -98,8 +98,8 @@ fun ViewGroupScope<out ViewGroup>.smartRefreshList(
         contentBuilder = {
             if (upperLayout != null) {
                 RelativeLayout(context).apply {
-                    addView(list, matchLayoutParams())
-                    addView(upperLayout, matchLayoutParams())
+                    addView(list, matchMarginLayoutParams())
+                    addView(upperLayout, matchMarginLayoutParams())
                 }
             } else {
                 list

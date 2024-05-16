@@ -6,7 +6,10 @@ import android.view.View.OnLongClickListener
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
 import android.view.ViewParent
+import android.widget.LinearLayout
+import android.widget.LinearLayout.LayoutParams
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.setPadding
 import androidx.viewpager.widget.ViewPager
 import com.wpf.app.quickutil.data.KV
 import com.wpf.app.quickutil.other.asTo
@@ -100,20 +103,76 @@ fun View.getViewContext(): Any? {
     return null
 }
 
-fun View.setMarginEnd(margin: Int) {
-    layoutParams.forceTo<MarginLayoutParams>().marginEnd = margin
-}
-
-fun View.setMarginStart(margin: Int) {
+fun <T: View> T.margin(margin: Int): T {
     layoutParams.forceTo<MarginLayoutParams>().marginStart = margin
-}
-
-fun View.setTopMargin(margin: Int) {
     layoutParams.forceTo<MarginLayoutParams>().topMargin = margin
+    layoutParams.forceTo<MarginLayoutParams>().marginEnd = margin
+    layoutParams.forceTo<MarginLayoutParams>().bottomMargin = margin
+    return this
 }
 
-fun View.seBottomMargin(margin: Int) {
+fun <T: View> T.marginVertical(margin: Int): T {
+    layoutParams.forceTo<MarginLayoutParams>().topMargin = margin
     layoutParams.forceTo<MarginLayoutParams>().bottomMargin = margin
+    return this
+}
+
+fun <T: View> T.marginHorizontal(margin: Int): T {
+    layoutParams.forceTo<MarginLayoutParams>().marginStart = margin
+    layoutParams.forceTo<MarginLayoutParams>().marginEnd = margin
+    return this
+}
+
+fun <T: View> T.marginEnd(margin: Int): T {
+    layoutParams.forceTo<MarginLayoutParams>().marginEnd = margin
+    return this
+}
+
+fun <T: View> T.marginStart(margin: Int): T {
+    layoutParams.forceTo<MarginLayoutParams>().marginStart = margin
+    return this
+}
+
+fun <T: View> T.topMargin(margin: Int): T {
+    layoutParams.forceTo<MarginLayoutParams>().topMargin = margin
+    return this
+}
+
+fun <T: View> T.bottomMargin(margin: Int): T {
+    layoutParams.forceTo<MarginLayoutParams>().bottomMargin = margin
+    return this
+}
+
+fun <T: View> T.widget(widget: Float): T {
+    parent()?.forceTo<LinearLayout>()?.let {
+        if (it.orientation == LinearLayout.VERTICAL) {
+            this@widget.layoutParams.height = 0
+        } else {
+            this@widget.layoutParams.width = 0
+        }
+        this@widget.layoutParams.forceTo<LayoutParams>().weight = widget
+    }
+    return this
+}
+
+fun <T: View> T.padding(size: Int): T {
+    this.setPadding(size)
+    return this
+}
+
+fun <T: View> T.padding(start: Int = this.left, top: Int = this.top, end: Int = this.right, bottom: Int = this.bottom): T {
+    this.setPadding(start, top, end, bottom)
+    return this
+}
+
+fun <T: View> T.paddingVertical(size: Int): T {
+    padding(top = size, bottom = size)
+    return this
+}
+
+fun <T: View> T.paddingHorizontal(size: Int): T {
+    padding(start = size, end = size)
+    return this
 }
 
 fun View.postDelay(delayMillis: Long, action: Runnable) {

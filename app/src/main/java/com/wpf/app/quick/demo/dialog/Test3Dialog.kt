@@ -6,7 +6,7 @@ import android.widget.FrameLayout
 import com.wpf.app.quick.ability.ex.contentView
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quickwork.ability.helper.text
-import com.wpf.app.quickwork.widget.QuickThemeDialog
+import com.wpf.app.quickwork.widget.theme.QuickThemeDialog
 
 class Test3Dialog(
     context: Context

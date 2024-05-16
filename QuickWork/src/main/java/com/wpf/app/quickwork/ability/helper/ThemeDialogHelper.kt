@@ -7,7 +7,7 @@ import androidx.annotation.StyleRes
 import com.wpf.app.base.ability.scope.ContextScope
 import com.wpf.app.quick.ability.QuickDialog
 import com.wpf.app.quick.ability.ex.contentView
-import com.wpf.app.quickwork.widget.QuickThemeDialog
+import com.wpf.app.quickwork.widget.theme.QuickThemeDialog
 import com.wpf.app.quickwork.widget.theme.QuickDialogThemeI
 
 fun ContextScope.dialog(

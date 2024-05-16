@@ -5,7 +5,10 @@ import com.wpf.app.quicknetwork.base.BaseRequest
 import com.wpf.app.quicknetwork.base.BaseResponseI
 import com.wpf.app.quicknetwork.base.JobRequest
 import com.wpf.app.quickutil.other.asTo
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Response
 import java.lang.reflect.Type
@@ -24,7 +27,12 @@ open class RealCall<SResponse, FResponse>(private val rawCall: Call<SResponse>, 
             request.funBefore.invoke()
             val result = withContext(Dispatchers.IO) {
                 try {
-                    rawCall.execute() as Response<SResponse>
+                    val data = rawCall.execute() as Response<SResponse>
+                    val body = data.body() as SResponse
+                    if (request.isSuccess(body)) {
+                        request.funSuccessBefore.invoke(body)
+                    }
+                    data
                 } catch (t: Throwable) {
                     t
                 }

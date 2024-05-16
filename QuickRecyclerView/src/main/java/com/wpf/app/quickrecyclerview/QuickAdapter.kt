@@ -28,7 +28,7 @@ open class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>()
     val headerViews = mutableListOf<QuickHeaderData>()
     val footerViews = mutableListOf<QuickFooterData>()
 
-    internal val extraParameter: LinkedHashMap<String, Any> = linkedMapOf()
+    val extraParameter: LinkedHashMap<String, Any> = linkedMapOf()
 
     fun getDataByViewType(viewType: Int): QuickItemData? {
         return (mDataList?.find {

@@ -53,64 +53,64 @@ fun String.setToSp(
     }
 }
 
-inline fun <reified T : Any> String.putSpValue(
-    value: T?,
+fun <T : Any> String.putSpValue(
+    value: T,
     fileName: String = "QuickViewSpBindFile",
 ) {
     SpManager.getSharedPreference(fileName)?.edit()?.apply {
-        when (T::class.java) {
+        when (value.javaClass) {
             String::class.java -> {
-                putString(this@putSpValue, value as? String)
+                putString(this@putSpValue, value as String)
             }
 
             Int::class.java -> {
-                putInt(this@putSpValue, value as? Int ?: 0)
+                putInt(this@putSpValue, value as Int)
             }
 
             Float::class.java -> {
-                putFloat(this@putSpValue, value as? Float ?: 0F)
+                putFloat(this@putSpValue, value as Float)
             }
 
             Boolean::class.java -> {
-                putBoolean(this@putSpValue, value as? Boolean ?: false)
+                putBoolean(this@putSpValue, value as Boolean)
             }
 
             Long::class.java -> {
-                putLong(this@putSpValue, value as? Long ?: 0L)
+                putLong(this@putSpValue, value as Long)
             }
         }
         apply()
     }
 }
 
-inline fun <reified T : Any> String.getSpValue(
-    defaultValue: T? = null,
+fun <T : Any> String.getSpValue(
+    defaultValue: T,
     fileName: String = "QuickViewSpBindFile",
 ): T? {
     val sp = SpManager.getSharedPreference(fileName) ?: return null
-    return when (T::class.java) {
+    return when (defaultValue.javaClass) {
         String::class.java -> {
-            sp.getString(this@getSpValue, defaultValue as? String) as? T
+            sp.getString(this@getSpValue, defaultValue as String) as? T
         }
 
         Int::class.java -> {
-            sp.getInt(this@getSpValue, defaultValue as? Int ?: 0) as? T
+            sp.getInt(this@getSpValue, defaultValue as Int) as? T
         }
 
         Float::class.java -> {
-            sp.getFloat(this@getSpValue, defaultValue as? Float ?: 0f) as? T
+            sp.getFloat(this@getSpValue, defaultValue as Float) as? T
         }
 
         Boolean::class.java -> {
-            sp.getBoolean(this@getSpValue, defaultValue as? Boolean ?: false) as? T
+            sp.getBoolean(this@getSpValue, defaultValue as Boolean) as? T
         }
 
         Long::class.java -> {
-            sp.getLong(this@getSpValue, defaultValue as? Long ?: 0L) as? T
+            sp.getLong(this@getSpValue, defaultValue as Long) as? T
         }
 
         else -> {
-            defaultValue as T
+            defaultValue
         }
     }
 }

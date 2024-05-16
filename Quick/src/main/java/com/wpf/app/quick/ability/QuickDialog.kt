@@ -5,17 +5,21 @@ import android.os.Bundle
 import android.view.View
 import androidx.annotation.CallSuper
 import androidx.annotation.StyleRes
+import androidx.lifecycle.ViewModel
 import com.wpf.app.base.ability.base.QuickAbility
 import com.wpf.app.base.ability.base.QuickInflateViewAbility
 import com.wpf.app.base.ability.base.QuickLifecycleAbility
+import com.wpf.app.base.ability.base.QuickViewAbility
+import com.wpf.app.quickbind.interfaces.BindViewModel
 import com.wpf.app.quickdialog.QuickBaseDialog
 import com.wpf.app.quickutil.helper.InitViewHelper
+import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.other.forceTo
 
 open class QuickDialog(
     context: Context,
     @StyleRes themeId: Int = 0,
-    val abilityList: List<QuickAbility> = mutableListOf(),
+    val abilityList: MutableList<QuickAbility> = mutableListOf(),
 ) : QuickBaseDialog(context = context, themeId = themeId, layoutViewCreate = {
     val inflateAbility = abilityList.first { ability -> ability is QuickInflateViewAbility }
         .forceTo<QuickInflateViewAbility>()
@@ -25,8 +29,22 @@ open class QuickDialog(
         inflateAbility.layoutView(),
         inflateAbility.layoutViewCreate()
     )
-}) {
-    internal val extraParameter: LinkedHashMap<String, Any> = linkedMapOf()
+}), BindViewModel<ViewModel> {
+    val extraParameter: LinkedHashMap<String, Any> = linkedMapOf()
+
+    companion object {
+        var commonAbility: List<QuickAbility>? = null
+    }
+
+    init {
+        commonAbility?.let {
+            abilityList.addAll(0, it)
+        }
+    }
+
+    override fun getViewModel(): ViewModel? {
+        return abilityList.find { it is BindViewModel<*> }?.asTo<BindViewModel<*>>()?.getViewModel()
+    }
 
     @CallSuper
     override fun generateContentView(view: View): View {
@@ -37,8 +55,10 @@ open class QuickDialog(
 
     @CallSuper
     override fun initView(view: View) {
-        super.initView(view)
-        abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
+        abilityList.filterIsInstance<QuickViewAbility>().forEach {
+            it.afterGenerateContentView(this, view)
+        }
+        abilityList.filterIsInstance<QuickViewAbility>().forEach {
             it.initView(this, view)
         }
     }

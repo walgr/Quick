@@ -1,6 +1,8 @@
 package com.wpf.app.quicknetwork.helper
 
-import okhttp3.*
+import okhttp3.CookieJar
+import okhttp3.Interceptor
+import okhttp3.OkHttpClient
 import java.util.concurrent.TimeUnit
 import javax.net.ssl.HostnameVerifier
 import javax.net.ssl.SSLSocketFactory
@@ -20,7 +22,8 @@ object OkHttpCreateHelper {
         cookieJar: CookieJar? = null,
         sslFactory: SSLSocketFactory? = null,
         trustManager: X509TrustManager? = null,
-        hostnameVerifier: HostnameVerifier? = null
+        hostnameVerifier: HostnameVerifier? = null,
+        init: (OkHttpClient.Builder.() -> Unit)? = null
     ): OkHttpClient {
         val builder = OkHttpClient.Builder()
             .connectTimeout(timeOut, TimeUnit.SECONDS)
@@ -40,6 +43,7 @@ object OkHttpCreateHelper {
         cookieJar?.let {
             builder.cookieJar(it)
         }
+        init?.invoke(builder)
         okHttpClient = builder.build()
         return okHttpClient
     }

@@ -386,6 +386,28 @@ interface QuickTitleThemeI {
         isAbsoluteCenter = isAbsoluteCenter ?: true
     }
 
+    fun with(other: QuickTitleThemeI?): QuickTitleThemeI {
+        height = height ?: other?.height
+        background = background ?: other?.background
+        contentGravity = contentGravity ?: other?.contentGravity
+        isAbsoluteCenter = isAbsoluteCenter ?: other?.isAbsoluteCenter
+        isLinearLayout = isLinearLayout ?: other?.isLinearLayout
+        showLine = showLine ?: other?.showLine
+        showBackIcon = showBackIcon ?: other?.showBackIcon
+        backIcon = backIcon ?: other?.backIcon
+        titleStr = titleStr ?: other?.titleStr
+        titleColor = titleColor ?: other?.titleColor
+        titleBold = titleBold ?: other?.titleBold
+        titleSize = titleSize ?: other?.titleSize
+        subTitleStr = subTitleStr ?: other?.subTitleStr
+        subTitleColor = subTitleColor ?: other?.subTitleColor
+        subTitleBold = subTitleBold ?: other?.subTitleBold
+        subTitleSize = subTitleSize ?: other?.subTitleSize
+        space = space ?: other?.space
+        titleSpace = titleSpace ?: other?.titleSpace
+        return this
+    }
+
     fun copy(): QuickTitleThemeI {
         return QuickTitleAttrs().apply {
             height = this@QuickTitleThemeI.height

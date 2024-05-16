@@ -58,6 +58,12 @@ object QuickBindWrap: QuickBindI {
         quickBindI?.bind(dialog)
     }
 
+    override fun bind(dialog: Dialog, viewModel: ViewModel?) {
+        if (dialog is NoBind) return
+        if (bindHistory.find { it.get() == dialog } != null) return
+        quickBindI?.bind(dialog, viewModel)
+    }
+
     override fun <T : Bind> bind(bind: T) {
         if (bindHistory.find { it.get() == bind } != null) return
         quickBindI?.bind(bind)

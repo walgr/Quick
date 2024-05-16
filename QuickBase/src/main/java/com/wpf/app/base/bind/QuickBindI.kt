@@ -2,7 +2,6 @@ package com.wpf.app.base.bind
 
 import android.app.Activity
 import android.app.Dialog
-import androidx.annotation.CallSuper
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
@@ -11,29 +10,31 @@ import kotlin.reflect.KClass
 
 interface QuickBindI {
 
-    @CallSuper
     fun bind(activity: Activity) {
 
     }
 
-    @CallSuper
     fun bind(activity: Activity, viewModel: ViewModel?) {
 
     }
 
-    @CallSuper
     fun bind(fragment: Fragment) {
 
     }
 
-    @CallSuper
     fun bind(fragment: Fragment, viewModel: ViewModel?) {
 
     }
 
-    fun bind(viewHolder: RecyclerView.ViewHolder)
+    fun bind(dialog: Dialog) {
 
-    fun bind(dialog: Dialog)
+    }
+
+    fun bind(dialog: Dialog, viewModel: ViewModel?) {
+
+    }
+
+    fun bind(viewHolder: RecyclerView.ViewHolder)
 
     fun <T : Bind> bind(bind: T)
 

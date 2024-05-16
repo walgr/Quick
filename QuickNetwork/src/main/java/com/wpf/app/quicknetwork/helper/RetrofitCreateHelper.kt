@@ -37,7 +37,8 @@ object RetrofitCreateHelper {
         serviceCls: Class<*>,
         callFactoryList: List<CallAdapter.Factory>? = null,
         converterFactoryList: List<Converter.Factory>? = null,
-        okHttp: OkHttpClient = OkHttpCreateHelper.newInstance()
+        okHttp: OkHttpClient = OkHttpCreateHelper.newInstance(),
+        init: (Retrofit.Builder.() -> Unit)? = null
     ): Retrofit {
         var retrofit = retrofitMap[baseUrl]
         if (retrofit == null) {
@@ -51,6 +52,7 @@ object RetrofitCreateHelper {
             converterFactoryList?.forEach {
                 retrofitBuilder.addConverterFactory(it)
             }
+            init?.invoke(retrofitBuilder)
             retrofit = retrofitBuilder.build()
             retrofitMap[baseUrl] = retrofit
             retrofitServiceMap[serviceCls] = retrofit

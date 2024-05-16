@@ -8,7 +8,9 @@ abstract class BaseRequest<SResponse, FResponse> {
 
     internal var funBefore = {}
 
-    internal var funSuccess = { _: SResponse? -> }
+    internal var funSuccessBefore = { _: SResponse -> }
+
+    internal var funSuccess = { _: SResponse -> }
 
     internal var funFail = { _: FResponse? -> }
 
@@ -19,7 +21,12 @@ abstract class BaseRequest<SResponse, FResponse> {
         return this
     }
 
-    open fun success(onSuccess: (SResponse?) -> Unit): BaseRequest<SResponse, FResponse> {
+    open fun successBefore(onSuccessBefore: (SResponse) -> Unit): BaseRequest<SResponse, FResponse> {
+        funSuccessBefore = onSuccessBefore
+        return this
+    }
+
+    open fun success(onSuccess: (SResponse) -> Unit): BaseRequest<SResponse, FResponse> {
         funSuccess = onSuccess
         return this
     }

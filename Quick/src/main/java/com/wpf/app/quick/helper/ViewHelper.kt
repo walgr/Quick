@@ -32,7 +32,7 @@ inline fun <reified VM : QuickVBModel<QuickFragment, VB>, reified VB : ViewDataB
 fun View.toActivity(
     onActivityInit: ((view: View) -> Unit)? = null,
 ) = object : QuickActivity(
-    contentView(layoutView = this)
+    contentView(layoutView = this@toActivity)
 ) {
     override fun initView(view: View) {
         super.initView(view)
@@ -43,7 +43,7 @@ fun View.toActivity(
 inline fun <reified VM : QuickViewModel<out QuickView>> View.toVMActivity(
     noinline onActivityInit: ((view: View) -> Unit)? = null,
 ) = object : QuickActivity(
-    contentView(layoutView = this).with(viewModel<VM>())
+    contentView(layoutView = this@toVMActivity).with(viewModel<VM>())
 ) {
     override fun initView(view: View) {
         super.initView(view)
@@ -54,7 +54,7 @@ inline fun <reified VM : QuickViewModel<out QuickView>> View.toVMActivity(
 inline fun <reified VM : QuickVBModel<QuickActivity, VB>, reified VB : ViewDataBinding> View.toVBActivity(
     noinline onActivityInit: (VB.() -> Unit)? = null,
 ) = QuickActivity(
-    contentView(layoutView = this).with(modelBindingWithSelf<QuickActivity, VM, VB> { _, _ ->
+    contentView(layoutView = this@toVBActivity).with(modelBindingWithSelf<QuickActivity, VM, VB> { _, _ ->
         onActivityInit?.invoke(this)
     })
 )

@@ -7,18 +7,33 @@ import androidx.annotation.UiThread
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
-import com.wpf.app.quick.annotations.bind.BindData2View
-import com.wpf.app.quick.annotations.bind.BindView
-import com.wpf.app.quick.annotations.bind.Databinder
-import com.wpf.app.quick.annotations.bind.GroupView
-import com.wpf.app.quickbind.annotations.*
-import com.wpf.app.quickbind.plugins.*
-import com.wpf.app.quickutil.helper.contentView
 import com.wpf.app.base.bind.Bind
 import com.wpf.app.base.bind.NoBind
 import com.wpf.app.base.bind.QuickBindI
 import com.wpf.app.base.bind.QuickBindWrap.bindHistory
 import com.wpf.app.base.bind.plugins.BasePlugin
+import com.wpf.app.quick.annotations.bind.BindData2View
+import com.wpf.app.quick.annotations.bind.BindView
+import com.wpf.app.quick.annotations.bind.Databinder
+import com.wpf.app.quick.annotations.bind.GroupView
+import com.wpf.app.quickbind.annotations.AutoGet
+import com.wpf.app.quickbind.annotations.BindFragment
+import com.wpf.app.quickbind.annotations.BindFragment2
+import com.wpf.app.quickbind.annotations.BindFragments
+import com.wpf.app.quickbind.annotations.BindFragments2
+import com.wpf.app.quickbind.annotations.BindSp2View
+import com.wpf.app.quickbind.annotations.LoadSp
+import com.wpf.app.quickbind.plugins.AutoGetPlugin
+import com.wpf.app.quickbind.plugins.BindData2ViewPlugin
+import com.wpf.app.quickbind.plugins.BindFragment2Plugin
+import com.wpf.app.quickbind.plugins.BindFragmentPlugin
+import com.wpf.app.quickbind.plugins.BindFragments2Plugin
+import com.wpf.app.quickbind.plugins.BindFragmentsPlugin
+import com.wpf.app.quickbind.plugins.BindSp2ViewPlugin
+import com.wpf.app.quickbind.plugins.BindViewPlugin
+import com.wpf.app.quickbind.plugins.GroupViewPlugin
+import com.wpf.app.quickbind.plugins.LoadSpPlugin
+import com.wpf.app.quickutil.helper.contentView
 import com.wpf.app.quickutil.other.GenericEx.getFieldAndParent
 import com.wpf.app.quickutil.other.forceTo
 import java.lang.reflect.Constructor
@@ -110,6 +125,13 @@ object QuickBind: QuickBindI {
         if (bindHistory.find { it.get() == dialog } != null) return
         bindBinder(dialog, dialog.window!!.decorView)
         dealInPlugins(dialog, null)
+    }
+
+    override fun bind(dialog: Dialog, viewModel: ViewModel?) {
+        if (dialog is NoBind) return
+        if (bindHistory.find { it.get() == dialog } != null) return
+        bindBinder(dialog, dialog.window!!.decorView)
+        dealInPlugins(dialog, viewModel)
     }
 
     override fun <T : Bind> bind(bind: T) {

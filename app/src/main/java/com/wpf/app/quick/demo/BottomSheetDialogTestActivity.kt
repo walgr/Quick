@@ -12,8 +12,8 @@ import com.wpf.app.quick.ability.helper.myLayout
 import com.wpf.app.quick.ability.helper.rect
 import com.wpf.app.quick.annotations.getclass.GetClass
 import com.wpf.app.quickutil.helper.dp
-import com.wpf.app.quickutil.helper.matchLayoutParams
-import com.wpf.app.quickutil.helper.matchWrapLayoutParams
+import com.wpf.app.quickutil.helper.matchMarginLayoutParams
+import com.wpf.app.quickutil.helper.matchWrapMarginLayoutParams
 import com.wpf.app.quickutil.helper.onClick
 import com.wpf.app.quickutil.helper.reset
 import com.wpf.app.quickutil.helper.toColor
@@ -24,14 +24,14 @@ import com.wpf.app.quickwork.ability.helper.title
 class BottomSheetDialogTestActivity : QuickActivity(
     contentView<LinearLayout> {
         title("BottomSheet测试")
-        myLayout<LinearLayout>(layoutParams = matchLayoutParams()) {
+        myLayout<LinearLayout>(layoutParams = matchMarginLayoutParams()) {
             addView(MaterialButton(context).apply {
                 text = "弹窗"
             }.onClick {
                 bottomSheetDialog(
                     layoutViewCreate = {
                         myLayout<LinearLayout>(
-                            layoutParams = matchWrapLayoutParams().reset(height = 100.dp),
+                            layoutParams = matchWrapMarginLayoutParams().reset(height = 100.dp),
                         ) {
                             text(text = "弹窗")
                         }.gravity(Gravity.CENTER).background {

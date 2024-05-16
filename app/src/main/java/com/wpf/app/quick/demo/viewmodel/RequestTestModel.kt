@@ -2,11 +2,11 @@ package com.wpf.app.quick.demo.viewmodel
 
 import android.annotation.SuppressLint
 import com.wpf.app.quick.activity.viewmodel.QuickVBModel
-import com.wpf.app.quick.demo.R
-import com.wpf.app.quick.demo.http.request
 import com.wpf.app.quick.annotations.bind.BindData2View
+import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.demo.RequestTestActivity
 import com.wpf.app.quick.demo.databinding.ActivityRequestTestBinding
+import com.wpf.app.quick.demo.http.request
 import com.wpf.app.quickrecyclerview.bind.Request2View
 import com.wpf.app.quickrecyclerview.interfaces.request2View
 import com.wpf.app.quickutil.helper.postDelay
@@ -22,7 +22,7 @@ class RequestTestModel : QuickVBModel<RequestTestActivity, ActivityRequestTestBi
         request {
             homePageList(page)
         }.success {
-            callback.backData(it?.data)
+            callback.backData(it.data)
         }.fail {
             LogUtil.e("接口错误：${it?.errorI}")
         }

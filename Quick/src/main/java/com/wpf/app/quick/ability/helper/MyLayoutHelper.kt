@@ -13,13 +13,13 @@ import com.wpf.app.base.ability.scope.createViewScope
 import com.wpf.app.quick.ability.ex.viewCreateConvert
 import com.wpf.app.quickbind.utils.context
 import com.wpf.app.quickutil.helper.InitViewHelper
-import com.wpf.app.quickutil.helper.matchLayoutParams
-import com.wpf.app.quickutil.helper.matchWrapLayoutParams
+import com.wpf.app.quickutil.helper.matchMarginLayoutParams
+import com.wpf.app.quickutil.helper.matchWrapMarginLayoutParams
 import com.wpf.app.quickutil.helper.removeParent
 import com.wpf.app.quickutil.other.forceTo
 
 inline fun <reified T : ViewGroup> Any.myLayout(
-    layoutParams: ViewGroup.LayoutParams = matchWrapLayoutParams(),
+    layoutParams: ViewGroup.LayoutParams = matchWrapMarginLayoutParams(),
     noinline builder: (ViewGroupScope<T>.() -> Unit)? = null,
 ): T {
     val mContext = context()!!
@@ -37,7 +37,7 @@ fun Any.myLayout(
     @LayoutRes layoutId: Int = 0,
     layoutView: View? = null,
     layoutViewCreate: (ContextScope.() -> View)? = null,
-    layoutParams: ViewGroup.LayoutParams = matchLayoutParams(),
+    layoutParams: ViewGroup.LayoutParams = matchMarginLayoutParams(),
     builder: (ViewScope<View>.() -> Unit)? = null,
 ): View {
     val mContext = context()!!

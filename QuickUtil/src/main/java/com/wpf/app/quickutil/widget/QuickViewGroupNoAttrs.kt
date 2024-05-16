@@ -26,14 +26,12 @@ open class QuickViewGroupNoAttrs<T : ViewGroup> @JvmOverloads constructor(
     private val attrs: AttributeSet? = null,
     private val defStyleAttr: Int = 0,
     private var addToParent: Boolean = true,
-    private val childView: Array<View>? = null,
     private val forceGenerics: Boolean = false          //强制泛型初始化
 ) : ViewGroup(context, attrs, defStyleAttr), QuickViewGroupI<T> {
 
-    protected val attrSet: QuickViewGroupAttrSet
+    private val attrSet: QuickViewGroupAttrSet = AutoGetAttributeHelper.init(context, attrs, R.styleable.QuickViewGroup)
 
     init {
-        attrSet = AutoGetAttributeHelper.init(context, attrs, R.styleable.QuickViewGroup)
         this.init()
     }
 
@@ -228,6 +226,5 @@ open class QuickViewGroupNoAttrs<T : ViewGroup> @JvmOverloads constructor(
     protected class QuickViewGroupAttrSet @JvmOverloads constructor(
         val addToParent: Boolean? = null,
         val groupType: Int = -1,
-        val layoutRes: Int = 0,
     )
 }

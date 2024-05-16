@@ -28,7 +28,6 @@ class GenerateCommonCallProcessor(private val environment: SymbolProcessorEnviro
         className: String
     ) {
         super.visitClassDeclaration(classDeclaration, data, packageName, className)
-        println(classDeclaration)
         val generateNormalCallAnn = classDeclaration.annotations.find {
             it.shortName.getShortName() == GenerateCommonCall::class.simpleName
         } ?: return

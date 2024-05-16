@@ -2,9 +2,9 @@ package com.wpf.app.quick.ability.ex
 
 import android.app.Activity
 import android.view.View
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
-import com.wpf.app.base.ability.base.QuickViewAbility
 import com.wpf.app.base.QuickView
 import com.wpf.app.base.ability.base.QuickAbility
 import com.wpf.app.quick.ability.ex.base.QuickVMAbility
@@ -18,12 +18,12 @@ inline fun <reified VM : QuickViewModel<out QuickView>> viewModel(
     private var viewModel: VM? = null
     override fun getViewModel() = viewModel
 
-    override fun afterGenerateContentView(owner: ViewModelStoreOwner, view: View) {
+    override fun afterGenerateContentView(owner: LifecycleOwner, view: View) {
         super.afterGenerateContentView(owner, view)
         val viewModelCls = VM::class.java
         val activity = owner.forceTo<Activity>()
         viewModel = ViewModelProvider(
-            owner, ViewModelProvider.AndroidViewModelFactory(activity.application)
+            owner.forceTo<ViewModelStoreOwner>(), ViewModelProvider.AndroidViewModelFactory(activity.application)
         )[viewModelCls]
         vmBuilder?.invoke(viewModel!!)
         com.wpf.app.base.bind.QuickBindWrap.bind(activity, viewModel)

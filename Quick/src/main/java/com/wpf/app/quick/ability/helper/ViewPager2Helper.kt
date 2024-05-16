@@ -14,7 +14,7 @@ import com.wpf.app.quick.helper.getLifecycle
 import com.wpf.app.quick.helper.toFragment
 import com.wpf.app.quickbind.utils.getFragment
 import com.wpf.app.quickbind.viewpager2.adapter.Fragments2StateAdapter
-import com.wpf.app.quickutil.helper.matchLayoutParams
+import com.wpf.app.quickutil.helper.matchMarginLayoutParams
 import com.wpf.app.quickutil.helper.removeParent
 import com.wpf.app.quickutil.other.forceTo
 import kotlin.math.abs
@@ -90,7 +90,7 @@ fun ViewGroupScope<out ViewGroup>.viewPager2WithView(
 ): ViewPager2 {
     val contentFragmentList = views.map {
         val contentView = FrameLayout(context)
-        contentView.layoutParams = matchLayoutParams()
+        contentView.layoutParams = matchMarginLayoutParams()
         contentView.addView(it)
         contentView.toFragment()
     }

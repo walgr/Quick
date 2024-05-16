@@ -15,10 +15,9 @@ import com.wpf.app.quickbind.interfaces.BindViewModel
 import com.wpf.app.quickutil.helper.InitViewHelper
 import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.other.forceTo
-import com.wpf.app.quickutil.run.runOnContext
 
 open class QuickFragment(
-    private val abilityList: List<QuickAbility> = mutableListOf()
+    private val abilityList: MutableList<QuickAbility> = mutableListOf()
 ) : QuickBaseFragment(
     layoutViewCreate = {
         val inflateAbility = abilityList.first { ability -> ability is QuickInflateViewAbility }
@@ -31,7 +30,17 @@ open class QuickFragment(
         )
     }
 ), BindViewModel<ViewModel> {
-    internal val extraParameter: LinkedHashMap<String, Any> = linkedMapOf()
+    val extraParameter: LinkedHashMap<String, Any> = linkedMapOf()
+
+    companion object {
+        var commonAbility: List<QuickAbility>? = null
+    }
+
+    init {
+        commonAbility?.let {
+            abilityList.addAll(0, it)
+        }
+    }
 
     override fun getViewModel(): ViewModel? {
         return abilityList.find { it is BindViewModel<*> }?.asTo<BindViewModel<*>>()?.getViewModel()

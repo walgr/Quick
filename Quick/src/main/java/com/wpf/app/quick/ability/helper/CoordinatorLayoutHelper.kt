@@ -6,15 +6,14 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout.Behavior
 import com.google.android.material.appbar.AppBarLayout
 import com.wpf.app.base.ability.scope.ViewGroupScope
-import com.wpf.app.quickutil.helper.matchLayoutParams
-import com.wpf.app.quickutil.helper.matchWrapLayoutParams
+import com.wpf.app.quickutil.helper.layoutParams
+import com.wpf.app.quickutil.helper.matchWrapMarginLayoutParams
 import com.wpf.app.quickutil.helper.parent
 import com.wpf.app.quickutil.helper.removeParent
-import com.wpf.app.quickutil.widget.smartLayoutParams
 import com.wpf.app.quickutil.widget.wishLayoutParams
 
 fun <Follow : View, Top : View, Bottom : View> ViewGroupScope<out ViewGroup>.coordinator(
-    layoutParams: ViewGroup.LayoutParams = this@coordinator.view.smartLayoutParams(),
+    layoutParams: ViewGroup.LayoutParams = smartLayoutParams(),
     followSlideLayout: (AppBarLayout.() -> Follow)? = null,
     scrollFlags: Int? = null,
     topSuspendLayout: (AppBarLayout.() -> Top)? = null,
@@ -24,14 +23,14 @@ fun <Follow : View, Top : View, Bottom : View> ViewGroupScope<out ViewGroup>.coo
 ): CoordinatorLayout {
     val parentLayout = CoordinatorLayout(context)
     val appBarLayout = AppBarLayout(context)
-    parentLayout.addView(appBarLayout, matchWrapLayoutParams())
+    parentLayout.addView(appBarLayout, matchWrapMarginLayoutParams())
     var followSlideLayoutView: Follow? = null
 
     followSlideLayout?.invoke(appBarLayout)?.let {
         followSlideLayoutView = it
         if (it.parent() != appBarLayout) {
             it.removeParent()
-            appBarLayout.addView(it, it.layoutParams ?: matchWrapLayoutParams())
+            appBarLayout.addView(it, it.layoutParams ?: layoutParams<AppBarLayout.LayoutParams>(matchWrapMarginLayoutParams()))
         }
         it.wishLayoutParams<AppBarLayout.LayoutParams>().scrollFlags = scrollFlags!!
     }
@@ -40,7 +39,7 @@ fun <Follow : View, Top : View, Bottom : View> ViewGroupScope<out ViewGroup>.coo
         topSuspendLayoutView = it
         if (it.parent() != appBarLayout) {
             it.removeParent()
-            appBarLayout.addView(it, it.layoutParams ?: matchWrapLayoutParams())
+            appBarLayout.addView(it, it.layoutParams ?: layoutParams<AppBarLayout.LayoutParams>(matchWrapMarginLayoutParams()))
         }
         it.wishLayoutParams<AppBarLayout.LayoutParams>().scrollFlags = 0
     }
@@ -49,7 +48,7 @@ fun <Follow : View, Top : View, Bottom : View> ViewGroupScope<out ViewGroup>.coo
         bottomScrollLayoutView = it
         if (it.parent() != parentLayout) {
             it.removeParent()
-            parentLayout.addView(it, it.layoutParams ?: matchLayoutParams())
+            parentLayout.addView(it, it.layoutParams ?: layoutParams<CoordinatorLayout.LayoutParams>(matchWrapMarginLayoutParams()))
         }
         it.wishLayoutParams<CoordinatorLayout.LayoutParams>().behavior = behavior
     }

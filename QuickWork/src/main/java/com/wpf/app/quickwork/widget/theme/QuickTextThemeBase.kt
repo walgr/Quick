@@ -117,6 +117,24 @@ interface QuickTextThemeI {
         textSize = textSize ?: 14f.dp
     }
 
+    fun with(other: QuickTextThemeI?): QuickTextThemeI {
+        background = background ?: other?.background
+        textColor = textColor ?: other?.textColor
+        hintTextColor = hintTextColor ?: other?.hintTextColor
+        textSize = textSize ?: other?.textSize
+        textGravity = textGravity ?: other?.textGravity
+        isBold = isBold ?: other?.isBold
+        isSingleLine = isSingleLine ?: other?.isSingleLine
+        maxLines = maxLines ?: other?.maxLines
+        lines = lines ?: other?.lines
+        ems = ems ?: other?.ems
+        maxEms = maxEms ?: other?.maxEms
+        maxWidth = maxWidth ?: other?.maxWidth
+        includeFontPadding = includeFontPadding ?: other?.includeFontPadding
+        ellipsize = ellipsize ?: other?.ellipsize
+        return this
+    }
+
     fun copy(): QuickTextThemeI {
         return QuickTextTheme(
             background,

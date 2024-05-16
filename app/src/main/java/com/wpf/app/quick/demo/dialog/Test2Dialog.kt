@@ -9,16 +9,16 @@ import com.wpf.app.quick.ability.helper.gravity
 import com.wpf.app.quick.ability.helper.myLayout
 import com.wpf.app.quick.ability.helper.rect
 import com.wpf.app.quickutil.helper.dp
-import com.wpf.app.quickutil.helper.matchLayoutParams
+import com.wpf.app.quickutil.helper.matchMarginLayoutParams
 import com.wpf.app.quickwork.ability.helper.text
-import com.wpf.app.quickwork.widget.QuickThemeDialog
+import com.wpf.app.quickwork.widget.theme.QuickThemeDialog
 
 class Test2Dialog(
     context: Context,
 ) : QuickThemeDialog(
     context,
     abilityList = contentView(layoutViewCreate = {
-            myLayout<LinearLayout>(layoutParams = matchLayoutParams()) {
+            myLayout<LinearLayout>(layoutParams = matchMarginLayoutParams()) {
             text(text = "Test2Dialog").gravity(Gravity.CENTER)
         }.background {
             rect(topLeftRadius = 12f.dp, topRightRadius = 12f.dp)

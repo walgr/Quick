@@ -27,17 +27,19 @@ android {
 }
 
 dependencies {
-    compileOnly deps.androidx.annotation
-    compileOnly deps.kotlin.kotlinxcoroutinescore
+    implementation deps.androidx.annotation
+    implementation deps.kotlin.kotlinxcoroutinescore
     //retrofit2-okhttp-gson
-    compileOnly deps.retrofit
-    compileOnly deps.okhttp
-    compileOnly deps.gson
+    api deps.retrofit
+    api deps.okhttp
+    api deps.gson
 
     if (IS_REMOTE.toBoolean()) {
+        api deps.quickbind.annotations
         api deps.quickbind.base
         api deps.quickbind.util
     } else {
+        api project(":Quick-annotations")
         api project(":QuickBase")
         api project(":QuickUtil")
     }

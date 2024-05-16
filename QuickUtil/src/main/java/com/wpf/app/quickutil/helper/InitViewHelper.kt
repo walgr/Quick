@@ -2,6 +2,7 @@ package com.wpf.app.quickutil.helper
 
 import android.content.Context
 import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 
 object InitViewHelper {
@@ -12,5 +13,9 @@ object InitViewHelper {
         layoutViewCreate: (Context.() -> View)? = null,
     ): View {
         return layoutViewCreate?.invoke(context) ?: layoutView ?: layoutId.toView(context)
+    }
+
+    inline fun <reified T: ViewGroup> newInstance(context: Context): T {
+        return T::class.java.getConstructor(Context::class.java).newInstance(context)
     }
 }
