@@ -4,14 +4,12 @@ import android.content.Context
 import androidx.annotation.StyleRes
 import com.wpf.app.base.ability.base.QuickAbility
 import com.wpf.app.quick.ability.QuickDialog
-import com.wpf.app.quickwork.widget.theme.QuickDialogThemeBase
-import com.wpf.app.quickwork.widget.theme.QuickDialogThemeI
 
 open class QuickThemeDialog @JvmOverloads constructor(
     context: Context,
     @StyleRes themeId: Int = 0,
     theme: QuickDialogThemeI? = null,
-    abilityList: List<QuickAbility> = mutableListOf(),
+    abilityList: MutableList<QuickAbility> = mutableListOf(),
 ) : QuickDialog(
     context, themeId, abilityList
 ), QuickDialogThemeBase {
