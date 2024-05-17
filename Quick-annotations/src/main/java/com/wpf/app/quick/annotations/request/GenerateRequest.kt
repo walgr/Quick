@@ -4,5 +4,7 @@ package com.wpf.app.quick.annotations.request
 @Retention(AnnotationRetention.RUNTIME)
 annotation class GenerateRequest(
     val fileName: String,
-    val funName: String = "request"
+    val funName: String = "request",
+    val registerService: Boolean = true,
+    val baseUrl: String = "",
 )

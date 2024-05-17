@@ -26,6 +26,7 @@ fun <Self : QuickView, T : ViewGroup> createContentViewScope(context: Self, view
         override val self: Self = context
     }
 
+@Suppress("DEPRECATION")
 fun contentView(
     @LayoutRes layoutId: Int = 0,
     layoutView: View? = null,
@@ -44,16 +45,17 @@ inline fun <reified T : ViewGroup> contentView(
     return contentViewWithSelf<QuickView, T>(layoutParams = layoutParams, builder = builder)
 }
 
-inline fun <reified Self : QuickView> contentViewWithSelf(
-    @LayoutRes layoutId: Int = 0,
-    layoutView: View? = null,
-    noinline layoutViewCreate: (ContextScope.() -> View)? = null,
-    layoutParams: LayoutParams = matchMarginLayoutParams(),
-    noinline builder: (ContentViewScope<Self, ViewGroup>.() -> Unit)? = null,
-): MutableList<QuickAbility> {
-    return contentViewWithSelf<Self, ViewGroup>(layoutId, layoutView, layoutViewCreate, layoutParams, builder)
-}
+//inline fun <reified Self : QuickView> contentViewWithSelf(
+//    @LayoutRes layoutId: Int = 0,
+//    layoutView: View? = null,
+//    noinline layoutViewCreate: (ContextScope.() -> View)? = null,
+//    layoutParams: LayoutParams = matchMarginLayoutParams(),
+//    noinline builder: (ContentViewScope<Self, ViewGroup>.() -> Unit)? = null,
+//): MutableList<QuickAbility> {
+//    return contentViewWithSelf<Self, ViewGroup>(layoutId, layoutView, layoutViewCreate, layoutParams, builder)
+//}
 
+@Suppress("DEPRECATION")
 inline fun <reified Self : QuickView, reified T : ViewGroup> contentViewWithSelf(
     @LayoutRes layoutId: Int = 0,
     layoutView: View? = null,

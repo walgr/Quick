@@ -20,7 +20,7 @@ class GenerateRequestProcessor(environment: SymbolProcessorEnvironment) :
         classDeclaration: KSClassDeclaration,
         data: Unit,
         packageName: String,
-        className: String
+        className: String,
     ) {
         super.visitClassDeclaration(classDeclaration, data, packageName, className)
         val generateRequestAnn = classDeclaration.annotations.find {
@@ -28,12 +28,15 @@ class GenerateRequestProcessor(environment: SymbolProcessorEnvironment) :
         } ?: return
         val fileName = generateRequestAnn.arguments.getOrNull(0)?.value as? String
         val funName = generateRequestAnn.arguments.getOrNull(1)?.value as String
+        val registerService = generateRequestAnn.arguments.getOrNull(2)?.value as Boolean
+        val baseUrl = generateRequestAnn.arguments.getOrNull(3)?.value as String
         outFileName = fileName
         val dataType = TypeVariableName("Data")
         val failType = TypeVariableName("Fail")
         val api = ClassName(packageName, className)
         val baseRequest = ClassName("com.wpf.app.quicknetwork.base", "BaseRequest")
-        val retrofitCreateHelper = ClassName("com.wpf.app.quicknetwork.helper", "RetrofitCreateHelper")
+        val retrofitCreateHelper =
+            ClassName("com.wpf.app.quicknetwork.helper", "RetrofitCreateHelper")
         val wpfRequest = ClassName("com.wpf.app.quicknetwork.base", "WpfRequest")
         val realCall = ClassName("com.wpf.app.quicknetwork.call", "RealCall")
         val requestCoroutineScope =
@@ -52,7 +55,24 @@ class GenerateRequestProcessor(environment: SymbolProcessorEnvironment) :
                 ).build()
             ).returns(
                 baseRequest.parameterizedBy(dataType, failType)
-            ).addCode(CodeBlock.of("return %T.getService<%T>().run(run).enqueue(%T(context))", retrofitCreateHelper, api, wpfRequest))
+            )
+        if (registerService) {
+            funBuilder?.addCode(
+                CodeBlock.of(
+                    "%T.registerServices(%T::class.java" + if (baseUrl.isNotEmpty()) ", ${baseUrl})" else ")" + "\n",
+                    retrofitCreateHelper,
+                    api
+                )
+            )
+        }
+        funBuilder?.addCode(
+            CodeBlock.of(
+                "return %T.getService<%T>().run(run).enqueue(%T(context))",
+                retrofitCreateHelper,
+                api,
+                wpfRequest
+            )
+        )
     }
 
     override fun visitEnd() {

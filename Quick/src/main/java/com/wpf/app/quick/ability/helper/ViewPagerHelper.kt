@@ -1,6 +1,7 @@
 package com.wpf.app.quick.ability.helper
 
 import android.content.Context
+import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
@@ -46,6 +47,7 @@ inline fun <reified F : Fragment> ViewGroupScope<out ViewGroup>.viewPager(
     defaultSize: Int = 1,
     limit: Int = 0,
     isLoop: Boolean = false,
+    noinline fragmentDataInit: ((Int) -> Bundle)? = null,
     noinline builder: (QuickViewPager.() -> Unit)? = null,
 ): QuickViewPager {
     val viewPager = QuickViewPager(context)
@@ -54,11 +56,15 @@ inline fun <reified F : Fragment> ViewGroupScope<out ViewGroup>.viewPager(
     if (withState && !isLoop) {
         viewPager.adapter =
             FragmentsStateAdapter(quickView.getFragmentManager()) {
-                getFragment(
+                val fragment = getFragment(
                     quickView,
                     F::class.java.getDeclaredConstructor().newInstance().forceTo(),
                     it
-                ).forceTo()
+                ).forceTo<Fragment>()
+                fragmentDataInit?.apply {
+                    fragment.arguments = fragmentDataInit.invoke(it)
+                }
+                fragment
             }.apply {
                 setPageSize(defaultSize)
             }
@@ -66,11 +72,15 @@ inline fun <reified F : Fragment> ViewGroupScope<out ViewGroup>.viewPager(
         viewPager.adapter = FragmentsAdapter(quickView.getFragmentManager()) {
             val realPos =
                 if (isLoop) (abs(defaultSize + (it - defaultPos) % defaultSize) % defaultSize) else it
-            getFragment(
+            val fragment = getFragment(
                 context,
                 F::class.java.getDeclaredConstructor().newInstance().forceTo(),
                 realPos
-            ).forceTo()
+            ).forceTo<Fragment>()
+            fragmentDataInit?.apply {
+                fragment.arguments = fragmentDataInit.invoke(it)
+            }
+            fragment
         }.apply {
             setPageSize(if (isLoop) Int.MAX_VALUE else defaultSize)
             if (isLoop) {

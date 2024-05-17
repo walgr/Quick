@@ -7,5 +7,5 @@ import android.view.View
  *
  */
 interface QuickAdapterListener<T> {
-    fun onItemClick(view: View?, data: T?, position: Int)
+    fun onItemClick(view: View, data: T?, position: Int)
 }

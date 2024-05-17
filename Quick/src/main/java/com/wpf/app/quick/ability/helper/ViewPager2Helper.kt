@@ -1,5 +1,6 @@
 package com.wpf.app.quick.ability.helper
 
+import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
@@ -48,6 +49,7 @@ inline fun <reified F : Fragment> ViewGroupScope<out ViewGroup>.viewPager2(
     defaultSize: Int = 1,
     limit: Int = 0,
     isLoop: Boolean = false,
+    noinline fragmentDataInit: ((Int) -> Bundle)? = null,
     noinline builder: (ViewPager2.() -> Unit)? = null,
 ): ViewPager2 {
     val viewPager2 = ViewPager2(context)
@@ -57,11 +59,15 @@ inline fun <reified F : Fragment> ViewGroupScope<out ViewGroup>.viewPager2(
         Fragments2StateAdapter(quickView.getFragmentManager(), quickView.getLifecycle()) {
             val realPos =
                 if (isLoop) (abs(defaultSize + (it - defaultPos) % defaultSize) % defaultSize) else it
-            getFragment(
+            val fragment = getFragment(
                 quickView,
                 F::class.java.getDeclaredConstructor().newInstance().forceTo(),
                 realPos
-            ).forceTo()
+            ).forceTo<Fragment>()
+            fragmentDataInit?.apply {
+                fragment.arguments = fragmentDataInit.invoke(it)
+            }
+            fragment
         }.apply {
             setPageSize(if (isLoop) Int.MAX_VALUE else defaultSize)
             if (isLoop) {

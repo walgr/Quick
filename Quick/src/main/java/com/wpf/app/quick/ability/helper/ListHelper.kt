@@ -9,7 +9,6 @@ import com.wpf.app.quickrecyclerview.QuickRecyclerView
 import com.wpf.app.quickrecyclerview.QuickRefreshRecyclerView
 import com.wpf.app.quickrecyclerview.data.QuickItemData
 import com.wpf.app.quickrecyclerview.utils.SpaceType
-import com.wpf.app.quickutil.other.forceTo
 
 fun ViewGroupScope<out ViewGroup>.list(
     layoutParams: ViewGroup.LayoutParams = smartLayoutParams(),
@@ -21,7 +20,7 @@ fun ViewGroupScope<out ViewGroup>.list(
     dataList: List<QuickItemData>? = null,
     builder: (QuickRecyclerView.() -> Unit)? = null,
 ): QuickRecyclerView {
-    val list = QuickRefreshRecyclerView(context).apply {
+    val list = QuickRecyclerView(context).apply {
         id = R.id.quickList
         space?.let {
             setSpace(it, spaceType, includeFirst, includeLast)
@@ -46,14 +45,17 @@ fun ViewGroupScope<out ViewGroup>.refreshList(
     dataList: List<QuickItemData>? = null,
     builder: (QuickRecyclerView.() -> Unit)? = null,
 ): QuickRefreshRecyclerView {
-    return list(
-        layoutParams,
-        layoutManager,
-        space,
-        spaceType,
-        includeFirst,
-        includeLast,
-        dataList,
-        builder
-    ).forceTo()
+    val list = QuickRefreshRecyclerView(context).apply {
+        id = R.id.quickList
+        space?.let {
+            setSpace(it, spaceType, includeFirst, includeLast)
+        }
+        this.layoutManager = layoutManager
+        dataList?.let {
+            setData(it.toMutableList())
+        }
+        builder?.invoke(this)
+    }
+    addView(list, layoutParams)
+    return list
 }

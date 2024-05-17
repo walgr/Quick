@@ -30,7 +30,7 @@ inline fun <reified Self : QuickView, reified VM : QuickVBModel<out Self, VB>, r
     private var viewModel: VM? = null
     private var viewBinding: VB? = null
 
-    override fun afterGenerateContentView(owner: LifecycleOwner, view: View) {
+    override fun afterGenerateContentView(owner: QuickView, view: View) {
         super.afterGenerateContentView(owner, view)
         val viewModelCls = VM::class.java
         val context = owner.forceTo<QuickView>()
@@ -103,7 +103,7 @@ inline fun <reified Self : QuickView, reified VB : ViewDataBinding> bindingAndSe
 ): MutableList<QuickAbility> = mutableListOf(object : QuickViewAbility {
     override fun getPrimeKey(): String = "binding"
     private var viewBinding: VB? = null
-    override fun afterGenerateContentView(owner: LifecycleOwner, view: View) {
+    override fun afterGenerateContentView(owner: QuickView, view: View) {
         super.afterGenerateContentView(owner, view)
         if (viewBinding == null && VB::class.java != ViewDataBinding::class.java) {
             viewBinding = DataBindingUtil.bind(view.findBinding()!!)

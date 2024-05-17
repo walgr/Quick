@@ -9,6 +9,7 @@ import androidx.annotation.ColorInt
 import com.wpf.app.base.ability.helper.addView
 import com.wpf.app.base.ability.scope.ContextScope
 import com.wpf.app.base.ability.scope.ViewGroupScope
+import com.wpf.app.quick.ability.ex.ContentViewScope
 import com.wpf.app.quickutil.helper.wrapMarginLayoutParams
 import com.wpf.app.quickwidget.shadow.ShadowTextView
 import com.wpf.app.quickwork.widget.theme.QuickTextTheme
@@ -111,6 +112,9 @@ fun ContextScope.text(
             this.textGravity = textGravity ?: this.textGravity
         })
     textView.text = text
+    if (this is ContentViewScope<*, out ViewGroup>) {
+
+    }
     builder?.invoke(textView)
     addView(textView, layoutParams)
     return textView

@@ -8,7 +8,6 @@ import com.wpf.app.quickrecyclerview.data.QuickAbilityData
 import com.wpf.app.quickrecyclerview.data.QuickItemData
 import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
 
-
 fun <T : QuickAbilityData> click(
     @IdRes viewId: Int = 0,
     func: T.(View) -> Unit
@@ -37,6 +36,12 @@ fun <T : QuickAbilityData> click(
                 }
             }
         })
+}
+
+fun adapterClick(): MutableList<QuickAbility>  {
+    return click<QuickAbilityData> {
+        getAdapter()?.getQuickAdapterListener()?.onItemClick(it, this, getViewPos())
+    }
 }
 
 fun <T : QuickAbilityData> longClick(

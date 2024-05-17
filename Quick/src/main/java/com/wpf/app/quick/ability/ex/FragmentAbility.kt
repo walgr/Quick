@@ -12,6 +12,7 @@ import com.wpf.app.quick.R
 import com.wpf.app.quickutil.helper.matchMarginLayoutParams
 import com.wpf.app.quickutil.other.forceTo
 
+@Suppress("DEPRECATION")
 fun <T : Fragment> fragment(
     fragment: T,
     builder: (T.() -> Unit)? = null

@@ -18,7 +18,7 @@ inline fun <reified VM : QuickViewModel<out QuickView>> viewModel(
     private var viewModel: VM? = null
     override fun getViewModel() = viewModel
 
-    override fun afterGenerateContentView(owner: LifecycleOwner, view: View) {
+    override fun afterGenerateContentView(owner: QuickView, view: View) {
         super.afterGenerateContentView(owner, view)
         val viewModelCls = VM::class.java
         val activity = owner.forceTo<Activity>()

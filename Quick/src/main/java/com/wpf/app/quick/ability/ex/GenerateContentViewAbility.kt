@@ -3,7 +3,6 @@ package com.wpf.app.quick.ability.ex
 import android.content.Context
 import android.view.View
 import androidx.annotation.LayoutRes
-import androidx.lifecycle.LifecycleOwner
 import com.wpf.app.base.QuickView
 import com.wpf.app.base.ability.base.QuickAbility
 import com.wpf.app.base.ability.base.QuickInflateViewAbility
@@ -58,11 +57,11 @@ fun generateContentView(
             return viewCreateConvert(layoutViewCreate)
         }
 
-        override fun generateContentView(owner: LifecycleOwner, view: View): View {
+        override fun generateContentView(owner: QuickView, view: View): View {
             return generateContentView?.invoke(createQuickViewScope(owner.forceTo()), view) ?: view
         }
 
-        override fun initView(owner: LifecycleOwner, view: View) {
+        override fun initView(owner: QuickView, view: View) {
             super.initView(owner, view)
             builder?.invoke(createQuickViewScope(owner.forceTo()), view)
         }

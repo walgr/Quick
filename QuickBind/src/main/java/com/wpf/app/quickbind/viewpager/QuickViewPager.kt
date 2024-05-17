@@ -3,9 +3,11 @@ package com.wpf.app.quickbind.viewpager
 import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
+import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.wpf.app.quickbind.R
 import com.wpf.app.quickutil.helper.attribute.AutoGetAttributeHelper
+import com.wpf.app.quickutil.other.forceTo
 
 /**
  * Created by 王朋飞 on 2022/7/12.
@@ -42,4 +44,9 @@ open class QuickViewPager @JvmOverloads constructor(
     internal class QuickViewPagerAttr(
         val canScroll: Boolean = true
     )
+}
+
+fun QuickViewPager.notifyPagerSize(size: Int) {
+    adapter?.forceTo<ViewPagerSize>()?.setPageSize(size)
+    adapter?.forceTo<PagerAdapter>()?.notifyDataSetChanged()
 }

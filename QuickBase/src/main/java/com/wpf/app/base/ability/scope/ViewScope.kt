@@ -2,7 +2,6 @@ package com.wpf.app.base.ability.scope
 
 import android.content.Context
 import android.view.View
-import android.view.ViewGroup
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.InvocationKind
 import kotlin.contracts.contract
@@ -17,7 +16,7 @@ interface ViewScope<T: View>: ContextScope {
     }
 }
 
-fun <T : ViewGroup, R> T.withViewScope(block: ViewScope<T>.() -> R) : R {
+fun <T : View, R> T.withViewScope(block: ViewScope<T>.() -> R) : R {
     return block(createViewScope(this))
 }
 

@@ -2,15 +2,18 @@ package com.wpf.app.quickrecyclerview
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.wpf.app.quickrecyclerview.data.QuickFooterData
 import com.wpf.app.quickrecyclerview.data.QuickHeaderData
+import com.wpf.app.quickrecyclerview.data.QuickItemData
 import com.wpf.app.quickrecyclerview.helper.toFooterViewData
 import com.wpf.app.quickrecyclerview.helper.toHeaderViewData
 import com.wpf.app.quickrecyclerview.helper.toViewData
 import com.wpf.app.quickrecyclerview.listeners.DataAdapter
+import com.wpf.app.quickrecyclerview.listeners.QuickAdapterListener
 import com.wpf.app.quickrecyclerview.utils.SpaceItemDecoration
 import com.wpf.app.quickrecyclerview.utils.SpaceType
 import com.wpf.app.quickrecyclerview.widget.QuickFooterShadow
@@ -36,6 +39,8 @@ open class QuickRecyclerView @JvmOverloads constructor(
 
     init {
         this.initView()
+        mQuickAdapter.setRecyclerView(this)
+        adapter = mQuickAdapter
         dealAttrs()
     }
 
@@ -43,7 +48,10 @@ open class QuickRecyclerView @JvmOverloads constructor(
         if (layoutManager == null) {
             layoutManager = LinearLayoutManager(context)
         }
+    }
 
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
         if (layoutManager is GridLayoutManager) {
             layoutManager?.asTo<GridLayoutManager>()?.apply {
                 spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
@@ -68,8 +76,6 @@ open class QuickRecyclerView @JvmOverloads constructor(
                 }
             }
         }
-        mQuickAdapter.setRecyclerView(this)
-        adapter = mQuickAdapter
     }
 
     private fun dealAttrs() {
@@ -131,4 +137,12 @@ open class QuickRecyclerView @JvmOverloads constructor(
         val includeFirst: Boolean = false,
         val includeLast: Boolean = false,
     )
+}
+
+fun <T: QuickItemData> QuickRecyclerView.itemClick(click: (view: View, data: T?, position: Int) -> Unit) {
+    getQuickAdapter().setQuickAdapterListener(object : QuickAdapterListener<T> {
+        override fun onItemClick(view: View, data: T?, position: Int) {
+            click.invoke(view, data, position)
+        }
+    })
 }

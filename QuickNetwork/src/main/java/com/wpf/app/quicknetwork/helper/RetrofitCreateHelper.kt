@@ -7,7 +7,7 @@ import retrofit2.Retrofit
 
 /**
  * Created by 王朋飞 on 2022/7/21.
- *
+ * ksp使用此类，修改代码需要考虑GenerateRequestProcessor逻辑
  */
 object RetrofitCreateHelper {
 
@@ -18,9 +18,20 @@ object RetrofitCreateHelper {
     /**
      * 存储已经初始化过的Retrofit
      */
-    fun putInitedRetrofit(baseUrl: String, serviceCls: Class<*>, retrofit: Retrofit) {
+    fun putInitRetrofit(baseUrl: String, serviceCls: Class<*>, retrofit: Retrofit) {
         retrofitMap[baseUrl] = retrofit
         retrofitServiceMap[serviceCls] = retrofit
+    }
+
+    fun registerServices(baseUrl: String, serviceCls: Class<*>) {
+        if (retrofitServiceMap[serviceCls] != retrofitMap[baseUrl]!!) {
+            retrofitServiceMap[serviceCls] = retrofitMap[baseUrl]!!
+            createService(serviceCls)
+        }
+    }
+
+    fun registerServices(serviceCls: Class<*>) {
+        registerServices(retrofitMap.keys.first(), serviceCls)
     }
 
     fun putInitService(serviceCls: Class<*>, service: Any) {
@@ -38,7 +49,7 @@ object RetrofitCreateHelper {
         callFactoryList: List<CallAdapter.Factory>? = null,
         converterFactoryList: List<Converter.Factory>? = null,
         okHttp: OkHttpClient = OkHttpCreateHelper.newInstance(),
-        init: (Retrofit.Builder.() -> Unit)? = null
+        init: (Retrofit.Builder.() -> Unit)? = null,
     ): Retrofit {
         var retrofit = retrofitMap[baseUrl]
         if (retrofit == null) {
