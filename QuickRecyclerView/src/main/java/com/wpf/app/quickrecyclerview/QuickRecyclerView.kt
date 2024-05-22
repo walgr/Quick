@@ -45,7 +45,9 @@ open class QuickRecyclerView @JvmOverloads constructor(
     }
 
     open fun initView() {
-        layoutManager = LinearLayoutManager(context)
+        if (layoutManager == null) {
+            layoutManager = LinearLayoutManager(context)
+        }
     }
 
     override fun onAttachedToWindow() {
