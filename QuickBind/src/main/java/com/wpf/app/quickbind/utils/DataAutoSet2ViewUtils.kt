@@ -14,6 +14,10 @@ object DataAutoSet2ViewUtils {
 
     private var bind2ViewList: MutableList<BindD2VHelper<View, Any>> = arrayListOf()
 
+    fun appendViewSet(helper: BindD2VHelper<View, Any>) {
+        bind2ViewList.add(helper)
+    }
+
     fun <T: Any> autoSet(data: T, view: View) {
         setData2ViewGroup(view, data)
     }

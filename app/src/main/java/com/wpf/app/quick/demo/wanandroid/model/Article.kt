@@ -1,5 +1,6 @@
 package com.wpf.app.quick.demo.wanandroid.model
 
+import android.view.View
 import androidx.core.os.bundleOf
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.demo.wanandroid.WebViewActivity
@@ -11,7 +12,7 @@ open class Article : QuickClickData(R.layout.holder_refresh_item, autoSet = true
     val title: String? = null
     val link: String? = null
 
-    override fun onClick() {
+    override fun onClick(view: View) {
         getContext()?.startActivity(WebViewActivity::class.java, bundleOf("url" to link, "title" to title))
     }
 }

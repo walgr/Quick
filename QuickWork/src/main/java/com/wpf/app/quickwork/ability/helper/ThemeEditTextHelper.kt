@@ -4,32 +4,33 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.text.TextUtils
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.EditText
 import androidx.annotation.ColorInt
 import com.wpf.app.base.ability.helper.addView
 import com.wpf.app.base.ability.scope.ContextScope
 import com.wpf.app.base.ability.scope.ViewGroupScope
 import com.wpf.app.quickutil.helper.wrapMarginLayoutParams
-import com.wpf.app.quickwidget.shadow.ShadowTextView
-import com.wpf.app.quickwork.widget.theme.QuickTextTheme
-import com.wpf.app.quickwork.widget.theme.QuickTextThemeBase
+import com.wpf.app.quickwidget.shadow.ShadowEditView
+import com.wpf.app.quickwork.widget.theme.QuickEditTheme
+import com.wpf.app.quickwork.widget.theme.QuickEditThemeBase
+import com.wpf.app.quickwork.widget.theme.QuickEditThemeI
 import com.wpf.app.quickwork.widget.theme.QuickTextThemeI
-import com.wpf.app.quickwork.widget.theme.QuickThemeTextView
+import com.wpf.app.quickwork.widget.theme.QuickThemeEditView
 
-fun TextView.setTheme(
-    theme: QuickTextThemeI,
+fun EditText.setTheme(
+    theme: QuickEditThemeI,
 ) {
-    object : QuickTextThemeBase {
-        override val textView: TextView = this@setTheme
+    object : QuickEditThemeBase {
+        override val editText: EditText = this@setTheme
         override var curTheme: QuickTextThemeI? = theme
     }.setTheme(theme)
 }
 
-fun ViewGroupScope<out ViewGroup>.shadowText(
+fun ViewGroupScope<out ViewGroup>.shadowEdit(
     layoutParams: ViewGroup.LayoutParams = wrapMarginLayoutParams(),
     background: Drawable? = null,
-    text: CharSequence,
-    theme: QuickTextThemeI? = null,
+    hint: String? = null,
+    theme: QuickEditThemeI? = null,
     @ColorInt textColor: Int? = null,
     @ColorInt hintTextColor: Int? = null,
     textSize: Float? = null,                  //单位px
@@ -43,12 +44,13 @@ fun ViewGroupScope<out ViewGroup>.shadowText(
     maxWidth: Int? = null,
     includeFontPadding: Boolean? = null,
     textGravity: Int? = null,
-    builder: (ShadowTextView.() -> Unit)? = null,
-): ShadowTextView {
+    builder: (ShadowEditView.() -> Unit)? = null,
+): ShadowEditView {
     val mContext: Context = context
-    val curTheme = (theme ?: QuickTextThemeBase.defaultTheme ?: QuickTextTheme()).apply {
+    val curTheme = (theme ?: QuickEditThemeBase.defaultTheme ?: QuickEditTheme()).apply {
         this.background = background ?: this.background
         this.textColor = textColor ?: this.textColor
+        this.hint = hint ?: this.hint
         this.hintTextColor = hintTextColor ?: this.hintTextColor
         this.textSize = textSize ?: this.textSize
         this.ellipsize = ellipsize ?: this.ellipsize
@@ -62,8 +64,7 @@ fun ViewGroupScope<out ViewGroup>.shadowText(
         this.includeFontPadding = includeFontPadding ?: this.includeFontPadding
         this.textGravity = textGravity ?: this.textGravity
     }
-    val textView = ShadowTextView(mContext)
-    textView.text = text
+    val textView = ShadowEditView(mContext)
     textView.setTheme(curTheme)
     builder?.invoke(textView)
     addView(textView, layoutParams)
@@ -71,12 +72,12 @@ fun ViewGroupScope<out ViewGroup>.shadowText(
 }
 
 
-fun ContextScope.text(
+fun ContextScope.edit(
     layoutParams: ViewGroup.LayoutParams = wrapMarginLayoutParams(),
     background: Drawable? = null,
-    text: CharSequence,
-    theme: QuickTextThemeI? = null,
+    theme: QuickEditThemeI? = null,
     @ColorInt textColor: Int? = null,
+    hint: String? = null,
     @ColorInt hintTextColor: Int? = null,
     textSize: Float? = null,                  //单位px
     ellipsize: TextUtils.TruncateAt? = null,
@@ -89,14 +90,15 @@ fun ContextScope.text(
     maxWidth: Int? = null,
     includeFontPadding: Boolean? = null,
     textGravity: Int? = null,
-    builder: (QuickThemeTextView.() -> Unit)? = null,
-): QuickThemeTextView {
+    builder: (QuickThemeEditView.() -> Unit)? = null,
+): QuickThemeEditView {
     val mContext: Context = context
-    val textView = QuickThemeTextView(
+    val view = QuickThemeEditView(
         mContext,
-        theme = (theme ?: QuickTextThemeBase.defaultTheme ?: QuickTextTheme()).apply {
+        theme = (theme ?: QuickEditThemeBase.defaultTheme ?: QuickEditTheme()).apply {
             this.background = background ?: this.background
             this.textColor = textColor ?: this.textColor
+            this.hint = hint ?: this.hint
             this.hintTextColor = hintTextColor ?: this.hintTextColor
             this.textSize = textSize ?: this.textSize
             this.ellipsize = ellipsize ?: this.ellipsize
@@ -109,9 +111,9 @@ fun ContextScope.text(
             this.maxWidth = maxWidth ?: this.maxWidth
             this.includeFontPadding = includeFontPadding ?: this.includeFontPadding
             this.textGravity = textGravity ?: this.textGravity
-        })
-    textView.text = text
-    builder?.invoke(textView)
-    addView(textView, layoutParams)
-    return textView
+        }
+    )
+    builder?.invoke(view)
+    addView(view, layoutParams)
+    return view
 }

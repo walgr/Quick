@@ -5,12 +5,15 @@ import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.GradientDrawable.Orientation
 import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.appcompat.graphics.drawable.StateListDrawableCompat
 import com.wpf.app.base.NO_SET
 import com.wpf.app.base.NO_SET_F
+import com.wpf.app.base.QuickView
 import com.wpf.app.base.ability.scope.ViewScope
+import com.wpf.app.quick.ability.ex.ContentViewScope
 import com.wpf.app.quickutil.helper.toColor
 import com.wpf.app.quickutil.other.forceTo
 
@@ -90,6 +93,42 @@ fun createDrawable(
     }
 }
 
+fun ContentViewScope<out QuickView, out ViewGroup>.background(
+    shape: Int = GradientDrawable.RECTANGLE,
+    @ColorInt color: Int = android.R.color.white.toColor(),
+    colorStateList: ColorStateList? = null,
+    orientation: Orientation = Orientation.LEFT_RIGHT,
+    centerX: Float = 0.5f,
+    centerY: Float = 0.5f,
+    @ColorInt gradientColors: IntArray? = null,
+    radius: Float = NO_SET_F,
+    topLeftRadius: Float = NO_SET_F,
+    topRightRadius: Float = NO_SET_F,
+    bottomRightRadius: Float = NO_SET_F,
+    bottomLeftRadius: Float = NO_SET_F,
+    @ColorInt borderColor: Int = NO_SET,
+    borderWidth: Int = 0,        //单位px
+): View {
+    return view.background {
+        background(
+            shape,
+            color,
+            colorStateList,
+            orientation,
+            centerX,
+            centerY,
+            gradientColors,
+            radius,
+            topLeftRadius,
+            topRightRadius,
+            bottomRightRadius,
+            bottomLeftRadius,
+            borderColor,
+            borderWidth
+        )
+    }
+}
+
 fun BackgroundScope.background(
     shape: Int = GradientDrawable.RECTANGLE,
     @ColorInt color: Int = android.R.color.white.toColor(),
@@ -125,6 +164,40 @@ fun BackgroundScope.background(
     return view
 }
 
+fun ContentViewScope<out QuickView, out ViewGroup>.rect(
+    @ColorInt color: Int = android.R.color.white.toColor(),
+    colorStateList: ColorStateList? = null,
+    orientation: Orientation = Orientation.LEFT_RIGHT,
+    centerX: Float = 0.5f,
+    centerY: Float = 0.5f,
+    @ColorInt gradientColors: IntArray? = null,
+    radius: Float = NO_SET_F,
+    topLeftRadius: Float = NO_SET_F,
+    topRightRadius: Float = NO_SET_F,
+    bottomRightRadius: Float = NO_SET_F,
+    bottomLeftRadius: Float = NO_SET_F,
+    @ColorInt borderColor: Int = NO_SET,
+    borderWidth: Int = 0,        //单位px
+): View {
+    return view.background {
+        rect(
+            color,
+            colorStateList,
+            orientation,
+            centerX,
+            centerY,
+            gradientColors,
+            radius,
+            topLeftRadius,
+            topRightRadius,
+            bottomRightRadius,
+            bottomLeftRadius,
+            borderColor,
+            borderWidth
+        )
+    }
+}
+
 fun BackgroundScope.rect(
     @ColorInt color: Int = android.R.color.white.toColor(),
     colorStateList: ColorStateList? = null,
@@ -158,6 +231,40 @@ fun BackgroundScope.rect(
     )
 }
 
+fun ContentViewScope<out QuickView, out ViewGroup>.oval(
+    @ColorInt color: Int = android.R.color.white.toColor(),
+    colorStateList: ColorStateList? = null,
+    orientation: Orientation = Orientation.LEFT_RIGHT,
+    centerX: Float = 0.5f,
+    centerY: Float = 0.5f,
+    @ColorInt gradientColors: IntArray? = null,
+    radius: Float = NO_SET_F,
+    topLeftRadius: Float = NO_SET_F,
+    topRightRadius: Float = NO_SET_F,
+    bottomRightRadius: Float = NO_SET_F,
+    bottomLeftRadius: Float = NO_SET_F,
+    @ColorInt borderColor: Int = NO_SET,
+    borderWidth: Int = 0,        //单位px
+): View {
+    return view.background {
+        oval(
+            color,
+            colorStateList,
+            orientation,
+            centerX,
+            centerY,
+            gradientColors,
+            radius,
+            topLeftRadius,
+            topRightRadius,
+            bottomRightRadius,
+            bottomLeftRadius,
+            borderColor,
+            borderWidth
+        )
+    }
+}
+
 fun BackgroundScope.oval(
     @ColorInt color: Int = android.R.color.white.toColor(),
     colorStateList: ColorStateList? = null,
@@ -186,6 +293,53 @@ fun BackgroundScope.oval(
         topRightRadius = topRightRadius,
         bottomRightRadius = bottomRightRadius,
         bottomLeftRadius = bottomLeftRadius,
+        borderColor = borderColor,
+        borderWidth = borderWidth,
+    )
+}
+
+fun ContentViewScope<out QuickView, out ViewGroup>.ring(
+    @ColorInt color: Int = android.R.color.white.toColor(),
+    colorStateList: ColorStateList? = null,
+    orientation: Orientation = Orientation.LEFT_RIGHT,
+    centerX: Float = 0.5f,
+    centerY: Float = 0.5f,
+    @ColorInt gradientColors: IntArray? = null,
+    @ColorInt borderColor: Int = NO_SET,
+    borderWidth: Int = 0,        //单位px
+): View {
+    return view.background {
+        ring(
+            color,
+            colorStateList,
+            orientation,
+            centerX,
+            centerY,
+            gradientColors,
+            borderColor,
+            borderWidth
+        )
+    }
+}
+
+fun BackgroundScope.ring(
+    @ColorInt color: Int = android.R.color.white.toColor(),
+    colorStateList: ColorStateList? = null,
+    orientation: Orientation = Orientation.LEFT_RIGHT,
+    centerX: Float = 0.5f,
+    centerY: Float = 0.5f,
+    @ColorInt gradientColors: IntArray? = null,
+    @ColorInt borderColor: Int = NO_SET,
+    borderWidth: Int = 0,        //单位px
+): View {
+    return background(
+        shape = GradientDrawable.RING,
+        color = color,
+        colorStateList = colorStateList,
+        orientation = orientation,
+        centerX = centerX,
+        centerY = centerY,
+        gradientColors = gradientColors,
         borderColor = borderColor,
         borderWidth = borderWidth,
     )

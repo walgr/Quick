@@ -1,6 +1,7 @@
 package com.wpf.app.quick.demo.model
 
 import android.annotation.SuppressLint
+import android.view.View
 import com.wpf.app.quick.annotations.bind.BindData2View
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quickbind.helper.binddatahelper.Select2CheckBox
@@ -61,8 +62,8 @@ class ParentTitleSelectItem(
     }
 
     private var isShowChild = true
-    override fun onClick() {
-        super.onClick()
+    override fun onClick(view: View) {
+        super.onClick(view)
         val positionStart = getViewPos() + 1
         if (isShowChild) {
             LogUtil.e("收缩${title}")

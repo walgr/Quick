@@ -26,8 +26,8 @@ abstract class QuickClickData @JvmOverloads constructor(
     @Transient
     @BindData2View(helper = ItemClick::class)
     var itemClick = itemClick {
-        onClick()
+        onClick(it)
     }
 
-    abstract fun onClick()
+    abstract fun onClick(view: View)
 }

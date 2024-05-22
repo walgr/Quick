@@ -45,9 +45,7 @@ open class QuickRecyclerView @JvmOverloads constructor(
     }
 
     open fun initView() {
-        if (layoutManager == null) {
-            layoutManager = LinearLayoutManager(context)
-        }
+        layoutManager = LinearLayoutManager(context)
     }
 
     override fun onAttachedToWindow() {
@@ -139,7 +137,7 @@ open class QuickRecyclerView @JvmOverloads constructor(
     )
 }
 
-fun <T: QuickItemData> QuickRecyclerView.itemClick(click: (view: View, data: T?, position: Int) -> Unit) {
+fun <T : QuickItemData> QuickRecyclerView.itemClick(click: (view: View, data: T?, position: Int) -> Unit) {
     getQuickAdapter().setQuickAdapterListener(object : QuickAdapterListener<T> {
         override fun onItemClick(view: View, data: T?, position: Int) {
             click.invoke(view, data, position)

@@ -15,8 +15,8 @@ open class QuickChildSelectData(
     @Transient open var isInOne: Boolean = false,
     isSuspension: Boolean = false,                 //View是否悬浮置顶
     @Transient open var parent: QuickParentSelectData? = null,
-    @Transient open var childList: MutableList<out QuickChildSelectData>? = null,
-    @Transient open val onChildClick: RunItemClickWithSelf<out QuickChildSelectData>? = null,
+    @Transient open var childList: MutableList<QuickChildSelectData>? = null,
+    @Transient open val onChildClick: RunItemClickWithSelf<QuickChildSelectData>? = null,
     id: String? = null,
     name: String? = null,
     defaultSelect: Boolean = false,
@@ -53,7 +53,7 @@ open class QuickChildSelectData(
         return childList?.filter { it.isSelect }
     }
 
-    override fun onClick() {
+    override fun onClick(view: View) {
         onItemClick()
         if (this is QuickParentSelectData) {
             if (!canClick) {
@@ -69,7 +69,7 @@ open class QuickChildSelectData(
         }
     }
 
-    open fun onItemClick() {
+    internal open fun onItemClick() {
 
     }
 

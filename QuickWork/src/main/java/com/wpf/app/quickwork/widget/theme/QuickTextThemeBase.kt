@@ -8,10 +8,8 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.widget.TextView
 import androidx.annotation.ColorInt
-import com.wpf.app.quickutil.helper.attribute.AutoGetAttributeHelper
 import com.wpf.app.quickutil.helper.dp
 import com.wpf.app.quickutil.helper.toColor
-import com.wpf.app.quickwork.R
 
 interface QuickTextThemeBase {
     val textView: TextView
@@ -19,12 +17,7 @@ interface QuickTextThemeBase {
     var curTheme: QuickTextThemeI?
 
     fun initTextTheme(context: Context, attrs: AttributeSet? = null, theme: QuickTextThemeI? = null) {
-        curTheme = AutoGetAttributeHelper.init(
-            context,
-            attrs,
-            R.styleable.QuickTheme,
-            (theme ?: defaultTheme ?: QuickTextTheme())
-        )
+        curTheme = theme ?: defaultTheme ?: QuickTextTheme()
         curTheme?.initDataByXml(context)
         setTheme(curTheme!!)
     }

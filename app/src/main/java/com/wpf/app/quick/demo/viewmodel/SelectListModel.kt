@@ -2,12 +2,13 @@ package com.wpf.app.quick.demo.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.wpf.app.quick.activity.viewmodel.QuickVBModel
+import com.wpf.app.quick.demo.SelectListTestActivity
 import com.wpf.app.quick.demo.databinding.ActivitySelectTestBinding
 import com.wpf.app.quick.demo.model.ParentSelectItem
 import com.wpf.app.quick.demo.model.SelectItem
 import com.wpf.app.quick.demo.model.SelectResultItem
-import com.wpf.app.quick.activity.viewmodel.QuickVBModel
-import com.wpf.app.quick.demo.SelectListTestActivity
+import com.wpf.app.quickutil.other.forceTo
 import com.wpf.app.quickwidget.selectview.data.QuickChildSelectData
 import com.wpf.app.quickwidget.selectview.listeners.OnSelectCallback
 
@@ -52,7 +53,7 @@ class SelectListModel : QuickVBModel<SelectListTestActivity, ActivitySelectTestB
                     name = "子"
                 })
             }
-            parentItem.childList = childList
+            parentItem.childList = childList.forceTo()
         }
         getViewBinding().selectList.setData(allData, true)
     }

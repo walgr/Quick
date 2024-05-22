@@ -23,6 +23,8 @@ object ShadowLiveFactory {
             40 to isSelectLiveData,
             80 to checkedLiveData,
             100 to imageLiveData,
+            200 to hintLiveData,
+            400 to hintTextColorLiveData,
         )
     }
     fun addCustomData(liveData: Pair<Int, ShadowData<out Any>>) {
@@ -131,6 +133,39 @@ object ShadowLiveFactory {
                 override fun invoke(p1: ShadowView) {
                     p1.getLiveData<ColorStateList>(textColorStateListLiveDataKey)
                         ?.nullSet(p1.getTextColorStateList())
+                }
+            })
+
+    private const val hintLiveDataKey = "hint"
+    val hintLiveData: ShadowData<CharSequence> = Quadruple(
+        hintLiveDataKey, { MutableLiveData<CharSequence>() },
+        object : ((Context, ShadowView) -> Unit) {
+            override fun invoke(context: Context, shadowView: ShadowView) {
+                shadowView.getLiveData<CharSequence>(hintLiveDataKey)
+                    ?.observe(context as LifecycleOwner) {
+                        shadowView.setText(it, TextView.BufferType.NORMAL)
+                    }
+            }
+        }, object : (ShadowView) -> Unit {
+            override fun invoke(p1: ShadowView) {
+                p1.getLiveData<CharSequence>(hintLiveDataKey)?.nullSet(p1.getText())
+            }
+        })
+
+    private const val hintTextColorLiveDataKey = "hintTextColor"
+    val hintTextColorLiveData: ShadowData<Int> =
+        Quadruple(
+            hintTextColorLiveDataKey, { MutableLiveData<Int>() },
+            object : ((Context, ShadowView) -> Unit) {
+                override fun invoke(context: Context, shadowView: ShadowView) {
+                    shadowView.getLiveData<Int>(hintTextColorLiveDataKey)
+                        ?.observe(context as LifecycleOwner) {
+                            shadowView.setTextColor(it)
+                        }
+                }
+            }, object : (ShadowView) -> Unit {
+                override fun invoke(p1: ShadowView) {
+                    p1.getLiveData<Int>(hintTextColorLiveDataKey)?.nullSet(p1.getTextColor())
                 }
             })
 

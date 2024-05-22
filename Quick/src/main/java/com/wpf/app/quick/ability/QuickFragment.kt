@@ -98,12 +98,12 @@ open class QuickFragment(
         }
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
-            it.onSaveInstanceState(outState)
-        }
-    }
+//    override fun onSaveInstanceState(outState: Bundle) {
+//        super.onSaveInstanceState(outState)
+//        abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
+//            it.onSaveInstanceState(outState)
+//        }
+//    }
 
     @Deprecated("Deprecated by Android")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

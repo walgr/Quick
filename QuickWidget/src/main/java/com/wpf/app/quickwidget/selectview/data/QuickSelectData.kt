@@ -31,7 +31,7 @@ open class QuickSelectData(
     isSuspension = isSuspension,
 ), Serializable {
 
-    override fun onClick() {
+    override fun onClick(view: View) {
 
     }
 

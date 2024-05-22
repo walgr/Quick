@@ -10,7 +10,7 @@ fun createStateColor(
     @ColorInt enabledColor: Int? = null,
 ): ColorStateList {
     return ColorStateList(
-        mutableListOf(intArrayOf()).apply {
+        mutableListOf<IntArray>().apply {
             if (selectedColor != null) {
                 add(intArrayOf(android.R.attr.state_selected))
             }
@@ -20,8 +20,9 @@ fun createStateColor(
             if (enabledColor != null) {
                 add(intArrayOf(android.R.attr.state_enabled))
             }
+            add(intArrayOf())
         }.toTypedArray(),
-        mutableListOf(defaultColor).apply {
+        mutableListOf<Int>().apply {
             if (selectedColor != null) {
                 add(selectedColor)
             }
@@ -31,6 +32,7 @@ fun createStateColor(
             if (enabledColor != null) {
                 add(enabledColor)
             }
+            add(defaultColor)
         }.toIntArray()
     )
 }

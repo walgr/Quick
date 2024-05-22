@@ -112,12 +112,12 @@ open class QuickActivity(
         }
     }
 
-    @CallSuper
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
-            it.onSaveInstanceState(outState)
-        }
-    }
+//    @CallSuper
+//    override fun onSaveInstanceState(outState: Bundle) {
+//        super.onSaveInstanceState(outState)
+//        abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
+//            it.onSaveInstanceState(outState)
+//        }
+//    }
 }
 

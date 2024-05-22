@@ -7,14 +7,14 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener
-import com.wpf.app.quickwidget.selectview.listeners.SetSelectChange
+import com.wpf.app.quickrecyclerview.utils.QuickStickyHelper
+import com.wpf.app.quickrecyclerview.utils.StickyItemDecoration
 import com.wpf.app.quickwidget.selectview.data.QuickChildSelectData
 import com.wpf.app.quickwidget.selectview.data.QuickParentSelectData
 import com.wpf.app.quickwidget.selectview.helper.ParentChildDataHelper
-import com.wpf.app.quickrecyclerview.utils.QuickStickyHelper
 import com.wpf.app.quickwidget.selectview.listeners.OnSelectCallback
 import com.wpf.app.quickwidget.selectview.listeners.OnSelectOnChange
-import com.wpf.app.quickrecyclerview.utils.StickyItemDecoration
+import com.wpf.app.quickwidget.selectview.listeners.SetSelectChange
 
 /**
  * Created by 王朋飞 on 2022/9/5.
@@ -29,7 +29,7 @@ open class QuickMultistageSelectView @JvmOverloads constructor(
 
     var mOnSelectCallback: OnSelectCallback? = null
 
-    private val selectViewList = mutableListOf<QuickSelectRecyclerView>()
+    val selectViewList = mutableListOf<QuickSelectRecyclerView>()
 
     init {
         initView()
@@ -74,7 +74,6 @@ open class QuickMultistageSelectView @JvmOverloads constructor(
             }
         })
         selectViewList[selectViewList.size - 1].addOnScrollListener(object : OnScrollListener() {
-
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 val selectAdapter: QuickSelectAdapter =
@@ -89,6 +88,7 @@ open class QuickMultistageSelectView @JvmOverloads constructor(
                         selectAdapter.parentSelectAdapter?.getDataPos(curTopData.parent) ?: -1
                     if (parentPos in 0 until parentDataSize) {
                         selectAdapter.parentSelectAdapter?.curClickData = curTopData.parent
+                        selectAdapter.parentSelectAdapter?.getRecyclerView()?.smoothScrollToPosition(parentPos)
                         selectAdapter.parentSelectAdapter?.notifyItemChange()
                     }
                 }

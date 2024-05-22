@@ -20,8 +20,8 @@ open class QuickParentSelectData(
     open var canClick: Boolean = false,
     isSuspension: Boolean = false,                 //父View是否悬浮置顶
     parent: QuickParentSelectData? = null,
-    childList: MutableList<out QuickChildSelectData>? = null,
-    onParentClick: RunItemClickWithSelf<out QuickParentSelectData>? = null,
+    childList: MutableList<QuickChildSelectData>? = null,
+    onParentClick: RunItemClickWithSelf<QuickParentSelectData>? = null,
     id: String? = null,
     name: String? = null,
     defaultSelect: Boolean = false,
@@ -54,7 +54,7 @@ open class QuickParentSelectData(
 ), Serializable {
 
     @SuppressLint("NotifyDataSetChanged")
-    override fun onItemClick() {
+    internal override fun onItemClick() {
         if (getView() != null) {
             if (getAdapter()?.curClickData != this) {
                 val oldClickPos = getAdapter()?.getDataPos(getAdapter()?.curClickData) ?: -1
@@ -88,6 +88,10 @@ open class QuickParentSelectData(
         }
     }
 
+    open fun getSelectChildList(): List<QuickChildSelectData>? {
+        return childList?.filter { it.isSelect }
+    }
+
     open fun onSelectChildChange(selectList: List<QuickChildSelectData>?) {
 
     }
@@ -102,7 +106,7 @@ open class QuickParentSelectData(
     override fun onBindViewHolder(
         adapter: QuickSelectAdapter,
         viewHolder: QuickViewHolder<QuickBindData>,
-        position: Int
+        position: Int,
     ) {
         super.onBindViewHolder(adapter, viewHolder, position)
         asTitleViewInChild()?.onBindViewHolder(adapter, viewHolder, position)

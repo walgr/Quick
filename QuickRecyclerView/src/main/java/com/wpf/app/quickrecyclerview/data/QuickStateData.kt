@@ -21,7 +21,7 @@ abstract class QuickStateData @JvmOverloads constructor(
     isSuspension = isSuspension
 ), Serializable {
 
-    override fun onClick() {
+    override fun onClick(view: View) {
         selected = !selected
         selectChange(selected)
     }

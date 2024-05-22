@@ -1,5 +1,6 @@
 package com.wpf.app.quickutil.helper
 
+import android.graphics.drawable.Drawable
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.View.OnLongClickListener
@@ -8,6 +9,7 @@ import android.view.ViewGroup.MarginLayoutParams
 import android.view.ViewParent
 import android.widget.LinearLayout
 import android.widget.LinearLayout.LayoutParams
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.setPadding
 import androidx.viewpager.widget.ViewPager
@@ -15,8 +17,8 @@ import com.wpf.app.quickutil.data.KV
 import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.other.forceTo
 
-fun <V: View> ViewGroup.getChild(isViewGroup: (View) -> Boolean): V? {
-    for(it in 0 until this.childCount) {
+fun <V : View> ViewGroup.getChild(isViewGroup: (View) -> Boolean): V? {
+    for (it in 0 until this.childCount) {
         val child = this.getChildAt(it)
         if (child is ViewGroup) {
             if (isViewGroup.invoke(child)) {
@@ -41,7 +43,7 @@ fun View.removeParent(): View {
     return this
 }
 
-fun <T : View>T.addToParent(parent: ViewParent): T {
+fun <T : View> T.addToParent(parent: ViewParent): T {
     parent.asTo<ViewGroup>()?.addView(this)
     return this
 }
@@ -90,7 +92,8 @@ fun View.getViewContext(): Any? {
     var viewParent: ViewParent? = parent ?: return null
     while (viewParent != null) {
         if (viewParent is ViewPager) {
-            val fragments = (viewParent.context as AppCompatActivity).supportFragmentManager.fragments
+            val fragments =
+                (viewParent.context as AppCompatActivity).supportFragmentManager.fragments
             fragments.forEach {
                 if (it.view?.findViewById<View>(id) == this) {
                     return it
@@ -103,7 +106,7 @@ fun View.getViewContext(): Any? {
     return null
 }
 
-fun <T: View> T.margin(margin: Int): T {
+fun <T : View> T.margin(margin: Int): T {
     layoutParams.forceTo<MarginLayoutParams>().marginStart = margin
     layoutParams.forceTo<MarginLayoutParams>().topMargin = margin
     layoutParams.forceTo<MarginLayoutParams>().marginEnd = margin
@@ -111,39 +114,39 @@ fun <T: View> T.margin(margin: Int): T {
     return this
 }
 
-fun <T: View> T.marginVertical(margin: Int): T {
+fun <T : View> T.marginVertical(margin: Int): T {
     layoutParams.forceTo<MarginLayoutParams>().topMargin = margin
     layoutParams.forceTo<MarginLayoutParams>().bottomMargin = margin
     return this
 }
 
-fun <T: View> T.marginHorizontal(margin: Int): T {
+fun <T : View> T.marginHorizontal(margin: Int): T {
     layoutParams.forceTo<MarginLayoutParams>().marginStart = margin
     layoutParams.forceTo<MarginLayoutParams>().marginEnd = margin
     return this
 }
 
-fun <T: View> T.marginEnd(margin: Int): T {
+fun <T : View> T.marginEnd(margin: Int): T {
     layoutParams.forceTo<MarginLayoutParams>().marginEnd = margin
     return this
 }
 
-fun <T: View> T.marginStart(margin: Int): T {
+fun <T : View> T.marginStart(margin: Int): T {
     layoutParams.forceTo<MarginLayoutParams>().marginStart = margin
     return this
 }
 
-fun <T: View> T.topMargin(margin: Int): T {
+fun <T : View> T.topMargin(margin: Int): T {
     layoutParams.forceTo<MarginLayoutParams>().topMargin = margin
     return this
 }
 
-fun <T: View> T.bottomMargin(margin: Int): T {
+fun <T : View> T.bottomMargin(margin: Int): T {
     layoutParams.forceTo<MarginLayoutParams>().bottomMargin = margin
     return this
 }
 
-fun <T: View> T.widget(widget: Float): T {
+fun <T : View> T.widget(widget: Float): T {
     parent()?.forceTo<LinearLayout>()?.let {
         if (it.orientation == LinearLayout.VERTICAL) {
             this@widget.layoutParams.height = 0
@@ -155,23 +158,56 @@ fun <T: View> T.widget(widget: Float): T {
     return this
 }
 
-fun <T: View> T.padding(size: Int): T {
+fun <T : View> T.padding(size: Int): T {
     this.setPadding(size)
     return this
 }
 
-fun <T: View> T.padding(start: Int = this.left, top: Int = this.top, end: Int = this.right, bottom: Int = this.bottom): T {
+fun <T : View> T.padding(
+    start: Int = this.left,
+    top: Int = this.top,
+    end: Int = this.right,
+    bottom: Int = this.bottom,
+): T {
     this.setPadding(start, top, end, bottom)
     return this
 }
 
-fun <T: View> T.paddingVertical(size: Int): T {
+fun <T : View> T.paddingVertical(size: Int): T {
     padding(top = size, bottom = size)
     return this
 }
 
-fun <T: View> T.paddingHorizontal(size: Int): T {
+fun <T : View> T.paddingHorizontal(size: Int): T {
     padding(start = size, end = size)
+    return this
+}
+
+fun <T : TextView> T.drawableStart(drawable: Drawable, padding: Int = 0): T {
+    drawable.setBounds(0, 0, drawable.intrinsicWidth, drawable.intrinsicHeight)
+    setCompoundDrawables(drawable, null, null, null)
+    compoundDrawablePadding = padding
+    return this
+}
+
+fun <T : TextView> T.drawableEnd(drawable: Drawable, padding: Int = 0): T {
+    drawable.setBounds(0, 0, drawable.intrinsicWidth, drawable.intrinsicHeight)
+    setCompoundDrawables(null, null, drawable, null)
+    compoundDrawablePadding = padding
+    return this
+}
+
+fun <T : TextView> T.drawableTop(drawable: Drawable, padding: Int = 0): T {
+    drawable.setBounds(0, 0, drawable.intrinsicWidth, drawable.intrinsicHeight)
+    setCompoundDrawables(null, drawable, null, null)
+    compoundDrawablePadding = padding
+    return this
+}
+
+fun <T : TextView> T.drawableBottom(drawable: Drawable, padding: Int = 0): T {
+    drawable.setBounds(0, 0, drawable.intrinsicWidth, drawable.intrinsicHeight)
+    setCompoundDrawables(null, null, null, drawable)
+    compoundDrawablePadding = padding
     return this
 }
 
