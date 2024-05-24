@@ -8,8 +8,9 @@ import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
-import com.wpf.app.base.QuickView
-import com.wpf.app.base.ability.scope.ViewGroupScope
+import com.wpf.app.base.Quick
+import com.wpf.app.base.ability.helper.addView
+import com.wpf.app.base.ability.scope.ContextScope
 import com.wpf.app.quick.R
 import com.wpf.app.quick.helper.getFragmentManager
 import com.wpf.app.quick.helper.toFragment
@@ -40,9 +41,9 @@ class FragmentGroup @JvmOverloads constructor(
     }
 }
 
-inline fun <reified F : Fragment> ViewGroupScope<out ViewGroup>.viewPager(
-    layoutParams: ViewGroup.LayoutParams = smartLayoutParams(),
-    quickView: QuickView,
+inline fun <reified F : Fragment> ContextScope.viewPager(
+    layoutParams: ViewGroup.LayoutParams = matchMarginLayoutParams(),
+    quick: Quick,
     withState: Boolean = true,
     defaultSize: Int = 1,
     limit: Int = 0,
@@ -55,9 +56,9 @@ inline fun <reified F : Fragment> ViewGroupScope<out ViewGroup>.viewPager(
     val defaultPos = if (isLoop) Int.MAX_VALUE / 2 else 0
     if (withState && !isLoop) {
         viewPager.adapter =
-            FragmentsStateAdapter(quickView.getFragmentManager()) {
+            FragmentsStateAdapter(quick.getFragmentManager()) {
                 val fragment = getFragment(
-                    quickView,
+                    quick,
                     F::class.java.getDeclaredConstructor().newInstance().forceTo(),
                     it
                 ).forceTo<Fragment>()
@@ -69,7 +70,7 @@ inline fun <reified F : Fragment> ViewGroupScope<out ViewGroup>.viewPager(
                 setPageSize(defaultSize)
             }
     } else {
-        viewPager.adapter = FragmentsAdapter(quickView.getFragmentManager()) {
+        viewPager.adapter = FragmentsAdapter(quick.getFragmentManager()) {
             val realPos =
                 if (isLoop) (abs(defaultSize + (it - defaultPos) % defaultSize) % defaultSize) else it
             val fragment = getFragment(
@@ -104,9 +105,9 @@ inline fun <reified F : Fragment> ViewGroupScope<out ViewGroup>.viewPager(
     return viewPager
 }
 
-fun ViewGroupScope<out ViewGroup>.viewPager(
-    layoutParams: ViewGroup.LayoutParams = smartLayoutParams(),
-    quickView: QuickView,
+fun ContextScope.viewPager(
+    layoutParams: ViewGroup.LayoutParams = matchMarginLayoutParams(),
+    quick: Quick,
     fragments: List<Fragment>,
     withState: Boolean = true,
     limit: Int = 0,
@@ -115,13 +116,13 @@ fun ViewGroupScope<out ViewGroup>.viewPager(
     val viewPager = QuickViewPager(context)
     viewPager.id = R.id.quickViewPager
     if (withState) {
-        viewPager.adapter = FragmentsStateAdapter(quickView.getFragmentManager()) {
+        viewPager.adapter = FragmentsStateAdapter(quick.getFragmentManager()) {
             fragments[it]
         }.apply {
             setPageSize(fragments.size)
         }
     } else {
-        viewPager.adapter = FragmentsAdapter(quickView.getFragmentManager()) {
+        viewPager.adapter = FragmentsAdapter(quick.getFragmentManager()) {
             fragments[it]
         }.apply {
             setPageSize(fragments.size)
@@ -135,9 +136,9 @@ fun ViewGroupScope<out ViewGroup>.viewPager(
     return viewPager
 }
 
-fun ViewGroupScope<out ViewGroup>.viewPagerWithView(
-    layoutParams: ViewGroup.LayoutParams = smartLayoutParams(),
-    quickView: QuickView,
+fun ContextScope.viewPagerWithView(
+    layoutParams: ViewGroup.LayoutParams = matchMarginLayoutParams(),
+    quick: Quick,
     views: List<View>,
     withState: Boolean = true,
     limit: Int = 0,
@@ -149,12 +150,12 @@ fun ViewGroupScope<out ViewGroup>.viewPagerWithView(
         contentView.addView(it)
         contentView.toFragment()
     }
-    return viewPager(layoutParams, quickView, contentFragmentList, withState, limit, builder)
+    return viewPager(layoutParams, quick, contentFragmentList, withState, limit, builder)
 }
 
-fun ViewGroupScope<out ViewGroup>.viewPagerBuilder(
-    layoutParams: ViewGroup.LayoutParams = smartLayoutParams(),
-    quickView: QuickView,
+fun ContextScope.viewPagerBuilder(
+    layoutParams: ViewGroup.LayoutParams = matchMarginLayoutParams(),
+    quick: Quick,
     withState: Boolean = true,
     limit: Int = 0,
     viewConvert: ((view: View) -> Fragment)? = null,
@@ -162,5 +163,5 @@ fun ViewGroupScope<out ViewGroup>.viewPagerBuilder(
 ): ViewPager {
     val viewGroup = FragmentGroup(context, viewConvert)
     builder?.invoke(viewGroup)
-    return viewPager(layoutParams, quickView, viewGroup.fragmentList, withState, limit)
+    return viewPager(layoutParams, quick, viewGroup.fragmentList, withState, limit)
 }

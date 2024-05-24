@@ -7,8 +7,9 @@ import android.widget.FrameLayout
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
-import com.wpf.app.base.QuickView
-import com.wpf.app.base.ability.scope.ViewGroupScope
+import com.wpf.app.base.Quick
+import com.wpf.app.base.ability.helper.addView
+import com.wpf.app.base.ability.scope.ContextScope
 import com.wpf.app.quick.R
 import com.wpf.app.quick.helper.getFragmentManager
 import com.wpf.app.quick.helper.getLifecycle
@@ -20,9 +21,9 @@ import com.wpf.app.quickutil.helper.removeParent
 import com.wpf.app.quickutil.other.forceTo
 import kotlin.math.abs
 
-fun ViewGroupScope<out ViewGroup>.viewPager2(
-    layoutParams: ViewGroup.LayoutParams = smartLayoutParams(),
-    quickView: QuickView,
+fun ContextScope.viewPager2(
+    layoutParams: ViewGroup.LayoutParams = matchMarginLayoutParams(),
+    quick: Quick,
     fragments: List<Fragment>,
     limit: Int = 0,
     builder: (ViewPager2.() -> Unit)? = null,
@@ -30,7 +31,7 @@ fun ViewGroupScope<out ViewGroup>.viewPager2(
     val viewPager2 = ViewPager2(context)
     viewPager2.id = R.id.quickViewPager
     viewPager2.adapter =
-        Fragments2StateAdapter(quickView.getFragmentManager(), quickView.getLifecycle()) {
+        Fragments2StateAdapter(quick.getFragmentManager(), quick.getLifecycle()) {
             fragments[it]
         }.apply {
             setPageSize(fragments.size)
@@ -43,9 +44,9 @@ fun ViewGroupScope<out ViewGroup>.viewPager2(
     return viewPager2
 }
 
-inline fun <reified F : Fragment> ViewGroupScope<out ViewGroup>.viewPager2(
-    layoutParams: ViewGroup.LayoutParams = smartLayoutParams(),
-    quickView: QuickView,
+inline fun <reified F : Fragment> ContextScope.viewPager2(
+    layoutParams: ViewGroup.LayoutParams = matchMarginLayoutParams(),
+    quick: Quick,
     defaultSize: Int = 1,
     limit: Int = 0,
     isLoop: Boolean = false,
@@ -56,11 +57,11 @@ inline fun <reified F : Fragment> ViewGroupScope<out ViewGroup>.viewPager2(
     viewPager2.id = R.id.quickViewPager
     val defaultPos = if (isLoop) Int.MAX_VALUE / 2 else 0
     viewPager2.adapter =
-        Fragments2StateAdapter(quickView.getFragmentManager(), quickView.getLifecycle()) {
+        Fragments2StateAdapter(quick.getFragmentManager(), quick.getLifecycle()) {
             val realPos =
                 if (isLoop) (abs(defaultSize + (it - defaultPos) % defaultSize) % defaultSize) else it
             val fragment = getFragment(
-                quickView,
+                quick,
                 F::class.java.getDeclaredConstructor().newInstance().forceTo(),
                 realPos
             ).forceTo<Fragment>()
@@ -87,9 +88,9 @@ inline fun <reified F : Fragment> ViewGroupScope<out ViewGroup>.viewPager2(
     return viewPager2
 }
 
-fun ViewGroupScope<out ViewGroup>.viewPager2WithView(
-    layoutParams: ViewGroup.LayoutParams = smartLayoutParams(),
-    quickView: QuickView,
+fun ContextScope.viewPager2WithView(
+    layoutParams: ViewGroup.LayoutParams = matchMarginLayoutParams(),
+    quick: Quick,
     views: List<View>,
     limit: Int = 0,
     builder: (ViewPager2.() -> Unit)? = null,
@@ -100,12 +101,12 @@ fun ViewGroupScope<out ViewGroup>.viewPager2WithView(
         contentView.addView(it)
         contentView.toFragment()
     }
-    return viewPager2(layoutParams, quickView, contentFragmentList, limit, builder)
+    return viewPager2(layoutParams, quick, contentFragmentList, limit, builder)
 }
 
-fun ViewGroupScope<out ViewGroup>.viewPager2(
-    layoutParams: ViewGroup.LayoutParams = smartLayoutParams(),
-    quickView: QuickView,
+fun ContextScope.viewPager2(
+    layoutParams: ViewGroup.LayoutParams = matchMarginLayoutParams(),
+    quick: Quick,
     limit: Int = 0,
     builder: ViewGroup.() -> Unit,
 ): ViewPager2 {
@@ -115,5 +116,5 @@ fun ViewGroupScope<out ViewGroup>.viewPager2(
     childViews.forEach {
         it.removeParent()
     }
-    return viewPager2WithView(layoutParams, quickView, childViews, limit)
+    return viewPager2WithView(layoutParams, quick, childViews, limit)
 }

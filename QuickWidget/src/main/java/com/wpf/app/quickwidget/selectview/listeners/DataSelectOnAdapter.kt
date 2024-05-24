@@ -1,6 +1,7 @@
 package com.wpf.app.quickwidget.selectview.listeners
 
 import com.wpf.app.quickrecyclerview.listeners.DataAdapter
+import com.wpf.app.quickutil.other.nullDefault
 import com.wpf.app.quickwidget.selectview.QuickSelectAdapter
 import com.wpf.app.quickwidget.selectview.data.QuickChildSelectData
 import com.wpf.app.quickwidget.selectview.data.QuickParentSelectData
@@ -44,7 +45,7 @@ interface DataSelectOnAdapter : DataAdapter, SetSelectChange {
                 changePos.add(indexOf(childSelectData))
             }
         } else {
-            if (getItemSelectSize() < childSelectData.maxLimit) {
+            if (getItemSelectSize(if (childSelectData.isGlobal) null else childSelectData.parent?.id) < childSelectData.maxLimit) {
                 childSelectData.isSelect = true
                 changePos.add(indexOf(childSelectData))
             } else {
@@ -146,14 +147,14 @@ interface DataSelectOnAdapter : DataAdapter, SetSelectChange {
         }
     }
 
-    override fun getSelectList(): MutableList<QuickChildSelectData>? {
+    override fun getSelectList(parentId: String?): MutableList<QuickChildSelectData>? {
         return asChildSelectData()?.filter {
-            it.isSelect
+            it.isSelect && if (parentId.isNullOrEmpty()) true else it.parent?.id == parentId
         }?.toMutableList()
     }
 
-    fun getItemSelectSize(): Int {
-        return getSelectList()?.size ?: 0
+    fun getItemSelectSize(parentId: String? = null): Int {
+        return getSelectList(parentId)?.size.nullDefault(0)
     }
 
     fun getSelectAdapter(): QuickSelectAdapter {

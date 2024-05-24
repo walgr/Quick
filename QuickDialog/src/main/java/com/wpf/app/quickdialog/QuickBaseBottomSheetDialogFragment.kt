@@ -23,7 +23,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.wpf.app.base.NO_SET
-import com.wpf.app.base.QuickView
+import com.wpf.app.base.Quick
 import com.wpf.app.base.bind.Bind
 import com.wpf.app.base.bind.QuickBindWrap
 import com.wpf.app.quickbind.interfaces.BindBaseFragment
@@ -46,7 +46,7 @@ open class QuickBaseBottomSheetDialogFragment @JvmOverloads constructor(
     var layoutView: View? = null,
     var layoutViewCreate: (Context.() -> View)? = null,
 ) : BottomSheetDialogFragment(), BindBaseFragment, RequestCoroutineScope, DialogSize,
-    DialogLifecycle, SheetInit, Bind, QuickView {
+    DialogLifecycle, SheetInit, Bind, Quick {
 
     override var jobManager: MutableList<Job> = mutableListOf()
 

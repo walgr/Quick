@@ -38,7 +38,7 @@
     2.添加依赖
     dependencies {
         依赖全部
-        implementation 'com.github.walgr.Quick:Quick:latest'
+        implementation 'com.github.walgr.Quick:QuickWork:latest'
 
         看需求依赖
         implementation 'com.github.walgr.Quick:QuickUtil:latest'

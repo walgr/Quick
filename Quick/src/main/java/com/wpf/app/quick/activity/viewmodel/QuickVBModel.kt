@@ -2,14 +2,14 @@ package com.wpf.app.quick.activity.viewmodel
 
 import android.content.Context
 import androidx.databinding.ViewDataBinding
-import com.wpf.app.base.QuickView
+import com.wpf.app.base.Quick
 import kotlinx.coroutines.Job
 
 /**
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-open class QuickVBModel<T : QuickView, VB : ViewDataBinding> : QuickViewModel<T>() {
+open class QuickVBModel<T : Quick, VB : ViewDataBinding> : QuickViewModel<T>() {
     private var mViewBinding: VB? = null
 
     override var jobManager: MutableList<Job> = mutableListOf()

@@ -16,6 +16,7 @@ import com.google.android.material.tabs.TabLayout
 import com.wpf.app.quickutil.R
 import com.wpf.app.quickutil.helper.attribute.AutoGetAttributeHelper
 import com.wpf.app.quickutil.other.asTo
+import com.wpf.app.quickutil.other.nullDefault
 
 /**
  * Created by 王朋飞 on 2022/8/31.
@@ -138,9 +139,9 @@ open class QuickViewGroupNoAttrs<T : ViewGroup> @JvmOverloads constructor(
 
     fun getRealChildCount(): Int {
         if (shadowView is TabLayout) {
-            return shadowView.asTo<TabLayout>()?.tabCount ?: 0
+            return shadowView.asTo<TabLayout>()?.tabCount.nullDefault(0)
         }
-        return shadowView?.childCount ?: 0
+        return shadowView?.childCount.nullDefault(0)
     }
 
     override fun setClipChildren(clipChildren: Boolean) {

@@ -5,10 +5,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
-import com.wpf.app.base.QuickView
+import com.wpf.app.base.Quick
 import com.wpf.app.quickutil.other.forceTo
 
-fun QuickView.getActivity(): Activity {
+fun Quick.getActivity(): Activity {
     return when (this) {
         is Activity -> {
             this
@@ -24,7 +24,7 @@ fun QuickView.getActivity(): Activity {
     }
 }
 
-fun QuickView.getFragmentManager(): FragmentManager {
+fun Quick.getFragmentManager(): FragmentManager {
     return if (this is Fragment) {
         childFragmentManager
     } else {
@@ -32,7 +32,7 @@ fun QuickView.getFragmentManager(): FragmentManager {
     }
 }
 
-fun QuickView.getLifecycle(): Lifecycle {
+fun Quick.getLifecycle(): Lifecycle {
     return if (this is Fragment) {
         lifecycle
     } else {

@@ -8,7 +8,6 @@ import com.wpf.app.base.ability.scope.createViewGroupScope
 import com.wpf.app.quick.ability.QuickFragment
 import com.wpf.app.quickutil.helper.matchMarginLayoutParams
 
-
 fun FragmentGroup.viewFragment(callback: ViewGroupScope<ViewGroup>.() -> Unit) {
     val fragmentRootView = FrameLayout(context)
     callback.invoke(createViewGroupScope(fragmentRootView))

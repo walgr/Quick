@@ -2,11 +2,11 @@ package com.wpf.app.quick.helper
 
 import android.view.View
 import androidx.databinding.ViewDataBinding
-import com.wpf.app.base.QuickView
+import com.wpf.app.base.Quick
 import com.wpf.app.base.ability.base.with
+import com.wpf.app.base.ability.ex.contentView
 import com.wpf.app.quick.ability.QuickActivity
 import com.wpf.app.quick.ability.QuickFragment
-import com.wpf.app.quick.ability.ex.contentView
 import com.wpf.app.quick.ability.ex.modelBindingWithSelf
 import com.wpf.app.quick.ability.ex.viewModel
 import com.wpf.app.quick.activity.viewmodel.QuickVBModel
@@ -18,7 +18,7 @@ fun View.toFragment() = QuickFragment(
     contentView(layoutView = this@toFragment)
 )
 
-inline fun <reified VM : QuickViewModel<out QuickView>> View.toVMFragment(
+inline fun <reified VM : QuickViewModel<out Quick>> View.toVMFragment(
 ) = QuickFragment(
     contentView(layoutView = this@toVMFragment).with(viewModel<VM>())
 )
@@ -40,7 +40,7 @@ fun View.toActivity(
     }
 }
 
-inline fun <reified VM : QuickViewModel<out QuickView>> View.toVMActivity(
+inline fun <reified VM : QuickViewModel<out Quick>> View.toVMActivity(
     noinline onActivityInit: ((view: View) -> Unit)? = null,
 ) = object : QuickActivity(
     contentView(layoutView = this@toVMActivity).with(viewModel<VM>())

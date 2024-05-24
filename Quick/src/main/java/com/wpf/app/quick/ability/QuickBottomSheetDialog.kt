@@ -6,7 +6,9 @@ import android.view.View
 import androidx.annotation.CallSuper
 import androidx.annotation.StyleRes
 import com.wpf.app.base.ability.base.QuickAbility
+import com.wpf.app.base.ability.base.QuickGenerateViewAbility
 import com.wpf.app.base.ability.base.QuickInflateViewAbility
+import com.wpf.app.base.ability.base.QuickInitViewAbility
 import com.wpf.app.base.ability.base.QuickLifecycleAbility
 import com.wpf.app.quickdialog.QuickBaseBottomSheetDialog
 import com.wpf.app.quickutil.helper.InitViewHelper
@@ -40,15 +42,20 @@ open class QuickBottomSheetDialog(
 
     @CallSuper
     override fun generateContentView(view: View): View {
-        val inflateViewAbility =
-            abilityList.first { it is QuickInflateViewAbility }.forceTo<QuickInflateViewAbility>()
-        return inflateViewAbility.generateContentView(this, view)
+        var newView = view
+        abilityList.filterIsInstance<QuickGenerateViewAbility>().forEach {
+            newView = it.generateContentView(this, newView)
+        }
+        return newView
     }
 
     @CallSuper
     override fun initView(view: View) {
+        abilityList.filterIsInstance<QuickGenerateViewAbility>().forEach {
+            it.afterGenerateContentView(this, view)
+        }
         super.initView(view)
-        abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
+        abilityList.filterIsInstance<QuickInitViewAbility>().forEach {
             it.initView(this, view)
         }
     }

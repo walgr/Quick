@@ -9,15 +9,16 @@ import androidx.core.widget.NestedScrollView
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.appbar.AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL
 import com.google.android.material.tabs.TabLayout
+import com.wpf.app.base.ability.ex.contentView
+import com.wpf.app.base.ability.helper.coordinator
+import com.wpf.app.base.ability.helper.gravity
+import com.wpf.app.base.ability.helper.tabLayout
+import com.wpf.app.base.ability.helper.viewGroupCreate
 import com.wpf.app.base.ability.scope.viewGroupApply
 import com.wpf.app.base.ability.scope.withViewGroupScope
 import com.wpf.app.quick.ability.QuickActivity
 import com.wpf.app.quick.ability.QuickView
-import com.wpf.app.quick.ability.ex.contentView
-import com.wpf.app.quick.ability.helper.coordinator
 import com.wpf.app.quick.ability.helper.fragment
-import com.wpf.app.quick.ability.helper.gravity
-import com.wpf.app.quick.ability.helper.myLayout
 import com.wpf.app.quick.ability.helper.viewFragment
 import com.wpf.app.quick.ability.helper.viewPagerBuilder
 import com.wpf.app.quick.annotations.getclass.GetClass
@@ -36,7 +37,6 @@ import com.wpf.app.quickwidget.tab.TabManagerProvider
 import com.wpf.app.quickwidget.title.ability.backClick
 import com.wpf.app.quickwork.ability.helper.dialog
 import com.wpf.app.quickwork.ability.helper.moreGroup
-import com.wpf.app.quickwork.ability.helper.tabLayout
 import com.wpf.app.quickwork.ability.helper.text
 import com.wpf.app.quickwork.ability.helper.title
 
@@ -89,14 +89,14 @@ class WanAndroidHomeActivity : QuickActivity(contentView<LinearLayout> {
         }
     }, bottomScrollLayout = {
         withViewGroupScope {
-            viewPagerBuilder(quickView = this@contentView.self) {
+            viewPagerBuilder(quick = this@contentView.self) {
                 fragment(RecommendFragment())
                 viewFragment {
-                    myLayout<NestedScrollView>(layoutParams = matchMarginLayoutParams()) {
+                    viewGroupCreate<NestedScrollView>(layoutParams = matchMarginLayoutParams()) {
                         viewGroupApply {
                             isFillViewport = true
                         }
-                        myLayout<LinearLayout>(layoutParams = matchMarginLayoutParams()) {
+                        viewGroupCreate<LinearLayout>(layoutParams = matchMarginLayoutParams()) {
                             text(text = "测试", textSize = 24f.dp)
                         }.gravity(Gravity.CENTER)
                     }

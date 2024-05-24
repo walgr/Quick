@@ -3,20 +3,24 @@ package com.wpf.app.quick.demo
 import android.view.Gravity
 import android.widget.LinearLayout
 import com.google.android.material.button.MaterialButton
+import com.wpf.app.base.ability.ex.contentView
+import com.wpf.app.base.ability.helper.gravity
+import com.wpf.app.base.ability.helper.rect
+import com.wpf.app.base.ability.helper.viewGroupCreate
 import com.wpf.app.quick.ability.QuickActivity
-import com.wpf.app.quick.ability.ex.contentView
-import com.wpf.app.quick.ability.helper.background
 import com.wpf.app.quick.ability.helper.bottomSheetDialog
-import com.wpf.app.quick.ability.helper.gravity
-import com.wpf.app.quick.ability.helper.myLayout
-import com.wpf.app.quick.ability.helper.rect
 import com.wpf.app.quick.annotations.getclass.GetClass
 import com.wpf.app.quickutil.helper.dp
 import com.wpf.app.quickutil.helper.matchMarginLayoutParams
 import com.wpf.app.quickutil.helper.matchWrapMarginLayoutParams
 import com.wpf.app.quickutil.helper.onClick
+import com.wpf.app.quickutil.helper.paddingHorizontal
 import com.wpf.app.quickutil.helper.reset
+import com.wpf.app.quickutil.helper.sp
 import com.wpf.app.quickutil.helper.toColor
+import com.wpf.app.quickutil.helper.widget
+import com.wpf.app.quickwidget.wheel.WheelItemData
+import com.wpf.app.quickwidget.wheel.WheelView
 import com.wpf.app.quickwork.ability.helper.text
 import com.wpf.app.quickwork.ability.helper.title
 
@@ -24,22 +28,52 @@ import com.wpf.app.quickwork.ability.helper.title
 class BottomSheetDialogTestActivity : QuickActivity(
     contentView<LinearLayout> {
         title("BottomSheet测试")
-        myLayout<LinearLayout>(layoutParams = matchMarginLayoutParams()) {
+        viewGroupCreate<LinearLayout>(layoutParams = matchMarginLayoutParams()) {
             addView(MaterialButton(context).apply {
                 text = "弹窗"
             }.onClick {
                 bottomSheetDialog(
                     layoutViewCreate = {
-                        myLayout<LinearLayout>(
-                            layoutParams = matchWrapMarginLayoutParams().reset(height = 100.dp),
-                        ) {
-                            text(text = "弹窗")
-                        }.gravity(Gravity.CENTER).background {
+                        viewGroupCreate<LinearLayout>(matchMarginLayoutParams()) {
+                            view.orientation = LinearLayout.VERTICAL
                             rect(
+                                color = R.color.white.toColor(),
                                 topLeftRadius = 16f.dp,
-                                topRightRadius = 16f.dp,
-                                color = R.color.white.toColor()
+                                topRightRadius = 16f.dp
                             )
+                            viewGroupCreate<LinearLayout>(
+                                layoutParams = matchWrapMarginLayoutParams().reset(
+                                    height = 60.dp
+                                )
+                            ) {
+                                viewApply {
+                                    gravity = Gravity.CENTER_VERTICAL
+                                    paddingHorizontal(16.dp)
+                                }
+                                text(
+                                    textSize = 16f.sp,
+                                    text = "取消",
+                                    textColor = R.color.colorPrimary.toColor()
+                                )
+                                text(
+                                    textSize = 18f.sp,
+                                    text = "",
+                                    textColor = R.color.colorPrimary.toColor()
+                                ).widget(1f)
+                                text(
+                                    textSize = 16f.sp,
+                                    text = "取消",
+                                    textColor = R.color.colorPrimary.toColor()
+                                )
+                            }
+                            val wheelView = WheelView(context)
+                            wheelView.layoutParams = matchMarginLayoutParams()
+                            val testData: MutableList<WheelItemData> = mutableListOf()
+                            repeat(50) {
+                                testData.add(WheelItemData(it.toString(), System.currentTimeMillis().toString() + System.currentTimeMillis().toString()))
+                            }
+                            wheelView.setData(testData)
+                            addView(wheelView)
                         }
                     },
                     skipCollapsed = true,

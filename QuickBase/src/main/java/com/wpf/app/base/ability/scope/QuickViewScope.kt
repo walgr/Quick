@@ -1,8 +1,8 @@
 package com.wpf.app.base.ability.scope
 
-import com.wpf.app.base.QuickView
+import com.wpf.app.base.Quick
 
-interface QuickViewScope<T: QuickView> {
+interface QuickViewScope<T: Quick> {
     val self: T
 
     fun withSelf(builder: T.() -> Unit) {
@@ -10,6 +10,6 @@ interface QuickViewScope<T: QuickView> {
     }
 }
 
-fun <T: QuickView> createQuickViewScope(context: T) = object : QuickViewScope<T> {
+fun <T: Quick> createQuickViewScope(context: T) = object : QuickViewScope<T> {
     override val self: T = context
 }

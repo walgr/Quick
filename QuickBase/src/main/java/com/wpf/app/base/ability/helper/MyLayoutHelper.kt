@@ -1,24 +1,22 @@
-package com.wpf.app.quick.ability.helper
+package com.wpf.app.base.ability.helper
 
 import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
-import com.wpf.app.base.ability.helper.addView
 import com.wpf.app.base.ability.scope.ContextScope
 import com.wpf.app.base.ability.scope.ViewGroupScope
 import com.wpf.app.base.ability.scope.ViewScope
 import com.wpf.app.base.ability.scope.createViewGroupScope
 import com.wpf.app.base.ability.scope.createViewScope
-import com.wpf.app.quick.ability.ex.viewCreateConvert
-import com.wpf.app.quickbind.utils.context
+import com.wpf.app.base.utils.context
 import com.wpf.app.quickutil.helper.InitViewHelper
 import com.wpf.app.quickutil.helper.matchMarginLayoutParams
 import com.wpf.app.quickutil.helper.matchWrapMarginLayoutParams
 import com.wpf.app.quickutil.helper.removeParent
 import com.wpf.app.quickutil.other.forceTo
 
-inline fun <reified T : ViewGroup> Any.myLayout(
+inline fun <reified T : ViewGroup> Any.viewGroupCreate(
     layoutParams: ViewGroup.LayoutParams = matchWrapMarginLayoutParams(),
     noinline builder: (ViewGroupScope<T>.() -> Unit)? = null,
 ): T {
@@ -33,7 +31,7 @@ inline fun <reified T : ViewGroup> Any.myLayout(
     return view.forceTo()
 }
 
-fun Any.myLayout(
+fun Any.viewGroupCreate(
     @LayoutRes layoutId: Int = 0,
     layoutView: View? = null,
     layoutViewCreate: (ContextScope.() -> View)? = null,

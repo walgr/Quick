@@ -2,6 +2,7 @@ package com.wpf.app.quickrecyclerview.listeners
 
 import com.wpf.app.quickrecyclerview.QuickAdapter
 import com.wpf.app.quickrecyclerview.data.QuickItemData
+import com.wpf.app.quickutil.other.nullDefault
 
 /**
  * Created by 王朋飞 on 2022/7/18.
@@ -98,17 +99,17 @@ interface DataAdapter {
     }
 
     fun indexOf(itemData: QuickItemData): Int {
-        return getQuickAdapter().headerViews.size + (getQuickAdapter().mDataList?.indexOf(itemData) ?: 0)
+        return getQuickAdapter().headerViews.size + getQuickAdapter().mDataList?.indexOf(itemData).nullDefault(0)
     }
 
     fun getDataWithHeaderFooter(position: Int): QuickItemData? {
         val realData: QuickItemData? =
             if (getQuickAdapter().headerViews.isNotEmpty() && position < getQuickAdapter().headerViews.size) {
                 getQuickAdapter().headerViews[position]
-            } else if (position < getQuickAdapter().headerViews.size + (getQuickAdapter().mDataList?.size ?: 0)) {
+            } else if (position < getQuickAdapter().headerViews.size + getQuickAdapter().mDataList?.size.nullDefault(0)) {
                 getQuickAdapter().mDataList?.getOrNull(position - getQuickAdapter().headerViews.size)
             } else {
-                getQuickAdapter().footerViews[position - (getQuickAdapter().headerViews.size + (getQuickAdapter().mDataList?.size ?: 0))]
+                getQuickAdapter().footerViews[position - (getQuickAdapter().headerViews.size + getQuickAdapter().mDataList?.size.nullDefault(0))]
             }
         return realData
     }

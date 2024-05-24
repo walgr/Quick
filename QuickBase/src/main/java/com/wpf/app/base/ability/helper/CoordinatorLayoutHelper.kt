@@ -1,19 +1,20 @@
-package com.wpf.app.quick.ability.helper
+package com.wpf.app.base.ability.helper
 
 import android.view.View
 import android.view.ViewGroup
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout.Behavior
 import com.google.android.material.appbar.AppBarLayout
-import com.wpf.app.base.ability.scope.ViewGroupScope
+import com.wpf.app.base.ability.scope.ContextScope
 import com.wpf.app.quickutil.helper.layoutParams
+import com.wpf.app.quickutil.helper.matchMarginLayoutParams
 import com.wpf.app.quickutil.helper.matchWrapMarginLayoutParams
 import com.wpf.app.quickutil.helper.parent
 import com.wpf.app.quickutil.helper.removeParent
 import com.wpf.app.quickutil.widget.wishLayoutParams
 
-fun <Follow : View, Top : View, Bottom : View> ViewGroupScope<out ViewGroup>.coordinator(
-    layoutParams: ViewGroup.LayoutParams = smartLayoutParams(),
+fun <Follow : View, Top : View, Bottom : View> ContextScope.coordinator(
+    layoutParams: ViewGroup.LayoutParams = matchMarginLayoutParams(),
     followSlideLayout: (AppBarLayout.() -> Follow)? = null,
     scrollFlags: Int? = null,
     topSuspendLayout: (AppBarLayout.() -> Top)? = null,

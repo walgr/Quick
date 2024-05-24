@@ -1,11 +1,11 @@
-package com.wpf.app.quick.ability.helper
+package com.wpf.app.base.ability.helper
 
 import android.graphics.drawable.Drawable
-import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams
 import androidx.annotation.ColorInt
-import com.wpf.app.base.ability.scope.ViewGroupScope
+import com.wpf.app.base.ability.scope.ContextScope
 import com.wpf.app.quickutil.helper.dp
+import com.wpf.app.quickutil.helper.wrapMarginLayoutParams
 import io.github.florent37.shapeofview.shapes.ArcView
 import io.github.florent37.shapeofview.shapes.ArcView.ArcPosition
 import io.github.florent37.shapeofview.shapes.BubbleView
@@ -18,8 +18,8 @@ import io.github.florent37.shapeofview.shapes.RoundRectView
 import io.github.florent37.shapeofview.shapes.StarView
 import io.github.florent37.shapeofview.shapes.TriangleView
 
-fun ViewGroupScope<out ViewGroup>.circle(
-    layoutParams: LayoutParams = smartLayoutParams(),
+fun ContextScope.circle(
+    layoutParams: LayoutParams = wrapMarginLayoutParams(),
     @ColorInt borderColor: Int? = null,
     borderWidth: Float = 0f,        //单位px
     builder: (CircleView.() -> Unit)? = null,
@@ -34,8 +34,8 @@ fun ViewGroupScope<out ViewGroup>.circle(
     return view
 }
 
-fun ViewGroupScope<out ViewGroup>.roundRect(
-    layoutParams: LayoutParams = smartLayoutParams(),
+fun ContextScope.roundRect(
+    layoutParams: LayoutParams = wrapMarginLayoutParams(),
     background: Drawable? = null,
     radius: Float? = null,
     topLeftRadius: Float = 0f,
@@ -61,8 +61,8 @@ fun ViewGroupScope<out ViewGroup>.roundRect(
     return view
 }
 
-fun ViewGroupScope<out ViewGroup>.clipCorner(
-    layoutParams: LayoutParams = smartLayoutParams(),
+fun ContextScope.clipCorner(
+    layoutParams: LayoutParams = wrapMarginLayoutParams(),
     cutSize: Float? = null,
     topLeftCutSize: Float = 0f,
     topRightCutSize: Float = 0f,
@@ -80,8 +80,8 @@ fun ViewGroupScope<out ViewGroup>.clipCorner(
     return view
 }
 
-fun ViewGroupScope<out ViewGroup>.arc(
-    layoutParams: LayoutParams = smartLayoutParams(),
+fun ContextScope.arc(
+    layoutParams: LayoutParams = wrapMarginLayoutParams(),
     height: Float = 0f,       //单位px 负反方向
     @ArcPosition position: Int = ArcView.POSITION_BOTTOM,
     builder: (ArcView.() -> Unit)? = null,
@@ -94,8 +94,8 @@ fun ViewGroupScope<out ViewGroup>.arc(
     return view
 }
 
-fun ViewGroupScope<out ViewGroup>.diagonal(
-    layoutParams: LayoutParams = smartLayoutParams(),
+fun ContextScope.diagonal(
+    layoutParams: LayoutParams = wrapMarginLayoutParams(),
     angle: Float = 0f,       //单位px 负反方向
     @DiagonalView.DiagonalPosition position: Int = DiagonalView.POSITION_BOTTOM,
     builder: (DiagonalView.() -> Unit)? = null,
@@ -108,8 +108,8 @@ fun ViewGroupScope<out ViewGroup>.diagonal(
     return view
 }
 
-fun ViewGroupScope<out ViewGroup>.triangle(
-    layoutParams: LayoutParams = smartLayoutParams(),
+fun ContextScope.triangle(
+    layoutParams: LayoutParams = wrapMarginLayoutParams(),
     percentLeft: Float = 0f,
     percentRight: Float = 0f,
     paddingBottom: Float = 0.5f,
@@ -124,8 +124,8 @@ fun ViewGroupScope<out ViewGroup>.triangle(
     return view
 }
 
-fun ViewGroupScope<out ViewGroup>.bubble(
-    layoutParams: LayoutParams = smartLayoutParams(),
+fun ContextScope.bubble(
+    layoutParams: LayoutParams = wrapMarginLayoutParams(),
     arrowWidth: Float = 10f.dp,
     arrowHeight: Float = 10f.dp,
     borderRadius: Float = 10f.dp,
@@ -144,8 +144,8 @@ fun ViewGroupScope<out ViewGroup>.bubble(
     return view
 }
 
-fun ViewGroupScope<out ViewGroup>.star(
-    layoutParams: LayoutParams = smartLayoutParams(),
+fun ContextScope.star(
+    layoutParams: LayoutParams = wrapMarginLayoutParams(),
     points: Int = 5,
     builder: (StarView.() -> Unit)? = null,
 ): StarView {
@@ -156,8 +156,8 @@ fun ViewGroupScope<out ViewGroup>.star(
     return view
 }
 
-fun ViewGroupScope<out ViewGroup>.polygon(
-    layoutParams: LayoutParams = smartLayoutParams(),
+fun ContextScope.polygon(
+    layoutParams: LayoutParams = wrapMarginLayoutParams(),
     sides: Int = 4,
     builder: (PolygonView.() -> Unit)? = null,
 ): PolygonView {
@@ -168,8 +168,8 @@ fun ViewGroupScope<out ViewGroup>.polygon(
     return view
 }
 
-fun ViewGroupScope<out ViewGroup>.dottedEdgesCutCorner(
-    layoutParams: LayoutParams = smartLayoutParams(),
+fun ContextScope.dottedEdgesCutCorner(
+    layoutParams: LayoutParams = wrapMarginLayoutParams(),
     dotRadius: Float = 0f,
     dotSpace: Float = 0f,
     position: Int = DottedEdgesCutCornerView.POSITION_NONE,

@@ -12,7 +12,7 @@ import androidx.activity.result.ActivityResultRegistry
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
-import com.wpf.app.base.QuickView
+import com.wpf.app.base.Quick
 import com.wpf.app.base.bind.Bind
 import com.wpf.app.base.bind.QuickBindWrap
 import com.wpf.app.quicknetwork.base.RequestCoroutineScope
@@ -27,7 +27,7 @@ open class QuickBaseActivity @JvmOverloads constructor(
     @LayoutRes open val layoutId: Int = 0,
     open val layoutView: View? = null,
     open val layoutViewCreate: (Context.() -> View)? = null,
-) : AppCompatActivity(), QuickView, RequestCoroutineScope, Bind {
+) : AppCompatActivity(), Quick, RequestCoroutineScope, Bind {
 
     override var jobManager: MutableList<Job> = mutableListOf()
 

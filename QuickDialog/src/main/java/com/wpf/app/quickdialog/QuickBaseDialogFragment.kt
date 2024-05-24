@@ -22,7 +22,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import com.wpf.app.base.NO_SET
-import com.wpf.app.base.QuickView
+import com.wpf.app.base.Quick
 import com.wpf.app.base.bind.Bind
 import com.wpf.app.base.bind.QuickBindWrap
 import com.wpf.app.quickbind.interfaces.BindBaseFragment
@@ -43,7 +43,7 @@ open class QuickBaseDialogFragment @JvmOverloads constructor(
     var layoutView: View? = null,
     var layoutViewCreate: (Context.() -> View)? = null,
 ) : DialogFragment(), BindBaseFragment, RequestCoroutineScope, DialogSize, DialogLifecycle, Bind,
-    QuickView {
+    Quick {
 
     override var jobManager: MutableList<Job> = mutableListOf()
 

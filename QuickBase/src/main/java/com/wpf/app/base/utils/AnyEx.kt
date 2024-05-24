@@ -1,4 +1,4 @@
-package com.wpf.app.quickbind.utils
+package com.wpf.app.base.utils
 
 import android.app.Activity
 import android.app.Dialog

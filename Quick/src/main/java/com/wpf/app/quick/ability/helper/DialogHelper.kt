@@ -7,6 +7,7 @@ import androidx.annotation.LayoutRes
 import androidx.annotation.StyleRes
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
+import com.wpf.app.base.ability.ex.contentView
 import com.wpf.app.base.ability.scope.ContextScope
 import com.wpf.app.base.ability.scope.DialogScope
 import com.wpf.app.base.ability.scope.createDialogScope
@@ -14,7 +15,6 @@ import com.wpf.app.quick.ability.QuickBottomSheetDialog
 import com.wpf.app.quick.ability.QuickBottomSheetDialogFragment
 import com.wpf.app.quick.ability.QuickDialog
 import com.wpf.app.quick.ability.QuickDialogFragment
-import com.wpf.app.quick.ability.ex.contentView
 
 open class QuickBottomSheetDialogFragmentTemp(
     @LayoutRes layoutId: Int = 0,
@@ -175,8 +175,8 @@ fun ContextScope.bottomSheetDialogFragment(
         callback?.let {
             dialog.getBehavior()?.addBottomSheetCallback(it)
         }
+        builder?.invoke(dialog)
     }
-    builder?.invoke(dialog)
     return dialog
 }
 
@@ -294,8 +294,8 @@ fun ContextScope.bottomSheetDialog(
         callback?.let {
             dialog.behavior.addBottomSheetCallback(it)
         }
+        builder?.invoke(createDialogScope(dialog))
     }
-    builder?.invoke(createDialogScope(dialog))
     return dialog
 }
 
@@ -420,8 +420,8 @@ fun ContextScope.dialogFragment(
     dialog.onDialogShow {
         setCancelable(cancelable)
         setCanceledOnTouchOutside(cancelableTouchOutside)
+        builder?.invoke(dialog)
     }
-    builder?.invoke(dialog)
     return dialog
 }
 
@@ -514,7 +514,7 @@ fun ContextScope.dialog(
     dialog.onDialogShow {
         setCancelable(cancelable)
         setCanceledOnTouchOutside(cancelableTouchOutside)
+        builder?.invoke(createDialogScope(dialog))
     }
-    builder?.invoke(createDialogScope(dialog))
     return dialog
 }

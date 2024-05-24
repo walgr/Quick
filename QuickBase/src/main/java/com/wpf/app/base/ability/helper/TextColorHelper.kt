@@ -1,10 +1,11 @@
-package com.wpf.app.quick.ability.helper
+package com.wpf.app.base.ability.helper
 
 import android.view.View
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import com.wpf.app.base.ability.scope.ViewScope
+import com.wpf.app.quickutil.helper.createStateColor
 
 interface TextViewScope: ViewScope<TextView>
 

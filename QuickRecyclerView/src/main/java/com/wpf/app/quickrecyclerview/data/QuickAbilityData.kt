@@ -5,8 +5,9 @@ import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-import com.wpf.app.base.QuickView
+import com.wpf.app.base.Quick
 import com.wpf.app.base.ability.base.QuickAbility
+import com.wpf.app.base.ability.base.QuickGenerateViewAbility
 import com.wpf.app.base.ability.base.QuickInflateViewAbility
 import com.wpf.app.quickrecyclerview.QuickAdapter
 import com.wpf.app.quickrecyclerview.ability.base.QuickItemAbility
@@ -32,10 +33,14 @@ open class QuickAbilityData(
         inflateAbility.layoutView(),
         inflateAbility.layoutViewCreate()
     )
-    view = inflateAbility.generateContentView(this.activity().forceTo(), view)
-    inflateAbility.afterGenerateContentView(this.activity().forceTo(), view)
+    abilityList.filterIsInstance<QuickGenerateViewAbility>().forEach {
+        view = it.generateContentView(this.activity().forceTo(), view)
+    }
+    abilityList.filterIsInstance<QuickGenerateViewAbility>().forEach {
+        it.afterGenerateContentView(this.activity().forceTo(), view)
+    }
     view
-}, autoSet = autoSet, isSuspension = isSuspension), QuickView {
+}, autoSet = autoSet, isSuspension = isSuspension), Quick {
     var isDealBinding = false
 
     @CallSuper

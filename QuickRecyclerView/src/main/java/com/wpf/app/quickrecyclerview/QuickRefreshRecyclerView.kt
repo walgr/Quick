@@ -7,6 +7,7 @@ import com.wpf.app.quickrecyclerview.data.QuickItemData
 import com.wpf.app.quickrecyclerview.data.RequestData
 import com.wpf.app.quickrecyclerview.listeners.RefreshView
 import com.wpf.app.quickrecyclerview.listeners.Request2ListWithView
+import com.wpf.app.quickutil.other.nullDefault
 
 /**
  * Created by 王朋飞 on 2022/7/13.
@@ -32,7 +33,7 @@ open class QuickRefreshRecyclerView @JvmOverloads constructor(
             refreshView?.onRefreshEnd(data)
             getQuickAdapter().mDataList?.clear()
             getQuickAdapter().appendList(data)
-            requestData.loadDataSize(data?.size ?: 0)
+            requestData.loadDataSize(data?.size.nullDefault(0))
             if (mDataChangeListener?.refreshFinish(hasMore) != true) {
                 adapter.notifyDataSetChanged()
             }
@@ -44,10 +45,10 @@ open class QuickRefreshRecyclerView @JvmOverloads constructor(
         override fun backData(data: List<QuickItemData>?, hasMore: Boolean) {
             refreshView?.onLoadMoreEnd(data)
             appendList(data)
-            requestData.loadDataSize(data?.size ?: 0)
+            requestData.loadDataSize(data?.size.nullDefault(0))
             if (mDataChangeListener?.loadMoreFinish(hasMore) != true) {
                 adapter.notifyItemRangeInserted(
-                    size() - (data?.size ?: 0), (data?.size ?: 0)
+                    size() - data?.size.nullDefault(0), data?.size.nullDefault(0)
                 )
             }
         }

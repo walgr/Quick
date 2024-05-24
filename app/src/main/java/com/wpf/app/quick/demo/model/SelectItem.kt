@@ -88,7 +88,7 @@ class ParentTitleSelectItem(
     }
 }
 
-open class SelectItem : QuickChildSelectData(layoutId = R.layout.holder_select_item) {
+open class SelectItem : QuickChildSelectData(layoutId = R.layout.holder_select_item, isGlobal = false) {
 
     @SuppressLint("NonConstantResourceId")
     @BindData2View(id = R.id.select, helper = Select2CheckBox::class)

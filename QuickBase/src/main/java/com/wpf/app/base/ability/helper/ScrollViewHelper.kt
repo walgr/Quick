@@ -1,15 +1,16 @@
-package com.wpf.app.quickwork.ability.helper
+package com.wpf.app.base.ability.helper
 
 import android.view.ViewGroup
 import android.widget.ScrollView
 import androidx.core.widget.NestedScrollView
+import com.wpf.app.base.ability.scope.ContextScope
 import com.wpf.app.base.ability.scope.ViewGroupScope
 import com.wpf.app.base.ability.scope.createViewGroupScope
 import com.wpf.app.quickutil.helper.InitViewHelper
 import com.wpf.app.quickutil.helper.matchMarginLayoutParams
 import com.wpf.app.quickutil.helper.matchWrapMarginLayoutParams
 
-inline fun <reified T : ViewGroup> ViewGroupScope<out ViewGroup>.scroll(
+inline fun <reified T : ViewGroup> ContextScope.scroll(
     layoutParams: ViewGroup.LayoutParams = matchWrapMarginLayoutParams(),
     noinline builder: (ViewGroupScope<T>.() -> Unit)? = null,
 ): ScrollView {
@@ -22,7 +23,7 @@ inline fun <reified T : ViewGroup> ViewGroupScope<out ViewGroup>.scroll(
     return view
 }
 
-inline fun <reified T : ViewGroup> ViewGroupScope<out ViewGroup>.nestedScroll(
+inline fun <reified T : ViewGroup> ContextScope.nestedScroll(
     layoutParams: ViewGroup.LayoutParams = matchWrapMarginLayoutParams(),
     noinline builder: (ViewGroupScope<T>.() -> Unit)? = null,
 ): NestedScrollView {

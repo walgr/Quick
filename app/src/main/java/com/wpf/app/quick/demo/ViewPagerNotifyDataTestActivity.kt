@@ -2,7 +2,7 @@ package com.wpf.app.quick.demo
 
 import android.widget.LinearLayout
 import com.wpf.app.quick.ability.QuickActivity
-import com.wpf.app.quick.ability.ex.contentViewWithSelf
+import com.wpf.app.base.ability.ex.contentViewWithSelf
 import com.wpf.app.quick.ability.helper.viewPager
 import com.wpf.app.quick.annotations.getclass.GetClass
 import com.wpf.app.quickwork.ability.helper.smartRefreshLayout
@@ -28,7 +28,7 @@ class ViewPagerNotifyDataTestActivity : QuickActivity(
             finishRefresh()
         }, contentBuilder = {
             viewPager<TestFragment>(
-                quickView = this@contentViewWithSelf.self,
+                quick = this@contentViewWithSelf.self,
                 defaultSize = this@contentViewWithSelf.self.fragmentData.size,
                 isLoop = true
             )

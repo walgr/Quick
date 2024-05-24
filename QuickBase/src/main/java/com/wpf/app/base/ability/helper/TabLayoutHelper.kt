@@ -1,17 +1,16 @@
-package com.wpf.app.quickwork.ability.helper
+package com.wpf.app.base.ability.helper
 
 import android.view.View
-import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams
 import com.google.android.material.tabs.TabLayout
-import com.wpf.app.base.ability.scope.ViewGroupScope
-import com.wpf.app.quick.ability.helper.smartLayoutParams
+import com.wpf.app.base.ability.scope.ContextScope
+import com.wpf.app.quickutil.helper.matchWrapMarginLayoutParams
 import com.wpf.app.quickutil.helper.toView
 
-fun ViewGroupScope<out ViewGroup>.tabLayout(
+fun ContextScope.tabLayout(
     tabLayoutRes: Int = 0,
     tabSize: Int = 0,
-    layoutParams: LayoutParams = smartLayoutParams(),
+    layoutParams: LayoutParams = matchWrapMarginLayoutParams(),
     tabInit: ((position: Int, tabView: View) -> Unit)? = null,
     builder: (TabLayout.() -> Unit)? = null,
 ): TabLayout {

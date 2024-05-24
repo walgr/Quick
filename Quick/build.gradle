@@ -43,20 +43,18 @@ dependencies {
     implementation deps.androidx.constraintlayout
     //列表
     implementation deps.androidx.recyclerview
-    //shapeView
-    api deps.shapeofview
 
     if (IS_REMOTE.toBoolean()) {
-        api deps.quickbind.bind
+        api deps.quickbind.base
         api deps.quickbind.util
-        api deps.quickbind.network
+//        api deps.quickbind.network
         api deps.quickbind.recyclerview
         api deps.quickbind.dialog
         api deps.quickbind.widget
     } else {
-        api project(":QuickBind")
+        api project(":QuickBase")
         api project(":QuickUtil")
-        api project(":QuickNetwork")
+//        api project(":QuickNetwork")
         api project(":QuickRecyclerView")
         api project(":QuickDialog")
         api project(":QuickWidget")

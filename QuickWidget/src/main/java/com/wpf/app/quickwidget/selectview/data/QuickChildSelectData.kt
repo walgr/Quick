@@ -3,6 +3,7 @@ package com.wpf.app.quickwidget.selectview.data
 import android.view.View
 import android.view.ViewGroup
 import com.wpf.app.quickutil.other.asTo
+import com.wpf.app.quickutil.other.nullDefault
 import com.wpf.app.quickutil.run.RunItemClickWithSelf
 import com.wpf.app.quickutil.run.RunOnContextWithSelf
 import java.io.Serializable
@@ -46,7 +47,7 @@ open class QuickChildSelectData(
 ), Serializable {
 
     fun getChildSelectSize(): Int {
-        return getChildSelectList()?.size ?: 0
+        return getChildSelectList()?.size.nullDefault(0)
     }
 
     fun getChildSelectList(): List<QuickChildSelectData>? {

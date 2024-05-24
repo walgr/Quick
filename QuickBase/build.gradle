@@ -30,7 +30,11 @@ dependencies {
     implementation deps.androidx.fragmentktx
     implementation deps.androidx.annotation
     implementation deps.androidx.recyclerview
-
+    implementation deps.androidx.material
+    //约束布局
+    implementation deps.androidx.constraintlayout
+    //shapeView
+    implementation deps.shapeofview
     if (IS_REMOTE.toBoolean()) {
         api deps.quickbind.util
     } else {

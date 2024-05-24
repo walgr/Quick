@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import com.wpf.app.quick.ability.QuickFragment
-import com.wpf.app.quick.ability.ex.contentView
+import com.wpf.app.base.ability.ex.contentView
 import com.wpf.app.quick.annotations.bind.BindView
 import com.wpf.app.quickbind.annotations.AutoGet
 import com.wpf.app.quickutil.other.printLog

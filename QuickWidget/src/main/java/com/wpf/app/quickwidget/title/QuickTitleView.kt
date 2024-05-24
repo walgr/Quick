@@ -24,6 +24,7 @@ import com.wpf.app.quickutil.helper.sp
 import com.wpf.app.quickutil.helper.toColor
 import com.wpf.app.quickutil.helper.toDrawable
 import com.wpf.app.quickutil.helper.toView
+import com.wpf.app.quickutil.other.nullDefault
 import com.wpf.app.quickutil.widget.wishLayoutParams
 import com.wpf.app.quickwidget.R
 import com.wpf.app.quickwidget.group.QuickSpaceLinearLayout
@@ -151,10 +152,10 @@ open class QuickTitleView @JvmOverloads constructor(
                     showBackIcon = showBackIcon ?: false,
                     isLinearLayout = isLinearLayout ?: true,
                     isAbsoluteCenter = isAbsoluteCenter ?: true,
-                    space = space ?: 0
+                    space = space.nullDefault(0)
                 )
             }
-            moreGroup?.updateLayoutParams<MarginLayoutParams> { marginEnd = space ?: 0 }
+            moreGroup?.updateLayoutParams<MarginLayoutParams> { marginEnd = space.nullDefault(0) }
         }
     }
 
@@ -272,9 +273,9 @@ open class QuickTitleView @JvmOverloads constructor(
         curAttrs?.apply {
             if (isInEditMode && isAbsoluteCenter == true && titleGroup != null && ivBack != null && moreGroup != null) {
                 val minL =
-                    if (showBackIcon == true && isLinearLayout == true) ivBack!!.width else (space
-                        ?: 0)
-                val minE = (space ?: 0) + if (isLinearLayout == true) moreGroup!!.width else 0
+                    if (showBackIcon == true && isLinearLayout == true) ivBack!!.width else space
+                        .nullDefault(0)
+                val minE = space.nullDefault(0) + if (isLinearLayout == true) moreGroup!!.width else 0
                 val titleGroupL = when (contentGravity) {
                     CONTENT_GRAVITY_CENTER -> {
                         ((l + r - titleGroup!!.width) / 2).coerceIn(l + minL, (l + r) / 2)
@@ -382,7 +383,7 @@ interface QuickTitleThemeI {
         subTitleBold = subTitleBold ?: false
         subTitleSize = subTitleSize ?: 14f.sp
         space = space ?: 16.dp
-        titleSpace = titleSpace ?: 0
+        titleSpace = titleSpace.nullDefault(0)
         isAbsoluteCenter = isAbsoluteCenter ?: true
     }
 

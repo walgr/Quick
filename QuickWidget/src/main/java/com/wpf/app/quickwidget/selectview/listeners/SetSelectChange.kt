@@ -9,5 +9,5 @@ import com.wpf.app.quickwidget.selectview.data.QuickChildSelectData
 interface SetSelectChange {
     fun setOnSelectChangeListener(onSelectChange: OnSelectOnChange)
     fun getOnSelectChangeListener(): OnSelectOnChange?
-    fun getSelectList(): List<QuickChildSelectData>?
+    fun getSelectList(parentId: String? = null): List<QuickChildSelectData>?
 }

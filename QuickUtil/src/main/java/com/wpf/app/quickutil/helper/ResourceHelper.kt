@@ -1,6 +1,7 @@
 package com.wpf.app.quickutil.helper
 
 import android.content.Context
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.annotation.AnimRes
+import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.LayoutRes
@@ -31,6 +33,10 @@ fun @receiver:ColorRes Int.toColor(context: Context? = QuickInit.getContext()): 
         throw RuntimeException("context is null")
     }
     return ContextCompat.getColor(context, this)
+}
+
+fun @receiver:ColorInt Int.alpha(alpha: Float): Int {
+    return Color.argb((alpha * 256).toInt(), Color.red(this), Color.green(this), Color.blue(this))
 }
 
 fun @receiver:AnimRes Int.toAnim(context: Context? = QuickInit.getContext()): Animation {

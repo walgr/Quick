@@ -19,15 +19,16 @@ import androidx.annotation.IdRes
 import androidx.core.view.children
 import androidx.core.view.drawToBitmap
 import androidx.viewpager.widget.ViewPager
-import com.wpf.app.quickutil.helper.myContentView
 import com.wpf.app.quickutil.helper.anim
 import com.wpf.app.quickutil.helper.attribute.AutoGetAttributeHelper
-import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.helper.getLocationInWindow
+import com.wpf.app.quickutil.helper.myContentView
+import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.other.forceTo
+import com.wpf.app.quickutil.other.nullDefault
+import com.wpf.app.quickutil.widget.QuickViewGroup
 import com.wpf.app.quickutil.widget.onPageScrollStateChanged
 import com.wpf.app.quickutil.widget.onPageScrolled
-import com.wpf.app.quickutil.widget.QuickViewGroup
 import com.wpf.app.quickwidget.R
 import kotlin.math.max
 
@@ -90,7 +91,7 @@ class BottomTabLayout @JvmOverloads constructor(
                 }
             }
             circleR = max(animView.width, animView.height).toFloat()
-            viewCenterX = (viewLocation[animView]?.first() ?: 0f) + animView.width / 2f
+            viewCenterX = (viewLocation[animView]?.first().nullDefault(0f)) + animView.width / 2f
             viewHeight = animView.height
             contentAppend = 10f
             paddingTopH = 2 * contentR - circleR
@@ -361,7 +362,7 @@ class BottomTabLayout @JvmOverloads constructor(
         AutoGetAttributeHelper.init<BottomTabLayoutAttr>(
             context, attrs, R.styleable.BottomTabLayout
         ).apply {
-            this@BottomTabLayout.animViewId = animView ?: 0
+            this@BottomTabLayout.animViewId = animView.nullDefault(0)
         }
     }
 

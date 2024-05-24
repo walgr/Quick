@@ -2,7 +2,7 @@ package com.wpf.app.quick.demo.wanandroid.fragment
 
 import android.widget.FrameLayout
 import com.wpf.app.quick.ability.QuickFragment
-import com.wpf.app.quick.ability.ex.contentView
+import com.wpf.app.base.ability.ex.contentView
 import com.wpf.app.quick.demo.http.request
 import com.wpf.app.quick.demo.model.ListRequest
 import com.wpf.app.quick.demo.wanandroid.model.Article

@@ -8,7 +8,6 @@ import android.widget.EditText
 import androidx.annotation.ColorInt
 import com.wpf.app.base.ability.helper.addView
 import com.wpf.app.base.ability.scope.ContextScope
-import com.wpf.app.base.ability.scope.ViewGroupScope
 import com.wpf.app.quickutil.helper.wrapMarginLayoutParams
 import com.wpf.app.quickwidget.shadow.ShadowEditView
 import com.wpf.app.quickwork.widget.theme.QuickEditTheme
@@ -26,7 +25,7 @@ fun EditText.setTheme(
     }.setTheme(theme)
 }
 
-fun ViewGroupScope<out ViewGroup>.shadowEdit(
+fun ContextScope.shadowEdit(
     layoutParams: ViewGroup.LayoutParams = wrapMarginLayoutParams(),
     background: Drawable? = null,
     hint: String? = null,

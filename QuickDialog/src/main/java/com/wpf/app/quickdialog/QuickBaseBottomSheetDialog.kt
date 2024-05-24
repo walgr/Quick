@@ -13,7 +13,7 @@ import androidx.annotation.StyleRes
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.wpf.app.base.NO_SET
-import com.wpf.app.base.QuickView
+import com.wpf.app.base.Quick
 import com.wpf.app.base.bind.QuickBindWrap
 import com.wpf.app.quickdialog.helper.DialogSheetHelper
 import com.wpf.app.quickdialog.helper.DialogSizeHelper
@@ -32,7 +32,7 @@ open class QuickBaseBottomSheetDialog(
     @LayoutRes private val layoutId: Int = 0,
     private val layoutView: View? = null,
     private var layoutViewCreate: (Context.() -> View)? = null,
-) : BottomSheetDialog(context, true, null), SheetInit, DialogSize, DialogLifecycle, QuickView {
+) : BottomSheetDialog(context, true, null), SheetInit, DialogSize, DialogLifecycle, Quick {
 
     private var mView: View? = null
     override fun getView(): View? {

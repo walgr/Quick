@@ -3,11 +3,11 @@ package com.wpf.app.quick.demo.dialog
 import android.content.Context
 import android.view.Gravity
 import android.widget.LinearLayout
-import com.wpf.app.quick.ability.ex.contentView
-import com.wpf.app.quick.ability.helper.background
-import com.wpf.app.quick.ability.helper.gravity
-import com.wpf.app.quick.ability.helper.myLayout
-import com.wpf.app.quick.ability.helper.rect
+import com.wpf.app.base.ability.helper.background
+import com.wpf.app.base.ability.helper.gravity
+import com.wpf.app.base.ability.helper.rect
+import com.wpf.app.base.ability.ex.contentView
+import com.wpf.app.base.ability.helper.viewGroupCreate
 import com.wpf.app.quickutil.helper.dp
 import com.wpf.app.quickutil.helper.matchMarginLayoutParams
 import com.wpf.app.quickwork.ability.helper.text
@@ -18,7 +18,7 @@ class Test2Dialog(
 ) : QuickThemeDialog(
     context,
     abilityList = contentView(layoutViewCreate = {
-            myLayout<LinearLayout>(layoutParams = matchMarginLayoutParams()) {
+            viewGroupCreate<LinearLayout>(layoutParams = matchMarginLayoutParams()) {
             text(text = "Test2Dialog").gravity(Gravity.CENTER)
         }.background {
             rect(topLeftRadius = 12f.dp, topRightRadius = 12f.dp)

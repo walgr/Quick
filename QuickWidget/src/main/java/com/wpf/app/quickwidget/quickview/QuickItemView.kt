@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import com.wpf.app.base.bind.Bind
+import com.wpf.app.quickutil.other.nullDefault
 import com.wpf.app.quickutil.run.RunOnContext
 import kotlin.math.abs
 
@@ -78,8 +79,8 @@ abstract class QuickItemView @JvmOverloads constructor(
         getView()?.measure(widthMeasureSpec, heightMeasureSpec)
         val specModeWidth = MeasureSpec.getMode(widthMeasureSpec)
         val specModeHeight = MeasureSpec.getMode(heightMeasureSpec)
-        val viewMeasureWidth = getView()?.measuredWidth ?: 0
-        val viewMeasureHeight = getView()?.measuredHeight ?: 0
+        val viewMeasureWidth = getView()?.measuredWidth.nullDefault(0)
+        val viewMeasureHeight = getView()?.measuredHeight.nullDefault(0)
         setMeasuredDimension(
             MeasureSpec.makeMeasureSpec(viewMeasureWidth, specModeWidth),
             MeasureSpec.makeMeasureSpec(viewMeasureHeight, specModeHeight)

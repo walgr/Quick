@@ -6,9 +6,10 @@ import android.view.View
 import androidx.annotation.CallSuper
 import androidx.lifecycle.ViewModel
 import com.wpf.app.base.ability.base.QuickAbility
+import com.wpf.app.base.ability.base.QuickGenerateViewAbility
 import com.wpf.app.base.ability.base.QuickInflateViewAbility
 import com.wpf.app.base.ability.base.QuickLifecycleAbility
-import com.wpf.app.base.ability.base.QuickViewAbility
+import com.wpf.app.base.ability.base.QuickInitViewAbility
 import com.wpf.app.quick.ability.ex.base.QuickFragmentAbility
 import com.wpf.app.quickbind.interfaces.BindViewModel
 import com.wpf.app.quickdialog.QuickBaseDialogFragment
@@ -49,17 +50,20 @@ open class QuickDialogFragment(
 
     @CallSuper
     override fun generateContentView(view: View): View {
-        val inflateViewAbility =
-            abilityList.first { it is QuickInflateViewAbility }.forceTo<QuickInflateViewAbility>()
-        return inflateViewAbility.generateContentView(this, view.forceTo<View>())
+        var newView = view
+        abilityList.filterIsInstance<QuickGenerateViewAbility>().forEach {
+            newView = it.generateContentView(this, newView)
+        }
+        return newView
     }
 
     @CallSuper
     override fun initView(view: View) {
-        abilityList.filterIsInstance<QuickViewAbility>().forEach {
+        abilityList.filterIsInstance<QuickGenerateViewAbility>().forEach {
             it.afterGenerateContentView(this, view)
         }
-        abilityList.filterIsInstance<QuickViewAbility>().forEach {
+        super.initView(view)
+        abilityList.filterIsInstance<QuickInitViewAbility>().forEach {
             it.initView(this, view)
         }
     }

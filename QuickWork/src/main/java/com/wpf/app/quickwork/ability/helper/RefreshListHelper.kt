@@ -11,10 +11,9 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.scwang.smart.refresh.layout.api.RefreshFooter
 import com.scwang.smart.refresh.layout.api.RefreshHeader
 import com.scwang.smart.refresh.layout.api.RefreshLayout
+import com.wpf.app.base.ability.helper.addView
+import com.wpf.app.base.ability.helper.viewCreateConvert
 import com.wpf.app.base.ability.scope.ContextScope
-import com.wpf.app.base.ability.scope.ViewGroupScope
-import com.wpf.app.quick.ability.ex.viewCreateConvert
-import com.wpf.app.quick.ability.helper.smartLayoutParams
 import com.wpf.app.quickbind.helper.binddatahelper.BindData2ViewHelper
 import com.wpf.app.quickrecyclerview.QuickRefreshRecyclerView
 import com.wpf.app.quickrecyclerview.data.QuickItemData
@@ -24,12 +23,13 @@ import com.wpf.app.quickrecyclerview.listeners.RefreshView
 import com.wpf.app.quickrecyclerview.listeners.Request2ListWithView
 import com.wpf.app.quickutil.helper.InitViewHelper
 import com.wpf.app.quickutil.helper.matchMarginLayoutParams
+import com.wpf.app.quickutil.helper.matchWrapMarginLayoutParams
 import com.wpf.app.quickutil.helper.parent
 import com.wpf.app.quickutil.helper.removeParent
 import com.wpf.app.quickutil.other.forceTo
 
-fun <V : View> ViewGroupScope<out ViewGroup>.smartRefreshLayout(
-    layoutParams: ViewGroup.LayoutParams = smartLayoutParams(),
+fun <V : View> ContextScope.smartRefreshLayout(
+    layoutParams: ViewGroup.LayoutParams = matchWrapMarginLayoutParams(),
     header: RefreshHeader = ClassicsHeader(context),
     footer: RefreshFooter = ClassicsFooter(context),
     autoRefresh: Boolean = true,
@@ -66,8 +66,8 @@ fun <V : View> ViewGroupScope<out ViewGroup>.smartRefreshLayout(
     return smartRefreshLayout
 }
 
-fun ViewGroupScope<out ViewGroup>.smartRefreshList(
-    layoutParams: ViewGroup.LayoutParams = smartLayoutParams(),
+fun ContextScope.smartRefreshList(
+    layoutParams: ViewGroup.LayoutParams = matchWrapMarginLayoutParams(),
     layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(context),
     header: RefreshHeader = ClassicsHeader(context),
     footer: RefreshFooter = ClassicsFooter(context),

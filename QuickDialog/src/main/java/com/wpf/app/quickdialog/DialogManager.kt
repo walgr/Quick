@@ -2,6 +2,7 @@ package com.wpf.app.quickdialog
 
 import android.app.Dialog
 import com.wpf.app.quickutil.helper.getRealActivity
+import com.wpf.app.quickutil.other.nullDefault
 
 fun Dialog?.showInManager(
     showWithOther: Boolean = false,
@@ -23,7 +24,7 @@ object DialogManager {
         recoverInDismiss: Boolean = true
     ) {
         if (dialog == null || dialog.getRealActivity()?.isFinishing == true || dialog.getRealActivity()?.isDestroyed == true) return
-        val maxPriority = showingDialog.keys.maxOrNull() ?: 0
+        val maxPriority = showingDialog.keys.maxOrNull().nullDefault(0)
         val curIsMax: Boolean
         val realPriority = if (priority == AUTO_PRIORITY) {
             curIsMax = true

@@ -4,10 +4,10 @@ import android.annotation.SuppressLint
 import android.widget.FrameLayout
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.wpf.app.base.ability.base.with
-import com.wpf.app.quick.ability.ex.contentView
-import com.wpf.app.quick.ability.helper.background
-import com.wpf.app.quick.ability.helper.myLayout
-import com.wpf.app.quick.ability.helper.rect
+import com.wpf.app.base.ability.helper.background
+import com.wpf.app.base.ability.helper.rect
+import com.wpf.app.base.ability.ex.contentView
+import com.wpf.app.base.ability.helper.viewGroupCreate
 import com.wpf.app.quick.annotations.bind.BindData2View
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.demo.databinding.DragItemBinding
@@ -31,7 +31,7 @@ import com.wpf.app.quickutil.run.runOnView
  */
 class BindDataTestModel(private val index: Int = 0) : QuickAbilityData(
     abilityList = contentView<FrameLayout> {
-        myLayout(R.layout.holder_image, layoutParams = matchWrapMarginLayoutParams()).background {
+        viewGroupCreate(R.layout.holder_image, layoutParams = matchWrapMarginLayoutParams()).background {
             rect(radius = 8f.dp)
         }
     }.with(bindWSelf<HolderImageBinding, BindDataTestModel> {

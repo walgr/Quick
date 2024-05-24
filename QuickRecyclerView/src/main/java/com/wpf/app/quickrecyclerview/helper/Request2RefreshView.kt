@@ -8,6 +8,7 @@ import com.wpf.app.quickrecyclerview.data.QuickItemData
 import com.wpf.app.quickrecyclerview.data.RequestData
 import com.wpf.app.quickrecyclerview.listeners.RefreshView
 import com.wpf.app.quickrecyclerview.listeners.Request2ListWithView
+import com.wpf.app.quickutil.other.nullDefault
 import java.lang.reflect.ParameterizedType
 
 object Request2RefreshView :
@@ -35,7 +36,7 @@ object Request2RefreshView :
                     view.refreshView?.onRefreshEnd(data)
                     quickAdapter.mDataList?.clear()
                     quickAdapter.appendList(data)
-                    requestData.loadDataSize(data?.size ?: 0)
+                    requestData.loadDataSize(data?.size.nullDefault(0))
                     if (!realData.refreshFinish(hasMore)) {
                         quickAdapter.notifyDataSetChanged()
                     }
@@ -45,7 +46,7 @@ object Request2RefreshView :
                 override fun backData(data: List<QuickItemData>?, hasMore: Boolean) {
                     view.refreshView?.onLoadMoreEnd(data)
                     quickAdapter.appendList(data)
-                    realData.requestData?.loadDataSize(data?.size ?: 0)
+                    realData.requestData?.loadDataSize(data?.size.nullDefault(0))
                     if (!realData.loadMoreFinish(hasMore)) {
                         quickAdapter.notifyDataSetChanged()
                     }

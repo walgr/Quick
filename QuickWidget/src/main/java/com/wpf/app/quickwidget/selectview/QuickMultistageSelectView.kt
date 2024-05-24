@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import com.wpf.app.quickrecyclerview.utils.QuickStickyHelper
 import com.wpf.app.quickrecyclerview.utils.StickyItemDecoration
+import com.wpf.app.quickutil.other.nullDefault
 import com.wpf.app.quickwidget.selectview.data.QuickChildSelectData
 import com.wpf.app.quickwidget.selectview.data.QuickParentSelectData
 import com.wpf.app.quickwidget.selectview.helper.ParentChildDataHelper
@@ -83,7 +84,7 @@ open class QuickMultistageSelectView @JvmOverloads constructor(
                     val curTopData =
                         selectAdapter.getRealTypeData<QuickChildSelectData>()?.get(curTopPos)
                     if (curTopData?.isInOne != true) return
-                    val parentDataSize: Int = selectAdapter.parentSelectAdapter?.size() ?: 0
+                    val parentDataSize: Int = selectAdapter.parentSelectAdapter?.size().nullDefault(0)
                     val parentPos: Int =
                         selectAdapter.parentSelectAdapter?.getDataPos(curTopData.parent) ?: -1
                     if (parentPos in 0 until parentDataSize) {

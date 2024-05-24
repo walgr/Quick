@@ -1,4 +1,4 @@
-package com.wpf.app.quick.ability.helper
+package com.wpf.app.quickutil.helper
 
 import android.content.res.ColorStateList
 import androidx.annotation.ColorInt

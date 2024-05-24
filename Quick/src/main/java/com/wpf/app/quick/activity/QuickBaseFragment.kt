@@ -14,7 +14,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
-import com.wpf.app.base.QuickView
+import com.wpf.app.base.Quick
 import com.wpf.app.base.bind.Bind
 import com.wpf.app.base.bind.QuickBindWrap
 import com.wpf.app.quickbind.interfaces.BindBaseFragment
@@ -30,7 +30,7 @@ open class QuickBaseFragment @JvmOverloads constructor(
     @LayoutRes open val layoutId: Int = 0,
     open val layoutView: View? = null,
     open val layoutViewCreate: (Context.() -> View)? = null,
-) : Fragment(), BindBaseFragment, RequestCoroutineScope, QuickView, Bind {
+) : Fragment(), BindBaseFragment, RequestCoroutineScope, Quick, Bind {
 
     override var jobManager: MutableList<Job> = mutableListOf()
 

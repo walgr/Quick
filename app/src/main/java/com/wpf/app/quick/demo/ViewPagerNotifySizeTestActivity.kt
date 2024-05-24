@@ -3,7 +3,7 @@ package com.wpf.app.quick.demo
 import android.widget.LinearLayout
 import android.widget.Toast
 import com.wpf.app.quick.ability.QuickActivity
-import com.wpf.app.quick.ability.ex.contentViewWithSelf
+import com.wpf.app.base.ability.ex.contentViewWithSelf
 import com.wpf.app.quick.ability.helper.viewPager
 import com.wpf.app.quickbind.viewpager2.ViewPagerHelper
 import com.wpf.app.quickutil.helper.postDelay
@@ -18,7 +18,7 @@ class ViewPagerNotifySizeTestActivity : QuickActivity(
     contentViewWithSelf<ViewPagerNotifySizeTestActivity, LinearLayout> {
         title("ViewPager刷新测试")
         viewPager<TestFragment>(
-            quickView = self,
+            quick = self,
             defaultSize = self.fragmentData.size,
             isLoop = false
         ) {
