@@ -54,8 +54,8 @@ interface DataSelectOnAdapter : DataAdapter, SetSelectChange {
         }
         if (curItemSelect != childSelectData.isSelect) {
             childSelectData.onSelectChange(childSelectData.isSelect)
-            getSelectAdapter().getOnSelectChangeListener()?.onSelectChange()
         }
+        getSelectAdapter().getOnSelectChangeListener()?.onSelectChange()
         childSelectData.parent?.onSelectChildChange(getSelectList(childSelectData.parent?.id))
         notifyItemChange()
     }
