@@ -25,6 +25,7 @@ open class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>()
     private var mQuickAdapterListener: QuickAdapterListener<QuickItemData>? = null
 
     internal var mDataList: MutableList<QuickItemData>? = null
+    internal var allDataList: MutableList<QuickItemData>? = null
     val headerViews = mutableListOf<QuickHeaderData>()
     val footerViews = mutableListOf<QuickFooterData>()
 

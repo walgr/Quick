@@ -21,6 +21,7 @@ import com.wpf.app.quickrecyclerview.widget.QuickHeaderShadow
 import com.wpf.app.quickutil.helper.attribute.AutoGetAttributeHelper
 import com.wpf.app.quickutil.helper.children
 import com.wpf.app.quickutil.other.asTo
+import com.wpf.app.quickutil.other.nullDefault
 
 /**
  * Created by 王朋飞 on 2022/7/13.
@@ -50,9 +51,10 @@ open class QuickRecyclerView @JvmOverloads constructor(
         }
     }
 
+    private var isSetSpanSizeLookup = false
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        if (layoutManager is GridLayoutManager) {
+        if (layoutManager is GridLayoutManager && !isSetSpanSizeLookup) {
             layoutManager?.asTo<GridLayoutManager>()?.apply {
                 spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                     override fun getSpanSize(position: Int): Int {
@@ -70,10 +72,11 @@ open class QuickRecyclerView @JvmOverloads constructor(
                         return if (isHeaderOrFooter && isMatch) {
                             spanCount
                         } else {
-                            1
+                            itemData?.getSpanSize(spanCount).nullDefault(1)
                         }
                     }
                 }
+                isSetSpanSizeLookup = true
             }
         }
     }
@@ -84,13 +87,24 @@ open class QuickRecyclerView @JvmOverloads constructor(
         }
     }
 
+    private var spaceItemDecoration: SpaceItemDecoration? = null
     open fun setSpace(
         space: Int,
         spaceType: Int = SpaceType.Center.type,
         includeFirst: Boolean = false,
         includeLast: Boolean = false,
     ) {
-        addItemDecoration(SpaceItemDecoration(space, spaceType, includeFirst, includeLast))
+        spaceItemDecoration?.let {
+            removeItemDecoration(it)
+        }
+        if (spaceItemDecoration == null) {
+            spaceItemDecoration = SpaceItemDecoration(space, spaceType, includeFirst, includeLast)
+        }
+        spaceItemDecoration!!.space = space
+        spaceItemDecoration!!.spaceType = spaceType
+        spaceItemDecoration!!.includeFirst = includeFirst
+        spaceItemDecoration!!.includeLast = includeLast
+        addItemDecoration(spaceItemDecoration!!)
     }
 
     private var isFirst = true

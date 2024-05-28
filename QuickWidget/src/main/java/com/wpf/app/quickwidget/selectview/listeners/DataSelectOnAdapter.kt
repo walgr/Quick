@@ -55,8 +55,8 @@ interface DataSelectOnAdapter : DataAdapter, SetSelectChange {
         if (curItemSelect != childSelectData.isSelect) {
             childSelectData.onSelectChange(childSelectData.isSelect)
             getSelectAdapter().getOnSelectChangeListener()?.onSelectChange()
-            childSelectData.parent?.onSelectChildChange(getSelectList())
         }
+        childSelectData.parent?.onSelectChildChange(getSelectList(childSelectData.parent?.id))
         notifyItemChange()
     }
 
@@ -89,20 +89,12 @@ interface DataSelectOnAdapter : DataAdapter, SetSelectChange {
         childSelectData: QuickChildSelectData,
         dealChange: Boolean = true,
     ) {
-        asParentSelectData()?.find {
-            it == childSelectData.parent
-        }?.let {
+        asChildSelectData()?.filter { it.parent == childSelectData.parent }?.forEach {
             val changePos = arrayListOf<Int>()
             if (it.isSelect != it.defaultSelect) {
                 changePos.add(indexOf(it))
             }
             it.isSelect = it.defaultSelect
-            it.childList?.forEach { child ->
-                if (child.isSelect != child.defaultSelect) {
-                    changePos.add(indexOf(child))
-                }
-                child.isSelect = child.defaultSelect
-            }
             if (dealChange) {
                 notifyItemChange(changePos)
             }
@@ -162,14 +154,14 @@ interface DataSelectOnAdapter : DataAdapter, SetSelectChange {
     }
 
     fun asSelectData(): MutableList<QuickSelectData>? {
-        return getData() as? MutableList<QuickSelectData>
+        return getData()?.filterIsInstance<QuickSelectData>()?.toMutableList()
     }
 
     fun asChildSelectData(): MutableList<QuickChildSelectData>? {
-        return getData() as? MutableList<QuickChildSelectData>
+        return getData()?.filterIsInstance<QuickChildSelectData>()?.toMutableList()
     }
 
     fun asParentSelectData(): MutableList<QuickParentSelectData>? {
-        return getData() as? MutableList<QuickParentSelectData>
+        return getData()?.filterIsInstance<QuickParentSelectData>()?.toMutableList()
     }
 }

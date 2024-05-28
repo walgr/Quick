@@ -27,7 +27,7 @@
             app:spaceType="center"
             app:includeFirst="true"
             app:includeLast="true"
-            app:spanCount="2"
+            app:spanCount="3"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager" >
 
             <com.wpf.app.quickrecyclerview.widget.QuickHeaderShadow

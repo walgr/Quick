@@ -94,6 +94,20 @@ interface DataAdapter {
         return getQuickAdapter().mDataList
     }
 
+    fun getDataWithHeaderFooter(forceInit: Boolean = false): MutableList<QuickItemData>? {
+        if (getQuickAdapter().allDataList == null || forceInit) {
+            getQuickAdapter().allDataList = mutableListOf()
+            getQuickAdapter().allDataList!!.apply {
+                addAll(getQuickAdapter().headerViews)
+                getData()?.let {
+                    addAll(it)
+                }
+                addAll(getQuickAdapter().footerViews)
+            }
+        }
+        return getQuickAdapter().allDataList
+    }
+
     fun getData(position: Int): QuickItemData? {
         return getDataWithHeaderFooter(position)
     }

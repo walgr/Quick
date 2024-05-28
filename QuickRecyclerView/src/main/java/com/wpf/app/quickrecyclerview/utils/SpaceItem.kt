@@ -16,7 +16,7 @@ import java.io.Serializable
  */
 open class SpaceItem(
     open val space: Int,
-    open val isVertical: Boolean = true
+    open val isVertical: Boolean = true,
 ) : QuickBindData(layoutViewCreate = runOnContextWithSelf { context ->
     View(context)
 }), Serializable {
@@ -24,7 +24,7 @@ open class SpaceItem(
     override fun onBindViewHolder(
         adapter: QuickAdapter,
         viewHolder: QuickViewHolder<QuickBindData>,
-        position: Int
+        position: Int,
     ) {
         super.onBindViewHolder(adapter, viewHolder, position)
         BindData2ViewHelper.bind(
@@ -32,5 +32,10 @@ open class SpaceItem(
             space,
             if (isVertical) Height2View else Width2View
         )
+    }
+
+    override var dealSpaceItemDecoration: Boolean = false
+    override fun dealSpaceItemDecoration(pos: Int): Boolean {
+        return false
     }
 }

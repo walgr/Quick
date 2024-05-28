@@ -8,7 +8,7 @@ import com.wpf.app.quickutil.run.RunOnContextWithSelf
 import java.io.Serializable
 
 open class QuickViewData @JvmOverloads constructor(
-    @LayoutRes val layoutId: Int = 0,
+    @LayoutRes var layoutId: Int = 0,
     @Transient var layoutView: View? = null,
     @Transient var layoutViewInViewGroup: RunOnContextWithSelf<ViewGroup, View>? = null,
     isSuspension: Boolean = false       //View是否悬浮置顶

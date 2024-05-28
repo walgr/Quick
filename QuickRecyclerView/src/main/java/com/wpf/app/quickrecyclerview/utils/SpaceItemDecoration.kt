@@ -7,29 +7,44 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.wpf.app.quickrecyclerview.QuickAdapter
+import com.wpf.app.quickrecyclerview.data.QuickItemData
+import com.wpf.app.quickutil.log.LogUtil
+import com.wpf.app.quickutil.other.nullDefault
 
 class SpaceItemDecoration(
-    private val space: Int = 0,
-    private val spaceType: Int = SpaceType.Center.type,
-    private val includeFirst: Boolean = false,
-    private val includeLast: Boolean = false,
+    var space: Int = 0,
+    var spaceType: Int = SpaceType.Center.type,
+    var includeFirst: Boolean = false,
+    var includeLast: Boolean = false,
 ) : RecyclerView.ItemDecoration() {
+    private val TAG = "SpaceItemDecoration"
+    private val DEBUG = true
     override fun getItemOffsets(
         outRect: Rect,
         view: View,
         parent: RecyclerView,
-        state: RecyclerView.State
+        state: RecyclerView.State,
     ) {
         super.getItemOffsets(outRect, view, parent, state)
         if (parent.adapter == null) return
-        var pos = parent.getChildAdapterPosition(view)
-        var headerSize = 0
+        val oldPos = parent.getChildAdapterPosition(view)
+        var pos = oldPos
+        if (DEBUG) {
+            LogUtil.e(TAG, "当前原始pos:${pos}")
+        }
+        var noDealSpaceItemDecorationSize = 0
+        var itemData: QuickItemData? = null
         if (parent.adapter is QuickAdapter) {
-            headerSize = (parent.adapter as QuickAdapter).headerViews.size
-            if (pos < headerSize) {
-                return
-            }
-            pos -= headerSize
+            val quickAdapter = parent.adapter as QuickAdapter
+            itemData = quickAdapter.getData(pos)
+            if (itemData?.dealSpaceItemDecoration(pos) == false) return
+            noDealSpaceItemDecorationSize =
+                quickAdapter.getDataWithHeaderFooter()?.count { !it.dealSpaceItemDecoration(pos) }.nullDefault(0)
+            pos -= quickAdapter.getDataWithHeaderFooter()?.subList(0, pos)
+                ?.count { !it.dealSpaceItemDecoration(pos) }.nullDefault(0)
+        }
+        if (DEBUG) {
+            LogUtil.e(TAG, "当前新pos:${pos}")
         }
         val layoutManager = parent.layoutManager
         var startSpace = 0
@@ -46,7 +61,7 @@ class SpaceItemDecoration(
                 startSpace = 0
             }
         }
-        val allCount = parent.adapter!!.itemCount - headerSize
+        val allCount = parent.adapter!!.itemCount - noDealSpaceItemDecorationSize
         if (layoutManager is GridLayoutManager || layoutManager is StaggeredGridLayoutManager) {
             startSpace = space / 2          //保证同级view大小一致只能是Center
             val span = when (layoutManager) {
@@ -59,9 +74,15 @@ class SpaceItemDecoration(
                 is StaggeredGridLayoutManager -> layoutManager.orientation
                 else -> RecyclerView.VERTICAL
             }
-            val allRows = (allCount + 1) / span
-            val posMod = pos % span     //列数
-            val posDiv = pos / span     //行数
+            val allRows = itemData?.customAllRows(allCount, span)
+                .nullDefault((allCount + 1) / span)
+            val posMod = itemData?.customColumn(oldPos, span)
+                .nullDefault(pos % span)     //列数
+            val posDiv = itemData?.customRow(oldPos, span)
+                .nullDefault(pos / span)     //行数
+            if (DEBUG) {
+                LogUtil.e(TAG, "当前新pos总行数:${allRows}-列数:${posMod}-行数:${posDiv}")
+            }
             if (orientation == RecyclerView.VERTICAL) {
                 if (posMod in 1 until span) {
                     outRect.left = startSpace

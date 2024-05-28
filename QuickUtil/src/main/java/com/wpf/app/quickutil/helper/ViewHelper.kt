@@ -164,10 +164,10 @@ fun <T : View> T.padding(size: Int): T {
 }
 
 fun <T : View> T.padding(
-    start: Int = this.left,
-    top: Int = this.top,
-    end: Int = this.right,
-    bottom: Int = this.bottom,
+    start: Int = this.paddingLeft,
+    top: Int = this.paddingTop,
+    end: Int = this.paddingRight,
+    bottom: Int = this.paddingBottom,
 ): T {
     this.setPadding(start, top, end, bottom)
     return this
