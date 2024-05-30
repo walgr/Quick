@@ -11,14 +11,10 @@ import com.wpf.app.base.ability.base.QuickAbility
 import com.wpf.app.base.ability.base.Unique
 import com.wpf.app.quickrecyclerview.ability.base.QuickItemAbility
 import com.wpf.app.quickrecyclerview.data.QuickAbilityData
-import com.wpf.app.quickrecyclerview.data.QuickItemData
-import com.wpf.app.quickrecyclerview.holder.QuickViewBindingHolder
-import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
 import com.wpf.app.quickrecyclerview.widget.SwipeMenuLayout
 import com.wpf.app.quickutil.helper.toView
 import com.wpf.app.quickutil.helper.wrapMatchMarginLayoutParams
 import com.wpf.app.quickutil.other.asTo
-import com.wpf.app.quickutil.other.forceTo
 import com.wpf.app.quickutil.run.runOnContextWithSelf
 import com.wpf.app.quickutil.widget.wishLayoutParams
 
@@ -57,21 +53,21 @@ fun <T : QuickAbilityData> swipeMenu(
                     }
             }
 
-            override fun beforeHolderOnCreateHolder(
-                holder: QuickViewHolder<QuickItemData>,
-                selfOnlyBase: QuickAbilityData,
-            ) {
-                super.beforeHolderOnCreateHolder(holder, selfOnlyBase)
-                if (selfOnlyBase.isDealBinding) {
-                    holder.forceTo<QuickViewBindingHolder<QuickAbilityData, ViewDataBinding>>()
-                        .apply {
-                            holder.itemView.asTo<SwipeMenuLayout>()?.contentView()?.let {
-                                this.mViewBinding = DataBindingUtil.bind(it)
-                            }
-
-                        }
-                }
-            }
+//            override fun beforeHolderOnCreateHolder(
+//                holder: QuickViewHolder<QuickItemData>,
+//                selfOnlyBase: QuickAbilityData,
+//            ) {
+//                super.beforeHolderOnCreateHolder(holder, selfOnlyBase)
+//                if (selfOnlyBase.isDealBinding) {
+//                    holder.forceTo<QuickViewBindingHolder<QuickAbilityData, ViewDataBinding>>()
+//                        .apply {
+//                            holder.itemView.asTo<SwipeMenuLayout>()?.contentView()?.let {
+//                                this.mViewBinding = DataBindingUtil.bind(it)
+//                            }
+//
+//                        }
+//                }
+//            }
 
             override fun afterOnBindHolder(context: Context, self: QuickAbilityData) {
                 super.afterOnBindHolder(context, self)

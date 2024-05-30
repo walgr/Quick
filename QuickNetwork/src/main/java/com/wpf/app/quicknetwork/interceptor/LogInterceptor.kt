@@ -12,7 +12,7 @@ import java.io.IOException
 /**
  * Created by 王朋飞 on 2021/9/13.
  */
-class LogInterceptor(context: Context) : Interceptor {
+class LogInterceptor(context: Context, val showHeader: Boolean = false) : Interceptor {
 
     private val versionName = getPackageInfo(context)?.versionName
 
@@ -28,26 +28,31 @@ class LogInterceptor(context: Context) : Interceptor {
         e(TAG, "\n")
         e(TAG, "----------Start----------------")
         //            LogUtil.e(TAG, "| " + request.toString());
-        e(TAG, (("| Request:{method=" + request.method) + ", url=" + request.url) + ", version=" + versionName + "}")
+        e(
+            TAG,
+            (("| Request:{method=" + request.method) + ", url=" + request.url) + ", version=" + versionName + "}"
+        )
         val method = request.method
-        //            String headers = request.headers().toString();
-//            headers = headers.replaceAll("\n", " ");
-//            if (headers.length() > splitSize) {
-//                int i = 0;
-//                for (String string : splitString(headers)) {
-//                    LogUtil.e(TAG, (i++ == 0 ? "| Header:{" : "| ") + string);
-//                }
-//                System.out.println();
-//                LogUtil.e(TAG, "}");
-//            } else {
-//                LogUtil.e(TAG, "| Header:{" + headers + "}");
-//            }
+        if (showHeader) {
+            var headers = request.headers.toString()
+            headers = headers.replace("\n", " ")
+            if (headers.length > splitSize) {
+                splitString(headers).forEachIndexed { index, it ->
+                    e(TAG, if (index == 0) "| Header:{" else "| $it")
+                }
+                e(TAG, "\n")
+                e(TAG, "}")
+            } else {
+                e(TAG, "| Header:{$headers}")
+            }
+        }
         if ("POST" == method) {
             val sb = java.lang.StringBuilder()
             if (request.body is FormBody) {
                 val body = request.body as FormBody?
                 for (i in 0 until body!!.size) {
-                    sb.append(body.encodedName(i)).append("=").append(body.encodedValue(i)).append(",")
+                    sb.append(body.encodedName(i)).append("=").append(body.encodedValue(i))
+                        .append(",")
                 }
                 sb.delete(sb.length - 1, sb.length)
                 e(TAG, "| RequestParams:{$sb}")
@@ -63,7 +68,6 @@ class LogInterceptor(context: Context) : Interceptor {
         } else {
             e(TAG, "| Response:$result")
         }
-        //            LogUtil.loge("| Response:" + result);
         e(TAG, "----------End:" + duration + "ms----------")
         return response.newBuilder()
             .body(content.toResponseBody(mediaType))

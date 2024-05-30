@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -9,7 +10,6 @@ android {
         minSdk rootProject.minSdkVersion
     }
     buildFeatures {
-        //noinspection DataBindingWithoutKapt
         dataBinding true
     }
     compileOptions {
@@ -26,6 +26,7 @@ android {
 dependencies {
     //列表
     compileOnly deps.androidx.recyclerview
+    implementation deps.flexbox
 
     //SmartRefreshLayout
     compileOnly deps.refresh

@@ -14,7 +14,7 @@ open class QuickItemData(
     var viewType: Int = 0,
 ) : Serializable {
     init {
-        this.initViewType()
+        initViewType()
     }
 
     open fun initViewType() {

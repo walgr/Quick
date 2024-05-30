@@ -15,6 +15,7 @@ import com.wpf.app.quick.annotations.tab.TabInit
 import com.wpf.app.quick.annotations.tab.view.ViewType
 import java.io.File
 
+@Suppress("UNCHECKED_CAST")
 class TabInitProcessor(environment: SymbolProcessorEnvironment) : IdProcessor(environment) {
     private var funBuilderMap = mutableMapOf<String, FunSpec.Builder>()
     override fun visitPropertyDeclaration(

@@ -21,7 +21,7 @@ open class ShadowEditView @JvmOverloads constructor(
 ) : AppCompatEditText(context, attrs, defStyleAttr), ShadowView {
 
     init {
-        this.initShadow(
+        initShadow(
             context,
             abilityList ?: listOf(
                 ShadowLiveFactory.visibilityLiveData,

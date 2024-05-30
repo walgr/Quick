@@ -39,9 +39,7 @@ open class QuickRecyclerView @JvmOverloads constructor(
     }
 
     init {
-        this.initView()
-        mQuickAdapter.setRecyclerView(this)
-        adapter = mQuickAdapter
+        initView()
         dealAttrs()
     }
 
@@ -49,6 +47,8 @@ open class QuickRecyclerView @JvmOverloads constructor(
         if (layoutManager == null) {
             layoutManager = LinearLayoutManager(context)
         }
+        mQuickAdapter.setRecyclerView(this)
+        adapter = mQuickAdapter
     }
 
     private var isSetSpanSizeLookup = false

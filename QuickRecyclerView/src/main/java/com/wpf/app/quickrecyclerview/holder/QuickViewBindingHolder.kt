@@ -9,6 +9,7 @@ import androidx.databinding.ViewDataBinding
 import com.wpf.app.quickrecyclerview.QuickAdapter
 import com.wpf.app.quickrecyclerview.constant.BRConstant
 import com.wpf.app.quickrecyclerview.data.QuickItemData
+import com.wpf.app.quickrecyclerview.utils.findBinding
 import com.wpf.app.quickutil.run.RunOnContextWithSelf
 
 /**
@@ -22,6 +23,7 @@ open class QuickViewBindingHolder<T : QuickItemData, VB : ViewDataBinding> @JvmO
     layoutViewCreate: RunOnContextWithSelf<ViewGroup, View>? = null,
     dealBindView: Boolean = false,
     autoClick: Boolean = false,
+    private val bindVBClass: Class<VB>? = null,
 ) : QuickViewHolder<T>(
     mParent,
     layoutId,
@@ -38,7 +40,7 @@ open class QuickViewBindingHolder<T : QuickItemData, VB : ViewDataBinding> @JvmO
     override fun onCreateViewHolder(itemView: View) {
         super.onCreateViewHolder(itemView)
         if (mViewBinding == null) {
-            mViewBinding = DataBindingUtil.bind(itemView)
+            mViewBinding = DataBindingUtil.bind(itemView.findBinding(bindClass = bindVBClass)!!)
         }
     }
 

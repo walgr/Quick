@@ -41,8 +41,10 @@ open class QuickSelectData(
         viewHolder: QuickViewHolder<QuickBindData>,
         position: Int,
     ) {
-        super.onBindViewHolder(adapter as QuickSelectAdapter, viewHolder, position)
-        onBindViewHolder(adapter, viewHolder, position)
+        super.onBindViewHolder(adapter, viewHolder, position)
+        if (adapter is QuickSelectAdapter) {
+            onBindViewHolder(adapter, viewHolder, position)
+        }
     }
 
     open fun onBindViewHolder(

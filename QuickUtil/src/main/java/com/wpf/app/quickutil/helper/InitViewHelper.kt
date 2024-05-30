@@ -11,8 +11,10 @@ object InitViewHelper {
         @LayoutRes layoutId: Int = 0,
         layoutView: View? = null,
         layoutViewCreate: (Context.() -> View)? = null,
+        mParent: ViewGroup? = null,
+        attachToRoot: Boolean = false
     ): View {
-        return layoutViewCreate?.invoke(context) ?: layoutView ?: layoutId.toView(context)
+        return layoutViewCreate?.invoke(context) ?: layoutView ?: layoutId.toView(context, mParent, attachToRoot)
     }
 
     inline fun <reified T: ViewGroup> newInstance(context: Context): T {

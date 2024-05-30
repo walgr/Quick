@@ -40,11 +40,11 @@ open class QuickView @JvmOverloads constructor(
         abilityList.filterIsInstance<QuickGenerateViewAbility>().forEach {
             view = it.generateContentView(this, view)
         }
-        this.addView(view)
+        addView(view)
         abilityList.filterIsInstance<QuickGenerateViewAbility>().forEach {
             it.afterGenerateContentView(this, view)
         }
-        this.initView()
+        initView()
         abilityList.filterIsInstance<QuickInitViewAbility>().forEach {
             it.initView(this, view)
         }

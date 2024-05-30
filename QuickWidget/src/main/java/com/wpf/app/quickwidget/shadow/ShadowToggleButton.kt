@@ -18,7 +18,7 @@ open class ShadowToggleButton @JvmOverloads constructor(
 ) : AppCompatToggleButton(context, attrs), ShadowView {
 
     init {
-        this.initShadow(
+        initShadow(
             context,
             abilityList ?: listOf(
                 ShadowLiveFactory.visibilityLiveData,

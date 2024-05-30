@@ -20,7 +20,7 @@ open class ShadowTextView @JvmOverloads constructor(
 ) : AppCompatTextView(context, attrs, defStyleAttr), ShadowView {
 
     init {
-        this.initShadow(
+        initShadow(
             context,
             abilityList ?: listOf(
                 ShadowLiveFactory.visibilityLiveData,

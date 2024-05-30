@@ -76,7 +76,7 @@ open class QuickTitleView @JvmOverloads constructor(
                     ?: commonClickListener?.onSubTitleClick(it)
             }
         }
-        this.initAttrsInXml(attrs)
+        initAttrsInXml(attrs)
     }
 
     private var curAttrs: QuickTitleAttrs? = null

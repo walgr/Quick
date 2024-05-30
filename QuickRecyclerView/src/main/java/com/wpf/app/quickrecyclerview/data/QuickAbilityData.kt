@@ -25,13 +25,16 @@ open class QuickAbilityData(
     autoSet: Boolean = false,                                                   //自动映射
     isSuspension: Boolean = false,                                              //View是否悬浮置顶
     private val abilityList: List<QuickAbility> = mutableListOf(),
-) : QuickBindData(layoutViewCreate = runOnContextWithSelf { context ->
+) : QuickBindData(
+    layoutViewCreate = runOnContextWithSelf { context ->
     val inflateAbility = abilityList.first { it is QuickInflateViewAbility }.forceTo<QuickInflateViewAbility>()
     var view = InitViewHelper.init(
         context,
         inflateAbility.layoutId(),
         inflateAbility.layoutView(),
-        inflateAbility.layoutViewCreate()
+        inflateAbility.layoutViewCreate(),
+        this,
+        false
     )
     abilityList.filterIsInstance<QuickGenerateViewAbility>().forEach {
         view = it.generateContentView(this.activity().forceTo(), view)
@@ -41,7 +44,7 @@ open class QuickAbilityData(
     }
     view
 }, autoSet = autoSet, isSuspension = isSuspension), Quick {
-    var isDealBinding = false
+    var bindingClass: Class<out ViewDataBinding>? = null
 
     @CallSuper
     fun initViewType(position: Int): Int {

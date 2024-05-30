@@ -3,7 +3,6 @@ package com.wpf.app.quick.ability.ex
 import android.app.Activity
 import android.app.Dialog
 import android.view.View
-import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
@@ -15,9 +14,9 @@ import com.wpf.app.base.ability.base.QuickInitViewAbility
 import com.wpf.app.base.bind.QuickBindWrap
 import com.wpf.app.quick.ability.ex.base.QuickVMAbility
 import com.wpf.app.quick.activity.viewmodel.QuickVBModel
-import com.wpf.app.quick.helper.QuickDataBindingUtil
 import com.wpf.app.quick.helper.getActivity
 import com.wpf.app.quickrecyclerview.constant.BRConstant
+import com.wpf.app.quickrecyclerview.utils.findBinding
 import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.other.forceTo
 
@@ -40,7 +39,7 @@ inline fun <reified Self : Quick, reified VM : QuickVBModel<out Self, VB>, reifi
             vmBuilder?.invoke(viewModel!!, context.forceTo())
         }
         if (viewBinding == null && VB::class.java != ViewDataBinding::class.java) {
-            viewBinding = DataBindingUtil.bind(view.findBinding()!!)
+            viewBinding = DataBindingUtil.bind(view.findBinding(VB::class.java)!!)
             viewBinding?.lifecycleOwner = context.forceTo()
         }
         viewBinding?.setVariable(BRConstant.viewModel, viewModel)
@@ -69,20 +68,6 @@ inline fun <reified Self : Quick, reified VM : QuickVBModel<out Self, VB>, reifi
         }
     }
 
-    private fun View.findBinding(): View? {
-        if (QuickDataBindingUtil.bind<ViewDataBinding>(this) != null) return this
-        if (this is ViewGroup) {
-            for (it in 0 until this.childCount) {
-                val child = getChildAt(it)
-                if (QuickDataBindingUtil.bind<ViewDataBinding>(child) != null) return child
-            }
-            for (it in 0 until this.childCount) {
-                return getChildAt(it).findBinding()
-            }
-        }
-        return null
-    }
-
     override fun getViewModel() = viewModel
 })
 
@@ -105,26 +90,12 @@ inline fun <reified Self : Quick, reified VB : ViewDataBinding> bindingAndSelf(
     override fun afterGenerateContentView(owner: Quick, view: View) {
         super.afterGenerateContentView(owner, view)
         if (viewBinding == null && VB::class.java != ViewDataBinding::class.java) {
-            viewBinding = DataBindingUtil.bind(view.findBinding()!!)
+            viewBinding = DataBindingUtil.bind(view.findBinding(VB::class.java)!!)
         }
         viewBinding?.executePendingBindings()
         viewBinding?.let {
             vbBuilder?.invoke(it.forceTo(), owner.forceTo())
         }
-    }
-
-    private fun View.findBinding(): View? {
-        if (QuickDataBindingUtil.bind<ViewDataBinding>(this) != null) return this
-        if (this is ViewGroup) {
-            for (it in 0 until this.childCount) {
-                val child = getChildAt(it)
-                if (QuickDataBindingUtil.bind<ViewDataBinding>(child) != null) return child
-            }
-            for (it in 0 until this.childCount) {
-                return getChildAt(it).findBinding()
-            }
-        }
-        return null
     }
 })
 

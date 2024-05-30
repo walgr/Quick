@@ -136,12 +136,12 @@ fun <T : View> T.marginStart(margin: Int): T {
     return this
 }
 
-fun <T : View> T.topMargin(margin: Int): T {
+fun <T : View> T.marginTop(margin: Int): T {
     layoutParams.forceTo<MarginLayoutParams>().topMargin = margin
     return this
 }
 
-fun <T : View> T.bottomMargin(margin: Int): T {
+fun <T : View> T.marginBottom(margin: Int): T {
     layoutParams.forceTo<MarginLayoutParams>().bottomMargin = margin
     return this
 }

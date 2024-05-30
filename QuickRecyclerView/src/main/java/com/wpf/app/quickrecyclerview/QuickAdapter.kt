@@ -14,6 +14,7 @@ import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
 import com.wpf.app.quickrecyclerview.listeners.DataAdapter
 import com.wpf.app.quickrecyclerview.listeners.QuickAdapterListener
 import com.wpf.app.quickutil.other.asTo
+import com.wpf.app.quickutil.other.forceTo
 import com.wpf.app.quickutil.other.nullDefault
 
 /**
@@ -47,12 +48,13 @@ open class QuickAdapter : RecyclerView.Adapter<QuickViewHolder<QuickItemData>>()
             if (findData is QuickBindData) {
                 findData.setAdapter(this)
                 findData.beforeAdapterCreateHolder(viewGroup)
-                if (findData is QuickAbilityData && findData.isDealBinding) {
+                if (findData is QuickAbilityData && findData.bindingClass != null) {
                     holder = QuickViewBindingHolder<QuickItemData, ViewDataBinding>(
                         viewGroup,
                         findData.layoutId,
                         findData.layoutView,
-                        findData.layoutViewInViewGroup
+                        findData.layoutViewInViewGroup,
+                        bindVBClass = findData.bindingClass!!.forceTo()
                     )
                 }
             }

@@ -16,15 +16,16 @@ class AutoTagLayout @JvmOverloads constructor(
     context: Context,
     val attrs: AttributeSet? = null,
     val defStyleAttr: Int = 0,
-    private val init: (FlexboxLayoutManager.() -> Unit)? = null
+    private val init: (FlexboxLayoutManager.() -> Unit)? = null,
 ) : QuickRecyclerView(
     context, attrs, defStyleAttr
 ) {
     private val attr: AutoTagLayoutAttr by lazy {
         AutoGetAttributeHelper.init(context, attrs, R.styleable.AutoTagLayout)
     }
+
     override fun initView() {
-        layoutManager = FlexboxLayoutManager(context).apply {
+        layoutManager = QuickFlexboxLayoutManager(context).apply {
             init?.invoke(this) ?: let {
                 attrs?.let {
                     attr.tagDirection?.let {

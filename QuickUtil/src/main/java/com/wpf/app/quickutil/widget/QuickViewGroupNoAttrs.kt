@@ -33,7 +33,7 @@ open class QuickViewGroupNoAttrs<T : ViewGroup> @JvmOverloads constructor(
     private val attrSet: QuickViewGroupAttrSet = AutoGetAttributeHelper.init(context, attrs, R.styleable.QuickViewGroup)
 
     init {
-        this.init()
+        init()
     }
 
     var shadowView: ViewGroup? = null

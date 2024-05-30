@@ -1,5 +1,6 @@
 package com.wpf.app.quickutil.data
 
+@Suppress("UNCHECKED_CAST")
 object KV {
     private val data = mutableMapOf<Any, Any?>()
 

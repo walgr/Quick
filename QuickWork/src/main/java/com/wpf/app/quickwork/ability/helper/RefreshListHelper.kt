@@ -69,6 +69,7 @@ fun <V : View> ContextScope.smartRefreshLayout(
 fun ContextScope.smartRefreshList(
     layoutParams: ViewGroup.LayoutParams = matchWrapMarginLayoutParams(),
     layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(context),
+    listBuilder: (QuickRefreshRecyclerView.() -> Unit)? = null,
     header: RefreshHeader = ClassicsHeader(context),
     footer: RefreshFooter = ClassicsFooter(context),
     autoRefresh: Boolean = true,
@@ -81,6 +82,7 @@ fun ContextScope.smartRefreshList(
 ): SmartRefreshLayout {
     val list = QuickRefreshRecyclerView(context)
     list.layoutManager = layoutManager
+    listBuilder?.invoke(list)
     val upperLayout: View? =
         if (upperLayerLayoutId != 0 || upperLayerLayoutView != null || upperLayerLayoutViewCreate != null) {
             InitViewHelper.init(

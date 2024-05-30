@@ -17,7 +17,7 @@ open class QuickThemeDialog @JvmOverloads constructor(
     override var curTheme: QuickDialogThemeI? = null
 
     init {
-        this.initDialogTheme(context, theme)
+        initDialogTheme(context, theme)
     }
 
     override fun canDialogBackgroundClick(): Boolean {
