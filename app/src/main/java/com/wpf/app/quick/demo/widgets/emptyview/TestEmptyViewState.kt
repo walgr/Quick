@@ -8,5 +8,5 @@ sealed class TestEmptyViewState(
     val title: String = "",
     val info: String = "",
     val btnStr: String = ""
-): EmptyViewState()
+): EmptyViewState
 

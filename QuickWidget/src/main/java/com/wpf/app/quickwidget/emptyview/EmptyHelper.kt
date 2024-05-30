@@ -12,7 +12,7 @@ object EmptyHelper {
             override fun onRefresh() {
                 super.onRefresh()
                 LogUtil.e("空数据页", "下拉刷新")
-                emptyView.changeState(Loading)
+                emptyView.changeState(StateLoading)
             }
 
             override fun onLoadMore() {
@@ -24,9 +24,9 @@ object EmptyHelper {
                 super.onRefreshEnd(data)
                 LogUtil.e("空数据页", "刷新结束")
                 if (data.isNullOrEmpty()) {
-                    emptyView.changeState(EmptyDataError)
+                    emptyView.changeState(StateEmptyData)
                 } else {
-                    emptyView.changeState(NoError)
+                    emptyView.changeState(StateNoError)
                 }
             }
 
