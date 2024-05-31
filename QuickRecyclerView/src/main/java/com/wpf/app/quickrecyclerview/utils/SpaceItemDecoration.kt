@@ -18,7 +18,7 @@ class SpaceItemDecoration(
     var includeLast: Boolean = false,
 ) : RecyclerView.ItemDecoration() {
     private val TAG = "SpaceItemDecoration"
-    private val DEBUG = true
+    private val DEBUG = false
     override fun getItemOffsets(
         outRect: Rect,
         view: View,
