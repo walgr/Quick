@@ -25,6 +25,7 @@ open class QuickMultiSelectData(
     name: String? = null,
     isSelect: Boolean = false,
     defaultSelect: Boolean = false,                                 //是否默认选中，true清空后会再次选中
+    canClickAgain: Boolean = true,                         //选中后再次点击是否触发选中回调
     layoutId: Int = 0,
     layoutViewCreate: RunOnContextWithSelf<ViewGroup, View>? = null,
     autoSet: Boolean = false,                                        //自动映射
@@ -33,6 +34,7 @@ open class QuickMultiSelectData(
     id = id,
     name = name,
     defaultSelect = defaultSelect,
+    canClickAgain = canClickAgain,
     isSelect = isSelect,
     layoutId = layoutId,
     layoutViewCreate = layoutViewCreate,

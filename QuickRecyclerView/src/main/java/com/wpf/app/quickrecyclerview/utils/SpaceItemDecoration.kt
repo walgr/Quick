@@ -32,16 +32,17 @@ class SpaceItemDecoration(
         if (DEBUG) {
             LogUtil.e(TAG, "当前原始pos:${pos}")
         }
-        var noDealSpaceItemDecorationSize = 0
+        var headerSize = 0
         var itemData: QuickItemData? = null
         if (parent.adapter is QuickAdapter) {
             val quickAdapter = parent.adapter as QuickAdapter
             itemData = quickAdapter.getData(pos)
             if (itemData?.dealSpaceItemDecoration(pos) == false) return
-            noDealSpaceItemDecorationSize =
-                quickAdapter.getDataWithHeaderFooter()?.count { !it.dealSpaceItemDecoration(pos) }.nullDefault(0)
-            pos -= quickAdapter.getDataWithHeaderFooter()?.subList(0, pos)
-                ?.count { !it.dealSpaceItemDecoration(pos) }.nullDefault(0)
+            headerSize = (parent.adapter as QuickAdapter).headerViews.size
+            if (pos < headerSize) {
+                return
+            }
+            pos -= headerSize
         }
         if (DEBUG) {
             LogUtil.e(TAG, "当前新pos:${pos}")
@@ -61,7 +62,7 @@ class SpaceItemDecoration(
                 startSpace = 0
             }
         }
-        val allCount = parent.adapter!!.itemCount - noDealSpaceItemDecorationSize
+        val allCount = parent.adapter!!.itemCount - headerSize
         if (layoutManager is GridLayoutManager || layoutManager is StaggeredGridLayoutManager) {
             startSpace = space / 2          //保证同级view大小一致只能是Center
             val span = when (layoutManager) {

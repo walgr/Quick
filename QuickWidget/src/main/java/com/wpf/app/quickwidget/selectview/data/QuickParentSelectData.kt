@@ -26,6 +26,7 @@ open class QuickParentSelectData(
     name: String? = null,
     defaultSelect: Boolean = false,
     isSelect: Boolean = defaultSelect,
+    canClickAgain: Boolean = true,                         //选中后再次点击是否触发选中回调
     canCancel: Boolean = true,                  //是否可以取消选择
     singleSelect: Boolean = true,               //true 单选  false 多选
     isGlobal: Boolean = true,                   //true 全局范围  false 同父范围
@@ -42,6 +43,7 @@ open class QuickParentSelectData(
     name = name,
     defaultSelect = defaultSelect,
     isSelect = isSelect,
+    canClickAgain = canClickAgain,
     canCancel = canCancel,
     singleSelect = singleSelect,
     isGlobal = isGlobal,
@@ -88,11 +90,11 @@ open class QuickParentSelectData(
         }
     }
 
-    open fun getSelectChildList(): List<QuickChildSelectData>? {
-        return childList?.filter { it.isSelect }
+    open fun getSelectChildList(): MutableList<QuickChildSelectData>? {
+        return childList?.filter { it.isSelect }?.toMutableList()
     }
 
-    open fun onSelectChildChange(selectList: List<QuickChildSelectData>?) {
+    open fun onSelectChildChange(selectList: MutableList<QuickChildSelectData>?) {
 
     }
 

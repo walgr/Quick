@@ -30,8 +30,11 @@ interface DataSelectOnAdapter : DataAdapter, SetSelectChange {
      * 作为子项选中
      */
     fun onChildClick(childSelectData: QuickChildSelectData) {
-        val changePos = arrayListOf<Int>()
         val curItemSelect = childSelectData.isSelect
+        if (curItemSelect) {
+            if (!childSelectData.canClickAgain) return
+        }
+        val changePos = arrayListOf<Int>()
         if (childSelectData.singleSelect) {
             if (childSelectData.isGlobal) {
                 clearAll(false)
@@ -54,9 +57,9 @@ interface DataSelectOnAdapter : DataAdapter, SetSelectChange {
         }
         if (curItemSelect != childSelectData.isSelect) {
             childSelectData.onSelectChange(childSelectData.isSelect)
+            getSelectAdapter().getOnSelectChangeListener()?.onSelectChange()
+            childSelectData.parent?.onSelectChildChange(getSelectList(childSelectData.parent?.id))
         }
-        getSelectAdapter().getOnSelectChangeListener()?.onSelectChange()
-        childSelectData.parent?.onSelectChildChange(getSelectList(childSelectData.parent?.id))
         notifyItemChange()
     }
 

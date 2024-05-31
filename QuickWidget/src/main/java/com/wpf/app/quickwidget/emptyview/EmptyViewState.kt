@@ -1,11 +1,19 @@
 package com.wpf.app.quickwidget.emptyview
 
+import com.wpf.app.quickutil.other.forceTo
+
 interface EmptyViewStateManager {
     val registerStateMap: MutableMap<Int, DealStateFun<EmptyViewState>>
     var curState: EmptyViewState
     fun changeState(state: EmptyViewState) {
         this.curState = state
-        registerStateMap[state::class.java.interfaces.first().hashCode()]?.invoke(state)
+        val dealStateFun = registerStateMap[state::class.java.interfaces.first().hashCode()] ?: return
+        val stateClass: Class<EmptyViewState> = dealStateFun.javaClass.methods.find { it.name == "invoke" }!!.parameterTypes.first().forceTo()
+        if (stateClass == state.javaClass) {
+            dealStateFun.invoke(state)
+        } else {
+            dealStateFun.invoke(stateClass.getDeclaredConstructor().newInstance())
+        }
     }
 }
 
@@ -28,8 +36,18 @@ interface NoErrorI : EmptyViewState
 object StateNoError : NoErrorI
 
 //加载状态
-interface LoadingI : EmptyViewState
-object StateLoading : LoadingI
+interface LoadingI : EmptyViewState {
+    var listIsEmpty: Boolean
+}
+object StateLoading : LoadingI {
+    override var listIsEmpty: Boolean = true
+
+    fun new(listIsEmpty: Boolean): StateLoading {
+        val stateLoading = StateLoading
+        stateLoading.listIsEmpty = listIsEmpty
+        return stateLoading
+    }
+}
 
 //成功状态
 interface SuccessI : EmptyViewState
@@ -43,7 +61,7 @@ interface NetErrorI : EmptyViewState {
     val errorCode: Int
 }
 
-class StateNetError(
+open class StateNetError(
     override val errorCode: Int = 0,
 ) : NetErrorI
 
@@ -53,14 +71,14 @@ interface CustomErrorI : EmptyViewState {
     val e: Throwable?
 }
 
-class StateCustomError(
+open class StateCustomError(
     override val errorCode: Int = 0,
     override val e: Throwable? = null,
 ) : CustomErrorI
 
 //代码异常
 interface ExceptionErrorI : CustomErrorI
-class StateExceptionError(
+open class StateExceptionError(
     override val errorCode: Int = 0,
     override val e: Throwable? = null,
 ) : ExceptionErrorI

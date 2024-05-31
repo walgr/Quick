@@ -20,6 +20,7 @@ open class QuickSelectData(
     open var name: String? = null,
     open var defaultSelect: Boolean = false,                        //是否默认选中，true 清空后会再次选中
     open var isSelect: Boolean = defaultSelect,
+    open var canClickAgain: Boolean = true,                         //选中后再次点击是否触发选中回调
     layoutId: Int = 0,
     layoutViewCreate: RunOnContextWithSelf<ViewGroup, View>? = null,
     autoSet: Boolean = false,                                        //自动映射
