@@ -64,7 +64,8 @@ open class QuickBottomSheetDialog(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
-            it.onCreate()
+            it.onCreate(this)
+            it.onResume(this)
         }
     }
 
@@ -72,7 +73,7 @@ open class QuickBottomSheetDialog(
     override fun onStart() {
         super.onStart()
         abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
-            it.onStart()
+            it.onStart(this)
         }
     }
 
@@ -80,7 +81,8 @@ open class QuickBottomSheetDialog(
     override fun onStop() {
         super.onStop()
         abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
-            it.onStop()
+            it.onPause(this)
+            it.onStop(this)
         }
     }
 
@@ -88,7 +90,7 @@ open class QuickBottomSheetDialog(
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
         abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
-            it.onDestroy()
+            it.onDestroy(this)
         }
     }
 }

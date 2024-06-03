@@ -9,8 +9,8 @@ import androidx.lifecycle.ViewModel
 import com.wpf.app.base.ability.base.QuickAbility
 import com.wpf.app.base.ability.base.QuickGenerateViewAbility
 import com.wpf.app.base.ability.base.QuickInflateViewAbility
-import com.wpf.app.base.ability.base.QuickLifecycleAbility
 import com.wpf.app.base.ability.base.QuickInitViewAbility
+import com.wpf.app.base.ability.base.QuickLifecycleAbility
 import com.wpf.app.quickbind.interfaces.BindViewModel
 import com.wpf.app.quickdialog.QuickBaseDialog
 import com.wpf.app.quickutil.helper.InitViewHelper
@@ -71,7 +71,8 @@ open class QuickDialog(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
-            it.onCreate()
+            it.onCreate(this)
+            it.onResume(this)
         }
     }
 
@@ -79,7 +80,7 @@ open class QuickDialog(
     override fun onStart() {
         super.onStart()
         abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
-            it.onStart()
+            it.onStart(this)
         }
     }
 
@@ -87,7 +88,8 @@ open class QuickDialog(
     override fun onStop() {
         super.onStop()
         abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
-            it.onStop()
+            it.onPause(this)
+            it.onStop(this)
         }
     }
 
@@ -95,7 +97,7 @@ open class QuickDialog(
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
         abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
-            it.onDestroy()
+            it.onDestroy(this)
         }
     }
 }

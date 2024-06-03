@@ -8,8 +8,8 @@ import androidx.lifecycle.ViewModel
 import com.wpf.app.base.ability.base.QuickAbility
 import com.wpf.app.base.ability.base.QuickGenerateViewAbility
 import com.wpf.app.base.ability.base.QuickInflateViewAbility
-import com.wpf.app.base.ability.base.QuickLifecycleAbility
 import com.wpf.app.base.ability.base.QuickInitViewAbility
+import com.wpf.app.base.ability.base.QuickLifecycleAbility
 import com.wpf.app.quick.ability.ex.base.QuickFragmentAbility
 import com.wpf.app.quick.activity.QuickBaseFragment
 import com.wpf.app.quickbind.interfaces.BindViewModel
@@ -70,35 +70,35 @@ open class QuickFragment(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
-            it.onResume()
+            it.onCreate(this)
         }
     }
 
     override fun onResume() {
         super.onResume()
         abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
-            it.onResume()
+            it.onResume(this)
         }
     }
 
     override fun onPause() {
         super.onPause()
         abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
-            it.onPause()
+            it.onPause(this)
         }
     }
 
     override fun onStop() {
         super.onStop()
         abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
-            it.onStop()
+            it.onStop(this)
         }
     }
 
     override fun onDestroy() {
         super.onDestroy()
         abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
-            it.onDestroy()
+            it.onDestroy(this)
         }
     }
 
@@ -109,14 +109,18 @@ open class QuickFragment(
 //        }
 //    }
 
+    @CallSuper
+    @Suppress("DEPRECATION")
     @Deprecated("Deprecated by Android")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
-            it.onActivityResult(requestCode, resultCode, data)
+            it.onActivityResult(this, requestCode, resultCode, data)
         }
     }
 
+    @CallSuper
+    @Suppress("DEPRECATION")
     @Deprecated("Deprecated in Android")
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)

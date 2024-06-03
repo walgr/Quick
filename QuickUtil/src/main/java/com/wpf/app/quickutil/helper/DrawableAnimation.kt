@@ -209,17 +209,17 @@ class DrawableAnimation private constructor(mContext: Context) {
                 if (mOnAnimationStoppedListener != null) {
                     mOnAnimationStoppedListener!!.onAnimationStop()
                 }
-                if (isContinuous || !imageViewVisibility) {
+                if (isContinuous || !imageViewVisibility || mShouldRun == false) {
                     return
                 }
             }
-
+            if (mShouldRun == false) return
             mIsRunning = true
             if (imageView!!.isShown) {
+                unShownCount = 0
 //                LogUtil.e("动画", this + " 进行中");
                 val imageRes = next
                 if (imageRes == -1 || curImageRes == imageRes) return
-                unShownCount = 0
                 this.curImageRes = imageRes
                 if (mBitmap != null) {
                     var bitmap: Bitmap? = null
@@ -255,7 +255,7 @@ class DrawableAnimation private constructor(mContext: Context) {
                 }
             }
             //新开线程去读下一帧
-            if (mRunnable != null && isContinuous) {
+            if (mRunnable != null && isContinuous && mShouldRun == true) {
                 mHandler.postDelayed(mRunnable!!, mDelayMillis.toLong())
             }
         }

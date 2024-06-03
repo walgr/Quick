@@ -8,8 +8,8 @@ import androidx.lifecycle.ViewModel
 import com.wpf.app.base.ability.base.QuickAbility
 import com.wpf.app.base.ability.base.QuickGenerateViewAbility
 import com.wpf.app.base.ability.base.QuickInflateViewAbility
-import com.wpf.app.base.ability.base.QuickLifecycleAbility
 import com.wpf.app.base.ability.base.QuickInitViewAbility
+import com.wpf.app.base.ability.base.QuickLifecycleAbility
 import com.wpf.app.quick.ability.ex.base.QuickFragmentAbility
 import com.wpf.app.quickbind.interfaces.BindViewModel
 import com.wpf.app.quickdialog.QuickBaseBottomSheetDialogFragment
@@ -72,7 +72,7 @@ open class QuickBottomSheetDialogFragment(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
-            it.onResume()
+            it.onCreate(this)
         }
     }
 
@@ -80,7 +80,14 @@ open class QuickBottomSheetDialogFragment(
     override fun onResume() {
         super.onResume()
         abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
-            it.onResume()
+            it.onResume(this)
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
+            it.onStart(this)
         }
     }
 
@@ -88,7 +95,7 @@ open class QuickBottomSheetDialogFragment(
     override fun onPause() {
         super.onPause()
         abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
-            it.onPause()
+            it.onPause(this)
         }
     }
 
@@ -96,7 +103,7 @@ open class QuickBottomSheetDialogFragment(
     override fun onStop() {
         super.onStop()
         abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
-            it.onStop()
+            it.onStop(this)
         }
     }
 
@@ -104,7 +111,7 @@ open class QuickBottomSheetDialogFragment(
     override fun onDestroy() {
         super.onDestroy()
         abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
-            it.onDestroy()
+            it.onDestroy(this)
         }
     }
 
@@ -117,20 +124,22 @@ open class QuickBottomSheetDialogFragment(
 //    }
 
     @CallSuper
-    @Deprecated("Deprecated by Android")
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
-            it.onActivityResult(requestCode, resultCode, data)
-        }
-    }
-
-    @CallSuper
+    @Suppress("DEPRECATION")
     @Deprecated("Deprecated in Android")
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
         abilityList.filterIsInstance<QuickFragmentAbility>().forEach {
             it.setUserVisibleHint(isVisibleToUser)
+        }
+    }
+
+    @Suppress("DEPRECATION")
+    @CallSuper
+    @Deprecated("Deprecated by Android")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
+            it.onActivityResult(this, requestCode, resultCode, data)
         }
     }
 }

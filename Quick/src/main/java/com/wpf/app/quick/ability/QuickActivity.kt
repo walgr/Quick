@@ -71,7 +71,7 @@ open class QuickActivity(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
-            it.onCreate()
+            it.onCreate(this)
         }
     }
 
@@ -79,7 +79,7 @@ open class QuickActivity(
     override fun onResume() {
         super.onResume()
         abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
-            it.onResume()
+            it.onResume(this)
         }
     }
 
@@ -87,7 +87,7 @@ open class QuickActivity(
     override fun onPause() {
         super.onPause()
         abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
-            it.onPause()
+            it.onPause(this)
         }
     }
 
@@ -95,7 +95,7 @@ open class QuickActivity(
     override fun onStop() {
         super.onStop()
         abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
-            it.onStop()
+            it.onStop(this)
         }
     }
 
@@ -103,7 +103,7 @@ open class QuickActivity(
     override fun onDestroy() {
         super.onDestroy()
         abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
-            it.onDestroy()
+            it.onDestroy(this)
         }
     }
 
@@ -112,7 +112,7 @@ open class QuickActivity(
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
-            it.onActivityResult(requestCode, resultCode, data)
+            it.onActivityResult(this, requestCode, resultCode, data)
         }
     }
 
