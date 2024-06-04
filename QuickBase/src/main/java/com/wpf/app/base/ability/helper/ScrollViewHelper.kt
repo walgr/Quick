@@ -18,7 +18,7 @@ inline fun <reified T : ViewGroup> ContextScope.scroll(
     val childT = InitViewHelper.newInstance<T>(context)
     childT.layoutParams = matchMarginLayoutParams()
     view.addView(childT)
-    builder?.invoke(createViewGroupScope(childT))
+    builder?.invoke(childT.createViewGroupScope())
     addView(view, layoutParams)
     return view
 }
@@ -31,7 +31,7 @@ inline fun <reified T : ViewGroup> ContextScope.nestedScroll(
     val childT = InitViewHelper.newInstance<T>(context)
     childT.layoutParams = matchMarginLayoutParams()
     view.addView(childT)
-    builder?.invoke(createViewGroupScope(childT))
+    builder?.invoke(childT.createViewGroupScope())
     addView(view, layoutParams)
     return view
 }

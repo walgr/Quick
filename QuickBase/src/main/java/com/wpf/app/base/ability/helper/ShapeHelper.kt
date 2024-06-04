@@ -4,6 +4,8 @@ import android.graphics.drawable.Drawable
 import android.view.ViewGroup.LayoutParams
 import androidx.annotation.ColorInt
 import com.wpf.app.base.ability.scope.ContextScope
+import com.wpf.app.base.ability.scope.ViewGroupScope
+import com.wpf.app.base.ability.scope.createViewGroupScope
 import com.wpf.app.quickutil.helper.dp
 import com.wpf.app.quickutil.helper.wrapMarginLayoutParams
 import io.github.florent37.shapeofview.shapes.ArcView
@@ -22,14 +24,14 @@ fun ContextScope.circle(
     layoutParams: LayoutParams = wrapMarginLayoutParams(),
     @ColorInt borderColor: Int? = null,
     borderWidth: Float = 0f,        //单位px
-    builder: (CircleView.() -> Unit)? = null,
+    builder: (ViewGroupScope<CircleView>.() -> Unit)? = null,
 ): CircleView {
     val view = CircleView(context)
     borderColor?.let {
         view.borderColor = it
         view.borderWidth = borderWidth
     }
-    builder?.invoke(view)
+    builder?.invoke(view.createViewGroupScope())
     addView(view, layoutParams)
     return view
 }
@@ -44,7 +46,7 @@ fun ContextScope.roundRect(
     bottomLeftRadius: Float = 0f,
     @ColorInt borderColor: Int? = null,
     borderWidth: Float = 0f,        //单位px
-    builder: (RoundRectView.() -> Unit)? = null,
+    builder: (ViewGroupScope<RoundRectView>.() -> Unit)? = null,
 ): RoundRectView {
     val view = RoundRectView(context)
     view.background = background
@@ -56,7 +58,7 @@ fun ContextScope.roundRect(
     view.topRightRadius = radius ?: topRightRadius
     view.bottomRightRadius = radius ?: bottomRightRadius
     view.bottomLeftRadius = radius ?: bottomLeftRadius
-    builder?.invoke(view)
+    builder?.invoke(view.createViewGroupScope())
     addView(view, layoutParams)
     return view
 }
@@ -68,14 +70,14 @@ fun ContextScope.clipCorner(
     topRightCutSize: Float = 0f,
     bottomRightCutSize: Float = 0f,
     bottomLeftCutSize: Float = 0f,
-    builder: (CutCornerView.() -> Unit)? = null,
+    builder: (ViewGroupScope<CutCornerView>.() -> Unit)? = null,
 ): CutCornerView {
     val view = CutCornerView(context)
     view.topLeftCutSize = cutSize ?: topLeftCutSize
     view.topRightCutSize = cutSize ?: topRightCutSize
     view.bottomRightCutSize = cutSize ?: bottomRightCutSize
     view.bottomLeftCutSize = cutSize ?: bottomLeftCutSize
-    builder?.invoke(view)
+    builder?.invoke(view.createViewGroupScope())
     addView(view, layoutParams)
     return view
 }
@@ -84,12 +86,12 @@ fun ContextScope.arc(
     layoutParams: LayoutParams = wrapMarginLayoutParams(),
     height: Float = 0f,       //单位px 负反方向
     @ArcPosition position: Int = ArcView.POSITION_BOTTOM,
-    builder: (ArcView.() -> Unit)? = null,
+    builder: (ViewGroupScope<ArcView>.() -> Unit)? = null,
 ): ArcView {
     val view = ArcView(context)
     view.arcHeight = height
     view.arcPosition = position
-    builder?.invoke(view)
+    builder?.invoke(view.createViewGroupScope())
     addView(view, layoutParams)
     return view
 }
@@ -98,12 +100,12 @@ fun ContextScope.diagonal(
     layoutParams: LayoutParams = wrapMarginLayoutParams(),
     angle: Float = 0f,       //单位px 负反方向
     @DiagonalView.DiagonalPosition position: Int = DiagonalView.POSITION_BOTTOM,
-    builder: (DiagonalView.() -> Unit)? = null,
+    builder: (ViewGroupScope<DiagonalView>.() -> Unit)? = null,
 ): DiagonalView {
     val view = DiagonalView(context)
     view.diagonalAngle = angle
     view.diagonalPosition = position
-    builder?.invoke(view)
+    builder?.invoke(view.createViewGroupScope())
     addView(view, layoutParams)
     return view
 }
@@ -113,13 +115,13 @@ fun ContextScope.triangle(
     percentLeft: Float = 0f,
     percentRight: Float = 0f,
     paddingBottom: Float = 0.5f,
-    builder: (TriangleView.() -> Unit)? = null,
+    builder: (ViewGroupScope<TriangleView>.() -> Unit)? = null,
 ): TriangleView {
     val view = TriangleView(context)
     view.percentLeft = percentLeft
     view.percentRight = percentRight
     view.percentBottom = paddingBottom
-    builder?.invoke(view)
+    builder?.invoke(view.createViewGroupScope())
     addView(view, layoutParams)
     return view
 }
@@ -131,7 +133,7 @@ fun ContextScope.bubble(
     borderRadius: Float = 10f.dp,
     positionPer: Float = 0.5f,
     position: Int = BubbleView.POSITION_BOTTOM,
-    builder: (BubbleView.() -> Unit)? = null,
+    builder: (ViewGroupScope<BubbleView>.() -> Unit)? = null,
 ): BubbleView {
     val view = BubbleView(context)
     view.position = position
@@ -139,7 +141,7 @@ fun ContextScope.bubble(
     view.arrowHeight = arrowHeight
     view.borderRadius = borderRadius
     view.setPositionPer(positionPer)
-    builder?.invoke(view)
+    builder?.invoke(view.createViewGroupScope())
     addView(view, layoutParams)
     return view
 }
@@ -147,11 +149,11 @@ fun ContextScope.bubble(
 fun ContextScope.star(
     layoutParams: LayoutParams = wrapMarginLayoutParams(),
     points: Int = 5,
-    builder: (StarView.() -> Unit)? = null,
+    builder: (ViewGroupScope<StarView>.() -> Unit)? = null,
 ): StarView {
     val view = StarView(context)
     view.noOfPoints = points
-    builder?.invoke(view)
+    builder?.invoke(view.createViewGroupScope())
     addView(view, layoutParams)
     return view
 }
@@ -159,11 +161,11 @@ fun ContextScope.star(
 fun ContextScope.polygon(
     layoutParams: LayoutParams = wrapMarginLayoutParams(),
     sides: Int = 4,
-    builder: (PolygonView.() -> Unit)? = null,
+    builder: (ViewGroupScope<PolygonView>.() -> Unit)? = null,
 ): PolygonView {
     val view = PolygonView(context)
     view.noOfSides = sides
-    builder?.invoke(view)
+    builder?.invoke(view.createViewGroupScope())
     addView(view, layoutParams)
     return view
 }
@@ -177,7 +179,7 @@ fun ContextScope.dottedEdgesCutCorner(
     topRightCutSize: Float = 0f,
     bottomLeftCutSize: Float = 0f,
     bottomRightCutSize: Float = 0f,
-    builder: (DottedEdgesCutCornerView.() -> Unit)? = null,
+    builder: (ViewGroupScope<DottedEdgesCutCornerView>.() -> Unit)? = null,
 ): DottedEdgesCutCornerView {
     val view = DottedEdgesCutCornerView(context)
     view.dotRadius = dotRadius
@@ -187,7 +189,7 @@ fun ContextScope.dottedEdgesCutCorner(
     view.topRightCutSize = topRightCutSize
     view.bottomLeftCutSize = bottomLeftCutSize
     view.bottomRightCutSize = bottomRightCutSize
-    builder?.invoke(view)
+    builder?.invoke(view.createViewGroupScope())
     addView(view, layoutParams)
     return view
 }

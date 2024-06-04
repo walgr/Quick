@@ -17,7 +17,7 @@ interface ViewScope<T: View>: ContextScope {
 }
 
 fun <T : View, R> T.withViewScope(block: ViewScope<T>.() -> R) : R {
-    return block(createViewScope(this))
+    return block(this.createViewScope())
 }
 
 @OptIn(ExperimentalContracts::class)
@@ -28,6 +28,6 @@ inline fun <T: View> ViewScope<T>.viewApply(block: T.() -> Unit) {
     block(this.view)
 }
 
-fun <T: View> createViewScope(view: T) = object : ViewScope<T> {
-    override val view: T = view
+fun <T: View> T.createViewScope() = object : ViewScope<T> {
+    override val view: T = this@createViewScope
 }

@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable
 import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.TextPaint
+import android.text.style.AbsoluteSizeSpan
 import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
 import android.text.style.ImageSpan
@@ -16,6 +17,26 @@ import android.view.View
 import androidx.annotation.ColorInt
 
 fun String.toSpannableBuilder() = SpannableStringBuilder(this)
+
+fun SpannableStringBuilder.size(
+    startIndex: Int,
+    endIndex: Int,
+    textSize: Int,      //单位 px
+): SpannableStringBuilder {
+    setSpan(AbsoluteSizeSpan(
+        textSize
+    ), startIndex, endIndex, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+    return this
+}
+
+fun SpannableStringBuilder.size(
+    text: String,
+    textSize: Int,      //单位 px
+): SpannableStringBuilder {
+    val start = indexOf(text)
+    if (start < 0) return this
+    return size(start, start + text.length, textSize)
+}
 
 fun SpannableStringBuilder.img(
     text: String,
@@ -60,15 +81,23 @@ fun SpannableStringBuilder.img(
 }
 
 fun SpannableStringBuilder.foregroundColor(
+    startIndex: Int,
+    endIndex: Int,
+    @ColorInt color: Int,
+): SpannableStringBuilder {
+    setSpan(
+        ForegroundColorSpan(color), startIndex, endIndex, Spanned.SPAN_INCLUSIVE_EXCLUSIVE
+    )
+    return this
+}
+
+fun SpannableStringBuilder.foregroundColor(
     text: String,
     @ColorInt color: Int,
 ): SpannableStringBuilder {
     val start = indexOf(text)
     if (start < 0) return this
-    setSpan(
-        ForegroundColorSpan(color), start, start + text.length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE
-    )
-    return this
+    return foregroundColor(start, start + text.length, color)
 }
 
 fun SpannableStringBuilder.bold(

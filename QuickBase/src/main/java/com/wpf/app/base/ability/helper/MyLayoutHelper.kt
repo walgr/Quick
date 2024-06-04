@@ -23,7 +23,7 @@ inline fun <reified T : ViewGroup> Any.viewGroupCreate(
     val mContext = context()!!
     val view = T::class.java.getConstructor(Context::class.java).newInstance(mContext)
     view.layoutParams = layoutParams
-    builder?.invoke(createViewGroupScope(view))
+    builder?.invoke(view.createViewGroupScope())
     view.let {
         view.removeParent()
         addView(view)
@@ -42,15 +42,15 @@ fun Any.viewGroupCreate(
     val view = InitViewHelper.init(mContext, layoutId, layoutView, viewCreateConvert(layoutViewCreate))
     when (this) {
         is ViewGroupScope<out ViewGroup> -> {
-            builder?.invoke(createViewScope(this.view))
+            builder?.invoke(this.view.createViewScope())
         }
 
         is ViewGroup -> {
-            builder?.invoke(createViewScope(this))
+            builder?.invoke(this.createViewScope())
         }
 
         else -> {
-            builder?.invoke(createViewScope(view))
+            builder?.invoke(view.createViewScope())
         }
     }
     addView(view, layoutParams)

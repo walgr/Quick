@@ -34,7 +34,7 @@ dependencies {
     //约束布局
     implementation deps.androidx.constraintlayout
     //shapeView
-    implementation deps.shapeofview
+    api deps.shapeofview
     if (IS_REMOTE.toBoolean()) {
         api deps.quickbind.util
     } else {

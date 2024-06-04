@@ -19,7 +19,7 @@ interface ViewGroupScope<T : ViewGroup> : ViewScope<T> {
 }
 
 fun <T : ViewGroup, R> T.withViewGroupScope(block: ViewGroupScope<T>.() -> R) : R {
-    return block(createViewGroupScope(this))
+    return block(this.createViewGroupScope())
 }
 
 @OptIn(ExperimentalContracts::class)
@@ -30,7 +30,6 @@ inline fun <T : ViewGroup> ViewGroupScope<T>.viewGroupApply(block: T.() -> Unit)
     block(this.view)
 }
 
-
-fun <T : ViewGroup> createViewGroupScope(viewGroup: T) = object : ViewGroupScope<T> {
-    override val view: T = viewGroup
+fun <T : ViewGroup> T.createViewGroupScope() = object : ViewGroupScope<T> {
+    override val view: T = this@createViewGroupScope
 }

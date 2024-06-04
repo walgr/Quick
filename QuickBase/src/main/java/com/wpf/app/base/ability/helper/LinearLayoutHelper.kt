@@ -1,6 +1,7 @@
 package com.wpf.app.base.ability.helper
 
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.wpf.app.base.ability.scope.ViewGroupScope
@@ -13,6 +14,9 @@ fun <T : View> T.gravity(gravity: Int): T {
     }
     if (this.parent is LinearLayout) {
         wishLayoutParams<LinearLayout.LayoutParams>().gravity = gravity
+    }
+    if (this.parent is FrameLayout) {
+        wishLayoutParams<FrameLayout.LayoutParams>().gravity = gravity
     }
     if (this is TextView) {
         this.gravity = gravity
