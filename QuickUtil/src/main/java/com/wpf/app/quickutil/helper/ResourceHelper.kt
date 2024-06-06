@@ -21,11 +21,11 @@ import com.wpf.app.quickutil.init.QuickInit
  *
  */
 
-fun @receiver:DrawableRes Int.toDrawable(context: Context? = QuickInit.getContext()): Drawable? {
+fun @receiver:DrawableRes Int.toDrawable(context: Context? = QuickInit.getContext()): Drawable {
     if (context == null) {
         throw RuntimeException("context is null")
     }
-    return ContextCompat.getDrawable(context, this)
+    return ContextCompat.getDrawable(context, this)!!
 }
 
 fun @receiver:ColorRes Int.toColor(context: Context? = QuickInit.getContext()): Int {

@@ -22,9 +22,9 @@ import com.wpf.app.quickutil.other.forceTo
 import com.wpf.app.quickutil.run.runOnContextWithSelf
 
 open class QuickAbilityData(
+    private val abilityList: List<QuickAbility> = mutableListOf(),
     autoSet: Boolean = false,                                                   //自动映射
     isSuspension: Boolean = false,                                              //View是否悬浮置顶
-    private val abilityList: List<QuickAbility> = mutableListOf(),
 ) : QuickBindData(
     layoutViewCreate = runOnContextWithSelf { context ->
     val inflateAbility = abilityList.first { it is QuickInflateViewAbility }.forceTo<QuickInflateViewAbility>()
