@@ -1,0 +1,1 @@
+./gradlew :Quick-compiler-ksp:publishToMavenLocal

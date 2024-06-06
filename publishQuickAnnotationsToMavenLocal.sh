@@ -1,0 +1,1 @@
+./gradlew :Quick-annotations:publishToMavenLocal

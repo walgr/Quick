@@ -1,0 +1,1 @@
+./gradlew :QuickWidget:publishToMavenLocal

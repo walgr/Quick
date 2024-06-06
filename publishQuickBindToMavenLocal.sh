@@ -1,0 +1,1 @@
+./gradlew :QuickBind:publishToMavenLocal
