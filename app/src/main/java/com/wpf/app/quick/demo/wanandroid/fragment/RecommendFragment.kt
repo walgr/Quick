@@ -1,8 +1,8 @@
 package com.wpf.app.quick.demo.wanandroid.fragment
 
 import android.widget.FrameLayout
-import com.wpf.app.quick.ability.QuickFragment
 import com.wpf.app.base.ability.ex.contentView
+import com.wpf.app.quick.ability.QuickFragment
 import com.wpf.app.quick.demo.http.request
 import com.wpf.app.quick.demo.model.ListRequest
 import com.wpf.app.quick.demo.wanandroid.model.Article
@@ -21,7 +21,7 @@ class RecommendFragment: QuickFragment(
                 request(self.forceTo()) {
                     homePageList(requestData.page, requestData.pageSize)
                 }.success {
-                    callback.backData(it?.data?.datas, !it?.data?.datas.isNullOrEmpty())
+                    callback.backData(it.data?.datas, !it.data?.datas.isNullOrEmpty())
                 }.fail {
                     callback.backData(null, false)
                 }

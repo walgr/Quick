@@ -16,5 +16,7 @@ interface RefreshView {
     fun onLoadMore() {}
 
     fun onRefreshEnd(data: List<*>?) {}
+    fun onRefreshError(e: Exception) {}
     fun onLoadMoreEnd(data: List<*>?) {}
+    fun onLoadMoreError(e: Exception) {}
 }

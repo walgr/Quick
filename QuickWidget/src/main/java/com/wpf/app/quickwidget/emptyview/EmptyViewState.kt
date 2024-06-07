@@ -7,18 +7,45 @@ interface EmptyViewStateManager {
     var curState: EmptyViewState
     fun changeState(state: EmptyViewState) {
         this.curState = state
-        val dealStateFun = registerStateMap[state::class.java.interfaces.first().hashCode()] ?: return
-        val stateClass: Class<EmptyViewState> = dealStateFun.javaClass.methods.find { it.name == "invoke" }!!.parameterTypes.first().forceTo()
+        val dealStateFun =
+            registerStateMap[state::class.java.hashCode()] ?: return
+        val stateClass: Class<EmptyViewState> =
+            dealStateFun.javaClass.methods.find { it.name == "invoke" }!!.parameterTypes.first()
+                .forceTo()
         if (stateClass == state.javaClass) {
             dealStateFun.invoke(state)
         } else {
-            dealStateFun.invoke(stateClass.getDeclaredConstructor().newInstance())
+            when (state) {
+                is LoadingI -> {
+                    dealStateFun.invoke(
+                        stateClass.getDeclaredConstructor(Boolean::class.java).newInstance(state.listIsEmpty)
+                    )
+                }
+                is StateNetError -> {
+                    dealStateFun.invoke(
+                        stateClass.getDeclaredConstructor(Int::class.java).newInstance(state.errorCode)
+                    )
+                }
+
+                is StateCustomError -> {
+                    dealStateFun.invoke(
+                        stateClass.getDeclaredConstructor(
+                            Int::class.java,
+                            Exception::class.java
+                        ).newInstance(state.errorCode, state.e)
+                    )
+                }
+
+                else -> {
+                    dealStateFun.invoke(stateClass.getDeclaredConstructor().newInstance())
+                }
+            }
         }
     }
 }
 
 inline fun <reified T : EmptyViewState> EmptyViewStateManager.register(noinline dealState: T.() -> Unit) {
-    val key = T::class.java.interfaces.first().hashCode()
+    val key = T::class.hashCode()
     registerStateMap[key] = dealState as DealStateFun<EmptyViewState>
 }
 
@@ -39,6 +66,7 @@ object StateNoError : NoErrorI
 interface LoadingI : EmptyViewState {
     var listIsEmpty: Boolean
 }
+
 object StateLoading : LoadingI {
     override var listIsEmpty: Boolean = true
 
@@ -56,15 +84,6 @@ object StateSuccess : SuccessI
 interface EmptyDataI : EmptyViewState
 object StateEmptyData : EmptyDataI
 
-//网络异常
-interface NetErrorI : EmptyViewState {
-    val errorCode: Int
-}
-
-open class StateNetError(
-    override val errorCode: Int = 0,
-) : NetErrorI
-
 //自定义异常
 interface CustomErrorI : EmptyViewState {
     val errorCode: Int
@@ -76,9 +95,6 @@ open class StateCustomError(
     override val e: Throwable? = null,
 ) : CustomErrorI
 
-//代码异常
-interface ExceptionErrorI : CustomErrorI
-open class StateExceptionError(
+open class StateNetError(
     override val errorCode: Int = 0,
-    override val e: Throwable? = null,
-) : ExceptionErrorI
+) : StateCustomError(errorCode)

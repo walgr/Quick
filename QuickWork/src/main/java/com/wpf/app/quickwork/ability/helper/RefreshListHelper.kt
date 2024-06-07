@@ -19,7 +19,6 @@ import com.wpf.app.quickrecyclerview.QuickRefreshRecyclerView
 import com.wpf.app.quickrecyclerview.data.QuickItemData
 import com.wpf.app.quickrecyclerview.data.RequestData
 import com.wpf.app.quickrecyclerview.helper.Request2RefreshView
-import com.wpf.app.quickrecyclerview.listeners.RefreshView
 import com.wpf.app.quickrecyclerview.listeners.Request2ListWithView
 import com.wpf.app.quickutil.helper.InitViewHelper
 import com.wpf.app.quickutil.helper.matchMarginLayoutParams
@@ -78,7 +77,7 @@ fun ContextScope.smartRefreshList(
     upperLayerLayoutId: Int = 0,
     upperLayerLayoutView: View? = null,
     upperLayerLayoutViewCreate: (ContextScope.() -> View)? = null,
-    builder: SmartRefreshLayout.(list: QuickRefreshRecyclerView, upperLayout: View?) -> Request2ListWithView<out RequestData, out QuickItemData, out RefreshView>,
+    builder: SmartRefreshLayout.(list: QuickRefreshRecyclerView, upperLayout: View?) -> Request2ListWithView<out RequestData, out QuickItemData, QuickRefreshRecyclerView>,
 ): SmartRefreshLayout {
     val list = QuickRefreshRecyclerView(context)
     list.layoutManager = layoutManager
@@ -86,7 +85,10 @@ fun ContextScope.smartRefreshList(
     val upperLayout: View? =
         if (upperLayerLayoutId != 0 || upperLayerLayoutView != null || upperLayerLayoutViewCreate != null) {
             InitViewHelper.init(
-                context, upperLayerLayoutId, upperLayerLayoutView, viewCreateConvert(upperLayerLayoutViewCreate)
+                context,
+                upperLayerLayoutId,
+                upperLayerLayoutView,
+                viewCreateConvert(upperLayerLayoutViewCreate)
             )
         } else null
     return smartRefreshLayout(layoutParams,
@@ -107,8 +109,6 @@ fun ContextScope.smartRefreshList(
                 list
             }
         }) {
-        val request2List = builder.invoke(this, list, upperLayout)
-            .forceTo<Request2ListWithView<RequestData, QuickItemData, QuickRefreshRecyclerView>>()
-        BindData2ViewHelper.bind(list, request2List, Request2RefreshView)
+        BindData2ViewHelper.bind(list, builder.invoke(this, list, upperLayout), Request2RefreshView)
     }
 }
