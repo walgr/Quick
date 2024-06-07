@@ -2,7 +2,6 @@ package com.wpf.app.quickbind.helper.binddatahelper
 
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
 import com.wpf.app.quickbind.annotations.BindD2VHelper
 
 /**

@@ -53,6 +53,7 @@ fun <T : Activity> Fragment.startActivity(
     }
 }
 
+@Suppress("unused")
 inline fun <reified T : Activity> Fragment.startActivity(
     data: Bundle? = null,
     resultCallback: ActivityResultCallback<ActivityResult>? = null,

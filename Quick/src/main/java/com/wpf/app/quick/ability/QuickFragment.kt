@@ -31,6 +31,7 @@ open class QuickFragment(
         )
     }
 ), BindViewModel<ViewModel> {
+    @Suppress("unused")
     val extraParameter: LinkedHashMap<String, Any> = linkedMapOf()
 
     companion object {

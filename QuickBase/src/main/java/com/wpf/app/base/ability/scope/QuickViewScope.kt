@@ -5,6 +5,7 @@ import com.wpf.app.base.Quick
 interface QuickViewScope<T: Quick> {
     val self: T
 
+    @Suppress("unused")
     fun withSelf(builder: T.() -> Unit) {
         builder.invoke(self)
     }

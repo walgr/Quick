@@ -101,6 +101,6 @@ inline fun <reified Self : Quick, reified VB : ViewDataBinding> bindingAndSelf(
 
 inline fun <reified VB : ViewDataBinding> binding(
     noinline vbBuilder: (VB.() -> Unit)? = null,
-): MutableList<QuickAbility> = bindingAndSelf<Quick, VB>() {
+): MutableList<QuickAbility> = bindingAndSelf<Quick, VB> {
     vbBuilder?.invoke(this)
 }

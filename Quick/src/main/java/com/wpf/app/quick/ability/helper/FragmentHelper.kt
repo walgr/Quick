@@ -28,6 +28,7 @@ inline fun <reified T : QuickFragment> FragmentGroup.fragment(noinline builder: 
     addFragment(fragment)
 }
 
+@Suppress("unused")
 fun FragmentGroup.classFragment(
     fragmentClass: Class<*>,
     builder: (Fragment.() -> Unit)? = null,

@@ -15,6 +15,7 @@ import kotlin.reflect.KClass
  *
  */
 
+@Suppress("unused")
 @BindingAdapter("clickGoto")
 fun <T : Activity> gotoActivity(view: View, gotoClass: KClass<T>) {
     view.setOnClickListener {
@@ -29,6 +30,7 @@ fun isSelect(checkView: View, select: Boolean) {
     }
 }
 
+@Suppress("unused")
 @BindingAdapter("bindSelect")
 fun bindSelect(checkView: View, select: MutableLiveData<Boolean>) {
     isSelect(checkView, select.value ?: false)
@@ -47,11 +49,13 @@ fun bindSelect(checkView: View, select: MutableLiveData<Boolean>) {
     }
 }
 
+@Suppress("unused")
 @BindingAdapter("onViewClick")
 fun onViewClick(view: View, onClick: View.OnClickListener) {
     view.setOnClickListener(onClick)
 }
 
+@Suppress("unused")
 @BindingAdapter("onViewCheck")
 fun onViewCheck(view: View, onChange: CompoundButton.OnCheckedChangeListener?) {
     if (view is CheckView) {

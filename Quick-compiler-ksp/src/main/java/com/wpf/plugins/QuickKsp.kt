@@ -6,12 +6,12 @@ import com.google.devtools.ksp.processing.SymbolProcessor
 import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
 import com.google.devtools.ksp.processing.SymbolProcessorProvider
 import com.google.devtools.ksp.symbol.KSAnnotated
-import com.wpf.app.quick.annotations.tab.TabInit
 import com.wpf.app.quick.annotations.getclass.GetClass
 import com.wpf.app.quick.annotations.getclass.GetFun
 import com.wpf.app.quick.annotations.request.GenerateCommonCall
 import com.wpf.app.quick.annotations.request.GenerateNormalCall
 import com.wpf.app.quick.annotations.request.GenerateRequest
+import com.wpf.app.quick.annotations.tab.TabInit
 import com.wpf.plugins.processor.BaseProcessor
 import com.wpf.plugins.processor.BindViewProcessor
 import com.wpf.plugins.processor.GenerateCommonCallProcessor
@@ -74,6 +74,7 @@ internal class QuickSymbolProcessor(private val environment: SymbolProcessorEnvi
         return emptyList()
     }
 
+    @Suppress("unused")
     private fun print(msg: String) {
         environment.logger.warn(msg)
     }

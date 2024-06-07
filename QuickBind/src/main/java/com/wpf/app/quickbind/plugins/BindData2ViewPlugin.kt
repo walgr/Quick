@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 import com.wpf.app.quick.annotations.bind.BindD2VHHelper
 import com.wpf.app.quick.annotations.bind.BindData2View
-import com.wpf.app.quickutil.run.RunOnViewWithSelf
 import com.wpf.app.quickutil.other.GenericEx.canBreakScan
+import com.wpf.app.quickutil.run.RunOnViewWithSelf
 import java.lang.reflect.Field
 
 /**
@@ -62,6 +62,7 @@ class BindData2ViewPlugin : BindBasePlugin {
         return
     }
 
+    @Suppress("SameParameterValue")
     private fun parentClassIs(cur: Class<*>, parentName: String): Boolean {
         var curCls = cur
         while (parentName != curCls.simpleName) {

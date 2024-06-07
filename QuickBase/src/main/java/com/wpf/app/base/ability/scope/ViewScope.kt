@@ -16,10 +16,12 @@ interface ViewScope<T: View>: ContextScope {
     }
 }
 
+@Suppress("unused")
 fun <T : View, R> T.withViewScope(block: ViewScope<T>.() -> R) : R {
     return block(this.createViewScope())
 }
 
+@Suppress("unused", "EXTENSION_SHADOWED_BY_MEMBER")
 @OptIn(ExperimentalContracts::class)
 inline fun <T: View> ViewScope<T>.viewApply(block: T.() -> Unit) {
     contract {

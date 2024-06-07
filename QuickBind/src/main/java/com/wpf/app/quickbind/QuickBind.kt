@@ -233,6 +233,7 @@ object QuickBind: QuickBindI {
         }
     }
 
+    @Suppress("unused")
     fun setBindSpFileName(bindSpFileName: String) {
         QuickBind.bindSpFileName = bindSpFileName
     }

@@ -44,6 +44,7 @@ fun ContextScope.viewPager2(
     return viewPager2
 }
 
+@Suppress("unused")
 inline fun <reified F : Fragment> ContextScope.viewPager2(
     layoutParams: ViewGroup.LayoutParams = matchMarginLayoutParams(),
     quick: Quick,
@@ -104,6 +105,7 @@ fun ContextScope.viewPager2WithView(
     return viewPager2(layoutParams, quick, contentFragmentList, limit, builder)
 }
 
+@Suppress("unused")
 fun ContextScope.viewPager2(
     layoutParams: ViewGroup.LayoutParams = matchMarginLayoutParams(),
     quick: Quick,

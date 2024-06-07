@@ -9,6 +9,7 @@ import com.wpf.app.quickrecyclerview.QuickAdapter
 import com.wpf.app.quickrecyclerview.ability.base.QuickItemAbility
 import com.wpf.app.quickrecyclerview.data.QuickAbilityData
 
+@Suppress("unused")
 inline fun <reified VB : ViewDataBinding> binding(
     noinline func: (VB.() -> Unit)? = null,
 ): MutableList<QuickAbility> {
@@ -25,7 +26,8 @@ inline fun <reified VB : ViewDataBinding> bindWAdapter(
     }
 }
 
-inline fun <reified VB : ViewDataBinding, T : QuickAbilityData> bindWSelf(
+@Suppress("unused")
+inline fun <reified VB : ViewDataBinding, reified T : QuickAbilityData> bindWSelf(
     noinline func: (VB.(self: T) -> Unit)? = null,
 ): MutableList<QuickAbility> {
     return bindWSelfWAdapter<VB, T> { self, _ ->
@@ -33,7 +35,7 @@ inline fun <reified VB : ViewDataBinding, T : QuickAbilityData> bindWSelf(
     }
 }
 
-inline fun <reified VB : ViewDataBinding, T : QuickAbilityData> bindWSelfWAdapter(
+inline fun <reified VB : ViewDataBinding, reified T : QuickAbilityData> bindWSelfWAdapter(
     noinline func: (VB.(self: T, adapter: QuickAdapter) -> Unit)? = null,
 ): MutableList<QuickAbility> {
     return mutableListOf(

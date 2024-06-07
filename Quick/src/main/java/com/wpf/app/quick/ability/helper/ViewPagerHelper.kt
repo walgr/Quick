@@ -136,6 +136,7 @@ fun ContextScope.viewPager(
     return viewPager
 }
 
+@Suppress("unused")
 fun ContextScope.viewPagerWithView(
     layoutParams: ViewGroup.LayoutParams = matchMarginLayoutParams(),
     quick: Quick,

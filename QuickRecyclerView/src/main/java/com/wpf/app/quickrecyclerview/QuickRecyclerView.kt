@@ -27,12 +27,14 @@ import com.wpf.app.quickutil.other.nullDefault
  * Created by 王朋飞 on 2022/7/13.
  *
  */
+@Suppress("LeakingThis")
 open class QuickRecyclerView @JvmOverloads constructor(
     mContext: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
 ) : RecyclerView(mContext, attrs, defStyleAttr), DataAdapter {
 
+    @Suppress("MemberVisibilityCanBePrivate")
     protected var mQuickAdapter: QuickAdapter = QuickAdapter()
     private val attr: QuickRecyclerViewAttr by lazy {
         AutoGetAttributeHelper.init(context, attrs, R.styleable.QuickRecyclerView)
@@ -153,6 +155,7 @@ open class QuickRecyclerView @JvmOverloads constructor(
     )
 }
 
+@Suppress("unused")
 fun <T : QuickItemData> QuickRecyclerView.itemClick(click: (view: View, data: T?, position: Int) -> Unit) {
     getQuickAdapter().setQuickAdapterListener(object : QuickAdapterListener<T> {
         override fun onItemClick(view: View, data: T?, position: Int) {

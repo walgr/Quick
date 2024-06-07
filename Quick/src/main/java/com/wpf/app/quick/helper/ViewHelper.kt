@@ -18,17 +18,20 @@ fun View.toFragment() = QuickFragment(
     contentView(layoutView = this@toFragment)
 )
 
+@Suppress("unused")
 inline fun <reified VM : QuickViewModel<out Quick>> View.toVMFragment(
 ) = QuickFragment(
     contentView(layoutView = this@toVMFragment).with(viewModel<VM>())
 )
 
 
+@Suppress("unused")
 inline fun <reified VM : QuickVBModel<QuickFragment, VB>, reified VB : ViewDataBinding> View.toVBFragment(
 ) = QuickFragment(
     contentView(layoutView = this@toVBFragment).with(modelBindingWithSelf<QuickFragment, VM, VB>())
 )
 
+@Suppress("unused")
 fun View.toActivity(
     onActivityInit: ((view: View) -> Unit)? = null,
 ) = object : QuickActivity(
@@ -40,6 +43,7 @@ fun View.toActivity(
     }
 }
 
+@Suppress("unused")
 inline fun <reified VM : QuickViewModel<out Quick>> View.toVMActivity(
     noinline onActivityInit: ((view: View) -> Unit)? = null,
 ) = object : QuickActivity(
@@ -51,6 +55,7 @@ inline fun <reified VM : QuickViewModel<out Quick>> View.toVMActivity(
     }
 }
 
+@Suppress("unused")
 inline fun <reified VM : QuickVBModel<QuickActivity, VB>, reified VB : ViewDataBinding> View.toVBActivity(
     noinline onActivityInit: (VB.() -> Unit)? = null,
 ) = QuickActivity(
@@ -59,6 +64,7 @@ inline fun <reified VM : QuickVBModel<QuickActivity, VB>, reified VB : ViewDataB
     })
 )
 
+@Suppress("unused")
 fun View.toDialog(onDialogInit: ((view: View?) -> Unit)? = null): QuickBaseDialog {
     return object : QuickBaseDialog(this.context, layoutView = this) {
         override fun initView(view: View) {
@@ -67,6 +73,7 @@ fun View.toDialog(onDialogInit: ((view: View?) -> Unit)? = null): QuickBaseDialo
     }
 }
 
+@Suppress("unused")
 fun View.toDialogFragment(): QuickBaseDialogFragment {
     return QuickBaseDialogFragment(layoutView = this)
 }

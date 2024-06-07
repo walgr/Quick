@@ -30,6 +30,7 @@ open class QuickActivity(
         )
     }
 ), BindViewModel<ViewModel> {
+    @Suppress("unused")
     val extraParameter: LinkedHashMap<String, Any> = linkedMapOf()
 
     companion object {

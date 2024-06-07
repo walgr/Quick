@@ -20,6 +20,7 @@ import io.github.florent37.shapeofview.shapes.RoundRectView
 import io.github.florent37.shapeofview.shapes.StarView
 import io.github.florent37.shapeofview.shapes.TriangleView
 
+@Suppress("unused")
 fun ContextScope.circle(
     layoutParams: LayoutParams = wrapMarginLayoutParams(),
     @ColorInt borderColor: Int? = null,
@@ -36,6 +37,7 @@ fun ContextScope.circle(
     return view
 }
 
+@Suppress("unused")
 fun ContextScope.roundRect(
     layoutParams: LayoutParams = wrapMarginLayoutParams(),
     background: Drawable? = null,
@@ -63,6 +65,7 @@ fun ContextScope.roundRect(
     return view
 }
 
+@Suppress("unused")
 fun ContextScope.clipCorner(
     layoutParams: LayoutParams = wrapMarginLayoutParams(),
     cutSize: Float? = null,
@@ -82,6 +85,7 @@ fun ContextScope.clipCorner(
     return view
 }
 
+@Suppress("unused")
 fun ContextScope.arc(
     layoutParams: LayoutParams = wrapMarginLayoutParams(),
     height: Float = 0f,       //单位px 负反方向
@@ -96,6 +100,7 @@ fun ContextScope.arc(
     return view
 }
 
+@Suppress("unused")
 fun ContextScope.diagonal(
     layoutParams: LayoutParams = wrapMarginLayoutParams(),
     angle: Float = 0f,       //单位px 负反方向
@@ -110,6 +115,7 @@ fun ContextScope.diagonal(
     return view
 }
 
+@Suppress("unused")
 fun ContextScope.triangle(
     layoutParams: LayoutParams = wrapMarginLayoutParams(),
     percentLeft: Float = 0f,
@@ -126,6 +132,7 @@ fun ContextScope.triangle(
     return view
 }
 
+@Suppress("unused")
 fun ContextScope.bubble(
     layoutParams: LayoutParams = wrapMarginLayoutParams(),
     arrowWidth: Float = 10f.dp,
@@ -146,6 +153,7 @@ fun ContextScope.bubble(
     return view
 }
 
+@Suppress("unused")
 fun ContextScope.star(
     layoutParams: LayoutParams = wrapMarginLayoutParams(),
     points: Int = 5,
@@ -158,6 +166,7 @@ fun ContextScope.star(
     return view
 }
 
+@Suppress("unused")
 fun ContextScope.polygon(
     layoutParams: LayoutParams = wrapMarginLayoutParams(),
     sides: Int = 4,
@@ -170,6 +179,7 @@ fun ContextScope.polygon(
     return view
 }
 
+@Suppress("unused")
 fun ContextScope.dottedEdgesCutCorner(
     layoutParams: LayoutParams = wrapMarginLayoutParams(),
     dotRadius: Float = 0f,

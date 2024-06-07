@@ -28,6 +28,7 @@ open class QuickBottomSheetDialog(
         inflateAbility.layoutViewCreate()
     )
 }) {
+    @Suppress("unused")
     val extraParameter: LinkedHashMap<String, Any> = linkedMapOf()
 
     companion object {

@@ -10,6 +10,7 @@ import com.wpf.app.quickutil.helper.InitViewHelper
 import com.wpf.app.quickutil.helper.matchMarginLayoutParams
 import com.wpf.app.quickutil.helper.matchWrapMarginLayoutParams
 
+@Suppress("unused")
 inline fun <reified T : ViewGroup> ContextScope.scroll(
     layoutParams: ViewGroup.LayoutParams = matchWrapMarginLayoutParams(),
     noinline builder: (ViewGroupScope<T>.() -> Unit)? = null,
@@ -23,6 +24,7 @@ inline fun <reified T : ViewGroup> ContextScope.scroll(
     return view
 }
 
+@Suppress("unused")
 inline fun <reified T : ViewGroup> ContextScope.nestedScroll(
     layoutParams: ViewGroup.LayoutParams = matchWrapMarginLayoutParams(),
     noinline builder: (ViewGroupScope<T>.() -> Unit)? = null,

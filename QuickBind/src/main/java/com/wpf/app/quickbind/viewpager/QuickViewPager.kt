@@ -1,5 +1,6 @@
 package com.wpf.app.quickbind.viewpager
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
@@ -25,6 +26,7 @@ open class QuickViewPager @JvmOverloads constructor(
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(arg0: MotionEvent?): Boolean {
         return if (canScroll) {
             super.onTouchEvent(arg0)
@@ -46,6 +48,7 @@ open class QuickViewPager @JvmOverloads constructor(
     )
 }
 
+@Suppress("unused")
 fun QuickViewPager.notifyPagerSize(size: Int) {
     adapter?.forceTo<ViewPagerSize>()?.setPageSize(size)
     adapter?.forceTo<PagerAdapter>()?.notifyDataSetChanged()

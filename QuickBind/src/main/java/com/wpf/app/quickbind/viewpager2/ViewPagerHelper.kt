@@ -17,6 +17,7 @@ object ViewPagerHelper {
         (viewPager.adapter as PagerAdapter).notifyDataSetChanged()
     }
 
+    @Suppress("unused")
     @SuppressLint("NotifyDataSetChanged")
     fun notifyPagerSize(viewPager: ViewPager2?, size: Int) {
         if (viewPager == null) return

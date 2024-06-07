@@ -2,6 +2,7 @@ package com.wpf.app.quick.annotations.tab
 
 import androidx.annotation.LayoutRes
 
+@Suppress("unused")
 @Target(AnnotationTarget.FIELD)
 @Retention(AnnotationRetention.RUNTIME)
 annotation class TabInit(

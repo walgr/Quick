@@ -17,6 +17,7 @@ import com.wpf.app.quickutil.helper.reset
 import com.wpf.app.quickutil.other.forceTo
 import com.wpf.app.quickutil.widget.wishLayoutParams
 
+@Suppress("LeakingThis")
 open class QuickView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
@@ -25,6 +26,7 @@ open class QuickView @JvmOverloads constructor(
 ) : FrameLayout(
     context, attrs, defStyleAttr
 ), LifecycleOwner, Quick {
+    @Suppress("unused")
     val extraParameter: LinkedHashMap<String, Any> = linkedMapOf()
 
     init {

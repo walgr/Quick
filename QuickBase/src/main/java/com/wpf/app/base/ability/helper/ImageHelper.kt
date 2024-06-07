@@ -10,6 +10,7 @@ import com.wpf.app.base.ability.scope.ContextScope
 import com.wpf.app.quickutil.helper.onceClick
 import com.wpf.app.quickutil.helper.wrapMarginLayoutParams
 
+@Suppress("unused")
 fun ContextScope.img(
     layoutParams: LayoutParams = wrapMarginLayoutParams(),
     @DrawableRes img: Int = NO_SET,

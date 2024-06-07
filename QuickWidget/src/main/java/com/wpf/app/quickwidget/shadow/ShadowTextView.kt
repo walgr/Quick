@@ -10,6 +10,7 @@ import com.wpf.app.quickwidget.shadow.base.ShadowData
 import com.wpf.app.quickwidget.shadow.base.ShadowLiveFactory
 import com.wpf.app.quickwidget.shadow.base.ShadowView
 
+@Suppress("LeakingThis")
 open class ShadowTextView @JvmOverloads constructor(
     context: Context,
     override val attrs: AttributeSet? = null,

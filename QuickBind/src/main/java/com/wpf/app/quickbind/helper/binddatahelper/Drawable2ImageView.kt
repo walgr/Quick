@@ -7,6 +7,7 @@ import com.wpf.app.quickbind.annotations.BindD2VHelper
  * Created by 王朋飞 on 2022/7/19.
  *
  */
+@Suppress("unused")
 object Drawable2ImageView : BindD2VHelper<ImageView, Int> {
 
     override fun initView(view: ImageView, data: Int) {

@@ -31,6 +31,7 @@ fun <T : View> T.background(
     return this
 }
 
+@Suppress("unused")
 fun BackgroundScope.backgroundRes(
     @DrawableRes drawableRes: Int,
 ): View {
@@ -176,6 +177,7 @@ fun BackgroundScope.rect(
     )
 }
 
+@Suppress("unused")
 fun ViewGroupScope<out ViewGroup>.oval(
     @ColorInt color: Int = android.R.color.white.toColor(),
     colorStateList: ColorStateList? = null,
@@ -243,6 +245,7 @@ fun BackgroundScope.oval(
     )
 }
 
+@Suppress("unused")
 fun ViewGroupScope<out ViewGroup>.ring(
     @ColorInt color: Int = android.R.color.white.toColor(),
     colorStateList: ColorStateList? = null,

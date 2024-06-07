@@ -84,16 +84,21 @@ open class QuickBaseBottomSheetDialog(
 
     open fun initView(view: View) {}
 
+    @Suppress("MemberVisibilityCanBePrivate")
     protected var mScreenWidth = 0
+    @Suppress("MemberVisibilityCanBePrivate")
     protected var mScreenHeight = 0
 
+    @Suppress("MemberVisibilityCanBePrivate")
     protected fun dealSize() {
         val size = getScreenSize()
         mScreenWidth = size.x
         mScreenHeight = size.y
     }
 
+    @Suppress("MemberVisibilityCanBePrivate")
     protected var mNewWidth = DialogSize.NO_SET
+    @Suppress("MemberVisibilityCanBePrivate")
     protected var mNewHeight = DialogSize.NO_SET
 
     override fun getNewHeight(): Int {
@@ -144,6 +149,7 @@ open class QuickBaseBottomSheetDialog(
         listener?.onDismiss(this)
     }
 
+    @Suppress("MemberVisibilityCanBePrivate")
     var listener: DialogInterface.OnDismissListener? = null
     override fun setOnDismissListener(listener: DialogInterface.OnDismissListener?) {
         super.setOnDismissListener(listener)

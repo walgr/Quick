@@ -14,6 +14,7 @@ object DataAutoSet2ViewUtils {
 
     private var bind2ViewList: MutableList<BindD2VHelper<View, Any>> = arrayListOf()
 
+    @Suppress("unused")
     fun appendViewSet(helper: BindD2VHelper<View, Any>) {
         bind2ViewList.add(helper)
     }

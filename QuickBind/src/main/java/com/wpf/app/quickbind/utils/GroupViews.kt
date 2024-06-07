@@ -1,7 +1,6 @@
 package com.wpf.app.quickbind.utils
 
 import android.view.View
-import java.util.*
 
 /**
  * Created by 王朋飞 on 2022/7/12.
@@ -14,14 +13,17 @@ class GroupViews {
         viewList.addAll(view)
     }
 
+    @Suppress("unused")
     fun removeView(view: View) {
         viewList.remove(view)
     }
 
+    @Suppress("unused")
     fun removeAll() {
         viewList.clear()
     }
 
+    @Suppress("unused")
     fun showAll() {
         for (view in viewList) {
             view.visibility = View.VISIBLE

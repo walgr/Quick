@@ -21,9 +21,9 @@ class GroupViewPlugin : BindBasePlugin {
         ) ?: return
         field.isAccessible = true
         val groupViews = GroupViews()
-        val R2IdList = getSaveIdList(obj, viewModel, field)
-        if (R2IdList != null) {
-            for (id in R2IdList) {
+        val r2IdList = getSaveIdList(obj, viewModel, field)
+        if (r2IdList != null) {
+            for (id in r2IdList) {
                 val findView = findView(obj, id)
                 if (findView != null) {
                     groupViews.viewList.add(findView)

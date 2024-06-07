@@ -1,5 +1,6 @@
 package com.wpf.app.quickbind.viewpager2
 
+import android.annotation.SuppressLint
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.wpf.app.quickbind.viewpager.ViewPagerSize
@@ -15,6 +16,8 @@ interface ViewPagerSize2: ViewPagerSize {
         return null
     }
     fun getAdapter2(): FragmentStateAdapter?
+
+    @SuppressLint("NotifyDataSetChanged")
     override fun notifyPagerSize(size: Int) {
         setPageSize(size)
         forceTo<FragmentStateAdapter>().notifyDataSetChanged()

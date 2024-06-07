@@ -117,6 +117,7 @@ open class QuickBottomSheetDialogFragmentTemp(
     }
 }
 
+@Suppress("unused", "UnusedReceiverParameter")
 fun ContextScope.bottomSheetDialogFragment(
     @LayoutRes layoutId: Int = 0,
     layoutView: View? = null,
@@ -376,6 +377,7 @@ open class QuickDialogFragmentTemp(
     }
 }
 
+@Suppress("unused", "UnusedReceiverParameter")
 fun ContextScope.dialogFragment(
     @LayoutRes layoutId: Int = 0,
     layoutView: View? = null,
@@ -425,6 +427,7 @@ fun ContextScope.dialogFragment(
     return dialog
 }
 
+@Suppress("unused")
 fun ContextScope.dialog(
     @StyleRes themeId: Int = 0,
     @LayoutRes layoutId: Int = 0,

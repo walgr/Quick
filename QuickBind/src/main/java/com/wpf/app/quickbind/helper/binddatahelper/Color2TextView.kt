@@ -9,6 +9,7 @@ import com.wpf.app.quickbind.annotations.BindD2VHelper
  * Created by 王朋飞 on 2022/7/21.
  *
  */
+@Suppress("unused")
 object Color2TextView: BindD2VHelper<TextView, Int> {
 
     override fun initView(view: TextView, @ColorRes data: Int) {

@@ -2,9 +2,7 @@ package com.wpf.app.quickbind.interfaces
 
 import android.app.Activity
 import android.os.Bundle
-import androidx.annotation.NonNull
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
 
 /**
  * Created by 王朋飞 on 2022/7/12.

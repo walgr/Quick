@@ -55,7 +55,7 @@ open class QuickBaseBottomSheetDialogFragment @JvmOverloads constructor(
         registerForActivityResult()
     }
 
-    var launcher: ActivityResultLauncher<Intent>? = null
+    private var launcher: ActivityResultLauncher<Intent>? = null
     private var resultRegister: ActivityResultRegistry? = null
     private var resultCallback: ActivityResultCallback<ActivityResult>? = null
     open fun registerForActivityResult(
@@ -135,9 +135,12 @@ open class QuickBaseBottomSheetDialogFragment @JvmOverloads constructor(
 
     open fun initView(view: View) {}
 
+    @Suppress("MemberVisibilityCanBePrivate")
     protected var mScreenWidth = 0
+    @Suppress("MemberVisibilityCanBePrivate")
     protected var mScreenHeight = 0
 
+    @Suppress("MemberVisibilityCanBePrivate")
     protected fun dealSize() {
         val size = getScreenSize()
         mScreenWidth = size.x
@@ -156,7 +159,9 @@ open class QuickBaseBottomSheetDialogFragment @JvmOverloads constructor(
         return mNewHeight
     }
 
+    @Suppress("MemberVisibilityCanBePrivate")
     protected var mNewWidth = DialogSize.NO_SET
+    @Suppress("MemberVisibilityCanBePrivate")
     protected var mNewHeight = DialogSize.NO_SET
 
     /**

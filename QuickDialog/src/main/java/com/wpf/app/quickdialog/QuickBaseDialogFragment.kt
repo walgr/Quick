@@ -52,7 +52,7 @@ open class QuickBaseDialogFragment @JvmOverloads constructor(
         registerForActivityResult()
     }
 
-    var launcher: ActivityResultLauncher<Intent>? = null
+    private var launcher: ActivityResultLauncher<Intent>? = null
     private var resultRegister: ActivityResultRegistry? = null
     private var resultCallback: ActivityResultCallback<ActivityResult>? = null
     open fun registerForActivityResult(
