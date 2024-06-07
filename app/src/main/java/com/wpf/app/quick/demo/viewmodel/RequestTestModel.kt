@@ -23,8 +23,8 @@ class RequestTestModel : QuickVBModel<RequestTestActivity, ActivityRequestTestBi
             homePageList(page)
         }.success {
             callback.backData(it.data)
-        }.fail {
-            LogUtil.e("接口错误：${it?.errorI}")
+        }.error {
+            LogUtil.e("接口错误：${it.message}")
         }
     }.autoRequest { false }
 

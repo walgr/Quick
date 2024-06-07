@@ -138,8 +138,8 @@ class TestGsonConverterFactory private constructor(private val gson: Gson) : Con
                 }
             } catch (e: Exception) {
                 val exceptionResponse: TestResponse<*> = TestResponse<Any>()
-                exceptionResponse.codeI = "-1"
-                exceptionResponse.errorI = e.message
+                exceptionResponse.code = "-1"
+                exceptionResponse.error = e.message
                 exceptionResponse as T
             } finally {
                 value.close()

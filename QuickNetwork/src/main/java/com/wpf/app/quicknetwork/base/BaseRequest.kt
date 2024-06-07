@@ -6,38 +6,72 @@ package com.wpf.app.quicknetwork.base
  */
 abstract class BaseRequest<SResponse, FResponse> {
 
-    internal var funBefore = {}
+    internal var funBefore = {
+        beforeList.forEach { it.invoke() }
+    }
 
-    internal var funSuccessBefore = { _: SResponse -> }
+    internal var funSuccessBefore = { data: SResponse ->
+        successBeforeList.forEach {
+            it.invoke(data)
+        }
+    }
 
-    internal var funSuccess = { _: SResponse -> }
+    internal var funSuccess = { data: SResponse ->
+        successList.forEach {
+            it.invoke(data)
+        }
+    }
 
-    internal var funFail = { _: FResponse? -> }
+    internal var funFail = { data: FResponse? ->
+        failList.forEach {
+            it.invoke(data)
+        }
+    }
 
-    internal var funAfter = {}
+    internal var funError = { t: Throwable ->
+        errorList.forEach {
+            it.invoke(t)
+        }
+    }
+
+    internal var funAfter = {
+        afterList.forEach { it.invoke() }
+    }
+
+    private val beforeList = mutableListOf<() -> Unit>()
+    private val successBeforeList = mutableListOf<(data: SResponse) -> Unit>()
+    private val successList = mutableListOf<(data: SResponse) -> Unit>()
+    private val failList = mutableListOf<(data: FResponse?) -> Unit>()
+    private val errorList = mutableListOf<(data: Throwable) -> Unit>()
+    private val afterList = mutableListOf<() -> Unit>()
 
     open fun before(onBefore: () -> Unit): BaseRequest<SResponse, FResponse> {
-        funBefore = onBefore
+        beforeList.add(onBefore)
         return this
     }
 
     open fun successBefore(onSuccessBefore: (SResponse) -> Unit): BaseRequest<SResponse, FResponse> {
-        funSuccessBefore = onSuccessBefore
+        successBeforeList.add(onSuccessBefore)
         return this
     }
 
     open fun success(onSuccess: (SResponse) -> Unit): BaseRequest<SResponse, FResponse> {
-        funSuccess = onSuccess
+        successList.add(onSuccess)
         return this
     }
 
     open fun fail(onFail: (FResponse?) -> Unit): BaseRequest<SResponse, FResponse> {
-        funFail = onFail
+        failList.add(onFail)
+        return this
+    }
+
+    open fun error(onError: (Throwable) -> Unit): BaseRequest<SResponse, FResponse> {
+        errorList.add(onError)
         return this
     }
 
     open fun after(onAfter: () -> Unit): BaseRequest<SResponse, FResponse> {
-        funAfter = onAfter
+        afterList.add(onAfter)
         return this
     }
 

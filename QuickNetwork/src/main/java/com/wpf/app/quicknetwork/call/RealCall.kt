@@ -22,8 +22,9 @@ open class RealCall<SResponse, FResponse>(private val rawCall: Call<SResponse>, 
     /**
      * 异步请求
      */
+    @Suppress("UNCHECKED_CAST")
     fun <Request : BaseRequest<SResponse, FResponse>> enqueue(request: Request): Request {
-        val job = CoroutineScope(Dispatchers.Default).launch {
+        val job = CoroutineScope(Dispatchers.Main).launch {
             request.funBefore.invoke()
             val result = withContext(Dispatchers.IO) {
                 try {
@@ -40,23 +41,10 @@ open class RealCall<SResponse, FResponse>(private val rawCall: Call<SResponse>, 
             withContext(Dispatchers.Main) {
                 when (result) {
                     is Throwable -> {
-                        try {
-                            if (fail is BaseResponseI<*, *>) {
-                                request.funFail.invoke(fail.asTo<BaseResponseI<*, Any>>()?.apply {
-                                    codeI = "-1"
-                                    errorI = result.message
-                                } as? FResponse)
-                            } else {
-                                request.funFail.invoke(fail)
-                            }
-                        } catch (e: Exception) {
-                            e.printStackTrace()
-                            request.funFail.invoke(fail)
-                        }
+                        request.funError.invoke(result)
                     }
 
                     is Response<*> -> {
-                        var code = ""
                         try {
                             val body = result.body() as SResponse
                             if (request.isSuccess(body)) {
@@ -64,23 +52,22 @@ open class RealCall<SResponse, FResponse>(private val rawCall: Call<SResponse>, 
                             } else {
                                 if (fail is BaseResponseI<*, *>) {
                                     if (body is BaseResponseI<*, *>) {
-                                        code = body.codeI ?: ""
-                                        if (fail.dataI != null) {
-                                            body.dataI = Gson().fromJson(
-                                                Gson().toJson(body.dataI),
-                                                (fail.dataI!!.javaClass as Type)
+                                        if (fail.data != null) {
+                                            body.data = Gson().fromJson(
+                                                Gson().toJson(body.data),
+                                                (fail.data!!.javaClass as Type)
                                             )
                                         }
                                         request.funFail.invoke(fail.asTo<BaseResponseI<Any, Any>>()?.apply {
-                                            codeI = body.codeI
-                                            errorI = body.errorI
-                                            dataI = body.dataI
+                                            code = body.code
+                                            error = body.error
+                                            data = body.data
                                         } as? FResponse)
                                     } else {
                                         request.funFail.invoke(fail.asTo<BaseResponseI<Any, Any>>()?.apply {
-                                            codeI = result.code().toString()
-                                            errorI = result.message()
-                                            dataI = null
+                                            code = result.code().toString()
+                                            error = result.message()
+                                            data = null
                                         } as? FResponse)
                                     }
                                 } else {
@@ -88,19 +75,7 @@ open class RealCall<SResponse, FResponse>(private val rawCall: Call<SResponse>, 
                                 }
                             }
                         } catch (e: Exception) {
-                            try {
-                                if (fail is BaseResponseI<*, *>) {
-                                    request.funFail.invoke(fail.asTo<BaseResponseI<Any, Any>>()?.apply {
-                                        codeI = code
-                                        errorI = e.message
-                                    } as? FResponse)
-                                } else {
-                                    request.funFail.invoke(fail)
-                                }
-                            } catch (e: Exception) {
-                                e.printStackTrace()
-                                request.funFail.invoke(fail)
-                            }
+                            request.funError.invoke(e)
                         }
                     }
                 }

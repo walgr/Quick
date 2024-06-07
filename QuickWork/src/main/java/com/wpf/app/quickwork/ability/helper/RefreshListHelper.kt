@@ -14,6 +14,7 @@ import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.wpf.app.base.ability.helper.addView
 import com.wpf.app.base.ability.helper.viewCreateConvert
 import com.wpf.app.base.ability.scope.ContextScope
+import com.wpf.app.base.ability.scope.ViewGroupScope
 import com.wpf.app.quickbind.helper.binddatahelper.BindData2ViewHelper
 import com.wpf.app.quickrecyclerview.QuickRefreshRecyclerView
 import com.wpf.app.quickrecyclerview.data.QuickItemData
@@ -65,6 +66,7 @@ fun <V : View> ContextScope.smartRefreshLayout(
     return smartRefreshLayout
 }
 
+@Suppress("UNCHECKED_CAST")
 fun ContextScope.smartRefreshList(
     layoutParams: ViewGroup.LayoutParams = matchWrapMarginLayoutParams(),
     layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(context),
@@ -75,8 +77,8 @@ fun ContextScope.smartRefreshList(
     enableRefresh: Boolean = true,
     enableLoadMore: Boolean = true,
     upperLayerLayoutId: Int = 0,
-    upperLayerLayoutView: View? = null,
-    upperLayerLayoutViewCreate: (ContextScope.() -> View)? = null,
+    upperLayerLayoutView: (QuickRefreshRecyclerView.() -> View)? = null,
+    upperLayerLayoutViewCreate: (ViewGroupScope<QuickRefreshRecyclerView>.() -> View)? = null,
     builder: SmartRefreshLayout.(list: QuickRefreshRecyclerView, upperLayout: View?) -> Request2ListWithView<out RequestData, out QuickItemData, QuickRefreshRecyclerView>,
 ): SmartRefreshLayout {
     val list = QuickRefreshRecyclerView(context)
@@ -87,8 +89,8 @@ fun ContextScope.smartRefreshList(
             InitViewHelper.init(
                 context,
                 upperLayerLayoutId,
-                upperLayerLayoutView,
-                viewCreateConvert(upperLayerLayoutViewCreate)
+                upperLayerLayoutView!!.invoke(list),
+                viewCreateConvert(upperLayerLayoutViewCreate as? ContextScope.() -> View)
             )
         } else null
     return smartRefreshLayout(layoutParams,
