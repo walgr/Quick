@@ -89,7 +89,6 @@ class StickyItemDecoration(
         val firstViewPos = mLayoutManager!!.findFirstVisibleItemPosition()
         var stickyItemViewPos = -1
         if (allStickyPosList.size == 1) {
-
             stickyItemViewPos = allStickyPosList[0]
         } else {
             allStickyPosList.forEachIndexed { index, i ->

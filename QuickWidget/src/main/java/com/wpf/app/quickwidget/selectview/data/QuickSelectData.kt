@@ -66,11 +66,4 @@ open class QuickSelectData(
     open fun onSelectChange(isSelect: Boolean) {
 
     }
-
-    /**
-     * 点击态变化
-     */
-    open fun onClickChange(clicked: Boolean) {
-
-    }
 }

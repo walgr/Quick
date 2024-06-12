@@ -3,7 +3,6 @@ package com.wpf.app.quickwidget.selectview.data
 import android.view.View
 import android.view.ViewGroup
 import com.wpf.app.quickutil.other.asTo
-import com.wpf.app.quickutil.other.nullDefault
 import com.wpf.app.quickutil.run.RunItemClickWithSelf
 import com.wpf.app.quickutil.run.RunOnContextWithSelf
 import java.io.Serializable
@@ -22,7 +21,7 @@ open class QuickChildSelectData(
     name: String? = null,
     defaultSelect: Boolean = false,
     isSelect: Boolean = defaultSelect,
-    canClickAgain: Boolean = true,                         //选中后再次点击是否触发选中回调
+    canClickAgain: Boolean = true,                 //选中后再次点击是否触发选中回调
     canCancel: Boolean = true,                     //是否可以取消选择
     singleSelect: Boolean = false,                 //true 单选  false 多选
     isGlobal: Boolean = true,                      //true 全局范围  false 同父范围
@@ -48,35 +47,14 @@ open class QuickChildSelectData(
     isSuspension = isSuspension
 ), Serializable {
 
-    fun getChildSelectSize(): Int {
-        return getChildSelectList()?.size.nullDefault(0)
-    }
-
-    fun getChildSelectList(): MutableList<QuickChildSelectData>? {
-        return childList?.filter { it.isSelect }?.toMutableList()
-    }
-
     override fun onClick(view: View) {
         onItemClick()
-        if (this is QuickParentSelectData) {
-            if (!canClick) {
-                return
-            }
-            getAdapter()?.onChildClick(this)
-            getAdapter()?.onParentChild(this)
-        } else {
-            getAdapter()?.onChildClick(this)
-        }
+    }
+
+    open fun onItemClick() {
+        getAdapter()?.onChildClick(this)
         getViewHolder()?.itemView?.let {
             onChildClick?.asTo<RunItemClickWithSelf<QuickChildSelectData>>()?.run(it, this)?.onClick(it)
         }
-    }
-
-    internal open fun onItemClick() {
-
-    }
-
-    override fun onSelectChange(isSelect: Boolean) {
-
     }
 }

@@ -89,8 +89,12 @@ open class QuickBindData @JvmOverloads constructor(
         return getAdapter()?.getRecyclerView()
     }
 
+    open fun getDataPos(): Int {
+        return getAdapter()?.getData()?.indexOf(this).nullDefault(-1)
+    }
+
     open fun getViewPos(): Int {
-        return getViewHolder()?.bindingAdapterPosition.nullDefault(0)
+        return getViewHolder()?.bindingAdapterPosition.nullDefault(-1)
     }
 
     override fun getView(): View? {

@@ -84,12 +84,17 @@ open class QuickMultistageSelectView @JvmOverloads constructor(
                     val curTopData =
                         selectAdapter.getRealTypeData<QuickChildSelectData>()?.get(curTopPos)
                     if (curTopData?.isInOne != true) return
-                    val parentDataSize: Int = selectAdapter.parentSelectAdapter?.size().nullDefault(0)
+                    val parentDataSize: Int =
+                        selectAdapter.parentSelectAdapter?.size().nullDefault(0)
                     val parentPos: Int =
                         selectAdapter.parentSelectAdapter?.getDataPos(curTopData.parent) ?: -1
                     if (parentPos in 0 until parentDataSize) {
-                        selectAdapter.parentSelectAdapter?.curClickData = curTopData.parent
-                        selectAdapter.parentSelectAdapter?.getRecyclerView()?.smoothScrollToPosition(parentPos)
+                        selectAdapter.parentSelectAdapter?.asSelectData()?.forEach {
+                            it.isSelect = curTopData.parent == it
+                        }
+                        curTopData.parent?.isSelect = true
+                        selectAdapter.parentSelectAdapter?.getRecyclerView()
+                            ?.smoothScrollToPosition(parentPos)
                         selectAdapter.parentSelectAdapter?.notifyItemChange()
                     }
                 }
@@ -101,12 +106,13 @@ open class QuickMultistageSelectView @JvmOverloads constructor(
         if (selectViewList.isEmpty()) return null
         return selectViewList[0].getRealTypeData<QuickChildSelectData>()?.flatMap {
             it.childList ?: arrayListOf()
-        }?.filter { it.isSelect }?.toSortedSet { o1, o2 -> if (o1?.id == o2?.id) 0 else 1 }?.toList()
+        }?.filter { it.isSelect }?.toSortedSet { o1, o2 -> if (o1?.id == o2?.id) 0 else 1 }
+            ?.toList()
     }
 
     private fun addSelectRecyclerView(
         selectRecyclerView: QuickSelectRecyclerView?,
-        index: Int
+        index: Int,
     ): QuickSelectRecyclerView {
         val recyclerView = selectRecyclerView ?: QuickSelectRecyclerView(mContext = context)
         if (index > 0 && selectViewList.size > (index - 1)) {
@@ -124,7 +130,7 @@ open class QuickMultistageSelectView @JvmOverloads constructor(
     fun setData(dataList: List<QuickParentSelectData>, childInOne: Boolean = false) {
         ParentChildDataHelper.initData(dataList, childInOne)
         selectViewList[0].setNewData(dataList)
-        selectViewList[0].getSelectAdapter().curClickData = dataList[0]
+        selectViewList[0].getSelectAdapter().asSelectData()?.getOrNull(0)?.isSelect = true
         selectViewList[0].getSelectAdapter().notifyItemChanged(0)
         if (childInOne) {
             val allChildList = dataList.flatMap {
@@ -149,16 +155,13 @@ open class QuickMultistageSelectView @JvmOverloads constructor(
     }
 
     fun setNewSelectList(newSelect: List<QuickChildSelectData>?) {
-        selectViewList[0].clearAll(false)
         (selectViewList[0].getRealTypeData<QuickChildSelectData>())?.flatMap {
             it.childList ?: arrayListOf()
         }?.forEach {
             val find = newSelect?.find { find ->
                 find.id == it.id && find.parent == it.parent
             }
-            if (find != null) {
-                it.isSelect = true
-            }
+            it.isSelect = find != null
         }
         selectViewList.forEach {
             it.notifyItemChange()

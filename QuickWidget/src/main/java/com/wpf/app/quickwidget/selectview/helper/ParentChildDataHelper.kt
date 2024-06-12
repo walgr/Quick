@@ -1,6 +1,5 @@
 package com.wpf.app.quickwidget.selectview.helper
 
-import com.wpf.app.quickwidget.selectview.data.QuickChildSelectData
 import com.wpf.app.quickwidget.selectview.data.QuickParentSelectData
 
 /**
@@ -30,7 +29,7 @@ object ParentChildDataHelper {
                     if (addParentTitle) {
                         parentList.forEach { parent ->
                             if (parent.childList != null && parent.asTitleViewInChild() != null) {
-                                (parent.childList as? MutableList<QuickChildSelectData>)?.add(
+                                parent.childList?.add(
                                     0,
                                     parent.asTitleViewInChild()!!.also {
                                         it.parent = parent
@@ -39,9 +38,6 @@ object ParentChildDataHelper {
                             }
                         }
                     }
-//                    parentList[0].childList = parentList.flatMap {
-//                        it.childList ?: arrayListOf()
-//                    }.toMutableList()
                 }
             }
         }

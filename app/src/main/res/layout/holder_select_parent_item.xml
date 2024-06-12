@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/bg_change_isselect_eeeeee_fffff"
+    android:background="@drawable/bg_change_eeeeee_fffff"
     android:orientation="horizontal"
     android:gravity="center_vertical"
     android:layout_width="match_parent"

@@ -1,5 +1,6 @@
 package com.wpf.app.quickwidget.selectview.listeners
 
+import android.annotation.SuppressLint
 import com.wpf.app.quickrecyclerview.listeners.DataAdapter
 import com.wpf.app.quickutil.other.nullDefault
 import com.wpf.app.quickwidget.selectview.QuickSelectAdapter
@@ -16,22 +17,11 @@ interface DataSelectOnAdapter : DataAdapter, SetSelectChange {
 
     /**
      * Item点击
-     * 作为父项选中
-     */
-    fun onParentChild(parentSelectData: QuickParentSelectData) {
-        parentSelectData.childList?.forEach {
-            it.isSelect = parentSelectData.isSelect
-        }
-        parentSelectData.onSelectChildChange(parentSelectData.getChildSelectList())
-    }
-
-    /**
-     * Item点击
      * 作为子项选中
      */
     fun onChildClick(childSelectData: QuickChildSelectData) {
-        val curItemSelect = childSelectData.isSelect
-        if (curItemSelect) {
+        val oldItemSelect = childSelectData.isSelect
+        if (oldItemSelect) {
             if (!childSelectData.canClickAgain) return
         }
         val changePos = arrayListOf<Int>()
@@ -42,7 +32,7 @@ interface DataSelectOnAdapter : DataAdapter, SetSelectChange {
                 clearInParent(childSelectData, false)
             }
         }
-        if (curItemSelect) {
+        if (oldItemSelect) {
             childSelectData.isSelect = !childSelectData.canCancel
             if (!childSelectData.isSelect) {
                 changePos.add(indexOf(childSelectData))
@@ -55,10 +45,10 @@ interface DataSelectOnAdapter : DataAdapter, SetSelectChange {
                 childSelectData.maxLimitListener?.beyondLimit(childSelectData.maxLimit)
             }
         }
-        if (curItemSelect != childSelectData.isSelect) {
+        if (oldItemSelect != childSelectData.isSelect) {
             childSelectData.onSelectChange(childSelectData.isSelect)
-            getSelectAdapter().getOnSelectChangeListener()?.onSelectChange()
             childSelectData.parent?.onSelectChildChange(getSelectList(childSelectData.parent?.id))
+            getSelectAdapter().getOnSelectChangeListener()?.onSelectChange()
         }
         notifyItemChange()
     }
@@ -73,12 +63,6 @@ interface DataSelectOnAdapter : DataAdapter, SetSelectChange {
                 changePos.add(indexOf(it))
             }
             it.isSelect = it.defaultSelect
-            it.childList?.forEach { child ->
-                if (child.isSelect != child.defaultSelect) {
-                    changePos.add(indexOf(child))
-                }
-                child.isSelect = child.defaultSelect
-            }
         }
         if (dealChange) {
             notifyItemChange(changePos)
@@ -92,33 +76,35 @@ interface DataSelectOnAdapter : DataAdapter, SetSelectChange {
         childSelectData: QuickChildSelectData,
         dealChange: Boolean = true,
     ) {
+        val changePos = arrayListOf<Int>()
         asChildSelectData()?.filter { it.parent == childSelectData.parent }?.forEach {
-            val changePos = arrayListOf<Int>()
             if (it.isSelect != it.defaultSelect) {
                 changePos.add(indexOf(it))
             }
             it.isSelect = it.defaultSelect
-            if (dealChange) {
-                notifyItemChange(changePos)
-            }
+        }
+        if (dealChange) {
+            notifyItemChange(changePos)
         }
     }
 
     /**
      * 全局全选
      */
+    @Suppress("unused")
     fun selectAll(dealChange: Boolean = true) {
         asSelectData()?.forEach {
             it.isSelect = true
         }
         if (dealChange) {
-            getQuickAdapter().notifyDataSetChanged()
+            notifyItemChange()
         }
     }
 
     /**
      * 同父全选
      */
+    @Suppress("unused")
     fun selectInParent(childSelectData: QuickChildSelectData, dealChange: Boolean = true) {
         val changePos = arrayListOf<Int>()
         asParentSelectData()?.filter {
@@ -132,6 +118,7 @@ interface DataSelectOnAdapter : DataAdapter, SetSelectChange {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun notifyItemChange() {
         getQuickAdapter().notifyDataSetChanged()
     }

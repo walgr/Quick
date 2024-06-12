@@ -3,13 +3,11 @@ package com.wpf.app.quickwidget.selectview.data
 import android.annotation.SuppressLint
 import android.view.View
 import android.view.ViewGroup
-import com.wpf.app.quickrecyclerview.data.QuickBindData
-import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
 import com.wpf.app.quickutil.other.asTo
+import com.wpf.app.quickutil.other.nullDefault
 import com.wpf.app.quickutil.run.RunItemClickWithSelf
 import com.wpf.app.quickutil.run.RunOnContextWithSelf
 import com.wpf.app.quickutil.widget.scrollToPositionAndOffset
-import com.wpf.app.quickwidget.selectview.QuickSelectAdapter
 import java.io.Serializable
 
 /**
@@ -17,8 +15,7 @@ import java.io.Serializable
  * 筛选父类
  */
 open class QuickParentSelectData(
-    open var canClick: Boolean = false,
-    isSuspension: Boolean = false,                 //父View是否悬浮置顶
+    isSuspension: Boolean = false,                                      //父View是否悬浮置顶
     parent: QuickParentSelectData? = null,
     childList: MutableList<QuickChildSelectData>? = null,
     onParentClick: RunItemClickWithSelf<QuickParentSelectData>? = null,
@@ -26,15 +23,15 @@ open class QuickParentSelectData(
     name: String? = null,
     defaultSelect: Boolean = false,
     isSelect: Boolean = defaultSelect,
-    canClickAgain: Boolean = true,                         //选中后再次点击是否触发选中回调
-    canCancel: Boolean = true,                  //是否可以取消选择
-    singleSelect: Boolean = true,               //true 单选  false 多选
-    isGlobal: Boolean = true,                   //true 全局范围  false 同父范围
-    maxLimit: Int = 5,                          //多选最多数量
-    maxLimitListener: MaxLimitListener? = null, //超出反馈
+    canClickAgain: Boolean = true,                                      //选中后再次点击是否触发选中回调
+    canCancel: Boolean = true,                                          //是否可以取消选择
+    singleSelect: Boolean = true,                                       //true 单选  false 多选
+    isGlobal: Boolean = true,                                           //true 全局范围  false 同父范围
+    maxLimit: Int = 5,                                                  //多选最多数量
+    maxLimitListener: MaxLimitListener? = null,                         //超出反馈
     layoutId: Int = 0,
     layoutViewCreate: RunOnContextWithSelf<ViewGroup, View>? = null,
-    autoSet: Boolean = false,                                        //自动映射
+    autoSet: Boolean = false,                                           //自动映射
 ) : QuickChildSelectData(
     parent = parent,
     childList = childList,
@@ -56,19 +53,11 @@ open class QuickParentSelectData(
 ), Serializable {
 
     @SuppressLint("NotifyDataSetChanged")
-    internal override fun onItemClick() {
-        if (getView() != null) {
-            if (getAdapter()?.curClickData != this) {
-                val oldClickPos = getAdapter()?.getDataPos(getAdapter()?.curClickData) ?: -1
-                getAdapter()?.curClickData = this
-                getAdapter()?.notifyItemChange(
-                    arrayListOf(
-                        oldClickPos,
-                        getAdapter()?.getDataPos(this) ?: -1
-                    )
-                )
-            }
+    override fun onItemClick() {
+        if (isSelect) {
+            if (!canClickAgain) return
         }
+        super.onItemClick()
         if (!isInOne) {
             childList?.let {
                 getAdapter()?.childSelectAdapter?.setNewData(childList)
@@ -90,7 +79,12 @@ open class QuickParentSelectData(
         }
     }
 
-    open fun getSelectChildList(): MutableList<QuickChildSelectData>? {
+    fun getChildSelectSize(): Int {
+        return childList?.count { it.isSelect }.nullDefault(0)
+    }
+
+    @Suppress("unused")
+    open fun getChildSelectList(): MutableList<QuickChildSelectData>? {
         return childList?.filter { it.isSelect }?.toMutableList()
     }
 
@@ -103,15 +97,5 @@ open class QuickParentSelectData(
      */
     open fun asTitleViewInChild(): QuickParentSelectData? {
         return null
-    }
-
-    override fun onBindViewHolder(
-        adapter: QuickSelectAdapter,
-        viewHolder: QuickViewHolder<QuickBindData>,
-        position: Int,
-    ) {
-        super.onBindViewHolder(adapter, viewHolder, position)
-        asTitleViewInChild()?.onBindViewHolder(adapter, viewHolder, position)
-        onClickChange(adapter.curClickData == this)
     }
 }

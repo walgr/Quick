@@ -12,6 +12,7 @@ import com.wpf.app.quickrecyclerview.data.QuickItemData
 import com.wpf.app.quickrecyclerview.listeners.QuickAdapterListener
 import com.wpf.app.quickutil.helper.removeParent
 import com.wpf.app.quickutil.helper.toView
+import com.wpf.app.quickutil.other.forceTo
 import com.wpf.app.quickutil.run.RunOnContextWithSelf
 
 /**
@@ -46,34 +47,19 @@ open class QuickViewHolder<T : QuickItemData> @JvmOverloads constructor(
         }
         if (autoClick) {
             itemView.setOnClickListener { v: View ->
-                (mQuickAdapter?.getQuickAdapterListener() as QuickAdapterListener<T>).onItemClick(
+                (mQuickAdapter?.getQuickAdapterListener()?.forceTo<QuickAdapterListener<T>>())?.onItemClick(
                     v, getViewData(), bindingAdapterPosition
                 )
             }
         }
     }
 
-    private var cloneData: QuickBindData? = null
-    private var cloneDataPos: Int = -1
-
     @CallSuper
     open fun onBindViewHolder(adapter: QuickAdapter, data: T?, position: Int) {
         if (data is QuickBindData) {
-            if (data.isSuspension && layoutPosition == -1) {
-                //悬浮复制一份数据填充view
-                if (cloneData == null || cloneDataPos != position) {
-                    cloneData = data.clone<QuickBindData>()
-                    cloneDataPos = position
-                }
-                cloneData!!.onBindViewHolder(
-                    adapter, (this as QuickViewHolder<QuickBindData>), position
-                )
-            } else {
-                data.onBindViewHolder(
-                    adapter, (this as QuickViewHolder<QuickBindData>), position
-                )
-            }
-
+            data.onBindViewHolder(
+                adapter, this.forceTo<QuickViewHolder<QuickBindData>>(), position
+            )
         }
     }
 
@@ -93,6 +79,7 @@ open class QuickViewHolder<T : QuickItemData> @JvmOverloads constructor(
         return itemView
     }
 
+    @Suppress("UNCHECKED_CAST")
     open fun getViewData(): T? {
         return mQuickAdapter?.getData(bindingAdapterPosition) as? T
     }
