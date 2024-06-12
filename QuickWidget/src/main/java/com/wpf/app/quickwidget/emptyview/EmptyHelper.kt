@@ -1,6 +1,7 @@
 package com.wpf.app.quickwidget.emptyview
 
 import com.wpf.app.quickrecyclerview.listeners.RefreshResult
+import com.wpf.app.quickutil.other.nullDefault
 
 object EmptyHelper {
 
@@ -17,7 +18,7 @@ object EmptyHelper {
             if (onRefreshCallback != null) {
                 onRefreshCallback.invoke(it)
             } else {
-                changeState(StateLoading.new(it?.size == 0))
+                changeState(StateLoading.new(it?.size.nullDefault(0) == 0))
             }
         }
         view.onRefreshEnd {

@@ -1,5 +1,6 @@
 package com.wpf.app.quickwork.ability.helper
 
+import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
@@ -12,9 +13,9 @@ import com.scwang.smart.refresh.layout.api.RefreshFooter
 import com.scwang.smart.refresh.layout.api.RefreshHeader
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.wpf.app.base.ability.helper.addView
-import com.wpf.app.base.ability.helper.viewCreateConvert
 import com.wpf.app.base.ability.scope.ContextScope
 import com.wpf.app.base.ability.scope.ViewGroupScope
+import com.wpf.app.base.ability.scope.createViewGroupScope
 import com.wpf.app.quickbind.helper.binddatahelper.BindData2ViewHelper
 import com.wpf.app.quickrecyclerview.QuickRefreshRecyclerView
 import com.wpf.app.quickrecyclerview.data.QuickItemData
@@ -67,7 +68,6 @@ fun <V : View> ContextScope.smartRefreshLayout(
     return curSmartRefreshLayout
 }
 
-@Suppress("UNCHECKED_CAST")
 fun ContextScope.smartRefreshList(
     layoutParams: ViewGroup.LayoutParams = matchWrapMarginLayoutParams(),
     layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(context),
@@ -78,21 +78,31 @@ fun ContextScope.smartRefreshList(
     enableRefresh: Boolean = true,
     enableLoadMore: Boolean = true,
     upperLayerLayoutId: Int = 0,
-    upperLayerLayoutView: (SmartRefreshLayout.(QuickRefreshRecyclerView) -> View)? = null,
-    upperLayerLayoutViewCreate: (ViewGroupScope<SmartRefreshLayout>.() -> View)? = null,
+    upperLayerLayoutView: View? = null,
+    upperLayerLayoutViewCreate: (ViewGroupScope<SmartRefreshLayout>.(QuickRefreshRecyclerView) -> View)? = null,
     builder: SmartRefreshLayout.(list: QuickRefreshRecyclerView, upperLayout: View?) -> Request2ListWithView<out RequestData, out QuickItemData, QuickRefreshRecyclerView>,
 ): SmartRefreshLayout {
     val smartRefreshLayout = SmartRefreshLayout(context)
     val list = QuickRefreshRecyclerView(context)
     list.layoutManager = layoutManager
     listBuilder?.invoke(list)
+    val upperLayoutCreate: (Context.() -> View)? =
+        if (upperLayerLayoutViewCreate == null) null else object : ((Context) -> View) {
+            override fun invoke(p1: Context): View {
+                return upperLayerLayoutViewCreate.invoke(
+                    smartRefreshLayout.createViewGroupScope(),
+                    list
+                )
+            }
+
+        }
     val upperLayout: View? =
         if (upperLayerLayoutId != 0 || upperLayerLayoutView != null || upperLayerLayoutViewCreate != null) {
             InitViewHelper.init(
                 context,
                 upperLayerLayoutId,
-                upperLayerLayoutView!!.invoke(smartRefreshLayout, list),
-                viewCreateConvert(upperLayerLayoutViewCreate as? ContextScope.() -> View)
+                upperLayerLayoutView,
+                upperLayoutCreate
             )
         } else null
     return smartRefreshLayout(

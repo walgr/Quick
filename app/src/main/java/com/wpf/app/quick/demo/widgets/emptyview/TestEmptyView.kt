@@ -45,9 +45,7 @@ class TestEmptyView @JvmOverloads constructor(
         }
         register<StateLoading> {
             isVisible = true
-            if (this.listIsEmpty) {
-                progress?.isVisible = true
-            }
+            progress?.isVisible = this.listIsEmpty
             errorGroup?.isVisible = false
         }
         register<StateEmptyData> {
