@@ -8,7 +8,7 @@ interface EmptyViewStateManager {
     fun changeState(state: EmptyViewState) {
         this.curState = state
         val dealStateFun =
-            registerStateMap[state::class.java.hashCode()] ?: return
+            registerStateMap[getClassFirstInterface<EmptyViewState>(state)] ?: return
         val stateClass: Class<EmptyViewState> =
             dealStateFun.javaClass.methods.find { it.name == "invoke" }!!.parameterTypes.first()
                 .forceTo()
@@ -45,13 +45,26 @@ interface EmptyViewStateManager {
 }
 
 inline fun <reified T : EmptyViewState> EmptyViewStateManager.register(noinline dealState: T.() -> Unit) {
-    val key = T::class.hashCode()
-    registerStateMap[key] = dealState as DealStateFun<EmptyViewState>
+    val key = getClassFirstInterface<T>()
+    registerStateMap[key] = dealState.forceTo<DealStateFun<EmptyViewState>>()
 }
 
 inline fun <reified T : EmptyViewState> EmptyViewStateManager.unRegister() {
-    val key = T::class.hashCode()
+    val key = getClassFirstInterface<T>()
     registerStateMap.remove(key)
+}
+
+inline fun <reified T : EmptyViewState> getClassFirstInterface(state: EmptyViewState? = null): Int {
+    var hashCode = T::class.java.hashCode()
+    var curObj: Class<*> = state?.javaClass ?: T::class.java
+    do {
+        if (!curObj.interfaces.isNullOrEmpty()) {
+            hashCode = curObj.interfaces.first().hashCode()
+            break
+        }
+        curObj = curObj.superclass
+    } while (curObj != Any::class.java)
+    return hashCode
 }
 
 typealias DealStateFun<T> = T.() -> Unit
