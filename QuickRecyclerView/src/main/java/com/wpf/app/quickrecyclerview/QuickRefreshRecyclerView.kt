@@ -6,7 +6,7 @@ import android.util.AttributeSet
 import com.wpf.app.quicknetwork.utils.RequestCallback
 import com.wpf.app.quickrecyclerview.data.QuickItemData
 import com.wpf.app.quickrecyclerview.data.RequestData
-import com.wpf.app.quickrecyclerview.listeners.RefreshView
+import com.wpf.app.quickrecyclerview.listeners.RefreshResult
 import com.wpf.app.quickrecyclerview.listeners.Request2ListWithView
 import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.other.nullDefault
@@ -19,67 +19,63 @@ open class QuickRefreshRecyclerView @JvmOverloads constructor(
     mContext: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
-) : QuickRecyclerView(mContext, attrs, defStyleAttr), RefreshView {
-    override var refreshView: RefreshView? = null
+) : QuickRecyclerView(mContext, attrs, defStyleAttr), RefreshResult {
 
-    override fun getAdapter(): Adapter<*> {
-        return getQuickAdapter()
-    }
+    override val onRefresh: MutableList<(curData: List<*>?) -> Unit> = mutableListOf()
+    override val onLoadMore: MutableList<(curData: List<*>?) -> Unit> = mutableListOf()
+    override val onRefreshEnd: MutableList<(data: List<*>?) -> Unit> = mutableListOf()
+    override val onLoadMoreEnd: MutableList<(data: List<*>?) -> Unit> = mutableListOf()
+    override var onRefreshError: MutableList<(e: Throwable) -> Unit> = mutableListOf()
+    override var onLoadMoreError: MutableList<(e: Throwable) -> Unit> = mutableListOf()
 
-    @JvmField
-    var requestData = RequestData(0)
-
-    @JvmField
-    val refreshCallback = object : RequestCallback<QuickItemData> {
-        @SuppressLint("NotifyDataSetChanged")
-        override fun backData(data: List<QuickItemData>?, hasMore: Boolean) {
-            refreshView?.onRefreshEnd(data)
-            getQuickAdapter().mDataList?.clear()
-            getQuickAdapter().appendList(data)
-            requestData.loadDataSize(data?.size.nullDefault(0))
-            if (mDataChangeListener?.refreshFinish(hasMore) != true) {
-                adapter.notifyDataSetChanged()
-            }
-        }
-    }
-
-    @JvmField
-    val loadMoreCallback = object : RequestCallback<QuickItemData> {
-        override fun backData(data: List<QuickItemData>?, hasMore: Boolean) {
-            refreshView?.onLoadMoreEnd(data)
-            appendList(data)
-            requestData.loadDataSize(data?.size.nullDefault(0))
-            if (mDataChangeListener?.loadMoreFinish(hasMore) != true) {
-                adapter.notifyItemRangeInserted(
-                    size() - data?.size.nullDefault(0), data?.size.nullDefault(0)
-                )
-            }
-        }
-    }
-
-    private var mDataChangeListener: Request2ListWithView<out RequestData, out QuickItemData, out RefreshView>? =
+    private var requestManager: Request2ListWithView<out RequestData, out QuickItemData, QuickRefreshRecyclerView>? =
         null
 
-    fun setDataChangeListener(dataChangeListener: Request2ListWithView<out RequestData, out QuickItemData, QuickRefreshRecyclerView>) {
-        mDataChangeListener = dataChangeListener
-        mDataChangeListener.asTo<Request2ListWithView<RequestData, QuickItemData, QuickRefreshRecyclerView>>()?.let {
-            it.requestData = requestData
-            it.refreshCallback = refreshCallback
-            it.loadMoreCallback = loadMoreCallback
+    fun setRequestManager(requestManager: Request2ListWithView<out RequestData, out QuickItemData, QuickRefreshRecyclerView>) {
+        this.requestManager = requestManager
+        this.requestManager.asTo<Request2ListWithView<RequestData, QuickItemData, QuickRefreshRecyclerView>>()?.let {
+            it.requestData = it.requestData ?: RequestData(0)
+            it.refreshCallback = it.refreshCallback ?: object : RequestCallback<QuickItemData> {
+                @SuppressLint("NotifyDataSetChanged")
+                override fun backData(data: List<QuickItemData>?, hasMore: Boolean) {
+                    getQuickAdapter().mDataList?.clear()
+                    getQuickAdapter().appendList(data)
+                    requestManager.requestData?.loadDataSize(data?.size.nullDefault(0))
+                    onRefreshEnd(data)
+                    if (!requestManager.refreshFinish(hasMore)) {
+                        getQuickAdapter().notifyDataSetChanged()
+                    }
+                }
+            }
+            it.loadMoreCallback = it.loadMoreCallback ?: object : RequestCallback<QuickItemData> {
+                override fun backData(data: List<QuickItemData>?, hasMore: Boolean) {
+                    appendList(data)
+                    requestManager.requestData?.loadDataSize(data?.size.nullDefault(0))
+                    onLoadMoreEnd(data)
+                    if (!requestManager.loadMoreFinish(hasMore)) {
+                        getQuickAdapter().notifyItemRangeInserted(
+                            size() - data?.size.nullDefault(0), data?.size.nullDefault(0)
+                        )
+                    }
+                }
+            }
         }
     }
-
     override fun onRefresh() {
-        refreshView?.onRefresh()
-        requestData.refresh()
-        mDataChangeListener.asTo<Request2ListWithView<RequestData, QuickItemData, QuickRefreshRecyclerView>>()
-            ?.requestAndCallback(this, requestData, refreshCallback)
+        onRefresh(getQuickAdapter().mDataList)
+        requestManager?.requestData?.refresh()
+        requestManager?.manualRequest()
+        requestManager?.baseRequest?.error {
+            onRefreshError(it)
+        }
     }
 
     override fun onLoadMore() {
-        refreshView?.onLoadMore()
-        requestData.loadMore()
-        mDataChangeListener.asTo<Request2ListWithView<RequestData, QuickItemData, QuickRefreshRecyclerView>>()
-            ?.requestAndCallback(this, requestData, loadMoreCallback)
+        onLoadMore(getQuickAdapter().mDataList)
+        requestManager?.requestData?.loadMore()
+        requestManager?.manualRequest()
+        requestManager?.baseRequest?.error {
+            onLoadMoreError(it)
+        }
     }
 }

@@ -45,32 +45,56 @@ abstract class BaseRequest<SResponse, FResponse> {
     private val errorList = mutableListOf<(data: Throwable) -> Unit>()
     private val afterList = mutableListOf<() -> Unit>()
 
-    open fun before(onBefore: () -> Unit): BaseRequest<SResponse, FResponse> {
+    open fun before(
+        unique: Boolean = false,
+        onBefore: () -> Unit,
+    ): BaseRequest<SResponse, FResponse> {
+        if (unique) beforeList.clear()
         beforeList.add(onBefore)
         return this
     }
 
-    open fun successBefore(onSuccessBefore: (SResponse) -> Unit): BaseRequest<SResponse, FResponse> {
+    open fun successBefore(
+        unique: Boolean = false,
+        onSuccessBefore: (SResponse) -> Unit,
+    ): BaseRequest<SResponse, FResponse> {
+        if (unique) successBeforeList.clear()
         successBeforeList.add(onSuccessBefore)
         return this
     }
 
-    open fun success(onSuccess: (SResponse) -> Unit): BaseRequest<SResponse, FResponse> {
+    open fun success(
+        unique: Boolean = false,
+        onSuccess: (SResponse) -> Unit,
+    ): BaseRequest<SResponse, FResponse> {
+        if (unique) successList.clear()
         successList.add(onSuccess)
         return this
     }
 
-    open fun fail(onFail: (FResponse?) -> Unit): BaseRequest<SResponse, FResponse> {
+    open fun fail(
+        unique: Boolean = false,
+        onFail: (FResponse?) -> Unit,
+    ): BaseRequest<SResponse, FResponse> {
+        if (unique) failList.clear()
         failList.add(onFail)
         return this
     }
 
-    open fun error(onError: (Throwable) -> Unit): BaseRequest<SResponse, FResponse> {
+    open fun error(
+        unique: Boolean = false,
+        onError: (Throwable) -> Unit,
+    ): BaseRequest<SResponse, FResponse> {
+        if (unique) errorList.clear()
         errorList.add(onError)
         return this
     }
 
-    open fun after(onAfter: () -> Unit): BaseRequest<SResponse, FResponse> {
+    open fun after(
+        unique: Boolean = false,
+        onAfter: () -> Unit,
+    ): BaseRequest<SResponse, FResponse> {
+        if (unique) afterList.clear()
         afterList.add(onAfter)
         return this
     }

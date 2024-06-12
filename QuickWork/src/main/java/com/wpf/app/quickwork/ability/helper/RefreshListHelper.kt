@@ -29,6 +29,7 @@ import com.wpf.app.quickutil.helper.removeParent
 import com.wpf.app.quickutil.other.forceTo
 
 fun <V : View> ContextScope.smartRefreshLayout(
+    smartRefreshLayout: SmartRefreshLayout? = null,
     layoutParams: ViewGroup.LayoutParams = matchWrapMarginLayoutParams(),
     header: RefreshHeader = ClassicsHeader(context),
     footer: RefreshFooter = ClassicsFooter(context),
@@ -40,30 +41,30 @@ fun <V : View> ContextScope.smartRefreshLayout(
     contentBuilder: SmartRefreshLayout.() -> V,
     builder: (SmartRefreshLayout.(contentView: V) -> Unit)? = null,
 ): SmartRefreshLayout {
-    val smartRefreshLayout = SmartRefreshLayout(context)
-    smartRefreshLayout.setRefreshHeader(header.forceTo())
-    val contentView = contentBuilder.invoke(smartRefreshLayout)
+    val curSmartRefreshLayout = smartRefreshLayout ?: SmartRefreshLayout(context)
+    curSmartRefreshLayout.setRefreshHeader(header.forceTo())
+    val contentView = contentBuilder.invoke(curSmartRefreshLayout)
     if (contentView.parent() != this) {
         contentView.removeParent()
-        smartRefreshLayout.addView(contentView, matchMarginLayoutParams())
+        curSmartRefreshLayout.addView(contentView, matchMarginLayoutParams())
     }
-    smartRefreshLayout.setRefreshFooter(footer.forceTo())
-    smartRefreshLayout.setOnRefreshListener {
+    curSmartRefreshLayout.setRefreshFooter(footer.forceTo())
+    curSmartRefreshLayout.setOnRefreshListener {
         refreshListener?.invoke(it, contentView)
     }
-    smartRefreshLayout.setOnLoadMoreListener {
+    curSmartRefreshLayout.setOnLoadMoreListener {
         loadMoreListener?.invoke(it, contentView)
     }
-    smartRefreshLayout.setEnableRefresh(enableRefresh)
-    smartRefreshLayout.setEnableLoadMore(enableLoadMore)
+    curSmartRefreshLayout.setEnableRefresh(enableRefresh)
+    curSmartRefreshLayout.setEnableLoadMore(enableLoadMore)
     if (autoRefresh) {
-        smartRefreshLayout.post {
-            smartRefreshLayout.autoRefresh()
+        curSmartRefreshLayout.post {
+            curSmartRefreshLayout.autoRefresh()
         }
     }
-    addView(smartRefreshLayout, layoutParams)
-    builder?.invoke(smartRefreshLayout, contentView)
-    return smartRefreshLayout
+    addView(curSmartRefreshLayout, layoutParams)
+    builder?.invoke(curSmartRefreshLayout, contentView)
+    return curSmartRefreshLayout
 }
 
 @Suppress("UNCHECKED_CAST")
@@ -77,10 +78,11 @@ fun ContextScope.smartRefreshList(
     enableRefresh: Boolean = true,
     enableLoadMore: Boolean = true,
     upperLayerLayoutId: Int = 0,
-    upperLayerLayoutView: (QuickRefreshRecyclerView.() -> View)? = null,
-    upperLayerLayoutViewCreate: (ViewGroupScope<QuickRefreshRecyclerView>.() -> View)? = null,
+    upperLayerLayoutView: (SmartRefreshLayout.(QuickRefreshRecyclerView) -> View)? = null,
+    upperLayerLayoutViewCreate: (ViewGroupScope<SmartRefreshLayout>.() -> View)? = null,
     builder: SmartRefreshLayout.(list: QuickRefreshRecyclerView, upperLayout: View?) -> Request2ListWithView<out RequestData, out QuickItemData, QuickRefreshRecyclerView>,
 ): SmartRefreshLayout {
+    val smartRefreshLayout = SmartRefreshLayout(context)
     val list = QuickRefreshRecyclerView(context)
     list.layoutManager = layoutManager
     listBuilder?.invoke(list)
@@ -89,11 +91,13 @@ fun ContextScope.smartRefreshList(
             InitViewHelper.init(
                 context,
                 upperLayerLayoutId,
-                upperLayerLayoutView!!.invoke(list),
+                upperLayerLayoutView!!.invoke(smartRefreshLayout, list),
                 viewCreateConvert(upperLayerLayoutViewCreate as? ContextScope.() -> View)
             )
         } else null
-    return smartRefreshLayout(layoutParams,
+    return smartRefreshLayout(
+        smartRefreshLayout,
+        layoutParams,
         header,
         footer,
         autoRefresh,

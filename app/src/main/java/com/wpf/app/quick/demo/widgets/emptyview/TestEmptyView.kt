@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.view.isVisible
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quickwidget.emptyview.BaseEmptyView
+import com.wpf.app.quickwidget.emptyview.EmptyViewState
 import com.wpf.app.quickwidget.emptyview.StateEmptyData
 import com.wpf.app.quickwidget.emptyview.StateLoading
 import com.wpf.app.quickwidget.emptyview.StateNetError
@@ -19,6 +21,7 @@ class TestEmptyView @JvmOverloads constructor(
     mContext: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
+    var btnClick: (EmptyViewState.() -> Unit)? = null
 ) : BaseEmptyView(mContext, attrs, defStyleAttr, R.layout.empty_layout, curState = StateNoError) {
 
     private var progress: ProgressBar? = null
@@ -35,22 +38,30 @@ class TestEmptyView @JvmOverloads constructor(
         btnNext = view.findViewById(R.id.btnNext)
         progress = view.findViewById(R.id.progress)
         errorGroup = view.findViewById(R.id.errorGroup)
-        register<StateNoError> {
-            visibility = View.INVISIBLE
+        progress?.isVisible = false
+        errorGroup?.isVisible = false
+        btnNext?.setOnClickListener {
+            btnClick?.invoke(curState)
         }
         register<StateLoading> {
-            visibility = View.VISIBLE
-            errorGroup?.visibility = View.GONE
-            progress?.visibility = View.VISIBLE
+            isVisible = true
+            if (this.listIsEmpty) {
+                progress?.isVisible = true
+            }
+            errorGroup?.isVisible = false
         }
         register<StateEmptyData> {
-            visibility = View.VISIBLE
+            isVisible = true
+            errorGroup?.isVisible = true
+            progress?.isVisible = false
             title?.text = "数据异常"
             info?.text = "暂无数据"
             btnNext?.text = "刷新重试"
         }
         register<StateNetError> {
-            visibility = View.VISIBLE
+            isVisible = true
+            errorGroup?.isVisible = true
+            progress?.isVisible = false
             title?.text = "网络异常"
             info?.text = "暂无数据"
             btnNext?.text = "刷新重试"

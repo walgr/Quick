@@ -10,26 +10,21 @@ import com.wpf.app.quick.demo.widgets.emptyview.TestEmptyView
 import com.wpf.app.quickrecyclerview.listeners.requestData2List
 import com.wpf.app.quickutil.log.LogUtil
 import com.wpf.app.quickutil.other.forceTo
-import com.wpf.app.quickwidget.emptyview.EmptyHelper
+import com.wpf.app.quickwidget.emptyview.EmptyHelper.bind
 import com.wpf.app.quickwork.ability.helper.smartRefreshList
 
 class RecommendFragment : QuickFragment(
     contentView<FrameLayout> {
         smartRefreshList(upperLayerLayoutView = {
-            TestEmptyView(context).apply {
-                this@smartRefreshList.refreshView?.onRefreshError {
-
-                }
-                EmptyHelper.bind(this@smartRefreshList, emptyView = this)
-            }
+            TestEmptyView(context, btnClick = {
+                this@smartRefreshList.autoRefresh()
+            }).bind(it)
         }, autoRefresh = true) { _, _ ->
             requestData2List<ListRequest, Article> { requestData, callback ->
                 request(self.forceTo()) {
                     homePageList(requestData.page, requestData.pageSize)
-                }.success {
+                }.success(true) {
                     callback.backData(it.data?.datas, !it.data?.datas.isNullOrEmpty())
-                }.fail {
-                    callback.backData(null, false)
                 }
             }.initRequestData {
                 page = 0

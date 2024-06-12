@@ -15,7 +15,7 @@ abstract class BaseEmptyView @JvmOverloads constructor(
     defStyleAttr: Int = 0,
     open val layoutId: Int = 0,
     open val layoutView: RunOnContextWithSelf<ViewGroup, View>? = null,
-    override var curState: EmptyViewState = StateLoading
+    override var curState: EmptyViewState = StateLoading,
 ) : FrameLayout(mContext, attrs, defStyleAttr), EmptyViewStateManager {
 
     override val registerStateMap: MutableMap<Int, DealStateFun<EmptyViewState>> = mutableMapOf()
@@ -32,7 +32,7 @@ abstract class BaseEmptyView @JvmOverloads constructor(
             isVisible = false
         }
         initView(emptyView!!)
-        post {    changeState(curState) }
+        post { changeState(curState) }
     }
 
     abstract fun initView(view: View)

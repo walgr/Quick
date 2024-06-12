@@ -1,15 +1,15 @@
 package com.wpf.app.quickrecyclerview.helper
 
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
-import com.wpf.app.quickrecyclerview.listeners.RefreshView
+import com.wpf.app.quickrecyclerview.listeners.RefreshResult
 import com.wpf.app.quickutil.helper.getChild
 
 fun SmartRefreshLayout.bindRefreshView(autoRefresh: Boolean) {
-    val refreshView: RefreshView? = this.getChild {
-        it is RefreshView
+    val refreshResult: RefreshResult? = this.getChild {
+        it is RefreshResult
     }
-    this.setOnRefreshListener { refreshView?.onRefresh() }
-    this.setOnLoadMoreListener { refreshView?.onLoadMore() }
+    this.setOnRefreshListener { refreshResult?.onRefresh() }
+    this.setOnLoadMoreListener { refreshResult?.onLoadMore() }
     if (autoRefresh) {
         this.autoRefresh()
     }

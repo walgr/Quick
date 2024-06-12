@@ -14,9 +14,6 @@ object Request2RefreshView :
         data: Request2ListWithView<out RequestData, out QuickItemData, QuickRefreshRecyclerView>
     ) {
         data.view = view
-        data.requestData?.let {
-            view.requestData = it
-        }
-        view.setDataChangeListener(data)
+        view.setRequestManager(data)
     }
 }

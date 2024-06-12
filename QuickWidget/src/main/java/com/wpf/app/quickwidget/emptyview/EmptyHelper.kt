@@ -1,30 +1,52 @@
 package com.wpf.app.quickwidget.emptyview
 
-import com.wpf.app.quickrecyclerview.listeners.RefreshView
+import com.wpf.app.quickrecyclerview.listeners.RefreshResult
 
 object EmptyHelper {
 
-    fun bind(view: RefreshView?, customRefreshView: RefreshView? = null, emptyView: BaseEmptyView?) {
-        if (view == null || emptyView == null) return
-        view.refreshView = customRefreshView ?: object : RefreshView by view {
-
-            override fun onRefresh() {
-                super.onRefresh()
-                emptyView.changeState(StateLoading.new(this.getAdapter().itemCount == 0))
+    fun <T: BaseEmptyView> T.bind(
+        view: RefreshResult,
+        onRefreshCallback: ((curData: List<*>?) -> Unit)? = null,
+        onRefreshEndCallback: ((data: List<*>?) -> Unit)? = null,
+        onRefreshErrorCallback: ((e: Throwable) -> Unit)? = null,
+        onLoadMoreCallback: ((curData: List<*>?) -> Unit)? = null,
+        onLoadMoreEndCallback: ((data: List<*>?) -> Unit)? = null,
+        onLoadMoreErrorCallback: ((e: Throwable) -> Unit)? = null,
+    ): T {
+        view.onRefresh {
+            if (onRefreshCallback != null) {
+                onRefreshCallback.invoke(it)
+            } else {
+                changeState(StateLoading.new(it?.size == 0))
             }
-
-            override fun onLoadMore() {
-                super.onLoadMore()
-            }
-
-            override fun onRefreshEnd(data: List<*>?) {
-                super.onRefreshEnd(data)
-                if (data.isNullOrEmpty()) {
-                    emptyView.changeState(StateEmptyData)
+        }
+        view.onRefreshEnd {
+            if (onRefreshEndCallback != null) {
+                onRefreshEndCallback.invoke(it)
+            } else {
+                if (it.isNullOrEmpty()) {
+                    changeState(StateEmptyData)
                 } else {
-                    emptyView.changeState(StateNoError)
+                    changeState(StateNoError)
                 }
             }
         }
+        view.onRefreshError {
+            if (onRefreshErrorCallback != null) {
+                onRefreshErrorCallback.invoke(it)
+            } else {
+                changeState(StateNetError())
+            }
+        }
+        view.onLoadMore {
+            onLoadMoreCallback?.invoke(it)
+        }
+        view.onLoadMoreEnd {
+            onLoadMoreEndCallback?.invoke(it)
+        }
+        view.onLoadMoreError {
+            onLoadMoreErrorCallback?.invoke(it)
+        }
+        return this
     }
 }

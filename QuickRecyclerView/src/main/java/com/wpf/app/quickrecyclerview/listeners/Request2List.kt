@@ -173,12 +173,24 @@ inline fun <reified Request : RequestData, reified Data : QuickItemData> request
 
     override fun requestAndCallback(requestData: Request, callback: RequestCallback<Data>) {
         super.requestAndCallback(requestData, callback)
-        baseRequest = callbackF.invoke(requestData, callback)
+        baseRequest = callbackF.invoke(requestData, callback).fail {
+            if (requestData.isViewRefresh) {
+                super.refreshFinish(false)
+            } else {
+                super.loadMoreFinish(false)
+            }
+        }.error {
+            if (requestData.isViewRefresh) {
+                super.refreshFinish(false)
+            } else {
+                super.loadMoreFinish(false)
+            }
+        }
     }
 }
 
 @Suppress("unused")
-inline fun <reified Request : RequestData,reified Data : QuickItemData, View> requestData2ListWithView(
+inline fun <reified Request : RequestData, reified Data : QuickItemData, View> requestData2ListWithView(
     noinline callbackF: (requestData: Request, callback: RequestCallback<Data>, view: View) -> BaseRequest<out BaseResponseI<out Any, out Any>, out Any>,
 ) = object : Request2ListWithView<Request, Data, View> {
     override var request2List: Request2ListWithView<Request, Data, View>? = this
