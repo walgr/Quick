@@ -1,5 +1,18 @@
 package com.wpf.app.quicknetwork.base
 
+import com.wpf.app.quicknetwork.helper.NetworkResponseInterceptor.beforeListDefault
+import com.wpf.app.quicknetwork.helper.NetworkResponseInterceptor.beforeListForce
+import com.wpf.app.quicknetwork.helper.NetworkResponseInterceptor.errorListDefault
+import com.wpf.app.quicknetwork.helper.NetworkResponseInterceptor.errorListForce
+import com.wpf.app.quicknetwork.helper.NetworkResponseInterceptor.failListDefault
+import com.wpf.app.quicknetwork.helper.NetworkResponseInterceptor.failListForce
+import com.wpf.app.quicknetwork.helper.NetworkResponseInterceptor.finallyListDefault
+import com.wpf.app.quicknetwork.helper.NetworkResponseInterceptor.finallyListForce
+import com.wpf.app.quicknetwork.helper.NetworkResponseInterceptor.successBeforeListDefault
+import com.wpf.app.quicknetwork.helper.NetworkResponseInterceptor.successBeforeListForce
+import com.wpf.app.quicknetwork.helper.NetworkResponseInterceptor.successListDefault
+import com.wpf.app.quicknetwork.helper.NetworkResponseInterceptor.successListForce
+
 /**
  * Created by 王朋飞 on 2022/7/22.
  * 注解使用此类，移动需要修改注解代码
@@ -166,104 +179,4 @@ abstract class BaseRequest<SResponse, FResponse> {
     internal abstract fun isSuccess(response: SResponse?): Boolean
 
     internal abstract fun failMessage(response: FResponse?): String
-
-    companion object {
-        internal val beforeListDefault = mutableListOf<() -> Unit>()
-        internal val successBeforeListDefault = mutableListOf<(data: Any) -> Unit>()
-        internal val successListDefault = mutableListOf<(data: Any) -> Unit>()
-        internal val failListDefault = mutableListOf<(data: Any?) -> Unit>()
-        internal val errorListDefault = mutableListOf<(data: Throwable) -> Unit>()
-        internal val finallyListDefault = mutableListOf<() -> Unit>()
-
-        @Suppress("unused")
-        fun registerBeforeDefault(
-            vararg onBefore: () -> Unit,
-        ) {
-            beforeListDefault.addAll(onBefore)
-        }
-
-        @Suppress("UNCHECKED_CAST", "unused")
-        fun <SResponse : Any> registerSuccessBeforeDefault(
-            vararg onSuccessBefore: (SResponse) -> Unit,
-        ) {
-            successBeforeListDefault.addAll(onSuccessBefore as Array<(Any) -> Unit>)
-        }
-
-        @Suppress("UNCHECKED_CAST", "unused")
-        fun <SResponse : Any> registerSuccessDefault(
-            vararg onSuccess: (SResponse) -> Unit,
-        ) {
-            successListDefault.addAll(onSuccess as Array<(Any) -> Unit>)
-        }
-
-        @Suppress("UNCHECKED_CAST", "unused")
-        fun <FResponse : Any> registerFailDefault(
-            vararg onFail: (FResponse?) -> Unit,
-        ) {
-            failListDefault.addAll(onFail as Array<(Any?) -> Unit>)
-        }
-
-        @Suppress("unused")
-        fun registerErrorDefault(
-            vararg onError: (Throwable) -> Unit,
-        ) {
-            errorListDefault.addAll(onError)
-        }
-
-        @Suppress("unused")
-        fun registerFinallyDefault(
-            vararg onAfter: () -> Unit,
-        ) {
-            finallyListDefault.addAll(onAfter)
-        }
-
-        internal val beforeListForce = mutableListOf<() -> Unit>()
-        internal val successBeforeListForce = mutableListOf<(data: Any) -> Unit>()
-        internal val successListForce = mutableListOf<(data: Any) -> Unit>()
-        internal val failListForce = mutableListOf<(data: Any?) -> Unit>()
-        internal val errorListForce = mutableListOf<(data: Throwable) -> Unit>()
-        internal val finallyListForce = mutableListOf<() -> Unit>()
-
-        @Suppress("unused")
-        fun registerBeforeForce(
-            vararg onBefore: () -> Unit,
-        ) {
-            beforeListForce.addAll(onBefore)
-        }
-
-        @Suppress("UNCHECKED_CAST", "unused")
-        fun <SResponse : Any> registerSuccessBeforeForce(
-            vararg onSuccessBefore: (SResponse) -> Unit,
-        ) {
-            successBeforeListForce.addAll(onSuccessBefore as Array<(Any) -> Unit>)
-        }
-
-        @Suppress("UNCHECKED_CAST", "unused")
-        fun <SResponse : Any> registerSuccessForce(
-            vararg onSuccess: (SResponse) -> Unit,
-        ) {
-            successListForce.addAll(onSuccess as Array<(Any) -> Unit>)
-        }
-
-        @Suppress("UNCHECKED_CAST", "unused")
-        fun <FResponse : Any> registerFailForce(
-            vararg onFail: (FResponse?) -> Unit,
-        ) {
-            failListForce.addAll(onFail as Array<(Any?) -> Unit>)
-        }
-
-        @Suppress("unused")
-        fun registerErrorForce(
-            vararg onError: (Throwable) -> Unit,
-        ) {
-            errorListForce.addAll(onError)
-        }
-
-        @Suppress("unused")
-        fun registerFinallyForce(
-            vararg onAfter: () -> Unit,
-        ) {
-            finallyListForce.addAll(onAfter)
-        }
-    }
 }
