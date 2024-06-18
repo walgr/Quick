@@ -80,7 +80,7 @@ open class RealCall<SResponse, FResponse>(private val rawCall: Call<SResponse>, 
                     }
                 }
 
-                request.funAfter.invoke()
+                request.funFinally.invoke()
             }
         }
         if (request is JobRequest<*, *>) {

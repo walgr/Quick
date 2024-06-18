@@ -34,13 +34,15 @@ open class QuickDialog(
     val extraParameter: LinkedHashMap<String, Any> = linkedMapOf()
 
     companion object {
-        var commonAbility: List<QuickAbility>? = null
+        internal var commonAbilityList: MutableList<QuickAbility> = mutableListOf()
+
+        fun registerCommonAbility(vararg commonAbility: QuickAbility) {
+            commonAbilityList.addAll(commonAbility)
+        }
     }
 
     init {
-        commonAbility?.let {
-            abilityList.addAll(0, it)
-        }
+        abilityList.addAll(0, commonAbilityList)
     }
 
     override fun getViewModel(): ViewModel? {

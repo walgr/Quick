@@ -22,12 +22,24 @@ open class QuickView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
-    abilityList: List<QuickAbility> = mutableListOf(),
+    abilityList: MutableList<QuickAbility> = mutableListOf(),
 ) : FrameLayout(
     context, attrs, defStyleAttr
 ), LifecycleOwner, Quick {
     @Suppress("unused")
     val extraParameter: LinkedHashMap<String, Any> = linkedMapOf()
+
+    companion object {
+        internal var commonAbilityList: MutableList<QuickAbility> = mutableListOf()
+
+        fun registerCommonAbility(vararg commonAbility: QuickAbility) {
+            commonAbilityList.addAll(commonAbility)
+        }
+    }
+
+    init {
+        abilityList.addAll(0, commonAbilityList)
+    }
 
     init {
         val inflateAbility = abilityList.first { ability -> ability is QuickInflateViewAbility }

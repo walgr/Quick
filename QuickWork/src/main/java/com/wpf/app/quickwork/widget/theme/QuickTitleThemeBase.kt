@@ -33,7 +33,14 @@ interface QuickTitleThemeBase {
     }
 
     companion object {
-        var defaultTheme: QuickTitleThemeI? = null
+        internal var defaultTheme: QuickTitleThemeI? = null
             get() = field?.copy()
+
+        @Suppress("unused")
+        fun registerDefaultTheme(defaultThemeRun: QuickTitleThemeI.() -> Unit) {
+            val theme = QuickTitleAttrs()
+            defaultThemeRun.invoke(theme)
+            defaultTheme = theme
+        }
     }
 }

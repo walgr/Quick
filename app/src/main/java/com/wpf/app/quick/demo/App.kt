@@ -17,11 +17,8 @@ import com.wpf.app.quickutil.helper.sp
 import com.wpf.app.quickutil.helper.toColor
 import com.wpf.app.quickutil.helper.toDrawable
 import com.wpf.app.quickutil.init.QuickInit
-import com.wpf.app.quickwidget.title.QuickTitleAttrs
 import com.wpf.app.quickwidget.title.QuickTitleView
-import com.wpf.app.quickwork.widget.theme.QuickDialogTheme
 import com.wpf.app.quickwork.widget.theme.QuickDialogThemeBase
-import com.wpf.app.quickwork.widget.theme.QuickTextTheme
 import com.wpf.app.quickwork.widget.theme.QuickTextThemeBase
 import com.wpf.app.quickwork.widget.theme.QuickTitleThemeBase
 
@@ -36,12 +33,12 @@ class App : Application() {
         BRConstant.initByBR(BR::class.java)
         initTestRequest()
 
-        QuickTextThemeBase.defaultTheme = QuickTextTheme().apply {
+        QuickTextThemeBase.registerDefaultTheme {
             textSize = 14f.sp
             textColor = R.color.black.toColor()
             hintTextColor = R.color.grey.toColor()
         }
-        QuickTitleThemeBase.defaultTheme = QuickTitleAttrs().apply {
+        QuickTitleThemeBase.registerDefaultTheme {
             height = 48.dp
             background = R.color.purple_700.toDrawable()
             contentGravity = QuickTitleView.CONTENT_GRAVITY_CENTER
@@ -58,7 +55,7 @@ class App : Application() {
             isLinearLayout = true
             space = 16.dp
         }
-        QuickDialogThemeBase.defaultTheme = QuickDialogTheme().apply {
+        QuickDialogThemeBase.registerDefaultTheme {
             gravity = Gravity.BOTTOM
             animStyleRes = R.style.DialogBottomTopAnim
             minHeight = 200.dp

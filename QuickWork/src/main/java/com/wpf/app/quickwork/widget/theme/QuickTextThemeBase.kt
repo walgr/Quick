@@ -82,8 +82,15 @@ interface QuickTextThemeBase {
     }
 
     companion object {
-        var defaultTheme: QuickTextThemeI? = null
+        internal var defaultTheme: QuickTextThemeI? = null
             get() = field?.copy()
+
+        @Suppress("unused")
+        fun registerDefaultTheme(defaultThemeRun: QuickTextThemeI.() -> Unit) {
+            val theme = QuickTextTheme()
+            defaultThemeRun.invoke(theme)
+            defaultTheme = theme
+        }
     }
 }
 

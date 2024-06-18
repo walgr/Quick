@@ -10,8 +10,15 @@ interface QuickDialogThemeBase {
     }
 
     companion object {
-        var defaultTheme: QuickDialogThemeI? = null
+        internal var defaultTheme: QuickDialogThemeI? = null
             get() = field?.copy()
+
+        @Suppress("unused")
+        fun registerDefaultTheme(defaultThemeRun: QuickDialogThemeI.() -> Unit) {
+            val theme = QuickDialogTheme()
+            defaultThemeRun.invoke(theme)
+            defaultTheme = theme
+        }
     }
 }
 

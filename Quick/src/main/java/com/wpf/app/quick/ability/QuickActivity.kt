@@ -17,9 +17,9 @@ import com.wpf.app.quickutil.other.asTo
 import com.wpf.app.quickutil.other.forceTo
 
 open class QuickActivity(
-    private val abilityList: MutableList<QuickAbility> = mutableListOf()
+    private val abilityList: MutableList<QuickAbility> = mutableListOf(),
 ) : QuickBaseActivity(
-        layoutViewCreate = {
+    layoutViewCreate = {
         val inflateAbility = abilityList.first { ability -> ability is QuickInflateViewAbility }
             .forceTo<QuickInflateViewAbility>()
         InitViewHelper.init(
@@ -34,13 +34,15 @@ open class QuickActivity(
     val extraParameter: LinkedHashMap<String, Any> = linkedMapOf()
 
     companion object {
-        var commonAbility: List<QuickAbility>? = null
+        internal var commonAbilityList: MutableList<QuickAbility> = mutableListOf()
+
+        fun registerCommonAbility(vararg commonAbility: QuickAbility) {
+            commonAbilityList.addAll(commonAbility)
+        }
     }
 
     init {
-        commonAbility?.let {
-            abilityList.addAll(0, it)
-        }
+        abilityList.addAll(0, commonAbilityList)
     }
 
     @CallSuper
@@ -65,7 +67,8 @@ open class QuickActivity(
 
     @CallSuper
     override fun getViewModel(): ViewModel? {
-        return abilityList.firstOrNull { it is BindViewModel<*> }?.asTo<BindViewModel<*>>()?.getViewModel()
+        return abilityList.firstOrNull { it is BindViewModel<*> }?.asTo<BindViewModel<*>>()
+            ?.getViewModel()
     }
 
     @CallSuper
