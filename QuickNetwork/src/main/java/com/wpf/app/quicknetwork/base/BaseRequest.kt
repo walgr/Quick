@@ -7,6 +7,9 @@ package com.wpf.app.quicknetwork.base
 abstract class BaseRequest<SResponse, FResponse> {
 
     internal var funBefore = {
+        beforeListForce.forEach {
+            it.invoke()
+        }
         if (!beforeUnique) {
             beforeListDefault.forEach {
                 it.invoke()
@@ -16,6 +19,9 @@ abstract class BaseRequest<SResponse, FResponse> {
     }
 
     internal var funSuccessBefore = { data: SResponse ->
+        successBeforeListForce.forEach {
+            it.invoke(data as Any)
+        }
         if (!successBeforeUnique) {
             successBeforeListDefault.forEach {
                 it.invoke(data as Any)
@@ -27,6 +33,9 @@ abstract class BaseRequest<SResponse, FResponse> {
     }
 
     internal var funSuccess = { data: SResponse ->
+        successListForce.forEach {
+            it.invoke(data as Any)
+        }
         if (!successUnique) {
             successListDefault.forEach {
                 it.invoke(data as Any)
@@ -38,9 +47,12 @@ abstract class BaseRequest<SResponse, FResponse> {
     }
 
     internal var funFail = { data: FResponse? ->
+        failListForce.forEach {
+            it.invoke(data)
+        }
         if (!failUnique) {
             failListDefault.forEach {
-                it.invoke(data as? Any)
+                it.invoke(data)
             }
         }
         failList.forEach {
@@ -49,6 +61,9 @@ abstract class BaseRequest<SResponse, FResponse> {
     }
 
     internal var funError = { t: Throwable ->
+        errorListForce.forEach {
+            it.invoke(t)
+        }
         if (!errorUnique) {
             errorListDefault.forEach {
                 it.invoke(t)
@@ -60,6 +75,9 @@ abstract class BaseRequest<SResponse, FResponse> {
     }
 
     internal var funFinally = {
+        finallyListForce.forEach {
+            it.invoke()
+        }
         if (!finallyUnique) {
             finallyListDefault.forEach {
                 it.invoke()
@@ -197,6 +215,55 @@ abstract class BaseRequest<SResponse, FResponse> {
             vararg onAfter: () -> Unit,
         ) {
             finallyListDefault.addAll(onAfter)
+        }
+
+        internal val beforeListForce = mutableListOf<() -> Unit>()
+        internal val successBeforeListForce = mutableListOf<(data: Any) -> Unit>()
+        internal val successListForce = mutableListOf<(data: Any) -> Unit>()
+        internal val failListForce = mutableListOf<(data: Any?) -> Unit>()
+        internal val errorListForce = mutableListOf<(data: Throwable) -> Unit>()
+        internal val finallyListForce = mutableListOf<() -> Unit>()
+
+        @Suppress("unused")
+        fun registerBeforeForce(
+            vararg onBefore: () -> Unit,
+        ) {
+            beforeListForce.addAll(onBefore)
+        }
+
+        @Suppress("UNCHECKED_CAST", "unused")
+        fun <SResponse : Any> registerSuccessBeforeForce(
+            vararg onSuccessBefore: (SResponse) -> Unit,
+        ) {
+            successBeforeListForce.addAll(onSuccessBefore as Array<(Any) -> Unit>)
+        }
+
+        @Suppress("UNCHECKED_CAST", "unused")
+        fun <SResponse : Any> registerSuccessForce(
+            vararg onSuccess: (SResponse) -> Unit,
+        ) {
+            successListForce.addAll(onSuccess as Array<(Any) -> Unit>)
+        }
+
+        @Suppress("UNCHECKED_CAST", "unused")
+        fun <FResponse : Any> registerFailForce(
+            vararg onFail: (FResponse?) -> Unit,
+        ) {
+            failListForce.addAll(onFail as Array<(Any?) -> Unit>)
+        }
+
+        @Suppress("unused")
+        fun registerErrorForce(
+            vararg onError: (Throwable) -> Unit,
+        ) {
+            errorListForce.addAll(onError)
+        }
+
+        @Suppress("unused")
+        fun registerFinallyForce(
+            vararg onAfter: () -> Unit,
+        ) {
+            finallyListForce.addAll(onAfter)
         }
     }
 }
