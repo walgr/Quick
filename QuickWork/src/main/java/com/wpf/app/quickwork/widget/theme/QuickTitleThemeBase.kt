@@ -33,7 +33,7 @@ interface QuickTitleThemeBase {
     }
 
     companion object {
-        internal var defaultTheme: QuickTitleThemeI? = null
+        var defaultTheme: QuickTitleThemeI? = null
             get() = field?.copy()
 
         @Suppress("unused")

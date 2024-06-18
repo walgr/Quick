@@ -82,7 +82,7 @@ interface QuickTextThemeBase {
     }
 
     companion object {
-        internal var defaultTheme: QuickTextThemeI? = null
+        var defaultTheme: QuickTextThemeI? = null
             get() = field?.copy()
 
         @Suppress("unused")

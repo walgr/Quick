@@ -10,7 +10,7 @@ interface QuickDialogThemeBase {
     }
 
     companion object {
-        internal var defaultTheme: QuickDialogThemeI? = null
+        var defaultTheme: QuickDialogThemeI? = null
             get() = field?.copy()
 
         @Suppress("unused")

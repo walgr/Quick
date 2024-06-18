@@ -34,7 +34,7 @@ interface QuickEditThemeBase : QuickTextThemeBase {
     }
 
     companion object {
-        internal var defaultTheme: QuickEditThemeI? = null
+        var defaultTheme: QuickEditThemeI? = null
             get() = field?.copy()
 
         @Suppress("unused")
