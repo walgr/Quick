@@ -37,8 +37,9 @@ open class QuickFragment(
     companion object {
         internal var commonAbilityList: MutableList<QuickAbility> = mutableListOf()
 
-        fun registerCommonAbility(vararg commonAbility: QuickAbility) {
-            commonAbilityList.addAll(commonAbility)
+        @Suppress("unused")
+        fun registerCommonAbility(commonAbilityList: List<QuickAbility>) {
+            QuickFragment.commonAbilityList.addAll(commonAbilityList)
         }
     }
 

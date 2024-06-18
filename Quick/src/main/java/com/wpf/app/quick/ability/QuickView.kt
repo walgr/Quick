@@ -32,8 +32,9 @@ open class QuickView @JvmOverloads constructor(
     companion object {
         internal var commonAbilityList: MutableList<QuickAbility> = mutableListOf()
 
-        fun registerCommonAbility(vararg commonAbility: QuickAbility) {
-            commonAbilityList.addAll(commonAbility)
+        @Suppress("unused")
+        fun registerCommonAbility(commonAbilityList: List<QuickAbility>) {
+            QuickView.commonAbilityList.addAll(commonAbilityList)
         }
     }
 
