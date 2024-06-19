@@ -9,7 +9,7 @@ fun viewCreateConvert(layoutViewCreate: (ContextScope.() -> View)?) : (Context.(
     return layoutViewCreate?.let {
         object : (Context) -> View {
             override fun invoke(p1: Context): View {
-                return it.invoke(createContextScope(p1))
+                return it.invoke(p1.createContextScope())
             }
         }
     }

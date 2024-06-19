@@ -4,7 +4,7 @@ import android.view.Gravity
 import android.widget.LinearLayout
 import com.google.android.material.button.MaterialButton
 import com.wpf.app.base.ability.ex.contentView
-import com.wpf.app.base.ability.helper.gravity
+import com.wpf.app.base.ability.helper.gravityInParent
 import com.wpf.app.base.ability.helper.rect
 import com.wpf.app.base.ability.helper.viewGroupCreate
 import com.wpf.app.quick.ability.QuickActivity
@@ -80,6 +80,6 @@ class BottomSheetDialogTestActivity : QuickActivity(
                     heightAdaptive = true
                 ).show(self)
             })
-        }.gravity(Gravity.CENTER)
+        }.gravityInParent(Gravity.CENTER)
     }
 )

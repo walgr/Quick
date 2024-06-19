@@ -97,8 +97,9 @@ class WanAndroidHomeActivity : QuickActivity(contentView<LinearLayout> {
                             isFillViewport = true
                         }
                         viewGroupCreate<LinearLayout>(layoutParams = matchMarginLayoutParams()) {
+                            gravity(Gravity.CENTER)
                             text(text = "测试", textSize = 24f.dp)
-                        }.gravity(Gravity.CENTER)
+                        }
                     }
                 }
             }

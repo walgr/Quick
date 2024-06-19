@@ -10,6 +10,6 @@ interface ContextScope: QuickScope {
     }
 }
 
-fun createContextScope(context: Context) = object : ContextScope {
-    override val context: Context = context
+fun Context.createContextScope() = object : ContextScope {
+    override val context: Context = this@createContextScope
 }
