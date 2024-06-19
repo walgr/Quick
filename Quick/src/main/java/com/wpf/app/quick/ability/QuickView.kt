@@ -3,9 +3,6 @@ package com.wpf.app.quick.ability
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.FrameLayout
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LifecycleRegistry
 import com.wpf.app.base.Quick
 import com.wpf.app.base.ability.base.QuickAbility
 import com.wpf.app.base.ability.base.QuickGenerateViewAbility
@@ -25,7 +22,7 @@ open class QuickView @JvmOverloads constructor(
     abilityList: MutableList<QuickAbility> = mutableListOf(),
 ) : FrameLayout(
     context, attrs, defStyleAttr
-), LifecycleOwner, Quick {
+), Quick {
     @Suppress("unused")
     val extraParameter: LinkedHashMap<String, Any> = linkedMapOf()
 
@@ -68,7 +65,4 @@ open class QuickView @JvmOverloads constructor(
     open fun initView() {
 
     }
-
-    override val lifecycle: Lifecycle
-        get() = LifecycleRegistry(this)
 }

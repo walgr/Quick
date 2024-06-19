@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.annotation.StyleRes
-import androidx.appcompat.app.AppCompatDialog
 import com.wpf.app.base.NO_SET
 import com.wpf.app.base.Quick
 import com.wpf.app.base.bind.QuickBindWrap
@@ -28,7 +27,7 @@ open class QuickBaseDialog(
     @LayoutRes private val layoutId: Int = 0,
     private var layoutView: View? = null,
     private var layoutViewCreate: (Context.() -> View)? = null,
-) : AppCompatDialog(context, themeId), DialogSize, DialogLifecycle, Quick {
+) : Dialog(context, themeId), DialogSize, DialogLifecycle, Quick {
 
     private var mView: View? = null
     override fun onCreate(savedInstanceState: Bundle?) {
