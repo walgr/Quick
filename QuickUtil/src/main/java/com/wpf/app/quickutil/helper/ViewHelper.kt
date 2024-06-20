@@ -146,14 +146,14 @@ fun <T : View> T.marginBottom(margin: Int): T {
     return this
 }
 
-fun <T : View> T.widget(widget: Float): T {
+fun <T : View> T.weight(weight: Float): T {
     parent()?.forceTo<LinearLayout>()?.let {
         if (it.orientation == LinearLayout.VERTICAL) {
-            this@widget.layoutParams.height = 0
+            this@weight.layoutParams.height = 0
         } else {
-            this@widget.layoutParams.width = 0
+            this@weight.layoutParams.width = 0
         }
-        this@widget.layoutParams.forceTo<LayoutParams>().weight = widget
+        this@weight.layoutParams.forceTo<LayoutParams>().weight = weight
     }
     return this
 }

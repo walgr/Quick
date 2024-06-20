@@ -9,7 +9,7 @@ import com.wpf.app.base.ability.helper.viewGroupCreate
 import com.wpf.app.quickutil.helper.dp
 import com.wpf.app.quickutil.helper.matchWrapMarginLayoutParams
 import com.wpf.app.quickutil.helper.padding
-import com.wpf.app.quickutil.helper.widget
+import com.wpf.app.quickutil.helper.weight
 import com.wpf.app.quickwidget.wheel.WheelItemData
 import com.wpf.app.quickwidget.wheel.WheelView
 import com.wpf.app.quickwork.ability.helper.title
@@ -24,7 +24,7 @@ class WheelViewTestActivity: QuickActivity(
 
             }
             addView(self.wheelView!!, matchWrapMarginLayoutParams())
-        }.widget(1f)
+        }.weight(1f)
     }
 ) {
 

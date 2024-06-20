@@ -1,3 +1,5 @@
+@file:Suppress("LeakingThis")
+
 package com.wpf.app.quick.ability
 
 import android.content.Context
@@ -59,10 +61,6 @@ open class QuickView @JvmOverloads constructor(
             childView = it.generateContentView(this, childView!!)
         }
         addView(childView)
-    }
-
-    override fun onAttachedToWindow() {
-        super.onAttachedToWindow()
         abilityList.filterIsInstance<QuickGenerateViewAbility>().forEach {
             it.afterGenerateContentView(this, childView!!)
         }

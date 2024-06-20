@@ -18,7 +18,7 @@ import com.wpf.app.quickutil.helper.paddingHorizontal
 import com.wpf.app.quickutil.helper.reset
 import com.wpf.app.quickutil.helper.sp
 import com.wpf.app.quickutil.helper.toColor
-import com.wpf.app.quickutil.helper.widget
+import com.wpf.app.quickutil.helper.weight
 import com.wpf.app.quickwidget.wheel.WheelItemData
 import com.wpf.app.quickwidget.wheel.WheelView
 import com.wpf.app.quickwork.ability.helper.text
@@ -59,7 +59,7 @@ class BottomSheetDialogTestActivity : QuickActivity(
                                     textSize = 18f.sp,
                                     text = "",
                                     textColor = R.color.colorPrimary.toColor()
-                                ).widget(1f)
+                                ).weight(1f)
                                 text(
                                     textSize = 16f.sp,
                                     text = "取消",
