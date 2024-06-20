@@ -16,7 +16,9 @@ import com.wpf.app.quickdialog.helper.DialogSizeHelper
 import com.wpf.app.quickdialog.listeners.DialogLifecycle
 import com.wpf.app.quickdialog.listeners.DialogSize
 import com.wpf.app.quickdialog.minAndMaxLimit.SizeLimitViewGroup
+import com.wpf.app.quicknetwork.base.RequestCoroutineScope
 import com.wpf.app.quickutil.helper.InitViewHelper
+import kotlinx.coroutines.Job
 
 /**
  * Created by 王朋飞 on 2022/6/16.
@@ -27,7 +29,9 @@ open class QuickBaseDialog(
     @LayoutRes private val layoutId: Int = 0,
     private var layoutView: View? = null,
     private var layoutViewCreate: (Context.() -> View)? = null,
-) : Dialog(context, themeId), DialogSize, DialogLifecycle, Quick {
+) : Dialog(context, themeId), DialogSize, DialogLifecycle, RequestCoroutineScope, Quick {
+
+    override var jobManager: MutableList<Job> = mutableListOf()
 
     private var mView: View? = null
     override fun onCreate(savedInstanceState: Bundle?) {

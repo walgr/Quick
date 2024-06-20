@@ -15,7 +15,7 @@ import com.wpf.app.quick.annotations.request.GenerateRequest
 
 class GenerateRequestProcessor(environment: SymbolProcessorEnvironment) :
     BaseProcessor(environment) {
-    private var funBuilder: FunSpec.Builder? = null
+    private val outFunSpecMap = mutableMapOf<String, FunSpec.Builder>()
     override fun visitClassDeclaration(
         classDeclaration: KSClassDeclaration,
         data: Unit,
@@ -31,9 +31,11 @@ class GenerateRequestProcessor(environment: SymbolProcessorEnvironment) :
         val registerService = generateRequestAnn.arguments.getOrNull(2)?.value as Boolean
         val baseUrl = generateRequestAnn.arguments.getOrNull(3)?.value as String
         outFileName = fileName
+
         val dataType = TypeVariableName("Data")
         val failType = TypeVariableName("Fail")
         val api = ClassName(packageName, className)
+        val quick = ClassName("com.wpf.app.base", "Quick")
         val baseRequest = ClassName("com.wpf.app.quicknetwork.base", "BaseRequest")
         val retrofitCreateHelper =
             ClassName("com.wpf.app.quicknetwork.helper", "RetrofitCreateHelper")
@@ -41,7 +43,8 @@ class GenerateRequestProcessor(environment: SymbolProcessorEnvironment) :
         val realCall = ClassName("com.wpf.app.quicknetwork.call", "RealCall")
         val requestCoroutineScope =
             ClassName("com.wpf.app.quicknetwork.base", "RequestCoroutineScope")
-        funBuilder = FunSpec.builder(funName)
+
+        val defaultFunBuilder = FunSpec.builder(funName)
             .addModifiers(KModifier.INLINE)
             .addTypeVariable(dataType)
             .addTypeVariable(failType)
@@ -57,7 +60,7 @@ class GenerateRequestProcessor(environment: SymbolProcessorEnvironment) :
                 baseRequest.parameterizedBy(dataType, failType)
             )
         if (registerService) {
-            funBuilder?.addCode(
+            defaultFunBuilder.addCode(
                 CodeBlock.of(
                     "%T.registerServices(%T::class.java" + if (baseUrl.isNotEmpty()) ", ${baseUrl})" else ")" + "\n",
                     retrofitCreateHelper,
@@ -65,7 +68,7 @@ class GenerateRequestProcessor(environment: SymbolProcessorEnvironment) :
                 )
             )
         }
-        funBuilder?.addCode(
+        defaultFunBuilder.addCode(
             CodeBlock.of(
                 "return %T.getService<%T>().run(run).enqueue(%T(context))",
                 retrofitCreateHelper,
@@ -73,14 +76,49 @@ class GenerateRequestProcessor(environment: SymbolProcessorEnvironment) :
                 wpfRequest
             )
         )
+        outFunSpecMap["default"] = defaultFunBuilder
+        val quickFunBuilder = FunSpec.builder(funName)
+            .addModifiers(KModifier.INLINE)
+            .addTypeVariable(dataType)
+            .addTypeVariable(failType)
+            .receiver(quick)
+            .addParameter(
+                ParameterSpec.builder(
+                    "run",
+                    LambdaTypeName.get(api, listOf(), realCall.parameterizedBy(dataType, failType))
+                ).build()
+            ).returns(
+                baseRequest.parameterizedBy(dataType, failType)
+            )
+        if (registerService) {
+            quickFunBuilder.addCode(
+                CodeBlock.of(
+                    "%T.registerServices(%T::class.java" + if (baseUrl.isNotEmpty()) ", ${baseUrl})" else ")" + "\n",
+                    retrofitCreateHelper,
+                    api
+                )
+            )
+        }
+        quickFunBuilder.addCode(
+            CodeBlock.of(
+                "return %T.getService<%T>().run(run).enqueue(%T(this as? RequestCoroutineScope))",
+                retrofitCreateHelper,
+                api,
+                wpfRequest
+            )
+        )
+        outFunSpecMap["quick"] = quickFunBuilder
     }
 
     override fun visitEnd() {
-        if (outFileName.isNullOrEmpty() || funBuilder == null) return
+        if (outFileName.isNullOrEmpty() ||outFunSpecMap.isEmpty()) return
         if (outFileSpec == null) {
             outFileSpec = FileSpec.builder(packageName, outFileName!!)
         }
-        outFileSpec?.addFunction(funBuilder!!.build())
+        outFunSpecMap.values.forEach { funBuilder ->
+            outFileSpec?.addFunction(funBuilder.build())
+        }
         super.visitEnd()
+
     }
 }

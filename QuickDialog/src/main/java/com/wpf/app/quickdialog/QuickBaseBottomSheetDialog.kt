@@ -21,7 +21,9 @@ import com.wpf.app.quickdialog.listeners.DialogLifecycle
 import com.wpf.app.quickdialog.listeners.DialogSize
 import com.wpf.app.quickdialog.listeners.SheetInit
 import com.wpf.app.quickdialog.minAndMaxLimit.SizeLimitViewGroup
+import com.wpf.app.quicknetwork.base.RequestCoroutineScope
 import com.wpf.app.quickutil.helper.InitViewHelper
+import kotlinx.coroutines.Job
 
 /**
  * Created by 王朋飞 on 2022/6/21.
@@ -32,7 +34,9 @@ open class QuickBaseBottomSheetDialog(
     @LayoutRes private val layoutId: Int = 0,
     private val layoutView: View? = null,
     private var layoutViewCreate: (Context.() -> View)? = null,
-) : BottomSheetDialog(context, true, null), SheetInit, DialogSize, DialogLifecycle, Quick {
+) : BottomSheetDialog(context, true, null), SheetInit, DialogSize, DialogLifecycle, RequestCoroutineScope, Quick {
+
+    override var jobManager: MutableList<Job> = mutableListOf()
 
     private var mView: View? = null
     override fun getView(): View? {

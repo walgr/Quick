@@ -17,7 +17,7 @@ object TimeDelayHelper {
         if (interval == null) {
             interval = Timer()
         }
-        interval?.scheduleAtFixedRate(object : TimerTask() {
+        interval?.schedule(object : TimerTask() {
             override fun run() {
                 traversalDelayMap()
             }
