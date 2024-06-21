@@ -38,15 +38,15 @@ open class QuickTitleView @JvmOverloads constructor(
     defStyleAttr: Int = 0,
 ) : LinearLayout(context, attrs, defStyleAttr) {
 
-    protected var contentLayout: ViewGroup? = null
-    protected var backLayout: ViewGroup? = null
-    protected var ivBack: ImageView? = null
-    protected var backGroup: QuickSpaceLinearLayout? = null
-    protected var titleGroup: ViewGroup? = null
-    protected var tvTitle: TextView? = null
-    protected var tvSubTitle: TextView? = null
+    var contentLayout: ViewGroup? = null
+    var backLayout: ViewGroup? = null
+    var ivBack: ImageView? = null
+    var titleGroup: ViewGroup? = null
+    var tvTitle: TextView? = null
+    var tvSubTitle: TextView? = null
+    var backGroup: QuickSpaceLinearLayout? = null
+    var line: View? = null
     private var moreGroup: QuickSpaceLinearLayout? = null
-    protected var line: View? = null
 
     var clickListener: CommonClickListener? = null
 
