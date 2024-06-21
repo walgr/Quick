@@ -62,26 +62,38 @@ open class QuickSpaceLinearLayout @JvmOverloads constructor(
                     this.bottomMargin = 0
                 }
                 if (orientation == HORIZONTAL) {
-                    if (pos > 0) {
-                        if (this.marginStart == 0 || forceSet) {
-                            this.marginStart = startSpace
-                        }
-                    }
-                    if (pos < childCount - 1) {
+                    if (childCount == 1) {
                         if (this.marginEnd == 0 || forceSet) {
-                            this.marginEnd = attr.itemSpace - startSpace
+                            this.marginEnd = attr.itemSpace
+                        }
+                    } else {
+                        if (pos > 0) {
+                            if (this.marginStart == 0 || forceSet) {
+                                this.marginStart = startSpace
+                            }
+                        }
+                        if (pos < childCount - 1) {
+                            if (this.marginEnd == 0 || forceSet) {
+                                this.marginEnd = attr.itemSpace - startSpace
+                            }
                         }
                     }
                 }
                 if (orientation == VERTICAL) {
-                    if (pos > 0) {
-                        if (this.topMargin == 0 || forceSet) {
-                            this.topMargin = startSpace
-                        }
-                    }
-                    if (pos < childCount - 1) {
+                    if (childCount == 1) {
                         if (this.bottomMargin == 0 || forceSet) {
-                            this.bottomMargin = attr.itemSpace - startSpace
+                            this.bottomMargin = attr.itemSpace
+                        }
+                    } else {
+                        if (pos > 0) {
+                            if (this.topMargin == 0 || forceSet) {
+                                this.topMargin = startSpace
+                            }
+                        }
+                        if (pos < childCount - 1) {
+                            if (this.bottomMargin == 0 || forceSet) {
+                                this.bottomMargin = attr.itemSpace - startSpace
+                            }
                         }
                     }
                 }

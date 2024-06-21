@@ -53,7 +53,6 @@ class App : Application() {
             showBackIcon = true
             showLine = false
             isLinearLayout = true
-            space = 16.dp
         }
         QuickDialogThemeBase.registerDefaultTheme {
             gravity = Gravity.BOTTOM

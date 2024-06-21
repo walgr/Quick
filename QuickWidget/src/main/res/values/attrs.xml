@@ -188,9 +188,13 @@
     </declare-styleable>
 
     <declare-styleable name="BackGroup">
-        <attr name="backRemoveDefaultChild" format="boolean" />
+        <attr name="removeAllDefaultChild" format="boolean" />
+        <attr name="itemSpace"/>
+        <attr name="spaceType"/>
     </declare-styleable>
     <declare-styleable name="MoreGroup">
-        <attr name="moreRemoveDefaultChild" format="boolean" />
+        <attr name="removeAllDefaultChild" />
+        <attr name="itemSpace"/>
+        <attr name="spaceType"/>
     </declare-styleable>
 </resources>

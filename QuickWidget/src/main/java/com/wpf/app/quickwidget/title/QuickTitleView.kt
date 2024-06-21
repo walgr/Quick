@@ -156,10 +156,8 @@ open class QuickTitleView @JvmOverloads constructor(
                     showBackIcon = showBackIcon ?: false,
                     isLinearLayout = isLinearLayout ?: true,
                     isAbsoluteCenter = isAbsoluteCenter ?: true,
-                    space = space.nullDefault(0)
                 )
             }
-            moreGroup?.updateLayoutParams<MarginLayoutParams> { marginEnd = space.nullDefault(0) }
 
             backGroupChild?.let {
                 backGroup?.let { backGroup ->
@@ -199,11 +197,8 @@ open class QuickTitleView @JvmOverloads constructor(
         showBackIcon: Boolean = true,
         isLinearLayout: Boolean = true,
         isAbsoluteCenter: Boolean = true,
-        space: Int = 0,
     ) {
         titleGroup?.updateLayoutParams<ConstraintLayout.LayoutParams> {
-            marginStart =
-                if (showBackIcon && isLinearLayout) 0 else space
             if (isLinearLayout) {
                 this.startToEnd = R.id.backGroup
                 this.endToStart = R.id.moreGroup
@@ -300,10 +295,8 @@ open class QuickTitleView @JvmOverloads constructor(
         curAttrs?.apply {
             if (isInEditMode && isAbsoluteCenter == true && titleGroup != null && ivBack != null && moreGroup != null) {
                 val minL =
-                    if (showBackIcon == true && isLinearLayout == true) ivBack!!.width else space
-                        .nullDefault(0)
-                val minE =
-                    space.nullDefault(0) + if (isLinearLayout == true) moreGroup!!.width else 0
+                    if (showBackIcon == true && isLinearLayout == true) ivBack!!.width else 0
+                val minE = if (isLinearLayout == true) moreGroup!!.width else 0
                 val titleGroupL = when (contentGravity) {
                     CONTENT_GRAVITY_CENTER -> {
                         ((l + r - titleGroup!!.width) / 2).coerceIn(l + minL, (l + r) / 2)
@@ -334,7 +327,7 @@ open class QuickTitleView @JvmOverloads constructor(
         } else {
             when (child) {
                 is BackGroup -> {
-                    if (child.attrs.backRemoveDefaultChild) {
+                    if (child.attrs.removeAllDefaultChild) {
                         backGroup?.removeAllViews()
                     }
                     child.children().forEach {
@@ -345,7 +338,7 @@ open class QuickTitleView @JvmOverloads constructor(
                 }
 
                 is MoreGroup -> {
-                    if (child.attrs.moreRemoveDefaultChild) {
+                    if (child.attrs.removeAllDefaultChild) {
                         moreGroup?.removeAllViews()
                     }
                     child.children().forEach {
@@ -400,7 +393,7 @@ class BackGroup @JvmOverloads constructor(
     internal val attrs = AutoGetAttributeHelper.init(context, attrs, R.styleable.BackGroup, BackGroupAttrs())
 
     internal class BackGroupAttrs(
-        val backRemoveDefaultChild: Boolean = false
+        val removeAllDefaultChild: Boolean = false
     )
 }
 
@@ -413,7 +406,7 @@ class MoreGroup @JvmOverloads constructor(
     internal val attrs = AutoGetAttributeHelper.init(context, attrs, R.styleable.MoreGroup, MoreGroupAttrs())
 
     internal class MoreGroupAttrs(
-        val moreRemoveDefaultChild: Boolean = false
+        val removeAllDefaultChild: Boolean = false
     )
 }
 
@@ -443,7 +436,6 @@ interface QuickTitleThemeI {
     var subTitleBold: Boolean?
     var subTitleSize: Float?
 
-    var space: Int?
     var titleSpace: Int?
 
     var backGroupChild: (QuickSpaceLinearLayout.() -> List<View>)?
@@ -465,7 +457,6 @@ interface QuickTitleThemeI {
         subTitleColor = subTitleColor ?: android.R.color.white.toColor(context)
         subTitleBold = subTitleBold ?: false
         subTitleSize = subTitleSize ?: 14f.sp
-        space = space ?: 16.dp
         titleSpace = titleSpace.nullDefault(0)
         isAbsoluteCenter = isAbsoluteCenter ?: true
     }
@@ -487,7 +478,6 @@ interface QuickTitleThemeI {
         subTitleColor = subTitleColor ?: other?.subTitleColor
         subTitleBold = subTitleBold ?: other?.subTitleBold
         subTitleSize = subTitleSize ?: other?.subTitleSize
-        space = space ?: other?.space
         titleSpace = titleSpace ?: other?.titleSpace
         backGroupChild = backGroupChild ?: other?.backGroupChild
         moreGroupChild = moreGroupChild ?: other?.moreGroupChild
@@ -512,7 +502,6 @@ interface QuickTitleThemeI {
             subTitleColor = this@QuickTitleThemeI.subTitleColor
             subTitleBold = this@QuickTitleThemeI.subTitleBold
             subTitleSize = this@QuickTitleThemeI.subTitleSize
-            space = this@QuickTitleThemeI.space
             titleSpace = this@QuickTitleThemeI.titleSpace
             backGroupChild = this@QuickTitleThemeI.backGroupChild
             moreGroupChild = this@QuickTitleThemeI.moreGroupChild
@@ -545,7 +534,6 @@ open class QuickTitleAttrs(
     override var subTitleBold: Boolean? = null,
     override var subTitleSize: Float? = null,
 
-    override var space: Int? = null,
     override var titleSpace: Int? = null,
 
     override var backGroupChild: (QuickSpaceLinearLayout.() -> List<View>)? = null,

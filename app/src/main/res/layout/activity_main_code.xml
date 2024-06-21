@@ -27,7 +27,8 @@
 
             <com.wpf.app.quickwidget.title.MoreGroup
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                app:itemSpace="8dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -42,7 +43,6 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
                     android:src="@drawable/baseline_more_vert_24_white"
                     android:textColor="@color/white"
                     android:textSize="16sp"
