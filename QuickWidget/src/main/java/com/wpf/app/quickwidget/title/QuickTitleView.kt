@@ -209,18 +209,25 @@ open class QuickTitleView @JvmOverloads constructor(
             if (gravity == CONTENT_GRAVITY_CENTER) {
                 horizontalBias = 0.5f
                 if (isLinearLayout && isAbsoluteCenter) {
-                    post {
-                        val leftViewW =
-                            ivBack?.width.nullDefault(0) + backGroup?.width.nullDefault(0)
-                        val rightViewW = moreGroup?.width.nullDefault(0)
-                        val maxW = max(leftViewW, rightViewW)
-                        val isDealLeft = maxW == rightViewW
-                        titleGroup?.setPadding(
-                            paddingLeft + if (isDealLeft) max(0, maxW - leftViewW) else 0,
-                            paddingTop,
-                            paddingRight + if (!isDealLeft) max(0, maxW - rightViewW) else 0,
-                            paddingBottom
-                        )
+                    ivBack?.post {
+                        backGroup?.post {
+                            moreGroup?.post {
+                                val leftViewW =
+                                    ivBack?.width.nullDefault(0) + backGroup?.width.nullDefault(0)
+                                val rightViewW = moreGroup?.width.nullDefault(0)
+                                val maxW = max(leftViewW, rightViewW)
+                                val isDealLeft = maxW == rightViewW
+                                titleGroup?.setPadding(
+                                    paddingLeft + if (isDealLeft) max(0, maxW - leftViewW) else 0,
+                                    paddingTop,
+                                    paddingRight + if (!isDealLeft) max(
+                                        0,
+                                        maxW - rightViewW
+                                    ) else 0,
+                                    paddingBottom
+                                )
+                            }
+                        }
                     }
                 }
             }
@@ -390,10 +397,11 @@ class BackGroup @JvmOverloads constructor(
     defStyleAttr: Int = 0,
 ) : QuickSpaceLinearLayout(context, attrs, defStyleAttr) {
 
-    internal val attrs = AutoGetAttributeHelper.init(context, attrs, R.styleable.BackGroup, BackGroupAttrs())
+    internal val attrs =
+        AutoGetAttributeHelper.init(context, attrs, R.styleable.BackGroup, BackGroupAttrs())
 
     internal class BackGroupAttrs(
-        val removeAllDefaultChild: Boolean = false
+        val removeAllDefaultChild: Boolean = false,
     )
 }
 
@@ -403,10 +411,11 @@ class MoreGroup @JvmOverloads constructor(
     defStyleAttr: Int = 0,
 ) : QuickSpaceLinearLayout(context, attrs, defStyleAttr) {
 
-    internal val attrs = AutoGetAttributeHelper.init(context, attrs, R.styleable.MoreGroup, MoreGroupAttrs())
+    internal val attrs =
+        AutoGetAttributeHelper.init(context, attrs, R.styleable.MoreGroup, MoreGroupAttrs())
 
     internal class MoreGroupAttrs(
-        val removeAllDefaultChild: Boolean = false
+        val removeAllDefaultChild: Boolean = false,
     )
 }
 
