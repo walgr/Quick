@@ -186,4 +186,11 @@
         <attr name="showLine" format="boolean" />
         <attr name="space" format="dimension" />
     </declare-styleable>
+
+    <declare-styleable name="BackGroup">
+        <attr name="backRemoveDefaultChild" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="MoreGroup">
+        <attr name="moreRemoveDefaultChild" format="boolean" />
+    </declare-styleable>
 </resources>

@@ -5,7 +5,6 @@ import android.util.AttributeSet
 import android.view.ViewGroup
 import com.wpf.app.quickwidget.title.QuickTitleThemeI
 import com.wpf.app.quickwidget.title.QuickTitleView
-import com.wpf.app.quickwork.widget.theme.QuickTitleThemeBase
 
 open class QuickThemeTitle @JvmOverloads constructor(
     context: Context,
@@ -14,6 +13,7 @@ open class QuickThemeTitle @JvmOverloads constructor(
     theme: QuickTitleThemeI? = null,
 ) : QuickTitleView(context, attrs, defStyleAttr), QuickTitleThemeBase {
 
+    @Suppress("LeakingThis")
     override val titleView: QuickTitleView = this
     override var moreGroupLayout: ViewGroup? = getMoreGroup()
     override var curTheme: QuickTitleThemeI? = null

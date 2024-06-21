@@ -19,24 +19,38 @@
             app:showBackIcon="false"
             app:titleStr="正式场">
 
-            <TextView
+            <com.wpf.app.quickwidget.title.BackGroup
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:includeFontPadding="false"
-                android:src="@drawable/baseline_more_vert_24_white"
-                android:text="关于App"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:visibility="visible" />
+                android:layout_height="match_parent"
+                >
 
-            <ImageView
+
+            </com.wpf.app.quickwidget.title.BackGroup>
+
+            <com.wpf.app.quickwidget.title.MoreGroup
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:src="@drawable/baseline_more_vert_24_white"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:visibility="visible" />
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:src="@drawable/baseline_more_vert_24_white"
+                    android:text="关于App"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:visibility="visible" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/baseline_more_vert_24_white"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:visibility="visible" />
+
+            </com.wpf.app.quickwidget.title.MoreGroup>
 
         </com.wpf.app.quickwork.widget.theme.QuickThemeTitle>
 

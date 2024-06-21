@@ -22,7 +22,9 @@
             app:isWidthMain="false"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:layout_width="56dp"
+            tools:layout_height="56dp">
 
             <ImageView
                 android:id="@+id/ivBack"
@@ -33,14 +35,24 @@
 
         </com.wpf.app.quickwidget.ratio.AspectRatioView>
 
-        <LinearLayout
+        <com.wpf.app.quickwidget.group.QuickSpaceLinearLayout
+            android:id="@+id/backGroup"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:layout_constraintStart_toEndOf="@+id/backLayout"/>
+
+        <com.wpf.app.quickwidget.group.QuickSpaceLinearLayout
             android:id="@+id/titleGroup"
             android:orientation="vertical"
             android:gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constrainedWidth="true"
-            tools:layout_constraintStart_toEndOf="@+id/backLayout"
+            tools:layout_constraintStart_toEndOf="@+id/backGroup"
             tools:layout_constraintEnd_toStartOf="@+id/moreGroup"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent">
@@ -68,7 +80,7 @@
                 android:includeFontPadding="false"
                 />
 
-        </LinearLayout>
+        </com.wpf.app.quickwidget.group.QuickSpaceLinearLayout>
 
         <com.wpf.app.quickwidget.group.QuickSpaceLinearLayout
             android:id="@+id/moreGroup"

@@ -15,11 +15,12 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.IntDef
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
-import androidx.core.view.marginEnd
 import androidx.core.view.updateLayoutParams
 import com.wpf.app.quickutil.helper.attribute.AutoGetAttributeHelper
+import com.wpf.app.quickutil.helper.children
 import com.wpf.app.quickutil.helper.copy
 import com.wpf.app.quickutil.helper.dp
+import com.wpf.app.quickutil.helper.removeParent
 import com.wpf.app.quickutil.helper.sp
 import com.wpf.app.quickutil.helper.toColor
 import com.wpf.app.quickutil.helper.toDrawable
@@ -30,6 +31,7 @@ import com.wpf.app.quickwidget.R
 import com.wpf.app.quickwidget.group.QuickSpaceLinearLayout
 import kotlin.math.max
 
+@Suppress("LeakingThis")
 open class QuickTitleView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
@@ -37,9 +39,10 @@ open class QuickTitleView @JvmOverloads constructor(
 ) : LinearLayout(context, attrs, defStyleAttr) {
 
     protected var contentLayout: ViewGroup? = null
-    protected var titleGroup: ViewGroup? = null
     protected var backLayout: ViewGroup? = null
     protected var ivBack: ImageView? = null
+    protected var backGroup: QuickSpaceLinearLayout? = null
+    protected var titleGroup: ViewGroup? = null
     protected var tvTitle: TextView? = null
     protected var tvSubTitle: TextView? = null
     private var moreGroup: QuickSpaceLinearLayout? = null
@@ -54,6 +57,7 @@ open class QuickTitleView @JvmOverloads constructor(
         contentLayout = findViewById(R.id.titleContentLayout)
         titleGroup = findViewById(R.id.titleGroup)
         backLayout = findViewById(R.id.backLayout)
+        backGroup = findViewById(R.id.backGroup)
         ivBack = findViewById(R.id.ivBack)
         tvTitle = findViewById(R.id.tvTitle)
         tvSubTitle = findViewById(R.id.tvSubTitle)
@@ -156,6 +160,28 @@ open class QuickTitleView @JvmOverloads constructor(
                 )
             }
             moreGroup?.updateLayoutParams<MarginLayoutParams> { marginEnd = space.nullDefault(0) }
+
+            backGroupChild?.let {
+                backGroup?.let { backGroup ->
+                    val childList = it.invoke(backGroup)
+                    childList.forEach {
+                        if (it.parent == null) {
+                            backGroup.addView(it)
+                        }
+                    }
+                }
+            }
+
+            moreGroupChild?.let {
+                moreGroup?.let { moreGroup ->
+                    val childList = it.invoke(moreGroup)
+                    childList.forEach {
+                        if (it.parent == null) {
+                            moreGroup.addView(it)
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -179,7 +205,7 @@ open class QuickTitleView @JvmOverloads constructor(
             marginStart =
                 if (showBackIcon && isLinearLayout) 0 else space
             if (isLinearLayout) {
-                this.startToEnd = R.id.backLayout
+                this.startToEnd = R.id.backGroup
                 this.endToStart = R.id.moreGroup
             } else {
                 this.startToStart = ConstraintLayout.LayoutParams.PARENT_ID
@@ -189,8 +215,9 @@ open class QuickTitleView @JvmOverloads constructor(
                 horizontalBias = 0.5f
                 if (isLinearLayout && isAbsoluteCenter) {
                     post {
-                        val leftViewW = ivBack!!.width + marginStart
-                        val rightViewW = moreGroup!!.width + moreGroup!!.marginEnd
+                        val leftViewW =
+                            ivBack?.width.nullDefault(0) + backGroup?.width.nullDefault(0)
+                        val rightViewW = moreGroup?.width.nullDefault(0)
                         val maxW = max(leftViewW, rightViewW)
                         val isDealLeft = maxW == rightViewW
                         titleGroup?.setPadding(
@@ -275,7 +302,8 @@ open class QuickTitleView @JvmOverloads constructor(
                 val minL =
                     if (showBackIcon == true && isLinearLayout == true) ivBack!!.width else space
                         .nullDefault(0)
-                val minE = space.nullDefault(0) + if (isLinearLayout == true) moreGroup!!.width else 0
+                val minE =
+                    space.nullDefault(0) + if (isLinearLayout == true) moreGroup!!.width else 0
                 val titleGroupL = when (contentGravity) {
                     CONTENT_GRAVITY_CENTER -> {
                         ((l + r - titleGroup!!.width) / 2).coerceIn(l + minL, (l + r) / 2)
@@ -304,7 +332,33 @@ open class QuickTitleView @JvmOverloads constructor(
         if (child == null || child.id == R.id.titleContentLayout || child.id == R.id.line) {
             super.addView(child, index, params)
         } else {
-            moreGroup?.addView(child, params)
+            when (child) {
+                is BackGroup -> {
+                    if (child.attrs.backRemoveDefaultChild) {
+                        backGroup?.removeAllViews()
+                    }
+                    child.children().forEach {
+                        it.removeParent()
+                        backGroup?.addView(it)
+                    }
+                    backGroup?.setNewItemSpace(child.getCurrentSpace())
+                }
+
+                is MoreGroup -> {
+                    if (child.attrs.moreRemoveDefaultChild) {
+                        moreGroup?.removeAllViews()
+                    }
+                    child.children().forEach {
+                        it.removeParent()
+                        moreGroup?.addView(it)
+                    }
+                    moreGroup?.setNewItemSpace(child.getCurrentSpace())
+                }
+
+                else -> {
+                    moreGroup?.addView(child, params)
+                }
+            }
         }
     }
 
@@ -337,6 +391,32 @@ open class QuickTitleView @JvmOverloads constructor(
     }
 }
 
+class BackGroup @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0,
+) : QuickSpaceLinearLayout(context, attrs, defStyleAttr) {
+
+    internal val attrs = AutoGetAttributeHelper.init(context, attrs, R.styleable.BackGroup, BackGroupAttrs())
+
+    internal class BackGroupAttrs(
+        val backRemoveDefaultChild: Boolean = false
+    )
+}
+
+class MoreGroup @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0,
+) : QuickSpaceLinearLayout(context, attrs, defStyleAttr) {
+
+    internal val attrs = AutoGetAttributeHelper.init(context, attrs, R.styleable.MoreGroup, MoreGroupAttrs())
+
+    internal class MoreGroupAttrs(
+        val moreRemoveDefaultChild: Boolean = false
+    )
+}
+
 interface QuickTitleThemeI {
     var height: Int?
     var background: Drawable?
@@ -365,6 +445,9 @@ interface QuickTitleThemeI {
 
     var space: Int?
     var titleSpace: Int?
+
+    var backGroupChild: (QuickSpaceLinearLayout.() -> List<View>)?
+    var moreGroupChild: (QuickSpaceLinearLayout.() -> List<View>)?
 
     fun initDataByXml(context: Context) {
         height = height ?: 44.dp
@@ -406,6 +489,8 @@ interface QuickTitleThemeI {
         subTitleSize = subTitleSize ?: other?.subTitleSize
         space = space ?: other?.space
         titleSpace = titleSpace ?: other?.titleSpace
+        backGroupChild = backGroupChild ?: other?.backGroupChild
+        moreGroupChild = moreGroupChild ?: other?.moreGroupChild
         return this
     }
 
@@ -429,6 +514,8 @@ interface QuickTitleThemeI {
             subTitleSize = this@QuickTitleThemeI.subTitleSize
             space = this@QuickTitleThemeI.space
             titleSpace = this@QuickTitleThemeI.titleSpace
+            backGroupChild = this@QuickTitleThemeI.backGroupChild
+            moreGroupChild = this@QuickTitleThemeI.moreGroupChild
         }
     }
 }
@@ -460,4 +547,7 @@ open class QuickTitleAttrs(
 
     override var space: Int? = null,
     override var titleSpace: Int? = null,
+
+    override var backGroupChild: (QuickSpaceLinearLayout.() -> List<View>)? = null,
+    override var moreGroupChild: (QuickSpaceLinearLayout.() -> List<View>)? = null,
 ) : QuickTitleThemeI
