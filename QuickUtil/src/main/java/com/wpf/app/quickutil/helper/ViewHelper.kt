@@ -57,13 +57,14 @@ fun ViewGroup.children(): List<View> {
     return childList
 }
 
-fun View.onceClick(interval: Long = 1000L, onClickListener: OnClickListener) {
+fun <T : View> T.onceClick(interval: Long = 1000L, onClickListener: OnClickListener): T {
     onceClick(interval) {
         onClickListener.onClick(it)
     }
+    return this
 }
 
-fun View.onceClick(interval: Long = 1000L, onClickListener: (View) -> Unit) {
+fun <T : View> T.onceClick(interval: Long = 1000L, onClickListener: (View) -> Unit): T {
     setOnClickListener {
         val viewKey = it.toString()
         val lastClickTime: Long = KV.get(viewKey, 0L)
@@ -73,6 +74,7 @@ fun View.onceClick(interval: Long = 1000L, onClickListener: (View) -> Unit) {
             KV.put(viewKey, curTime)
         }
     }
+    return this
 }
 
 fun View?.getLocationInWindow(): IntArray {

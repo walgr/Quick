@@ -23,8 +23,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            tools:layout_width="56dp"
-            tools:layout_height="56dp">
+            tools:layout_width="44dp"
+            tools:layout_height="44dp">
 
             <ImageView
                 android:id="@+id/ivBack"
@@ -43,7 +43,7 @@
             android:gravity="center"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            tools:layout_constraintStart_toEndOf="@+id/backLayout"/>
+            app:layout_constraintStart_toEndOf="@+id/backLayout"/>
 
         <com.wpf.app.quickwidget.group.QuickSpaceLinearLayout
             android:id="@+id/titleGroup"
