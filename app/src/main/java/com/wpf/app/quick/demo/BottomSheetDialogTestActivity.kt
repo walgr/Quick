@@ -70,7 +70,7 @@ class BottomSheetDialogTestActivity : QuickActivity(
                             wheelView.layoutParams = matchMarginLayoutParams()
                             val testData: MutableList<WheelItemData> = mutableListOf()
                             repeat(50) {
-                                testData.add(WheelItemData(it.toString(), System.currentTimeMillis().toString() + System.currentTimeMillis().toString()))
+                                testData.add(WheelItemData(it.toString(), it.toString()))
                             }
                             wheelView.setData(testData)
                             addView(wheelView)

@@ -114,7 +114,7 @@ open class QuickMultistageSelectView @JvmOverloads constructor(
         selectRecyclerView: QuickSelectRecyclerView?,
         index: Int,
     ): QuickSelectRecyclerView {
-        val recyclerView = selectRecyclerView ?: QuickSelectRecyclerView(mContext = context)
+        val recyclerView = selectRecyclerView ?: QuickSelectRecyclerView(context = context)
         if (index > 0 && selectViewList.size > (index - 1)) {
             val parentSelectAdapter = selectViewList[index - 1].getSelectAdapter()
             parentSelectAdapter.childSelectAdapter = recyclerView.getSelectAdapter()

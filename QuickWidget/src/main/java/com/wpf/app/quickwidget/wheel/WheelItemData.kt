@@ -30,7 +30,7 @@ open class WheelItemData(
             layoutParams = matchWrapMarginLayoutParams().reset(height = 44.dp)
             maxLines = 1
             ellipsize = TextUtils.TruncateAt.MARQUEE
-            textSize = 14f
+            textSize = (44/1.3f)
             gravity = Gravity.CENTER
             setTextColor(Color.BLACK)
         }

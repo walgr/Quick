@@ -14,10 +14,10 @@ import com.wpf.app.quickwidget.selectview.listeners.SetSelectChange
  *
  */
 open class QuickSelectRecyclerView @JvmOverloads constructor(
-    mContext: Context,
+    context: Context,
     attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0
-) : QuickRecyclerView(mContext, attrs, defStyleAttr), DataSelectOnAdapter, SetSelectChange {
+    defStyleAttr: Int = 0,
+) : QuickRecyclerView(context, attrs, defStyleAttr), DataSelectOnAdapter, SetSelectChange {
 
     override fun initView() {
         if (layoutManager == null) {
@@ -28,7 +28,7 @@ open class QuickSelectRecyclerView @JvmOverloads constructor(
         adapter = mQuickAdapter
     }
 
-    override fun getQuickAdapter() : QuickAdapter {
+    override fun getQuickAdapter(): QuickAdapter {
         return mQuickAdapter
     }
 

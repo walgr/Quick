@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.PagerAdapter
-import androidx.viewpager.widget.ViewPager
 import com.wpf.app.base.Quick
 import com.wpf.app.base.ability.helper.addView
 import com.wpf.app.base.ability.scope.ContextScope
@@ -161,7 +160,7 @@ fun ContextScope.viewPagerBuilder(
     limit: Int = 0,
     viewConvert: ((view: View) -> Fragment)? = null,
     builder: (FragmentGroup.() -> Unit)? = null,
-): ViewPager {
+): QuickViewPager {
     val viewGroup = FragmentGroup(context, viewConvert)
     builder?.invoke(viewGroup)
     return viewPager(layoutParams, quick, viewGroup.fragmentList, withState, limit)

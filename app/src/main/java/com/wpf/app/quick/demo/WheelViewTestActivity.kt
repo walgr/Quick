@@ -3,9 +3,9 @@ package com.wpf.app.quick.demo
 import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
-import com.wpf.app.quick.ability.QuickActivity
 import com.wpf.app.base.ability.ex.contentViewWithSelf
 import com.wpf.app.base.ability.helper.viewGroupCreate
+import com.wpf.app.quick.ability.QuickActivity
 import com.wpf.app.quickutil.helper.dp
 import com.wpf.app.quickutil.helper.matchWrapMarginLayoutParams
 import com.wpf.app.quickutil.helper.padding
@@ -34,7 +34,7 @@ class WheelViewTestActivity: QuickActivity(
         super.initView(view)
         val testData: MutableList<WheelItemData> = mutableListOf()
         repeat(50) {
-            testData.add(WheelItemData(it.toString(), System.currentTimeMillis().toString() + System.currentTimeMillis().toString()))
+            testData.add(WheelItemData(it.toString(), System.currentTimeMillis().toString()))
         }
         wheelView?.setData(testData)
     }

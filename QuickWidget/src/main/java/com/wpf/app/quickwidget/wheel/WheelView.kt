@@ -20,7 +20,7 @@ class WheelView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
-    private var maxShowSize: Int = 9,               //最多展示多少个 必须是奇数
+    private var maxShowSize: Int = 7,               //最多展示多少个 必须是奇数
     maskBackground: Drawable? = null
 ) : FrameLayout(
     context, attrs, defStyleAttr
@@ -40,8 +40,9 @@ class WheelView @JvmOverloads constructor(
         }
         list?.setHasFixedSize(true)
 
-        list?.layoutManager = WheelLayoutManager(context)
+        list?.layoutManager = LinearLayoutManager(context)
         LinearSnapHelper().attachToRecyclerView(list)
+        list?.addItemDecoration(WheelItemDecoration())
         list?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -79,6 +80,7 @@ class WheelView @JvmOverloads constructor(
         }
     }
 
+    @Suppress("MemberVisibilityCanBePrivate")
     fun setCenterPos(pos: Int) {
         if (list == null) return
         list?.post {
@@ -86,18 +88,21 @@ class WheelView @JvmOverloads constructor(
         }
     }
 
+    @Suppress("unused")
     fun setCenterPosById(id: String) {
         if (list == null) return
         val findItem = list?.getRealTypeData<WheelItemData>()?.find { it.id == id } ?: return
         setCenterPos(list!!.getDataPos(findItem) - getOffsetSize())
     }
 
+    @Suppress("unused")
     fun setCenterPosByName(name: String) {
         if (list == null) return
         val findItem = list?.getRealTypeData<WheelItemData>()?.find { it.name == name } ?: return
         setCenterPos(list!!.getDataPos(findItem) - getOffsetSize())
     }
 
+    @Suppress("unused")
     fun getSelectItem(): WheelItemData {
         if (list == null) {
             throw RuntimeException("list is null")
