@@ -1,4 +1,4 @@
-package com.wpf.app.quickbind.viewpager
+package com.wpf.app.quickwidget.viewpager
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -7,6 +7,7 @@ import android.view.MotionEvent
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.wpf.app.quickbind.R
+import com.wpf.app.quickbind.viewpager.ViewPagerSize
 import com.wpf.app.quickutil.helper.attribute.AutoGetAttributeHelper
 import com.wpf.app.quickutil.other.forceTo
 
@@ -17,7 +18,7 @@ import com.wpf.app.quickutil.other.forceTo
 open class QuickViewPager @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-    private var canScroll: Boolean = true,
+    @Suppress("MemberVisibilityCanBePrivate") var canScroll: Boolean = true,
 ) : ViewPager(context, attrs) {
 
     init {

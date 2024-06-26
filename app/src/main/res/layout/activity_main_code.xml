@@ -52,7 +52,7 @@
 
         </com.wpf.app.quickwork.widget.theme.QuickThemeTitle>
 
-        <com.wpf.app.quickbind.viewpager.QuickViewPager
+        <com.wpf.app.quickwidget.viewpager.QuickViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="0dp"

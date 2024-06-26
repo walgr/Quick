@@ -14,11 +14,11 @@ import com.wpf.app.quick.R
 import com.wpf.app.quick.helper.getFragmentManager
 import com.wpf.app.quick.helper.toFragment
 import com.wpf.app.quickbind.utils.getFragment
-import com.wpf.app.quickbind.viewpager.QuickViewPager
 import com.wpf.app.quickbind.viewpager.adapter.FragmentsAdapter
 import com.wpf.app.quickbind.viewpager.adapter.FragmentsStateAdapter
 import com.wpf.app.quickutil.helper.matchMarginLayoutParams
 import com.wpf.app.quickutil.other.forceTo
+import com.wpf.app.quickwidget.viewpager.QuickViewPager
 import kotlin.math.abs
 
 class FragmentGroup @JvmOverloads constructor(
