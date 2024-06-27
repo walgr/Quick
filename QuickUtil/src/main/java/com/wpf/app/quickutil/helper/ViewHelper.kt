@@ -213,11 +213,19 @@ fun <T : TextView> T.drawableBottom(drawable: Drawable, padding: Int = 0): T {
     return this
 }
 
-fun <T : TextView> T.drawable(start: Drawable, top: Drawable, end: Drawable, bottom: Drawable, padding: Int = 0): T {
-    start.setBounds(0, 0, start.intrinsicWidth, start.intrinsicHeight)
-    top.setBounds(0, 0, top.intrinsicWidth, top.intrinsicHeight)
-    end.setBounds(0, 0, end.intrinsicWidth, end.intrinsicHeight)
-    bottom.setBounds(0, 0, bottom.intrinsicWidth, bottom.intrinsicHeight)
+fun <T : TextView> T.drawable(start: Drawable? = null, top: Drawable? = null, end: Drawable? = null, bottom: Drawable? = null, padding: Int = 0): T {
+    start?.let {
+        start.setBounds(0, 0, start.intrinsicWidth, start.intrinsicHeight)
+    }
+    top?.let {
+        top.setBounds(0, 0, top.intrinsicWidth, top.intrinsicHeight)
+    }
+    end?.let {
+        end.setBounds(0, 0, end.intrinsicWidth, end.intrinsicHeight)
+    }
+    bottom?.let {
+        bottom.setBounds(0, 0, bottom.intrinsicWidth, bottom.intrinsicHeight)
+    }
     setCompoundDrawables(start, top, end, bottom)
     compoundDrawablePadding = padding
     return this
