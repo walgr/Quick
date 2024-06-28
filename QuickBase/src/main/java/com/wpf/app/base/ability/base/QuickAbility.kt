@@ -1,5 +1,7 @@
 package com.wpf.app.base.ability.base
 
+import java.io.Serializable
+
 
 fun <T : QuickAbility> MutableList<T>.with(others: MutableList<T>): MutableList<T> {
     others.filter { it is Unique }.map { it.getPrimeKey() }.forEach { otherPrimeKey ->
@@ -34,6 +36,6 @@ fun <T : QuickAbility> T.with(other: T): MutableList<T> {
     return abilityList
 }
 
-interface QuickAbility {
+interface QuickAbility: Serializable {
     fun getPrimeKey(): String
 }

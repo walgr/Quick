@@ -2,4 +2,13 @@
 <resources>
     <item name="quickList" type="id"/>
     <item name="quickViewPager" type="id"/>
+    <item name="quickViewPager1" type="id"/>
+    <item name="quickViewPager2" type="id"/>
+    <item name="quickViewPager3" type="id"/>
+    <item name="quickViewPager4" type="id"/>
+    <item name="quickViewPager5" type="id"/>
+    <item name="quickViewPager6" type="id"/>
+    <item name="quickViewPager7" type="id"/>
+    <item name="quickViewPager8" type="id"/>
+    <item name="quickViewPager9" type="id"/>
 </resources>

@@ -17,11 +17,8 @@ open class AspectRatioView @JvmOverloads constructor(
     mContext, attrs, defStyleAttr
 ) {
 
-    private var attrsData: AspectRatioViewHelper
-
-    init {
-        attrsData = AutoGetAttributeHelper.init(mContext, attrs, R.styleable.AspectRatioView)
-    }
+    @Suppress("MemberVisibilityCanBePrivate")
+    var attrsData: AspectRatioViewAttrs = AutoGetAttributeHelper.init(mContext, attrs, R.styleable.AspectRatioView)
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         val specWidth = MeasureSpec.getSize(widthMeasureSpec)
@@ -47,9 +44,7 @@ open class AspectRatioView @JvmOverloads constructor(
     }
 }
 
-class AspectRatioViewHelper {
-
-    var ratio: Float = 1f
-
+class AspectRatioViewAttrs(
+    var ratio: Float = 1f,
     var isWidthMain: Boolean = true
-}
+)

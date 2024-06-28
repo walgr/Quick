@@ -111,6 +111,7 @@ open class QuickFragment(
 //        abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
 //            it.onSaveInstanceState(outState)
 //        }
+//        outState.putSerializable("abilityList", abilityList.toTypedArray())
 //    }
 
     @CallSuper

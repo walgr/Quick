@@ -13,6 +13,27 @@ import com.wpf.app.quickutil.helper.parent
 import com.wpf.app.quickutil.helper.removeParent
 import com.wpf.app.quickutil.widget.wishLayoutParams
 
+@Suppress("unused")
+fun <Follow : View, Bottom : View> ContextScope.coordinator(
+    layoutParams: ViewGroup.LayoutParams = matchMarginLayoutParams(),
+    followSlideLayout: AppBarLayout.() -> Follow,
+    scrollFlags: Int,
+    bottomScrollLayout: CoordinatorLayout.() -> Bottom,
+    behavior: Behavior<*> = AppBarLayout.ScrollingViewBehavior(),
+    builder: (CoordinatorLayout.(followSlideLayout: Follow?, bottomScrollLayout: Bottom) -> Unit)? = null,
+): CoordinatorLayout {
+    return coordinator<Follow, View, Bottom>(
+        layoutParams = layoutParams,
+        followSlideLayout = followSlideLayout,
+        scrollFlags = scrollFlags,
+        bottomScrollLayout = bottomScrollLayout,
+        behavior = behavior,
+        builder = {followLayout, _, bottomLayout ->
+            builder?.invoke(this, followLayout, bottomLayout)
+        },
+    )
+}
+
 fun <Follow : View, Top : View, Bottom : View> ContextScope.coordinator(
     layoutParams: ViewGroup.LayoutParams = matchMarginLayoutParams(),
     followSlideLayout: (AppBarLayout.() -> Follow)? = null,
@@ -31,7 +52,12 @@ fun <Follow : View, Top : View, Bottom : View> ContextScope.coordinator(
         followSlideLayoutView = it
         if (it.parent() != appBarLayout) {
             it.removeParent()
-            appBarLayout.addView(it, it.layoutParams ?: layoutParams<AppBarLayout.LayoutParams>(matchWrapMarginLayoutParams()))
+            appBarLayout.addView(
+                it,
+                it.layoutParams ?: layoutParams<AppBarLayout.LayoutParams>(
+                    matchWrapMarginLayoutParams()
+                )
+            )
         }
         it.wishLayoutParams<AppBarLayout.LayoutParams>().scrollFlags = scrollFlags!!
     }
@@ -40,7 +66,12 @@ fun <Follow : View, Top : View, Bottom : View> ContextScope.coordinator(
         topSuspendLayoutView = it
         if (it.parent() != appBarLayout) {
             it.removeParent()
-            appBarLayout.addView(it, it.layoutParams ?: layoutParams<AppBarLayout.LayoutParams>(matchWrapMarginLayoutParams()))
+            appBarLayout.addView(
+                it,
+                it.layoutParams ?: layoutParams<AppBarLayout.LayoutParams>(
+                    matchWrapMarginLayoutParams()
+                )
+            )
         }
         it.wishLayoutParams<AppBarLayout.LayoutParams>().scrollFlags = 0
     }
@@ -49,7 +80,12 @@ fun <Follow : View, Top : View, Bottom : View> ContextScope.coordinator(
         bottomScrollLayoutView = it
         if (it.parent() != parentLayout) {
             it.removeParent()
-            parentLayout.addView(it, it.layoutParams ?: layoutParams<CoordinatorLayout.LayoutParams>(matchWrapMarginLayoutParams()))
+            parentLayout.addView(
+                it,
+                it.layoutParams ?: layoutParams<CoordinatorLayout.LayoutParams>(
+                    matchMarginLayoutParams()
+                )
+            )
         }
         it.wishLayoutParams<CoordinatorLayout.LayoutParams>().behavior = behavior
     }

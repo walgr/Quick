@@ -23,13 +23,14 @@ import kotlin.math.abs
 
 fun ContextScope.viewPager2(
     layoutParams: ViewGroup.LayoutParams = matchMarginLayoutParams(),
+    id: Int = R.id.quickViewPager,
     quick: Quick,
     fragments: List<Fragment>,
     limit: Int = 0,
     builder: (ViewPager2.() -> Unit)? = null,
 ): ViewPager2 {
     val viewPager2 = ViewPager2(context)
-    viewPager2.id = R.id.quickViewPager
+    viewPager2.id = id
     viewPager2.adapter =
         Fragments2StateAdapter(quick.getFragmentManager(), quick.getLifecycle()) {
             fragments[it]
@@ -47,6 +48,7 @@ fun ContextScope.viewPager2(
 @Suppress("unused")
 inline fun <reified F : Fragment> ContextScope.viewPager2(
     layoutParams: ViewGroup.LayoutParams = matchMarginLayoutParams(),
+    id: Int = R.id.quickViewPager,
     quick: Quick,
     defaultSize: Int = 1,
     limit: Int = 0,
@@ -55,12 +57,13 @@ inline fun <reified F : Fragment> ContextScope.viewPager2(
     noinline builder: (ViewPager2.() -> Unit)? = null,
 ): ViewPager2 {
     val viewPager2 = ViewPager2(context)
-    viewPager2.id = R.id.quickViewPager
+    viewPager2.id = id
     val defaultPos = if (isLoop) Int.MAX_VALUE / 2 else 0
+    var defaultSizeNew = defaultSize
     viewPager2.adapter =
-        Fragments2StateAdapter(quick.getFragmentManager(), quick.getLifecycle()) {
+        object : Fragments2StateAdapter(quick.getFragmentManager(), quick.getLifecycle(), {
             val realPos =
-                if (isLoop) (abs(defaultSize + (it - defaultPos) % defaultSize) % defaultSize) else it
+                if (isLoop) (abs(defaultSizeNew + (it - defaultSizeNew) % defaultSizeNew) % defaultSizeNew) else it
             val fragment = getFragment(
                 quick,
                 F::class.java.getDeclaredConstructor().newInstance().forceTo(),
@@ -70,8 +73,13 @@ inline fun <reified F : Fragment> ContextScope.viewPager2(
                 fragment.arguments = fragmentDataInit.invoke(it)
             }
             fragment
+        }) {
+            override fun setPageSize(size: Int) {
+                defaultSizeNew = size
+                super.setPageSize(if (isLoop) Int.MAX_VALUE else size)
+            }
         }.apply {
-            setPageSize(if (isLoop) Int.MAX_VALUE else defaultSize)
+            setPageSize(defaultSizeNew)
             if (isLoop) {
                 registerItemIdChange {
                     System.currentTimeMillis() % Int.MAX_VALUE
@@ -91,6 +99,7 @@ inline fun <reified F : Fragment> ContextScope.viewPager2(
 
 fun ContextScope.viewPager2WithView(
     layoutParams: ViewGroup.LayoutParams = matchMarginLayoutParams(),
+    id: Int = R.id.quickViewPager,
     quick: Quick,
     views: List<View>,
     limit: Int = 0,
@@ -102,12 +111,13 @@ fun ContextScope.viewPager2WithView(
         contentView.addView(it)
         contentView.toFragment()
     }
-    return viewPager2(layoutParams, quick, contentFragmentList, limit, builder)
+    return viewPager2(layoutParams, id, quick, contentFragmentList, limit, builder)
 }
 
 @Suppress("unused")
 fun ContextScope.viewPager2(
     layoutParams: ViewGroup.LayoutParams = matchMarginLayoutParams(),
+    id: Int = R.id.quickViewPager,
     quick: Quick,
     limit: Int = 0,
     builder: ViewGroup.() -> Unit,
@@ -118,5 +128,5 @@ fun ContextScope.viewPager2(
     childViews.forEach {
         it.removeParent()
     }
-    return viewPager2WithView(layoutParams, quick, childViews, limit)
+    return viewPager2WithView(layoutParams, id, quick, childViews, limit)
 }

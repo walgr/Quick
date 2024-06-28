@@ -10,7 +10,7 @@ import com.wpf.app.quickbind.viewpager.ViewPagerSize
  * Created by 王朋飞 on 2022/7/12.
  *
  */
-class FragmentsAdapter(
+open class FragmentsAdapter(
     fm: FragmentManager, private val getFragment: (position: Int) -> Fragment,
 ) : FragmentPagerAdapter(fm), ViewPagerSize {
 

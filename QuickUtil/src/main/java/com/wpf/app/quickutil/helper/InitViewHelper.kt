@@ -17,7 +17,7 @@ object InitViewHelper {
         return layoutViewCreate?.invoke(context) ?: layoutView ?: layoutId.toView(context, mParent, attachToRoot)
     }
 
-    inline fun <reified T: ViewGroup> newInstance(context: Context): T {
+    inline fun <reified T: View> newInstance(context: Context): T {
         return T::class.java.getConstructor(Context::class.java).newInstance(context)
     }
 }
