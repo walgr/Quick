@@ -22,6 +22,10 @@ import com.wpf.app.quickutil.other.forceTo
 import com.wpf.app.quickwidget.viewpager.QuickViewPager
 import kotlin.math.abs
 
+fun getRealPosInLoop(pos: Int, adapterSize: Int = 0, defaultPos: Int = Int.MAX_VALUE / 2): Int {
+    return abs(adapterSize + (pos - defaultPos) % adapterSize) % adapterSize
+}
+
 class FragmentGroup @JvmOverloads constructor(
     context: Context,
     private val viewConvert: ((view: View) -> Fragment)? = null,
@@ -75,7 +79,7 @@ inline fun <reified F : Fragment> ContextScope.viewPager(
     } else {
         viewPager.adapter = object : FragmentsAdapter(quick.getFragmentManager(), {
             val realPos =
-                if (isLoop) (abs(defaultSizeNew + (it - defaultPos) % defaultSizeNew) % defaultSizeNew) else it
+                if (isLoop) getRealPosInLoop(it, defaultSizeNew, defaultPos) else it
             val fragment = getFragment(
                 context,
                 F::class.java.getDeclaredConstructor().newInstance().forceTo(),
@@ -174,7 +178,7 @@ inline fun <reified T : View> ContextScope.viewPagerWithView(
     } else {
         viewPager.adapter = object : FragmentsAdapter(quick.getFragmentManager(), {
             val realPos =
-                if (isLoop) (abs(defaultSizeNew + (it - defaultPos) % defaultSizeNew) % defaultSizeNew) else it
+                if (isLoop) getRealPosInLoop(it, defaultSizeNew, defaultPos) else it
             val view = InitViewHelper.newInstance<T>(context)
             viewInit?.invoke(view, realPos)
             val fragment = view.toFragment()
