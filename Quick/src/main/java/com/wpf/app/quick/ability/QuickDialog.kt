@@ -3,6 +3,7 @@ package com.wpf.app.quick.ability
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import android.widget.FrameLayout
 import androidx.annotation.CallSuper
 import androidx.annotation.StyleRes
 import androidx.lifecycle.ViewModel
@@ -22,14 +23,20 @@ open class QuickDialog(
     @StyleRes themeId: Int = 0,
     val abilityList: MutableList<QuickAbility> = mutableListOf(),
 ) : QuickBaseDialog(context = context, themeId = themeId, layoutViewCreate = {
-    val inflateAbility = abilityList.first { ability -> ability is QuickInflateViewAbility }
-        .forceTo<QuickInflateViewAbility>()
-    InitViewHelper.init(
-        this,
-        inflateAbility.layoutId(),
-        inflateAbility.layoutView(),
-        inflateAbility.layoutViewCreate()
-    )
+    val inflateAbility =
+        abilityList.firstOrNull { ability -> ability is QuickInflateViewAbility }
+            ?.forceTo<QuickInflateViewAbility>()
+    if (inflateAbility != null) {
+        InitViewHelper.init(
+            this,
+            inflateAbility.layoutId(),
+            inflateAbility.layoutView(),
+            inflateAbility.layoutViewCreate()
+        )
+    } else {
+        //恢复时能力丢失返回空页面
+        FrameLayout(this)
+    }
 }), BindViewModel<ViewModel> {
     val extraParameter: LinkedHashMap<String, Any> = linkedMapOf()
 

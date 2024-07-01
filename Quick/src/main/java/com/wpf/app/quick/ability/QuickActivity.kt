@@ -3,6 +3,7 @@ package com.wpf.app.quick.ability
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.FrameLayout
 import androidx.annotation.CallSuper
 import androidx.lifecycle.ViewModel
 import com.wpf.app.base.ability.base.QuickAbility
@@ -20,14 +21,20 @@ open class QuickActivity(
     private val abilityList: MutableList<QuickAbility> = mutableListOf(),
 ) : QuickBaseActivity(
     layoutViewCreate = {
-        val inflateAbility = abilityList.first { ability -> ability is QuickInflateViewAbility }
-            .forceTo<QuickInflateViewAbility>()
-        InitViewHelper.init(
-            this,
-            inflateAbility.layoutId(),
-            inflateAbility.layoutView(),
-            inflateAbility.layoutViewCreate()
-        )
+        val inflateAbility =
+            abilityList.firstOrNull { ability -> ability is QuickInflateViewAbility }
+                ?.forceTo<QuickInflateViewAbility>()
+        if (inflateAbility != null) {
+            InitViewHelper.init(
+                this,
+                inflateAbility.layoutId(),
+                inflateAbility.layoutView(),
+                inflateAbility.layoutViewCreate()
+            )
+        } else {
+            //恢复时能力丢失返回空页面
+            FrameLayout(this)
+        }
     }
 ), BindViewModel<ViewModel> {
     @Suppress("unused")

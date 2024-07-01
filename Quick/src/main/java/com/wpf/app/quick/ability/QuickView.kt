@@ -19,6 +19,7 @@ import com.wpf.app.quickutil.other.forceTo
 import com.wpf.app.quickutil.widget.wishLayoutParams
 import kotlinx.coroutines.Job
 
+@Suppress("CanBeParameter")
 open class QuickView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
