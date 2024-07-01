@@ -6,7 +6,7 @@
 
     简化代码，争取做到最小代码实现功能。
 
-    PS：R2部分逻辑参照butterknife项目，侧滑复制SwipeMemulayout项目
+    PS：R2部分逻辑参照butterknife项目，侧滑参照SwipeMemulayout项目重构
 
     项目目前处于初期建设阶段，文档粗略，功能可参照app里的demo。
 
