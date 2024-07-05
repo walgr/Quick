@@ -3,11 +3,6 @@ package com.wpf.app.quick.demo.model
 import android.annotation.SuppressLint
 import android.widget.FrameLayout
 import androidx.recyclerview.widget.ItemTouchHelper
-import com.wpf.app.quickutil.ability.base.with
-import com.wpf.app.quickutil.ability.ex.contentView
-import com.wpf.app.quickutil.ability.helper.background
-import com.wpf.app.quickutil.ability.helper.rect
-import com.wpf.app.quickutil.ability.helper.viewGroupCreate
 import com.wpf.app.quick.annotations.bind.BindData2View
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.demo.databinding.DragItemBinding
@@ -19,11 +14,17 @@ import com.wpf.app.quickrecyclerview.ability.bindWSelf
 import com.wpf.app.quickrecyclerview.ability.click
 import com.wpf.app.quickrecyclerview.ability.swap
 import com.wpf.app.quickrecyclerview.data.QuickAbilityData
+import com.wpf.app.quickutil.ability.base.with
+import com.wpf.app.quickutil.ability.ex.contentView
+import com.wpf.app.quickutil.ability.helper.background
+import com.wpf.app.quickutil.ability.helper.rect
+import com.wpf.app.quickutil.ability.helper.viewGroupCreate
 import com.wpf.app.quickutil.helper.dp
+import com.wpf.app.quickutil.helper.generic.printLog
 import com.wpf.app.quickutil.helper.matchMarginLayoutParams
 import com.wpf.app.quickutil.helper.onceClick
+import com.wpf.app.quickutil.helper.toColor
 import com.wpf.app.quickutil.init.ToastHelper
-import com.wpf.app.quickutil.helper.generic.printLog
 import com.wpf.app.quickutil.run.runOnView
 
 /**
@@ -32,7 +33,7 @@ import com.wpf.app.quickutil.run.runOnView
 class BindDataTestModel(private val index: Int = 0) : QuickAbilityData(
     abilityList = contentView<FrameLayout> {
         viewGroupCreate(R.layout.holder_image, layoutParams = matchMarginLayoutParams()).background {
-            rect(radius = 8f.dp)
+            rect(radius = 8f.dp, color = R.color.white.toColor())
         }
     }.with(bindWSelf<HolderImageBinding, BindDataTestModel> {
         tvTitle.text.printLog("当前View-", "index:${it.index}")

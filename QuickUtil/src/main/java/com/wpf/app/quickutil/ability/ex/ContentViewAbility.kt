@@ -12,9 +12,9 @@ import com.wpf.app.quickutil.ability.scope.QuickViewScope
 import com.wpf.app.quickutil.ability.scope.ViewGroupScope
 import com.wpf.app.quickutil.bind.QuickBindWrap
 import com.wpf.app.quickutil.helper.InitViewHelper
-import com.wpf.app.quickutil.helper.matchMarginLayoutParams
 import com.wpf.app.quickutil.helper.generic.asTo
 import com.wpf.app.quickutil.helper.generic.forceTo
+import com.wpf.app.quickutil.helper.matchMarginLayoutParams
 import com.wpf.app.quickutil.helper.toView
 
 interface ContentViewScope<Self : Quick, T : ViewGroup> : ViewGroupScope<T>,
@@ -26,7 +26,6 @@ fun <Self : Quick, T : ViewGroup> createContentViewScope(context: Self, view: T)
         override val self: Self = context
     }
 
-@Suppress("DEPRECATION")
 fun contentView(
     @LayoutRes layoutId: Int = 0,
     layoutView: View? = null,
@@ -45,7 +44,6 @@ inline fun <reified T : ViewGroup> contentView(
     return contentViewWithSelf<Quick, T>(layoutParams = layoutParams, builder = builder)
 }
 
-@Suppress("DEPRECATION")
 inline fun <reified Self : Quick, reified T : ViewGroup> contentViewWithSelf(
     @LayoutRes layoutId: Int = 0,
     layoutView: View? = null,

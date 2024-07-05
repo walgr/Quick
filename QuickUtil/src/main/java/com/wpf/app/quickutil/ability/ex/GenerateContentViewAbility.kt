@@ -3,6 +3,7 @@ package com.wpf.app.quickutil.ability.ex
 import android.content.Context
 import android.view.View
 import androidx.annotation.LayoutRes
+import androidx.annotation.RestrictTo
 import com.wpf.app.quickutil.Quick
 import com.wpf.app.quickutil.ability.base.QuickAbility
 import com.wpf.app.quickutil.ability.base.QuickInflateViewAbility
@@ -12,7 +13,7 @@ import com.wpf.app.quickutil.ability.scope.QuickViewScope
 import com.wpf.app.quickutil.ability.scope.createQuickViewScope
 import com.wpf.app.quickutil.helper.generic.forceTo
 
-@Deprecated("框架使用,建议使用contentView")
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 fun generateContentViewCommon(
     @LayoutRes layoutId: Int = 0,
     layoutView: View? = null,
@@ -26,7 +27,7 @@ fun generateContentViewCommon(
     }, builder)
 }
 
-@Deprecated("框架使用,建议使用contentView")
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 fun generateContentView(
     @LayoutRes layoutId: Int = 0,
     layoutView: View? = null,
