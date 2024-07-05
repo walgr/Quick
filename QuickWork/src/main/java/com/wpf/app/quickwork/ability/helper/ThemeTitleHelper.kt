@@ -1,8 +1,8 @@
 package com.wpf.app.quickwork.ability.helper
 
 import android.view.ViewGroup.LayoutParams
-import com.wpf.app.base.ability.helper.addView
-import com.wpf.app.base.ability.scope.ContextScope
+import com.wpf.app.quickutil.ability.helper.addView
+import com.wpf.app.quickutil.ability.scope.ContextScope
 import com.wpf.app.quickutil.helper.matchWrapMarginLayoutParams
 import com.wpf.app.quickutil.helper.reset
 import com.wpf.app.quickwidget.group.QuickSpaceLinearLayout

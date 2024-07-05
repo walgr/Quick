@@ -2,8 +2,8 @@ package com.wpf.app.quick.activity.viewmodel
 
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModel
-import com.wpf.app.base.ViewLifecycle
-import com.wpf.app.base.Quick
+import com.wpf.app.quickutil.ViewLifecycle
+import com.wpf.app.quickutil.Quick
 import com.wpf.app.quicknetwork.base.RequestCoroutineScope
 import kotlinx.coroutines.Job
 

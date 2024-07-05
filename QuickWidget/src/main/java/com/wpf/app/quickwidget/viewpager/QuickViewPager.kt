@@ -9,7 +9,7 @@ import androidx.viewpager.widget.ViewPager
 import com.wpf.app.quickbind.R
 import com.wpf.app.quickbind.viewpager.ViewPagerSize
 import com.wpf.app.quickutil.helper.attribute.AutoGetAttributeHelper
-import com.wpf.app.quickutil.other.forceTo
+import com.wpf.app.quickutil.helper.generic.forceTo
 
 /**
  * Created by 王朋飞 on 2022/7/12.

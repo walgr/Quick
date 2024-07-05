@@ -21,14 +21,14 @@ import com.wpf.app.quickutil.init.QuickInit
  *
  */
 
-fun @receiver:DrawableRes Int.toDrawable(context: Context? = QuickInit.getContext()): Drawable {
+fun @receiver:DrawableRes Int.toDrawable(context: Context? = com.wpf.app.quickutil.init.QuickInit.getContext()): Drawable {
     if (context == null) {
         throw RuntimeException("context is null")
     }
     return ContextCompat.getDrawable(context, this)!!
 }
 
-fun @receiver:ColorRes Int.toColor(context: Context? = QuickInit.getContext()): Int {
+fun @receiver:ColorRes Int.toColor(context: Context? = com.wpf.app.quickutil.init.QuickInit.getContext()): Int {
     if (context == null) {
         throw RuntimeException("context is null")
     }
@@ -39,7 +39,7 @@ fun @receiver:ColorInt Int.alpha(alpha: Float): Int {
     return Color.argb((alpha * 256).toInt(), Color.red(this), Color.green(this), Color.blue(this))
 }
 
-fun @receiver:AnimRes Int.toAnim(context: Context? = QuickInit.getContext()): Animation {
+fun @receiver:AnimRes Int.toAnim(context: Context? = com.wpf.app.quickutil.init.QuickInit.getContext()): Animation {
     if (context == null) {
         throw RuntimeException("context is null")
     }

@@ -7,8 +7,8 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.LinearLayout
 import com.wpf.app.quick.ability.QuickActivity
-import com.wpf.app.base.ability.ex.contentViewWithSelf
-import com.wpf.app.base.ability.helper.viewGroupCreate
+import com.wpf.app.quickutil.ability.ex.contentViewWithSelf
+import com.wpf.app.quickutil.ability.helper.viewGroupCreate
 import com.wpf.app.quick.annotations.bind.BindView
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quickbind.annotations.AutoGet

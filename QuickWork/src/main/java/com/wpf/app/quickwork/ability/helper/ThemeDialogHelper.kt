@@ -4,8 +4,8 @@ import android.content.Context
 import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.annotation.StyleRes
-import com.wpf.app.base.ability.ex.contentView
-import com.wpf.app.base.ability.scope.ContextScope
+import com.wpf.app.quickutil.ability.ex.contentView
+import com.wpf.app.quickutil.ability.scope.ContextScope
 import com.wpf.app.quick.ability.QuickDialog
 import com.wpf.app.quickwork.widget.theme.QuickDialogThemeI
 import com.wpf.app.quickwork.widget.theme.QuickThemeDialog

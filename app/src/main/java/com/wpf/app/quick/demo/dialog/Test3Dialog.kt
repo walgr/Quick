@@ -3,7 +3,7 @@ package com.wpf.app.quick.demo.dialog
 import android.content.Context
 import android.view.Gravity
 import android.widget.FrameLayout
-import com.wpf.app.base.ability.ex.contentView
+import com.wpf.app.quickutil.ability.ex.contentView
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quickwork.ability.helper.text
 import com.wpf.app.quickwork.widget.theme.QuickThemeDialog

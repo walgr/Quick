@@ -6,16 +6,16 @@ import android.view.View
 import android.widget.FrameLayout
 import androidx.annotation.CallSuper
 import androidx.lifecycle.ViewModel
-import com.wpf.app.base.ability.base.QuickAbility
-import com.wpf.app.base.ability.base.QuickGenerateViewAbility
-import com.wpf.app.base.ability.base.QuickInflateViewAbility
-import com.wpf.app.base.ability.base.QuickInitViewAbility
-import com.wpf.app.base.ability.base.QuickLifecycleAbility
 import com.wpf.app.quick.activity.QuickBaseActivity
 import com.wpf.app.quickbind.interfaces.BindViewModel
+import com.wpf.app.quickutil.ability.base.QuickAbility
+import com.wpf.app.quickutil.ability.base.QuickGenerateViewAbility
+import com.wpf.app.quickutil.ability.base.QuickInflateViewAbility
+import com.wpf.app.quickutil.ability.base.QuickInitViewAbility
+import com.wpf.app.quickutil.ability.base.QuickLifecycleAbility
 import com.wpf.app.quickutil.helper.InitViewHelper
-import com.wpf.app.quickutil.other.asTo
-import com.wpf.app.quickutil.other.forceTo
+import com.wpf.app.quickutil.helper.generic.asTo
+import com.wpf.app.quickutil.helper.generic.forceTo
 
 open class QuickActivity(
     private val abilityList: MutableList<QuickAbility> = mutableListOf(),
@@ -128,12 +128,18 @@ open class QuickActivity(
         }
     }
 
-//    @CallSuper
-//    override fun onSaveInstanceState(outState: Bundle) {
-//        super.onSaveInstanceState(outState)
-//        abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
-//            it.onSaveInstanceState(outState)
-//        }
-//    }
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
+            it.onSaveInstanceState(this, outState)
+        }
+    }
+
+    override fun onCreateWithSavedInstanceState(savedInstanceState: Bundle?) {
+        super.onCreateWithSavedInstanceState(savedInstanceState)
+        abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
+            it.onRestoredInstanceState(this, savedInstanceState)
+        }
+    }
 }
 

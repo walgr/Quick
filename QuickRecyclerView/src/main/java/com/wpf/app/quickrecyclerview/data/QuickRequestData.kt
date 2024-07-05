@@ -1,8 +1,8 @@
 package com.wpf.app.quickrecyclerview.data
 
 import android.view.View
-import com.wpf.app.base.bind.Bind
-import com.wpf.app.base.bind.QuickBindWrap
+import com.wpf.app.quickutil.bind.Bind
+import com.wpf.app.quickutil.bind.QuickBindWrap
 import com.wpf.app.quickbind.utils.DataAutoSet2ViewUtils
 
 /**

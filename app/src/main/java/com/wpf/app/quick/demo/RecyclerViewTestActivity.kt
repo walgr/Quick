@@ -1,10 +1,10 @@
 package com.wpf.app.quick.demo
 
 import android.widget.LinearLayout
-import com.wpf.app.base.ability.base.with
+import com.wpf.app.quickutil.ability.base.with
 import com.wpf.app.quick.ability.QuickActivity
-import com.wpf.app.base.ability.ex.contentView
-import com.wpf.app.base.ability.helper.viewGroupCreate
+import com.wpf.app.quickutil.ability.ex.contentView
+import com.wpf.app.quickutil.ability.helper.viewGroupCreate
 import com.wpf.app.quick.ability.ex.modelBinding
 import com.wpf.app.quick.demo.databinding.ActivityRecyclerviewTestBinding
 import com.wpf.app.quick.demo.model.BindDataTestModel

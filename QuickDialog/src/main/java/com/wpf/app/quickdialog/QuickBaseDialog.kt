@@ -9,14 +9,13 @@ import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.annotation.StyleRes
-import com.wpf.app.base.NO_SET
-import com.wpf.app.base.Quick
-import com.wpf.app.base.bind.QuickBindWrap
 import com.wpf.app.quickdialog.helper.DialogSizeHelper
 import com.wpf.app.quickdialog.listeners.DialogLifecycle
 import com.wpf.app.quickdialog.listeners.DialogSize
 import com.wpf.app.quickdialog.minAndMaxLimit.SizeLimitViewGroup
 import com.wpf.app.quicknetwork.base.RequestCoroutineScope
+import com.wpf.app.quickutil.Quick
+import com.wpf.app.quickutil.bind.QuickBindWrap
 import com.wpf.app.quickutil.helper.InitViewHelper
 import kotlinx.coroutines.Job
 
@@ -36,6 +35,7 @@ open class QuickBaseDialog(
     private var mView: View? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        onCreateWithSavedInstanceState(savedInstanceState)
         dealSize()
         mView = generateContentView(InitViewHelper.init(getViewContext(), layoutId, layoutView, layoutViewCreate))
         if (initDialogAdaptiveHeight()) {
@@ -45,7 +45,7 @@ open class QuickBaseDialog(
         }
         setContentView(mView!!)
         if (window != null) {
-            if (initDialogAnimStyle() != DialogSize.NO_SET) {
+            if (initDialogAnimStyle() != 0) {
                 window!!.setWindowAnimations(initDialogAnimStyle())
             }
             window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -53,6 +53,10 @@ open class QuickBaseDialog(
         }
         QuickBindWrap.bind(this)
         initView(mView!!)
+    }
+
+    open fun onCreateWithSavedInstanceState(savedInstanceState: Bundle?) {
+
     }
 
     public override fun onStart() {
@@ -81,8 +85,8 @@ open class QuickBaseDialog(
 
     }
 
-    open var mNewWidth = DialogSize.NO_SET
-    open var mNewHeight = DialogSize.NO_SET
+    open var mNewWidth = 0
+    open var mNewHeight = 0
 
     override fun getNewHeight(): Int {
         return mNewHeight
@@ -95,17 +99,17 @@ open class QuickBaseDialog(
     /**
      * 重新设置大小
      */
-    fun newSize(newWidth: Int = NO_SET, newHeight: Int = NO_SET) {
-        if (mNewWidth != DialogSize.NO_SET) {
+    fun newSize(newWidth: Int = 0, newHeight: Int = 0) {
+        if (mNewWidth != 0) {
             this.mNewWidth = newWidth
         }
-        if (mNewHeight != DialogSize.NO_SET) {
+        if (mNewHeight != 0) {
             this.mNewHeight = newHeight
         }
         DialogSizeHelper.dealSize(
             this,
-            if (mNewWidth == DialogSize.NO_SET) initDialogWidth() else mNewWidth,
-            if (mNewHeight == DialogSize.NO_SET) initDialogHeight() else mNewHeight
+            if (mNewWidth == 0) initDialogWidth() else mNewWidth,
+            if (mNewHeight == 0) initDialogHeight() else mNewHeight
         )
     }
 

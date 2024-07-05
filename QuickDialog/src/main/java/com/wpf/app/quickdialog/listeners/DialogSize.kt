@@ -12,7 +12,7 @@ import androidx.annotation.StyleRes
 interface DialogSize : QuickContext {
 
     fun initDialogHeightPercent(): Float {
-        return NO_SET.toFloat()
+        return 0f
     }
 
     //指定初始高度 不能低于最低 不能超过最高
@@ -36,7 +36,7 @@ interface DialogSize : QuickContext {
     }
 
     fun initDialogWidthPercent(): Float {
-        return NO_SET.toFloat()
+        return 0f
     }
 
     //指定初始宽度  不能低于最低 不能超过最高
@@ -74,7 +74,7 @@ interface DialogSize : QuickContext {
 
     @StyleRes
     fun initDialogAnimStyle(): Int {
-        return NO_SET
+        return 0
     }
 
     fun getView(): View?
@@ -82,8 +82,4 @@ interface DialogSize : QuickContext {
 
     fun getNewWidth(): Int
     fun getNewHeight(): Int
-
-    companion object {
-        const val NO_SET = 0
-    }
 }

@@ -1,6 +1,6 @@
 package com.wpf.app.quickwidget.emptyview
 
-import com.wpf.app.quickutil.other.forceTo
+import com.wpf.app.quickutil.helper.generic.forceTo
 
 interface EmptyViewStateManager {
     val registerStateMap: MutableMap<Int, DealStateFun<EmptyViewState>>

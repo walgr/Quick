@@ -5,7 +5,7 @@ object KV {
     private val data = mutableMapOf<Any, Any?>()
 
     fun put(key: Any, data: Any?) {
-        this.data[key] = data
+        KV.data[key] = data
     }
 
     fun putIfNull(key: Any, data: () -> Any?) {
@@ -14,7 +14,7 @@ object KV {
         }
     }
 
-    fun <T: Any> get(key: Any): T? = this.data[key] as? T
+    fun <T: Any> get(key: Any): T? = data[key] as? T
 
     fun <T: Any> get(key: Any, default: T): T = get(key) ?: default
 

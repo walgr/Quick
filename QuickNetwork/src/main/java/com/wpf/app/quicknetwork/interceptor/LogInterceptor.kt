@@ -3,7 +3,7 @@ package com.wpf.app.quicknetwork.interceptor
 import android.content.Context
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
-import com.wpf.app.quickutil.log.LogUtil.e
+import com.wpf.app.quickutil.utils.LogUtil.e
 import okhttp3.*
 import okhttp3.ResponseBody.Companion.toResponseBody
 import java.io.IOException

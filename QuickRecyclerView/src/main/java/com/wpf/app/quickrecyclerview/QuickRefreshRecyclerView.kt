@@ -8,8 +8,8 @@ import com.wpf.app.quickrecyclerview.data.QuickItemData
 import com.wpf.app.quickrecyclerview.data.RequestData
 import com.wpf.app.quickrecyclerview.listeners.RefreshResult
 import com.wpf.app.quickrecyclerview.listeners.Request2ListWithView
-import com.wpf.app.quickutil.other.asTo
-import com.wpf.app.quickutil.other.nullDefault
+import com.wpf.app.quickutil.helper.generic.asTo
+import com.wpf.app.quickutil.helper.generic.nullDefault
 
 /**
  * Created by 王朋飞 on 2022/7/13.

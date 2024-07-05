@@ -14,11 +14,11 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
-import com.wpf.app.base.Quick
-import com.wpf.app.base.bind.Bind
-import com.wpf.app.base.bind.QuickBindWrap
 import com.wpf.app.quickbind.interfaces.BindBaseFragment
 import com.wpf.app.quicknetwork.base.RequestCoroutineScope
+import com.wpf.app.quickutil.Quick
+import com.wpf.app.quickutil.bind.Bind
+import com.wpf.app.quickutil.bind.QuickBindWrap
 import com.wpf.app.quickutil.helper.InitViewHelper
 import kotlinx.coroutines.Job
 
@@ -27,9 +27,10 @@ import kotlinx.coroutines.Job
  *
  */
 open class QuickBaseFragment @JvmOverloads constructor(
-    @LayoutRes open val layoutId: Int = 0,
-    open val layoutView: View? = null,
-    open val layoutViewCreate: (Context.() -> View)? = null,
+    @LayoutRes val layoutId: Int = 0,
+    val layoutView: View? = null,
+    val layoutViewCreate: (Context.() -> View)? = null,
+    val layoutViewCreateWithQuick: (Context.(self: Quick?) -> View)? = null,
 ) : Fragment(), BindBaseFragment, RequestCoroutineScope, Quick, Bind {
 
     override var jobManager: MutableList<Job> = mutableListOf()
@@ -52,7 +53,8 @@ open class QuickBaseFragment @JvmOverloads constructor(
 
     private fun registerForActivityResult() {
         launcher = registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()) { result ->
+            ActivityResultContracts.StartActivityForResult()
+        ) { result ->
             resultCallback?.onActivityResult(result)
         }
     }
@@ -62,10 +64,24 @@ open class QuickBaseFragment @JvmOverloads constructor(
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
+        onCreateWithSavedInstanceState(savedInstanceState)
         if (mView == null) {
-            mView = generateContentView(InitViewHelper.init(inflater.context, layoutId, layoutView, layoutViewCreate))
+            mView = generateContentView(
+                InitViewHelper.init(
+                    inflater.context,
+                    layoutId,
+                    layoutView,
+                    layoutViewCreate,
+                    self = this,
+                    layoutViewCreateWithQuick = layoutViewCreateWithQuick
+                )
+            )
         }
         return mView
+    }
+
+    open fun onCreateWithSavedInstanceState(savedInstanceState: Bundle?) {
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

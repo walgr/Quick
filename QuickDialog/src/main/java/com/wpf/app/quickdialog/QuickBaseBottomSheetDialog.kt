@@ -12,9 +12,6 @@ import androidx.annotation.LayoutRes
 import androidx.annotation.StyleRes
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.wpf.app.base.NO_SET
-import com.wpf.app.base.Quick
-import com.wpf.app.base.bind.QuickBindWrap
 import com.wpf.app.quickdialog.helper.DialogSheetHelper
 import com.wpf.app.quickdialog.helper.DialogSizeHelper
 import com.wpf.app.quickdialog.listeners.DialogLifecycle
@@ -22,6 +19,8 @@ import com.wpf.app.quickdialog.listeners.DialogSize
 import com.wpf.app.quickdialog.listeners.SheetInit
 import com.wpf.app.quickdialog.minAndMaxLimit.SizeLimitViewGroup
 import com.wpf.app.quicknetwork.base.RequestCoroutineScope
+import com.wpf.app.quickutil.Quick
+import com.wpf.app.quickutil.bind.QuickBindWrap
 import com.wpf.app.quickutil.helper.InitViewHelper
 import kotlinx.coroutines.Job
 
@@ -55,6 +54,7 @@ open class QuickBaseBottomSheetDialog(
     @CallSuper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        onCreateWithSavedInstanceState(savedInstanceState)
         dealSize()
         mView = generateContentView(
             InitViewHelper.init(
@@ -72,7 +72,7 @@ open class QuickBaseBottomSheetDialog(
         setContentView(mView!!)
         val window = window
         if (window != null) {
-            if (initDialogAnimStyle() != DialogSize.NO_SET) {
+            if (initDialogAnimStyle() != 0) {
                 window.setWindowAnimations(initDialogAnimStyle())
             }
             window.decorView.setPadding(0, 0, 0, 0)
@@ -80,6 +80,10 @@ open class QuickBaseBottomSheetDialog(
         }
         QuickBindWrap.bind(this)
         initView(mView!!)
+    }
+
+    open fun onCreateWithSavedInstanceState(savedInstanceState: Bundle?) {
+
     }
 
     open fun generateContentView(view: View): View {
@@ -101,9 +105,9 @@ open class QuickBaseBottomSheetDialog(
     }
 
     @Suppress("MemberVisibilityCanBePrivate")
-    protected var mNewWidth = DialogSize.NO_SET
+    protected var mNewWidth = 0
     @Suppress("MemberVisibilityCanBePrivate")
-    protected var mNewHeight = DialogSize.NO_SET
+    protected var mNewHeight = 0
 
     override fun getNewHeight(): Int {
         return mNewHeight
@@ -116,17 +120,17 @@ open class QuickBaseBottomSheetDialog(
     /**
      * 重新设置大小
      */
-    fun newSize(newWidth: Int = NO_SET, newHeight: Int = NO_SET) {
-        if (mNewWidth != DialogSize.NO_SET) {
+    fun newSize(newWidth: Int = 0, newHeight: Int = 0) {
+        if (mNewWidth != 0) {
             this.mNewWidth = newWidth
         }
-        if (mNewHeight != DialogSize.NO_SET) {
+        if (mNewHeight != 0) {
             this.mNewHeight = newHeight
         }
         DialogSizeHelper.dealSize(
             this,
-            if (mNewWidth == DialogSize.NO_SET) initDialogWidth() else mNewWidth,
-            if (mNewHeight == DialogSize.NO_SET) initDialogHeight() else mNewHeight
+            if (mNewWidth == 0) initDialogWidth() else mNewWidth,
+            if (mNewHeight == 0) initDialogHeight() else mNewHeight
         )
     }
 

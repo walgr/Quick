@@ -8,17 +8,17 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
-import com.wpf.app.base.Quick
-import com.wpf.app.base.ability.base.QuickAbility
-import com.wpf.app.base.ability.base.QuickInitViewAbility
-import com.wpf.app.base.bind.QuickBindWrap
+import com.wpf.app.quickutil.Quick
+import com.wpf.app.quickutil.ability.base.QuickAbility
+import com.wpf.app.quickutil.ability.base.QuickInitViewAbility
+import com.wpf.app.quickutil.bind.QuickBindWrap
 import com.wpf.app.quick.ability.ex.base.QuickVMAbility
 import com.wpf.app.quick.activity.viewmodel.QuickVBModel
 import com.wpf.app.quick.helper.getActivity
 import com.wpf.app.quickrecyclerview.constant.BRConstant
 import com.wpf.app.quickrecyclerview.utils.findBinding
-import com.wpf.app.quickutil.other.asTo
-import com.wpf.app.quickutil.other.forceTo
+import com.wpf.app.quickutil.helper.generic.asTo
+import com.wpf.app.quickutil.helper.generic.forceTo
 
 inline fun <reified Self : Quick, reified VM : QuickVBModel<out Self, VB>, reified VB : ViewDataBinding> modelBindingWithSelf(
     noinline vmBuilder: (VM.(self: Self) -> Unit)? = null,

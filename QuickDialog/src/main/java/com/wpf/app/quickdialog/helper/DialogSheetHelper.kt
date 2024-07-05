@@ -6,7 +6,6 @@ import android.view.View
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.wpf.app.quickdialog.QuickBaseBottomSheetDialog
 import com.wpf.app.quickdialog.QuickBaseBottomSheetDialogFragment
-import com.wpf.app.quickdialog.listeners.DialogSize
 import com.wpf.app.quickutil.helper.match
 
 /**
@@ -21,10 +20,10 @@ object DialogSheetHelper {
         bottomSheet.layoutParams?.height = match
         bottomSheet.background = ColorDrawable(Color.TRANSPARENT)
         val behavior: BottomSheetBehavior<View> = BottomSheetBehavior.from(bottomSheet)
-        if (dialog.initPeekHeight() != DialogSize.NO_SET) {
+        if (dialog.initPeekHeight() != 0) {
             behavior.peekHeight = dialog.initPeekHeight()
         }
-        if (dialog.initSheetState() != DialogSize.NO_SET) {
+        if (dialog.initSheetState() != 0) {
             behavior.state = dialog.initSheetState()
         }
         behavior.isHideable = dialog.hideAble()
@@ -39,10 +38,10 @@ object DialogSheetHelper {
         bottomSheet.layoutParams?.height = match
         bottomSheet.background = ColorDrawable(Color.TRANSPARENT)
         val behavior: BottomSheetBehavior<View> = BottomSheetBehavior.from(bottomSheet)
-        if (dialog.initPeekHeight() != DialogSize.NO_SET) {
+        if (dialog.initPeekHeight() != 0) {
             behavior.peekHeight = dialog.initPeekHeight()
         }
-        if (dialog.initSheetState() != DialogSize.NO_SET) {
+        if (dialog.initSheetState() != 0) {
             behavior.state = dialog.initSheetState()
         }
         behavior.isHideable = dialog.hideAble()

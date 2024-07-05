@@ -1,7 +1,7 @@
 package com.wpf.app.quickrecyclerview.interfaces
 
 import androidx.annotation.CallSuper
-import com.wpf.app.base.callback.Callback
+import com.wpf.app.quickutil.callback.Callback
 import com.wpf.app.quickrecyclerview.data.QuickRequestData
 
 
@@ -11,11 +11,11 @@ interface Request2View<Data : QuickRequestData> : Request2ViewWithView<Data, Any
      * 接口请求
      */
     @CallSuper
-    fun requestAndCallback(callback: com.wpf.app.base.callback.Callback<Data>) {
+    fun requestAndCallback(callback: Callback<Data>) {
         this.callback = callback
     }
 
-    override fun requestAndCallback(view: Any, callback: com.wpf.app.base.callback.Callback<Data>) {
+    override fun requestAndCallback(view: Any, callback: Callback<Data>) {
         super.requestAndCallback(view, callback)
         requestAndCallback(callback)
     }

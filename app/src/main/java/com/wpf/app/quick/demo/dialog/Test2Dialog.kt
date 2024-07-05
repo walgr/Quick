@@ -3,11 +3,11 @@ package com.wpf.app.quick.demo.dialog
 import android.content.Context
 import android.view.Gravity
 import android.widget.LinearLayout
-import com.wpf.app.base.ability.ex.contentView
-import com.wpf.app.base.ability.helper.background
-import com.wpf.app.base.ability.helper.gravityInParent
-import com.wpf.app.base.ability.helper.rect
-import com.wpf.app.base.ability.helper.viewGroupCreate
+import com.wpf.app.quickutil.ability.ex.contentView
+import com.wpf.app.quickutil.ability.helper.background
+import com.wpf.app.quickutil.ability.helper.gravityInParent
+import com.wpf.app.quickutil.ability.helper.rect
+import com.wpf.app.quickutil.ability.helper.viewGroupCreate
 import com.wpf.app.quickutil.helper.dp
 import com.wpf.app.quickutil.helper.matchMarginLayoutParams
 import com.wpf.app.quickwork.ability.helper.text

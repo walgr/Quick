@@ -45,14 +45,12 @@ dependencies {
     implementation deps.androidx.recyclerview
 
     if (IS_REMOTE.toBoolean()) {
-        api deps.quickbind.base
         api deps.quickbind.util
 //        api deps.quickbind.network
         api deps.quickbind.recyclerview
         api deps.quickbind.dialog
         api deps.quickbind.widget
     } else {
-        api project(":QuickBase")
         api project(":QuickUtil")
 //        api project(":QuickNetwork")
         api project(":QuickRecyclerView")

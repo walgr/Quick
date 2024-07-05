@@ -4,7 +4,7 @@ import com.google.gson.Gson
 import com.wpf.app.quicknetwork.base.BaseRequest
 import com.wpf.app.quicknetwork.base.BaseResponseI
 import com.wpf.app.quicknetwork.base.JobRequest
-import com.wpf.app.quickutil.other.asTo
+import com.wpf.app.quickutil.helper.generic.asTo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

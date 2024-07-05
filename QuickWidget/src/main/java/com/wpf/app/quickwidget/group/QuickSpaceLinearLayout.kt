@@ -6,7 +6,7 @@ import android.view.View
 import android.widget.LinearLayout
 import androidx.core.view.get
 import androidx.core.view.updateLayoutParams
-import com.wpf.app.quickutil.helper.anim
+import com.wpf.app.quickutil.helper.anim.anim
 import com.wpf.app.quickutil.helper.attribute.AutoGetAttributeHelper
 import com.wpf.app.quickwidget.R
 

@@ -2,7 +2,7 @@ package com.wpf.app.quickutil.helper
 
 import android.os.Handler
 import android.os.Looper
-import com.wpf.app.quickutil.other.asTo
+import com.wpf.app.quickutil.helper.generic.asTo
 
 typealias DoLastRun<T> = MutableSet<T>.() -> Unit
 class DoLast<T> {

@@ -4,7 +4,7 @@ import android.content.Context
 import android.text.TextUtils
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
-import com.wpf.app.base.bind.QuickBindWrap
+import com.wpf.app.quickutil.bind.QuickBindWrap
 import com.wpf.app.quickbind.annotations.LoadSp
 import java.lang.reflect.Field
 

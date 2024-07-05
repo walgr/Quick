@@ -4,12 +4,13 @@ import android.app.Activity
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
-import com.wpf.app.base.Quick
-import com.wpf.app.base.ability.base.QuickAbility
+import com.wpf.app.quickutil.Quick
+import com.wpf.app.quickutil.ability.base.QuickAbility
 import com.wpf.app.quick.ability.ex.base.QuickVMAbility
 import com.wpf.app.quick.activity.viewmodel.QuickViewModel
-import com.wpf.app.quickutil.other.asTo
-import com.wpf.app.quickutil.other.forceTo
+import com.wpf.app.quickutil.helper.generic.asTo
+import com.wpf.app.quickutil.helper.generic.forceTo
+import com.wpf.app.quickutil.bind.QuickBindWrap
 
 inline fun <reified VM : QuickViewModel<out Quick>> viewModel(
     noinline vmBuilder: (VM.() -> Unit)? = null
@@ -25,7 +26,7 @@ inline fun <reified VM : QuickViewModel<out Quick>> viewModel(
             owner.forceTo<ViewModelStoreOwner>(), ViewModelProvider.AndroidViewModelFactory(activity.application)
         )[viewModelCls]
         vmBuilder?.invoke(viewModel!!)
-        com.wpf.app.base.bind.QuickBindWrap.bind(activity, viewModel)
+        QuickBindWrap.bind(activity, viewModel)
         viewModel.asTo<QuickViewModel<Quick>>()?.onViewCreated(activity.forceTo())
     }
 })

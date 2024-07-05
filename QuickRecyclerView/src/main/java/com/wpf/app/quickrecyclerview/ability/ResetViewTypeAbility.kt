@@ -1,6 +1,6 @@
 package com.wpf.app.quickrecyclerview.ability
 
-import com.wpf.app.base.ability.base.QuickAbility
+import com.wpf.app.quickutil.ability.base.QuickAbility
 import com.wpf.app.quickrecyclerview.ability.base.QuickViewTypeAbility
 
 fun resetViewType(

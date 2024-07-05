@@ -31,11 +31,9 @@ dependencies {
     implementation deps.androidx.activityktx
 
     if (IS_REMOTE.toBoolean()) {
-        api deps.quickbind.base
         api deps.quickbind.util
         api deps.quickbind.bind
     } else {
-        api project(":QuickBase")
         api project(":QuickUtil")
         api project(":QuickBind")
     }

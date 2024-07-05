@@ -1,7 +1,7 @@
 package com.wpf.app.quickwidget.emptyview
 
 import com.wpf.app.quickrecyclerview.listeners.RefreshResult
-import com.wpf.app.quickutil.other.nullDefault
+import com.wpf.app.quickutil.helper.generic.nullDefault
 
 object EmptyHelper {
 

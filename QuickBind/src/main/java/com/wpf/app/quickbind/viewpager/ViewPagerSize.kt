@@ -1,7 +1,7 @@
 package com.wpf.app.quickbind.viewpager
 
 import androidx.viewpager.widget.PagerAdapter
-import com.wpf.app.quickutil.other.forceTo
+import com.wpf.app.quickutil.helper.generic.forceTo
 
 /**
  * Created by 王朋飞 on 2022/7/12.

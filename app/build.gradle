@@ -93,7 +93,7 @@ dependencies {
 
     if (IS_REMOTE.toBoolean()) {
         implementation deps.quickbind.work
-        ksp deps.quickbind.compiler_ksp_jitpack
+        ksp deps.quickbind.compiler_ksp
     } else {
         implementation project(":QuickWork")
         ksp deps.quickbind.compiler_ksp

@@ -10,13 +10,12 @@ import android.view.ViewParent
 import android.widget.LinearLayout
 import android.widget.LinearLayout.LayoutParams
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.setPadding
-import androidx.viewpager.widget.ViewPager
 import com.wpf.app.quickutil.data.KV
-import com.wpf.app.quickutil.other.asTo
-import com.wpf.app.quickutil.other.forceTo
+import com.wpf.app.quickutil.helper.generic.asTo
+import com.wpf.app.quickutil.helper.generic.forceTo
 
+@Suppress("UNCHECKED_CAST")
 fun <V : View> ViewGroup.getChild(isViewGroup: (View) -> Boolean): V? {
     for (it in 0 until this.childCount) {
         val child = this.getChildAt(it)
@@ -84,30 +83,7 @@ fun View?.getLocationInWindow(): IntArray {
     return location
 }
 
-
-/**
- * Created by 王朋飞 on 2022/7/27.
- * 请在onAttachedToWindow中执行
- * 返回view所在的Fragment或Activity
- */
-fun View.getViewContext(): Any? {
-    var viewParent: ViewParent? = parent ?: return null
-    while (viewParent != null) {
-        if (viewParent is ViewPager) {
-            val fragments =
-                (viewParent.context as AppCompatActivity).supportFragmentManager.fragments
-            fragments.forEach {
-                if (it.view?.findViewById<View>(id) == this) {
-                    return it
-                }
-            }
-        }
-        viewParent = viewParent.parent
-        if (viewParent == null) break
-    }
-    return null
-}
-
+@Suppress("unused")
 fun <T : View> T.margin(margin: Int): T {
     layoutParams.forceTo<MarginLayoutParams>().marginStart = margin
     layoutParams.forceTo<MarginLayoutParams>().topMargin = margin
@@ -116,33 +92,39 @@ fun <T : View> T.margin(margin: Int): T {
     return this
 }
 
+@Suppress("unused")
 fun <T : View> T.marginVertical(margin: Int): T {
     layoutParams.forceTo<MarginLayoutParams>().topMargin = margin
     layoutParams.forceTo<MarginLayoutParams>().bottomMargin = margin
     return this
 }
 
+@Suppress("unused")
 fun <T : View> T.marginHorizontal(margin: Int): T {
     layoutParams.forceTo<MarginLayoutParams>().marginStart = margin
     layoutParams.forceTo<MarginLayoutParams>().marginEnd = margin
     return this
 }
 
+@Suppress("unused")
 fun <T : View> T.marginEnd(margin: Int): T {
     layoutParams.forceTo<MarginLayoutParams>().marginEnd = margin
     return this
 }
 
+@Suppress("unused")
 fun <T : View> T.marginStart(margin: Int): T {
     layoutParams.forceTo<MarginLayoutParams>().marginStart = margin
     return this
 }
 
+@Suppress("unused")
 fun <T : View> T.marginTop(margin: Int): T {
     layoutParams.forceTo<MarginLayoutParams>().topMargin = margin
     return this
 }
 
+@Suppress("unused")
 fun <T : View> T.marginBottom(margin: Int): T {
     layoutParams.forceTo<MarginLayoutParams>().bottomMargin = margin
     return this
@@ -175,6 +157,7 @@ fun <T : View> T.padding(
     return this
 }
 
+@Suppress("unused")
 fun <T : View> T.paddingVertical(size: Int): T {
     padding(top = size, bottom = size)
     return this
@@ -185,6 +168,7 @@ fun <T : View> T.paddingHorizontal(size: Int): T {
     return this
 }
 
+@Suppress("unused")
 fun <T : TextView> T.drawableStart(drawable: Drawable, padding: Int = 0): T {
     drawable.setBounds(0, 0, drawable.intrinsicWidth, drawable.intrinsicHeight)
     setCompoundDrawables(drawable, null, null, null)
@@ -192,6 +176,7 @@ fun <T : TextView> T.drawableStart(drawable: Drawable, padding: Int = 0): T {
     return this
 }
 
+@Suppress("unused")
 fun <T : TextView> T.drawableEnd(drawable: Drawable, padding: Int = 0): T {
     drawable.setBounds(0, 0, drawable.intrinsicWidth, drawable.intrinsicHeight)
     setCompoundDrawables(null, null, drawable, null)
@@ -199,6 +184,7 @@ fun <T : TextView> T.drawableEnd(drawable: Drawable, padding: Int = 0): T {
     return this
 }
 
+@Suppress("unused")
 fun <T : TextView> T.drawableTop(drawable: Drawable, padding: Int = 0): T {
     drawable.setBounds(0, 0, drawable.intrinsicWidth, drawable.intrinsicHeight)
     setCompoundDrawables(null, drawable, null, null)
@@ -206,6 +192,7 @@ fun <T : TextView> T.drawableTop(drawable: Drawable, padding: Int = 0): T {
     return this
 }
 
+@Suppress("unused")
 fun <T : TextView> T.drawableBottom(drawable: Drawable, padding: Int = 0): T {
     drawable.setBounds(0, 0, drawable.intrinsicWidth, drawable.intrinsicHeight)
     setCompoundDrawables(null, null, null, drawable)
@@ -242,6 +229,7 @@ fun View.onClick(clickListener: OnClickListener): View {
     return this
 }
 
+@Suppress("unused")
 fun View.onLongClick(longClickListener: OnLongClickListener): View {
     setOnLongClickListener(longClickListener)
     return this

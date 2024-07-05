@@ -6,17 +6,17 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
-import com.wpf.app.base.Quick
-import com.wpf.app.base.ability.base.QuickAbility
-import com.wpf.app.base.ability.base.QuickGenerateViewAbility
-import com.wpf.app.base.ability.base.QuickInflateViewAbility
-import com.wpf.app.base.ability.base.QuickInitViewAbility
+import com.wpf.app.quickutil.Quick
+import com.wpf.app.quickutil.ability.base.QuickAbility
+import com.wpf.app.quickutil.ability.base.QuickGenerateViewAbility
+import com.wpf.app.quickutil.ability.base.QuickInflateViewAbility
+import com.wpf.app.quickutil.ability.base.QuickInitViewAbility
 import com.wpf.app.quicknetwork.base.RequestCoroutineScope
 import com.wpf.app.quickutil.helper.InitViewHelper
 import com.wpf.app.quickutil.helper.match
 import com.wpf.app.quickutil.helper.reset
-import com.wpf.app.quickutil.other.forceTo
-import com.wpf.app.quickutil.widget.wishLayoutParams
+import com.wpf.app.quickutil.helper.generic.forceTo
+import com.wpf.app.quickutil.helper.wishLayoutParams
 import kotlinx.coroutines.Job
 
 @Suppress("CanBeParameter")

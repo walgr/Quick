@@ -4,7 +4,7 @@ import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import androidx.annotation.ColorInt
-import com.wpf.app.quickutil.other.forceTo
+import com.wpf.app.quickutil.helper.generic.forceTo
 
 fun createDrawable(
     shape: Int = GradientDrawable.RECTANGLE,

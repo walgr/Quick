@@ -10,9 +10,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.wpf.app.quickutil.helper.toView
-import com.wpf.app.quickutil.other.forceTo
-import com.wpf.app.quickutil.other.nullDefault
-import com.wpf.app.quickutil.widget.scrollToPositionAndOffset
+import com.wpf.app.quickutil.helper.generic.forceTo
+import com.wpf.app.quickutil.helper.generic.nullDefault
+import com.wpf.app.quickutil.helper.scrollToPositionAndOffset
 import com.wpf.app.quickwidget.R
 import com.wpf.app.quickwidget.selectview.QuickSelectRecyclerView
 

@@ -13,9 +13,9 @@ import com.wpf.app.quickrecyclerview.holder.QuickViewBindingHolder
 import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
 import com.wpf.app.quickrecyclerview.listeners.DataAdapter
 import com.wpf.app.quickrecyclerview.listeners.QuickAdapterListener
-import com.wpf.app.quickutil.other.asTo
-import com.wpf.app.quickutil.other.forceTo
-import com.wpf.app.quickutil.other.nullDefault
+import com.wpf.app.quickutil.helper.generic.asTo
+import com.wpf.app.quickutil.helper.generic.forceTo
+import com.wpf.app.quickutil.helper.generic.nullDefault
 
 /**
  * Created by 王朋飞 on 2022/7/13.

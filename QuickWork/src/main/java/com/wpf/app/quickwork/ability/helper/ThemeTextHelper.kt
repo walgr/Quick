@@ -6,8 +6,8 @@ import android.text.TextUtils
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.ColorInt
-import com.wpf.app.base.ability.helper.addView
-import com.wpf.app.base.ability.scope.ContextScope
+import com.wpf.app.quickutil.ability.helper.addView
+import com.wpf.app.quickutil.ability.scope.ContextScope
 import com.wpf.app.quickutil.helper.wrapMarginLayoutParams
 import com.wpf.app.quickwidget.shadow.ShadowTextView
 import com.wpf.app.quickwork.widget.theme.QuickTextTheme

@@ -7,9 +7,9 @@ import android.widget.FrameLayout
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
-import com.wpf.app.base.Quick
-import com.wpf.app.base.ability.helper.addView
-import com.wpf.app.base.ability.scope.ContextScope
+import com.wpf.app.quickutil.Quick
+import com.wpf.app.quickutil.ability.helper.addView
+import com.wpf.app.quickutil.ability.scope.ContextScope
 import com.wpf.app.quick.R
 import com.wpf.app.quick.helper.getFragmentManager
 import com.wpf.app.quick.helper.getLifecycle
@@ -19,7 +19,7 @@ import com.wpf.app.quickbind.viewpager2.adapter.Fragments2StateAdapter
 import com.wpf.app.quickutil.helper.InitViewHelper
 import com.wpf.app.quickutil.helper.matchMarginLayoutParams
 import com.wpf.app.quickutil.helper.removeParent
-import com.wpf.app.quickutil.other.forceTo
+import com.wpf.app.quickutil.helper.generic.forceTo
 
 fun ContextScope.viewPager2(
     layoutParams: ViewGroup.LayoutParams = matchMarginLayoutParams(),

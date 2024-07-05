@@ -3,8 +3,8 @@ package com.wpf.app.quick.demo
 import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
-import com.wpf.app.base.ability.ex.contentViewWithSelf
-import com.wpf.app.base.ability.helper.viewGroupCreate
+import com.wpf.app.quickutil.ability.ex.contentViewWithSelf
+import com.wpf.app.quickutil.ability.helper.viewGroupCreate
 import com.wpf.app.quick.ability.QuickActivity
 import com.wpf.app.quickutil.helper.dp
 import com.wpf.app.quickutil.helper.matchWrapMarginLayoutParams

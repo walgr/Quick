@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 import com.wpf.app.quick.annotations.bind.BindD2VHHelper
 import com.wpf.app.quick.annotations.bind.BindData2View
-import com.wpf.app.quickutil.other.GenericEx.canBreakScan
+import com.wpf.app.quickutil.helper.generic.GenericEx.canBreakScan
 import com.wpf.app.quickutil.run.RunOnViewWithSelf
 import java.lang.reflect.Field
 

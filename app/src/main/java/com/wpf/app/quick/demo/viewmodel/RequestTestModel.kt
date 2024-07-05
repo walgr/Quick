@@ -10,7 +10,7 @@ import com.wpf.app.quick.demo.http.request
 import com.wpf.app.quickrecyclerview.bind.Request2View
 import com.wpf.app.quickrecyclerview.interfaces.request2View
 import com.wpf.app.quickutil.helper.postDelay
-import com.wpf.app.quickutil.log.LogUtil
+import com.wpf.app.quickutil.utils.LogUtil
 
 class RequestTestModel : QuickVBModel<RequestTestActivity, ActivityRequestTestBinding>() {
 

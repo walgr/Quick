@@ -3,8 +3,8 @@ package com.wpf.app.quick.ability.helper
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
-import com.wpf.app.base.ability.scope.ViewGroupScope
-import com.wpf.app.base.ability.scope.createViewGroupScope
+import com.wpf.app.quickutil.ability.scope.ViewGroupScope
+import com.wpf.app.quickutil.ability.scope.createViewGroupScope
 import com.wpf.app.quick.ability.QuickFragment
 import com.wpf.app.quickutil.helper.matchMarginLayoutParams
 

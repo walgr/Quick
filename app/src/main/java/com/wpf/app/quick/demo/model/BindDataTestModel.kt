@@ -3,11 +3,11 @@ package com.wpf.app.quick.demo.model
 import android.annotation.SuppressLint
 import android.widget.FrameLayout
 import androidx.recyclerview.widget.ItemTouchHelper
-import com.wpf.app.base.ability.base.with
-import com.wpf.app.base.ability.ex.contentView
-import com.wpf.app.base.ability.helper.background
-import com.wpf.app.base.ability.helper.rect
-import com.wpf.app.base.ability.helper.viewGroupCreate
+import com.wpf.app.quickutil.ability.base.with
+import com.wpf.app.quickutil.ability.ex.contentView
+import com.wpf.app.quickutil.ability.helper.background
+import com.wpf.app.quickutil.ability.helper.rect
+import com.wpf.app.quickutil.ability.helper.viewGroupCreate
 import com.wpf.app.quick.annotations.bind.BindData2View
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.demo.databinding.DragItemBinding
@@ -23,7 +23,7 @@ import com.wpf.app.quickutil.helper.dp
 import com.wpf.app.quickutil.helper.matchMarginLayoutParams
 import com.wpf.app.quickutil.helper.onceClick
 import com.wpf.app.quickutil.init.ToastHelper
-import com.wpf.app.quickutil.other.printLog
+import com.wpf.app.quickutil.helper.generic.printLog
 import com.wpf.app.quickutil.run.runOnView
 
 /**

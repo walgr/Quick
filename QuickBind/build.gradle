@@ -49,11 +49,9 @@ dependencies {
     if (IS_REMOTE.toBoolean()) {
         api deps.quickbind.annotations
         api deps.quickbind.network
-        api deps.quickbind.base
     } else {
         api project(":Quick-annotations")
         api project(":QuickNetwork")
-        api project(":QuickBase")
     }
 }
 

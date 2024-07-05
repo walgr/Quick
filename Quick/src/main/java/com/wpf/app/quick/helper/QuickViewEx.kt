@@ -5,8 +5,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
-import com.wpf.app.base.Quick
-import com.wpf.app.quickutil.other.forceTo
+import com.wpf.app.quickutil.Quick
+import com.wpf.app.quickutil.helper.generic.forceTo
 
 fun Quick.getActivity(): Activity {
     return when (this) {

@@ -5,10 +5,10 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
-import com.wpf.app.base.ability.base.with
+import com.wpf.app.quickutil.ability.base.with
 import com.wpf.app.quick.ability.QuickActivity
-import com.wpf.app.base.ability.ex.contentView
-import com.wpf.app.base.ability.helper.viewGroupCreate
+import com.wpf.app.quickutil.ability.ex.contentView
+import com.wpf.app.quickutil.ability.helper.viewGroupCreate
 import com.wpf.app.quick.ability.ex.modelBinding
 import com.wpf.app.quick.annotations.bind.BindView
 import com.wpf.app.quick.annotations.bind.GroupView

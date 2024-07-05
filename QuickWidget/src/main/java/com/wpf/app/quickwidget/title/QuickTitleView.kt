@@ -20,13 +20,13 @@ import com.wpf.app.quickutil.helper.attribute.AutoGetAttributeHelper
 import com.wpf.app.quickutil.helper.children
 import com.wpf.app.quickutil.helper.copy
 import com.wpf.app.quickutil.helper.dp
+import com.wpf.app.quickutil.helper.generic.nullDefault
 import com.wpf.app.quickutil.helper.removeParent
 import com.wpf.app.quickutil.helper.sp
 import com.wpf.app.quickutil.helper.toColor
 import com.wpf.app.quickutil.helper.toDrawable
 import com.wpf.app.quickutil.helper.toView
-import com.wpf.app.quickutil.other.nullDefault
-import com.wpf.app.quickutil.widget.wishLayoutParams
+import com.wpf.app.quickutil.helper.wishLayoutParams
 import com.wpf.app.quickwidget.R
 import com.wpf.app.quickwidget.group.QuickSpaceLinearLayout
 import kotlin.math.max
@@ -53,7 +53,9 @@ open class QuickTitleView @JvmOverloads constructor(
     init {
         orientation = VERTICAL
         R.layout.toolbar_layout.toView(context, this, true)
-        minimumHeight = 44.dp
+        if (isInEditMode) {
+            minimumHeight = 44.dp
+        }
         contentLayout = findViewById(R.id.titleContentLayout)
         titleGroup = findViewById(R.id.titleGroup)
         backLayout = findViewById(R.id.backLayout)
@@ -156,6 +158,7 @@ open class QuickTitleView @JvmOverloads constructor(
                     showBackIcon = showBackIcon ?: false,
                     isLinearLayout = isLinearLayout ?: true,
                     isAbsoluteCenter = isAbsoluteCenter ?: true,
+                    titleMarginStart = titleMarginStart.nullDefault(0),
                 )
             }
 
@@ -197,8 +200,10 @@ open class QuickTitleView @JvmOverloads constructor(
         showBackIcon: Boolean = true,
         isLinearLayout: Boolean = true,
         isAbsoluteCenter: Boolean = true,
+        titleMarginStart: Int = 0,
     ) {
         titleGroup?.updateLayoutParams<ConstraintLayout.LayoutParams> {
+            marginStart = if (showBackIcon && isLinearLayout) 0 else titleMarginStart
             if (isLinearLayout) {
                 this.startToEnd = R.id.backGroup
                 this.endToStart = R.id.moreGroup
@@ -433,8 +438,8 @@ interface QuickTitleThemeI {
     var showBackIcon: Boolean?
     var backIcon: Int?
 
+    var titleMarginStart: Int?
     var titleStr: String?
-
     var titleColor: Int?
     var titleBold: Boolean?
     var titleSize: Float?
@@ -444,7 +449,6 @@ interface QuickTitleThemeI {
     var subTitleColor: Int?
     var subTitleBold: Boolean?
     var subTitleSize: Float?
-
     var titleSpace: Int?
 
     var backGroupChild: (QuickSpaceLinearLayout.() -> List<View>)?
@@ -458,6 +462,7 @@ interface QuickTitleThemeI {
         showLine = showLine ?: false
         showBackIcon = showBackIcon ?: true
         backIcon = backIcon ?: R.drawable.baseline_arrow_back_ios_new_20_white
+        titleMarginStart = titleMarginStart.nullDefault(16.dp)
         titleStr = titleStr ?: ""
         titleColor = titleColor ?: android.R.color.white.toColor(context)
         titleBold = titleBold ?: true
@@ -479,6 +484,7 @@ interface QuickTitleThemeI {
         showLine = showLine ?: other?.showLine
         showBackIcon = showBackIcon ?: other?.showBackIcon
         backIcon = backIcon ?: other?.backIcon
+        titleMarginStart = titleMarginStart ?: other?.titleMarginStart
         titleStr = titleStr ?: other?.titleStr
         titleColor = titleColor ?: other?.titleColor
         titleBold = titleBold ?: other?.titleBold
@@ -503,6 +509,7 @@ interface QuickTitleThemeI {
             showLine = this@QuickTitleThemeI.showLine
             showBackIcon = this@QuickTitleThemeI.showBackIcon
             backIcon = this@QuickTitleThemeI.backIcon
+            titleMarginStart = this@QuickTitleThemeI.titleMarginStart
             titleStr = this@QuickTitleThemeI.titleStr
             titleColor = this@QuickTitleThemeI.titleColor
             titleBold = this@QuickTitleThemeI.titleBold
@@ -531,6 +538,7 @@ open class QuickTitleAttrs(
     override var showBackIcon: Boolean? = null,
     @DrawableRes override var backIcon: Int? = null,
 
+    override var titleMarginStart: Int? = null,
     override var titleStr: String? = null,
 
     @ColorInt override var titleColor: Int? = null,

@@ -2,9 +2,9 @@ package com.wpf.app.quick.helper
 
 import android.view.View
 import androidx.databinding.ViewDataBinding
-import com.wpf.app.base.Quick
-import com.wpf.app.base.ability.base.with
-import com.wpf.app.base.ability.ex.contentView
+import com.wpf.app.quickutil.Quick
+import com.wpf.app.quickutil.ability.base.with
+import com.wpf.app.quickutil.ability.ex.contentView
 import com.wpf.app.quick.ability.QuickActivity
 import com.wpf.app.quick.ability.QuickFragment
 import com.wpf.app.quick.ability.ex.modelBindingWithSelf

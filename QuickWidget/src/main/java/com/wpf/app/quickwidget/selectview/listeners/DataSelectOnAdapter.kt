@@ -2,7 +2,7 @@ package com.wpf.app.quickwidget.selectview.listeners
 
 import android.annotation.SuppressLint
 import com.wpf.app.quickrecyclerview.listeners.DataAdapter
-import com.wpf.app.quickutil.other.nullDefault
+import com.wpf.app.quickutil.helper.generic.nullDefault
 import com.wpf.app.quickwidget.selectview.QuickSelectAdapter
 import com.wpf.app.quickwidget.selectview.data.QuickChildSelectData
 import com.wpf.app.quickwidget.selectview.data.QuickParentSelectData

@@ -14,7 +14,11 @@ dependencies {
     implementation "com.android.tools.build:gradle:${gradleVersion}"
     implementation "org.ow2.asm:asm:9.1"
     implementation "org.ow2.asm:asm-commons:9.1"
-    implementation deps.quickbind.annotations
+    if (IS_REMOTE.toBoolean()) {
+        implementation deps.quickbind.annotations
+    } else {
+        implementation project(":Quick-annotations")
+    }
 }
 
 gradlePlugin {

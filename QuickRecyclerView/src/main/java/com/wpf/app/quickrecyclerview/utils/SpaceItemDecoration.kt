@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.wpf.app.quickrecyclerview.QuickAdapter
 import com.wpf.app.quickrecyclerview.data.QuickItemData
-import com.wpf.app.quickutil.log.LogUtil
-import com.wpf.app.quickutil.other.nullDefault
+import com.wpf.app.quickutil.utils.LogUtil
+import com.wpf.app.quickutil.helper.generic.nullDefault
 
 class SpaceItemDecoration(
     var space: Int = 0,

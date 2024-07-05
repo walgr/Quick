@@ -7,16 +7,16 @@ import android.view.ViewGroup.MarginLayoutParams
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import com.wpf.app.base.ability.base.QuickAbility
-import com.wpf.app.base.ability.base.Unique
+import com.wpf.app.quickutil.ability.base.QuickAbility
+import com.wpf.app.quickutil.ability.base.Unique
 import com.wpf.app.quickrecyclerview.ability.base.QuickItemAbility
 import com.wpf.app.quickrecyclerview.data.QuickAbilityData
 import com.wpf.app.quickrecyclerview.widget.SwipeMenuLayout
 import com.wpf.app.quickutil.helper.toView
 import com.wpf.app.quickutil.helper.wrapMatchMarginLayoutParams
-import com.wpf.app.quickutil.other.asTo
+import com.wpf.app.quickutil.helper.generic.asTo
 import com.wpf.app.quickutil.run.runOnContextWithSelf
-import com.wpf.app.quickutil.widget.wishLayoutParams
+import com.wpf.app.quickutil.helper.wishLayoutParams
 
 
 /**

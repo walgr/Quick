@@ -10,8 +10,8 @@ import com.wpf.app.quickrecyclerview.data.QuickBindData
 import com.wpf.app.quickrecyclerview.data.QuickClickData
 import com.wpf.app.quickrecyclerview.data.QuickItemData
 import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
-import com.wpf.app.quickutil.log.LogUtil
-import com.wpf.app.quickutil.other.forceTo
+import com.wpf.app.quickutil.utils.LogUtil
+import com.wpf.app.quickutil.helper.generic.forceTo
 import com.wpf.app.quickutil.run.runOnView
 import com.wpf.app.quickwidget.selectview.QuickSelectAdapter
 import com.wpf.app.quickwidget.selectview.data.QuickChildSelectData

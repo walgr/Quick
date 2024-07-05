@@ -2,7 +2,7 @@ package com.wpf.app.quickdialog
 
 import android.app.Dialog
 import com.wpf.app.quickutil.helper.getRealActivity
-import com.wpf.app.quickutil.other.nullDefault
+import com.wpf.app.quickutil.helper.generic.nullDefault
 
 fun Dialog?.showInManager(
     showWithOther: Boolean = false,

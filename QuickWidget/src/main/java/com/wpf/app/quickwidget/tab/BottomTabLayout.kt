@@ -19,16 +19,16 @@ import androidx.annotation.IdRes
 import androidx.core.view.children
 import androidx.core.view.drawToBitmap
 import androidx.viewpager.widget.ViewPager
-import com.wpf.app.quickutil.helper.anim
+import com.wpf.app.quickutil.helper.anim.anim
 import com.wpf.app.quickutil.helper.attribute.AutoGetAttributeHelper
 import com.wpf.app.quickutil.helper.getLocationInWindow
 import com.wpf.app.quickutil.helper.myContentView
-import com.wpf.app.quickutil.other.asTo
-import com.wpf.app.quickutil.other.forceTo
-import com.wpf.app.quickutil.other.nullDefault
-import com.wpf.app.quickutil.widget.QuickViewGroup
-import com.wpf.app.quickutil.widget.onPageScrollStateChanged
-import com.wpf.app.quickutil.widget.onPageScrolled
+import com.wpf.app.quickutil.helper.generic.asTo
+import com.wpf.app.quickutil.helper.generic.forceTo
+import com.wpf.app.quickutil.helper.generic.nullDefault
+import com.wpf.app.quickwidget.base.QuickViewGroup
+import com.wpf.app.quickutil.helper.onPageScrollStateChanged
+import com.wpf.app.quickutil.helper.onPageScrolled
 import com.wpf.app.quickwidget.R
 import kotlin.math.max
 

@@ -15,7 +15,7 @@ interface SheetInit {
     }
 
     fun initPeekHeight(): Int {
-        return DialogSize.NO_SET
+        return 0
     }
 
     fun skipCollapsed(): Boolean {

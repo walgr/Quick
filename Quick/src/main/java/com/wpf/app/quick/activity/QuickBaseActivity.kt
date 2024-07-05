@@ -12,10 +12,10 @@ import androidx.activity.result.ActivityResultRegistry
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
-import com.wpf.app.base.Quick
-import com.wpf.app.base.bind.Bind
-import com.wpf.app.base.bind.QuickBindWrap
 import com.wpf.app.quicknetwork.base.RequestCoroutineScope
+import com.wpf.app.quickutil.Quick
+import com.wpf.app.quickutil.bind.Bind
+import com.wpf.app.quickutil.bind.QuickBindWrap
 import com.wpf.app.quickutil.helper.InitViewHelper
 import kotlinx.coroutines.Job
 
@@ -35,6 +35,7 @@ open class QuickBaseActivity @JvmOverloads constructor(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        onCreateWithSavedInstanceState(savedInstanceState)
         mView = generateContentView(
             InitViewHelper.init(
                 this,
@@ -47,6 +48,10 @@ open class QuickBaseActivity @JvmOverloads constructor(
         QuickBindWrap.bind(this)
         initView(mView!!)
         registerForActivityResult()
+    }
+
+    open fun onCreateWithSavedInstanceState(savedInstanceState: Bundle?) {
+
     }
 
     open fun initView(view: View) {

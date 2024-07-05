@@ -7,11 +7,11 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
 import androidx.viewpager2.widget.ViewPager2
-import com.wpf.app.base.bind.Bind
+import com.wpf.app.quickutil.bind.Bind
 import com.wpf.app.quickbind.annotations.BindFragments2
 import com.wpf.app.quickbind.interfaces.BindBaseFragment
 import com.wpf.app.quickbind.viewpager2.adapter.Fragments2StateAdapter
-import com.wpf.app.quickutil.other.forceTo
+import com.wpf.app.quickutil.helper.generic.forceTo
 import java.lang.reflect.Field
 import kotlin.reflect.KClass
 

@@ -7,16 +7,16 @@ import android.widget.FrameLayout
 import androidx.annotation.CallSuper
 import androidx.annotation.StyleRes
 import androidx.lifecycle.ViewModel
-import com.wpf.app.base.ability.base.QuickAbility
-import com.wpf.app.base.ability.base.QuickGenerateViewAbility
-import com.wpf.app.base.ability.base.QuickInflateViewAbility
-import com.wpf.app.base.ability.base.QuickInitViewAbility
-import com.wpf.app.base.ability.base.QuickLifecycleAbility
 import com.wpf.app.quickbind.interfaces.BindViewModel
 import com.wpf.app.quickdialog.QuickBaseDialog
+import com.wpf.app.quickutil.ability.base.QuickAbility
+import com.wpf.app.quickutil.ability.base.QuickGenerateViewAbility
+import com.wpf.app.quickutil.ability.base.QuickInflateViewAbility
+import com.wpf.app.quickutil.ability.base.QuickInitViewAbility
+import com.wpf.app.quickutil.ability.base.QuickLifecycleAbility
 import com.wpf.app.quickutil.helper.InitViewHelper
-import com.wpf.app.quickutil.other.asTo
-import com.wpf.app.quickutil.other.forceTo
+import com.wpf.app.quickutil.helper.generic.asTo
+import com.wpf.app.quickutil.helper.generic.forceTo
 
 open class QuickDialog(
     context: Context,
@@ -108,6 +108,13 @@ open class QuickDialog(
         super.onDetachedFromWindow()
         abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
             it.onDestroy(this)
+        }
+    }
+
+    override fun onCreateWithSavedInstanceState(savedInstanceState: Bundle?) {
+        super.onCreateWithSavedInstanceState(savedInstanceState)
+        abilityList.filterIsInstance<QuickLifecycleAbility>().forEach {
+            it.onRestoredInstanceState(this, savedInstanceState)
         }
     }
 }

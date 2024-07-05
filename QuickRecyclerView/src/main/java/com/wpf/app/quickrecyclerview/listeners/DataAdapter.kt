@@ -2,7 +2,7 @@ package com.wpf.app.quickrecyclerview.listeners
 
 import com.wpf.app.quickrecyclerview.QuickAdapter
 import com.wpf.app.quickrecyclerview.data.QuickItemData
-import com.wpf.app.quickutil.other.nullDefault
+import com.wpf.app.quickutil.helper.generic.nullDefault
 
 /**
  * Created by 王朋飞 on 2022/7/18.

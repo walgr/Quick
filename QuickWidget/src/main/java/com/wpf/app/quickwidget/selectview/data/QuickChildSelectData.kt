@@ -2,7 +2,7 @@ package com.wpf.app.quickwidget.selectview.data
 
 import android.view.View
 import android.view.ViewGroup
-import com.wpf.app.quickutil.other.asTo
+import com.wpf.app.quickutil.helper.generic.asTo
 import com.wpf.app.quickutil.run.RunItemClickWithSelf
 import com.wpf.app.quickutil.run.RunOnContextWithSelf
 import java.io.Serializable

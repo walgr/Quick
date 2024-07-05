@@ -20,8 +20,8 @@ import com.wpf.app.quickrecyclerview.widget.QuickFooterShadow
 import com.wpf.app.quickrecyclerview.widget.QuickHeaderShadow
 import com.wpf.app.quickutil.helper.attribute.AutoGetAttributeHelper
 import com.wpf.app.quickutil.helper.children
-import com.wpf.app.quickutil.other.asTo
-import com.wpf.app.quickutil.other.nullDefault
+import com.wpf.app.quickutil.helper.generic.asTo
+import com.wpf.app.quickutil.helper.generic.nullDefault
 
 /**
  * Created by 王朋飞 on 2022/7/13.

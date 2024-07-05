@@ -5,7 +5,8 @@ import android.util.AttributeSet
 import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
-import com.wpf.app.base.bind.Bind
+import com.wpf.app.quickutil.bind.Bind
+import com.wpf.app.quickutil.bind.QuickBindWrap
 import com.wpf.app.quickwidget.quickview.QuickItemGroup
 
 /**
@@ -30,7 +31,7 @@ open class QuickBindGroup<T : ViewGroup> @JvmOverloads constructor(
     private var isLoadFirst = true
     override fun onCreateViewHolder() {
         if (dealBind) {
-            com.wpf.app.base.bind.QuickBindWrap.bind(this)
+            QuickBindWrap.bind(this)
         }
     }
 
@@ -41,7 +42,7 @@ open class QuickBindGroup<T : ViewGroup> @JvmOverloads constructor(
             isLoadFirst = false
         }
         if (dealBind) {
-            com.wpf.app.base.bind.QuickBindWrap.dealInPlugins(this, null, com.wpf.app.base.bind.QuickBindWrap.getBindPlugin())
+            QuickBindWrap.dealInPlugins(this, null, QuickBindWrap.getBindPlugin())
         }
     }
 

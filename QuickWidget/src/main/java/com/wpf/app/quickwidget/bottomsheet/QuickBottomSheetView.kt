@@ -11,19 +11,24 @@ import android.widget.LinearLayout
 import androidx.annotation.CallSuper
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.wpf.app.quickdialog.listeners.DialogSize
 import com.wpf.app.quickdialog.listeners.QuickContext
 import com.wpf.app.quickdialog.listeners.SheetInit
+import com.wpf.app.quickutil.helper.generic.forceTo
 
 
 /**
  * Created by 王朋飞 on 2022/6/21.
  */
+@Suppress("LeakingThis")
 open class QuickBottomSheetView(
     mContext: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : LinearLayout(mContext, attrs, defStyleAttr), SheetInit, QuickContext {
+
+    init {
+        initView()
+    }
 
     @CallSuper
     open fun initView() {
@@ -48,7 +53,7 @@ open class QuickBottomSheetView(
         } else {
             layoutParams = LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, mScreenHeight)
             if (mBehavior != null) {
-                (layoutParams as CoordinatorLayout.LayoutParams).behavior = mBehavior
+                layoutParams.forceTo<CoordinatorLayout.LayoutParams>().behavior = mBehavior
             }
             setLayoutParams(layoutParams)
         }
@@ -78,7 +83,7 @@ open class QuickBottomSheetView(
     }
 
     open fun initViewMaxHeight(): Int {
-        return DialogSize.NO_SET
+        return 0
     }
 
     private var mBehavior: BottomSheetBehavior<View>? = null
@@ -101,9 +106,5 @@ open class QuickBottomSheetView(
 
     override fun getViewContext(): Context {
         return context
-    }
-
-    init {
-        initView()
     }
 }

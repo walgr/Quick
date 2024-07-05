@@ -21,7 +21,7 @@ import com.wpf.app.quick.helper.startActivity
 import com.wpf.app.quickbind.annotations.BindSp2View
 import com.wpf.app.quickrecyclerview.utils.QuickStickyHelper
 import com.wpf.app.quickrecyclerview.utils.StickyItemDecoration
-import com.wpf.app.quickutil.other.printLog
+import com.wpf.app.quickutil.helper.generic.printLog
 
 class MainReleaseVM: QuickVBModel<MainReleaseFragment, FragmentMainReleaseBinding>() {
 

@@ -2,14 +2,14 @@ package com.wpf.app.quickrecyclerview.ability
 
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.wpf.app.base.ability.base.QuickAbility
-import com.wpf.app.base.ability.base.Unique
+import com.wpf.app.quickutil.ability.base.QuickAbility
+import com.wpf.app.quickutil.ability.base.Unique
 import com.wpf.app.quickrecyclerview.QuickAdapter
 import com.wpf.app.quickrecyclerview.ability.base.QuickItemAbility
 import com.wpf.app.quickrecyclerview.data.QuickAbilityData
 import com.wpf.app.quickrecyclerview.data.QuickItemData
 import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
-import com.wpf.app.quickutil.other.asTo
+import com.wpf.app.quickutil.helper.generic.asTo
 
 fun <T : QuickAbilityData> swap(
     canSwap: T.() -> Int = { 0 },

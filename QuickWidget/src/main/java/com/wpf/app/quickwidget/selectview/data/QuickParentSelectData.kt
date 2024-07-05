@@ -3,11 +3,11 @@ package com.wpf.app.quickwidget.selectview.data
 import android.annotation.SuppressLint
 import android.view.View
 import android.view.ViewGroup
-import com.wpf.app.quickutil.other.asTo
-import com.wpf.app.quickutil.other.nullDefault
+import com.wpf.app.quickutil.helper.generic.asTo
+import com.wpf.app.quickutil.helper.generic.nullDefault
 import com.wpf.app.quickutil.run.RunItemClickWithSelf
 import com.wpf.app.quickutil.run.RunOnContextWithSelf
-import com.wpf.app.quickutil.widget.scrollToPositionAndOffset
+import com.wpf.app.quickutil.helper.scrollToPositionAndOffset
 import java.io.Serializable
 
 /**

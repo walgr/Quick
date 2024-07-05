@@ -5,10 +5,10 @@ import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-import com.wpf.app.base.Quick
-import com.wpf.app.base.ability.base.QuickAbility
-import com.wpf.app.base.ability.base.QuickGenerateViewAbility
-import com.wpf.app.base.ability.base.QuickInflateViewAbility
+import com.wpf.app.quickutil.Quick
+import com.wpf.app.quickutil.ability.base.QuickAbility
+import com.wpf.app.quickutil.ability.base.QuickGenerateViewAbility
+import com.wpf.app.quickutil.ability.base.QuickInflateViewAbility
 import com.wpf.app.quickrecyclerview.QuickAdapter
 import com.wpf.app.quickrecyclerview.ability.base.QuickItemAbility
 import com.wpf.app.quickrecyclerview.ability.base.QuickViewTypeAbility
@@ -17,8 +17,8 @@ import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
 import com.wpf.app.quickrecyclerview.widget.SwipeMenuLayout
 import com.wpf.app.quickutil.helper.InitViewHelper
 import com.wpf.app.quickutil.helper.activity
-import com.wpf.app.quickutil.other.asTo
-import com.wpf.app.quickutil.other.forceTo
+import com.wpf.app.quickutil.helper.generic.asTo
+import com.wpf.app.quickutil.helper.generic.forceTo
 import com.wpf.app.quickutil.run.runOnContextWithSelf
 
 open class QuickAbilityData(

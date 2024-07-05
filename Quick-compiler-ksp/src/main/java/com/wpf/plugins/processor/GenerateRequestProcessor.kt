@@ -35,7 +35,7 @@ class GenerateRequestProcessor(environment: SymbolProcessorEnvironment) :
         val dataType = TypeVariableName("Data")
         val failType = TypeVariableName("Fail")
         val api = ClassName(packageName, className)
-        val quick = ClassName("com.wpf.app.base", "Quick")
+        val quick = ClassName("com.wpf.app.quickutil", "Quick")
         val baseRequest = ClassName("com.wpf.app.quicknetwork.base", "BaseRequest")
         val retrofitCreateHelper =
             ClassName("com.wpf.app.quicknetwork.helper", "RetrofitCreateHelper")

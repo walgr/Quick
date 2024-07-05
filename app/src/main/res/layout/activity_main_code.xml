@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:elevation="0dp"
             app:contentGravity="start"
-            app:showBackIcon="true"
+            app:showBackIcon="false"
             app:titleStr="正式场">
 
             <com.wpf.app.quickwidget.title.BackGroup

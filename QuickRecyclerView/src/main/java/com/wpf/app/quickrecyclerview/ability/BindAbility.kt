@@ -3,8 +3,8 @@ package com.wpf.app.quickrecyclerview.ability
 import android.content.Context
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
-import com.wpf.app.base.ability.base.QuickAbility
-import com.wpf.app.base.ability.base.Unique
+import com.wpf.app.quickutil.ability.base.QuickAbility
+import com.wpf.app.quickutil.ability.base.Unique
 import com.wpf.app.quickrecyclerview.QuickAdapter
 import com.wpf.app.quickrecyclerview.ability.base.QuickItemAbility
 import com.wpf.app.quickrecyclerview.data.QuickAbilityData

@@ -7,7 +7,7 @@ import android.util.AttributeSet
 import android.widget.EditText
 import android.widget.TextView
 import androidx.annotation.ColorInt
-import com.wpf.app.quickutil.other.forceTo
+import com.wpf.app.quickutil.helper.generic.forceTo
 
 interface QuickEditThemeBase : QuickTextThemeBase {
     val editText: EditText

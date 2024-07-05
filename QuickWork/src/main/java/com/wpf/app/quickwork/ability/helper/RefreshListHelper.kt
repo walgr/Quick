@@ -12,10 +12,10 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.scwang.smart.refresh.layout.api.RefreshFooter
 import com.scwang.smart.refresh.layout.api.RefreshHeader
 import com.scwang.smart.refresh.layout.api.RefreshLayout
-import com.wpf.app.base.ability.helper.addView
-import com.wpf.app.base.ability.scope.ContextScope
-import com.wpf.app.base.ability.scope.ViewGroupScope
-import com.wpf.app.base.ability.scope.createViewGroupScope
+import com.wpf.app.quickutil.ability.helper.addView
+import com.wpf.app.quickutil.ability.scope.ContextScope
+import com.wpf.app.quickutil.ability.scope.ViewGroupScope
+import com.wpf.app.quickutil.ability.scope.createViewGroupScope
 import com.wpf.app.quickbind.helper.binddatahelper.BindData2ViewHelper
 import com.wpf.app.quickrecyclerview.QuickRefreshRecyclerView
 import com.wpf.app.quickrecyclerview.data.QuickItemData
@@ -27,7 +27,7 @@ import com.wpf.app.quickutil.helper.matchMarginLayoutParams
 import com.wpf.app.quickutil.helper.matchWrapMarginLayoutParams
 import com.wpf.app.quickutil.helper.parent
 import com.wpf.app.quickutil.helper.removeParent
-import com.wpf.app.quickutil.other.forceTo
+import com.wpf.app.quickutil.helper.generic.forceTo
 
 fun <V : View> ContextScope.smartRefreshLayout(
     smartRefreshLayout: SmartRefreshLayout? = null,

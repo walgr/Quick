@@ -13,11 +13,11 @@ import com.wpf.app.quickutil.init.QuickInit
 import java.lang.ref.SoftReference
 import kotlin.math.max
 
-object UiSizeHelper : ApplicationInitRegister {
+object UiSizeHelper : com.wpf.app.quickutil.init.ApplicationInitRegister {
     override var context: SoftReference<Context>? = null
 
     init {
-        QuickInit.register(this)
+        com.wpf.app.quickutil.init.QuickInit.register(this)
     }
 
     fun getDisplayMetrics(): DisplayMetrics {
@@ -54,8 +54,8 @@ object UiSizeHelper : ApplicationInitRegister {
     fun getStatusBarHeight(context: Context? = null): Int {
         var newContext: Context? = context
         if (newContext == null) {
-            if (this.context?.get() == null) return 0
-            newContext = this.context?.get()!!
+            if (UiSizeHelper.context?.get() == null) return 0
+            newContext = UiSizeHelper.context?.get()!!
         }
         val resources = newContext.resources!!
         val id = resources.getIdentifier(

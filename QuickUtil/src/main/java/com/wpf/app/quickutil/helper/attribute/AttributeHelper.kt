@@ -2,7 +2,6 @@ package com.wpf.app.quickutil.helper.attribute
 
 import android.content.Context
 import android.util.AttributeSet
-import androidx.annotation.ColorInt
 import androidx.annotation.StyleableRes
 
 /**

@@ -1,8 +1,10 @@
 package com.wpf.app.quickutil.helper
 
+import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
 import android.widget.LinearLayout
+import com.wpf.app.quickutil.helper.generic.asTo
 
 const val match = ViewGroup.LayoutParams.MATCH_PARENT
 const val wrap = ViewGroup.LayoutParams.WRAP_CONTENT
@@ -31,7 +33,6 @@ inline fun <reified T : ViewGroup.LayoutParams> layoutParams(layoutParams: ViewG
     return T::class.java.getConstructor(ViewGroup.LayoutParams::class.java).newInstance(layoutParams) as T
 }
 
-
 fun <T : ViewGroup.LayoutParams> T.reset(width: Int? = null, height: Int? = null): T {
     if (width != null) {
         this.width = width
@@ -40,4 +41,18 @@ fun <T : ViewGroup.LayoutParams> T.reset(width: Int? = null, height: Int? = null
         this.height = height
     }
     return this
+}
+
+inline fun <reified T: ViewGroup.LayoutParams> View.wishLayoutParams(width: Int = match, height: Int = wrap): T {
+    return this.layoutParams?.asTo<T>() ?: layoutParams<T>(width, height)
+}
+
+fun ViewGroup.smartLayoutParams(layoutParams: ViewGroup.LayoutParams = matchMarginLayoutParams()): ViewGroup.LayoutParams {
+    return if (this is LinearLayout) {
+        if (this.orientation == LinearLayout.VERTICAL) {
+            wrapContentHeightParams()
+        } else {
+            wrapContentWidthParams()
+        }
+    } else layoutParams
 }

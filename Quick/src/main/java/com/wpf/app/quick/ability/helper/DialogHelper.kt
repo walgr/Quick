@@ -7,10 +7,10 @@ import androidx.annotation.LayoutRes
 import androidx.annotation.StyleRes
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
-import com.wpf.app.base.ability.ex.contentView
-import com.wpf.app.base.ability.scope.ContextScope
-import com.wpf.app.base.ability.scope.DialogScope
-import com.wpf.app.base.ability.scope.createDialogScope
+import com.wpf.app.quickutil.ability.ex.contentView
+import com.wpf.app.quickutil.ability.scope.ContextScope
+import com.wpf.app.quickutil.ability.scope.DialogScope
+import com.wpf.app.quickutil.ability.scope.createDialogScope
 import com.wpf.app.quick.ability.QuickBottomSheetDialog
 import com.wpf.app.quick.ability.QuickBottomSheetDialogFragment
 import com.wpf.app.quick.ability.QuickDialog

@@ -6,7 +6,7 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.TextView
 import androidx.lifecycle.ViewModel
-import com.wpf.app.base.bind.QuickBindWrap
+import com.wpf.app.quickutil.bind.QuickBindWrap
 import com.wpf.app.quickbind.annotations.BindSp2View
 import java.lang.reflect.Field
 

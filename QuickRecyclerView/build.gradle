@@ -37,12 +37,10 @@ dependencies {
     implementation deps.kotlin.stdLibJdk8
 
     if (IS_REMOTE.toBoolean()) {
-        api deps.quickbind.base
         api deps.quickbind.util
         api deps.quickbind.bind
         api deps.quickbind.network
     } else {
-        api project(":QuickBase")
         api project(":QuickUtil")
         api project(":QuickBind")
         api project(":QuickNetwork")

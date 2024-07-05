@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.wpf.app.quickbind.viewpager.ViewPagerSize
-import com.wpf.app.quickutil.other.forceTo
+import com.wpf.app.quickutil.helper.generic.forceTo
 
 /**
  * Created by 王朋飞 on 2022/7/12.

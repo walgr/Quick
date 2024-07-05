@@ -2,7 +2,7 @@ package com.wpf.app.quick.activity.viewmodel
 
 import android.content.Context
 import androidx.databinding.ViewDataBinding
-import com.wpf.app.base.Quick
+import com.wpf.app.quickutil.Quick
 import kotlinx.coroutines.Job
 
 /**

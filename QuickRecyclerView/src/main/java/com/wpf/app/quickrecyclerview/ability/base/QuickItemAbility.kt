@@ -3,7 +3,7 @@ package com.wpf.app.quickrecyclerview.ability.base
 import android.content.Context
 import android.view.View
 import android.view.ViewGroup
-import com.wpf.app.base.ability.base.QuickAbility
+import com.wpf.app.quickutil.ability.base.QuickAbility
 import com.wpf.app.quickrecyclerview.data.QuickItemData
 import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
 

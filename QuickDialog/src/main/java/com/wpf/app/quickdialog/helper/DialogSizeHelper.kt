@@ -4,7 +4,7 @@ import android.view.Window
 import android.view.WindowManager
 import com.wpf.app.quickdialog.listeners.DialogSize
 import com.wpf.app.quickdialog.minAndMaxLimit.MinAndMaxLimit
-import com.wpf.app.quickutil.other.asTo
+import com.wpf.app.quickutil.helper.generic.asTo
 
 /**
  * Created by 王朋飞 on 2022/6/17.
@@ -21,21 +21,21 @@ object DialogSizeHelper {
             //背景点击透传
             windowParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
         }
-        if (dialog.getNewWidth() != DialogSize.NO_SET || dialog.getNewHeight() != DialogSize.NO_SET) {
-            if (dialog.getNewWidth() != DialogSize.NO_SET) {
+        if (dialog.getNewWidth() != 0 || dialog.getNewHeight() != 0) {
+            if (dialog.getNewWidth() != 0) {
                 windowParams.width = dealDialogWidth(
                     dialog,
-                    if (dialog.initDialogWidthPercent() != DialogSize.NO_SET.toFloat()) (dialog.getNewWidth() * dialog.initDialogWidthPercent()).toInt() else dialogWidth
+                    if (dialog.initDialogWidthPercent() != 0f) (dialog.getNewWidth() * dialog.initDialogWidthPercent()).toInt() else dialogWidth
                 )
             }
-            if (dialog.getNewHeight() != DialogSize.NO_SET) {
+            if (dialog.getNewHeight() != 0) {
                 windowParams.height = dealDialogHeight(
                     dialog,
-                    if (dialog.initDialogHeightPercent() != DialogSize.NO_SET.toFloat()) (dialog.getNewHeight() * dialog.initDialogHeightPercent()).toInt() else dialogHeight
+                    if (dialog.initDialogHeightPercent() != 0f) (dialog.getNewHeight() * dialog.initDialogHeightPercent()).toInt() else dialogHeight
                 )
             }
         } else {
-            if ((dialog.initDialogAdaptiveWidth() || dialog.initDialogWidth() == WindowManager.LayoutParams.WRAP_CONTENT) && dialog.getView() != null && dialog.initDialogWidthPercent() == DialogSize.NO_SET.toFloat()) {
+            if ((dialog.initDialogAdaptiveWidth() || dialog.initDialogWidth() == WindowManager.LayoutParams.WRAP_CONTENT) && dialog.getView() != null && dialog.initDialogWidthPercent() == 0f) {
                 dialog.getView()!!.post {
                     windowParams.width = dealDialogWidth(dialog, dialog.getView()!!.width)
                     if (!dialog.initDialogAdaptiveHeight()) {
@@ -45,10 +45,10 @@ object DialogSizeHelper {
             } else {
                 windowParams.width = dealDialogWidth(
                     dialog,
-                    if (dialog.initDialogWidthPercent() != DialogSize.NO_SET.toFloat()) (dialog.getScreenWidth() * dialog.initDialogWidthPercent()).toInt() else dialogWidth
+                    if (dialog.initDialogWidthPercent() != 0f) (dialog.getScreenWidth() * dialog.initDialogWidthPercent()).toInt() else dialogWidth
                 )
             }
-            if ((dialog.initDialogAdaptiveHeight() || dialog.initDialogHeight() == WindowManager.LayoutParams.WRAP_CONTENT) && dialog.getView() != null && dialog.initDialogHeightPercent() == DialogSize.NO_SET.toFloat()) {
+            if ((dialog.initDialogAdaptiveHeight() || dialog.initDialogHeight() == WindowManager.LayoutParams.WRAP_CONTENT) && dialog.getView() != null && dialog.initDialogHeightPercent() == 0f) {
                 if (dialog.getView() is MinAndMaxLimit) {
                     val minAndMaxLimit = dialog.getView().asTo<MinAndMaxLimit>()
                     minAndMaxLimit?.maxHeight = dialog.initDialogMaxHeight()
@@ -67,7 +67,7 @@ object DialogSizeHelper {
             } else {
                 windowParams.height = dealDialogHeight(
                     dialog,
-                    if (dialog.initDialogHeightPercent() != DialogSize.NO_SET.toFloat()) (dialog.getScreenHeight() * dialog.initDialogHeightPercent()).toInt() else dialogHeight
+                    if (dialog.initDialogHeightPercent() != 0f) (dialog.getScreenHeight() * dialog.initDialogHeightPercent()).toInt() else dialogHeight
                 )
             }
         }

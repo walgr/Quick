@@ -2,7 +2,7 @@ package com.wpf.app.quick.demo
 
 import android.widget.LinearLayout
 import com.wpf.app.quick.ability.QuickActivity
-import com.wpf.app.base.ability.ex.contentViewWithSelf
+import com.wpf.app.quickutil.ability.ex.contentViewWithSelf
 import com.wpf.app.quick.ability.helper.viewPager
 import com.wpf.app.quick.annotations.getclass.GetClass
 import com.wpf.app.quickwork.ability.helper.smartRefreshLayout

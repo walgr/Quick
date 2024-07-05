@@ -33,6 +33,8 @@ dependencies {
     //列表
     implementation deps.androidx.recyclerview
     implementation deps.androidx.material
+    //shapeView
+    api deps.shapeofview
 }
 
 apply from: rootProject.file('gradle-mvn-push-aar.gradle')

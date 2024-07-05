@@ -12,7 +12,7 @@ import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
 import com.wpf.app.quickutil.helper.dp
 import com.wpf.app.quickutil.helper.matchWrapMarginLayoutParams
 import com.wpf.app.quickutil.helper.reset
-import com.wpf.app.quickutil.other.forceTo
+import com.wpf.app.quickutil.helper.generic.forceTo
 import com.wpf.app.quickutil.run.RunOnContextWithSelf
 import com.wpf.app.quickutil.run.runOnContextWithSelf
 import com.wpf.app.quickwidget.selectview.QuickSelectAdapter

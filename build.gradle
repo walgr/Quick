@@ -44,7 +44,6 @@ buildscript {
                         'work'                : "com.wpf.app.quick:QuickWork:${release}",
                         'compiler_ksp'        : "com.wpf.app.quick:Quick-gradle-ksp-plugin:${release}",
                         'compiler_ksp_jitpack': "com.github.walgr.Quick:Quick-gradle-ksp-plugin:0.10.5",
-                        'plugin'              : "com.wpf.app.quick:com.wpf.app.quickplugin.gradle.plugin:1.0.0",
                         'transform'           : "com.wpf.app.plugin:quick-transform.gradle.plugin:1.0.0",
                         'transform_jitpack'   : "com.github.walgr.Quick:quick.transform:1.0.0",
                 ],

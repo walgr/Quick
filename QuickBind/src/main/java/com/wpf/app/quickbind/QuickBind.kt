@@ -7,11 +7,11 @@ import androidx.annotation.UiThread
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
-import com.wpf.app.base.bind.Bind
-import com.wpf.app.base.bind.NoBind
-import com.wpf.app.base.bind.QuickBindI
-import com.wpf.app.base.bind.QuickBindWrap.bindHistory
-import com.wpf.app.base.bind.plugins.BasePlugin
+import com.wpf.app.quickutil.bind.Bind
+import com.wpf.app.quickutil.bind.NoBind
+import com.wpf.app.quickutil.bind.QuickBindI
+import com.wpf.app.quickutil.bind.QuickBindWrap.bindHistory
+import com.wpf.app.quickutil.bind.plugins.BasePlugin
 import com.wpf.app.quick.annotations.bind.BindData2View
 import com.wpf.app.quick.annotations.bind.BindView
 import com.wpf.app.quick.annotations.bind.Databinder
@@ -34,8 +34,8 @@ import com.wpf.app.quickbind.plugins.BindViewPlugin
 import com.wpf.app.quickbind.plugins.GroupViewPlugin
 import com.wpf.app.quickbind.plugins.LoadSpPlugin
 import com.wpf.app.quickutil.helper.contentView
-import com.wpf.app.quickutil.other.GenericEx.getFieldAndParent
-import com.wpf.app.quickutil.other.forceTo
+import com.wpf.app.quickutil.helper.generic.GenericEx.getFieldAndParent
+import com.wpf.app.quickutil.helper.generic.forceTo
 import java.lang.reflect.Constructor
 import java.lang.reflect.Field
 import java.lang.reflect.InvocationTargetException

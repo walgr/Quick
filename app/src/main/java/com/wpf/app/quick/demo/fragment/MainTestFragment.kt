@@ -1,14 +1,14 @@
 package com.wpf.app.quick.demo.fragment
 
-import com.wpf.app.base.ability.base.with
+import com.wpf.app.quickutil.ability.base.with
 import com.wpf.app.quick.ability.QuickFragment
 import com.wpf.app.quick.ability.ex.binding
-import com.wpf.app.base.ability.ex.contentView
+import com.wpf.app.quickutil.ability.ex.contentView
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.demo.databinding.FragmentMainTestBinding
 import com.wpf.app.quickutil.helper.dp
 import com.wpf.app.quickutil.helper.postDelay
-import com.wpf.app.quickutil.widget.onProgressChanged
+import com.wpf.app.quickutil.helper.onProgressChanged
 
 class MainTestFragment : QuickFragment(
     contentView(R.layout.fragment_main_test)

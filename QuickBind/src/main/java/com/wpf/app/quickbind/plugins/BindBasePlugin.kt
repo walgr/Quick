@@ -2,7 +2,7 @@ package com.wpf.app.quickbind.plugins
 
 import androidx.lifecycle.ViewModel
 import com.wpf.app.quick.annotations.bind.Databinder
-import com.wpf.app.base.bind.plugins.BasePlugin
+import com.wpf.app.quickutil.bind.plugins.BasePlugin
 import com.wpf.app.quickbind.QuickBind
 import java.lang.reflect.Field
 

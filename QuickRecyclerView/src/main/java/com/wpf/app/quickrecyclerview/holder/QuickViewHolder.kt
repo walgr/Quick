@@ -5,14 +5,14 @@ import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
-import com.wpf.app.base.bind.QuickBindWrap
+import com.wpf.app.quickutil.bind.QuickBindWrap
 import com.wpf.app.quickrecyclerview.QuickAdapter
 import com.wpf.app.quickrecyclerview.data.QuickBindData
 import com.wpf.app.quickrecyclerview.data.QuickItemData
 import com.wpf.app.quickrecyclerview.listeners.QuickAdapterListener
 import com.wpf.app.quickutil.helper.removeParent
 import com.wpf.app.quickutil.helper.toView
-import com.wpf.app.quickutil.other.forceTo
+import com.wpf.app.quickutil.helper.generic.forceTo
 import com.wpf.app.quickutil.run.RunOnContextWithSelf
 
 /**

@@ -2,7 +2,7 @@ package com.wpf.app.quickwork.widget.theme
 
 import android.content.Context
 import androidx.annotation.StyleRes
-import com.wpf.app.base.ability.base.QuickAbility
+import com.wpf.app.quickutil.ability.base.QuickAbility
 import com.wpf.app.quick.ability.QuickDialog
 
 open class QuickThemeDialog @JvmOverloads constructor(

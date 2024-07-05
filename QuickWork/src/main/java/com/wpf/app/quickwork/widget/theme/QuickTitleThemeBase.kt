@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.ViewGroup
 import com.wpf.app.quickutil.helper.attribute.AutoGetAttributeHelper
-import com.wpf.app.quickutil.other.forceTo
+import com.wpf.app.quickutil.helper.generic.forceTo
 import com.wpf.app.quickwidget.R
 import com.wpf.app.quickwidget.title.QuickTitleAttrs
 import com.wpf.app.quickwidget.title.QuickTitleThemeI

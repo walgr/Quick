@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import com.wpf.app.quickrecyclerview.utils.QuickStickyHelper
 import com.wpf.app.quickrecyclerview.utils.StickyItemDecoration
-import com.wpf.app.quickutil.other.nullDefault
+import com.wpf.app.quickutil.helper.generic.nullDefault
 import com.wpf.app.quickwidget.selectview.data.QuickChildSelectData
 import com.wpf.app.quickwidget.selectview.data.QuickParentSelectData
 import com.wpf.app.quickwidget.selectview.helper.ParentChildDataHelper

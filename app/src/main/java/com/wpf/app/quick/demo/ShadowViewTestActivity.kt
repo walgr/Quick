@@ -3,11 +3,11 @@ package com.wpf.app.quick.demo
 import android.annotation.SuppressLint
 import android.widget.LinearLayout
 import androidx.core.view.isVisible
-import com.wpf.app.base.ability.base.with
+import com.wpf.app.quickutil.ability.base.with
 import com.wpf.app.quick.ability.QuickActivity
 import com.wpf.app.quick.ability.ex.binding
-import com.wpf.app.base.ability.ex.contentView
-import com.wpf.app.base.ability.helper.viewGroupCreate
+import com.wpf.app.quickutil.ability.ex.contentView
+import com.wpf.app.quickutil.ability.helper.viewGroupCreate
 import com.wpf.app.quick.annotations.getclass.GetClass
 import com.wpf.app.quick.demo.databinding.ActivityShadowTestBinding
 import com.wpf.app.quickutil.helper.TimeDelayHelper

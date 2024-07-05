@@ -9,13 +9,13 @@ import androidx.core.widget.NestedScrollView
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.appbar.AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL
 import com.google.android.material.tabs.TabLayout
-import com.wpf.app.base.ability.ex.contentView
-import com.wpf.app.base.ability.helper.coordinator
-import com.wpf.app.base.ability.helper.gravity
-import com.wpf.app.base.ability.helper.tabLayout
-import com.wpf.app.base.ability.helper.viewGroupCreate
-import com.wpf.app.base.ability.scope.viewGroupApply
-import com.wpf.app.base.ability.scope.withViewGroupScope
+import com.wpf.app.quickutil.ability.ex.contentView
+import com.wpf.app.quickutil.ability.helper.coordinator
+import com.wpf.app.quickutil.ability.helper.gravity
+import com.wpf.app.quickutil.ability.helper.tabLayout
+import com.wpf.app.quickutil.ability.helper.viewGroupCreate
+import com.wpf.app.quickutil.ability.scope.viewGroupApply
+import com.wpf.app.quickutil.ability.scope.withViewGroupScope
 import com.wpf.app.quick.ability.QuickActivity
 import com.wpf.app.quick.ability.QuickView
 import com.wpf.app.quick.ability.helper.fragment
@@ -71,7 +71,8 @@ class WanAndroidHomeActivity : QuickActivity(contentView<LinearLayout> {
         withViewGroupScope {
             QuickView(context, abilityList = contentView<FrameLayout>(layoutParams = layoutParams<FrameLayout.LayoutParams>(
                 matchWrapMarginLayoutParams()
-            )) {
+            )
+            ) {
                 text(
                     layoutParams = layoutParams<FrameLayout.LayoutParams>(matchMarginLayoutParams()),
                     text = "Wan Android",

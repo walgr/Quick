@@ -5,9 +5,9 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.RelativeLayout
 import androidx.annotation.CallSuper
-import com.wpf.app.quickutil.other.GenericEx
-import com.wpf.app.quickutil.other.getClassWithSuper
-import com.wpf.app.quickutil.widget.QuickViewGroupNoAttrs
+import com.wpf.app.quickutil.helper.generic.GenericEx
+import com.wpf.app.quickutil.helper.generic.getClassWithSuper
+import com.wpf.app.quickwidget.base.QuickViewGroupNoAttrs
 
 /**
  * 最多1个子View
