@@ -16,7 +16,7 @@ fun <T : TextView> T.textColor(
         setTextColor(it)
     }
     builder?.invoke(createTextViewScope(this))
-    return this
+    return this@textColor
 }
 
 fun TextViewScope.state(
