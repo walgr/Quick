@@ -5,16 +5,16 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
-import com.wpf.app.quickutil.ability.base.with
 import com.wpf.app.quick.ability.QuickActivity
-import com.wpf.app.quickutil.ability.ex.contentView
-import com.wpf.app.quickutil.ability.helper.viewGroupCreate
 import com.wpf.app.quick.ability.ex.modelBinding
 import com.wpf.app.quick.annotations.bind.BindView
 import com.wpf.app.quick.annotations.bind.GroupView
 import com.wpf.app.quick.demo.databinding.ActivityDataTestBinding
 import com.wpf.app.quick.demo.viewmodel.IntentDataTestModel
 import com.wpf.app.quickbind.utils.GroupViews
+import com.wpf.app.quickutil.ability.base.with
+import com.wpf.app.quickutil.ability.ex.contentView
+import com.wpf.app.quickutil.ability.helper.viewGroupCreate
 import com.wpf.app.quickutil.helper.postDelay
 import com.wpf.app.quickwork.ability.helper.title
 
@@ -25,7 +25,7 @@ import com.wpf.app.quickwork.ability.helper.title
 class IntentDataTestActivity : QuickActivity(
     contentView<LinearLayout> {
         title("传输测试页")
-        viewGroupCreate(R.layout.activity_data_test)
+        viewGroupCreate(layoutId = R.layout.activity_data_test)
     }.with(modelBinding<IntentDataTestModel, ActivityDataTestBinding>())
 ) {
     @SuppressLint("NonConstantResourceId")

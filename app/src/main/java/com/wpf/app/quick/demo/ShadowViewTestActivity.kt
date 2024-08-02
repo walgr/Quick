@@ -19,7 +19,7 @@ import com.wpf.app.quickwork.ability.helper.title
 class ShadowViewTestActivity : QuickActivity(
     contentView<LinearLayout> {
         title("同步测试页")
-        viewGroupCreate(R.layout.activity_shadow_test)
+        viewGroupCreate(layoutId = R.layout.activity_shadow_test)
     }.with(binding<ActivityShadowTestBinding> {
         val colorList = arrayOf(
             R.color.black.toColor(),

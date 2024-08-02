@@ -3,12 +3,12 @@ package com.wpf.app.quickutil.ability.helper
 import android.content.Context
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import androidx.annotation.LayoutRes
-import com.wpf.app.quickutil.ability.scope.ContextScope
-import com.wpf.app.quickutil.ability.scope.ViewGroupScope
-import com.wpf.app.quickutil.ability.scope.ViewScope
-import com.wpf.app.quickutil.ability.scope.createViewGroupScope
-import com.wpf.app.quickutil.ability.scope.createViewScope
+import androidx.constraintlayout.widget.ConstraintLayout
+import com.wpf.app.quickutil.ability.scope.*
 import com.wpf.app.quickutil.helper.InitViewHelper
 import com.wpf.app.quickutil.helper.generic.context
 import com.wpf.app.quickutil.helper.generic.forceTo
@@ -32,10 +32,10 @@ inline fun <reified T : ViewGroup> Any.viewGroupCreate(
 }
 
 fun Any.viewGroupCreate(
+    layoutParams: ViewGroup.LayoutParams = matchMarginLayoutParams(),
     @LayoutRes layoutId: Int = 0,
     layoutView: View? = null,
     layoutViewCreate: (ContextScope.() -> View)? = null,
-    layoutParams: ViewGroup.LayoutParams = matchMarginLayoutParams(),
     builder: (ViewScope<View>.() -> Unit)? = null,
 ): View {
     val mContext = context()!!
@@ -55,4 +55,85 @@ fun Any.viewGroupCreate(
     }
     addView(view, layoutParams)
     return view
+}
+
+fun Any.vLinearLayout(
+    layoutParams: ViewGroup.LayoutParams = matchWrapMarginLayoutParams(),
+    builder: (ViewGroupScope<LinearLayout>.() -> Unit)? = null,
+): LinearLayout {
+    return viewGroupCreate<LinearLayout>(layoutParams = layoutParams) {
+        orientation(LinearLayout.VERTICAL)
+        builder?.invoke(this)
+    }
+}
+
+fun Any.vLinearLayoutScope(
+    layoutParams: ViewGroup.LayoutParams = matchWrapMarginLayoutParams(),
+): ViewGroupScope<LinearLayout> {
+    return viewGroupCreate<LinearLayout>(layoutParams = layoutParams) {
+        orientation(LinearLayout.VERTICAL)
+    }.createViewGroupScope()
+}
+
+fun Any.hLinearLayout(
+    layoutParams: ViewGroup.LayoutParams = matchWrapMarginLayoutParams(),
+    builder: (ViewGroupScope<LinearLayout>.() -> Unit)? = null,
+): LinearLayout {
+    return viewGroupCreate<LinearLayout>(layoutParams = layoutParams) {
+        orientation(LinearLayout.HORIZONTAL)
+        builder?.invoke(this)
+    }
+}
+
+fun Any.hLinearLayoutScope(
+    layoutParams: ViewGroup.LayoutParams = matchWrapMarginLayoutParams(),
+): ViewGroupScope<LinearLayout> {
+    return viewGroupCreate<LinearLayout>(layoutParams = layoutParams) {
+        orientation(LinearLayout.HORIZONTAL)
+    }.createViewGroupScope()
+}
+
+fun Any.relativeLayout(
+    layoutParams: ViewGroup.LayoutParams = matchWrapMarginLayoutParams(),
+    builder: (ViewGroupScope<RelativeLayout>.() -> Unit)? = null,
+): RelativeLayout {
+    return viewGroupCreate<RelativeLayout>(layoutParams = layoutParams) {
+        builder?.invoke(this)
+    }
+}
+
+fun Any.relativeLayoutScope(
+    layoutParams: ViewGroup.LayoutParams = matchWrapMarginLayoutParams(),
+): ViewGroupScope<RelativeLayout> {
+    return viewGroupCreate<RelativeLayout>(layoutParams = layoutParams).createViewGroupScope()
+}
+
+fun Any.frameLayout(
+    layoutParams: ViewGroup.LayoutParams = matchWrapMarginLayoutParams(),
+    builder: (ViewGroupScope<FrameLayout>.() -> Unit)? = null,
+): FrameLayout {
+    return viewGroupCreate<FrameLayout>(layoutParams = layoutParams) {
+        builder?.invoke(this)
+    }
+}
+
+fun Any.frameLayoutScope(
+    layoutParams: ViewGroup.LayoutParams = matchWrapMarginLayoutParams(),
+): ViewGroupScope<FrameLayout> {
+    return viewGroupCreate<FrameLayout>(layoutParams = layoutParams).createViewGroupScope()
+}
+
+fun Any.constraintLayout(
+    layoutParams: ViewGroup.LayoutParams = matchWrapMarginLayoutParams(),
+    builder: (ViewGroupScope<ConstraintLayout>.() -> Unit)? = null,
+): ConstraintLayout {
+    return viewGroupCreate<ConstraintLayout>(layoutParams = layoutParams) {
+        builder?.invoke(this)
+    }
+}
+
+fun Any.constraintLayoutScope(
+    layoutParams: ViewGroup.LayoutParams = matchWrapMarginLayoutParams(),
+): ViewGroupScope<ConstraintLayout> {
+    return viewGroupCreate<ConstraintLayout>(layoutParams = layoutParams).createViewGroupScope()
 }

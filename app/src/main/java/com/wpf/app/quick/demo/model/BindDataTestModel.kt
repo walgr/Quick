@@ -32,7 +32,7 @@ import com.wpf.app.quickutil.run.runOnView
  */
 class BindDataTestModel(private val index: Int = 0) : QuickAbilityData(
     abilityList = contentView<FrameLayout> {
-        viewGroupCreate(R.layout.holder_image, layoutParams = matchMarginLayoutParams()).background {
+        viewGroupCreate(layoutId = R.layout.holder_image, layoutParams = matchMarginLayoutParams()).background {
             rect(radius = 8f.dp, color = R.color.white.toColor())
         }
     }.with(bindWSelf<HolderImageBinding, BindDataTestModel> {

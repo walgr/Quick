@@ -17,7 +17,7 @@ import com.wpf.app.quickwork.ability.helper.title
 class WebViewActivity : QuickActivity(
     contentViewWithSelf<WebViewActivity, LinearLayout> {
         title(titleName = self.title ?: "")
-        viewGroupCreate(R.layout.activity_webview)
+        viewGroupCreate(layoutId = R.layout.activity_webview)
     }
 ) {
 

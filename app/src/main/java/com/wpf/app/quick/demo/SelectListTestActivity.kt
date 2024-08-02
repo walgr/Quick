@@ -16,6 +16,6 @@ import com.wpf.app.quickwork.ability.helper.title
 class SelectListTestActivity : QuickActivity(
     contentView<LinearLayout> {
         title("选择筛选页")
-        viewGroupCreate(R.layout.activity_select_test)
+        viewGroupCreate(layoutId = R.layout.activity_select_test)
     }.with(modelBinding<SelectListModel, ActivitySelectTestBinding>())
 )

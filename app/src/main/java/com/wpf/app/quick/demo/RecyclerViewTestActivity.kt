@@ -1,14 +1,14 @@
 package com.wpf.app.quick.demo
 
 import android.widget.LinearLayout
-import com.wpf.app.quickutil.ability.base.with
 import com.wpf.app.quick.ability.QuickActivity
-import com.wpf.app.quickutil.ability.ex.contentView
-import com.wpf.app.quickutil.ability.helper.viewGroupCreate
 import com.wpf.app.quick.ability.ex.modelBinding
 import com.wpf.app.quick.demo.databinding.ActivityRecyclerviewTestBinding
 import com.wpf.app.quick.demo.model.BindDataTestModel
 import com.wpf.app.quick.demo.viewmodel.RecyclerViewTestModel
+import com.wpf.app.quickutil.ability.base.with
+import com.wpf.app.quickutil.ability.ex.contentView
+import com.wpf.app.quickutil.ability.helper.viewGroupCreate
 import com.wpf.app.quickwork.ability.helper.title
 
 /**
@@ -16,7 +16,7 @@ import com.wpf.app.quickwork.ability.helper.title
  */
 class RecyclerViewTestActivity : QuickActivity(contentView<LinearLayout> {
     title("列表测试页")
-    viewGroupCreate(R.layout.activity_recyclerview_test)
+    viewGroupCreate(layoutId = R.layout.activity_recyclerview_test)
 }.with(modelBinding<RecyclerViewTestModel, ActivityRecyclerviewTestBinding> {
     list.setData(
         mutableListOf(

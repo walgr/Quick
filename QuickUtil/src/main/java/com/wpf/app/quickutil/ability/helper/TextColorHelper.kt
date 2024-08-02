@@ -4,14 +4,9 @@ import android.view.View
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
-import com.wpf.app.quickutil.ability.scope.ViewScope
+import com.wpf.app.quickutil.ability.scope.TextViewScope
+import com.wpf.app.quickutil.ability.scope.createTextViewScope
 import com.wpf.app.quickutil.helper.createStateColor
-
-interface TextViewScope: ViewScope<TextView>
-
-fun createTextViewScope(view: TextView) = object : TextViewScope {
-    override val view: TextView = view
-}
 
 fun <T : TextView> T.textColor(
     @ColorRes colorRes: Int? = null,

@@ -15,6 +15,6 @@ import com.wpf.app.quickwork.ability.helper.title
 class RequestTestActivity : QuickActivity(
     contentView<LinearLayout> {
         title("接口测试页")
-        viewGroupCreate(R.layout.activity_request_test)
+        viewGroupCreate(layoutId = R.layout.activity_request_test)
     }.with(modelBinding<RequestTestModel, ActivityRequestTestBinding>())
 )
