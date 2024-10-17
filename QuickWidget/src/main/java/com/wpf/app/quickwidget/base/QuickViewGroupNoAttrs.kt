@@ -16,6 +16,7 @@ import com.google.android.material.tabs.TabLayout
 import com.wpf.app.quickutil.helper.attribute.AutoGetAttributeHelper
 import com.wpf.app.quickutil.helper.generic.asTo
 import com.wpf.app.quickutil.helper.generic.nullDefault
+import com.wpf.app.quickutil.helper.parent
 import com.wpf.app.quickwidget.R
 
 /**
@@ -28,10 +29,13 @@ open class QuickViewGroupNoAttrs<T : ViewGroup> @JvmOverloads constructor(
     private val attrs: AttributeSet? = null,
     private val defStyleAttr: Int = 0,
     private var addToParent: Boolean = true,
-    private val forceGenerics: Boolean = false          //强制泛型初始化
+    private val forceGenerics: Boolean = false,             //强制泛型初始化
+    private val forceGenericsCls: Class<T>? = null,         //强制Cls初始化
+    private var addChildToParent: Boolean = false,           //是否把子View添加到父View
 ) : ViewGroup(context, attrs, defStyleAttr), QuickViewGroupI<T> {
 
-    private val attrSet: QuickViewGroupAttrSet = AutoGetAttributeHelper.init(context, attrs, R.styleable.QuickViewGroup)
+    private val attrSet: QuickViewGroupAttrSet =
+        AutoGetAttributeHelper.init(context, attrs, R.styleable.QuickViewGroup)
 
     init {
         init()
@@ -48,15 +52,20 @@ open class QuickViewGroupNoAttrs<T : ViewGroup> @JvmOverloads constructor(
         if (isInEditMode) {
             addToParent = false
         }
-        shadowView = if (forceGenerics || attrSet.groupType == -1) {
-            initViewGroupByT(shadowView, context, attrs, defStyleAttr)
+        if (!addChildToParent) {
+            shadowView = if (attrSet.groupType != -1) {
+                initViewGroupByXml(shadowView, attrSet.groupType, context, attrs, defStyleAttr)
+            } else if (forceGenerics || forceGenericsCls != null) {
+                initViewGroupByT(shadowView, context, attrs, defStyleAttr, forceGenericsCls)
+            } else {
+                initViewGroupByT(shadowView, context, attrs, defStyleAttr)
+            }
+            addChildToGroup(shadowView, this)
+            if (!addToParent) {
+                addT(false, shadowView, this)
+            }
         } else {
-            initViewGroupByXml(shadowView, attrSet.groupType, context, attrs, defStyleAttr)
-                ?: initViewGroupByT(shadowView, context, attrs, defStyleAttr)
-        }
-        addChildToT(shadowView, this)
-        if (!addToParent) {
-            addT(false, shadowView, this)
+            addChildToGroup(parent(), this)
         }
     }
 

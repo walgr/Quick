@@ -184,12 +184,20 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/spTextView1"
+                    <com.wpf.app.quickwidget.quickview.inxml.LoadSp2Text
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="4dp"
-                        android:text="测试绑定1" />
+                        app:bindData2Sp="true"
+                        app:bindKey="spTextView1">
+
+                        <TextView
+                            android:id="@+id/spTextView1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="4dp"
+                            android:text="测试绑定1" />
+
+                    </com.wpf.app.quickwidget.quickview.inxml.LoadSp2Text>
 
                     <TextView
                         android:id="@+id/spTextView2"

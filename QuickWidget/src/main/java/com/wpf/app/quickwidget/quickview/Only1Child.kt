@@ -16,7 +16,13 @@ abstract class Only1Child<T : View> @JvmOverloads constructor(
     mContext: Context,
     attributeSet: AttributeSet? = null,
     defStyleAttr: Int = 0,
-) : QuickViewGroupNoAttrs<RelativeLayout>(mContext, attributeSet, defStyleAttr, true) {
+) : QuickViewGroupNoAttrs<RelativeLayout>(
+    mContext,
+    attributeSet,
+    defStyleAttr,
+    false,
+    forceGenericsCls = RelativeLayout::class.java,
+) {
 
     @CallSuper
     override fun onFinishInflate() {

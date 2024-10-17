@@ -42,11 +42,7 @@ android {
         debug {
             debuggable true
             minifyEnabled false
-            kotlin {
-                sourceSets {
-                    main.kotlin.srcDirs += 'build/generated/ksp/debug/kotlin'
-                }
-            }
+
         }
         release {
             minifyEnabled true
@@ -54,12 +50,6 @@ android {
             shrinkResources true
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-
-            kotlin {
-                sourceSets {
-                    main.kotlin.srcDirs += 'build/generated/ksp/release/kotlin'
-                }
-            }
         }
     }
     compileOptions {

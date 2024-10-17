@@ -2,6 +2,9 @@ package com.wpf.app.quicknetwork.helper
 
 object NetworkResponseInterceptor {
 
+    /**
+     * 默认执行
+     */
     internal val beforeListDefault = mutableListOf<() -> Unit>()
     internal val successBeforeListDefault = mutableListOf<(data: Any) -> Unit>()
     internal val successListDefault = mutableListOf<(data: Any) -> Unit>()
@@ -93,6 +96,9 @@ object NetworkResponseInterceptor {
         finallyListDefault.add(onAfter)
     }
 
+    /**
+     * 强制执行
+     */
     internal val beforeListForce = mutableListOf<() -> Unit>()
     internal val successBeforeListForce = mutableListOf<(data: Any) -> Unit>()
     internal val successListForce = mutableListOf<(data: Any) -> Unit>()

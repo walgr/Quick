@@ -11,8 +11,8 @@ import android.widget.RelativeLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.tabs.TabLayout
 import com.wpf.app.quickutil.helper.children
-import com.wpf.app.quickutil.helper.matchMarginLayoutParams
 import com.wpf.app.quickutil.helper.generic.GenericEx
+import com.wpf.app.quickutil.helper.matchMarginLayoutParams
 import java.lang.reflect.Constructor
 
 enum class GroupType(val type: Int) {
@@ -76,10 +76,11 @@ internal interface QuickViewGroupI<T : ViewGroup> {
         shadowView: View?,
         context: Context,
         attrs: AttributeSet? = null,
-        defStyleAttr: Int = 0
+        defStyleAttr: Int = 0,
+        genericCls: Class<T>? = null,
     ): T? {
         if (shadowView != null) return shadowView as T
-        val tCls: Class<T>? = GenericEx.get0Clazz(this)
+        val tCls: Class<T>? = genericCls ?: GenericEx.get0Clazz(this)
         if ("ViewGroup" == tCls?.simpleName) return shadowView
         tCls?.let {
             val t = tCls.constructors.findLast {
@@ -104,7 +105,7 @@ internal interface QuickViewGroupI<T : ViewGroup> {
         return null
     }
 
-    fun addChildToT(shadowView: ViewGroup?, curView: ViewGroup) {
+    fun addChildToGroup(shadowView: ViewGroup?, curView: ViewGroup) {
         curView.children().forEach {
             shadowView?.addView(it)
         }

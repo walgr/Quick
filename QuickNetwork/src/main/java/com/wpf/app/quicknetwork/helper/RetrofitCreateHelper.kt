@@ -13,7 +13,7 @@ object RetrofitCreateHelper {
 
     private val retrofitMap: MutableMap<String, Retrofit> = mutableMapOf()
     private val retrofitServiceMap: MutableMap<Class<*>, Retrofit> = mutableMapOf()
-    val serviceMap: MutableMap<Class<*>, Any> = mutableMapOf()
+    val serviceMap: MutableMap<Class<*>, Any> = mutableMapOf()          //保存Retrofit create后的Service
 
     /**
      * 存储已经初始化过的Retrofit
@@ -26,7 +26,7 @@ object RetrofitCreateHelper {
     fun registerServices(baseUrl: String, serviceCls: Class<*>) {
         if (retrofitServiceMap[serviceCls] != retrofitMap[baseUrl]!!) {
             retrofitServiceMap[serviceCls] = retrofitMap[baseUrl]!!
-            createService(serviceCls)
+            serviceMap[serviceCls] = createService(serviceCls)
         }
     }
 
@@ -45,7 +45,7 @@ object RetrofitCreateHelper {
 
     fun newInstance(
         baseUrl: String,
-        serviceCls: Class<*>,
+        serviceCls: Class<*>? = null,
         callFactoryList: List<CallAdapter.Factory>? = null,
         converterFactoryList: List<Converter.Factory>? = null,
         okHttp: OkHttpClient = OkHttpCreateHelper.newInstance(),
@@ -66,7 +66,9 @@ object RetrofitCreateHelper {
             init?.invoke(retrofitBuilder)
             retrofit = retrofitBuilder.build()
             retrofitMap[baseUrl] = retrofit
-            retrofitServiceMap[serviceCls] = retrofit
+            serviceCls?.let {
+                retrofitServiceMap[serviceCls] = retrofit
+            }
         }
         return retrofit!!
     }

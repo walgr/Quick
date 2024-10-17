@@ -4,13 +4,13 @@ import android.annotation.SuppressLint
 import android.view.View
 import android.widget.TextView
 import com.wpf.app.quick.ability.QuickFragment
-import com.wpf.app.quickutil.ability.ex.contentView
 import com.wpf.app.quick.ability.ex.modelBinding
-import com.wpf.app.quickutil.ability.base.with
 import com.wpf.app.quick.annotations.bind.BindView
 import com.wpf.app.quick.demo.R
 import com.wpf.app.quick.demo.databinding.FragmentMainReleaseBinding
 import com.wpf.app.quickbind.annotations.BindSp2View
+import com.wpf.app.quickutil.ability.base.with
+import com.wpf.app.quickutil.ability.ex.contentView
 import com.wpf.app.quickutil.helper.postDelay
 
 class MainReleaseFragment : QuickFragment(
@@ -18,7 +18,7 @@ class MainReleaseFragment : QuickFragment(
 ) {
 
     @SuppressLint("NonConstantResourceId")
-    @BindSp2View(bindSp = "绑定的SpKey1", defaultValue = "默认值1")
+//    @BindSp2View(bindSp = "绑定的SpKey1", defaultValue = "默认值1")
     @BindView(R.id.spTextView1)
     var text1: TextView? = null
 

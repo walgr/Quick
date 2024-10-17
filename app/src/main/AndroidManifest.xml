@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!--    安装Apk-->
 
     <application
         android:name="com.wpf.app.quick.demo.App"
@@ -12,10 +14,11 @@
         android:theme="@style/Theme.Quick">
 
         <!--App页面-->
-        <activity android:name=".CodeMainActivity"
+        <activity
+            android:name=".CodeMainActivity"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -23,16 +26,16 @@
         <activity android:name=".RecyclerViewTestActivity" />
         <activity android:name=".IntentDataTestActivity" />
         <activity android:name=".SelectListTestActivity" />
-        <activity android:name=".ViewPagerNotifySizeTestActivity"/>
-        <activity android:name=".ViewPagerNotifyDataTestActivity"/>
-        <activity android:name=".RequestTestActivity"/>
-        <activity android:name=".DialogTestActivity"/>
-        <activity android:name=".ShadowViewTestActivity"/>
-        <activity android:name=".FragmentTestActivity"/>
-        <activity android:name=".BottomSheetDialogTestActivity"/>
-        <activity android:name=".WheelViewTestActivity"/>
-        <activity android:name=".wanandroid.WanAndroidHomeActivity"/>
-        <activity android:name=".wanandroid.WebViewActivity"/>
+        <activity android:name=".ViewPagerNotifySizeTestActivity" />
+        <activity android:name=".ViewPagerNotifyDataTestActivity" />
+        <activity android:name=".RequestTestActivity" />
+        <activity android:name=".DialogTestActivity" />
+        <activity android:name=".ShadowViewTestActivity" />
+        <activity android:name=".FragmentTestActivity" />
+        <activity android:name=".BottomSheetDialogTestActivity" />
+        <activity android:name=".WheelViewTestActivity" />
+        <activity android:name=".wanandroid.WanAndroidHomeActivity" />
+        <activity android:name=".wanandroid.WebViewActivity" />
     </application>
 
 </manifest>
