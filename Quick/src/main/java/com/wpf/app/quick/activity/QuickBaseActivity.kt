@@ -12,7 +12,7 @@ import androidx.activity.result.ActivityResultRegistry
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
-import com.wpf.app.quicknetwork.base.RequestCoroutineScope
+import com.wpf.app.quickutil.network.RequestCoroutineScope
 import com.wpf.app.quickutil.Quick
 import com.wpf.app.quickutil.bind.Bind
 import com.wpf.app.quickutil.bind.QuickBindWrap

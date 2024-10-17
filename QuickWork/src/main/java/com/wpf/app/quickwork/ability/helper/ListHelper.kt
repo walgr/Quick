@@ -1,16 +1,17 @@
-package com.wpf.app.quickrecyclerview.ability.helper
+package com.wpf.app.quickwork.ability.helper
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
+import com.wpf.app.quickutil.ability.helper.addView
+import com.wpf.app.quickutil.ability.scope.ContextScope
 import com.wpf.app.quickrecyclerview.QuickRecyclerView
 import com.wpf.app.quickrecyclerview.data.QuickItemData
 import com.wpf.app.quickrecyclerview.utils.SpaceType
-import com.wpf.app.quickutil.ability.helper.addView
-import com.wpf.app.quickutil.ability.scope.ContextScope
 import com.wpf.app.quickutil.helper.matchWrapMarginLayoutParams
+import com.wpf.app.quickwork.request2list.QuickRefreshRecyclerView
 
-fun ContextScope.list(
+fun ContextScope.refreshList(
     layoutParams: ViewGroup.LayoutParams = matchWrapMarginLayoutParams(),
     layoutManager: LayoutManager = LinearLayoutManager(context),
     space: Int? = null,
@@ -19,8 +20,8 @@ fun ContextScope.list(
     includeLast: Boolean = false,
     dataList: List<QuickItemData>? = null,
     builder: (QuickRecyclerView.() -> Unit)? = null,
-): QuickRecyclerView {
-    val list = QuickRecyclerView(context).apply {
+): QuickRefreshRecyclerView {
+    val list = QuickRefreshRecyclerView(context).apply {
         space?.let {
             setSpace(it, spaceType, includeFirst, includeLast)
         }

@@ -1,4 +1,4 @@
-package com.wpf.app.quickdialog.listeners
+package com.wpf.app.quickutil.utils
 
 import android.app.Activity
 import android.content.Context

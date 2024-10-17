@@ -2,7 +2,7 @@ package com.wpf.app.quickbind.utils
 
 import android.app.Activity
 import androidx.fragment.app.Fragment
-import com.wpf.app.quickbind.interfaces.BindBaseFragment
+import com.wpf.app.quickutil.bind.BindBaseFragment
 import com.wpf.app.quickutil.helper.generic.forceTo
 
 fun getFragment(

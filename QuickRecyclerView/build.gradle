@@ -43,7 +43,7 @@ dependencies {
     } else {
         api project(":QuickUtil")
         api project(":QuickBind")
-        api project(":QuickNetwork")
+//        api project(":QuickNetwork")
     }
 }
 

@@ -1,6 +1,6 @@
 package com.wpf.app.quickbind.annotations
 
-import com.wpf.app.quickbind.interfaces.BindBaseFragment
+import com.wpf.app.quickutil.bind.BindBaseFragment
 import kotlin.reflect.KClass
 
 /**

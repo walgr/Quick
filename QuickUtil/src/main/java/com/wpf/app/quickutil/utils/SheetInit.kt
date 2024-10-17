@@ -1,4 +1,4 @@
-package com.wpf.app.quickdialog.listeners
+package com.wpf.app.quickutil.utils
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 

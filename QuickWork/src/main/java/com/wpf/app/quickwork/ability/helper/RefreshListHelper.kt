@@ -17,11 +17,11 @@ import com.wpf.app.quickutil.ability.scope.ContextScope
 import com.wpf.app.quickutil.ability.scope.ViewGroupScope
 import com.wpf.app.quickutil.ability.scope.createViewGroupScope
 import com.wpf.app.quickbind.helper.binddatahelper.BindData2ViewHelper
-import com.wpf.app.quickrecyclerview.QuickRefreshRecyclerView
+import com.wpf.app.quickwork.request2list.QuickRefreshRecyclerView
 import com.wpf.app.quickrecyclerview.data.QuickItemData
-import com.wpf.app.quickrecyclerview.data.RequestData
-import com.wpf.app.quickrecyclerview.helper.Request2RefreshView
-import com.wpf.app.quickrecyclerview.listeners.Request2ListWithView
+import com.wpf.app.quickwork.request2list.RequestData
+import com.wpf.app.quickwork.request2list.Request2RefreshView
+import com.wpf.app.quickwork.request2list.Request2ListWithView
 import com.wpf.app.quickutil.helper.InitViewHelper
 import com.wpf.app.quickutil.helper.matchMarginLayoutParams
 import com.wpf.app.quickutil.helper.matchWrapMarginLayoutParams

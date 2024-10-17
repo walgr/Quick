@@ -1,13 +1,12 @@
-package com.wpf.app.quickrecyclerview
+package com.wpf.app.quickwork.request2list
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import com.wpf.app.quicknetwork.utils.RequestCallback
+import com.wpf.app.quickrecyclerview.QuickRecyclerView
 import com.wpf.app.quickrecyclerview.data.QuickItemData
-import com.wpf.app.quickrecyclerview.data.RequestData
 import com.wpf.app.quickrecyclerview.listeners.RefreshResult
-import com.wpf.app.quickrecyclerview.listeners.Request2ListWithView
 import com.wpf.app.quickutil.helper.generic.asTo
 import com.wpf.app.quickutil.helper.generic.nullDefault
 

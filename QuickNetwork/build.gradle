@@ -27,7 +27,6 @@ android {
 }
 
 dependencies {
-    implementation deps.androidx.annotation
     implementation deps.kotlin.kotlinxcoroutinescore
     //retrofit2-okhttp-gson
     api deps.retrofit

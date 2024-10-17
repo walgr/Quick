@@ -13,7 +13,7 @@ import com.wpf.app.quickdialog.helper.DialogSizeHelper
 import com.wpf.app.quickdialog.listeners.DialogLifecycle
 import com.wpf.app.quickdialog.listeners.DialogSize
 import com.wpf.app.quickdialog.minAndMaxLimit.SizeLimitViewGroup
-import com.wpf.app.quicknetwork.base.RequestCoroutineScope
+import com.wpf.app.quickutil.network.RequestCoroutineScope
 import com.wpf.app.quickutil.Quick
 import com.wpf.app.quickutil.bind.QuickBindWrap
 import com.wpf.app.quickutil.helper.InitViewHelper

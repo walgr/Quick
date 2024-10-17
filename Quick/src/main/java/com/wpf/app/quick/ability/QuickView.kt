@@ -11,7 +11,7 @@ import com.wpf.app.quickutil.ability.base.QuickAbility
 import com.wpf.app.quickutil.ability.base.QuickGenerateViewAbility
 import com.wpf.app.quickutil.ability.base.QuickInflateViewAbility
 import com.wpf.app.quickutil.ability.base.QuickInitViewAbility
-import com.wpf.app.quicknetwork.base.RequestCoroutineScope
+import com.wpf.app.quickutil.network.RequestCoroutineScope
 import com.wpf.app.quickutil.helper.InitViewHelper
 import com.wpf.app.quickutil.helper.match
 import com.wpf.app.quickutil.helper.reset

@@ -14,8 +14,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
-import com.wpf.app.quickbind.interfaces.BindBaseFragment
-import com.wpf.app.quicknetwork.base.RequestCoroutineScope
+import com.wpf.app.quickutil.bind.BindBaseFragment
+import com.wpf.app.quickutil.network.RequestCoroutineScope
 import com.wpf.app.quickutil.Quick
 import com.wpf.app.quickutil.bind.Bind
 import com.wpf.app.quickutil.bind.QuickBindWrap

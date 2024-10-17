@@ -1,6 +1,6 @@
 package com.wpf.app.quick.demo.model
 
-import com.wpf.app.quickrecyclerview.data.RequestData
+import com.wpf.app.quickwork.request2list.RequestData
 
 /**
  * Created by 王朋飞 on 2022/7/8.

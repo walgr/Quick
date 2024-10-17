@@ -16,12 +16,12 @@ import com.wpf.app.quickdialog.helper.DialogSheetHelper
 import com.wpf.app.quickdialog.helper.DialogSizeHelper
 import com.wpf.app.quickdialog.listeners.DialogLifecycle
 import com.wpf.app.quickdialog.listeners.DialogSize
-import com.wpf.app.quickdialog.listeners.SheetInit
+import com.wpf.app.quickutil.utils.SheetInit
 import com.wpf.app.quickdialog.minAndMaxLimit.SizeLimitViewGroup
-import com.wpf.app.quicknetwork.base.RequestCoroutineScope
 import com.wpf.app.quickutil.Quick
 import com.wpf.app.quickutil.bind.QuickBindWrap
 import com.wpf.app.quickutil.helper.InitViewHelper
+import com.wpf.app.quickutil.network.RequestCoroutineScope
 import kotlinx.coroutines.Job
 
 /**
@@ -33,7 +33,8 @@ open class QuickBaseBottomSheetDialog(
     @LayoutRes private val layoutId: Int = 0,
     private val layoutView: View? = null,
     private var layoutViewCreate: (Context.() -> View)? = null,
-) : BottomSheetDialog(context, true, null), SheetInit, DialogSize, DialogLifecycle, RequestCoroutineScope, Quick {
+) : BottomSheetDialog(context, true, null),
+    SheetInit, DialogSize, DialogLifecycle, RequestCoroutineScope, Quick {
 
     override var jobManager: MutableList<Job> = mutableListOf()
 
@@ -58,10 +59,7 @@ open class QuickBaseBottomSheetDialog(
         dealSize()
         mView = generateContentView(
             InitViewHelper.init(
-                context,
-                layoutId,
-                layoutView,
-                layoutViewCreate
+                context, layoutId, layoutView, layoutViewCreate
             )
         )
         if (initDialogAdaptiveHeight()) {
@@ -94,6 +92,7 @@ open class QuickBaseBottomSheetDialog(
 
     @Suppress("MemberVisibilityCanBePrivate")
     protected var mScreenWidth = 0
+
     @Suppress("MemberVisibilityCanBePrivate")
     protected var mScreenHeight = 0
 
@@ -106,6 +105,7 @@ open class QuickBaseBottomSheetDialog(
 
     @Suppress("MemberVisibilityCanBePrivate")
     protected var mNewWidth = 0
+
     @Suppress("MemberVisibilityCanBePrivate")
     protected var mNewHeight = 0
 
@@ -137,6 +137,7 @@ open class QuickBaseBottomSheetDialog(
     override fun getLifecycleDialog(): Dialog {
         return this
     }
+
     override var funcPrepare: (() -> Unit)? = null
     override var funcShow: (Dialog.() -> Unit)? = null
     override var funcDismiss: (Dialog.() -> Unit)? = null

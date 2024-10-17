@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModel
 import androidx.viewpager.widget.ViewPager
 import com.wpf.app.quickbind.annotations.BindFragment
-import com.wpf.app.quickbind.interfaces.BindBaseFragment
+import com.wpf.app.quickutil.bind.BindBaseFragment
 import com.wpf.app.quickbind.utils.getFragment
 import com.wpf.app.quickbind.viewpager.adapter.FragmentsAdapter
 import com.wpf.app.quickbind.viewpager.adapter.FragmentsStateAdapter

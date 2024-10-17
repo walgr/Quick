@@ -27,31 +27,19 @@ android {
 }
 
 dependencies {
-    //ktx核心
-    compileOnly deps.androidx.corektx
-    //activity-ktx
-    compileOnly deps.androidx.activityktx
-    compileOnly deps.androidx.appcompat
-    //fragment-ktx
-    compileOnly deps.androidx.fragmentktx
-    //列表
-    compileOnly deps.androidx.recyclerview
-
-    compileOnly deps.androidx.material
-
     //Glide
-    compileOnly deps.glide
+    implementation deps.glide
     //GSON
-    compileOnly deps.gson
+    implementation deps.gson
     //viewpager2
-    compileOnly deps.viewpager2
+    implementation deps.viewpager2
 
     if (IS_REMOTE.toBoolean()) {
         api deps.quickbind.annotations
-        api deps.quickbind.network
+        api deps.quickbind.util
     } else {
         api project(":Quick-annotations")
-        api project(":QuickNetwork")
+        api project(":QuickUtil")
     }
 }
 

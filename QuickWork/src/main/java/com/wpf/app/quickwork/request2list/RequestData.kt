@@ -1,4 +1,4 @@
-package com.wpf.app.quickrecyclerview.data
+package com.wpf.app.quickwork.request2list
 
 import androidx.annotation.CallSuper
 
@@ -36,7 +36,7 @@ open class RequestData @JvmOverloads constructor(
         offset += size
     }
 
-    internal fun <T : RequestData> resetData(build: T.() -> Unit) {
+    fun <T : RequestData> resetData(build: T.() -> Unit) {
         build.invoke(this as T)
         this.firstPage = this.page
     }

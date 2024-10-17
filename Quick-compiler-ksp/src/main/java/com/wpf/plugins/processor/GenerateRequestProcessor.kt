@@ -42,7 +42,7 @@ class GenerateRequestProcessor(environment: SymbolProcessorEnvironment) :
         val wpfRequest = ClassName("com.wpf.app.quicknetwork.base", "WpfRequest")
         val realCall = ClassName("com.wpf.app.quicknetwork.call", "RealCall")
         val requestCoroutineScope =
-            ClassName("com.wpf.app.quicknetwork.base", "RequestCoroutineScope")
+            ClassName("com.wpf.app.quickutil.network", "RequestCoroutineScope")
 
         val defaultFunBuilder = FunSpec.builder(funName)
             .addModifiers(KModifier.INLINE)

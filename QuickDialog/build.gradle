@@ -28,14 +28,11 @@ android {
 
 dependencies {
     implementation deps.androidx.material
-    implementation deps.androidx.activityktx
 
     if (IS_REMOTE.toBoolean()) {
         api deps.quickbind.util
-        api deps.quickbind.bind
     } else {
         api project(":QuickUtil")
-        api project(":QuickBind")
     }
 }
 

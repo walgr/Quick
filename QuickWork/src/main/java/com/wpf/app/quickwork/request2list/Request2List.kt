@@ -1,12 +1,10 @@
-package com.wpf.app.quickrecyclerview.listeners
+package com.wpf.app.quickwork.request2list
 
 import androidx.annotation.CallSuper
 import com.wpf.app.quicknetwork.base.BaseRequest
 import com.wpf.app.quicknetwork.base.BaseResponseI
 import com.wpf.app.quicknetwork.utils.RequestCallback
-import com.wpf.app.quickrecyclerview.QuickRefreshRecyclerView
 import com.wpf.app.quickrecyclerview.data.QuickItemData
-import com.wpf.app.quickrecyclerview.data.RequestData
 
 /**
  * Created by 王朋飞 on 2022/7/13.

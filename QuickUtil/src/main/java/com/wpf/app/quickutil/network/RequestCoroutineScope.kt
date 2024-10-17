@@ -1,4 +1,4 @@
-package com.wpf.app.quicknetwork.base
+package com.wpf.app.quickutil.network
 
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
@@ -6,6 +6,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlin.coroutines.CoroutineContext
 
+/**
+ * Created by 王朋飞 on 2022/7/22.
+ * 注解使用此类，移动需要修改注解代码
+ */
 interface RequestCoroutineScope: CoroutineScope {
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main

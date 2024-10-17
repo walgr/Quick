@@ -1,17 +1,17 @@
 package com.wpf.app.quick.demo.wanandroid.fragment
 
 import android.widget.FrameLayout
-import com.wpf.app.quickutil.ability.ex.contentView
 import com.wpf.app.quick.ability.QuickFragment
 import com.wpf.app.quick.demo.http.request
 import com.wpf.app.quick.demo.model.ListRequest
 import com.wpf.app.quick.demo.wanandroid.model.Article
 import com.wpf.app.quick.demo.widgets.emptyview.TestEmptyView
-import com.wpf.app.quickrecyclerview.listeners.requestData2List
-import com.wpf.app.quickutil.utils.LogUtil
+import com.wpf.app.quickutil.ability.ex.contentView
 import com.wpf.app.quickutil.helper.generic.forceTo
+import com.wpf.app.quickutil.utils.LogUtil
 import com.wpf.app.quickwidget.emptyview.EmptyHelper.bind
 import com.wpf.app.quickwork.ability.helper.smartRefreshList
+import com.wpf.app.quickwork.request2list.requestData2List
 
 class RecommendFragment : QuickFragment(
     contentView<FrameLayout> {

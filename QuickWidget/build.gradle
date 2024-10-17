@@ -27,9 +27,6 @@ android {
 }
 
 dependencies {
-
-    implementation deps.androidx.appcompat
-
     implementation deps.androidx.material
     //约束布局
     implementation deps.androidx.constraintlayout
@@ -38,15 +35,11 @@ dependencies {
     implementation deps.flexbox
 
     if (IS_REMOTE.toBoolean()) {
-        api deps.quickbind.bind
         api deps.quickbind.util
         api deps.quickbind.recyclerview
-        api deps.quickbind.dialog
     } else {
-        api project(":QuickBind")
         api project(":QuickUtil")
         api project(":QuickRecyclerView")
-        api project(":QuickDialog")
     }
 }
 

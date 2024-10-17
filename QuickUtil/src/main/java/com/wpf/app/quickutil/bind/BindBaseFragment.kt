@@ -1,4 +1,4 @@
-package com.wpf.app.quickbind.interfaces
+package com.wpf.app.quickutil.bind
 
 import android.app.Activity
 import android.os.Bundle
