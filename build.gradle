@@ -3,12 +3,12 @@ buildscript {
     // Define versions in a single place
     ext {
         // Sdk and tools
-        gradleVersion = '7.2.2'
+        gradleVersion = '7.3.1'
         compileSdkVersion = 33
         minSdkVersion = 21
         targetSdkVersion = 33
-        kotlin = "1.9.22"
-        ksp = "1.9.22-1.0.17"
+        kotlin = "2.1.0"
+        ksp = "2.1.0-1.0.29"
 
         release = VERSION_NAME
 

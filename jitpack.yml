@@ -1,13 +1,13 @@
 jdk:
   - openjdk11
 install:
-  - ./gradlew :Quick-annotations:publishToMavenLocal
-  - ./gradlew :Quick-compiler-ksp:publishToMavenLocal
-  - ./gradlew :QuickUtil:publishToMavenLocal
-  - ./gradlew :QuickNetwork:publishToMavenLocal
-  - ./gradlew :QuickBind:publishToMavenLocal
-  - ./gradlew :QuickRecyclerView:publishToMavenLocal
-  - ./gradlew :QuickDialog:publishToMavenLocal
-  - ./gradlew :QuickWidget:publishToMavenLocal
-  - ./gradlew :Quick:publishToMavenLocal
-  - ./gradlew :QuickWork:publishToMavenLocal
+  - ./gradlew :Quick-annotations:publishReleasePublicationToMavenLocal
+  - ./gradlew :Quick-compiler-ksp:publishReleasePublicationToMavenLocal
+  - ./gradlew :QuickUtil:publishReleasePublicationToMavenLocal
+  - ./gradlew :QuickNetwork:publishReleasePublicationToMavenLocal
+  - ./gradlew :QuickBind:publishReleasePublicationToMavenLocal
+  - ./gradlew :QuickRecyclerView:publishReleasePublicationToMavenLocal
+  - ./gradlew :QuickDialog:publishReleasePublicationToMavenLocal
+  - ./gradlew :QuickWidget:publishReleasePublicationToMavenLocal
+  - ./gradlew :Quick:publishReleasePublicationToMavenLocal
+  - ./gradlew :QuickWork:publishReleasePublicationToMavenLocal
