@@ -18,7 +18,7 @@ abstract class BaseEmptyView @JvmOverloads constructor(
     override var curState: EmptyViewState = StateLoading,
 ) : FrameLayout(mContext, attrs, defStyleAttr), EmptyViewStateManager {
 
-    override val registerStateMap: MutableMap<Int, DealStateFun<EmptyViewState>> = mutableMapOf()
+    override val registerStateMap: MutableMap<Int, StateClassAndFun<out EmptyViewState>> = mutableMapOf()
 
     init {
         init()

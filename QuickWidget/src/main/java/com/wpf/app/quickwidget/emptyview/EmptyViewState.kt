@@ -3,22 +3,31 @@ package com.wpf.app.quickwidget.emptyview
 import com.wpf.app.quickutil.helper.generic.forceTo
 
 interface EmptyViewStateManager {
-    val registerStateMap: MutableMap<Int, DealStateFun<EmptyViewState>>
+    val registerStateMap: MutableMap<Int, StateClassAndFun<out EmptyViewState>>
     var curState: EmptyViewState
     fun changeState(state: EmptyViewState) {
         this.curState = state
-        val dealStateFun =
+        val stateClassAndFun =
             registerStateMap[getClassFirstInterface<EmptyViewState>(state)] ?: return
-        val stateClass: Class<EmptyViewState> =
-            dealStateFun.javaClass.methods.find { it.name == "invoke" }!!.parameterTypes.first()
-                .forceTo()
+        val dealStateFun: DealStateFun<EmptyViewState> = stateClassAndFun.dealStateFun as DealStateFun<EmptyViewState>
+        val stateClass: Class<EmptyViewState> = stateClassAndFun.statusClass as Class<EmptyViewState>
         if (stateClass == state.javaClass) {
             dealStateFun.invoke(state)
         } else {
             when (state) {
+                is NoErrorI -> {
+                    dealStateFun.invoke(
+                        stateClass.getDeclaredConstructor().newInstance()
+                    )
+                }
                 is LoadingI -> {
                     dealStateFun.invoke(
                         stateClass.getDeclaredConstructor(Boolean::class.java).newInstance(state.listIsEmpty)
+                    )
+                }
+                is SuccessI -> {
+                    dealStateFun.invoke(
+                        stateClass.getDeclaredConstructor().newInstance()
                     )
                 }
                 is StateNetError -> {
@@ -46,7 +55,7 @@ interface EmptyViewStateManager {
 
 inline fun <reified T : EmptyViewState> EmptyViewStateManager.register(noinline dealState: T.() -> Unit) {
     val key = getClassFirstInterface<T>()
-    registerStateMap[key] = dealState.forceTo<DealStateFun<EmptyViewState>>()
+    registerStateMap[key] = StateClassAndFun(T::class.java, dealState.forceTo<DealStateFun<EmptyViewState>>())
 }
 
 inline fun <reified T : EmptyViewState> EmptyViewStateManager.unRegister() {
@@ -54,6 +63,9 @@ inline fun <reified T : EmptyViewState> EmptyViewStateManager.unRegister() {
     registerStateMap.remove(key)
 }
 
+/**
+ * 找到最终的接口类[NoErrorI,LoadingI,SuccessI,EmptyDataI,CustomErrorI]
+ */
 inline fun <reified T : EmptyViewState> getClassFirstInterface(state: EmptyViewState? = null): Int {
     var hashCode = T::class.java.hashCode()
     var curObj: Class<*> = state?.javaClass ?: T::class.java
@@ -68,6 +80,8 @@ inline fun <reified T : EmptyViewState> getClassFirstInterface(state: EmptyViewS
 }
 
 typealias DealStateFun<T> = T.() -> Unit
+
+class StateClassAndFun<T>(val statusClass: Class<T>, val dealStateFun: DealStateFun<T>)
 
 interface EmptyViewState
 

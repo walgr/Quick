@@ -34,6 +34,8 @@ dependencies {
     implementation deps.androidx.recyclerview
     implementation deps.flexbox
 
+//    implementation deps.kotlin_reflect
+
     if (IS_REMOTE.toBoolean()) {
         api deps.quickbind.util
         api deps.quickbind.recyclerview
