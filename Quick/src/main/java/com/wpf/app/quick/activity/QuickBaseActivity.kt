@@ -8,15 +8,14 @@ import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.ActivityResultRegistry
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
-import com.wpf.app.quickutil.network.RequestCoroutineScope
 import com.wpf.app.quickutil.Quick
 import com.wpf.app.quickutil.bind.Bind
 import com.wpf.app.quickutil.bind.QuickBindWrap
 import com.wpf.app.quickutil.helper.InitViewHelper
+import com.wpf.app.quickutil.network.RequestCoroutineScope
 import kotlinx.coroutines.Job
 
 /**
@@ -60,7 +59,6 @@ open class QuickBaseActivity @JvmOverloads constructor(
 
     var launcher: ActivityResultLauncher<Intent>? = null
 
-    private var resultRegister: ActivityResultRegistry? = null
     private var resultCallback: ActivityResultCallback<ActivityResult>? = null
     open fun registerForActivityResult(
         resultCallback: ActivityResultCallback<ActivityResult>,

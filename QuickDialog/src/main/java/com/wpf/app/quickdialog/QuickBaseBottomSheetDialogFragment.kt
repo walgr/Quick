@@ -13,7 +13,6 @@ import android.view.Window
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.ActivityResultRegistry
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
@@ -26,7 +25,6 @@ import com.wpf.app.quickdialog.helper.DialogSheetHelper
 import com.wpf.app.quickdialog.helper.DialogSizeHelper
 import com.wpf.app.quickdialog.listeners.DialogLifecycle
 import com.wpf.app.quickdialog.listeners.DialogSize
-import com.wpf.app.quickutil.utils.SheetInit
 import com.wpf.app.quickdialog.minAndMaxLimit.SizeLimitViewGroup
 import com.wpf.app.quickutil.Quick
 import com.wpf.app.quickutil.bind.Bind
@@ -34,6 +32,7 @@ import com.wpf.app.quickutil.bind.BindBaseFragment
 import com.wpf.app.quickutil.bind.QuickBindWrap
 import com.wpf.app.quickutil.helper.InitViewHelper
 import com.wpf.app.quickutil.network.RequestCoroutineScope
+import com.wpf.app.quickutil.utils.SheetInit
 import kotlinx.coroutines.Job
 
 /**
@@ -61,7 +60,6 @@ open class QuickBaseBottomSheetDialogFragment @JvmOverloads constructor(
     }
 
     private var launcher: ActivityResultLauncher<Intent>? = null
-    private var resultRegister: ActivityResultRegistry? = null
     private var resultCallback: ActivityResultCallback<ActivityResult>? = null
     open fun registerForActivityResult(
         resultCallback: ActivityResultCallback<ActivityResult>,

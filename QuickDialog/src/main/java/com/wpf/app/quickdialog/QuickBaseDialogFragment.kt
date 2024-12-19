@@ -13,7 +13,6 @@ import android.view.Window
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.ActivityResultRegistry
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
@@ -21,16 +20,16 @@ import androidx.annotation.StyleRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
-import com.wpf.app.quickutil.bind.BindBaseFragment
 import com.wpf.app.quickdialog.helper.DialogSizeHelper
 import com.wpf.app.quickdialog.listeners.DialogLifecycle
 import com.wpf.app.quickdialog.listeners.DialogSize
 import com.wpf.app.quickdialog.minAndMaxLimit.SizeLimitViewGroup
-import com.wpf.app.quickutil.network.RequestCoroutineScope
 import com.wpf.app.quickutil.Quick
 import com.wpf.app.quickutil.bind.Bind
+import com.wpf.app.quickutil.bind.BindBaseFragment
 import com.wpf.app.quickutil.bind.QuickBindWrap
 import com.wpf.app.quickutil.helper.InitViewHelper
+import com.wpf.app.quickutil.network.RequestCoroutineScope
 import kotlinx.coroutines.Job
 
 /**
@@ -57,7 +56,6 @@ open class QuickBaseDialogFragment @JvmOverloads constructor(
     }
 
     private var launcher: ActivityResultLauncher<Intent>? = null
-    private var resultRegister: ActivityResultRegistry? = null
     private var resultCallback: ActivityResultCallback<ActivityResult>? = null
     open fun registerForActivityResult(
         resultCallback: ActivityResultCallback<ActivityResult>,
