@@ -12,22 +12,22 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.scwang.smart.refresh.layout.api.RefreshFooter
 import com.scwang.smart.refresh.layout.api.RefreshHeader
 import com.scwang.smart.refresh.layout.api.RefreshLayout
+import com.wpf.app.quickbind.helper.binddatahelper.BindData2ViewHelper
+import com.wpf.app.quickrecyclerview.data.QuickItemData
 import com.wpf.app.quickutil.ability.helper.addView
 import com.wpf.app.quickutil.ability.scope.ContextScope
 import com.wpf.app.quickutil.ability.scope.ViewGroupScope
 import com.wpf.app.quickutil.ability.scope.createViewGroupScope
-import com.wpf.app.quickbind.helper.binddatahelper.BindData2ViewHelper
-import com.wpf.app.quickwork.request2list.QuickRefreshRecyclerView
-import com.wpf.app.quickrecyclerview.data.QuickItemData
-import com.wpf.app.quickwork.request2list.RequestData
-import com.wpf.app.quickwork.request2list.Request2RefreshView
-import com.wpf.app.quickwork.request2list.Request2ListWithView
 import com.wpf.app.quickutil.helper.InitViewHelper
+import com.wpf.app.quickutil.helper.generic.forceTo
 import com.wpf.app.quickutil.helper.matchMarginLayoutParams
 import com.wpf.app.quickutil.helper.matchWrapMarginLayoutParams
 import com.wpf.app.quickutil.helper.parent
 import com.wpf.app.quickutil.helper.removeParent
-import com.wpf.app.quickutil.helper.generic.forceTo
+import com.wpf.app.quickwork.request2list.QuickRefreshRecyclerView
+import com.wpf.app.quickwork.request2list.Request2ListWithView
+import com.wpf.app.quickwork.request2list.Request2RefreshView
+import com.wpf.app.quickwork.request2list.RequestData
 
 fun <V : View> ContextScope.smartRefreshLayout(
     smartRefreshLayout: SmartRefreshLayout? = null,

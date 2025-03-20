@@ -16,19 +16,20 @@ import com.wpf.app.quick.helper.getLifecycle
 import com.wpf.app.quick.helper.toFragment
 import com.wpf.app.quickbind.utils.getFragment
 import com.wpf.app.quickbind.viewpager2.adapter.Fragments2StateAdapter
+import com.wpf.app.quickutil.ability.scope.QuickViewScope
 import com.wpf.app.quickutil.helper.InitViewHelper
 import com.wpf.app.quickutil.helper.matchMarginLayoutParams
 import com.wpf.app.quickutil.helper.removeParent
 import com.wpf.app.quickutil.helper.generic.forceTo
 
-fun ContextScope.viewPager2(
+fun <T> T.viewPager2(
     layoutParams: ViewGroup.LayoutParams = matchMarginLayoutParams(),
     id: Int = R.id.quickViewPager,
-    quick: Quick,
+    quick: Quick = self,
     fragments: List<Fragment>,
     limit: Int = 0,
     builder: (ViewPager2.() -> Unit)? = null,
-): ViewPager2 {
+): ViewPager2 where T : ContextScope, T : QuickViewScope<*> {
     val viewPager2 = ViewPager2(context)
     viewPager2.id = id
     viewPager2.adapter =
@@ -46,16 +47,16 @@ fun ContextScope.viewPager2(
 }
 
 @Suppress("unused")
-inline fun <reified F : Fragment> ContextScope.viewPager2(
+inline fun <reified F : Fragment, T> T.viewPager2(
     layoutParams: ViewGroup.LayoutParams = matchMarginLayoutParams(),
     id: Int = R.id.quickViewPager,
-    quick: Quick,
+    quick: Quick = self,
     defaultSize: Int = 1,
     limit: Int = 0,
     isLoop: Boolean = false,
     noinline fragmentDataInit: ((Int) -> Bundle)? = null,
     noinline builder: (ViewPager2.() -> Unit)? = null,
-): ViewPager2 {
+): ViewPager2 where T : ContextScope, T : QuickViewScope<*> {
     val viewPager2 = ViewPager2(context)
     viewPager2.id = id
     val defaultPos = if (isLoop) Int.MAX_VALUE / 2 else 0
@@ -98,16 +99,16 @@ inline fun <reified F : Fragment> ContextScope.viewPager2(
 }
 
 @Suppress("unused")
-inline fun <reified T : View> ContextScope.viewPager2WithView(
+inline fun <reified T : View, H> H.viewPager2WithView(
     layoutParams: ViewGroup.LayoutParams = matchMarginLayoutParams(),
     id: Int = R.id.quickViewPager,
-    quick: Quick,
+    quick: Quick = self,
     defaultSize: Int = 1,
     limit: Int = 0,
     isLoop: Boolean = false,
     noinline viewInit: (T.(Int) -> Unit)? = null,
     noinline builder: (ViewPager2.() -> Unit)? = null,
-): ViewPager2 {
+): ViewPager2 where H : ContextScope, H : QuickViewScope<*> {
     val viewPager2 = ViewPager2(context)
     viewPager2.id = id
     val defaultPos = if (isLoop) Int.MAX_VALUE / 2 else 0
@@ -144,14 +145,14 @@ inline fun <reified T : View> ContextScope.viewPager2WithView(
     return viewPager2
 }
 
-fun ContextScope.viewPager2WithView(
+fun <T> T.viewPager2WithView(
     layoutParams: ViewGroup.LayoutParams = matchMarginLayoutParams(),
     id: Int = R.id.quickViewPager,
-    quick: Quick,
+    quick: Quick = self,
     views: List<View>,
     limit: Int = 0,
     builder: (ViewPager2.() -> Unit)? = null,
-): ViewPager2 {
+): ViewPager2 where T : ContextScope, T : QuickViewScope<*>  {
     val contentFragmentList = views.map {
         val contentView = FrameLayout(context)
         contentView.layoutParams = matchMarginLayoutParams()
@@ -162,13 +163,13 @@ fun ContextScope.viewPager2WithView(
 }
 
 @Suppress("unused")
-fun ContextScope.viewPager2(
+fun <T> T.viewPager2(
     layoutParams: ViewGroup.LayoutParams = matchMarginLayoutParams(),
     id: Int = R.id.quickViewPager,
-    quick: Quick,
+    quick: Quick = self,
     limit: Int = 0,
     builder: ViewGroup.() -> Unit,
-): ViewPager2 {
+): ViewPager2 where T : ContextScope, T : QuickViewScope<*>  {
     val viewGroup = FrameLayout(context)
     builder.invoke(viewGroup)
     val childViews = viewGroup.children.toList()

@@ -7,18 +7,19 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.PagerAdapter
-import com.wpf.app.quickutil.Quick
-import com.wpf.app.quickutil.ability.helper.addView
-import com.wpf.app.quickutil.ability.scope.ContextScope
 import com.wpf.app.quick.R
 import com.wpf.app.quick.helper.getFragmentManager
 import com.wpf.app.quick.helper.toFragment
 import com.wpf.app.quickbind.utils.getFragment
 import com.wpf.app.quickbind.viewpager.adapter.FragmentsAdapter
 import com.wpf.app.quickbind.viewpager.adapter.FragmentsStateAdapter
+import com.wpf.app.quickutil.Quick
+import com.wpf.app.quickutil.ability.helper.addView
+import com.wpf.app.quickutil.ability.scope.ContextScope
+import com.wpf.app.quickutil.ability.scope.QuickViewScope
 import com.wpf.app.quickutil.helper.InitViewHelper
-import com.wpf.app.quickutil.helper.matchMarginLayoutParams
 import com.wpf.app.quickutil.helper.generic.forceTo
+import com.wpf.app.quickutil.helper.matchMarginLayoutParams
 import com.wpf.app.quickwidget.viewpager.QuickViewPager
 import kotlin.math.abs
 
@@ -117,15 +118,15 @@ inline fun <reified F : Fragment> ContextScope.viewPager(
     return viewPager
 }
 
-fun ContextScope.viewPager(
+fun <T> T.viewPager(
     layoutParams: ViewGroup.LayoutParams = matchMarginLayoutParams(),
     id: Int = R.id.quickViewPager,
-    quick: Quick,
+    quick: Quick = self,
     fragments: List<Fragment>,
     withState: Boolean = true,
     limit: Int = 0,
     builder: (QuickViewPager.() -> Unit)? = null,
-): QuickViewPager {
+): QuickViewPager where T : ContextScope, T : QuickViewScope<*>  {
     val viewPager = QuickViewPager(context)
     viewPager.id = id
     if (withState) {
@@ -150,17 +151,17 @@ fun ContextScope.viewPager(
 }
 
 @Suppress("unused")
-inline fun <reified T : View> ContextScope.viewPagerWithView(
+inline fun <reified T : View, H> H.viewPagerWithView(
     layoutParams: ViewGroup.LayoutParams = matchMarginLayoutParams(),
     id: Int = R.id.quickViewPager,
-    quick: Quick,
+    quick: Quick = self,
     withState: Boolean = true,
     defaultSize: Int = 1,
     limit: Int = 0,
     isLoop: Boolean = false,
     noinline viewInit: (T.(Int) -> Unit)? = null,
     noinline builder: (QuickViewPager.() -> Unit)? = null,
-): QuickViewPager {
+): QuickViewPager where H : ContextScope, H : QuickViewScope<*>  {
     val viewPager = QuickViewPager(context)
     viewPager.id = id
     val defaultPos = if (isLoop) Int.MAX_VALUE / 2 else 0
@@ -212,15 +213,15 @@ inline fun <reified T : View> ContextScope.viewPagerWithView(
 }
 
 @Suppress("unused")
-fun ContextScope.viewPagerWithView(
+fun <T> T.viewPagerWithView(
     layoutParams: ViewGroup.LayoutParams = matchMarginLayoutParams(),
     id: Int = R.id.quickViewPager,
-    quick: Quick,
+    quick: Quick = self,
     views: List<View>,
     withState: Boolean = true,
     limit: Int = 0,
     builder: (QuickViewPager.() -> Unit)? = null,
-): QuickViewPager {
+): QuickViewPager where T : ContextScope, T : QuickViewScope<*>  {
     val contentFragmentList = views.map {
         val contentView = FrameLayout(context)
         contentView.layoutParams = matchMarginLayoutParams()
@@ -231,15 +232,15 @@ fun ContextScope.viewPagerWithView(
 }
 
 @Suppress("unused")
-fun ContextScope.viewPagerBuilder(
+fun <T> T.viewPagerBuilder(
     layoutParams: ViewGroup.LayoutParams = matchMarginLayoutParams(),
     id: Int = R.id.quickViewPager,
-    quick: Quick,
+    quick: Quick = self,
     withState: Boolean = true,
     limit: Int = 0,
     viewConvert: ((view: View) -> Fragment)? = null,
     builder: (FragmentGroup.() -> Unit)? = null,
-): QuickViewPager {
+): QuickViewPager where T : ContextScope, T : QuickViewScope<*> {
     val viewGroup = FragmentGroup(context, viewConvert)
     builder?.invoke(viewGroup)
     return viewPager(layoutParams, id, quick, viewGroup.fragmentList, withState, limit)

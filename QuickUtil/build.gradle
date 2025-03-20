@@ -33,6 +33,7 @@ dependencies {
     //列表
     implementation deps.androidx.recyclerview
     implementation deps.androidx.material
+    implementation deps.viewpager2
     //shapeView
     api deps.shapeofview
 }

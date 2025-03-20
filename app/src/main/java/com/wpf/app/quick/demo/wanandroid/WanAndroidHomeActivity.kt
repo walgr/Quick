@@ -90,7 +90,7 @@ class WanAndroidHomeActivity : QuickActivity(contentView<LinearLayout> {
         }
     }, bottomScrollLayout = {
         withViewGroupScope {
-            viewPagerBuilder(quick = this@contentView.self) {
+            viewPagerBuilder {
                 fragment(RecommendFragment())
                 viewFragment {
                     viewGroupCreate<NestedScrollView>(layoutParams = matchMarginLayoutParams()) {
