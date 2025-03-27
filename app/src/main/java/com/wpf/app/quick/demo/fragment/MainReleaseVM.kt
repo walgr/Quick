@@ -14,6 +14,7 @@ import com.wpf.app.quick.demo.RecyclerViewTestActivity
 import com.wpf.app.quick.demo.SelectListTestActivity
 import com.wpf.app.quick.demo.ViewPagerNotifySizeTestActivity
 import com.wpf.app.quick.demo.WheelViewTestActivity
+import com.wpf.app.quick.demo.bluetooth.BluetoothActivity
 import com.wpf.app.quick.demo.databinding.FragmentMainReleaseBinding
 import com.wpf.app.quick.demo.model.MyMessage
 import com.wpf.app.quick.demo.wanandroid.WanAndroidHomeActivity
@@ -43,6 +44,11 @@ class MainReleaseVM: QuickVBModel<MainReleaseFragment, FragmentMainReleaseBindin
             it.resultCode.printLog("返回数据成功")
         }
     }
+
+    fun gotoBluetoothTest(view: View?) {
+        view?.context?.startActivity<BluetoothActivity>()
+    }
+
 
     fun gotoDialog(view: View?) {
         view?.context?.startActivity<DialogTestActivity>()

@@ -86,6 +86,7 @@ dependencies {
         ksp deps.quickbind.compiler_ksp
     } else {
         implementation project(":QuickWork")
+        implementation project(":QuickBluetooth")
         ksp deps.quickbind.compiler_ksp_local
     }
     //ktx核心

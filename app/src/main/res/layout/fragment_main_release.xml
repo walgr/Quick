@@ -64,6 +64,13 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="@{viewModel::gotoBluetoothTest}"
+                    android:text="蓝牙"
+                    android:textAllCaps="false" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:onClick="@{viewModel::gotoWheelTest}"
                     android:text="WheelView测试"
                     android:textAllCaps="false" />

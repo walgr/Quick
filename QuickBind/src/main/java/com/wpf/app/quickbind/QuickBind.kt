@@ -7,11 +7,6 @@ import androidx.annotation.UiThread
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
-import com.wpf.app.quickutil.bind.Bind
-import com.wpf.app.quickutil.bind.NoBind
-import com.wpf.app.quickutil.bind.QuickBindI
-import com.wpf.app.quickutil.bind.QuickBindWrap.bindHistory
-import com.wpf.app.quickutil.bind.plugins.BasePlugin
 import com.wpf.app.quick.annotations.bind.BindData2View
 import com.wpf.app.quick.annotations.bind.BindView
 import com.wpf.app.quick.annotations.bind.Databinder
@@ -33,6 +28,11 @@ import com.wpf.app.quickbind.plugins.BindSp2ViewPlugin
 import com.wpf.app.quickbind.plugins.BindViewPlugin
 import com.wpf.app.quickbind.plugins.GroupViewPlugin
 import com.wpf.app.quickbind.plugins.LoadSpPlugin
+import com.wpf.app.quickutil.bind.Bind
+import com.wpf.app.quickutil.bind.NoBind
+import com.wpf.app.quickutil.bind.QuickBindI
+import com.wpf.app.quickutil.bind.QuickBindWrap.bindHistory
+import com.wpf.app.quickutil.bind.plugins.BasePlugin
 import com.wpf.app.quickutil.helper.contentView
 import com.wpf.app.quickutil.helper.generic.GenericEx.getFieldAndParent
 import com.wpf.app.quickutil.helper.generic.forceTo
@@ -45,11 +45,14 @@ import kotlin.reflect.KClass
  * Created by 王朋飞 on 2022/7/13.
  *
  */
-object QuickBind: QuickBindI {
+object QuickBind : QuickBindI {
     private var bindSpFileName = "QuickViewSpBindFile"
 
     private val plugins: LinkedHashMap<KClass<out Annotation>, BasePlugin> = LinkedHashMap()
-    private val bindDataPlugin = mutableMapOf<KClass<out Annotation>, BasePlugin>(Pair(BindData2View::class, BindData2ViewPlugin()))
+    private val bindDataPlugin = mutableMapOf<KClass<out Annotation>, BasePlugin>(
+        BindView::class to BindViewPlugin(),
+        BindData2View::class to BindData2ViewPlugin()
+    )
 
     override fun getRegisterPlugins(): MutableMap<KClass<out Annotation>, BasePlugin> {
         return plugins
@@ -63,7 +66,11 @@ object QuickBind: QuickBindI {
         plugins[ann] = plugin
     }
 
-    override fun <T : BasePlugin> registerPlugin(index: Int, ann: KClass<out Annotation>, plugin: T) {
+    override fun <T : BasePlugin> registerPlugin(
+        index: Int,
+        ann: KClass<out Annotation>,
+        plugin: T
+    ) {
         plugins[ann] = plugin
     }
 

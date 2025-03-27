@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 允许应用程序连接到配对的蓝牙设备 -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+
+    <!-- 允许应用程序发现和配对蓝牙设备 -->
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
+    <!-- 允许应用程序打开蓝牙 -->
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+
+    <!-- 允许应用程序蓝牙扫描 -->
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+
+    <!-- 用于Android 6.0及以上版本的蓝牙扫描 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+</manifest>

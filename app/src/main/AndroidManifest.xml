@@ -36,6 +36,7 @@
         <activity android:name=".WheelViewTestActivity" />
         <activity android:name=".wanandroid.WanAndroidHomeActivity" />
         <activity android:name=".wanandroid.WebViewActivity" />
+        <activity android:name=".bluetooth.BluetoothActivity" />
     </application>
 
 </manifest>

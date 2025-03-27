@@ -1,0 +1,23 @@
+plugins {
+    id 'java-library'
+    id 'org.jetbrains.kotlin.jvm'
+    id 'java-gradle-plugin'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-gradle-plugin-api:2.1.0"
+    compileOnly "org.jetbrains.kotlin:kotlin-compiler-embeddable:2.1.0"
+    implementation deps.kotlinpoet
+
+    if (IS_REMOTE.toBoolean())
+        api deps.quickbind.annotations
+    else
+        api project(":Quick-annotations")
+}
+
+apply from: rootProject.file('gradle-mvn-push-jar.gradle')

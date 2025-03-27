@@ -5,11 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import androidx.recyclerview.widget.RecyclerView
-import com.wpf.app.quickutil.bind.Bind
-import com.wpf.app.quickutil.bind.QuickBindWrap
 import com.wpf.app.quickbind.utils.DataAutoSet2ViewUtils
 import com.wpf.app.quickrecyclerview.QuickAdapter
 import com.wpf.app.quickrecyclerview.holder.QuickViewHolder
+import com.wpf.app.quickutil.bind.Bind
+import com.wpf.app.quickutil.bind.QuickBindWrap
 import com.wpf.app.quickutil.helper.generic.nullDefault
 import com.wpf.app.quickutil.run.RunOnContextWithSelf
 import java.io.Serializable

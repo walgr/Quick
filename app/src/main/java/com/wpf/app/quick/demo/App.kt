@@ -21,6 +21,7 @@ import com.wpf.app.quickwidget.title.QuickTitleView
 import com.wpf.app.quickwork.widget.theme.QuickDialogThemeBase
 import com.wpf.app.quickwork.widget.theme.QuickTextThemeBase
 import com.wpf.app.quickwork.widget.theme.QuickTitleThemeBase
+import com.wpf.tools.quickbluetooth.manager.QuickBluetoothManager
 
 /**
  * Created by 王朋飞 on 2022/6/13.
@@ -31,6 +32,7 @@ class App : Application() {
         QuickInit.init(this)
         //配置全局ViewBinding
         BRConstant.initByBR(BR::class.java)
+        QuickBluetoothManager.initAdapter(this)
         initTestRequest()
 
         QuickTextThemeBase.registerDefaultTheme {
