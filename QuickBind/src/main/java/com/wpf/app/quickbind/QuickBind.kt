@@ -51,6 +51,9 @@ object QuickBind : QuickBindI {
     private val plugins: LinkedHashMap<KClass<out Annotation>, BasePlugin> = LinkedHashMap()
     private val bindDataPlugin = mutableMapOf<KClass<out Annotation>, BasePlugin>(
         BindView::class to BindViewPlugin(),
+        GroupView::class to GroupViewPlugin(),
+        BindSp2View::class to BindSp2ViewPlugin(),
+        LoadSp::class to LoadSpPlugin(),
         BindData2View::class to BindData2ViewPlugin()
     )
 
